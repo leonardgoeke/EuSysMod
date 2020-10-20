@@ -1,0 +1,9 @@
+technology_1,technology_2,carrier_conversion_in,carrier_conversion_out,carrier_stored_in,carrier_stored_out
+wind,onshore,,electricity_central,,
+wind,offshore,,electricity_central,,
+hydrogen_vehicle,,hydrogen,passenger,,
+hydrogen_turbine,hydrogen,hydrogen,electricity_central,,
+fuelCell,,hydrogen,electricity_central; heat_low,,
+methanation,,"hydrogen, biomass",synthetic_methan,,
+hydrogenFurnace,,hydrogen,heat_high,,
+hydrogenStorage,,,,hydrogen,hydrogen
