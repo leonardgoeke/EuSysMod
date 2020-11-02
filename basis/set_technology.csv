@@ -1,0 +1,42 @@
+technology_1,technology_2,technology_3,carrier_conversion_in,carrier_conversion_out,carrier_stored_in,carrier_stored_out
+lowHeatingTech,heatPump_resi,,electricity,heatLow,,heatLow
+lowHeatingTech,gasBoiler_resi,,gas,heatLow,,heatLow
+lowHeatingTech,oilBoiler_resi,,oil,heatLow,,heatLow
+lowHeatingTech,fuelCell_resi,,hydrogenGrid; hydrogenResi,heatLow; electricity,,heatLow
+lowHeatingTech,districtHeatCon_resi,,districtHeat,heatLow,,heatLow
+lowHeatingTech,localHeatCon,,localHeat,heatLow,,heatLow
+localHeatingNetwork,blockHeatingGas_local,,gas,localHeat; electricity,,
+localHeatingNetwork,fuelCell_local,,hydrogenGrid,localHeat; electricity,,
+localHeatingNetwork,blockHeatingBiomass_local,,biomass,localHeat; electricity,,
+districtHeatingNetwork,blockHeatingGas_district,,gas,districtHeat; electricity,,
+districtHeatingNetwork,blockHeatingH2_district,,hydrogenGrid,districtHeat; electricity,,
+localHeatingNetwork,heatPump_local,,electricity,local Heat,,
+districtHeatingNetwork,heatPump_district,,electricity,districtHeat,,
+districtHeatingNetwork,geothermal_district,,,districtHeat; electricity,,
+districtHeatingNetwork,hydrogenBoiler_district,,hydrogenGrid,districtHeat,,
+districtHeatingNetwork,ccgtGas_district,,gas,districtHeat; electricity,,
+districtHeatingNetwork,ocgtGas_district,,gas,districtHeat; electricity,,
+districtHeatingNetwork,ccgtH2_district,,hydrogenGrid,districtHeat; electricity,,
+districtHeatingNetwork,ocgtH2_district,,hydrogenGrid,districtHeat; electricity,,
+districtHeatingNetwork,fuelCell_district,,hydrogenGrid,districtHeat; electricity,,
+mediumHeatTech,districtHeatCon_ind,,districtHeat,heatMedium,,heatMedium
+mediumHeatTech,electricFurnace_ind,,electricity,heatMedium,,
+mediumHeatTech,hydrogenBoiler_ind,,hydrogenGrid,heatMedium,,
+processHeatTech,hyrogenFurnace_ind,,hydrogenInd,heatHigh,,
+fuelConversion,methanation,,hydrogenGrid,districtHeat; synthGas,,
+fuelConversion,smr,,gas,districtHeat; hydrogenInd,,
+fuelConversion,electrolysisHT,,districtHeat; electricity,hydrogenGrid,,
+fuelConversion,electrolysisPEM,,electricity,hydrogenGrid,,
+fuelConversion,electrolysisA,,electricity,hydrogenInd,,
+fuelConversion,electrolysisA_resi,,electricity,hydrogenResi,,
+wind,wind_onshore,,,electricity,,
+wind,wind_offshore,,,electricity,,
+solar,photovoltaic_open,,,electricity,,
+solar,rooftop,photovoltaicRoof,,electricity,,electricity
+solar,rooftop,solarThermal,,heatLow,,heatLow
+fuelConversion,fermenter,,biomass,synthGas,,
+fuelConversion,compressH2,,hydrogenInd,hydrogenGrid,,
+mobility,electricVehicle,,electricity,mobility_passenger,,
+mobility,hydrogenVehicle,,hydrogenGrid,mobility_passenger,,
+mobility,oilVehicle,,oil,mobility_passenger,,
+fuelConversion,fischerTropsch,,hydrogenGrid,synthOil,,
