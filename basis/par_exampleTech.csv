@@ -1,0 +1,12 @@
+timestep_1,timestep_1,technology_1,technology_2,technology_3,modes,carrier_1,parameter_1,value_1,parameter_2,value_2,source,comment
+,,ccgt,,ccgtGas,,,effConv,0.6,costExpConv,3000,just an example,"expansion or operating costs always relate to input capacity, costs per output capacity (here electrical) have to be multiplied with the efficiency to obtain costs for input capacity"
+,,ccgt,,ccgtGas,,,costOprConv,20,,,,"cost of operating capacity, for 'decomm' technologies the model will consider the trade-off between operating or decommissioning"
+,,ocgt,,ocgtGas_chp,moreHeat,,effConv,0.8,,,just an example,"different modes are used to specific different operatinal parameters, here tradeoff between overall efficiency and chp ratio, 'effConv' give the overall conversion efficency"
+,,ocgt,,ocgtGas_chp,moreHeat,districtHeat,ratioGenFix,0.4,,,just an example,"ratioGenFix' fixes the generation share of respective energy carrier, upper or lower limits and restricting use instead of generation possible as well"
+,,ocgt,,ocgtGas_chp,morePower,,effConv,0.7,,,just an example,
+,,ocgt,,ocgtGas_chp,morePower,districtHeat,ratioGenFix,0.3,,,just an example,
+,,ocgt,ocgtH2CHP,,,,costExpConv,4000,effConv,0.5,just an example,values provided for node 'ocgtH2CHP' will for both sub-technologies 'ocgtH2_chp' and 'ocgtH2_chp_ind'
+all,2020,hydrogenAndMore,,alkElectrolysis,,,effConv,0.7,,,just an example,
+all,2025,hydrogenAndMore,,alkElectrolysis,,,effConv,0.7,,,just an example,"first timestep column relates to point of deployment, second column to year capacity is build, only for emerging technologies efficiency can differ by year capacity is build"
+all,2030,hydrogenAndMore,,alkElectrolysis,,,effConv,0.7,,,just an example,
+all,all(2035:2050),hydrogenAndMore,,alkElectrolysis,,,effConv,0.8,,,just an example,"same purpose as above, but an abbreviation is used to specificy the same value for three different years in a single line"
