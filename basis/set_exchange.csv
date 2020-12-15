@@ -4,4 +4,4 @@ powerGrid,hvdc,electricityGrid,mature,decomm,undirected,
 gasGrid,,bioGas; naturalGas; hydrogenBlend,mature,decomm,directed,
 hydrogenGrid,,hydrogenGrid,mature,none,directed,
 biomassTransport,,solidBiomass,unrestricted,none,undirected,
-hydrogenTransport,,hydrogenGrid,unrestricted,none,undirected,richtig oder könnte auch wasserstoff aus alk elektrolyse befördert werden?
+hydrogenTransport,,hydrogenGrid; hydrogenLocal,unrestricted,none,undirected,richtig oder könnte auch wasserstoff aus alk elektrolyse befördert werden?
