@@ -1,0 +1,1 @@
+- all capacities assumptions for hydro are build on data from the project partner EKC
