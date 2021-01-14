@@ -149,4 +149,5 @@ ocgt,ocgtH2CHP,ocgtH2ChpProLow,,hydrogenLocal,electricity; processHeat_low,,proc
 stockPower,,oilPlantStockProLow,,oil,electricity; processHeat_low,,,stock,decomm,
 stockPower,,oilPlantStockProMed,,oil,electricity; processHeat_medium,,,stock,decomm,
 miscProHeatMed,,bioChpProMed,,solidBiomass,electricity; processHeat_medium,,,mature,none,
-miscSpaceHeat,,renovation,,,spaceHeat,,,mature,none,
+miscSpaceHeat,renovation,moderate,,,spaceHeat,,,mature,none,
+miscSpaceHeat,renovation,ambitious,,,spaceHeat,,,mature,none,
