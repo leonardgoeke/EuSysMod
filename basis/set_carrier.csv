@@ -13,10 +13,10 @@ mobilityFreight,,2,1,1,1,none
 mobilityPassenger,,2,1,1,1,none
 localHeat,,2,1,1,1,no
 districtHeat,,2,1,1,1,no
-residentalHeat,,2,1,1,1,no
-industryHeat_low,,2,1,1,1,none
-industryHeat_medium,,2,1,1,1,none
-industryHeat_high,,2,1,1,1,none
+spaceHeat,,2,1,1,1,no
+processHeat_low,,2,1,1,1,none
+processHeat_medium,,2,1,1,1,none
+processHeat_high,,2,1,1,1,none
 solidBiomass,,2,1,1,1,no
 rawBiogas,,2,1,1,1,no
 waste,,2,1,1,1,no
