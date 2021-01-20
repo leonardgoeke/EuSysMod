@@ -1,0 +1,36 @@
+carrier_1,carrier_2,timestep_1,parameter,value,source
+oil,,,emissionFac,262.8736046,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe"
+hardcoal,,,emissionFac,342.0957868,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe"
+methan,naturalGas,,emissionFac,201.296363,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe"
+solidBiomass,,,emissionFac,387.0549954,"based on Greenhouse Gas Protocol (2017), Emission Factors from Cross-Sector Tools, computed a weighted average of different categories on biomassPotential Sheet"
+rawBiogas,,,emissionFac,197.1119134,"Greenhouse Gas Protocol (2017), Emission Factors from Cross-Sector Tools"
+solidBiomass,,,trdPrc,30.0,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+rawBiogas,,,trdPrc,30.0,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+liquidFuel,oil,2020,,29.07294083,computed as median of various sources
+liquidFuel,oil,2025,,39.77561685,"World Bank (2018), Commodity Markets Outlook"
+liquidFuel,oil,2030,,45.04708414,"IRENA (2018), Renewable Energy Prospects for the European Union"
+liquidFuel,oil,2035,,49.36010284,"Fraunhofer ISE (2018), Stromgestehungskosten erneuerbare Energien"
+liquidFuel,oil,2040,,53.19389723,"IEA (2017), World Energy Outlook 2017"
+liquidFuel,oil,2045,,53.19389723,
+liquidFuel,oil,2050,,53.19389723,
+hardcoal,,2020,,7.085931107,
+hardcoal,,2025,,7.702823932,
+hardcoal,,2030,,8.002933956,
+hardcoal,,2035,,8.10297063,
+hardcoal,,2040,,8.203007305,
+hardcoal,,2045,,8.203007305,
+hardcoal,,2050,,8.203007305,
+methan,naturalGas,2020,,16.79656369,
+methan,naturalGas,2025,,21.95286173,
+methan,naturalGas,2030,,23.89805201,
+methan,naturalGas,2035,,25.28747364,
+methan,naturalGas,2040,,26.67689527,
+methan,naturalGas,2045,,26.67689527,
+methan,naturalGas,2050,,26.67689527,
+hydrogen,,2020,,275,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+hydrogen,,2025,,242,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+hydrogen,,2030,,213,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+hydrogen,,2035,,187,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+hydrogen,,2040,,164,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+hydrogen,,2045,,145,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+hydrogen,,2050,,127,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
