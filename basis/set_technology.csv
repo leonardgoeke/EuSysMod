@@ -151,3 +151,5 @@ stockPower,,oilPlantStockProMed,,oil,electricity; processHeat_medium,,,stock,dec
 miscProHeatMed,,bioChpProMed,,solidBiomass,electricity; processHeat_medium,,,mature,none,
 miscSpaceHeat,renovation,moderate,,,spaceHeat,,,mature,none,
 miscSpaceHeat,renovation,ambitious,,,spaceHeat,,,mature,none,
+miscProHeatHigh,,bioBoilerProHighCc,,solidBiomass,processHeat_high,,,mature,none,
+miscProHeatMed,,bioBoilerProMedCc,,solidBiomass,processHeat_medium,,,mature,none,
