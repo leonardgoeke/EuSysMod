@@ -1,4 +1,4 @@
 technology_3,parameter,value,comment,source
 heatpumpDh,effConv,1.55,assumes 120 degrees for sink and 10 for source (ground heat),"based on Arpagau (2018), High temperature heat pumps Market overview, state of the art, research status, refrigerants, and application potentials"
 heatpumpLh,effConv,2.25,assumes 95 degrees for sink and 10 for source (ground heat),"based on Arpagau (2018), High temperature heat pumps Market overview, state of the art, research status, refrigerants, and application potentials"
-heatpumpInd,effConv,5.7,assumes 110 degrees for sink and 75 degrees for source (waste heat),"based on Arpagau (2018), High temperature heat pumps Market overview, state of the art, research status, refrigerants, and application potentials"
+heatpumpPro,effConv,5.7,assumes 110 degrees for sink and 75 degrees for source (waste heat),"based on Arpagau (2018), High temperature heat pumps Market overview, state of the art, research status, refrigerants, and application potentials"
