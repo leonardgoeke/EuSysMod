@@ -1,4 +1,3 @@
 technology_3,parameter,value,comment
-pumpedStorage,stOutToStInFix,1,assumed input and output capacity of pumped storage to be the same
 pumpedStorage,effStIn,0.89,"based on 80 percent roundtrip efficiency from Irena (2017), Electricity Storage and Renewables Costs and Markets to 2030, reference value"
 pumpedStorage,effStOut,0.89,"based on 80 percent roundtrip efficiency from Irena (2017), Electricity Storage and Renewables Costs and Markets to 2030, reference value"
