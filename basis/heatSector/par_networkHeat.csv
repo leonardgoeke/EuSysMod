@@ -1,0 +1,7 @@
+technology_1,technology_2,technology_3,timestep_2,parameter_1,value_1,parameter_2,value_2,source
+networkHeat,heatGrid,,,costExpConv,400,costOprConv,40,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+networkHeat,heatGrid,,,lifeConv,40,effConv,1,
+networkHeat,gasBoilerNet,,,costExpConv,89.24,costOprConv,1.78,
+networkHeat,gasBoilerNet,,,lifeConv,20,effConv,0.92,
+networkHeat,h2BoilerNet,,,costExpConv,125.12,costOprConv,2.5,
+networkHeat,h2BoilerNet,,,lifeConv,20,effConv,0.92,

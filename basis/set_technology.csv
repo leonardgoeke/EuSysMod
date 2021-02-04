@@ -1,156 +1,137 @@
-technology_1,technology_2,technology_3,modes,carrier_conversion_in,carrier_conversion_out,carrier_stored_in,carrier_stored_out,technology_type,technology_decomm
-battery,,lithiumBattery,,,,electricity,electricity,mature,none
-battery,,redoxBattery,,,,electricity,electricity,mature,none
-bioConversion,,solidToH2,,solidBiomass,hydrogenGrid; hydrogenLocal,,,mature,none
-bioConversion,,solidToLiquid,,solidBiomass,synthFuel,,,mature,none
-bioConversion,,rawBioToGas,,rawBiogas,bioGas,,,mature,none
-bioConversion,,solidBioToGas,,solidBiomass,bioGas,,,mature,none
-ccgt,ccgtGasCHP,ccgtGasChp,,methan,electricity; districtHeat,,,mature,none
-ccgt,ccgtGasCHP,ccgtGasChpProLow,,methan,electricity; processHeat_low,,processHeat_low,mature,none
-ccgt,ccgtGasCHPH2rdy,ccgtGasChpH2rdy,,methan,electricity; districtHeat,,,mature,none
-ccgt,ccgtGasCHPH2rdy,ccgtGasChpH2rdyProLow,,methan,electricity; processHeat_low,,processHeat_low,mature,none
-ccgt,ccgtH2CHP,ccgtH2Chp,,hydrogenGrid,electricity; districtHeat,,,mature,none
-ccgt,ccgtH2CHP,ccgtH2ChpProLow,,hydrogenGrid; hydrogenLocal,electricity; processHeat_low,,processHeat_low,mature,none
-ccgt,,ccgtGas,,methan,electricity,,,mature,none
-ccgt,,ccgtGasH2rdy,,methan,electricity,,,mature,none
-ccgt,,ccgtH2,,hydrogenGrid; hydrogenLocal,electricity,,,mature,none
-engine,bioEngine,bioEngineLh,,rawBiogas,electricity; localHeat,,,mature,none
-engine,gasEngine,gasEngineDh,,methan,electricity; districtHeat,,,mature,none
-engine,gasEngine,gasEngineLh,,methan,electricity; localHeat,,,mature,none
-engine,gasEngine,gasEnginePro,,methan,electricity; processHeat_low,,,mature,none
-engine,h2Engine,h2EngineDh,,hydrogenGrid,electricity; districtHeat,,,mature,none
-engine,h2Engine,h2EngineLh,,hydrogenGrid,electricity; localHeat,,,mature,none
-engine,h2Engine,h2EnginePro,,hydrogenGrid; hydrogenLocal,electricity; processHeat_low,,,mature,none
-frtTrp,frtRail,frtRailElec,,electricity,mobilityFreight,,,mature,none
-frtTrp,frtRail,frtRailOil,,oil,mobilityFreight,,,mature,none
-frtTrp,frtRoad,frtRoadHyElecGas,useElec; useGas,methan; electricity,mobilityFreight,,,mature,none
-frtTrp,frtRoad,frtRoadHyElecH2,useElec; useH2,hydrogenGrid; electricity,mobilityFreight,,,mature,none
-frtTrp,frtRoad,frtRoadHyElecOil,useElec; useOil,oil; electricity,mobilityFreight,,,mature,none
-frtTrp,frtRoad,frtRoadElec,,electricity,mobilityFreight,,,mature,none
-frtTrp,frtRoad,frtRoadH2,,hydrogenGrid,mobilityFreight,,,mature,none
-frtTrp,frtRoad,frtRoadIceGas,,methan,mobilityFreight,,,mature,none
-frtTrp,frtRoad,frtRoadIceOil,,oil,mobilityFreight,,,mature,none
-frtTrp,frtShip,frtShipBio,,synthFuel,mobilityFreight,,,mature,none
-frtTrp,frtShip,frtShipConv,,oil,mobilityFreight,,,mature,none
-heatpump,,heatpumpAirSpace,,electricity,spaceHeat,,spaceHeat,mature,none
-heatpump,,heatpumpDh,,electricity,districtHeat,,,mature,none
-heatpump,,heatpumpGroundSpace,,electricity,spaceHeat,,spaceHeat,mature,none
-heatpump,,heatpumpLh,,electricity,localHeat,,,mature,none
-heatpump,,heatpumpPro,,electricity,processHeat_low,,processHeat_low,mature,none
-heatpump,,heatpumpWaterSpace,,electricity,spaceHeat,,spaceHeat,mature,none
-hydrogenAndMore,electrolysis,alkElectrolysis,,electricity,hydrogenLocal,,,emerging,none
-hydrogenAndMore,electrolysis,pemElectrolysis,,electricity,hydrogenGrid; hydrogenLocal,,,emerging,none
-hydrogenAndMore,electrolysis,soElectrolysis,,electricity,hydrogenGrid; hydrogenLocal,,,emerging,none
-hydrogenAndMore,h2Storage,h2StorageAerial,,,,(hydrogenGrid; hydrogenLocal),(hydrogenGrid; hydrogenLocal),mature,none
-hydrogenAndMore,h2Storage,h2StorageCavern,,,,(hydrogenGrid; hydrogenLocal),(hydrogenGrid; hydrogenLocal),mature,none
-hydrogenAndMore,pefc,pefcLh,,hydrogenGrid,electricity; localHeat,,,emerging,none
-hydrogenAndMore,pefc,pefcSpace,,hydrogenGrid,electricity; spaceHeat,,spaceHeat,emerging,none
-hydrogenAndMore,sofc,sofcDh,,hydrogenGrid,electricity; districtHeat,,,emerging,none
-hydrogenAndMore,sofc,sofcProLow,,hydrogenGrid; hydrogenLocal,electricity; processHeat_low,,processHeat_low,emerging,none
-hydrogenAndMore,sofc,sofcProMed,,hydrogenGrid; hydrogenLocal,electricity; processHeat_medium,,processHeat_medium,emerging,none
-hydrogenAndMore,,fischerTropsch,,hydrogenGrid; hydrogenLocal,synthFuel,,,mature,none
-hydrogenAndMore,,gasStorage,,,,methan,methan,mature,none
-hydrogenAndMore,,h2Blending,,hydrogenGrid,hydrogenBlend,,,unrestricted,none
-hydrogenAndMore,,methanation,,hydrogenGrid; hydrogenLocal,naturalGas,,,mature,none
-hydrogenAndMore,,steamReforming,,methan,hydrogenGrid; hydrogenLocal,,,mature,none
-miscDistrictHeat,,gasBoilerDh,,methan,districtHeat,,,mature,none
-miscDistrictHeat,,h2BoilerDh,,hydrogenGrid,districtHeat,,,mature,none
-miscDistrictHeat,,heatStorageDh,,,,districtHeat,districtHeat,mature,none
-miscLocalHeat,,heatStorageLh,,,,localHeat,localHeat,mature,none
-miscLocalHeat,,miniCHPGas,,methan,electricity; localHeat,,,mature,none
-miscLocalHeat,,miniCHPH2,,hydrogen,electricity; localHeat,,,mature,none
-miscProHeatHigh,,bioBoilerProHigh,,solidBiomass,processHeat_high,,,mature,none
-miscProHeatHigh,,bioBoilerProHighCc,,solidBiomass,processHeat_high,,,mature,none
-miscProHeatHigh,,coalBoilerProHigh,,hardcoal,processHeat_high,,,mature,none
-miscProHeatHigh,,gasBoilerProHigh,,methan,processHeat_high,,,mature,none
-miscProHeatHigh,,h2BoilerProHigh,,hydrogenGrid; hydrogenLocal,processHeat_high,,,mature,none
-miscProHeatHigh,,oilBoilerProHigh,,liquidFuel,processHeat_high,,,mature,none
-miscProHeatLow,,bioBoilerProLow,,solidBiomass,processHeat_low,,,mature,none
-miscProHeatLow,,coalBoilerProLow,,hardcoal,processHeat_low,,,mature,none
-miscProHeatLow,,districtHeatPro,,districtHeat,processHeat_low,,,mature,none
-miscProHeatLow,,gasBoilerProLow,,methan,processHeat_low,,,mature,none
-miscProHeatLow,,oilBoilerProLow,,oil,processHeat_low,,,mature,none
-miscProHeatLow,,resistiveHeatProLow,,electricity,processHeat_low,,processHeat_low,mature,none
-miscProHeatMed,,bioBoilerProMed,,solidBiomass,processHeat_medium,,,mature,none
-miscProHeatMed,,bioBoilerProMedCc,,solidBiomass,processHeat_medium,,,mature,none
-miscProHeatMed,,bioChpProMed,,solidBiomass,electricity; processHeat_medium,,,mature,none
-miscProHeatMed,,coalBoilerProMed,,hardcoal,processHeat_medium,,,mature,none
-miscProHeatMed,,eBoilerProMed,,electricity,processHeat_medium,,processHeat_medium,mature,none
-miscProHeatMed,,gasBoilerProMed,,methan,processHeat_medium,,,mature,none
-miscProHeatMed,,h2BoilerProMed,,hydrogenGrid; hydrogenLocal,processHeat_medium,,,mature,none
-miscProHeatMed,,oilBoilerProMed,,liquidFuel,processHeat_medium,,,mature,none
-miscSpaceHeat,renovation,ambitious,,,spaceHeat,,,mature,none
-miscSpaceHeat,renovation,moderate,,,spaceHeat,,,mature,none
-miscSpaceHeat,,bioBoilerSpace,,solidBiomass,spaceHeat,,,mature,none
-miscSpaceHeat,,coalBoilerSpace,,hardcoal,spaceHeat,,,stock,none
-miscSpaceHeat,,districtHeatSpace,,districtHeat,spaceHeat,,spaceHeat,mature,none
-miscSpaceHeat,,gasBoilerSpace,,methan,spaceHeat,,,mature,none
-miscSpaceHeat,,h2BoilerSpace,,hydrogenGrid,spaceHeat,,spaceHeat,mature,none
-miscSpaceHeat,,localHeatSpace,,localHeat,spaceHeat,,spaceHeat,mature,none
-miscSpaceHeat,,oilBoilerSpace,,oil,spaceHeat,,,mature,none
-miscSpaceHeat,,resistiveHeatSpace,,electricity,spaceHeat,,spaceHeat,mature,none
-ocgt,ocgtGasCHP,ocgtGasChp,moreHeat; morePower,methan,electricity; districtHeat,,,mature,none
-ocgt,ocgtGasCHP,ocgtGasChpH2rdy,,methan,electricity; districtHeat,,,mature,none
-ocgt,ocgtGasCHP,ocgtGasChpH2rdyProLow,,methan,electricity; processHeat_low,,processHeat_low,mature,none
-ocgt,ocgtGasCHP,ocgtGasChpH2rdyProMed,,methan,electricity; processHeat_medium,,processHeat_medium,mature,none
-ocgt,ocgtGasCHP,ocgtGasChpProLow,,methan,electricity; processHeat_low,,processHeat_low,mature,none
-ocgt,ocgtGasCHP,ocgtGasChpProMed,,methan,electricity; processHeat_medium,,processHeat_medium,mature,none
-ocgt,ocgtH2CHP,ocgtH2Chp,,hydrogenGrid,electricity; districtHeat,,,mature,none
-ocgt,ocgtH2CHP,ocgtH2ChpProLow,,hydrogenLocal,electricity; processHeat_low,,processHeat_low,mature,none
-ocgt,ocgtH2CHP,ocgtH2ChpProMed,,hydrogenLocal,electricity; processHeat_medium,,processHeat_medium,mature,none
-ocgt,,ocgtGas,,methan,electricity,,,mature,none
-ocgt,,ocgtGasH2rdy,,methan,electricity,,,mature,none
-ocgt,,ocgtH2,,hydrogenGrid; hydrogenLocal,electricity,,,mature,none
-psngTrp,psngAir,psngAirBio,,synthFuel,mobilityPassenger,,,mature,none
-psngTrp,psngAir,psngAirConv,,oil,mobilityPassenger,,,mature,none
-psngTrp,psngAir,psngAirH2,,hydrogenGrid,mobilityPassenger,,,mature,none
-psngTrp,psngRail,psngRailElec,,electricity,mobilityPassenger,,,mature,none
-psngTrp,psngRail,psngRailOil,,oil,mobilityPassenger,,,mature,none
-psngTrp,psngRoad,psngRoadHyElecGas,useElec; useGas,methan; electricity,mobilityPassenger,,,mature,none
-psngTrp,psngRoad,psngRoadHyElecH2,useElec; useH2,hydrogenGrid; electricity,mobilityPassenger,,,mature,none
-psngTrp,psngRoad,psngRoadHyElecOil,useElec; useOil,oil; electricity,mobilityPassenger,,,mature,none
-psngTrp,psngRoad,psngRoadElec,,electricity,mobilityPassenger,,,mature,none
-psngTrp,psngRoad,psngRoadH2,,hydrogenGrid,mobilityPassenger,,,mature,none
-psngTrp,psngRoad,psngRoadIceGas,,methan,mobilityPassenger,,,mature,none
-psngTrp,psngRoad,psngRoadIceOil,,oil,mobilityPassenger,,,mature,none
-solar,openspace_a,cspOpenspace_a,,,electricity,,electricity,mature,none
-solar,openspace_a,pvOpenspace_a,,,electricity,,,mature,none
-solar,openspace_b,cspOpenspace_b,,,electricity,,electricity,mature,none
-solar,openspace_b,pvOpenspace_b,,,electricity,,,mature,none
-solar,openspace_c,cspOpenspace_c,,,electricity,,,mature,none
-solar,openspace_c,pvOpenspace_c,,,electricity,,,mature,none
-solar,rooftopInd_a,pvInd_a,,,electricity,,,mature,none
-solar,rooftopInd_a,solarThermalInd_a,,,processHeat_low,,processHeat_low,mature,none
-solar,rooftopInd_b,pvInd_b,,,electricity,,,mature,none
-solar,rooftopInd_b,solarThermalInd_b,,,processHeat_low,,processHeat_low,mature,none
-solar,rooftopResi_a,pvResi_a,,,electricity,,,mature,none
-solar,rooftopResi_a,solarThermalResi_a,,,spaceHeat,,spaceHeat,mature,none
-solar,rooftopResi_a,solarThermalResiLh_a,,,localHeat,,,mature,none
-solar,rooftopResi_b,pvResi_b,,,electricity,,,mature,none
-solar,rooftopResi_b,solarThermalResi_b,,,spaceHeat,,spaceHeat,mature,none
-solar,rooftopResi_b,solarThermalResiLh_b,,,localHeat,,,mature,none
-solar,,solarThermalDh,,,districtHeat,,,mature,none
-stockPower,,bioPlantStock,,,electricity; districtHeat,,,stock,none
-stockPower,,gasPlantStock_a,,methan,electricity; districtHeat,,,stock,none
-stockPower,,gasPlantStock_b,,methan,electricity; districtHeat,,,stock,none
-stockPower,,hardcoalPlantStock_a,,hardcoal,electricity; districtHeat,,,stock,none
-stockPower,,hardcoalPlantStock_b,,hardcoal,electricity; districtHeat,,,stock,none
-stockPower,,hardcoalPlantStockProLow,,hardcoal,electricity; processHeat_low,,,stock,none
-stockPower,,hardcoalPlantStockProMed,,hardcoal,electricity; processHeat_medium,,,stock,none
-stockPower,,lignitePlantStock_a,,,electricity; districtHeat,,,stock,none
-stockPower,,lignitePlantStock_b,,,electricity; districtHeat,,,stock,none
-stockPower,,nuclearPlantStock_a,,,electricity,,,stock,none
-stockPower,,nuclearPlantStock_b,,,electricity,,,stock,none
-stockPower,,oilPlantStock,,oil,electricity,,,stock,none
-stockPower,,oilPlantStockProLow,,oil,electricity; processHeat_low,,,stock,none
-stockPower,,oilPlantStockProMed,,oil,electricity; processHeat_medium,,,stock,none
-stockPower,,pumpedStorage,,,,electricity,electricity,stock,none
-stockPower,,reservoir,,,,,electricity,stock,none
-stockPower,,runOfRiver,,,electricity,,,stock,none
-stockPower,,wastePlantStock,,,electricity,,,stock,none
-wind,offshore,offshore_a,,,electricity,,,mature,none
-wind,offshore,offshore_b,,,electricity,,,mature,none
-wind,onshore,onshore_a,,,electricity,,,mature,none
-wind,onshore,onshore_b,,,electricity,,,mature,none
-wind,onshore,onshore_c,,,electricity,,,mature,none
-miscProHeatLow,,h2BoilerProLow,,hydrogen,processHeat_low,,,mature,none
+technology_1,technology_2,technology_3,modes,carrier_conversion_in,carrier_conversion_out,carrier_stored_in,carrier_stored_out,technology_type,technology_decomm,rework
+battery,,lithiumBattery,,,,electricity,electricity,emerging,none,0
+battery,,redoxBattery,,,,electricity,electricity,emerging,none,0
+bioConversion,,rawBioToGas,,rawBiogas,bioGas,,,mature,none,0
+bioConversion,,solidBioToGas,,solidBiomass,bioGas,,,mature,none,0
+bioConversion,,solidToH2,,solidBiomass,h2Grid; h2Local,,,mature,none,0
+bioConversion,,solidToLiquid,,solidBiomass,synthLiquid,,,stock,none,0
+ccgt,ccgtGasCHP,ccgtGasChpDh,,gasFuel,electricity; districtHeat,,,mature,none,0
+ccgt,ccgtGasCHP,ccgtGasChpProLow,,gasFuel,electricity; processHeat_low,,,mature,none,1
+ccgt,ccgtH2CHP,ccgtH2ChpDh,,h2Grid,electricity; districtHeat,,,mature,none,0
+ccgt,ccgtH2CHP,ccgtH2ChpProLow,,h2Grid; h2Local,electricity; processHeat_low,,,mature,none,1
+ccgt,,ccgtGas,,gasFuel,electricity,,,mature,none,0
+ccgt,,ccgtH2,,h2Grid; h2Local,electricity,,,mature,none,0
+engine,bioEngine,bioEngineLh,,rawBiogas,electricity; localHeat,,,mature,none,0
+engine,gasEngine,gasEngineDh,,gasFuel,electricity; districtHeat,,,mature,none,0
+engine,gasEngine,gasEngineLh,,gasFuel,electricity; localHeat,,,mature,none,0
+engine,gasEngine,gasEnginePro,,gasFuel,electricity; processHeat_low,,,mature,none,0
+engine,h2Engine,h2EngineDh,,h2Grid,electricity; districtHeat,,,mature,none,0
+engine,h2Engine,h2EngineLh,,h2Grid,electricity; localHeat,,,mature,none,0
+engine,h2Engine,h2EnginePro,,h2Grid; h2Local,electricity; processHeat_low,,,mature,none,0
+frtTrp,frtRail,frtRailElec,,electricity,mobilityFreight,,,mature,none,0
+frtTrp,frtRail,frtRailoilLiquid,,oilLiquid,mobilityFreight,,,mature,none,0
+frtTrp,frtRoad,frtRoadElec,,electricity,mobilityFreight,,,mature,none,0
+frtTrp,frtRoad,frtRoadH2,,h2Grid,mobilityFreight,,,mature,none,0
+frtTrp,frtRoad,frtRoadHyElecGas,useElec; useGas,gasFuel; electricity,mobilityFreight,,,mature,none,0
+frtTrp,frtRoad,frtRoadHyElecH2,useElec; useH2,h2Grid; electricity,mobilityFreight,,,mature,none,0
+frtTrp,frtRoad,frtRoadHyElecoilLiquid,useElec; useoilLiquid,oilLiquid; electricity,mobilityFreight,,,mature,none,0
+frtTrp,frtRoad,frtRoadIceGas,,gasFuel,mobilityFreight,,,mature,none,0
+frtTrp,frtRoad,frtRoadIceoilLiquid,,oilLiquid,mobilityFreight,,,mature,none,0
+heatpump,,heatpumpAirSpace,,electricity,spaceHeat,,,mature,none,1
+heatpump,,heatpumpDh,,electricity,districtHeat,,,mature,none,0
+heatpump,,heatpumpGroundSpace,,electricity,spaceHeat,,,mature,none,1
+heatpump,,heatpumpLh,,electricity,localHeat,,,mature,none,0
+heatpump,,heatpumpPro,,electricity,processHeat_low,,,mature,none,1
+heatpump,,heatpumpWaterSpace,,electricity,spaceHeat,,,mature,none,1
+miscProHeat,bioBoilerPro,bioBoilerProHigh,,solidBiomass,processHeat_high,,,mature,none,0
+miscProHeat,bioBoilerPro,bioBoilerProLow,,solidBiomass,processHeat_low,,,mature,none,0
+miscProHeat,bioBoilerPro,bioBoilerProMed,,solidBiomass,processHeat_medium,,,mature,none,0
+miscProHeat,coalBoilerPro,coalBoilerProHigh,,hardcoal,processHeat_high,,,mature,none,0
+miscProHeat,coalBoilerPro,coalBoilerProLow,,hardcoal,processHeat_low,,,mature,none,0
+miscProHeat,coalBoilerPro,coalBoilerProMed,,hardcoal,processHeat_medium,,,mature,none,0
+miscProHeat,electricHeatPro,eBoilerProMed,,electricity,processHeat_medium,,,mature,none,1
+miscProHeat,electricHeatPro,resistiveHeatProLow,,electricity,processHeat_low,,,mature,none,1
+miscProHeat,gasBoilerPro,gasBoilerProHigh,,gasFuel,processHeat_high,,,mature,none,0
+miscProHeat,gasBoilerPro,gasBoilerProLow,,gasFuel,processHeat_low,,,mature,none,0
+miscProHeat,gasBoilerPro,gasBoilerProMed,,gasFuel,processHeat_medium,,,mature,none,0
+miscProHeat,h2BoilerPro,h2BoilerProHigh,,h2Grid; h2Local,processHeat_high,,,mature,none,0
+miscProHeat,h2BoilerPro,h2BoilerProLow,,h2,processHeat_low,,,mature,none,0
+miscProHeat,h2BoilerPro,h2BoilerProMed,,h2Grid; h2Local,processHeat_medium,,,mature,none,0
+miscProHeat,oilBoilerPro,oilLiquidBoilerProHigh,,liquidFuel,processHeat_high,,,mature,none,0
+miscProHeat,oilBoilerPro,oilLiquidBoilerProLow,,oilLiquid,processHeat_low,,,mature,none,0
+miscProHeat,oilBoilerPro,oilLiquidBoilerProMed,,liquidFuel,processHeat_medium,,,mature,none,0
+miscProHeat,,bioChpProMed,,solidBiomass,electricity; processHeat_medium,,,mature,none,0
+miscSpaceHeat,renovation,ambitious,,,spaceHeat,,,mature,none,0
+miscSpaceHeat,renovation,moderate,,,spaceHeat,,,mature,none,0
+miscSpaceHeat,,bioBoilerSpace,,solidBiomass,spaceHeat,,,mature,none,0
+miscSpaceHeat,,coalBoilerSpace,,hardcoal,spaceHeat,,,stock,none,0
+miscSpaceHeat,,gasBoilerSpace,,gasFuel,spaceHeat,,,mature,none,0
+miscSpaceHeat,,h2BoilerSpace,,h2Grid,spaceHeat,,,mature,none,1
+miscSpaceHeat,,oilLiquidBoilerSpace,,oilLiquid,spaceHeat,,,mature,none,0
+miscSpaceHeat,,resistiveHeatSpace,,electricity,spaceHeat,,,mature,none,1
+networkHeat,gasBoilerNet,gasBoilerDh,,gasFuel,districtHeat,,,mature,none,0
+networkHeat,gasBoilerNet,gasBoilerLh,,gasFuel,localHeat,,,mature,none,0
+networkHeat,h2BoilerNet,h2BoilerDh,,h2Grid,districtHeat,,,mature,none,0
+networkHeat,h2BoilerNet,h2BoilerLh,,h2Grid,localHeat,,,mature,none,0
+networkHeat,heatGrid,districtHeatPro,,districtHeat,processHeat_low,,,mature,none,0
+networkHeat,heatGrid,districtHeatSpace,,districtHeat,spaceHeat,,,mature,none,1
+networkHeat,heatGrid,localHeatSpace,,localHeat,spaceHeat,,,mature,none,1
+networkHeat,heatStorage,heatStorageDh,,,,districtHeat,districtHeat,mature,none,0
+networkHeat,heatStorage,heatStorageLh,,,,localHeat,localHeat,mature,none,0
+ocgt,,ocgtGas,,gasFuel,electricity,,,mature,none,0
+ocgt,,ocgtH2,,h2Grid; h2Local,electricity,,,mature,none,0
+powerToX,electrolysis,alkElectrolysis,,electricity,h2Local,,,emerging,none,0
+powerToX,electrolysis,pemElectrolysis,,electricity,h2Grid; h2Local,,,emerging,none,0
+powerToX,electrolysis,soElectrolysis,,electricity,h2Grid; h2Local,,,emerging,none,0
+powerToX,fuelStorage,h2Blending,,h2Grid,h2Blend,,,unrestricted,none,0
+powerToX,h2Storage,h2StorageAerial,,,,(h2Grid; h2Local),(h2Grid; h2Local),emerging,none,0
+powerToX,h2Storage,h2StorageCavern,,,,(h2Grid; h2Local),(h2Grid; h2Local),emerging,none,0
+powerToX,pefc,pefcLh,,h2Grid,electricity; localHeat,,,mature,none,0
+powerToX,pefc,pefcSpace,,h2Grid,electricity; spaceHeat,,,mature,none,1
+powerToX,sofc,sofcDh,,h2Grid,electricity; districtHeat,,,mature,none,0
+powerToX,sofc,sofcProLow,,h2Grid; h2Local,electricity; processHeat_low,,,mature,none,1
+powerToX,sofc,sofcProMed,,h2Grid; h2Local,electricity; processHeat_medium,,,mature,none,1
+powerToX,synthFuel,fischerTropsch,,h2Grid; h2Local; capturedCO2,synthLiquid,,,mature,none,0
+powerToX,synthFuel,methanation,,h2Grid; h2Local; capturedCO2,synthGas,,,mature,none,0
+powerToX,synthFuel,steamReforming,,gasFuel,h2Grid; h2Local,,,mature,none,0
+powerToX,,directAirCapture,,electricity,capturedCO2,,,mature,none,0
+powerToX,,gasStorage,,,,gasFuel,gasFuel,mature,none,0
+psngTrp,psngRail,psngRailElec,,electricity,mobilityPassenger,,,mature,none,0
+psngTrp,psngRail,psngRailoilLiquid,,oilLiquid,mobilityPassenger,,,mature,none,0
+psngTrp,psngRoad,psngRoadElec,,electricity,mobilityPassenger,,,mature,none,0
+psngTrp,psngRoad,psngRoadH2,,h2Grid,mobilityPassenger,,,mature,none,0
+psngTrp,psngRoad,psngRoadHyElecGas,useElec; useGas,gasFuel; electricity,mobilityPassenger,,,mature,none,0
+psngTrp,psngRoad,psngRoadHyElecH2,useElec; useH2,h2Grid; electricity,mobilityPassenger,,,mature,none,0
+psngTrp,psngRoad,psngRoadHyElecoilLiquid,useElec; useoilLiquid,oilLiquid; electricity,mobilityPassenger,,,mature,none,0
+psngTrp,psngRoad,psngRoadIceGas,,gasFuel,mobilityPassenger,,,mature,none,0
+psngTrp,psngRoad,psngRoadIceoilLiquid,,oilLiquid,mobilityPassenger,,,mature,none,0
+solar,openspace_a,cspOpenspace_a,,,electricity,,electricity,mature,none,0
+solar,openspace_a,pvOpenspace_a,,,electricity,,,mature,none,0
+solar,openspace_b,cspOpenspace_b,,,electricity,,electricity,mature,none,0
+solar,openspace_b,pvOpenspace_b,,,electricity,,,mature,none,0
+solar,openspace_c,cspOpenspace_c,,,electricity,,,mature,none,0
+solar,openspace_c,pvOpenspace_c,,,electricity,,,mature,none,0
+solar,rooftopInd_a,pvInd_a,,,electricity,,,mature,none,0
+solar,rooftopInd_a,solarThermalInd_a,,,processHeat_low,,,mature,none,1
+solar,rooftopInd_b,pvInd_b,,,electricity,,,mature,none,0
+solar,rooftopInd_b,solarThermalInd_b,,,processHeat_low,,,mature,none,1
+solar,rooftopResi_a,pvResi_a,,,electricity,,,mature,none,0
+solar,rooftopResi_a,solarThermalResi_a,,,spaceHeat,,,mature,none,1
+solar,rooftopResi_a,solarThermalResiLh_a,,,localHeat,,,mature,none,0
+solar,rooftopResi_b,pvResi_b,,,electricity,,,mature,none,0
+solar,rooftopResi_b,solarThermalResi_b,,,spaceHeat,,,mature,none,1
+solar,rooftopResi_b,solarThermalResiLh_b,,,localHeat,,,mature,none,0
+solar,,solarThermalDh,,,districtHeat,,,stock,none,0
+stock,power,bioPlantStock,,,electricity; districtHeat,,,stock,decomm,0
+stock,power,gasPlantStock_a,,gasFuel,electricity; districtHeat,,,stock,decomm,0
+stock,power,gasPlantStock_b,,gasFuel,electricity; districtHeat,,,stock,decomm,0
+stock,power,hardcoalPlantStock_a,,hardcoal,electricity; districtHeat,,,stock,decomm,0
+stock,power,hardcoalPlantStock_b,,hardcoal,electricity; districtHeat,,,stock,decomm,0
+stock,power,hardcoalPlantStockProLow,,hardcoal,electricity; processHeat_low,,,stock,decomm,0
+stock,power,hardcoalPlantStockProMed,,hardcoal,electricity; processHeat_medium,,,stock,decomm,0
+stock,power,lignitePlantStock_a,,,electricity; districtHeat,,,stock,decomm,0
+stock,power,lignitePlantStock_b,,,electricity; districtHeat,,,stock,decomm,0
+stock,power,nuclearPlantStock_a,,,electricity,,,stock,decomm,0
+stock,power,nuclearPlantStock_b,,,electricity,,,stock,decomm,0
+stock,power,oilLiquidPlantStock,,oilLiquid,electricity,,,stock,decomm,0
+stock,power,oilLiquidPlantStockProLow,,oilLiquid,electricity; processHeat_low,,,stock,decomm,0
+stock,power,oilLiquidPlantStockProMed,,oilLiquid,electricity; processHeat_medium,,,stock,decomm,0
+stock,power,pumpedStorage,,,,electricity,electricity,stock,none,0
+stock,power,reservoir,,,,,electricity,stock,none,0
+stock,power,runOfRiver,,,electricity,,,stock,none,0
+stock,power,wastePlantStock,,,electricity,,,stock,decomm,0
+wind,offshore,offshore_a,,,electricity,,,mature,none,0
+wind,offshore,offshore_b,,,electricity,,,mature,none,0
+wind,onshore,onshore_a,,,electricity,,,mature,none,0
+wind,onshore,onshore_b,,,electricity,,,mature,none,0
+wind,onshore,onshore_c,,,electricity,,,mature,none,0

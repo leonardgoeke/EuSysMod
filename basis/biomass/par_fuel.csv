@@ -1,0 +1,5 @@
+carrier_1,parameter,value,source
+solidBiomass,emissionFac,387.0549954,"based on Greenhouse Gas Protocol (2017), Emission Factors from Cross-Sector Tools, computed a weighted average of different categories on biomassPotential Sheet"
+rawBiogas,emissionFac,197.1119134,"Greenhouse Gas Protocol (2017), Emission Factors from Cross-Sector Tools"
+solidBiomass,trdBuyPrc,30,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+rawBiogas,trdBuyPrc,30,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"

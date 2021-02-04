@@ -1,0 +1,7 @@
+technology_1,technology_2,technology_3,timestep_2,parameter,value,comment
+powerToX,,directAirCapture,2020,expConvFix,0,enable direct air capture starting in 2030
+powerToX,,directAirCapture,2025,expConvFix,0,
+powerToX,,fischerTropsch,2020,expConvFix,0,"if air capture is only available from 2030 on, also creation of synthetic fuels is only possible after 2030"
+powerToX,,fischerTropsch,2025,expConvFix,0,
+powerToX,,methanation,2020,expConvFix,0,
+powerToX,,methanation,2025,expConvFix,0,
