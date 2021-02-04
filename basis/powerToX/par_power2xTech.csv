@@ -68,7 +68,7 @@ powerToX,,gasStorage,,,costExpStSize,0.29,costOprStSize,0.0058,,,
 powerToX,,gasStorage,,,effStIn,0.99,effStOut,0.99,,,assumed same costs for input capacity as for gas storage
 powerToX,h2Storage,,,,costExpStIn,0.095,stOutToStInFix,1,lifeStSize,30,
 powerToX,h2Storage,h2StorageAerial,,,lifeStIn,30,lifeStOut,30,lifeStSize,50,
-powerToX,h2Storage,h2StorageCavern,,,lifeStIn,50,lifeStOut,50,,,
+powerToX,h2Storage,h2StorageCavern,,,lifeStIn,50,lifeStOut,50,lifeStSize,50,
 powerToX,h2Storage,h2StorageAerial,,,costExpStSize,18,costOprStSize,0.36,,,
 powerToX,h2Storage,h2StorageCavern,,,costExpStSize,0.36,costOprStSize,0.0072,,,
 powerToX,h2Storage,,2020,,effStIn,0.707,effStOut,0.707,,,
