@@ -79,6 +79,10 @@ powerToX,h2Storage,,2040,,effStIn,0.796,effStOut,0.796,,,
 powerToX,h2Storage,,2045,,effStIn,0.816,effStOut,0.816,,,
 powerToX,h2Storage,,2050,,effStIn,0.837,effStOut,0.837,,,
 powerToX,,directAirCapture,all(2030:2035),,costExpConv,1.0132,costOprConv,0.0405,,,"based on Fasihi (2017), Long-Term Hydrocarbon Trade Options for the Maghreb Region and Europe"
-powerToX,,directAirCapture,all(2040:2050),,costExpConv,0.8762,costOprConv,0.035,,,in Mil. €/ktCO2
-powerToX,,directAirCapture,all(2030:2035),,effConv,4.444,emissionFac,-4444,,,"effConv in GW_el/ktCO2, emissionFac in tCO2 per GWh_el input"
-powerToX,,directAirCapture,all(2040:2050),,effConv,4.762,emissionFac,-4762,,,
+powerToX,,directAirCapture,2040,,costExpConv,0.8762,costOprConv,0.035,,,in Mil. €/ktCO2
+powerToX,,directAirCapture,2045,,costExpConv,0.8762,costOprConv,0.035,,,"effConv in GW_el/ktCO2, emissionFac in tCO2 per GWh_el input"
+powerToX,,directAirCapture,2050,,costExpConv,0.8762,costOprConv,0.035,,,
+powerToX,,directAirCapture,all(2030:2035),,effConv,4.444,emissionFac,-4444,,,
+powerToX,,directAirCapture,2040,,effConv,4.762,emissionFac,-4762,,,
+powerToX,,directAirCapture,2045,,effConv,4.762,emissionFac,-4762,,,
+powerToX,,directAirCapture,2050,,effConv,4.762,emissionFac,-4762,,,
