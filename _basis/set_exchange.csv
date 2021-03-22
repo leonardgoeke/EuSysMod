@@ -1,0 +1,7 @@
+exchange_1,exchange_2,carrier_exchange,exchange_type,exchange_decomm,exchange_symmetry,comment
+powerGrid,hvac,electricity,mature,decomm,undirected,
+powerGrid,hvdc,electricity,mature,decomm,undirected,
+gasGrid,,bioGas; naturalGas; h2Blend,mature,decomm,directed,
+h2Grid,,h2Grid,mature,none,directed,
+biomassTransport,,solidBiomass; rawBiogas,unrestricted,none,undirected,
+h2Transport,,h2Grid,unrestricted,none,undirected,

@@ -1,0 +1,15 @@
+carrier_1,carrier_2,parameter,value
+electricity,,costLss,13000
+localHeat,,costLss,13000
+districtHeat,,costLss,13000
+liquidFuel,synthLiquid,costLss,13000
+spaceHeat,,costMissCapa,10000
+processHeat_low,,costMissCapa,10000
+processHeat_medium,,costMissCapa,10000
+processHeat_high,,costMissCapa,10000
+psngRoadPrvt,,costMissCapa,10000
+psngRoadPub,,costMissCapa,10000
+frtRoadLight,,costMissCapa,10000
+frtRoadHeavy,,costMissCapa,10000
+psngRail,,costMissCapa,10000
+frtRail,,costMissCapa,10000
