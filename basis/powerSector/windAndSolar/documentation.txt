@@ -1,4 +1,0 @@
-- total potential based on Open Entrance
-- solar and wind onshore distributed based on Corine and Global Wind Atlas and Global solar atlas
-- offshore distributed into 2 categories for water depth based on JRC (2018), Wind potentials for EU and neighbouring country
-- costs!
