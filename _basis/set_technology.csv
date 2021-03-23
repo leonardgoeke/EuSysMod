@@ -108,8 +108,8 @@ stock,heat,resistiveHeatSpaceStock,,electricity,spaceHeat,,,stock,none
 stock,power,bioPlantStock,,,electricity; districtHeat,,,stock,decomm
 stock,power,gasPlantStock_a,,gasFuel,electricity; districtHeat,,,stock,decomm
 stock,power,gasPlantStock_b,,gasFuel,electricity; districtHeat,,,stock,decomm
-stock,power,hardcoalPlantProLowStock,,hardcoal,electricity; processHeat_low,,,stock,decomm
-stock,power,hardcoalPlantProMedStock,,hardcoal,electricity; processHeat_medium,,,stock,decomm
+stock,power,hardcoalPlantProLowStock,,hardcoal,electricity; processHeat_low,,,stock,none
+stock,power,hardcoalPlantProMedStock,,hardcoal,electricity; processHeat_medium,,,stock,none
 stock,power,hardcoalPlantStock_a,,hardcoal,electricity; districtHeat,,,stock,decomm
 stock,power,hardcoalPlantStock_b,,hardcoal,electricity; districtHeat,,,stock,decomm
 stock,power,lignitePlantStock_a,,,electricity; districtHeat,,,stock,decomm
@@ -117,8 +117,8 @@ stock,power,lignitePlantStock_b,,,electricity; districtHeat,,,stock,decomm
 stock,power,nuclearPlantStock_a,,,electricity,,,stock,decomm
 stock,power,nuclearPlantStock_b,,,electricity,,,stock,decomm
 stock,power,oilLiquidPlantStock,,liquidFuel,electricity,,,stock,decomm
-stock,power,oilPlantProLowStock,,liquidFuel,electricity; processHeat_low,,,stock,decomm
-stock,power,oilPlantProMedStock,,liquidFuel,electricity; processHeat_medium,,,stock,decomm
+stock,power,oilPlantProLowStock,,liquidFuel,electricity; processHeat_low,,,stock,none
+stock,power,oilPlantProMedStock,,liquidFuel,electricity; processHeat_medium,,,stock,none
 stock,power,pumpedStorage,,,,electricity,electricity,stock,none
 stock,power,reservoir,,,,,electricity,stock,none
 stock,power,runOfRiver,,,electricity,,,stock,none
