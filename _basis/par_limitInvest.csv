@@ -7,3 +7,8 @@ powerToX,,methanation,,2020,expConvFix,0,
 powerToX,,methanation,,2025,expConvFix,0,
 ,,,naturalGas,2050,trdBuyUp,0,
 ,,,oilLiquid,2050,trdBuyUp,0,
+,,,,2020,expConvFix,0,deactivates investment in 2020
+,,,,2020,expStInFix,0,
+,,,,2020,expStOutFix,0,
+,,,,2020,expStSizeFix,0,
+,,,,2020,expExcFix,0,
