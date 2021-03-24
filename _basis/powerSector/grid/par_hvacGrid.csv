@@ -171,4 +171,4 @@ region_3,region_3,exchange_2,parameter_1,value_1,parameter_2,value_2,parameter_3
 88SE,89SE,hvac,capaExcResi,6.79,lossExc,0.021,costExpExc,165.2,costOprExc,6.6
 92UK,93UK,hvac,capaExcResi,5.09,lossExc,0.013,costExpExc,108,costOprExc,4.3
 98IT,99FR,hvac,capaExcResi,1.17,lossExc,0.01,costExpExc,78.1,costOprExc,3.1
-,,hvac,lifeExc,60,,,,,,
+,,hvac,lifeExc,40,,,,,,
