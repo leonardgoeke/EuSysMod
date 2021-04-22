@@ -8,10 +8,4 @@ spaceHeat,,costMissCapa,10000
 processHeat_low,,costMissCapa,10000
 processHeat_medium,,costMissCapa,10000
 processHeat_high,,costMissCapa,10000
-psngRoadPrvt,,costMissCapa,10000
-psngRoadPub,,costMissCapa,10000
-frtRoadLight,,costMissCapa,10000
-frtRoadHeavy,,costMissCapa,10000
-psngRail,,costMissCapa,10000
-frtRail,,costMissCapa,10000
 ,,emissionInf,10000
