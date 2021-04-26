@@ -6,11 +6,11 @@ bioConversion,,solidBioToGas,,solidBiomass,bioGas,,,mature,none
 bioConversion,,solidToH2,,solidBiomass,h2Grid; h2Local,,,mature,none
 bioConversion,,solidToLiquid,,solidBiomass,synthLiquid,,,mature,none
 ccgt,ccgtGasCHP,ccgtGasChpDh,,gasFuel,electricity; districtHeat,,,mature,none
-ccgt,ccgtGasCHP,ccgtGasChpProLow,,gasFuel,electricity; processHeat_low,,processHeat_low,mature,none
+ccgt,ccgtGasCHP,ccgtGasChpProLow,,gasFuel,electricity; processHeat_low,,,mature,none
 ccgt,ccgtH2CHP,ccgtH2ChpDh,,h2Grid,electricity; districtHeat,,,mature,none
-ccgt,ccgtH2CHP,ccgtH2ChpProLow,,h2Grid; h2Local,electricity; processHeat_low,,processHeat_low,mature,none
-ccgt,ccgtProMed,ccgtGasChpProMed,,gasFuel,electricity; processHeat_medium,,processHeat_medium,mature,none
-ccgt,ccgtProMed,ccgtH2ChpProMed,,h2Grid; h2Local,electricity; processHeat_medium,,processHeat_medium,mature,none
+ccgt,ccgtH2CHP,ccgtH2ChpProLow,,h2Grid; h2Local,electricity; processHeat_low,,,mature,none
+ccgt,ccgtProMed,ccgtGasChpProMed,,gasFuel,electricity; processHeat_medium,,,mature,none
+ccgt,ccgtProMed,ccgtH2ChpProMed,,h2Grid; h2Local,electricity; processHeat_medium,,,mature,none
 ccgt,,ccgtGas,,gasFuel,electricity,,,mature,none
 ccgt,,ccgtH2,,h2Grid; h2Local,electricity,,,mature,none
 engine,bioEngine,bioEngineLh,,rawBiogas,electricity; localHeat,,,mature,none
@@ -18,11 +18,11 @@ engine,gasEngine,gasEngineDh,,gasFuel,electricity; districtHeat,,,mature,none
 engine,gasEngine,gasEngineLh,,gasFuel,electricity; localHeat,,,mature,none
 engine,h2Engine,h2EngineDh,,h2Grid,electricity; districtHeat,,,mature,none
 engine,h2Engine,h2EngineLh,,h2Grid,electricity; localHeat,,,mature,none
-engineLow,,gasEngineProLow,,gasFuel,electricity; processHeat_low,,processHeat_low,mature,none
-engineLow,,h2EngineProLow,,h2Grid; h2Local,electricity; processHeat_low,,processHeat_low,mature,none
-engineMed,,bioEngineProMed,,rawBiogas,electricity; processHeat_medium,,processHeat_medium,mature,none
-engineMed,,gasEngineProMed,,gasFuel,electricity; processHeat_medium,,processHeat_medium,mature,none
-engineMed,,h2EngineProMed,,h2Grid; h2Local,electricity; processHeat_medium,,processHeat_medium,mature,none
+engineLow,,gasEngineProLow,,gasFuel,electricity; processHeat_low,,,mature,none
+engineLow,,h2EngineProLow,,h2Grid; h2Local,electricity; processHeat_low,,,mature,none
+engineMed,,bioEngineProMed,,rawBiogas,electricity; processHeat_medium,,,mature,none
+engineMed,,gasEngineProMed,,gasFuel,electricity; processHeat_medium,,,mature,none
+engineMed,,h2EngineProMed,,h2Grid; h2Local,electricity; processHeat_medium,,,mature,none
 heatpump,heatpumpSpace,heatpumpAirSpace,,electricity,spaceHeat,,spaceHeat,mature,none
 heatpump,,heatpumpDh,,electricity,districtHeat,,,mature,none
 heatpump,heatpumpSpace,heatpumpGroundSpace,,electricity,spaceHeat,,spaceHeat,mature,none
@@ -30,8 +30,8 @@ heatpump,,heatpumpLh,,electricity,localHeat,,,mature,none
 heatpump,,heatpumpPro,,electricity,processHeat_low,,processHeat_low,mature,none
 heatpump,heatpumpSpace,heatpumpWaterSpace,,electricity,spaceHeat,,spaceHeat,mature,none
 miscProHeat,bioBoilerPro,bioBoilerProHigh,,solidBiomass,processHeat_high,,,mature,none
-miscProHeat,bioBoilerPro,bioBoilerProLow,,solidBiomass,processHeat_low,,processHeat_low,mature,none
-miscProHeat,bioBoilerPro,bioBoilerProMed,,solidBiomass,processHeat_medium,,processHeat_medium,mature,none
+miscProHeat,bioBoilerPro,bioBoilerProLow,,solidBiomass,processHeat_low,,,mature,none
+miscProHeat,bioBoilerPro,bioBoilerProMed,,solidBiomass,processHeat_medium,,,mature,none
 miscProHeat,coalBoilerPro,coalBoilerProHigh,,hardcoal,processHeat_high,,,stock,none
 miscProHeat,coalBoilerPro,coalBoilerProLow,,hardcoal,processHeat_low,,,stock,none
 miscProHeat,coalBoilerPro,coalBoilerProMed,,hardcoal,processHeat_medium,,,stock,none
@@ -39,20 +39,20 @@ miscProHeat,electricHeatPro,eBoilerProHigh,,electricity,processHeat_high,,,matur
 miscProHeat,electricHeatPro,eBoilerProMed,,electricity,processHeat_medium,,processHeat_medium,mature,none
 miscProHeat,electricHeatPro,resistiveHeatProLow,,electricity,processHeat_low,,processHeat_low,mature,none
 miscProHeat,gasBoilerPro,gasBoilerProHigh,,gasFuel,processHeat_high,,,mature,none
-miscProHeat,gasBoilerPro,gasBoilerProLow,,gasFuel,processHeat_low,,processHeat_low,mature,none
-miscProHeat,gasBoilerPro,gasBoilerProMed,,gasFuel,processHeat_medium,,processHeat_medium,mature,none
+miscProHeat,gasBoilerPro,gasBoilerProLow,,gasFuel,processHeat_low,,,mature,none
+miscProHeat,gasBoilerPro,gasBoilerProMed,,gasFuel,processHeat_medium,,,mature,none
 miscProHeat,h2BoilerPro,h2BoilerProHigh,,h2Grid; h2Local,processHeat_high,,,mature,none
-miscProHeat,h2BoilerPro,h2BoilerProLow,,h2,processHeat_low,,processHeat_low,mature,none
-miscProHeat,h2BoilerPro,h2BoilerProMed,,h2Grid; h2Local,processHeat_medium,,processHeat_medium,mature,none
+miscProHeat,h2BoilerPro,h2BoilerProLow,,h2,processHeat_low,,,mature,none
+miscProHeat,h2BoilerPro,h2BoilerProMed,,h2Grid; h2Local,processHeat_medium,,,mature,none
 miscProHeat,oilBoilerPro,oilLiquidBoilerProHigh,,liquidFuel,processHeat_high,,,mature,none
-miscProHeat,oilBoilerPro,oilLiquidBoilerProLow,,liquidFuel,processHeat_low,,processHeat_low,mature,none
-miscProHeat,oilBoilerPro,oilLiquidBoilerProMed,,liquidFuel,processHeat_medium,,processHeat_medium,mature,none
+miscProHeat,oilBoilerPro,oilLiquidBoilerProLow,,liquidFuel,processHeat_low,,,mature,none
+miscProHeat,oilBoilerPro,oilLiquidBoilerProMed,,liquidFuel,processHeat_medium,,,mature,none
 miscSpaceHeat,renovation,ambitious,,,spaceHeat,,,mature,none
 miscSpaceHeat,renovation,moderate,,,spaceHeat,,,mature,none
-miscSpaceHeat,,bioBoilerSpace,,solidBiomass,spaceHeat,,spaceHeat,mature,none
-miscSpaceHeat,,gasBoilerSpace,,gasFuel,spaceHeat,,spaceHeat,mature,none
-miscSpaceHeat,,h2BoilerSpace,,h2Grid,spaceHeat,,spaceHeat,mature,none
-miscSpaceHeat,,oilLiquidBoilerSpace,,liquidFuel,spaceHeat,,spaceHeat,mature,none
+miscSpaceHeat,,bioBoilerSpace,,solidBiomass,spaceHeat,,,mature,none
+miscSpaceHeat,,gasBoilerSpace,,gasFuel,spaceHeat,,,mature,none
+miscSpaceHeat,,h2BoilerSpace,,h2Grid,spaceHeat,,,mature,none
+miscSpaceHeat,,oilLiquidBoilerSpace,,liquidFuel,spaceHeat,,,mature,none
 miscSpaceHeat,,resistiveHeatSpace,,electricity,spaceHeat,,spaceHeat,mature,none
 networkHeat,gasBoilerNet,gasBoilerDh,,gasFuel,districtHeat,,,mature,none
 networkHeat,gasBoilerNet,gasBoilerLh,,gasFuel,localHeat,,,mature,none
@@ -72,10 +72,10 @@ powerToX,fuelStorage,h2Blending,,h2Grid,h2Blend,,,unrestricted,none
 powerToX,h2Storage,h2StorageAerial,,,,(h2Grid; h2Local),(h2Grid; h2Local),emerging,none
 powerToX,h2Storage,h2StorageCavern,,,,(h2Grid; h2Local),(h2Grid; h2Local),emerging,none
 powerToX,pefc,pefcLh,,h2Grid,electricity; localHeat,,,mature,none
-powerToX,pefc,pefcSpace,,h2Grid,electricity; spaceHeat,,spaceHeat,mature,none
+powerToX,pefc,pefcSpace,,h2Grid,electricity; spaceHeat,,,mature,none
 powerToX,sofc,sofcDh,,h2Grid,electricity; districtHeat,,,mature,none
-powerToX,sofc,sofcProLow,,h2Grid; h2Local,electricity; processHeat_low,,processHeat_low,mature,none
-powerToX,sofc,sofcProMed,,h2Grid; h2Local,electricity; processHeat_medium,,processHeat_medium,mature,none
+powerToX,sofc,sofcProLow,,h2Grid; h2Local,electricity; processHeat_low,,,mature,none
+powerToX,sofc,sofcProMed,,h2Grid; h2Local,electricity; processHeat_medium,,,mature,none
 powerToX,synthFuel,fischerTropsch,,h2Grid; h2Local; capturedCO2,synthLiquid,,,mature,none
 powerToX,synthFuel,methanation,,h2Grid; h2Local; capturedCO2,synthGas,,,mature,none
 powerToX,synthFuel,steamReforming,,gasFuel,h2Grid; h2Local,,,mature,none
