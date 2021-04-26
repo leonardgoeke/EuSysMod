@@ -61,8 +61,8 @@ networkHeat,h2BoilerNet,h2BoilerLh,,h2Grid,localHeat,,,mature,none
 networkHeat,heatGrid,districtHeatPro,,districtHeat,processHeat_low,,,mature,none
 networkHeat,heatGrid,districtHeatSpace,,districtHeat,spaceHeat,,,mature,none
 networkHeat,heatGrid,localHeatSpace,,localHeat,spaceHeat,,,mature,none
-networkHeat,,heatStorageLh,,,,districtHeat,districtHeat,mature,none
-networkHeat,,heatStorageDhShort,,,,localHeat,localHeat,mature,none
+networkHeat,,heatStorageLh,,,,localHeat,localHeat,mature,none
+networkHeat,,heatStorageDhShort,,,,districtHeat,districtHeat,mature,none
 ocgt,,ocgtGas,,gasFuel,electricity,,,mature,none
 ocgt,,ocgtH2,,h2Grid; h2Local,electricity,,,mature,none
 powerToX,electrolysis,alkElectrolysis,,electricity,h2Local,,,emerging,none
