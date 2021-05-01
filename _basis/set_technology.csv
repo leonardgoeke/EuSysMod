@@ -47,8 +47,6 @@ miscProHeat,h2BoilerPro,h2BoilerProMed,,h2Grid; h2Local,processHeat_medium,,,mat
 miscProHeat,oilBoilerPro,oilLiquidBoilerProHigh,,liquidFuel,processHeat_high,,,mature,none
 miscProHeat,oilBoilerPro,oilLiquidBoilerProLow,,liquidFuel,processHeat_low,,,mature,none
 miscProHeat,oilBoilerPro,oilLiquidBoilerProMed,,liquidFuel,processHeat_medium,,,mature,none
-miscSpaceHeat,renovation,ambitious,,,spaceHeat,,,mature,none
-miscSpaceHeat,renovation,moderate,,,spaceHeat,,,mature,none
 miscSpaceHeat,,bioBoilerSpace,,solidBiomass,spaceHeat,,,mature,none
 miscSpaceHeat,,gasBoilerSpace,,gasFuel,spaceHeat,,,mature,none
 miscSpaceHeat,,h2BoilerSpace,,h2Grid,spaceHeat,,,mature,none
