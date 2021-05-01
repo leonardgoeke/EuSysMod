@@ -26,9 +26,9 @@ all,24FR,offshore_a,capaConvFix,0
 all,25FR,offshore_a,capaConvFix,0
 all,26FR,offshore_a,capaConvUp,14.74624173
 all,27FR,offshore_a,capaConvFix,0
-all,28BE,offshore_a,capaConvFix,0
+all,28BE,offshore_a,capaConvUp,5.9
 all,29LU,offshore_a,capaConvFix,0
-all,30NL,offshore_a,capaConvFix,0
+all,30NL,offshore_a,capaConvUp,9.3
 all,31DE,offshore_a,capaConvFix,0
 all,32DE,offshore_a,capaConvUp,83.54078621
 all,33DE,offshore_a,capaConvFix,0
@@ -122,9 +122,9 @@ all,24FR,offshore_b,capaConvFix,0
 all,25FR,offshore_b,capaConvFix,0
 all,26FR,offshore_b,capaConvUp,8.505932186
 all,27FR,offshore_b,capaConvFix,0
-all,28BE,offshore_b,capaConvFix,0
+all,28BE,offshore_b,capaConvUp,5.9
 all,29LU,offshore_b,capaConvFix,0
-all,30NL,offshore_b,capaConvFix,0
+all,30NL,offshore_b,capaConvUp,64.7
 all,31DE,offshore_b,capaConvFix,0
 all,32DE,offshore_b,capaConvUp,0.059213788
 all,33DE,offshore_b,capaConvFix,0
