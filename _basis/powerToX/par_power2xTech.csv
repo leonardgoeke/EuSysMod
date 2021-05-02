@@ -78,13 +78,13 @@ powerToX,h2Storage,,2035,,effStIn,0.775,effStOut,0.775,,,
 powerToX,h2Storage,,2040,,effStIn,0.796,effStOut,0.796,,,
 powerToX,h2Storage,,2045,,effStIn,0.816,effStOut,0.816,,,
 powerToX,h2Storage,,2050,,effStIn,0.837,effStOut,0.837,,,
-powerToX,,directAirCapture,2020,,costExpConv,1.0132,costOprConv,0.0405,,,"based on Fasihi (2017), Long-Term Hydrocarbon Trade Options for the Maghreb Region and Europe"
-powerToX,,directAirCapture,2025,,costExpConv,1.0132,costOprConv,0.0405,,,in Mil. Euro/ktCO2
-powerToX,,directAirCapture,2030,,costExpConv,1.0132,costOprConv,0.0405,,,"effConv in GW_el/ktCO2, emissionFac in tCO2 per GWh_el input"
-powerToX,,directAirCapture,2035,,costExpConv,1.0132,costOprConv,0.0405,,,
-powerToX,,directAirCapture,2040,,costExpConv,0.8762,costOprConv,0.035,,,
-powerToX,,directAirCapture,2045,,costExpConv,0.8762,costOprConv,0.035,,,
-powerToX,,directAirCapture,2050,,costExpConv,0.8762,costOprConv,0.035,,,
+powerToX,,directAirCapture,2020,,costExpConv,30.396,costOprConv,1.215,,,"based on Fasihi (2017), Long-Term Hydrocarbon Trade Options for the Maghreb Region and Europe"
+powerToX,,directAirCapture,2025,,costExpConv,30.396,costOprConv,1.215,,,in Mil. Euro/ktCO2
+powerToX,,directAirCapture,2030,,costExpConv,30.396,costOprConv,1.215,,,"effConv in GW_el/ktCO2, emissionFac in tCO2 per GWh_el input"
+powerToX,,directAirCapture,2035,,costExpConv,30.396,costOprConv,1.215,,,
+powerToX,,directAirCapture,2040,,costExpConv,26.286,costOprConv,1.05,,,
+powerToX,,directAirCapture,2045,,costExpConv,26.286,costOprConv,1.05,,,
+powerToX,,directAirCapture,2050,,costExpConv,26.286,costOprConv,1.05,,,
 powerToX,,directAirCapture,2020,,effConv,4.444,emissionFac,-4444,,,
 powerToX,,directAirCapture,2025,,effConv,4.444,emissionFac,-4444,,,"uses values for gas from Neumann (2008), Natural Gas Storage in Germany"
 powerToX,,directAirCapture,2030,,effConv,4.444,emissionFac,-4444,,,"uses values for gas from Neumann (2008), Natural Gas Storage in Germany"
