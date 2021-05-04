@@ -123,7 +123,6 @@ transport,bev,bevFrtRoadLight,,electricity,frtRoadLight,,,emerging,none
 transport,bev,bevPsngRoadPrvt,,electricity,psngRoadPrvt,,,mature,none
 transport,bev,bevPsngRoadPub,,electricity,psngRoadPub,,,mature,none
 transport,bev,hyDieselPsngRoadPrvt,,liquidFuel; electricity,psngRoadPrvt,,,mature,none
-transport,bev,hyFcPsngRoadPrvt,,h2Grid; electricity,psngRoadPrvt,,,mature,none
 transport,bev,hyOttoPsngRoadPrvt,,liquidFuel; electricity,psngRoadPrvt,,,mature,none
 transport,,avaAndNavi,,liquidFuel,,,,unrestricted,none
 transport,,cngPsngRoadPrvt,,gasFuel,psngRoadPrvt,,,mature,none
