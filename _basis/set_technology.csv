@@ -66,7 +66,7 @@ ocgt,,ocgtH2,,h2,electricity,,,mature,none
 powerToX,electrolysis,alkElectrolysis,,electricity,h2Local,,,emerging,none
 powerToX,electrolysis,pemElectrolysis,,electricity,h2Grid; h2Local,,,emerging,none
 powerToX,electrolysis,soElectrolysis,,electricity,h2Grid; h2Local,,,emerging,none
-powerToX,fuelStorage,h2Blending,,h2Grid,h2Blend,,,unrestricted,none
+powerToX,fuelStorage,h2Blending,,h2Grid; bioGas; naturalGas; synthGas,h2Blend,,,unrestricted,none
 powerToX,h2Storage,h2StorageAerial,,,,(h2Grid; h2Local),(h2Grid; h2Local),emerging,none
 powerToX,h2Storage,h2StorageCavern,,,,(h2Grid; h2Local),(h2Grid; h2Local),emerging,none
 powerToX,pefc,pefcLh,,h2Grid,electricity; localHeat,,,mature,none
