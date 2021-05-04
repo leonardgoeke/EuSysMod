@@ -1,5 +1,8 @@
-carrier_1,parameter,value,source
-solidBiomass,emissionFac,387.0549954,"based on Greenhouse Gas Protocol (2017), Emission Factors from Cross-Sector Tools, computed a weighted average of different categories on biomassPotential Sheet"
-rawBiogas,emissionFac,197.1119134,"Greenhouse Gas Protocol (2017), Emission Factors from Cross-Sector Tools"
-solidBiomass,trdBuyPrc,30,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
-rawBiogas,trdBuyPrc,30,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+technology_3,carrier_1,parameter,value,source
+,solidBiomass,emissionFac,387.0549954,"based on Greenhouse Gas Protocol (2017), Emission Factors from Cross-Sector Tools, computed a weighted average of different categories on biomassPotential Sheet"
+,rawBiogas,emissionFac,197.1119134,"Greenhouse Gas Protocol (2017), Emission Factors from Cross-Sector Tools"
+solidToLiquid,solidBiomass,emissionFac,124.1813908,"if biomass is used to create other carriers their emissions are already accounted for separately, therefore only the emissions of the transformation have to be accounted for, they depend on the efficiency of the proces and emissions of the created carrier"
+rawBioToGas,rawBiogas,emissionFac,-4.1844496,
+solidBioToGas,solidBiomass,emissionFac,185.7586324,
+,solidBiomass,trdBuyPrc,30,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+,rawBiogas,trdBuyPrc,30,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
