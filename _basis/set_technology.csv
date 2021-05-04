@@ -103,7 +103,7 @@ stock,heat,oilLiquidBoilerSpaceStock,,liquidFuel,spaceHeat,,,stock,none
 stock,heat,oilPlantProLow,,liquidFuel,electricity; processHeat_low,,,stock,none
 stock,heat,oilPlantProMed,,liquidFuel,electricity; processHeat_medium,,,stock,none
 stock,heat,resistiveHeatSpaceStock,,electricity,spaceHeat,,,stock,none
-stock,power,bioPlantStock,,,electricity; districtHeat,,,stock,decomm
+stock,power,bioPlantStock,,bioGas; solidBiomass,electricity; districtHeat,,,stock,decomm
 stock,power,gasPlantStock_a,,gasFuel,electricity; districtHeat,,,stock,decomm
 stock,power,gasPlantStock_b,,gasFuel,electricity; districtHeat,,,stock,decomm
 stock,power,hardcoalPlantProLowStock,,hardcoal,electricity; processHeat_low,,,stock,none
