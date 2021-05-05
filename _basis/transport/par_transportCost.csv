@@ -4,8 +4,6 @@ cngPsngRoadPrvt,2020,,costExpConv,11679.59121
 dieselPsngRoadPrvt,2020,,costExpConv,13599.22285
 fcevPsngRoadPrvt,2020,,costExpConv,39459.57253
 bevPsngRoadPrvt,2020,,costExpConv,18664.01129
-hyOttoPsngRoadPrvt,2020,,costExpConv,12567.90989
-hyDieselPsngRoadPrvt,2020,,costExpConv,13124.13643
 ottoPsngRoadPub,2020,,costExpConv,5372.921994
 dieselPsngRoadPub,2020,,costExpConv,5832.494523
 fcPsngRoadPub,2020,,costExpConv,11551.40061
@@ -30,8 +28,6 @@ cngPsngRoadPrvt,2025,,costExpConv,11216.18106
 dieselPsngRoadPrvt,2025,,costExpConv,13074.81655
 fcevPsngRoadPrvt,2025,,costExpConv,35440.98891
 bevPsngRoadPrvt,2025,,costExpConv,17624.82797
-hyOttoPsngRoadPrvt,2025,,costExpConv,12087.73189
-hyDieselPsngRoadPrvt,2025,,costExpConv,12594.63197
 ottoPsngRoadPub,2025,,costExpConv,5379.184141
 dieselPsngRoadPub,2025,,costExpConv,5871.377819
 fcPsngRoadPub,2025,,costExpConv,10711.67113
@@ -56,8 +52,6 @@ cngPsngRoadPrvt,2030,,costExpConv,10752.77091
 dieselPsngRoadPrvt,2030,,costExpConv,12550.41024
 fcevPsngRoadPrvt,2030,,costExpConv,31422.40529
 bevPsngRoadPrvt,2030,,costExpConv,16585.64466
-hyOttoPsngRoadPrvt,2030,,costExpConv,11607.55389
-hyDieselPsngRoadPrvt,2030,,costExpConv,12065.12751
 ottoPsngRoadPub,2030,,costExpConv,5385.446287
 dieselPsngRoadPub,2030,,costExpConv,5910.261116
 fcPsngRoadPub,2030,,costExpConv,9871.941653
@@ -82,8 +76,6 @@ cngPsngRoadPrvt,2035,,costExpConv,10289.36077
 dieselPsngRoadPrvt,2035,,costExpConv,12026.00394
 fcevPsngRoadPrvt,2035,,costExpConv,27403.82166
 bevPsngRoadPrvt,2035,,costExpConv,15546.46134
-hyOttoPsngRoadPrvt,2035,,costExpConv,11127.37589
-hyDieselPsngRoadPrvt,2035,,costExpConv,11535.62305
 ottoPsngRoadPub,2035,,costExpConv,5391.708434
 dieselPsngRoadPub,2035,,costExpConv,5949.144413
 fcPsngRoadPub,2035,,costExpConv,9032.212176
@@ -108,8 +100,6 @@ cngPsngRoadPrvt,2040,,costExpConv,9825.95062
 dieselPsngRoadPrvt,2040,,costExpConv,11501.59763
 fcevPsngRoadPrvt,2040,,costExpConv,23385.23804
 bevPsngRoadPrvt,2040,,costExpConv,14507.27802
-hyOttoPsngRoadPrvt,2040,,costExpConv,10647.19788
-hyDieselPsngRoadPrvt,2040,,costExpConv,11006.11859
 ottoPsngRoadPub,2040,,costExpConv,5397.970581
 dieselPsngRoadPub,2040,,costExpConv,5988.02771
 fcPsngRoadPub,2040,,costExpConv,8192.4827
@@ -134,8 +124,6 @@ cngPsngRoadPrvt,2045,,costExpConv,9362.540473
 dieselPsngRoadPrvt,2045,,costExpConv,10977.19133
 fcevPsngRoadPrvt,2045,,costExpConv,19366.65442
 bevPsngRoadPrvt,2045,,costExpConv,13468.09471
-hyOttoPsngRoadPrvt,2045,,costExpConv,10167.01988
-hyDieselPsngRoadPrvt,2045,,costExpConv,10476.61413
 ottoPsngRoadPub,2045,,costExpConv,5404.232728
 dieselPsngRoadPub,2045,,costExpConv,6026.911007
 fcPsngRoadPub,2045,,costExpConv,7352.753223
@@ -160,8 +148,6 @@ cngPsngRoadPrvt,2050,,costExpConv,8899.130326
 dieselPsngRoadPrvt,2050,,costExpConv,10452.78502
 fcevPsngRoadPrvt,2050,,costExpConv,15348.07079
 bevPsngRoadPrvt,2050,,costExpConv,12428.91139
-hyOttoPsngRoadPrvt,2050,,costExpConv,9686.841876
-hyDieselPsngRoadPrvt,2050,,costExpConv,9947.109668
 ottoPsngRoadPub,2050,,costExpConv,5410.494875
 dieselPsngRoadPub,2050,,costExpConv,6065.794304
 fcPsngRoadPub,2050,,costExpConv,6513.023746
@@ -186,8 +172,6 @@ cngPsngRoadPrvt,,,effConv,1.747
 dieselPsngRoadPrvt,,,effConv,2.052
 fcevPsngRoadPrvt,,,effConv,3.013
 bevPsngRoadPrvt,,,effConv,4.889
-hyOttoPsngRoadPrvt,,,effConv,3.573
-hyDieselPsngRoadPrvt,,,effConv,3.669
 ottoPsngRoadPub,,,effConv,3.283
 dieselPsngRoadPub,,,effConv,4.077
 fcPsngRoadPub,,,effConv,4.295
@@ -219,5 +203,3 @@ bevFrtRoadHeavy,2035,,effConv,12.768454
 bevFrtRoadHeavy,2040,,effConv,13.87638
 bevFrtRoadHeavy,2045,,effConv,14.984306
 bevFrtRoadHeavy,2050,,effConv,16.092232
-hyOttoPsngRoadPrvt,,electricity,ratioConvInFix,0.430033317
-hyDieselPsngRoadPrvt,,electricity,ratioConvInFix,0.406981982
