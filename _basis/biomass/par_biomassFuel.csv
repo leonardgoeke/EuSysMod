@@ -4,3 +4,5 @@ technology_3,carrier_1,parameter,value,source
 solidToLiquid,solidBiomass,emissionFac,124.1813908,"if biomass is used to create other carriers their emissions are already accounted for separately, therefore only the emissions of the transformation have to be accounted for, they depend on the efficiency of the proces and emissions of the created carrier"
 rawBioToGas,rawBiogas,emissionFac,-4.1844496,
 solidBioToGas,solidBiomass,emissionFac,185.7586324,
+,solidBiomass,trdBuyPrc,1,
+,rawBiogas,trdBuyPrc,1,

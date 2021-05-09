@@ -1,0 +1,4 @@
+timestep_2,carrier_1,technology_3,carrier_2,region_3,parameter,value,source
+all,,h2Blending,,all,capaConvResi,0,
+,,h2Blending,h2Grid,,ratioConvInFix,0.2,
+,,h2Blending,,,emissionFac,0,
