@@ -1,4 +1,4 @@
-timestep_2,region_3,technology_3,carrier_1,parameter,value,source
+timestep_2,region_4,technology_3,carrier_1,parameter,value,source
 2020,49AT,bioPlantStock,,capaConvResi,0.3626,see residualCapaPower xlsx
 2025,49AT,bioPlantStock,,capaConvResi,0.3626,
 2030,49AT,bioPlantStock,,capaConvResi,0.3309,

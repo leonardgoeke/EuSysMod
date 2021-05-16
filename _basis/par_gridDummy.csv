@@ -1,4 +1,4 @@
-timestep_2,region_3,region_3,exchange_1,exchange_2,parameter,value
+timestep_2,region_4,region_4,exchange_1,exchange_2,parameter,value
 ,01ES,02ES,h2Transport,,capaExcResi,0
 ,02ES,03ES,h2Transport,,capaExcResi,0
 ,02ES,04ES,h2Transport,,capaExcResi,0
@@ -172,5 +172,3 @@ timestep_2,region_3,region_3,exchange_1,exchange_2,parameter,value
 ,92UK,93UK,h2Transport,,capaExcResi,0
 ,98IT,99FR,h2Transport,,capaExcResi,0
 ,,,h2Transport,,lossExc,0.005
-all,,,powerGrid,hvac,expExcUp,0
-all,,,powerGrid,hvac,capaExcUp,1234.4

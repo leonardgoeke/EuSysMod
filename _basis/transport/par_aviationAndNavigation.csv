@@ -1,4 +1,4 @@
-timestep_2,carrier_1,technology_3,region_3,parameter,value,source
+timestep_2,carrier_1,technology_3,region_4,parameter,value,source
 all,liquidFuel,avaAndNavi,01ES,useFix,64.97991537,"models fuel demand from aviation and navigation, see transportInputs for details"
 all,liquidFuel,avaAndNavi,02ES,useFix,235.0177406,
 all,liquidFuel,avaAndNavi,03ES,useFix,195.8124382,
