@@ -6503,8 +6503,12 @@ timestep_2,region_4,technology_3,carrier_1,parameter,value,source
 2050,35DE,lignitePlantStock_c,,capaConvResi,0.0098,
 ,,gasPlantStock_a,,costOprConv,32.8,"based on Acatech (2016), Technologiesteckbrief Konventionelle Kraftwerke"
 ,,gasPlantStock_b,,costOprConv,38.2,
-,,hardcoalPlantStock,,costOprConv,10.2,
-,,lignitePlantStock,,costOprConv,85.13513514,
+,,hardcoalPlantStock_a,,costOprConv,10.2,
+,,hardcoalPlantStock_b,,costOprConv,10.2,
+,,hardcoalPlantStock_c,,costOprConv,10.2,
+,,lignitePlantStock_a,,costOprConv,85.13513514,
+,,lignitePlantStock_b,,costOprConv,85.13513514,
+,,lignitePlantStock_c,,costOprConv,85.13513514,
 ,,nuclearPlantStock,,costOprConv,82.5,"own assumption, relates to 5 percent per 5000 €/kW investment costs"
 ,,oilLiquidPlantStock,,costOprConv,17.43,uses 2020 values for local heating engine
 ,,wastePlantStock,,costOprConv,17.43,
