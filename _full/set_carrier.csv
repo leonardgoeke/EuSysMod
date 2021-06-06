@@ -28,4 +28,4 @@ frtRoadLight,,3,2,4,4,none
 frtRoadHeavy,,5,2,4,4,none
 psngRail,,5,2,4,4,none
 frtRail,,5,2,4,4,none
-waste,,2,1,4,4,none
+waste,,2,1,4,4,eq
