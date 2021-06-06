@@ -1,8 +1,6 @@
 technology_3,carrier_1,parameter,value,source
-,solidBiomass,emissionFac,387.0549954,"based on Greenhouse Gas Protocol (2017), Emission Factors from Cross-Sector Tools, computed a weighted average of different categories on biomassPotential Sheet"
-,rawBiogas,emissionFac,197.1119134,"Greenhouse Gas Protocol (2017), Emission Factors from Cross-Sector Tools"
-solidToLiquid,solidBiomass,emissionFac,124.1813908,"if biomass is used to create other carriers their emissions are already accounted for separately, therefore only the emissions of the transformation have to be accounted for, they depend on the efficiency of the proces and emissions of the created carrier"
-rawBioToGas,rawBiogas,emissionFac,-4.1844496,
-solidBioToGas,solidBiomass,emissionFac,185.7586324,
-,solidBiomass,trdBuyPrc,1,
-,rawBiogas,trdBuyPrc,1,
+solidToLiquid,solidBiomass,emissionFac,-120.922,"if biomass is used to create other carriers emissions are net-zero, therefore specific emissions of these processes correspond to their efficiency times emissions of the created carrier"
+rawBioToGas,rawBiogas,emissionFac,-177.141,
+solidBioToGas,solidBiomass,emissionFac,-122.791,
+,solidBiomass,trdBuyPrc,0,
+,rawBiogas,trdBuyPrc,0,
