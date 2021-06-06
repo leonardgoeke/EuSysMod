@@ -27,5 +27,4 @@ psngRoadPub,,3,2,4,4,none
 frtRoadLight,,3,2,4,4,none
 frtRoadHeavy,,3,2,4,4,none
 psngRail,,3,2,4,4,none
-frtRail,,3,2,4,4,none
-waste,,3,1,4,4,none
+waste,,3,1,4,4,eq
