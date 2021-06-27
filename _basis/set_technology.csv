@@ -153,9 +153,9 @@ wind,onshore,onshore_a,,,electricity,,,mature,none,4
 wind,onshore,onshore_b,,,electricity,,,mature,none,4
 wind,onshore,onshore_c,,,electricity,,,mature,none,4
 networkHeat,,heatStorageDhLong,,,,districtHeat,districtHeat,mature,none,
-stock,power,bioPlantStock_chp,,,electricity; districtHeat,,,stock,decomm,
-stock,power,gasPlantStock_chp_a,,,electricity; districtHeat,,,stock,decomm,
-stock,power,gasPlantStock_chp_b,,,electricity; districtHeat,,,stock,decomm,
-stock,power,hardcoalPlantStock_chp,,,electricity; districtHeat,,,stock,decomm,
-stock,power,oilLiquidPlantStock_chp,,,electricity; districtHeat,,,stock,decomm,
-stock,power,wastePlantStock_chp,,,electricity; districtHeat,,,stock,decomm,
+stock,power,bioPlantStock_chp,,bioGas; solidBiomass,electricity; districtHeat,,,stock,decomm,
+stock,power,gasPlantStock_chp_a,,gasFuel,electricity; districtHeat,,,stock,decomm,
+stock,power,gasPlantStock_chp_b,,gasFuel,electricity; districtHeat,,,stock,decomm,
+stock,power,hardcoalPlantStock_chp,,hardcoal,electricity; districtHeat,,,stock,decomm,
+stock,power,oilLiquidPlantStock_chp,,liquidFuel,electricity; districtHeat,,,stock,decomm,
+stock,power,wastePlantStock_chp,,waste,electricity; districtHeat,,,stock,decomm,
