@@ -1,0 +1,56 @@
+#!/bin/bash --login
+#$ -cwd
+#$ -N anyMOD
+#$ -o /net/work/goeke/julia/job_log.$JOB_ID.$TASK_ID.out
+#$ -j y
+#$ -l h_rt=172800
+#$ -l mem_free=4G
+#$ -pe mp 1
+#$ -m bae
+#$ -M lgo@wip.tu-berlin.de
+
+qsub -t 1 -v days='2' -v sca='scale' startSmall.job
+qsub -t 2 -v days='4' -v sca='scale' startSmall.job
+qsub -t 3 -v days='8' -v sca='scale' startSmall.job
+qsub -t 4 -v days='12' -v sca='scale' startSmall.job
+qsub -t 5 -v days='16' -v sca='scale' startLong.job
+qsub -t 6 -v days='20' -v sca='scale' startLong.job
+qsub -t 7 -v days='24' -v sca='scale' startLong.job
+qsub -t 8 -v days='28' -v sca='scale' startLong.job
+qsub -t 9 -v days='32' -v sca='scale' startLong.job
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
