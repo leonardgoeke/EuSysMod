@@ -9,30 +9,31 @@
 #$ -m bae
 #$ -M lgo@wip.tu-berlin.de
 
-qsub -t 1 -v method='none' -v resHeu='2' -v resFull='4' startBenders.job
-qsub -t 2 -v method='onlyFix' -v resHeu='2' -v resFull='4' startBenders.job
-qsub -t 3 -v method='noQtr' -v resHeu='2' -v resFull='4' startBenders.job
-qsub -t 4 -v method='both' -v resHeu='2' -v resFull='4' startBenders.job
+#qsub -t 101 -v method='none' -v resHeu='2' -v resFull='4' startBenders.job
+#qsub -t 102 -v method='onlyFix' -v resHeu='2' -v resFull='4' startBenders.job
+#qsub -t 103 -v method='noQtr' -v resHeu='2' -v resFull='4' startBenders.job
+qsub -t 104 -v method='both' -v resHeu='2' -v resFull='4' startBenders.job
 
-qsub -t 5 -v method='none' -v resHeu='4' -v resFull='8' startBenders.job
-qsub -t 6 -v method='onlyFix' -v resHeu='4' -v resFull='8' startBenders.job
-qsub -t 7 -v method='noQtr' -v resHeu='4' -v resFull='8' startBenders.job
-qsub -t 8 -v method='both' -v resHeu='4' -v resFull='8' startBenders.job
+#qsub -t 105 -v method='none' -v resHeu='4' -v resFull='8' startBenders.job
+#qsub -t 106 -v method='onlyFix' -v resHeu='4' -v resFull='8' startBenders.job
+#qsub -t 107 -v method='noQtr' -v resHeu='4' -v resFull='8' startBenders.job
+qsub -t 108 -v method='both' -v resHeu='4' -v resFull='8' startBenders.job
+qsub -t 1081 -v method='both' -v resHeu='4' -v resFull='4' startBenders.job
 
-qsub -t 9 -v method='none' -v resHeu='8' -v resFull='12' startBenders.job
-qsub -t 10 -v method='onlyFix' -v resHeu='8' -v resFull='12' startBenders.job
-qsub -t 11 -v method='noQtr' -v resHeu='8' -v resFull='12' startBenders.job
-qsub -t 12 -v method='both' -v resHeu='8' -v resFull='12' startBenders.job
+#qsub -t 109 -v method='none' -v resHeu='8' -v resFull='12' startBenders.job
+#qsub -t 1010 -v method='onlyFix' -v resHeu='8' -v resFull='12' startBenders.job
+#qsub -t 1011 -v method='noQtr' -v resHeu='8' -v resFull='12' startBenders.job
+qsub -t 1012 -v method='both' -v resHeu='8' -v resFull='12' startBenders.job
 
-qsub -t 13 -v method='none' -v resHeu='8' -v resFull='16' startBenders.job
-qsub -t 14 -v method='onlyFix' -v resHeu='8' -v resFull='16' startBenders.job
-qsub -t 15 -v method='noQtr' -v resHeu='8' -v resFull='16' startBenders.job
-qsub -t 16 -v method='both' -v resHeu='8' -v resFull='16' startBenders.job
+#qsub -t 1013 -v method='none' -v resHeu='8' -v resFull='16' startBenders.job
+#qsub -t 1014 -v method='onlyFix' -v resHeu='8' -v resFull='16' startBenders.job
+#qsub -t 1015 -v method='noQtr' -v resHeu='8' -v resFull='16' startBenders.job
+qsub -t 1016 -v method='both' -v resHeu='8' -v resFull='16' startBenders.job
 
-qsub -t 17 -v method='none' -v resHeu='16' -v resFull='32' startBenders.job
-qsub -t 18 -v method='onlyFix' -v resHeu='16' -v resFull='32' startBenders.job
-qsub -t 19 -v method='noQtr' -v resHeu='16' -v resFull='32' startBenders.job
-qsub -t 20 -v method='both' -v resHeu='16' -v resFull='32' startBenders.job
+#qsub -t 1017 -v method='none' -v resHeu='16' -v resFull='32' startBenders.job
+#qsub -t 1018 -v method='onlyFix' -v resHeu='16' -v resFull='32' startBenders.job
+#qsub -t 1019 -v method='noQtr' -v resHeu='16' -v resFull='32' startBenders.job
+qsub -t 1020 -v method='both' -v resHeu='16' -v resFull='32' startBenders.job
 
 
 

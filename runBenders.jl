@@ -11,7 +11,7 @@ b = ""
 reso_tup = (heu = resHeu, mod = resMod) 
 
 # options of solution algorithm
-solOpt_tup = (gap = 0.015, alg = :benders, heu = Symbol(method), linPar = (thrsAbs = 0.05, thrsRel = 0.05), quadPar = (startRad = 1e-2, lowRad = 1e-5 , shrThrs = 0.001, extThrs = 0.001))
+solOpt_tup = (gap = 0.05, alg = :benders, heu = Symbol(method), linPar = (thrsAbs = 0.001, thrsRel = 0.02), quadPar = (startRad = 1e-2, lowRad = 1e-5 , shrThrs = 0.001, extThrs = 0.001))
 
 # options for model creation
 suffix_str = "_" * method * "_" * string(resHeu) * "_" * string(resMod)
@@ -28,11 +28,12 @@ report_m = anyModel(String[],modOpt_tup.resultDir, objName = "decomposition" * m
 if solOpt_tup.heu != :none
 	# ! heuristic solve for re-scaled and compressed time-series
 	produceMessage(report_m.options,report_m.report, 1," - Started heuristic pre-solve", testErr = false, printErr = false)
-	heu_m, heuSca_obj = @suppress heuristicSolve(modOpt_tup,1.0,t_int)
-	~, heuCom_obj = @suppress heuristicSolve(modOpt_tup,365/reso_tup.heu,t_int)
+	heu_m, heuSca_obj = heuristicSolve(modOpt_tup,1.0,t_int)
+	~, heuCom_obj = heuristicSolve(modOpt_tup,365/reso_tup.heu,t_int)
+	
 	# ! write fixes to files and limits to dictionary
 	fix_dic, lim_dic, cntHeu_arr = evaluateHeu(heu_m,heuSca_obj,heuCom_obj,solOpt_tup.linPar) # get fixed and limited variables
-	feasFix_dic = @suppress getFeasResult(modOpt_tup,fix_dic,lim_dic) # ensure feasiblity with fixed variables
+	feasFix_dic = @suppress getFeasResult(modOpt_tup,fix_dic,lim_dic,t_int) # ensure feasiblity with fixed variables
 	produceMessage(report_m.options,report_m.report, 1," - Heuristic found $(cntHeu_arr[1]) fixed variables and $(cntHeu_arr[2]) limited variables", testErr = false, printErr = false)
 	
 	# ! write fixed variable values to files
@@ -69,10 +70,9 @@ produceMessage(report_m.options,report_m.report, 1," - Create top model and sub 
 # ! create top level problem
 inputDir_arr = solOpt_tup.heu != :none ? vcat(modOpt_tup.modIn,[temp_dir]) : modOpt_tup.modIn
 
-top_m = @suppress anyModel(inputDir_arr,modOpt_tup.resultDir, objName = "topModel" * modOpt_tup.suffix, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, reportLvl = 1, holdFixed = true)
+top_m = anyModel(inputDir_arr,modOpt_tup.resultDir, objName = "topModel" * modOpt_tup.suffix, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, reportLvl = 1, holdFixed = true, checkRng = true)
 top_m.subPro = tuple(0,0)
-@suppress prepareMod!(top_m,modOpt_tup.opt)
-set_optimizer_attribute(top_m.optModel, "Threads", t_int)
+@suppress prepareMod!(top_m,modOpt_tup.opt,t_int)
 
 # ! create sub level problems (geht parallel!)
 
@@ -83,8 +83,7 @@ for (id,x) in enumerate(sub_tup)
 	# create sub problem
 	s = anyModel(inputDir_arr,modOpt_tup.resultDir, objName = "subModel_" * string(id) * modOpt_tup.suffix, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, reportLvl = 1, holdFixed = true)
 	s.subPro = x
-	prepareMod!(s,modOpt_tup.opt)
-	set_optimizer_attribute(s.optModel, "Threads", t_int)
+	prepareMod!(s,modOpt_tup.opt,t_int)
 	sub_dic[x] = s
 end
 
@@ -105,7 +104,7 @@ if solOpt_tup.heu != :none
 		# run subproblems and get cut info
 		cutData_dic = Dict{Tuple{Int64,Int64},bendersData}()
 		@threads for x in collect(sub_tup)
-			dual_etr = @suppress runSubLevel(sub_dic[x],copy(z))
+			dual_etr = runSubLevel(sub_dic[x],copy(z))
 			# removes entries without dual values
 			for sys in [:exc,:tech]
 				for sSym in keys(dual_etr.capa[sys])
@@ -119,8 +118,6 @@ if solOpt_tup.heu != :none
 		end
 		# add cuts to top problem	
 		addCuts!(top_m,cutData_dic,0)
-		# sets current best to result of scalin gheurisk (second in loop)
-		global currentBest_fl = z.objVal + sum(map(x -> x.objVal, values(cutData_dic))) 
 	end
 	
 	# ! add linear trust region
@@ -132,13 +129,10 @@ if solOpt_tup.heu != :none
 	if solOpt_tup.heu != :noQtr
 		qctVar_dic = getQtrVar(top_m,heuSca_obj) # get variables for quadratic trust region
 		trustReg_obj, eleNum_int = quadTrust(qctVar_dic,solOpt_tup.quadPar)
-		trustReg_obj.cns, trustReg_obj.coef = centerQuadTrust(trustReg_obj.exp,top_m,trustReg_obj.rad);
-		trustReg_obj.objVal = currentBest_fl
+		trustReg_obj.cns, trustReg_obj.coef = centerQuadTrust(trustReg_obj.var,top_m,trustReg_obj.rad);
+		trustReg_obj.objVal = Inf
 		produceMessage(report_m.options,report_m.report, 1," - Initialized quadratic trust region with $eleNum_int variables", testErr = false, printErr = false)
 	end
-
-else
-	global currentBest_fl = Inf
 end
 
 #endregion
@@ -152,14 +146,16 @@ capaReport_df = DataFrame(Ts_expSup = Int[], Ts_disSup= Int[], R_exp= Int[], Te=
 gap_fl = 1.0
 i = 1
 cutData_dic = Dict{Tuple{Int64,Int64},bendersData}()
+currentBest_fl = Inf
 
 while true
 
 	global i = i
+	global allLimit_df = allLimit_df
 
 	produceMessage(report_m.options,report_m.report, 1," - Started iteration $i", testErr = false, printErr = false)
 
-	#region # * solve top level problem @suppress 
+	#region # * solve top level problem 
 
 	startTop = now()
 	capaData_obj, expTrust_dic, objTopTrust_fl, lowLimTrust_fl = @suppress runTopLevel(top_m,cutData_dic,i)
@@ -182,11 +178,41 @@ while true
 
 	if solOpt_tup.heu != :noQtr && solOpt_tup.heu != :none 
 		# run top-problem without trust region to obtain lower limits
-		objTop_fl, lowLim_fl = @suppress runTopWithoutQuadTrust(top_m,trustReg_obj)
+		objTop_fl, lowLim_fl = runTopWithoutQuadTrust(top_m,trustReg_obj)
 		# adjust trust region
 		objSub_fl = sum(map(x -> x.objVal, values(cutData_dic))) # summed objective of sub-problems # ! hier warten auf subprobleme
 		# write current best solution
 		global currentBest_fl = min(objTopTrust_fl + objSub_fl,trustReg_obj.objVal)
+
+		#region # * track binding cuts and limits
+
+		# add information on binding cuts
+		top_m.parts.obj.cns[:bendersCuts][!,:actItr] .= map(x -> dual(x.cns) != 0.0 ? vcat(x.actItr,[i]) : x.actItr, eachrow(top_m.parts.obj.cns[:bendersCuts]))
+		# write info on cuts to csv add info on biggest number of iteration the cuts was inactive before it was used again
+		writeCut_df = copy(select(top_m.parts.obj.cns[:bendersCuts],Not([:cns])))
+		writeCut_df[!,:maxGap] = map(x -> size(x,1) < 2 ? 0 : maximum(x[2:end] .- x[1:end-1]), writeCut_df[!,:actItr])
+		writeCut_df[!,:firstBind] = map(x -> isempty(x.actItr) ? 0 : x.actItr[1] - x.i, eachrow(writeCut_df))
+		CSV.write(modOpt_tup.resultDir * "/cutTracking_$(replace(top_m.options.objName,"topModel" => "")).csv",  writeCut_df)
+
+		# track binding limits
+		for sys in (:tech,:exc)
+			part_dic = getfield(top_m.parts,sys)
+			for sSym in keys(part_dic)
+				for limCns in filter(x -> any(occursin.(["BendersUp","BendersLow"],string(x))), keys(part_dic[sSym].cns))
+					# detect binding constraints
+					lim_df = copy(select(part_dic[sSym].cns[limCns],Not([:fac,:cns])))
+					lim_df[!,:limCns] .= occursin("BendersUp",string(limCns)) ? :Low : :Up
+					lim_df[!,:act] = map(x -> dual(x) != 0.0, part_dic[sSym].cns[limCns][!,:cns])
+					# merge info into dataframe for all limits
+					joinLim_df = innerjoin(lim_df,allLimit_df,on = intCol(lim_df,[:limCns,:dir]))
+					joinLim_df[!,:actItr] = map(x -> x.act ? vcat(x.actItr,[i]) : x.actItr,eachrow(joinLim_df))
+					joinLim_df[!,:actBestItr] = map(x -> x.act && (objTopTrust_fl + objSub_fl == currentBest_fl) ? vcat(x.actBestItr,[i]) : x.actBestItr,eachrow(joinLim_df))
+					global allLimit_df = vcat(antijoin(allLimit_df, select(joinLim_df,Not([:act])), on = intCol(joinLim_df,[:limCns,:dir])),select(joinLim_df,Not([:act])))
+				end
+			end
+		end
+		CSV.write(modOpt_tup.resultDir * "/limitTracking_$(replace(top_m.options.objName,"topModel" => "")).csv",  allLimit_df)
+		#endregion
 	else
 		lowLim_fl = lowLimTrust_fl # without quad trust region, lower limit corresponds result of standard top problem
 		objSub_fl = sum(map(x -> x.objVal, values(cutData_dic))) # summed objective of sub-problems # ! hier warten auf subprobleme
@@ -206,10 +232,9 @@ while true
 	CSV.write(modOpt_tup.resultDir * "/iterationBenders$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
 
 	if (1- lowLim_fl/currentBest_fl) < solOpt_tup.gap
-		bindLim_arr = trackBindingLim(top_m)
-		produceMessage(report_m.options,report_m.report, 1," - Finished iteration! $(bindLim_arr[2]) of $(bindLim_arr[1]) limiting constraints are binding.", testErr = false, printErr = false)
+		produceMessage(report_m.options,report_m.report, 1," - Finished iteration!", testErr = false, printErr = false)
 		break
-	elseif solOpt_tup.heu != :noQtr # adjust trust region in case algorithm has not converged yet
+	elseif solOpt_tup.heu != :noQtr && solOpt_tup.heu != :none # adjust trust region in case algorithm has not converged yet
 		global trustReg_obj = adjustQuadTrust(top_m,expTrust_dic,trustReg_obj,objSub_fl,objTopTrust_fl,lowLim_fl,lowLimTrust_fl,report_m)
 	end
 
@@ -222,3 +247,20 @@ end
 #endregion
 
 #region # * write final results and clean up
+
+# run top problem with optimal values fixed
+top_m = computeFeas(top_m,trustReg_obj.var)
+foreach(x -> reportResults(x,top_m), [:summary,:cost])
+	
+# obtain capacities
+capaData_obj = bendersData()
+capaData_obj.capa = writeResult(top_m,[:capa],true)
+
+# run sub problems with optimal values fixed
+for x in collect(sub_tup)
+	runSubLevel(sub_dic[x],copy(capaData_obj),true)
+end
+
+rm(temp_dir; force = true, recursive = true) # remove temporal files again
+
+#endregion
