@@ -9,15 +9,25 @@
 #$ -m bae
 #$ -M lgo@wip.tu-berlin.de
 
-qsub -t 1 -v days='2' -v sca='scale' startSmall.job
-qsub -t 2 -v days='4' -v sca='scale' startSmall.job
-qsub -t 3 -v days='8' -v sca='scale' startSmall.job
-qsub -t 4 -v days='12' -v sca='scale' startSmall.job
-qsub -t 5 -v days='16' -v sca='scale' startLong.job
-qsub -t 6 -v days='20' -v sca='scale' startLong.job
-qsub -t 7 -v days='24' -v sca='scale' startLong.job
-qsub -t 8 -v days='28' -v sca='scale' startLong.job
-qsub -t 9 -v days='32' -v sca='scale' startLong.job
+qsub -t 1 -v hours='2' -v sca='scale' startSmall.job
+qsub -t 2 -v hours='4' -v sca='scale' startSmall.job
+qsub -t 3 -v hours='8' -v sca='scale' startSmall.job
+qsub -t 4 -v hours='12' -v sca='scale' startSmall.job
+qsub -t 5 -v hours='16' -v sca='scale' startLong.job
+qsub -t 6 -v hours='20' -v sca='scale' startLong.job
+qsub -t 7 -v hours='24' -v sca='scale' startLong.job
+qsub -t 8 -v hours='28' -v sca='scale' startLong.job
+qsub -t 9 -v hours='32' -v sca='scale' startLong.job
+
+qsub -t 11 -v hours='2' -v sca='compress' startSmall.job
+qsub -t 12 -v hours='4' -v sca='compress' startSmall.job
+qsub -t 13 -v hours='8' -v sca='compress' startSmall.job
+qsub -t 14 -v hours='12' -v sca='compress' startSmall.job
+qsub -t 15 -v hours='16' -v sca='compress' startLong.job
+qsub -t 16 -v hours='20' -v sca='compress' startLong.job
+qsub -t 17 -v hours='24' -v sca='compress' startLong.job
+qsub -t 18 -v hours='28' -v sca='compress' startLong.job
+qsub -t 19 -v hours='32' -v sca='compress' startLong.job
 
 
 

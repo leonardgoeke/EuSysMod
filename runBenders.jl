@@ -1,65 +1,66 @@
 using AnyMOD, Gurobi, CSV, Base.Threads
 
-method = ARGS[1]
+method = Symbol(ARGS[1])
 resHeu = parse(Int,ARGS[2])
 resMod = parse(Int,ARGS[3])
 t_int = parse(Int,ARGS[4])
 b = ""
+trackLimit_boo = false
 
-# ! set options paramters
+#region # * set and write options
+
+# ! intermediate definitions of parameters
 
 reso_tup = (heu = resHeu, mod = resMod) 
+suffix_str = "_" * string(method) * "_" * string(resHeu) * "_" * string(resMod)
+inDir_arr = [[b * "_basis",b * "_full",b * "timeSeries/" * string(x) * "hours_2010"] for x in [reso_tup.heu, reso_tup.mod]] # input directories
+
+coefRngHeu_tup = (mat = (1e-2,1e4), rhs = (1e0,1e4))
+coefRngTop_tup = (mat = (1e-2,1e4), rhs = (1e0,1e4))
+coefRngSub_tup = (mat = (1e-2,1e4), rhs = (1e0,1e4))
+
+scaFacHeu_tup = (capa = 1e2,  capaStSize = 1e2, insCapa = 1e1,dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
+scaFacTop_tup = (capa = 1e0, capaStSize = 1e1, insCapa = 1e0, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
+scaFacSub_tup = (capa = 1e2,  capaStSize = 1e2, insCapa = 1e1,dispConv = 1e1, dispSt = 1e2, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
+
+# ! general input parameters
+
+opt_obj = Gurobi.Optimizer # solver option
+
+# structure of subproblems, indicating the year (first integer) and the scenario (second integer)
+sub_tup = ((1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0))
 
 # options of solution algorithm
-solOpt_tup = (gap = 0.05, alg = :benders, heu = Symbol(method), linPar = (thrsAbs = 0.001, thrsRel = 0.02), quadPar = (startRad = 1e-2, lowRad = 1e-5 , shrThrs = 0.001, extThrs = 0.001))
+solOpt_tup = (gap = 0.001, delCut = 30, linPar = (thrsAbs = 0.05, thrsRel = 0.05), quadPar = (startRad = 1e-1, shrThrs = 0.001, extThrs = 0.001))
 
-# options for model creation
-suffix_str = "_" * method * "_" * string(resHeu) * "_" * string(resMod)
-temp_dir = b * "tempFix" * suffix_str
-inDir_arr = [[b * "_basis",b * "_test",b * "timeSeries/" * string(x) * "days_2010"] for x in [reso_tup.heu, reso_tup.mod]] # input directories
-modOpt_tup = (supTsLvl = 2, shortExp = 5, opt = Gurobi.Optimizer, suffix = suffix_str, resultDir = b * "results", heuIn = inDir_arr[1], modIn = inDir_arr[2])
+# options for different models
+temp_dir = b * "tempFix" * suffix_str # directory for temporary folder
 
-sub_tup = ((1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)) # structure of subproblems, indicating the year (first integer) and the scenario (second integer)
+optMod_dic = Dict{Symbol,NamedTuple}()
 
-report_m = anyModel(String[],modOpt_tup.resultDir, objName = "decomposition" * modOpt_tup.suffix) # creates empty model just for reporting
+# options for model generation 
+optMod_dic[:heu] =  (inputDir = inDir_arr[1], resultDir = b * "results", suffix = suffix_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeu_tup, scaFac = scaFacHeu_tup)
+optMod_dic[:top] =  (inputDir = inDir_arr[2], resultDir = b * "results", suffix = suffix_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngTop_tup, scaFac = scaFacTop_tup)
+optMod_dic[:sub] =  (inputDir = inDir_arr[2], resultDir = b * "results", suffix = suffix_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngSub_tup, scaFac = scaFacSub_tup)
 
-#region # * solve heuristic models and write results 
+#endregion
 
-if solOpt_tup.heu != :none
+report_m = @suppress anyModel(String[],optMod_dic[:heu].resultDir, objName = "decomposition" * optMod_dic[:heu].suffix) # creates empty model just for reporting
+
+#region # * solve heuristic models and write results
+
+if method in (:all,:fixAndLim,:onlyFix,:fixAndQtr)
 	# ! heuristic solve for re-scaled and compressed time-series
 	produceMessage(report_m.options,report_m.report, 1," - Started heuristic pre-solve", testErr = false, printErr = false)
-	heu_m, heuSca_obj = heuristicSolve(modOpt_tup,1.0,t_int)
-	~, heuCom_obj = heuristicSolve(modOpt_tup,365/reso_tup.heu,t_int)
-	
+	heu_m, heuSca_obj = @suppress heuristicSolve(optMod_dic[:heu],1.0,t_int,opt_obj);
+	~, heuCom_obj = @suppress heuristicSolve(optMod_dic[:heu],365/reso_tup.heu,t_int,opt_obj)
 	# ! write fixes to files and limits to dictionary
 	fix_dic, lim_dic, cntHeu_arr = evaluateHeu(heu_m,heuSca_obj,heuCom_obj,solOpt_tup.linPar) # get fixed and limited variables
-	feasFix_dic = @suppress getFeasResult(modOpt_tup,fix_dic,lim_dic,t_int) # ensure feasiblity with fixed variables
+	produceMessage(report_m.options,report_m.report, 1," - Get an exact feasible solution", testErr = false, printErr = false)
+	feasFix_dic = getFeasResult(optMod_dic[:top],fix_dic,lim_dic,t_int,solOpt_tup.linPar.thrsAbs,opt_obj) # ensure feasiblity with fixed variables
 	produceMessage(report_m.options,report_m.report, 1," - Heuristic found $(cntHeu_arr[1]) fixed variables and $(cntHeu_arr[2]) limited variables", testErr = false, printErr = false)
-	
 	# ! write fixed variable values to files
-	rm(temp_dir; force = true, recursive = true)
-	mkdir(temp_dir) # create directory for fixing files
-	parFix_dic = defineParameter(heu_m.options,heu_m.report) # stores parameter info for fixing
-
-	# loop over variables
-	for sys in (:tech,:exc), sSym in keys(fix_dic[sys]), varSym in keys(fix_dic[sys][sSym])
-		fix_df = feasFix_dic[sys][sSym][varSym] |> (w -> innerjoin(w,select(fix_dic[sys][sSym][varSym],Not([:value])), on = intersect(intCol(w,:dir),intCol(fix_dic[sys][sSym][varSym],:dir))))
-		# create file name
-		par_sym = Symbol(varSym,:Fix)
-		fileName_str = temp_dir * "/par_Fix" * string(makeUp(sys)) * "_" * string(sSym) * "_" * string(varSym)
-		# correct values for scaling factor
-		fix_df[!,:value] = fix_df[!,:value] .* getfield(heu_m.options.scaFac,occursin("exp",string(varSym)) ? :insCapa : :capa)
-		# correct values by adding residual capacities
-		if occursin("capa",string(varSym))
-			resVal_df = copy(getfield(heu_m.parts,sys)[sSym].var[varSym])
-			resVal_df[!,:resi] = map(x -> x.constant, resVal_df[!,:var])
-			fix_df = innerjoin(fix_df,select(resVal_df,Not([:var])), on = intCol(fix_df,:dir))
-			fix_df[!,:value] = fix_df[!,:value] .+ fix_df[!,:resi]
-			select!(fix_df,Not([:resi]))	
-		end
-		# writes parameter file
-		writeParameterFile!(heu_m,fix_df,par_sym,parFix_dic[par_sym],fileName_str)
-	end	
+	writeFixToFiles(fix_dic,feasFix_dic,temp_dir,heu_m)
 end
 
 #endregion
@@ -68,22 +69,26 @@ end
 produceMessage(report_m.options,report_m.report, 1," - Create top model and sub models", testErr = false, printErr = false)
 
 # ! create top level problem
-inputDir_arr = solOpt_tup.heu != :none ? vcat(modOpt_tup.modIn,[temp_dir]) : modOpt_tup.modIn
 
-top_m = anyModel(inputDir_arr,modOpt_tup.resultDir, objName = "topModel" * modOpt_tup.suffix, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, reportLvl = 1, holdFixed = true, checkRng = true)
+modOpt_tup = optMod_dic[:top]
+inputDir_arr = method in (:all,:fixAndLim,:fixAndQtr,:onlyFix) ? vcat(modOpt_tup.inputDir,[temp_dir]) : modOpt_tup.inputDir
+top_m = anyModel(inputDir_arr, modOpt_tup.resultDir, objName = "topModel" * modOpt_tup.suffix, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, coefRng = modOpt_tup.coefRng, scaFac = modOpt_tup.scaFac, reportLvl = 1, holdFixed = true)
 top_m.subPro = tuple(0,0)
-@suppress prepareMod!(top_m,modOpt_tup.opt,t_int)
+prepareMod!(top_m,opt_obj,t_int)
 
-# ! create sub level problems (geht parallel!)
+# ! create sub level problems
+
+modOpt_tup = optMod_dic[:sub]
+inputDir_arr = method in (:all,:fixAndLim,:fixAndQtr,:onlyFix) ? vcat(modOpt_tup.inputDir,[temp_dir]) : modOpt_tup.inputDir
 
 sub_dic = Dict{Tuple{Int,Int},anyModel}()
-sub_lock = ReentrantLock()
 
 for (id,x) in enumerate(sub_tup)
 	# create sub problem
-	s = anyModel(inputDir_arr,modOpt_tup.resultDir, objName = "subModel_" * string(id) * modOpt_tup.suffix, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, reportLvl = 1, holdFixed = true)
+	s = anyModel(inputDir_arr,modOpt_tup.resultDir, objName = "subModel_" * string(id) * modOpt_tup.suffix, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, coefRng = modOpt_tup.coefRng, scaFac = modOpt_tup.scaFac, reportLvl = 1, holdFixed = true)
 	s.subPro = x
-	prepareMod!(s,modOpt_tup.opt,t_int)
+	prepareMod!(s,opt_obj,t_int)
+	set_optimizer_attribute(s.optModel, "Threads", t_int)
 	sub_dic[x] = s
 end
 
@@ -95,15 +100,13 @@ push!(top_m.parts.obj.cns[:objEqn], (name = :aggCut, group = :benders, cns = @co
 
 #region # * add linear and quadratic trust region
 
-currentBest_fl = 0.0
-
-if solOpt_tup.heu != :none
+if method in (:all,:fixAndLim,:fixAndQtr,:onlyFix)
 	produceMessage(report_m.options,report_m.report, 1," - Create cuts from heuristic solution", testErr = false, printErr = false)
 	# ! create cuts from heuristic solutions  
 	for z in [heuCom_obj,heuSca_obj]
 		# run subproblems and get cut info
 		cutData_dic = Dict{Tuple{Int64,Int64},bendersData}()
-		@threads for x in collect(sub_tup)
+		for x in collect(sub_tup)
 			dual_etr = runSubLevel(sub_dic[x],copy(z))
 			# removes entries without dual values
 			for sys in [:exc,:tech]
@@ -116,20 +119,21 @@ if solOpt_tup.heu != :none
 			end
 			cutData_dic[x] = dual_etr
 		end
-		# add cuts to top problem	
+		# add cuts to top problem
 		addCuts!(top_m,cutData_dic,0)
 	end
 	
 	# ! add linear trust region
-	if solOpt_tup.heu != :onlyFix addLinearTrust!(top_m,lim_dic) end
-
-	produceMessage(report_m.options,report_m.report, 1," - Enforced linear trust region", testErr = false, printErr = false)
+	if method in (:all,:fixAndLim) 
+		addLinearTrust!(top_m,lim_dic) 
+		produceMessage(report_m.options,report_m.report, 1," - Enforced linear trust region", testErr = false, printErr = false)
+	end
 
 	# ! add quadratic trust region
-	if solOpt_tup.heu != :noQtr
-		qctVar_dic = getQtrVar(top_m,heuSca_obj) # get variables for quadratic trust region
+	if method in (:all,:fixAndQtr)
+		qctVar_dic = filterQtrVar(feasFix_dic,top_m) # get variables for quadratic trust region
 		trustReg_obj, eleNum_int = quadTrust(qctVar_dic,solOpt_tup.quadPar)
-		trustReg_obj.cns, trustReg_obj.coef = centerQuadTrust(trustReg_obj.var,top_m,trustReg_obj.rad);
+		trustReg_obj.cns = centerQuadTrust(trustReg_obj.var,top_m,trustReg_obj.rad);
 		trustReg_obj.objVal = Inf
 		produceMessage(report_m.options,report_m.report, 1," - Initialized quadratic trust region with $eleNum_int variables", testErr = false, printErr = false)
 	end
@@ -148,22 +152,39 @@ i = 1
 cutData_dic = Dict{Tuple{Int64,Int64},bendersData}()
 currentBest_fl = Inf
 
+if method in (:all,:fixAndLim) && trackLimit_boo
+	# create dataframe of all limits to track binding ones
+	allLimit_df = DataFrame(Ts_expSup = Int[], Ts_disSup = Int[], R_exp = Int[], R_from = Int[], R_to = Int[], Te = Int[], Exc = Int[], dir = Int[], id = Int[], limCns = Symbol[])
+
+	for sys in (:tech,:exc)
+		for sSym in keys(lim_dic[sys])
+			for varSym in keys(lim_dic[sys][sSym])
+				lim_df = select(lim_dic[sys][sSym][varSym],Not([:limVal]))
+				foreach(x -> lim_df[!,x] .= 0 ,setdiff(intCol(allLimit_df),intCol(lim_df)))
+				append!(allLimit_df,lim_df)
+			end
+		end
+	end
+
+	allLimit_df[!,:actItr] = fill(Array{Int,1}(),size(allLimit_df,1))
+	allLimit_df[!,:actBestItr] = fill(Array{Int,1}(),size(allLimit_df,1))
+end
+
 while true
 
 	global i = i
-	global allLimit_df = allLimit_df
 
 	produceMessage(report_m.options,report_m.report, 1," - Started iteration $i", testErr = false, printErr = false)
 
-	#region # * solve top level problem 
+	#region # * solve top level problem
 
 	startTop = now()
-	capaData_obj, expTrust_dic, objTopTrust_fl, lowLimTrust_fl = @suppress runTopLevel(top_m,cutData_dic,i)
+	capaData_obj, allVal_dic, objTopTrust_fl, lowLimTrust_fl = @suppress runTopLevel(top_m,cutData_dic,i);
 	timeTop = now() - startTop
 
 	#endregion
 	
-	#region # * solve of sublevel problems	
+	#region # * solve of sublevel problems
 
 	startSub = now()
 	for x in collect(sub_tup)
@@ -176,24 +197,16 @@ while true
 
 	#region # * compute bounds and adjust quadratic trust region
 
-	if solOpt_tup.heu != :noQtr && solOpt_tup.heu != :none 
+	if method in (:all,:fixAndQtr)
 		# run top-problem without trust region to obtain lower limits
-		objTop_fl, lowLim_fl = runTopWithoutQuadTrust(top_m,trustReg_obj)
+		objTop_fl, lowLim_fl = @suppress runTopWithoutQuadTrust(top_m,trustReg_obj)
 		# adjust trust region
 		objSub_fl = sum(map(x -> x.objVal, values(cutData_dic))) # summed objective of sub-problems # ! hier warten auf subprobleme
 		# write current best solution
 		global currentBest_fl = min(objTopTrust_fl + objSub_fl,trustReg_obj.objVal)
 
-		#region # * track binding cuts and limits
-
-		# add information on binding cuts
-		top_m.parts.obj.cns[:bendersCuts][!,:actItr] .= map(x -> dual(x.cns) != 0.0 ? vcat(x.actItr,[i]) : x.actItr, eachrow(top_m.parts.obj.cns[:bendersCuts]))
-		# write info on cuts to csv add info on biggest number of iteration the cuts was inactive before it was used again
-		writeCut_df = copy(select(top_m.parts.obj.cns[:bendersCuts],Not([:cns])))
-		writeCut_df[!,:maxGap] = map(x -> size(x,1) < 2 ? 0 : maximum(x[2:end] .- x[1:end-1]), writeCut_df[!,:actItr])
-		writeCut_df[!,:firstBind] = map(x -> isempty(x.actItr) ? 0 : x.actItr[1] - x.i, eachrow(writeCut_df))
-		CSV.write(modOpt_tup.resultDir * "/cutTracking_$(replace(top_m.options.objName,"topModel" => "")).csv",  writeCut_df)
-
+		#region # * track binding limits
+		if method in (:all,:fixAndLim) && trackLimit_boo
 		# track binding limits
 		for sys in (:tech,:exc)
 			part_dic = getfield(top_m.parts,sys)
@@ -212,12 +225,23 @@ while true
 			end
 		end
 		CSV.write(modOpt_tup.resultDir * "/limitTracking_$(replace(top_m.options.objName,"topModel" => "")).csv",  allLimit_df)
+		end
 		#endregion
 	else
 		lowLim_fl = lowLimTrust_fl # without quad trust region, lower limit corresponds result of standard top problem
-		objSub_fl = sum(map(x -> x.objVal, values(cutData_dic))) # summed objective of sub-problems # ! hier warten auf subprobleme
+		objSub_fl = sum(map(x -> x.objVal, values(cutData_dic))) # summed objective of sub-problems
 		global currentBest_fl = (objSub_fl + objTopTrust_fl) < currentBest_fl ? (objSub_fl + objTopTrust_fl) : currentBest_fl
 	end
+
+	#endregion
+
+	#region # * track and delete cuts
+
+	# tracking latest binding iteration for cuts
+	top_m.parts.obj.cns[:bendersCuts][!,:actItr] .= map(x -> dual(x.cns) != 0.0 ? i : x.actItr, eachrow(top_m.parts.obj.cns[:bendersCuts]))
+	# delete cuts that were not binding long enough
+	delete.(top_m.optModel, filter(x -> x.actItr + solOpt_tup.delCut < i,top_m.parts.obj.cns[:bendersCuts])[!,:cns])
+	filter!(x -> (x.actItr + solOpt_tup.delCut > i),top_m.parts.obj.cns[:bendersCuts])
 
 	#endregion
 
@@ -231,14 +255,14 @@ while true
 	push!(itrReport_df, (i = i, low = lowLim_fl, best = currentBest_fl, gap = gap_fl, solCur = objTopTrust_fl + objSub_fl, time = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60))
 	CSV.write(modOpt_tup.resultDir * "/iterationBenders$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
 
-	if (1- lowLim_fl/currentBest_fl) < solOpt_tup.gap
+	if gap_fl < solOpt_tup.gap || i > 700 
 		produceMessage(report_m.options,report_m.report, 1," - Finished iteration!", testErr = false, printErr = false)
 		break
-	elseif solOpt_tup.heu != :noQtr && solOpt_tup.heu != :none # adjust trust region in case algorithm has not converged yet
-		global trustReg_obj = adjustQuadTrust(top_m,expTrust_dic,trustReg_obj,objSub_fl,objTopTrust_fl,lowLim_fl,lowLimTrust_fl,report_m)
+	elseif method in (:all,:fixAndQtr) # adjust trust region in case algorithm has not converged yet
+		global trustReg_obj = adjustQuadTrust(top_m,allVal_dic,trustReg_obj,objSub_fl,objTopTrust_fl,lowLim_fl,lowLimTrust_fl,report_m)
 	end
 
-	global i = i +1
+	global i = i + 1
 
 	#endregion
 	
@@ -249,7 +273,7 @@ end
 #region # * write final results and clean up
 
 # run top problem with optimal values fixed
-top_m = computeFeas(top_m,trustReg_obj.var)
+top_m = computeFeas(top_m,trustReg_obj.var,solOpt_tup.linPar.thrsAbs)
 foreach(x -> reportResults(x,top_m), [:summary,:cost])
 	
 # obtain capacities

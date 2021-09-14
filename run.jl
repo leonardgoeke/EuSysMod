@@ -1,10 +1,10 @@
 using AnyMOD, Gurobi
 
-d = ARGS[1]
+h = ARGS[1]
 sca = ARGS[2]
 threads = ARGS[3]
 
-anyM = anyModel(["_basis","_full","timeSeries/" * d * "days_2010"],"results", objName = d * "days_" * sca, supTsLvl = 2, shortExp = 5, redStep = (sca == "scale" ? 1.0 : 365/parse(Int, d)))
+anyM = anyModel(["_basis","_full","timeSeries/" * h * "hours_2010"],"results", objName = d * "days_" * sca, supTsLvl = 2, shortExp = 5, redStep = (sca == "scale" ? 1.0 : 365/parse(Int, d)), checkRng = true)
 
 createOptModel!(anyM)
 setObjective!(:cost,anyM)
