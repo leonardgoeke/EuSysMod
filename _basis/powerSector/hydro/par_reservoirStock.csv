@@ -51,7 +51,7 @@ timestep_2,region_4,technology_3,parameter_1,value_1,parameter_2,value_2
 2020,63BA,reservoir,capaStOutResi,0.574,capaStSizeResi,736.3
 2020,64ME,reservoir,capaStOutResi,0.866,capaStSizeResi,749.98
 2020,65RS,reservoir,capaStOutResi,0.504,capaStSizeResi,605.94
-2020,66BG,reservoir,capaStOutResi,1.858,capaStSizeResi,21.12
+2020,66BG,reservoir,capaStOutResi,1.858,capaStSizeResi,5.28
 2020,67MK,reservoir,capaStOutResi,0.502,capaStSizeResi,411.12
 2020,68GR,reservoir,capaStOutResi,2.471,capaStSizeResi,1580.05
 2020,70AL,reservoir,capaStOutResi,1.902,capaStSizeResi,1169.71
@@ -120,7 +120,7 @@ timestep_2,region_4,technology_3,parameter_1,value_1,parameter_2,value_2
 2025,63BA,reservoir,capaStOutResi,0.574,capaStSizeResi,736.3
 2025,64ME,reservoir,capaStOutResi,0.866,capaStSizeResi,749.98
 2025,65RS,reservoir,capaStOutResi,0.504,capaStSizeResi,605.94
-2025,66BG,reservoir,capaStOutResi,1.858,capaStSizeResi,21.12
+2025,66BG,reservoir,capaStOutResi,1.858,capaStSizeResi,5.28
 2025,67MK,reservoir,capaStOutResi,0.502,capaStSizeResi,411.12
 2025,68GR,reservoir,capaStOutResi,2.471,capaStSizeResi,1580.05
 2025,70AL,reservoir,capaStOutResi,1.902,capaStSizeResi,1169.71
@@ -189,7 +189,7 @@ timestep_2,region_4,technology_3,parameter_1,value_1,parameter_2,value_2
 2030,63BA,reservoir,capaStOutResi,0.574,capaStSizeResi,736.3
 2030,64ME,reservoir,capaStOutResi,0.866,capaStSizeResi,749.98
 2030,65RS,reservoir,capaStOutResi,0.504,capaStSizeResi,605.94
-2030,66BG,reservoir,capaStOutResi,1.858,capaStSizeResi,21.12
+2030,66BG,reservoir,capaStOutResi,1.858,capaStSizeResi,5.28
 2030,67MK,reservoir,capaStOutResi,0.502,capaStSizeResi,411.12
 2030,68GR,reservoir,capaStOutResi,2.471,capaStSizeResi,1580.05
 2030,70AL,reservoir,capaStOutResi,1.902,capaStSizeResi,1169.71
@@ -258,7 +258,7 @@ timestep_2,region_4,technology_3,parameter_1,value_1,parameter_2,value_2
 2035,63BA,reservoir,capaStOutResi,0.601,capaStSizeResi,770.29
 2035,64ME,reservoir,capaStOutResi,0.934,capaStSizeResi,809.18
 2035,65RS,reservoir,capaStOutResi,0.542,capaStSizeResi,651
-2035,66BG,reservoir,capaStOutResi,1.881,capaStSizeResi,21.4
+2035,66BG,reservoir,capaStOutResi,1.881,capaStSizeResi,5.35
 2035,67MK,reservoir,capaStOutResi,0.581,capaStSizeResi,475.41
 2035,68GR,reservoir,capaStOutResi,2.488,capaStSizeResi,1590.6
 2035,70AL,reservoir,capaStOutResi,2.027,capaStSizeResi,1246.56
@@ -326,7 +326,7 @@ timestep_2,region_4,technology_3,parameter_1,value_1,parameter_2,value_2
 2040,63BA,reservoir,capaStOutResi,0.627,capaStSizeResi,804.29
 2040,64ME,reservoir,capaStOutResi,1.002,capaStSizeResi,868.38
 2040,65RS,reservoir,capaStOutResi,0.579,capaStSizeResi,696.06
-2040,66BG,reservoir,capaStOutResi,1.904,capaStSizeResi,21.64
+2040,66BG,reservoir,capaStOutResi,1.904,capaStSizeResi,5.41
 2040,67MK,reservoir,capaStOutResi,0.659,capaStSizeResi,539.7
 2040,68GR,reservoir,capaStOutResi,2.504,capaStSizeResi,1601.15
 2040,70AL,reservoir,capaStOutResi,2.152,capaStSizeResi,1323.41
@@ -394,7 +394,7 @@ timestep_2,region_4,technology_3,parameter_1,value_1,parameter_2,value_2
 2045,63BA,reservoir,capaStOutResi,0.654,capaStSizeResi,838.28
 2045,64ME,reservoir,capaStOutResi,1.071,capaStSizeResi,927.58
 2045,65RS,reservoir,capaStOutResi,0.617,capaStSizeResi,741.12
-2045,66BG,reservoir,capaStOutResi,1.926,capaStSizeResi,21.92
+2045,66BG,reservoir,capaStOutResi,1.926,capaStSizeResi,5.48
 2045,67MK,reservoir,capaStOutResi,0.738,capaStSizeResi,603.98
 2045,68GR,reservoir,capaStOutResi,2.521,capaStSizeResi,1611.7
 2045,70AL,reservoir,capaStOutResi,2.277,capaStSizeResi,1400.26
@@ -462,7 +462,7 @@ timestep_2,region_4,technology_3,parameter_1,value_1,parameter_2,value_2
 2050,63BA,reservoir,capaStOutResi,0.68,capaStSizeResi,872.27
 2050,64ME,reservoir,capaStOutResi,1.139,capaStSizeResi,986.78
 2050,65RS,reservoir,capaStOutResi,0.654,capaStSizeResi,786.18
-2050,66BG,reservoir,capaStOutResi,1.949,capaStSizeResi,22.16
+2050,66BG,reservoir,capaStOutResi,1.949,capaStSizeResi,5.54
 2050,67MK,reservoir,capaStOutResi,0.816,capaStSizeResi,668.27
 2050,68GR,reservoir,capaStOutResi,2.537,capaStSizeResi,1622.25
 2050,70AL,reservoir,capaStOutResi,2.402,capaStSizeResi,1477.11
