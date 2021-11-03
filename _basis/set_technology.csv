@@ -1,4 +1,4 @@
-technology_1,technology_2,technology_3,modes,carrier_conversion_in,carrier_conversion_out,carrier_stored_in,carrier_stored_out,technology_type,technology_decomm,region_expansion
+technology_1,technology_2,technology_3,mode,carrier_conversion_in,carrier_conversion_out,carrier_stored_in,carrier_stored_out,technology_type,technology_decomm,region_expansion
 battery,,lithiumBattery,,,,electricity,electricity,emerging,none,
 battery,,redoxBattery,,,,electricity,electricity,emerging,none,
 bioConversion,,rawBioToGas,,rawBiogas,bioGas,,,mature,none,
