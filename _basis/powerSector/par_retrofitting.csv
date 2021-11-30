@@ -1,0 +1,3 @@
+technology_1,technology_2,technology_3,technology_1,technology_2,technology_3,parameter,value,comments
+ccgt,ccgtGasCHP,ccgtGasChpDhH2Rdy,ccgt,ccgtH2CHP,ccgtH2ChpDh,costRetroConv,124.34,"assumed retrofitting H2 plant from gas plant saves 50% of investment costs, costs are split 50/50 between investment and retrofitting"
+ccgt,,ccgtGasH2Rdy,ccgt,,ccgtH2,costRetroConv,114,
