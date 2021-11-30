@@ -1,5 +1,5 @@
 technology_1,technology_2,technology_3,parameter_1,value_1,parameter_2,value_2,source
-networkHeat,heatGrid,,costExpConv,400,costOprConv,40,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+networkHeat,heatGrid,,costExpConv,400,costOprConv,4,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
 networkHeat,heatGrid,,lifeConv,40,,,
 networkHeat,heatGrid,districtHeatPro,effConv,0.9,,,"based on Wolff (2011), Untersuchung von Nah- und Fernwärmenetzen"
 networkHeat,heatGrid,districtHeatSpace,effConv,0.9,,,
