@@ -26,12 +26,12 @@ gasFuel,naturalGas,2035,,trdBuyPrc,25.28747364,
 gasFuel,naturalGas,2040,,trdBuyPrc,26.67689527,
 gasFuel,naturalGas,2045,,trdBuyPrc,26.67689527,
 gasFuel,naturalGas,2050,,trdBuyPrc,26.67689527,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
-h2,h2Grid,2020,,trdBuyPrc,275,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
-h2,h2Grid,2025,,trdBuyPrc,242,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
-h2,h2Grid,2030,,trdBuyPrc,213,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
-h2,h2Grid,2035,,trdBuyPrc,187,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
-h2,h2Grid,2040,,trdBuyPrc,164,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
-h2,h2Grid,2045,,trdBuyPrc,145,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
-h2,h2Grid,2050,,trdBuyPrc,127,
+h2,,2020,,trdBuyPrc,275,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+h2,,2025,,trdBuyPrc,242,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+h2,,2030,,trdBuyPrc,213,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+h2,,2035,,trdBuyPrc,187,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+h2,,2040,,trdBuyPrc,164,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+h2,,2045,,trdBuyPrc,145,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+h2,,2050,,trdBuyPrc,127,
 lignite,,,,trdBuyPrc,1.5,
 waste,,,,trdBuyPrc,14.07599999,assumed same value as for lignite
