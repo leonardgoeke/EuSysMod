@@ -12,4 +12,8 @@ frtRoadLight,,costMissCapa,50000
 psngRail,,costMissCapa,50000
 psngRoadPrvt,,costMissCapa,50000
 psngRoadPub,,costMissCapa,50000
+spaceHeat,,costMissCapa,50000
+processHeat_low,,costMissCapa,50000
+processHeat_medium,,costMissCapa,50000
+processHeat_high,,costMissCapa,50000
 ,,emissionInf,10000
