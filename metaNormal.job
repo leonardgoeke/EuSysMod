@@ -9,7 +9,10 @@
 #$ -m bae
 #$ -M lgo@wip.tu-berlin.de
 
-qsub -t 2 -v hours='120' -v sca='scale' startSmall.job
+qsub -t 1 -v hours='360' -v sca='scale' startSmall.job
+qsub -t 2 -v hours='672' -v sca='scale' startSmall.job
+qsub -t 3 -v hours='8760' -v sca='scale' startLong.job
+
 
 
 
