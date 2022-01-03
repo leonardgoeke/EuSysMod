@@ -1,0 +1,61 @@
+#!/bin/bash --login
+#$ -cwd
+#$ -N anyMOD
+#$ -o /net/work/goeke/julia/job_log.$JOB_ID.$TASK_ID.out
+#$ -j y
+#$ -l h_rt=172800
+#$ -l mem_free=4G
+#$ -pe mp 1
+#$ -m bae
+#$ -M lgo@wip.tu-berlin.de
+
+qsub -t 101 -v method='all' -v resHeu='2' -v resFull='4' startBenders.job
+qsub -t 102 -v method='fixAndLim' -v resHeu='2' -v resFull='4' startBenders.job
+qsub -t 103 -v method='fixAndQtr' -v resHeu='2' -v resFull='4' startBenders.job
+qsub -t 104 -v method='onlyFix' -v resHeu='2' -v resFull='4' startBenders.job
+qsub -t 105 -v method='none' -v resHeu='2' -v resFull='4' startBenders.job
+
+qsub -t 106 -v method='all' -v resHeu='4' -v resFull='8' startBenders.job
+qsub -t 107 -v method='fixAndLim' -v resHeu='4' -v resFull='8' startBenders.job
+qsub -t 108 -v method='fixAndQtr' -v resHeu='4' -v resFull='8' startBenders.job
+qsub -t 109 -v method='onlyFix' -v resHeu='4' -v resFull='8' startBenders.job
+qsub -t 110 -v method='none' -v resHeu='4' -v resFull='8' startBenders.job
+
+qsub -t 111 -v method='all' -v resHeu='8' -v resFull='32' startBenders.job
+qsub -t 112 -v method='fixAndLim' -v resHeu='8' -v resFull='32' startBenders.job
+qsub -t 113 -v method='fixAndQtr' -v resHeu='8' -v resFull='32' startBenders.job
+qsub -t 114 -v method='onlyFix' -v resHeu='8' -v resFull='32' startBenders.job
+qsub -t 115 -v method='none' -v resHeu='8' -v resFull='32' startBenders.job
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

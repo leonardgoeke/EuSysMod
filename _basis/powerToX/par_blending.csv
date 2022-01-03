@@ -1,0 +1,4 @@
+timestep_2,technology_3,carrier_1,region_4,parameter,value,source
+all,h2Blending,,all,capaConvResi,0,
+,h2Blending,h2,,ratioConvInFix,0.0775,based on 20 volumetric percent and 11.88 MJ/m3 for hydrogen and 38.3 MJ/m3 for gas
+,h2Blending,,,emissionFac,-15.6,"blended carrier will automatically have emissions of gas, so technology requires correction for h2 share"
