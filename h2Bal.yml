@@ -314,43 +314,88 @@ variables:
         -   file: "summary"
             variable: "use"
             carrier: "h2"
-            technology: "miscProHeat < h2BoilerPro < h2BoilerProHigh"
+            technology: "miscProHeat < h2BoilerPro < h2BoilerProMed"
             factor:  -1.0
 
     District heat:
         -   file: "summary"
             variable: "use"
             carrier: "h2"
-            technology: "networkHeat < h2BoilerNet < h2BoilerDh"
+            technology: "networkHeat < h2BoilerDh"
             factor:  -1.0
-
-    Local heat:
-        -   file: "summary"
-            variable: "use"
-            carrier: "h2"
-            technology: "networkHeat < h2BoilerNet < h2BoilerLh"
-            factor:  -1.
 
     Synthetic fuels:
+
         -   file: "summary"
             variable: "use"
             carrier: "h2"
-            technology: "powerToX < h2Blending"
+            technology: "powerToX < synthFuel < bioMethanation"
             factor:  -1.0
 
         -   file: "summary"
             variable: "use"
             carrier: "h2"
-            technology: "powerToX < synthFuel < fischerTropsch"
+            technology: "powerToX < h2ToDiesel"
             factor:  -1.0
 
         -   file: "summary"
             variable: "use"
             carrier: "h2"
-            technology: "powerToX < synthFuel < methanation"
+            technology: "powerToX < h2ToGasoline"
+            factor:  -1.0
+
+        -   file: "summary"
+            variable: "use"
+            carrier: "h2"
+            technology: "powerToX < h2ToJetFuel"
+            factor:  -1.0
+
+    Power generation:
+
+        -   file: "summary"
+            variable: "use"
+            carrier: "h2"
+            technology: "ccgt < ccgtH2 < ccgtH2BackDh"
+            factor:  -1.0
+
+        -   file: "summary"
+            variable: "use"
+            carrier: "h2"
+            technology: "ccgt < ccgtH2 < ccgtH2BackProLow"
+            factor:  -1.0
+
+        -   file: "summary"
+            variable: "use"
+            carrier: "h2"
+            technology: "ccgt < ccgtH2 < ccgtH2Extract"
+            factor:  -1.0
+
+        -   file: "summary"
+            variable: "use"
+            carrier: "h2"
+            technology: "ccgt < ccgtProMed < ccgtH2BackProMed"
+            factor:  -1.0
+
+        -   file: "summary"
+            variable: "use"
+            carrier: "h2"
+            technology: "ccgt < ocgtH2"
+            factor:  -1.0
+
+        -   file: "summary"
+            variable: "use"
+            carrier: "h2"
+            technology: "ccgt < ocgtH2Chp"
+            factor:  -1.0
+
+        -   file: "summary"
+            variable: "use"
+            carrier: "h2"
+            technology: "ccgt < pefc"
             factor:  -1.0
 
     Biomass:
+
         -   file: "summary"
             variable: "gen"
             carrier: "h2"
@@ -358,6 +403,7 @@ variables:
             factor:  1.0
 
     Alkaline electrolysis:
+
         -   file: "summary"
             variable: "gen"
             carrier: "h2"
@@ -365,10 +411,27 @@ variables:
             factor:  1.0
 
     Solid oxide electrolysis:
+
         -   file: "summary"
             variable: "gen"
             carrier: "h2"
             technology: "powerToX < electrolysis < soElectrolysis"
+            factor:  1.0
+
+    PEM electrolysis:
+        
+        -   file: "summary"
+            variable: "gen"
+            carrier: "h2"
+            technology: "powerToX < electrolysis < pemElectrolysis"
+            factor:  1.0
+
+    Pyrolysis:
+    
+        -   file: "summary"
+            variable: "gen"
+            carrier: "h2"
+            technology: "powerToX < electrolysis < methanePyrolysis"
             factor:  1.0
 
 aggregations:
