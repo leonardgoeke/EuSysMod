@@ -18,7 +18,7 @@ ccgt,ccgtGas,ccgtGasExtractH2Rdy,onlyElec; elecAndHeat ,gasFuel,electricity; dis
 ccgt,ccgtH2,ccgtH2BackDh,,h2,electricity; districtHeat,,,mature,none,,,,
 ccgt,ccgtH2,ccgtH2BackProLow,,h2,electricity; processHeat_low,,,mature,none,,,,
 ccgt,ccgtH2,ccgtH2Extract,onlyElec; elecAndHeat ,h2,electricity; districtHeat,,,mature,none,,,,
-ccgt,ccgtProMed,ccgtGasBackProMed,,h2,electricity; processHeat_medium,,,mature,none,,,,
+ccgt,ccgtProMed,ccgtGasBackProMed,,gas,electricity; processHeat_medium,,,mature,none,,,,
 ccgt,ccgtProMed,ccgtH2BackProMed,,h2,electricity; processHeat_medium,,,mature,none,,,,
 engine,engineDh,bioGasEngineDh,,rawBiogas,electricity; districtHeat,,,mature,none,,,,
 engine,engineDh,gasEngineDh,,gasFuel,electricity; districtHeat,,,mature,none,,,,
