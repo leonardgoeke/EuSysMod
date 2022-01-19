@@ -74,7 +74,7 @@ powerToX,electrolysis,soElectrolysis,,electricity; processHeat_high,h2,,,emergin
 powerToX,h2Storage,h2StorageCavern,,,,h2,h2,mature,none,,,,
 powerToX,h2Storage,h2StorageTank,,,,h2,h2,mature,none,,,,
 powerToX,synthFuel,bioMethanation,,rawBiogas; h2,synthGas,,,mature,none,,,,
-powerToX,synthFuel,methanePyrolysis ,,gasFuel; electricity,h2; processHeat_high,,,mature,none,,,,
+powerToX,synthFuel,methanePyrolysis,,gasFuel; electricity,h2; processHeat_high,,,mature,none,,,,
 powerToX,,directAirCapture,,electricity; processHeat_low,capturedCO2,,,mature,none,,eq,,
 powerToX,,h2ToDiesel,,h2; capturedCO2,diesel,,,mature,none,,,,
 powerToX,,h2ToGasoline,,h2; capturedCO2,gasoline,,,mature,none,,,,
