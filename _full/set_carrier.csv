@@ -2,9 +2,9 @@ carrier_1,carrier_2,timestep_dispatch,timestep_expansion,region_dispatch,region_
 hardcoal,,2,1,4,4,eq
 lignite,,2,1,4,4,eq
 electricity,,5,1,3,3,eq
-gasFuel,,3,1,4,4,eq
-gasFuel,naturalGas,3,1,4,4,ineq
-gasFuel,synthGas,3,1,4,4,ineq
+gasFuel,,3,1,2,2,eq
+gasFuel,naturalGas,3,1,2,2,ineq
+gasFuel,synthGas,3,1,2,2,ineq
 h2,,3,1,4,4,eq
 districtHeat,,4,2,4,4,eq
 spaceHeat,,4,2,4,4,none
