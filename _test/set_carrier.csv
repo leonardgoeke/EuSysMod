@@ -19,9 +19,9 @@ frtRoadHeavy,,2,2,3,3,none
 psngRail,,2,2,3,3,none
 frtRail,,2,2,3,3,none
 waste,,2,1,4,4,eq
-crudeOil,,2,1,4,4,eq
-diesel,,2,1,4,4,eq
-gasoline,,2,1,4,4,eq
+crudeOil,,2,1,1,1,eq
+diesel,,2,1,1,1,eq
+gasoline,,2,1,1,1,eq
 jetFuel,,2,1,1,1,eq
 otherBiomass,solidBiomass,2,1,2,2,ineq
 otherBiomass,nonSolidBiomass,2,1,2,2,ineq
