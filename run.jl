@@ -95,7 +95,7 @@ h = ARGS[1]
 sca = ARGS[2]
 threads = ARGS[3]
 
-anyM = anyModel(["_basis","_full","timeSeries/" * h * "hours_2008_only2050"],"results", objName = h * "hours_" * sca, supTsLvl = 2, shortExp = 5, redStep = (sca == "scale" ? 1.0 : 8760/parse(Int, h)))
+anyM = anyModel(["_basis","_full","timeSeries/" * h * "hours_2008_only2050"],"results", objName = h * "hours_" * sca, supTsLvl = 2, shortExp = 5, redStep = (sca == "scale" ? 1.0 : 8760/parse(Int, h)), emissionLoss = false)
 
 createOptModel!(anyM)
 setObjective!(:cost,anyM)
@@ -104,7 +104,7 @@ set_optimizer(anyM.optModel, Gurobi.Optimizer)
 set_optimizer_attribute(anyM.optModel, "Method", 2);
 set_optimizer_attribute(anyM.optModel, "Crossover", 0);
 set_optimizer_attribute(anyM.optModel, "Threads",tryparse(Int,threads));
-set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-6);
+set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
 
 optimize!(anyM.optModel)
 
