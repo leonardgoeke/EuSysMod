@@ -1,10 +1,6 @@
 carrier_1,carrier_2,timestep_dispatch,timestep_expansion,region_dispatch,region_expansion,carrier_balance
-hardcoal,,2,1,4,4,eq
-lignite,,2,1,4,4,eq
 electricity,,5,1,3,3,eq
-gasFuel,,3,1,2,2,eq
-gasFuel,naturalGas,3,1,2,2,ineq
-gasFuel,synthGas,3,1,2,2,ineq
+synthGas,,3,1,2,2,eq
 h2,,3,1,4,4,eq
 districtHeat,,4,2,4,4,eq
 spaceHeat,,4,2,4,4,none
@@ -18,10 +14,8 @@ frtRoadLight,,3,2,3,3,none
 frtRoadHeavy,,5,2,3,3,none
 psngRail,,5,2,3,3,none
 frtRail,,5,2,3,3,none
-waste,,2,1,4,4,eq
 crudeOil,,2,1,2,2,eq
-diesel,,2,1,2,2,eq
-gasoline,,2,1,2,2,eq
+refinedOil,,2,1,2,2,eq
 jetFuel,,2,1,1,1,eq
 otherBiomass,solidBiomass,2,1,2,2,ineq
 otherBiomass,nonSolidBiomass,2,1,2,2,ineq
