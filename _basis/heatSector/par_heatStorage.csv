@@ -1,6 +1,6 @@
 technology_3,timestep_2,parameter,value,source
-pitThermalStorage,,effStIn,1,"see techData -> storageData, discharge rates also from Danish Energy Agency (2021), Technology Data for Energy Storage"
-pitThermalStorage,,effStOut,1,
+pitThermalStorage,,effStIn,0.8,"see techData -> storageData, discharge rates also from Danish Energy Agency (2021), Technology Data for Energy Storage"
+largeWaterTank,,effStIn,0.98,
 pitThermalStorage,2020,costExpStSize,0.579555556,
 pitThermalStorage,2030,costExpStSize,0.544444444,
 pitThermalStorage,2040,costExpStSize,0.505555556,

@@ -108,7 +108,6 @@ stock,power,oilPlantProMedStock,,refinedOil,electricity; processHeat_medium,,,st
 stock,power,pumpedStorage,,,,electricity,electricity,stock,none,,,
 stock,power,reservoir,,,,,electricity,stock,none,,,
 stock,power,runOfRiver,,,electricity,,,stock,none,,,
-thermal,,retrofittedCoal,onlyElec; elecAndHeat ,solidBiomass,electricity; districtHeat,,,mature,none,,,
 transport,bev,bevFrtRoadHeavy,,electricity,frtRoadHeavy,,,mature,none,,,
 transport,bev,bevFrtRoadLight,,electricity,frtRoadLight,,,mature,none,,,
 transport,bev,bevPsngRoadPrvt,,electricity,psngRoadPrvt,,,mature,none,,,
