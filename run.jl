@@ -75,8 +75,8 @@ function writeModulation(aggRelCol_dic::Dict{Symbol, Array{Pair}},anyM::anyModel
     end
 
     # filter columns with small values
-    select!(allMonth_df ,Not(filter(x -> x != "month" && abs(sum(allMonth_df[!,x])) < 1e-7, names(allMonth_df))))
-    select!(allHour_df ,Not(filter(x -> x != "hour" && abs(sum(allHour_df[!,x])) < 1e-7, names(allHour_df))))
+    select!(allMonth_df ,Not(filter(x -> x != "month" && abs(sum(allMonth_df[!,x])) < 1.0, names(allMonth_df))))
+    select!(allHour_df ,Not(filter(x -> x != "hour" && abs(sum(allHour_df[!,x])) < 1.0, names(allHour_df))))
     
     # write profile
     CSV.write("$(anyM.options.outDir)/results_yearlyProfile_$(anyM.options.outStamp).csv", allMonth_df)
@@ -92,10 +92,11 @@ function writeModulation(aggRelCol_dic::Dict{Symbol, Array{Pair}},anyM::anyModel
 end
 
 h = ARGS[1]
-sca = ARGS[2]
-threads = ARGS[3]
+ee = ARGS[2]
+grid = ARGS[2]
+threads = ARGS[4]
 
-anyM = anyModel(["_basis","_full","timeSeries/" * h * "hours_2008_only2050"],"results", objName = h * "hours_" * sca, supTsLvl = 2, shortExp = 5, redStep = (sca == "scale" ? 1.0 : 8760/parse(Int, h)), emissionLoss = false)
+anyM = anyModel(["_basis","_full",ee,grid,"timeSeries/" * h * "hours_2008_only2050"],"results", objName = h * "hours_" * ee * grid, supTsLvl = 2, shortExp = 5, redStep = 1.0, emissionLoss = false)
 
 createOptModel!(anyM)
 setObjective!(:cost,anyM)
@@ -108,9 +109,9 @@ set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
 
 optimize!(anyM.optModel)
 
-reportResults(:summary,anyM, addRep = (:capaConvOut,))
-reportResults(:exchange,anyM)
-reportResults(:cost,anyM)
+reportResults(:summary,anyM, addRep = (:capaConvOut,), addObjName = true)
+reportResults(:exchange,anyM, addObjName = true)
+reportResults(:cost,anyM, addObjName = true)
 
 writeModulation(aggRelCol_dic,anyM)
 
