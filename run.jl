@@ -92,11 +92,41 @@ function writeModulation(aggRelCol_dic::Dict{Symbol, Array{Pair}},anyM::anyModel
 end
 
 h = ARGS[1]
-ee = ARGS[2]
-grid = ARGS[2]
-threads = ARGS[4]
+h_heu = ARGS[2]
+ee = ARGS[3]
+grid = ARGS[4]
+t_int = ARGS[5]
 
-anyM = anyModel(["_basis","_full",ee,grid,"timeSeries/" * h * "hours_2008_only2050"],"results", objName = h * "hours_" * ee * grid, supTsLvl = 2, shortExp = 5, redStep = 1.0, emissionLoss = false)
+obj_str = h * "hours" * ee * grid
+temp_dir = "tempFix" * obj_str # directory for temporary folder
+
+inputMod_arr = ["_basis",ee,grid,"timeSeries/" * h * "hours_2008_only2050",temp_dir]
+inputHeu_arr = ["_basis",ee,grid,"timeSeries/" * h_heu * "hours_2008_only2050"]
+resultDir_str = "results"
+
+#region # * perform heuristic solve
+
+coefRngHeuSca_tup = (mat = (1e-2,1e4), rhs = (1e0,1e5))
+scaFacHeuSca_tup = (capa = 1e0, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e3, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
+
+optMod_dic = Dict{Symbol,NamedTuple}()
+optMod_dic[:heuSca] =  (inputDir = inputHeu_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
+optMod_dic[:top] 	=  (inputDir = inputMod_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
+
+heu_m, heuSca_obj = @suppress heuristicSolve(optMod_dic[:heuSca],1.0,t_int,Gurobi.Optimizer);
+~, heuCom_obj = @suppress heuristicSolve(optMod_dic[:heuSca],365/parse(Int,h_heu),t_int,Gurobi.Optimizer)
+# ! write fixes to files and limits to dictionary
+fix_dic, lim_dic, cntHeu_arr = evaluateHeu(heu_m,heuSca_obj,heuCom_obj,(thrsAbs = 0.05, thrsRel = 0.05)) # get fixed and limited variables
+feasFix_dic = getFeasResult(optMod_dic[:top],fix_dic,lim_dic,t_int,0.05,Gurobi.Optimizer) # ensure feasiblity with fixed variables
+# ! write fixed variable values to files
+writeFixToFiles(fix_dic,feasFix_dic,temp_dir,heu_m)
+heu_m = nothing
+
+#endregion
+
+#region # * create and solve main model
+
+anyM = anyModel(inputMod_arr,resultDir_str, objName = obj_str, supTsLvl = 2, shortExp = 5, redStep = 1.0, emissionLoss = false, holdFixed = true)
 
 createOptModel!(anyM)
 setObjective!(:cost,anyM)
@@ -104,10 +134,14 @@ setObjective!(:cost,anyM)
 set_optimizer(anyM.optModel, Gurobi.Optimizer)
 set_optimizer_attribute(anyM.optModel, "Method", 2);
 set_optimizer_attribute(anyM.optModel, "Crossover", 0);
-set_optimizer_attribute(anyM.optModel, "Threads",tryparse(Int,threads));
+set_optimizer_attribute(anyM.optModel, "Threads",tryparse(Int,t_int));
 set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
 
 optimize!(anyM.optModel)
+
+#endregion
+
+#region # * write results
 
 reportResults(:summary,anyM, addRep = (:capaConvOut,), addObjName = true)
 reportResults(:exchange,anyM, addObjName = true)
@@ -138,74 +172,9 @@ h2Bal_df = computeResults("h2Bal.yml",anyM, rtnOpt = (:csvDf,))
 h2Bal_df = unstack(h2Bal_df,:timestep,:value)
 CSV.write(anyM.options.outDir * "/h2Bal_$(anyM.options.outStamp).csv",h2Bal_df)
 
-# ! plot sankey for EU27
-
-#region # * names and colors
-anyM.graInfo.colors["capturedCO2"] = (0.0,  0.0, 0.0)
-anyM.graInfo.colors["h2"] = (0.329, 0.447, 0.827)
-
-anyM.graInfo.colors["rawBiogas"] = (0.682, 0.898, 0.443)
-anyM.graInfo.colors["solidBiomass"] = (0.682, 0.898, 0.443)
-anyM.graInfo.colors["nonSolidBiomass"] =  (0.682, 0.898, 0.443)
-anyM.graInfo.colors["otherBiomass"] = (0.682, 0.898, 0.443)
-
-anyM.graInfo.colors["spaceHeat"] = (1.0, 0.4549019607843137, 0.5215686274509804)
-anyM.graInfo.colors["processHeat_low"] = (0.6823529411764706, 0.07058823529411765, 0.22745098039215686)
-anyM.graInfo.colors["processHeat_medium"] = (0.6823529411764706, 0.07058823529411765, 0.22745098039215686)
-anyM.graInfo.colors["processHeat_high"] = (0.6823529411764706, 0.07058823529411765, 0.22745098039215686)
-
-anyM.graInfo.colors["jetFuel"] = (0.235, 0.506, 0.325)
-anyM.graInfo.colors["crudeOil"] = (0.33725490196078434, 0.3411764705882353, 0.3254901960784314)
-anyM.graInfo.colors["diesel"] = (0.33725490196078434, 0.3411764705882353, 0.3254901960784314)
-anyM.graInfo.colors["gasoline"] = (0.33725490196078434, 0.3411764705882353, 0.3254901960784314)
-
-anyM.graInfo.colors["synthGas"] = (0.235, 0.506, 0.325)
-anyM.graInfo.colors["naturalGas"] = (1.0,  0.416, 0.212)
-anyM.graInfo.colors["gasFuel"] = (1.0,  0.416, 0.212)
-
-anyM.graInfo.colors["frtRoadHeavy"] = (0.43529411764705883, 0.7843137254901961, 0.7137254901960784)
-anyM.graInfo.colors["frtRoadLight"] = (0.43529411764705883, 0.7843137254901961, 0.7137254901960784)
-anyM.graInfo.colors["frtRail"] = (0.43529411764705883, 0.7843137254901961, 0.7137254901960784)
-anyM.graInfo.colors["psngRail"] = (0.43529411764705883, 0.7843137254901961, 0.7137254901960784)
-anyM.graInfo.colors["psngRoadPrvt"] = (0.43529411764705883, 0.7843137254901961, 0.7137254901960784)
-anyM.graInfo.colors["psngRoadPub"] = (0.43529411764705883, 0.7843137254901961, 0.7137254901960784)
-
-for t in keys(anyM.parts.tech)
-    anyM.graInfo.names[string(t)] = ""
-end 
-
-anyM.graInfo.names["runOfRiver"] = "run-of-river"
-anyM.graInfo.names["reservoir"] = "reservoir"
-
-anyM.graInfo.names["capturedCO2"] = "carbon"
-anyM.graInfo.names["h2"] = "H2"
-
-anyM.graInfo.names["solidBiomass"] = "solid biomass"
-anyM.graInfo.names["rawBiogas"] =  "raw biogass"
-anyM.graInfo.names["nonSolidBiomass"] = "non-solid biomass"
-
-anyM.graInfo.names["spaceHeat"] = "space heat"
-anyM.graInfo.names["processHeat_low"] = "process heat - low"
-anyM.graInfo.names["processHeat_medium"] = "process heat - medium"
-anyM.graInfo.names["processHeat_high"] = "process heat - high"
-
-anyM.graInfo.names["synthLiquid"] = "synthetic oil"
-anyM.graInfo.names["jetFuel"] = "jet fuel"
-
-anyM.graInfo.names["gasFuel"] = "gas"
-
-anyM.graInfo.names["frtRoadHeavy"] = "heavy road"
-anyM.graInfo.names["frtRoadLight"] = "light road"
-anyM.graInfo.names["frtRail"] = "rail"
-anyM.graInfo.names["psngRail"] = "rail"
-anyM.graInfo.names["psngRoadPrvt"] = "private road"
-anyM.graInfo.names["psngRoadPub"] = "public road"
-
-
 #endregion
 
-rmvStr_tup = ("h2Blend","exchange losses", "trade buy; solid biomass", "trade buy; non-solid biomass")
-plotEnergyFlow(:sankey,anyM, dropDown = (:timestep,), rmvNode = rmvStr_tup, minVal = 1.0)
+
 
 
 
