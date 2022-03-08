@@ -102,7 +102,7 @@ stock,power,gasPlantStock_chp_a,,gasFuel,electricity; districtHeat,,,stock,decom
 stock,power,gasPlantStock_chp_b,,gasFuel,electricity; districtHeat,,,stock,decomm,,,
 stock,power,nuclearPlantStock,,,electricity,,,stock,decomm,,,
 stock,power,oilLiquidPlantStock,,refinedOil,electricity,,,stock,decomm,,,
-stock,power,oilLiquidPlantStock_chp,,crudeOil,electricity; districtHeat,,,stock,decomm,,,
+stock,power,oilLiquidPlantStock_chp,,refinedOil,electricity; districtHeat,,,stock,decomm,,,
 stock,power,oilPlantProLowStock,,refinedOil,electricity; processHeat_low,,,stock,none,,,
 stock,power,oilPlantProMedStock,,refinedOil,electricity; processHeat_medium,,,stock,none,,,
 stock,power,pumpedStorage,,,,electricity,electricity,stock,none,,,
