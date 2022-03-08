@@ -1,5 +1,7 @@
 carrier_1,carrier_2,timestep_2,technology_3,parameter,value,source
-crudeOil,,,,emissionFac,262.8736046,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe, uses oil value because refinery efficiencies are neglected"
+diesel,,,,emissionFac,262.8736046,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe, uses oil value because refinery efficiencies are neglected"
+gasoline,,,,emissionFac,262.8736046,"uses crude oil values, because energy losses in refinery process are not considered"
+refinedOil,,,,emissionFac,262.8736046,
 hardcoal,,,,emissionFac,342.0957868,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe"
 lignite,,,,emissionFac,362,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe"
 gasFuel,,,,emissionFac,201.296363,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe"
@@ -34,4 +36,4 @@ h2,,2040,,trdBuyPrc,164,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Ene
 h2,,2045,,trdBuyPrc,145,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
 h2,,2050,,trdBuyPrc,127,
 lignite,,,,trdBuyPrc,1.5,
-waste,,,,trdBuyPrc,14.07599999,assumed same value as for lignite
+waste,,,,trdBuyPrc,14.07599999,
