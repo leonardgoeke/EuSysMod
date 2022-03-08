@@ -1,0 +1,50 @@
+#!/bin/bash --login
+#$ -cwd
+#$ -N anyMOD
+#$ -o /net/work/goeke/julia/job_log.$JOB_ID.$TASK_ID.out
+#$ -j y
+#$ -l h_rt=172800
+#$ -l mem_free=4G
+#$ -pe mp 1
+#$ -m bae
+#$ -M lgo@wip.tu-berlin.de
+
+qsub -t 1 -v hours='8760' -v ee='_highWindPot' -v grid='_gridExp' start14_64.job
+qsub -t 2 -v hours='8760' -v ee='_highWindPot' -v grid='_noGridExp' start14_64.job
+qsub -t 3 -v hours='8760' -v ee='_lowWindPot' -v grid='_gridExp' start14_64.job
+qsub -t 4 -v hours='8760' -v ee='_lowWindPot' -v grid='_noGridExp' start14_64.job
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1039,3 +1039,4 @@ timestep_1,timestep_2,region_2,region_4,carrier_1,carrier_2,technology_1,technol
 ,2040,SE,,,,solar,,,,capaConvLow,3.451242978,
 ,2040,SE,,,,wind,onshore,,,capaConvLow,23.60735283,
 ,2040,SE,,,,wind,offshore,,,capaConvLow,0.3,
+,,,,,,,,,,retroExcLow,10,
