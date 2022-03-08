@@ -1,5 +1,11 @@
 using AnyMOD, Gurobi, CSV, Statistics
 
+h = ARGS[1]
+h_heu = ARGS[2]
+ee = ARGS[3]
+grid = ARGS[4]
+t_int = ARGS[5]
+
 include("techMapping.jl")
 
 function writeModulation(aggRelCol_dic::Dict{Symbol, Array{Pair}},anyM::anyModel)
@@ -91,11 +97,6 @@ function writeModulation(aggRelCol_dic::Dict{Symbol, Array{Pair}},anyM::anyModel
 
 end
 
-h = ARGS[1]
-h_heu = ARGS[2]
-ee = ARGS[3]
-grid = ARGS[4]
-t_int = ARGS[5]
 
 obj_str = h * "hours" * ee * grid
 temp_dir = "tempFix" * obj_str # directory for temporary folder
