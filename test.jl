@@ -6,6 +6,7 @@ b = "C:/Users/pacop/.julia/dev/AnyMOD.jl/"
 using Base.Threads, CSV, Dates, LinearAlgebra, Requires, YAML
 using MathOptInterface, Reexport, Statistics, PyCall, SparseArrays
 using DataFrames, JuMP, Suppressor
+using DelimitedFiles
 
 pyimport_conda("networkx","networkx")
 pyimport_conda("matplotlib.pyplot","matplotlib")
@@ -40,6 +41,11 @@ t_int = 2
 
 using Gurobi, CSV, Statistics
 
+
+# problem:
+# 1) erst hatte ich limits auf capaStSize, obwohl expStSize and expStOut geknüpft war => lösung war evaluateHeu nimmt exp statt capa, wo es sinn macht
+
+
 # ! dump for specific test code
 
 b = "C:/Users/pacop/Desktop/work/git/TheModel/" # add the model dir here
@@ -59,7 +65,7 @@ optimize!(anyM.optModel)
 
 writeModulation(aggRelCol_dic,anyM)
 
-reportResults(:summary,anyM, addRep = (:capaConvOut,))
+reportResults(:summary,heu_m)
 reportResults(:exchange,anyM)
 reportResults(:cost,anyM)
 
@@ -87,3 +93,14 @@ tSym = :pvOpenspace_b
 tInt = sysInt(tSym,anyM.sets[:Te])
 part = anyM.parts.tech[tSym]
 prepTech_dic = prepSys_dic[:Te][tSym]
+
+
+sysInt(Symbol("32DE"),heu_m.sets[:R])
+
+filter(x -> x.R_exp == 90, heuSca_obj.capa[:tech][:offshore_b][:capaConv])
+filter(x -> x.R_exp == 90, heuCom_obj.capa[:tech][:offshore_b][:capaConv])
+
+filter(x -> x.R_exp == 90, heuSca_obj.capa[:tech][:offshore_b][:expConv])
+filter(x -> x.R_exp == 90, heuCom_obj.capa[:tech][:offshore_b][:expConv])
+
+filter(x -> x.R_exp == 90, fix_dic[:tech][:offshore_b][:expConv])

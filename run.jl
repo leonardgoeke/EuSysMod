@@ -99,7 +99,10 @@ end
 
 
 obj_str = h * "hours" * ee * grid
-temp_dir = "tempFix" * obj_str # directory for temporary folder
+temp_dir = "tempFix_" * obj_str # directory for temporary folder
+
+if isdir(temp_dir) rm(temp_dir, recursive = true) end
+mkdir(temp_dir)
 
 inputMod_arr = ["_basis",ee,grid,"timeSeries/" * h * "hours_2008_only2050",temp_dir]
 inputHeu_arr = ["_basis",ee,grid,"timeSeries/" * h_heu * "hours_2008_only2050"]
@@ -135,7 +138,7 @@ setObjective!(:cost,anyM)
 set_optimizer(anyM.optModel, Gurobi.Optimizer)
 set_optimizer_attribute(anyM.optModel, "Method", 2);
 set_optimizer_attribute(anyM.optModel, "Crossover", 0);
-set_optimizer_attribute(anyM.optModel, "Threads",tryparse(Int,t_int));
+set_optimizer_attribute(anyM.optModel, "Threads",parse(Int,t_int));
 set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
 
 optimize!(anyM.optModel)
