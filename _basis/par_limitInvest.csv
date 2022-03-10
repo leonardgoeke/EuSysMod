@@ -536,7 +536,6 @@ timestep_1,timestep_2,region_2,region_4,carrier_1,carrier_2,technology_1,technol
 ,all,UK,92UK,,,wind,offshore,offshore_a,,capaConvLow,1.0903,
 ,all,UK,95UK,,,wind,offshore,offshore_a,,capaConvLow,1.0903,
 ,all,BE,28BE,,,wind,offshore,offshore_b,,capaConvLow,1.155,
-,all,DE,32DE,,,wind,offshore,offshore_b,,capaConvLow,0.0052,
 ,all,DK,72DK,,,wind,offshore,offshore_b,,capaConvLow,0.1934,
 ,all,FI,74FI,,,wind,offshore,offshore_b,,capaConvLow,0.0476,
 ,all,FI,75FI,,,wind,offshore,offshore_b,,capaConvLow,0.0476,
