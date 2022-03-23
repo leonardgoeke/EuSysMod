@@ -1,0 +1,9 @@
+exchange_1,exchange_2,carrier_exchange,exchange_type,exchange_decomm,exchange_symmetry,comment
+powerGrid,hvac,electricity,stock,none,undirected,
+powerGrid,hvdc,electricity,stock,none,undirected,
+gasGrid,dir,synthGas,stock,decomm,directed,
+gasGrid,undir,synthGas,stock,decomm,undirected,
+h2Grid,,h2,mature,none,directed,
+h2Transport,,h2,unrestricted,none,undirected,
+biomassExc,,solidBiomass,unrestricted,none,undirected,
+liquidExc,,crudeOil; jetFuel,unrestricted,none,undirected,

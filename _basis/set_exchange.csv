@@ -1,8 +1,8 @@
 exchange_1,exchange_2,carrier_exchange,exchange_type,exchange_decomm,exchange_symmetry
 powerGrid,hvac,electricity,mature,none,undirected
 powerGrid,hvdc,electricity,mature,none,undirected
-gasGrid,dir,synthGas; naturalGas,stock,decomm,directed
-gasGrid,undir,synthGas; naturalGas,stock,decomm,undirected
+gasGrid,dir,synthGas,stock,decomm,directed
+gasGrid,undir,synthGas,stock,decomm,undirected
 h2Grid,,h2,mature,none,directed
 biomassExc,,solidBiomass,unrestricted,none,undirected
-liquidExc,,refinedOil; jetFuel; diesel; gasoline,unrestricted,none,undirected
+liquidExc,,crudeOil; jetFuel,unrestricted,none,undirected
