@@ -1,10 +1,11 @@
 using AnyMOD, Gurobi, CSV, Statistics
 
-h = ARGS[1]
-h_heu = ARGS[2]
-ee = ARGS[3]
-grid = ARGS[4]
-t_int = parse(Int,ARGS[5])
+# ! string here define scenario, overwrite ARGS with respective values for hard-coding scenarios according to comments
+h = ARGS[1] # resolution of time-series for actual solve, can be 96, 1752, 4392, or 8760
+h_heu = ARGS[2] # resolution of time-series for pre-screening, can be 96, 1752, 4392, or 8760
+ee = ARGS[3] # scenario for renewable potential, can be "_highWind" and "_highPV"
+grid = ARGS[4] # scenario for grid expansion, can be "_gridExp" and "_noGridExp"
+t_int = parse(Int,ARGS[6]) # number of threads
 
 obj_str = h * "hours_" * h_heu * "hoursHeu" * ee * grid
 temp_dir = "tempFix_" * obj_str # directory for temporary folder
@@ -12,8 +13,8 @@ temp_dir = "tempFix_" * obj_str # directory for temporary folder
 if isdir(temp_dir) rm(temp_dir, recursive = true) end
 mkdir(temp_dir)
 
-inputMod_arr = ["_basis",ee,grid,"timeSeries/" * h * "hours_2008_only2050",temp_dir]
-inputHeu_arr = ["_basis",ee,grid,"timeSeries/" * h_heu * "hours_2008_only2050"]
+inputMod_arr = ["_basis",ee,grid,"timeSeries/" * h * "hours_2008_only2040",temp_dir]
+inputHeu_arr = ["_basis",ee,grid,"timeSeries/" * h_heu * "hours_2008_only2040"]
 resultDir_str = "results"
 
 #region # * perform heuristic solve
@@ -66,27 +67,7 @@ reportResults(:cost,anyM, addObjName = true)
 
 reportTimeSeries(:electricity,anyM)
 
-# ! write info on h2 grid for qgis
-h2Grid_df = select(filter(x -> x.variable == :capaExc && x.exchange == "h2Grid",reportResults(:exchange,anyM, rtnOpt = (:csvDf,))),Not([:timestep_superordinate_expansion,:carrier,:directed,:variable,:exchange]))
-h2Grid_df[!,:edge] = map(x -> join([replace(getindex(split(x[y],"<"),4)," " => "") for y in [:region_from,:region_to]],"-"), eachrow(h2Grid_df))
-select!(h2Grid_df,Not([:region_from,:region_to]))
-h2Grid_df[!,:timestep_superordinate_dispatch] = replace.(getindex.(split.(h2Grid_df[!,:timestep_superordinate_dispatch],"<"),2)," " => "")
-h2Grid_df[!,:value] = map(x -> x < 1e-2 ? 0.0 : x,h2Grid_df[!,:value])
-filter!(x -> x.value != 0.0, h2Grid_df)
-
-h2Grid_df = unstack(h2Grid_df,:timestep_superordinate_dispatch,:value)
-
-CSV.write(anyM.options.outDir * "/h2Grid_$(anyM.options.outStamp).csv",h2Grid_df)
-
-# ! write info on h2 balance
-
-h2Bal_df = computeResults("h2Bal.yml",anyM, rtnOpt = (:csvDf,))
-
-h2Bal_df = unstack(h2Bal_df,:timestep,:value)
-CSV.write(anyM.options.outDir * "/h2Bal_$(anyM.options.outStamp).csv",h2Bal_df)
-
 #endregion
-
 
 
 
