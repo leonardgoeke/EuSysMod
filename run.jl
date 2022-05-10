@@ -4,17 +4,17 @@ using AnyMOD, Gurobi, CSV, Statistics
 h = ARGS[1] # resolution of time-series for actual solve, can be 96, 1752, 4392, or 8760
 h_heu = ARGS[2] # resolution of time-series for pre-screening, can be 96, 1752, 4392, or 8760
 ee = ARGS[3] # scenario for renewable potential, can be "_highWind" and "_highPV"
-grid = ARGS[4] # scenario for grid expansion, can be "_gridExp" and "_noGridExp"
+nu = ARGS[4] # scenario for nuclear
 t_int = parse(Int,ARGS[6]) # number of threads
 
-obj_str = h * "hours_" * h_heu * "hoursHeu" * ee * grid
+obj_str = h * "hours_" * h_heu * "hoursHeu" * ee * nu
 temp_dir = "tempFix_" * obj_str # directory for temporary folder
 
 if isdir(temp_dir) rm(temp_dir, recursive = true) end
 mkdir(temp_dir)
 
-inputMod_arr = ["_basis",ee,grid,"timeSeries/" * h * "hours_2008_only2040",temp_dir]
-inputHeu_arr = ["_basis",ee,grid,"timeSeries/" * h_heu * "hours_2008_only2040"]
+inputMod_arr = ["_basis",ee,nu,"timeSeries/" * h * "hours_2008_only2040",temp_dir]
+inputHeu_arr = ["_basis",ee,nu,"timeSeries/" * h_heu * "hours_2008_only2040"]
 resultDir_str = "results"
 
 #region # * perform heuristic solve
