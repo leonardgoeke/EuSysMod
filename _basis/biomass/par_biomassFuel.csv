@@ -1,6 +1,0 @@
-technology_3,carrier_1,parameter,value,source
-solidToLiquid,solidBiomass,emissionFac,-120.922,"if biomass is used to create other carriers emissions are net-zero, therefore specific emissions of these processes correspond to their efficiency times emissions of the created carrier"
-rawBioToGas,rawBiogas,emissionFac,-177.141,
-solidBioToGas,solidBiomass,emissionFac,-122.791,
-,solidBiomass,trdBuyPrc,0,
-,rawBiogas,trdBuyPrc,0,

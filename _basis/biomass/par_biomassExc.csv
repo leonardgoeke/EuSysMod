@@ -1,0 +1,13 @@
+region_2,region_2,exchange_1,parameter_1,value_1,parameter_2,value_2,source
+BE,DE,biomassExc,costVarExc,56.992,capaExcResi,0,
+BE,LU,biomassExc,costVarExc,16.035,capaExcResi,0,
+BE,NL,biomassExc,costVarExc,27.857,capaExcResi,0,
+CH,AT,biomassExc,costVarExc,29.2,capaExcResi,0,
+DE,AT,biomassExc,costVarExc,42.241,capaExcResi,0,
+DE,CH,biomassExc,costVarExc,49.07,capaExcResi,0,
+FR,BE,biomassExc,costVarExc,68.322,capaExcResi,0,
+FR,CH,biomassExc,costVarExc,39.184,capaExcResi,0,
+FR,DE,biomassExc,costVarExc,74.634,capaExcResi,0,
+FR,LU,biomassExc,costVarExc,38.289,capaExcResi,0,
+LU,DE,biomassExc,costVarExc,32.658,capaExcResi,0,
+NL,DE,biomassExc,costVarExc,42.999,capaExcResi,0,
