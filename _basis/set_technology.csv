@@ -133,3 +133,4 @@ wind,onshore,onshore_a,,,electricity,,,mature,none,4,,yes
 wind,onshore,onshore_b,,,electricity,,,mature,none,4,,yes
 wind,onshore,onshore_c,,,electricity,,,mature,none,4,,yes
 powerToX,,gasStorage,,,,synthGas,synthGas,stock,decomm,,,
+nuclear,,nuclearPower,,,electricity,,,mature,none,,,
