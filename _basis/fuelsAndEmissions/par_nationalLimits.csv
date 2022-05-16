@@ -1,7 +1,2 @@
-region_2,timestep_2,parameter,value,source
-BE,2030,emissionUp,103.477,based on projections reported by countries in UNFCCC database
-FR,2030,emissionUp,203.515,
-DE,2030,emissionUp,466.376,
-NL,2030,emissionUp,113.84525,
-CH,2030,emissionUp,26.9,
-CH,2040,emissionUp,11.60906487,
+timestep_2,parameter,value,source
+2040,emissionUp,0,
