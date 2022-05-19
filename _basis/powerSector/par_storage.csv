@@ -1,4 +1,4 @@
-technology_1,technology_2,technology_3,timestep_2,timestep_2,parameter_1,value_1,parameter_2,value_2,parameter_3,value_3,parameter_4,value_4,source
+technology_1,technology_2,technology_3,timestep_1,timestep_1,parameter_1,value_1,parameter_2,value_2,parameter_3,value_3,parameter_4,value_4,source
 battery,,lithiumBattery,2030,,costExpStIn,83.7,costOprStIn,1.26,costExpStSize,239.8,costOprStSize,3.6,
 battery,,lithiumBattery,2040,,costExpStIn,80.9,costOprStIn,1.21,costExpStSize,199.6,costOprStSize,2.99,
 battery,,redoxBattery,2030,,costExpStIn,722,costOprStIn,10.83,costExpStSize,226.1,costOprStSize,3.39,
