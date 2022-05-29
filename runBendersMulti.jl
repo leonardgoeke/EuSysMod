@@ -33,7 +33,7 @@ scaFacSub_tup 	 = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, 
 sub_tup = ((1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0))
 
 # options of solution algorithm
-solOpt_tup = (gap = 0.001, gapLim = 0.005, gapSwitch = 0.05, delCut = 30, linPar = (thrsAbs = 0.05, thrsRel = 0.05), quadPar = (startRad = 1e-1, lowRad = 1e-6, shrThrs = 5e-4, extThrs = 5e-4))
+solOpt_tup = (gap = 0.001, gapLim = 0.005, gapSwitch = 0.05, delCut = 30, linPar = (thrsAbs = 0.05, thrsRel = 0.05), quadPar = (startRad = 1e-1, lowRad = 1e-6, extThrs = 5e-4, shrThrs = 5e-4))
 
 # options for different models
 temp_dir = dir_str * "tempFix" * suffix_str # directory for temporary folder
