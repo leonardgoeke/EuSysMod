@@ -1,8 +1,5 @@
 timestep_1,region_1,technology_3,parameter,value
 all,FR,offshore,capaConvUp,38.13135942
 all,BE,offshore,capaConvUp,4.819795532
-all,LU,offshore,capaConvFix,0
-all,NL,offshore,capaConvUp,71.17589423
+all,NL,offshore,capaConvUp,35.58794712
 all,DE,offshore,capaConvUp,48.98792191
-all,CH,offshore,capaConvFix,0
-all,AT,offshore,capaConvFix,0

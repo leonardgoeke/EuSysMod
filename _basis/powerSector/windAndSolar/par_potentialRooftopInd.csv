@@ -1,8 +1,5 @@
 timestep_1,region_1,technology_3,parameter,value
 all,FR,rooftopInd,capaConvUp,345.7869234
 all,BE,rooftopInd,capaConvUp,45.16157752
-all,LU,rooftopInd,capaConvUp,2.549580374
 all,NL,rooftopInd,capaConvUp,83.60968668
 all,DE,rooftopInd,capaConvUp,368.0830596
-all,CH,rooftopInd,capaConvUp,33.22579126
-all,AT,rooftopInd,capaConvUp,36.34711447
