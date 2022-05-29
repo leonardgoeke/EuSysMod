@@ -1,9 +1,5 @@
 timestep_1,region_1,technology_3,parameter_1,value_1,parameter_2,value_2
 2030,FR,reservoir,capaStOutResi,8.477,capaStSizeResi,6727.28
 2030,DE,reservoir,capaStOutResi,1.295,capaStSizeResi,257.65
-2030,CH,reservoir,capaStOutResi,8.152,capaStSizeResi,9218.4
-2030,AT,reservoir,capaStOutResi,2.43,capaStSizeResi,1749.9
 2040,FR,reservoir,capaStOutResi,8.434,capaStSizeResi,6694.34
 2040,DE,reservoir,capaStOutResi,1.295,capaStSizeResi,257.65
-2040,CH,reservoir,capaStOutResi,8.152,capaStSizeResi,9218.4
-2040,AT,reservoir,capaStOutResi,2.722,capaStSizeResi,1960.38

@@ -1,15 +1,9 @@
 timestep_1,region_1,technology_3,parameter,value
 2030,FR,runOfRiver,capaConvResi,13.64
 2030,BE,runOfRiver,capaConvResi,0.13
-2030,LU,runOfRiver,capaConvResi,0.04
 2030,NL,runOfRiver,capaConvResi,0.04
 2030,DE,runOfRiver,capaConvResi,4.04
-2030,CH,runOfRiver,capaConvResi,4.06
-2030,AT,runOfRiver,capaConvResi,5.95
 2040,FR,runOfRiver,capaConvResi,13.64
 2040,BE,runOfRiver,capaConvResi,0.14
-2040,LU,runOfRiver,capaConvResi,0.04
 2040,NL,runOfRiver,capaConvResi,0.04
 2040,DE,runOfRiver,capaConvResi,4.04
-2040,CH,runOfRiver,capaConvResi,4.08
-2040,AT,runOfRiver,capaConvResi,6.12
