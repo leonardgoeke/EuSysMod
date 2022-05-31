@@ -1,14 +1,10 @@
 using AnyMOD, Gurobi, CSV, Base.Threads
 
 method = Symbol(ARGS[1])
-scr = parse(Float64,ARGS[2])
+scr = parse(Int,ARGS[2])
 rad = parse(Float64,ARGS[3])
 shr = parse(Float64,ARGS[4])
-
-
-parse(Float64, "1e-2")
-
-t_int = 4
+t_int = parse(Int,ARGS[5])
 
 res = 8760
 dir_str = ""
@@ -36,7 +32,7 @@ opt_obj = Gurobi.Optimizer # solver option
 sub_tup = ((1,1),(2,1),(1,2),(2,2))
 
 # options of solution algorithm
-solOpt_tup = (gap = 0.001, gapSwitch = 0.05, delCut = 20, quadPar = (startRad = rad, lowRad = 1e-6, shrThrs = 5e-4, shrFac = shr))
+solOpt_tup = (gap = 0.001, delCut = 20, quadPar = (startRad = rad, lowRad = 1e-6, shrThrs = 5e-4, shrFac = shr))
 
 # options for different models
 optMod_dic = Dict{Symbol,NamedTuple}()
@@ -53,7 +49,7 @@ optMod_dic[:sub] =  (inputDir = inDir_str, resultDir = dir_str * "results", suff
 using Distributed, MatheClusterManagers # MatheClusterManagers is an altered version of https://github.com/JuliaParallel/ClusterManagers.jl by https://github.com/mariok90 to run on the cluster of TU Berlinn
 
 # add workers to job
-nb_workers = 8
+nb_workers = scr * 2
 @static if Sys.islinux()
     using MatheClusterManagers
     qrsh(nb_workers, timelimit=345600, ram=32, mp = t_int)
@@ -63,9 +59,6 @@ end
 
 @everywhere using AnyMOD, CSV, ParallelDataTransfer, Distributed, Gurobi
 opt_obj = Gurobi.Optimizer # solver option
-
-heuWrk_int = last(workers())
-subWrk_arr = filter(x-> x != heuWrk_int, workers())
 
 #endregion
 
@@ -106,11 +99,11 @@ inputDir_arr = method in (:all, :fixAndLim, :fixAndQtr, :onlyFix) ? vcat(modOptS
 passobj(1, workers(), [:modOptSub_tup, :sub_tup,:t_int])
 produceMessageShort(" - Start creating sub-problems",report_m)
 
-subTasks_arr = map(subWrk_arr) do w
+subTasks_arr = map(workers()) do w
 	t = @async @everywhere w begin
 		# create sub-problem
 		function buildSub(id)
-			sub_m = @suppress anyModel(modOptSub_tup.inputDir, modOptSub_tup.resultDir, objName = "subModel_" * string(myid()-1) * modOptSub_tup.suffix,  supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, coefRng = modOpt_tup.coefRng, scaFac = modOpt_tup.scaFac, reportLvl = 1)
+			sub_m = @suppress anyModel(modOptSub_tup.inputDir, modOptSub_tup.resultDir, objName = "subModel_" * string(myid()-1) * modOptSub_tup.suffix,  supTsLvl = modOptSub_tup.supTsLvl, shortExp = modOptSub_tup.shortExp, coefRng = modOptSub_tup.coefRng, scaFac = modOptSub_tup.scaFac, reportLvl = 1)
 			sub_m.subPro = sub_tup[id]
 			prepareMod!(sub_m, Gurobi.Optimizer, t_int)
 			return sub_m
@@ -213,7 +206,7 @@ let i = 1, gap_fl = 1.0, currentBest_fl = method == :none ? Inf : trustReg_obj.o
 		capaData_obj, allVal_dic, objTopTrust_fl, lowLimTrust_fl = @suppress runTop(top_m,cutData_dic,i);
 		timeTop = now() - startTop 
 
-		solvedFut_dic = runAllSub(sub_tup, capaData_obj, solOpt_tup.gapSwitch < gap_fl ? :barrier : :simplex)
+		solvedFut_dic = runAllSub(sub_tup, capaData_obj,:barrier)
 
 		#endregion
 

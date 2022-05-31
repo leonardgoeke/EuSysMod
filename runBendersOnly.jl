@@ -4,10 +4,6 @@ method = :none
 scr = 2
 rad = 1e-2
 shr = 0.5
-
-
-parse(Float64, "1e-2")
-
 t_int = 4
 
 res = 8760
@@ -39,7 +35,7 @@ opt_obj = Gurobi.Optimizer # solver option
 sub_tup = ((1,1),(2,1),(1,2),(2,2))
 
 # options of solution algorithm
-solOpt_tup = (gap = 0.001, gapSwitch = 0.05, delCut = 20, quadPar = (startRad = rad, lowRad = 1e-6, shrThrs = 5e-4, shrFac = shr))
+solOpt_tup = (gap = 0.001, delCut = 20, quadPar = (startRad = rad, lowRad = 1e-6, shrThrs = 5e-4, shrFac = shr))
 
 # options for different models
 optMod_dic = Dict{Symbol,NamedTuple}()
@@ -135,7 +131,7 @@ let i = 1, gap_fl = 1.0, currentBest_fl = method == :none ? Inf : trustReg_obj.o
 
 		startSub = now()
 		for x in collect(sub_tup)
-			dual_etr = @suppress runSub(sub_dic[x],copy(capaData_obj),solOpt_tup.gapSwitch < gap_fl ? :barrier : :simplex)
+			dual_etr = @suppress runSub(sub_dic[x],copy(capaData_obj),:barrier)
 			cutData_dic[x] = dual_etr
 		end
 		timeSub = now() - startSub
