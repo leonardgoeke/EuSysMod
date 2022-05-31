@@ -22,13 +22,5 @@ stock,power,reservoir,,,,,electricity,stock,none
 stock,power,runOfRiver,,,electricity,,,stock,none
 wind,,offshore,,,electricity,,,mature,none
 wind,,onshore,,,electricity,,,mature,none
-powerToX,,gasStorage,,,,synthGas,synthGas,stock,decomm
-stock,power,hardcoalPlantStock_a,,hardcoal,electricity,,,stock,decomm
-stock,power,hardcoalPlantStock_b,,hardcoal,electricity,,,stock,decomm
-stock,power,hardcoalPlantStock_c,,hardcoal,electricity,,,stock,decomm
-stock,power,lignitePlantStock_a,,lignite,electricity,,,stock,decomm
-stock,power,lignitePlantStock_b,,lignite,electricity,,,stock,decomm
-stock,power,lignitePlantStock_c,,lignite,electricity,,,stock,decomm
-stock,power,wastePlantStock,,waste,electricity,,,stock,decomm
 ccgt,ccgtGas,ccgtGasBackDh,,gasFuel,electricity,,,mature,none
 ccgt,ccgtH2,ccgtH2BackDh,,h2,electricity,,,mature,none
