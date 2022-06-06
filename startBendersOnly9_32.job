@@ -1,0 +1,19 @@
+#!/bin/bash --login
+#$ -cwd
+#$ -N anyMOD
+#$ -o /net/work/goeke/julia/job_log.$JOB_ID.$TASK_ID.out
+#$ -j y
+#$ -l h_rt=172800
+#$ -l mem_free=32G
+#$ -pe mp 9
+#$ -m bae
+#$ -M lgo@wip.tu-berlin.de
+
+
+GUROBI_HOME=/afs/math/software/gurobi/9.0.2/
+export GUROBI_HOME
+
+module add gurobi/9.0.2
+module add julia/1.5.2
+
+julia runBendersOnlyMulti.jl $method $scr $rad $shr $NSLOTS
