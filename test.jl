@@ -38,17 +38,24 @@ nu = "_lowCost"
 t_int = parse(Int,"2")
 resultDir_str = "results"
 
+buildTime_df = CSV.read("buildTime.csv")
+buildTime_dic = Dict(x[1] => 0.05/2*x[2]+0.05^2/6*x[2]^2 for x in eachrow(buildTime_df))
+
 
 using Gurobi, CSV, Statistics
 
 
+for ee in ["_highPV","_highWind"], nu in ["_lowCost"]
 
-for ee in ["_highPV","_highWind"], nu in ["_lowCost","_bestEstimate","_highCost"]
-
-    obj_str = h * "hours_" * h_heu * "hoursHeu" * ee * nu
+    obj_str = h * "hours_" * h * "hoursHeu" * ee * nu
     inputMod_arr = ["_basis",ee,nu,"timeSeries/" * h * "hours_2008_only2040"]
 
     anyM = anyModel(inputMod_arr,resultDir_str, objName = obj_str, supTsLvl = 2, shortExp = 5, redStep = 1.0, emissionLoss = false, holdFixed = true)
+
+    # adjust all investment costs but clear for build time
+    for x in intersect([:costExpConv,:costExpStOut,:costExpStIn],keys(anyM.parts.cost.par))
+        anyM.parts.cost.par[x].data[!,:val] = map( y-> y.val * (1+ buildTime_dic[getUniName(y.Te,anyM.sets[:Te])[end]]) , eachrow(anyM.parts.cost.par[x].data))
+    end
 
     createOptModel!(anyM)
     setObjective!(:cost,anyM)
@@ -64,6 +71,5 @@ for ee in ["_highPV","_highWind"], nu in ["_lowCost","_bestEstimate","_highCost"
     reportResults(:summary,anyM, addRep = (:capaConvOut,), addObjName = true)
     reportResults(:exchange,anyM, addObjName = true)
     reportResults(:cost,anyM, addObjName = true)
-
 end
 
