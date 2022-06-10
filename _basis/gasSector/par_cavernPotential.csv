@@ -1,7 +1,0 @@
-timestep_1,region_1,technology_3,parameter,value
-all,FR,h2StorageCavern,capaStSizeUp,274369.4861
-all,NL,h2StorageCavern,capaStSizeUp,205836.1003
-all,DE,h2StorageCavern,capaStSizeUp,11988141.42
-all,BE,h2StorageCavern,capaStSizeFix,0
-all,BE,h2StorageCavern,capaStInFix,0
-all,BE,h2StorageCavern,capaStOutFix,0
