@@ -35,7 +35,7 @@ invRes_obj.capa = writeResult(inv_m,[:capa,:exp,:mustCapa,:mustExp])
 
 # writes results of investment model to files avoiding infeasbilites in the investment part 
 optTest_tup =  (inputDir = inputTest_arr, resultDir = resultDir_str, suffix = "test_s4", supTsLvl = 1, shortExp = 10, coefRng = coefRng_tup, scaFac = scaFac_tup)
-feasFix_dic = getFeasResult(optTest_tup,invRes_obj.capa,Dict{Symbol,Dict{Symbol,Dict{Symbol,DataFrame}}}(),t_int,0.001,Gurobi.Optimizer) # ensure feasiblity of invesment with fixed variables
+feasFix_dic = getFeasResult(optTest_tup,invRes_obj.capa,Dict{Symbol,Dict{Symbol,Dict{Symbol,DataFrame}}}(),4,0.001,Gurobi.Optimizer) # ensure feasiblity of invesment with fixed variables
 writeFixToFiles(invRes_obj.capa,feasFix_dic,fixDir_str,inv_m) # write fixed variable values to files
 
 # create and solve test model
