@@ -1,0 +1,37 @@
+#!/bin/bash --login
+#$ -cwd
+#$ -N anyMOD
+#$ -o /net/work/goeke/julia/job_log.$JOB_ID.$TASK_ID.out
+#$ -j y
+#$ -l h_rt=172800
+#$ -l mem_free=4G
+#$ -pe mp 1
+#$ -m bae
+#$ -M lgo@wip.tu-berlin.de
+
+qsub -t 1001 -v hours='8760' -v hours_heu='1752' -v nu='2000' start8_64.job
+qsub -t 1002 -v hours='8760' -v hours_heu='1752' -v nu='2250' start8_64.job
+qsub -t 1003 -v hours='8760' -v hours_heu='1752' -v nu='2500' start8_64.job
+qsub -t 1004 -v hours='8760' -v hours_heu='1752' -v nu='2750' start8_64.job
+qsub -t 1005 -v hours='8760' -v hours_heu='1752' -v nu='3000' start8_64.job
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

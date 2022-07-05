@@ -3,18 +3,17 @@ using AnyMOD, Gurobi, CSV, Statistics
 # ! string here define scenario, overwrite ARGS with respective values for hard-coding scenarios according to comments
 h = ARGS[1] # resolution of time-series for actual solve, can be 96, 1752, 4392, or 8760
 h_heu = ARGS[2] # resolution of time-series for pre-screening, can be 96, 1752, 4392, or 8760
-ee = ARGS[3] # scenario for renewable potential, can be "_highWind" and "_highPV"
-nu = ARGS[4] # scenario for nuclear
+nu = ARGS[3] # scenario for renewable potential, can be "_highWind" and "_highPV"
 t_int = parse(Int,ARGS[6]) # number of threads
 
-obj_str = h * "hours_" * h_heu * "hoursHeu" * ee * nu
+obj_str = h * "hours_" * h_heu * "hoursHeu_" * nu * "nuCost"
 temp_dir = "tempFix_" * obj_str # directory for temporary folder
 
 if isdir(temp_dir) rm(temp_dir, recursive = true) end
 mkdir(temp_dir)
 
-inputMod_arr = ["_basis",ee,nu,"timeSeries/" * h * "hours_2008_only2040",temp_dir]
-inputHeu_arr = ["_basis",ee,nu,"timeSeries/" * h_heu * "hours_2008_only2040"]
+inputMod_arr = ["_basis","nuCost/" * nu,"timeSeries/" * h * "hours_2008_only2040",temp_dir]
+inputHeu_arr = ["_basis","nuCost/" * nu,"timeSeries/" * h_heu * "hours_2008_only2040"]
 resultDir_str = "results"
 
 #region # * perform heuristic solve
@@ -35,6 +34,7 @@ feasFix_dic = getFeasResult(optMod_dic[:top],fix_dic,lim_dic,t_int,0.001,Gurobi.
 writeFixToFiles(fix_dic,feasFix_dic,temp_dir,heu_m; skipMustSt = true)
 
 if isfile(temp_dir * "/par_FixTech_bevFrtRoadLight_expConv.csv") rm(temp_dir * "/par_FixTech_bevFrtRoadLight_expConv.csv") end
+if isfile(temp_dir * "/par_FixTech_nuclearPower_expConv.csv") rm(temp_dir * "/par_FixTech_nuclearPower_expConv.csv") end
 
 heu_m = nothing
 
