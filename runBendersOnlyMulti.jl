@@ -4,7 +4,8 @@ method = Symbol(ARGS[1])
 scr = parse(Int,ARGS[2])
 rad = parse(Float64,ARGS[3])
 shr = parse(Float64,ARGS[4])
-t_int = parse(Int,ARGS[5])
+ram = parse(Int,ARGS[5])
+t_int = parse(Int,ARGS[6])
 
 res = 8760
 dir_str = ""
@@ -13,12 +14,13 @@ dir_str = ""
 
 # ! intermediate definitions of parameters
 
-suffix_str = "_" * string(method) * "_" * string(res) * "_s" * string(scr)
+suffix_str = "_" * string(method) * "_" * string(res) * "_s" * string(scr) * "_rad" * string(rad) * "_shr" * string(shr)
+
 inDir_str = [dir_str * "_basis",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"] # input directory
 
-coefRngHeu_tup = (mat = (1e-2,1e4), rhs = (1e0,1e4))
-coefRngTop_tup = (mat = (1e-2,1e4), rhs = (1e0,1e4))
-coefRngSub_tup = (mat = (1e-2,1e4), rhs = (1e0,1e4))
+coefRngHeu_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
+coefRngTop_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
+coefRngSub_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
 
 scaFacHeu_tup = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
 scaFacTop_tup = (capa = 1e0, capaStSize = 1e1, insCapa = 1e0, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
@@ -29,10 +31,10 @@ scaFacSub_tup = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, di
 opt_obj = Gurobi.Optimizer # solver option
 
 # structure of subproblems, indicating the year (first integer) and the scenario (second integer)
-sub_tup = ((1,1),(2,1),(1,2),(2,2))
+sub_tup = tuple(collect((x,y) for x in 1:2, y in 1:scr)...)
 
 # options of solution algorithm
-solOpt_tup = (gap = 0.001, delCut = 20, quadPar = (startRad = rad, lowRad = 1e-6, shrThrs = 5e-4, shrFac = shr))
+solOpt_tup = (gap = 0.002, delCut = 20, quadPar = (startRad = rad, lowRad = 1e-6, shrThrs = shr, shrFac = 0.05))
 
 # options for different models
 optMod_dic = Dict{Symbol,NamedTuple}()
@@ -52,7 +54,7 @@ using Distributed, MatheClusterManagers # MatheClusterManagers is an altered ver
 nb_workers = scr * 2
 @static if Sys.islinux()
     using MatheClusterManagers
-    qrsh(nb_workers, timelimit=345600, ram=32, mp = t_int)
+    qrsh(nb_workers, timelimit=345600, ram=ram, mp = t_int)
 else
     addprocs(nb_workers; exeflags="--project=.")
 end
@@ -93,7 +95,6 @@ report_m = @suppress anyModel(String[],optMod_dic[:heu].resultDir, objName = "de
 produceMessage(report_m.options,report_m.report, 1," - Create top model and sub models", testErr = false, printErr = false)
 
 modOptSub_tup = optMod_dic[:sub]
-inputDir_arr = method in (:all, :fixAndLim, :fixAndQtr, :onlyFix) ? vcat(modOptSub_tup.inputDir, [temp_dir]) : modOptSub_tup.inputDir
 
 # ! create sub-problems
 passobj(1, workers(), [:modOptSub_tup, :sub_tup,:t_int])
@@ -134,7 +135,7 @@ prepareMod!(top_m,opt_obj,t_int)
 
 # create seperate variables for costs of subproblems and aggregate them (cannot be part of model creation, because requires information about subproblems) 
 top_m.parts.obj.var[:cut] = map(y -> map(x -> y == 1 ? top_m.supTs.step[sub_tup[x][1]] : sub_tup[x][2], 1:length(sub_tup)),1:2) |> (z -> createVar(DataFrame(Ts_disSup = z[1], scr = z[2]),"subCut",NaN,top_m.optModel,top_m.lock,top_m.sets, scaFac = 1e2))
-push!(top_m.parts.obj.cns[:objEqn], (name = :aggCut, group = :benders, cns = @constraint(top_m.optModel, sum(top_m.parts.obj.var[:cut][!,:var]) == filter(x -> x.name == :benders,top_m.parts.obj.var[:objVar])[1,:var])))
+push!(top_m.parts.obj.cns[:objEqn], (name = :aggCut, cns = @constraint(top_m.optModel, sum(top_m.parts.obj.var[:cut][!,:var]) == filter(x -> x.name == :benders,top_m.parts.obj.var[:objVar])[1,:var])))
 
 # wait for all sub-problems to be created
 subTasks_arr = getindex.(values(subTasks_arr), 2)
@@ -236,7 +237,6 @@ let i = 1, gap_fl = 1.0, currentBest_fl = method == :none ? Inf : trustReg_obj.o
 		
 		# write to reporting files
 		push!(itrReport_df, (i = i, low = lowLim_fl, best = currentBest_fl, gap = gap_fl, solCur = objTopTrust_fl + objSub_fl, time = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60))
-		CSV.write(modOpt_tup.resultDir * "/iterationBenders$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
 		
 		#endregion
 		
@@ -256,6 +256,9 @@ let i = 1, gap_fl = 1.0, currentBest_fl = method == :none ? Inf : trustReg_obj.o
 		i += 1
 	end
 end
+
+itrReport_df[!,:case] .= suffix_str
+CSV.write(modOpt_tup.resultDir * "/iterationBenders$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
 
 #endregion
 

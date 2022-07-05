@@ -4,8 +4,8 @@
 #$ -o /net/work/goeke/julia/job_log.$JOB_ID.$TASK_ID.out
 #$ -j y
 #$ -l h_rt=172800
-#$ -l mem_free=32G
-#$ -pe mp 17
+#$ -l mem_free=16G
+#$ -pe mp 3
 #$ -m bae
 #$ -M lgo@wip.tu-berlin.de
 
@@ -16,4 +16,4 @@ export GUROBI_HOME
 module add gurobi/9.0.2
 module add julia/1.5.2
 
-julia runBendersOnlyMulti.jl $method $scr $rad $shr $NSLOTS
+julia runBendersOnlyMulti.jl $method $scr $rad $shr $ram $NSLOTS

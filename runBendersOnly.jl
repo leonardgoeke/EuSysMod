@@ -1,27 +1,25 @@
 using AnyMOD, Gurobi, CSV, Base.Threads
 
-method = :none
+method = :qtrNoIni
 scr = 2
-rad = 1e-2
-shr = 0.5
+rad = 5e-2
+shr = 1e-3
 t_int = 4
 
 res = 8760
 dir_str = "C:/Users/pacop/Desktop/work/git/TheModel/"
 
-# TODO mache skript für server und definiere szenarien
-# TODO mache fix funktion für felix
-
 #region # * set and write options
 
 # ! intermediate definitions of parameters
 
-suffix_str = "_" * string(method) * "_" * string(res) * "_s" * string(scr)
+suffix_str = "_" * string(method) * "_" * string(res) * "_s" * string(scr) * "_rad" * string(rad) * "_shr" * string(shr)
 inDir_str = [dir_str * "_basis",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"] # input directory
 
-coefRngHeu_tup = (mat = (1e-2,1e4), rhs = (1e0,1e4))
-coefRngTop_tup = (mat = (1e-2,1e4), rhs = (1e0,1e4))
-coefRngSub_tup = (mat = (1e-2,1e4), rhs = (1e0,1e4))
+#coefRngHeu_tup = (mat = (1e-2,1e4), rhs = (1e0,1e4))
+coefRngHeu_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
+coefRngTop_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
+coefRngSub_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
 
 scaFacHeu_tup = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
 scaFacTop_tup = (capa = 1e0, capaStSize = 1e1, insCapa = 1e0, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
@@ -32,10 +30,10 @@ scaFacSub_tup = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, di
 opt_obj = Gurobi.Optimizer # solver option
 
 # structure of subproblems, indicating the year (first integer) and the scenario (second integer)
-sub_tup = ((1,1),(2,1),(1,2),(2,2))
+sub_tup = tuple(collect((x,y) for x in 1:2, y in 1:scr)...)
 
 # options of solution algorithm
-solOpt_tup = (gap = 0.001, delCut = 20, quadPar = (startRad = rad, lowRad = 1e-6, shrThrs = 5e-4, shrFac = shr))
+solOpt_tup = (gap = 0.002, delCut = 20, quadPar = (startRad = rad, lowRad = 1e-6, shrThrs = shr, shrFac = 0.5))
 
 # options for different models
 optMod_dic = Dict{Symbol,NamedTuple}()
@@ -76,7 +74,7 @@ end
 
 # create seperate variables for costs of subproblems and aggregate them (cannot be part of model creation, because requires information about subproblems) 
 top_m.parts.obj.var[:cut] = map(y -> map(x -> y == 1 ? top_m.supTs.step[sub_tup[x][1]] : sub_tup[x][2], 1:length(sub_tup)),1:2) |> (z -> createVar(DataFrame(Ts_disSup = z[1], scr = z[2]),"subCut",NaN,top_m.optModel,top_m.lock,top_m.sets, scaFac = 1e2))
-push!(top_m.parts.obj.cns[:objEqn], (name = :aggCut, group = :benders, cns = @constraint(top_m.optModel, sum(top_m.parts.obj.var[:cut][!,:var]) == filter(x -> x.name == :benders,top_m.parts.obj.var[:objVar])[1,:var])))
+push!(top_m.parts.obj.cns[:objEqn], (name = :aggCut, cns = @constraint(top_m.optModel, sum(top_m.parts.obj.var[:cut][!,:var]) == filter(x -> x.name == :benders,top_m.parts.obj.var[:objVar])[1,:var])))
 
 #endregion
 
@@ -156,14 +154,12 @@ let i = 1, gap_fl = 1.0, currentBest_fl = method == :none ? Inf : trustReg_obj.o
 		#endregion
 
 		#region # * result reporting 
-
 		gap_fl = 1 - lowLim_fl/currentBest_fl
 		produceMessage(report_m.options,report_m.report, 1," - Lower: $(round(lowLim_fl, sigdigits = 8)), Upper: $(round(currentBest_fl, sigdigits = 8)), gap: $(round(gap_fl, sigdigits = 4))", testErr = false, printErr = false)
 		produceMessage(report_m.options,report_m.report, 1," - Time for top: $(Dates.toms(timeTop) / Dates.toms(Second(1))) Time for sub: $(Dates.toms(timeSub) / Dates.toms(Second(1)))", testErr = false, printErr = false)
 		
 		# write to reporting files
 		push!(itrReport_df, (i = i, low = lowLim_fl, best = currentBest_fl, gap = gap_fl, solCur = objTopTrust_fl + objSub_fl, time = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60))
-		CSV.write(modOpt_tup.resultDir * "/iterationBenders$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
 		
 		#endregion
 		
@@ -184,6 +180,11 @@ let i = 1, gap_fl = 1.0, currentBest_fl = method == :none ? Inf : trustReg_obj.o
 	end
 end
 
+itrReport_df[!,:case] .= suffix_str
+CSV.write(modOpt_tup.resultDir * "/iterationBenders$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
+
+
+
 #endregion
 
 #region # * write final results and clean up
@@ -201,3 +202,34 @@ for x in collect(sub_tup)
 end
 
 #endregion
+
+b = "C:/Users/pacop/.julia/dev/AnyMOD.jl/"
+
+using Base.Threads, CSV, Dates, LinearAlgebra, Requires, YAML
+using MathOptInterface, Reexport, Statistics, PyCall, SparseArrays
+using DataFrames, JuMP, Suppressor
+using DelimitedFiles
+
+pyimport_conda("networkx","networkx")
+pyimport_conda("matplotlib.pyplot","matplotlib")
+pyimport_conda("plotly","plotly")
+
+include(b* "src/objects.jl")
+include(b* "src/tools.jl")
+include(b* "src/modelCreation.jl")
+include(b* "src/decomposition.jl")
+
+include(b* "src/optModel/technology.jl")
+include(b* "src/optModel/exchange.jl")
+include(b* "src/optModel/system.jl")
+include(b* "src/optModel/cost.jl")
+include(b* "src/optModel/other.jl")
+include(b* "src/optModel/objective.jl")
+
+include(b* "src/dataHandling/mapping.jl")
+include(b* "src/dataHandling/parameter.jl")
+include(b* "src/dataHandling/readIn.jl")
+include(b* "src/dataHandling/tree.jl")
+include(b* "src/dataHandling/util.jl")
+
+include(b* "src/dataHandling/gurobiTools.jl")
