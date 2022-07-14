@@ -1,5 +1,5 @@
 carrier_1,carrier_2,timestep_dispatch,timestep_expansion,region_dispatch,region_expansion,carrier_balance
-electricity,,2,1,1,1,eq
+electricity,,3,1,1,1,eq
 gasFuel,,2,1,1,1,eq
 gasFuel,naturalGas,2,1,1,1,ineq
 gasFuel,synthGas,2,1,1,1,ineq
