@@ -1,7 +1,0 @@
-technology_3,parameter,value
-nuclearPower,costExpConv,4000
-nuclearPower,costOprConv,97.89
-nuclearPower,lifeConv,40
-nuclearPower,avaConv,0.95
-nuclearPower,flhConvLow,2628
-nuclearPower,costVarGen,26.2
