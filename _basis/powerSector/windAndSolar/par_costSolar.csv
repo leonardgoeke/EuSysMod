@@ -1,10 +1,10 @@
 technology_1,technology_2,technology_3,timestep_1,parameter,value
 solar,,rooftopInd,2030,costExpConv,574.267497
 solar,,rooftopInd,2030,costOprConv,8.4
-solar,,rooftopInd,2030,lifeConv,15
+solar,,rooftopInd,2030,lifeConv,40
 solar,,rooftopInd,2040,costExpConv,511.7036004
 solar,,rooftopInd,2040,costOprConv,7.75
-solar,,rooftopInd,2040,lifeConv,15
+solar,,rooftopInd,2040,lifeConv,40
 solar,,openspace,2030,costExpConv,301.0334572
 solar,,openspace,2030,costOprConv,5.8
 solar,,openspace,2030,lifeConv,18
