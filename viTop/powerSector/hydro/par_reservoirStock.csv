@@ -1,0 +1,5 @@
+timestep_1,region_1,technology_3,parameter_1,value_1,parameter_2,value_2
+2030,FR,reservoir,capaStOutResi,8.477,capaStSizeResi,6727.28
+2030,DE,reservoir,capaStOutResi,1.295,capaStSizeResi,257.65
+2040,FR,reservoir,capaStOutResi,8.434,capaStSizeResi,6694.34
+2040,DE,reservoir,capaStOutResi,1.295,capaStSizeResi,257.65
