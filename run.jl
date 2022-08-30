@@ -7,7 +7,7 @@ nuC = ARGS[3] # scenario for nuclear cost
 nuY = ARGS[4] # scenario for nuclear lifetime
 t_int = parse(Int,ARGS[5]) # number of threads
 
-obj_str = h * "hours_" * h_heu * "hoursHeu_" * nuC * "nuCost_" * nuY * "nuYear_v12Inputs"
+obj_str = h * "hours_" * h_heu * "hoursHeu_" * nuC * "nuCost_" * nuY * "nuYear_v23"
 temp_dir = "tempFix_" * obj_str # directory for temporary folder
 
 if isdir(temp_dir) rm(temp_dir, recursive = true) end
