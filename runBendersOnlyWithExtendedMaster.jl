@@ -30,6 +30,9 @@ include(b* "src/dataHandling/util.jl")
 include(b* "src/dataHandling/gurobiTools.jl")
 
 method = :qtrNoIni
+useVI_boo = true
+gapVI_fl = 0.1
+
 scr = 2
 rad = 5e-2
 shr = 7.5e-4
@@ -86,8 +89,8 @@ top_m = anyModel(modOpt_tup.inputDir, modOpt_tup.resultDir, objName = "topModel"
 prepareMod!(top_m,opt_obj,t_int)
 
 modOpt_tup = optMod_dic[:top]
-bla = inDir_str = [dir_str * "viTop",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"] 
-topVI_m = anyModel(bla, modOpt_tup.resultDir, objName = "topModel" * modOpt_tup.suffix, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, coefRng = modOpt_tup.coefRng, scaFac = modOpt_tup.scaFac, reportLvl = 1, subPro = (-1,-1))
+inDirVI_str = [dir_str * "viTop",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"] 
+topVI_m = anyModel(inDirVI_str, modOpt_tup.resultDir, objName = "topModelVI" * modOpt_tup.suffix, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, coefRng = modOpt_tup.coefRng, scaFac = modOpt_tup.scaFac, reportLvl = 1, subPro = (-1,-1))
 prepareMod!(topVI_m,opt_obj,t_int)
 
 # ! create sub-problems
@@ -108,12 +111,14 @@ end
 top_m.parts.obj.var[:cut] = map(y -> map(x -> y == 1 ? top_m.supTs.step[sub_tup[x][1]] : sub_tup[x][2], 1:length(sub_tup)),1:2) |> (z -> createVar(DataFrame(Ts_disSup = z[1], scr = z[2]),"subCut",NaN,top_m.optModel,top_m.lock,top_m.sets, scaFac = 1e2))
 push!(top_m.parts.obj.cns[:objEqn], (name = :aggCut, cns = @constraint(top_m.optModel, sum(top_m.parts.obj.var[:cut][!,:var]) == filter(x -> x.name == :benders,top_m.parts.obj.var[:objVar])[1,:var])))
 
-topVI_m.parts.obj.var[:cut] = map(y -> map(x -> y == 1 ? topVI_m.supTs.step[sub_tup[x][1]] : sub_tup[x][2], 1:length(sub_tup)),1:2) |> (z -> createVar(DataFrame(Ts_disSup = z[1], scr = z[2]),"subCut",NaN,topVI_m.optModel,topVI_m.lock,topVI_m.sets, scaFac = 1e2))
-push!(topVI_m.parts.obj.cns[:objEqn], (name = :aggCut, cns = @constraint(topVI_m.optModel, sum(topVI_m.parts.obj.var[:cut][!,:var]) == filter(x -> x.name == :benders,topVI_m.parts.obj.var[:objVar])[1,:var])))
+if useVI_boo # add dispatch cost to objective function for valid inequalities case
+	topVI_m.parts.obj.var[:cut] = map(y -> map(x -> y == 1 ? topVI_m.supTs.step[sub_tup[x][1]] : sub_tup[x][2], 1:length(sub_tup)),1:2) |> (z -> createVar(DataFrame(Ts_disSup = z[1], scr = z[2]),"subCut",NaN,topVI_m.optModel,topVI_m.lock,topVI_m.sets, scaFac = 1e2))
+	push!(topVI_m.parts.obj.cns[:objEqn], (name = :aggCut, cns = @constraint(topVI_m.optModel, sum(topVI_m.parts.obj.var[:cut][!,:var]) == filter(x -> x.name == :benders,topVI_m.parts.obj.var[:objVar])[1,:var])))
 
-costDis_ntup = (name = :costDis, var = topVI_m.options.scaFac.obj * JuMP.add_variable(topVI_m.optModel, JuMP.build_variable(error, VariableInfo(true, 0.0, false, NaN, false, NaN, false, NaN, false, false)),"costDis"))
-push!(topVI_m.parts.obj.var[:objVar],costDis_ntup)
-push!(topVI_m.parts.obj.cns[:objEqn],(name =:costDis, cns = @constraint(topVI_m.optModel, costDis_ntup.var == sum(getAllVariables(:costDis,topVI_m)[!,:var]))))
+	costDis_ntup = (name = :costDis, var = topVI_m.options.scaFac.obj * JuMP.add_variable(topVI_m.optModel, JuMP.build_variable(error, VariableInfo(true, 0.0, false, NaN, false, NaN, false, NaN, false, false)),"costDis"))
+	push!(topVI_m.parts.obj.var[:objVar],costDis_ntup)
+	push!(topVI_m.parts.obj.cns[:objEqn],(name =:costDis, cns = @constraint(topVI_m.optModel, costDis_ntup.var == sum(getAllVariables(:costDis,topVI_m)[!,:var]))))
+end
 
 #endregion
 
@@ -121,7 +126,7 @@ push!(topVI_m.parts.obj.cns[:objEqn],(name =:costDis, cns = @constraint(topVI_m.
 
 cutData_dic = Dict{Tuple{Int64,Int64},bendersData}()
 
-capaData_obj, ~, ~, ~ = @suppress runTop(topVI_m,cutData_dic,0);
+capaData_obj, ~, ~, ~ = @suppress runTop(useVI_boo ? topVI_m : top_m,cutData_dic,0);
 
 for x in collect(sub_tup)
 	dual_etr = @suppress runSub(sub_dic[x],copy(capaData_obj),:barrier)
@@ -138,10 +143,10 @@ if method in (:qtrNoIni,:qtrFixIni,:qtrDynIni)
 		produceMessage(report_m.options,report_m.report, 1," - Started heuristic pre-solve for starting solution", testErr = false, printErr = false)
 		~, heuSol_obj =  @suppress heuristicSolve(optMod_dic[:heu],1.0,t_int,opt_obj,true,true);			
 	elseif method == :qtrNoIni
-		@suppress optimize!(topVI_m.optModel)
+		@suppress optimize!(useVI_boo ? topVI_m.optModel : top_m.optModel)
 		heuSol_obj = bendersData()
 		heuSol_obj.objVal = Inf
-		heuSol_obj.capa = writeResult(topVI_m,[:capa,:exp,:mustCapa,:mustExp])
+		heuSol_obj.capa = writeResult(useVI_boo ? topVI_m : top_m,[:capa,:exp,:mustCapa,:mustExp])
 	end
 	# !  solve sub-problems with capacity of heuristic solution to use for creation of cuts in first iteration
 	for x in collect(sub_tup)
@@ -151,7 +156,7 @@ if method in (:qtrNoIni,:qtrFixIni,:qtrDynIni)
 	heuSol_obj.objVal = method == :qtrFixIni ? heuSol_obj.objVal + sum(map(x -> x.objVal, values(cutData_dic))) : Inf
 	# ! create quadratic trust region
 	trustReg_obj, eleNum_int = quadTrust(heuSol_obj.capa,solOpt_tup.quadPar)
-	trustReg_obj.cns = centerQuadTrust(trustReg_obj.var,topVI_m,trustReg_obj.rad);
+	trustReg_obj.cns = centerQuadTrust(trustReg_obj.var,useVI_boo ? topVI_m : top_m,trustReg_obj.rad);
 	trustReg_obj.objVal = heuSol_obj.objVal
 	produceMessage(report_m.options,report_m.report, 1," - Initialized quadratic trust region with $eleNum_int variables", testErr = false, printErr = false)
 end
@@ -164,7 +169,7 @@ end
 itrReport_df = DataFrame(i = Int[], low = Float64[], best = Float64[], gap = Float64[], solCur = Float64[], time = Float64[])
 
 
-let i = 1, gap_fl = 1.0, currentBest_fl = method == :none ? Inf : trustReg_obj.objVal
+let i = 1, gap_fl = 1.0, currentBest_fl = method == :none ? Inf : trustReg_obj.objVal, useVI_boo = useVI_boo
 	while true
 
 		produceMessage(report_m.options,report_m.report, 1," - Started iteration $i", testErr = false, printErr = false)
@@ -172,7 +177,7 @@ let i = 1, gap_fl = 1.0, currentBest_fl = method == :none ? Inf : trustReg_obj.o
 		#region # * solve top-problem @suppress 
 
 		startTop = now()
-		capaData_obj, allVal_dic, objTopTrust_fl, lowLimTrust_fl = @suppress runTop(topVI_m,cutData_dic,i);
+		capaData_obj, allVal_dic, objTopTrust_fl, lowLimTrust_fl = @suppress runTop(useVI_boo ? topVI_m : top_m,cutData_dic,i);
 		timeTop = now() - startTop
 
 		#endregion
@@ -189,20 +194,21 @@ let i = 1, gap_fl = 1.0, currentBest_fl = method == :none ? Inf : trustReg_obj.o
 		#endregion
 
 		#region # * compute bounds and analyze cuts
-		addCuts!(top_m,cutData_dic,i)
-		@suppress optimize!(top_m.optModel)
-		objTop_fl = value(sum(filter(x -> x.name == :cost, top_m.parts.obj.var[:objVar])[!,:var])) # costs of unconstrained top-problem
-		lowLim_fl = objTop_fl + value(filter(x -> x.name == :benders,top_m.parts.obj.var[:objVar])[1,:var])
-		#=
-		if method in (:qtrNoIni,:qtrFixIni,:qtrDynIni) # run top-problem without trust region to obtain lower limits
-			objTop_fl, lowLim_fl = @suppress runTopWithoutQuadTrust(top_m,trustReg_obj)
+
+		# delete existing trust region
+		if method in (:qtrNoIni,:qtrFixIni,:qtrDynIni) delete(useVI_boo ? topVI_m.optModel : top_m.optModel,trustReg_obj.cns) end
+
+		# add cuts to regular top problem separately
+		if useVI_boo addCuts!(top_m,cutData_dic,i) end
+	
+		if method in (:qtrNoIni,:qtrFixIni,:qtrDynIni) || useVI_boo 
+			objTop_fl, lowLim_fl = @suppress runTopWithoutQuadTrust(top_m,trustReg_obj,useVI_boo)
 		else # without quad trust region, lower limit corresponds result of unaltered top-problem
 			lowLim_fl = lowLimTrust_fl
 		end
-		=#
-
+		
 		# ! delete cuts that not were binding for the defined number of iterations
-		#deleteCuts!(topVI_m,solOpt_tup.delCut,i) 
+		#if useVI_boo deleteCuts!(topVI_m,solOpt_tup.delCut,i) end
 		#deleteCuts!(top_m,solOpt_tup.delCut,i) 
 
 		# ! get objective of sub-problems and current best solution
@@ -221,7 +227,7 @@ let i = 1, gap_fl = 1.0, currentBest_fl = method == :none ? Inf : trustReg_obj.o
 		
 		#endregion
 		
-		#region # * check convergence and adjust limits	
+		#region # * check convergence and adjust trust region	
 		
 		if gap_fl < solOpt_tup.gap
 			# ! terminate or adjust quadratic trust region
@@ -229,11 +235,21 @@ let i = 1, gap_fl = 1.0, currentBest_fl = method == :none ? Inf : trustReg_obj.o
 			break
 		end
 
+
+		
+		# check on valid inequalities
+		if useVI_boo && gap_fl < gapVI_fl
+			useVI_boo = false
+			produceMessage(report_m.options,report_m.report, 1," - Removed valid inequalities!", testErr = false, printErr = false)
+		end
+
+		# add new trust region
 		if method in (:qtrNoIni,:qtrFixIni,:qtrDynIni) # adjust trust region in case algorithm has not converged yet
-			delete(topVI_m.optModel,trustReg_obj.cns)
-			global trustReg_obj = adjustQuadTrust(topVI_m,allVal_dic,trustReg_obj,objSub_fl,objTopTrust_fl,lowLim_fl,lowLimTrust_fl,report_m)
+			global trustReg_obj = adjustQuadTrust(useVI_boo ? topVI_m : top_m,allVal_dic,trustReg_obj,objSub_fl,objTopTrust_fl,lowLim_fl,lowLimTrust_fl,report_m)
 		end
 		#endregion
+
+		CSV.write(modOpt_tup.resultDir * "/iterationBenders$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
 
 		i = i + 1
 	end
@@ -281,3 +297,5 @@ prepareMod!(closed_m,opt_obj,t_int)
 optimize!(closed_m.optModel)
 reportResults(:summary,closed_m)
 reportResults(:cost,closed_m)
+
+reportResults(:cost,topVI_m)
