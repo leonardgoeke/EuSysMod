@@ -1,0 +1,10 @@
+timestep_1,timestep_2,region_2,region_4,carrier_1,carrier_2,technology_1,technology_2,technology_3,id,parameter,value,comment
+10th,,,,,,,,,,expConvFix,0,deactivates investment and retrofitting in 2020
+10th,,,,,,,,,,expStInFix,0,
+10th,,,,,,,,,,expStOutFix,0,
+10th,,,,,,,,,,expExcFix,0,
+10th,,,,,,,,,,expStSizeFix,0,
+10th,,,,,,,,,,retroConvFix,0,
+,,,,,,solar,openspace_a,cspOpenspace_a,,expConvFix,0,
+,,,,,,solar,openspace_b,cspOpenspace_b,,expConvFix,0,
+,,,,,,solar,openspace_c,cspOpenspace_c,,expConvFix,0,

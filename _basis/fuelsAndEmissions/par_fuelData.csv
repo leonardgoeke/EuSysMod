@@ -1,16 +1,3 @@
-carrier_1,carrier_2,timestep_1,parameter,value,source
-oil,,,emissionFac,262.8736046,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe, uses oil value because refinery efficiencies are neglected"
-hardcoal,,,emissionFac,342.0957868,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe"
-lignite,,,emissionFac,362,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe"
-gasFuel,,,emissionFac,201.296363,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe"
-waste,,,emissionFac,332,used old dynelmod input
-oil,,2030,trdBuyPrc,45.04708414,"IRENA (2018), Renewable Energy Prospects for the European Union"
-oil,,2040,trdBuyPrc,53.19389723,"IEA (2017), World Energy Outlook 2017"
-hardcoal,,2030,trdBuyPrc,8.002933956,
-hardcoal,,2040,trdBuyPrc,8.203007305,
-gasFuel,naturalGas,2030,trdBuyPrc,23.89805201,
-gasFuel,naturalGas,2040,trdBuyPrc,26.67689527,
-h2,,2030,trdBuyPrc,213,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
-h2,,2040,trdBuyPrc,164,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
-lignite,,,trdBuyPrc,1.5,
-waste,,,trdBuyPrc,14.07599999,
+carrier_1,carrier_2,timestep_2,technology_3,parameter,value,source
+h2,,2040,,trdBuyPrc,127,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
+electricity,,,,trdSellPrc,0.05,

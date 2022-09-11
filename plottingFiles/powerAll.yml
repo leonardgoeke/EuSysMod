@@ -1,0 +1,576 @@
+vertices:
+  - label: "wind, offshore"
+    name: "66"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.633933837713481
+      - 0.0139364001228106
+    aggregating:
+        - "offshore_a"
+        - "offshore_b"
+    type: "technology"
+  - label: "low temp. CCGT back, gas"
+    name: "49"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.508305244079019
+      - 0.814171743122933
+    type: "technology"
+  - label: "DH engine, biogas"
+    name: "55"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.852831740337134
+      - 0.622017167938856
+    type: "technology"
+  - label: "low temp. CCGT back, H2"
+    name: "46"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.189986110289853
+      - 0.47607055797225
+    type: "technology"
+  - label: "redox battery"
+    name: "29"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.747281654612139
+      - 0.0608350621153506
+    type: "technology"
+  - label: "pumped storage"
+    name: "43"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.381899709571835
+      - 0.100092339815774
+    type: "technology"
+  - label: "OCGT CHP, gas"
+    name: "56"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.193190777178925
+      - 0.589390626269988
+    type: "technology"
+  - label: "PV, rooftop residential"
+    name: "30"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.538598135938469
+      - 0.0868920701399307
+    aggregating:
+      - "pvResi_a"
+      - "pvResi_b"
+    type: "technology"
+  - label: "OCGT, gas"
+    name: "31"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.408252123597913
+      - 0.75631393545877
+    type: "technology"
+  - label: "CCGT back, gas"
+    name: "32"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.2377407186865
+      - 0.644766246181799
+    type: "technology"
+  - label: "medium temp. engine, gas"
+    name: "64"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.605531706010807
+      - 0.883545267166281
+    type: "technology"
+  - label: "pem FC"
+    name: "57"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.19307485830531
+      - 0.421645070382575
+    type: "technology"
+  - label: "PV, openspace"
+    name: "63"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.470940170994918
+      - 0.0
+    aggregating:
+      - "pvOpenspace_a"
+      - "pvOpenspace_b"
+      - "pvOpenspace_c"
+    type: "technology"
+  - label: "DH engine, gas"
+    name: "33"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.356957596589222
+      - 0.726291184948294
+    type: "technology"
+  - label: "OCGT CHP, H2"
+    name: "34"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.216252562225371
+      - 0.258434373538621
+    type: "technology"
+  - label: "DH plant, non-solid BM"
+    name: "44"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.774128006845954
+      - 0.245333737836867
+    type: "technology"
+  - label: "low temp. engine, gas"
+    name: "35"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.550898992691279
+      - 0.851762685872093
+    type: "technology"
+  - label: "engine, oil"
+    name: "61"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.759831342580042
+      - 0.190941976777944
+    type: "technology"
+  - label: "PV, rooftop industry"
+    name: "65"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.457805224313059
+      - 0.0482739962932104
+    aggregating:
+      - "pvInd_a"
+      - "pvInd_b"
+    type: "technology"
+  - label: "CCGT back, H2"
+    name: "45"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.202229342217037
+      - 0.313195932055751
+    type: "technology"
+  - label: "CCGT extract, H2"
+    name: "47"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.194112224670567
+      - 0.369425964233424
+    type: "technology"
+  - label: "solid oxide FC"
+    name: "48"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.746178919562483
+      - 0.955109212629369
+    type: "technology"
+  - label: "DH plant, solid BM"
+    name: "51"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.828788636298344
+      - 0.393318731717396
+    type: "technology"
+  - label: "medium temp. CCGT back, H2"
+    name: "42"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.192716222040905
+      - 0.537801591834962
+    type: "technology"
+  - label: "engine, gas"
+    name: "62"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.461008308730249
+      - 0.785557329535324
+    type: "technology"
+  - label: "low temp. plant, solid BM"
+    name: "60"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.845227194539069
+      - 0.545697245404932
+    type: "technology"
+  - label: "medium temp. engine, biogas"
+    name: "37"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.864466744739422
+      - 0.767071079833642
+    type: "technology"
+  - label: "run-of-river"
+    name: "53"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.339547035409463
+      - 0.134504807895519
+    type: "technology"
+  - label: "wind, onshore"
+    name: "39"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.656543835522734
+      - 0.07298442755171
+    aggregating:
+        - "onshore_a"
+        - "onshore_b"
+        - "onshore_c"
+    type: "technology"
+  - label: "CCGT extract, gas"
+    name: "50"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.296983790908547
+      - 0.682036078871233
+    type: "technology"
+  - label: "low temp. engine, biogas"
+    name: "38"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.859930038538126
+      - 0.691935042843291
+    type: "technology"
+  - label: "reservoir"
+    name: "40"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.303261559872242
+      - 0.166416690848387
+    type: "technology"
+  - label: "low temp. plant, non-solid BM"
+    name: "59"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.807472804595722
+      - 0.314905856337852
+    type: "technology"
+  - label: "OCGT, H2"
+    name: "58"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.221795778860824
+      - 0.208637122324621
+    type: "technology"
+  - label: "medium temp. CCGT back, gas"
+    name: "41"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.66677033239749
+      - 0.920903778952015
+    type: "technology"
+  - label: "lithium battery"
+    name: "54"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.772447522569883
+      - 0.114381140709855
+    type: "technology"
+  - label: "electricity"
+    name: "5"
+    color:
+      - 1.0
+      - 0.9215
+      - 0.2313
+    position:
+      - 0.585042469090173
+      - 0.270092503329047
+    type: "carrier"
+  - label: "synthetic gas"
+    name: "9"
+    color:
+      - 0.235
+      - 0.506
+      - 0.325
+    position:
+      - 0.262401467164868
+      - 1.0
+    type: "carrier"
+  - label: "process heat - low"
+    name: "17"
+    color:
+      - 0.6823529411764706
+      - 0.07058823529411765
+      - 0.22745098039215686
+    position:
+      - 0.646236367522199
+      - 0.611061838315791
+    type: "carrier"
+  - label: "raw biogas"
+    name: "22"
+    color:
+      - 0.682
+      - 0.898
+      - 0.443
+    position:
+      - 0.923278733169715
+      - 0.658967177873268
+    type: "carrier"
+  - label: "district heat"
+    name: "4"
+    color:
+      - 0.6
+      - 0.0
+      - 0.169
+    position:
+      - 0.460581466756642
+      - 0.487416278518722
+    type: "carrier"
+  - label: "H2"
+    name: "11"
+    color:
+      - 0.329
+      - 0.447
+      - 0.827
+    position:
+      - 0.09
+      - 0.366224088581022
+    type: "carrier"
+  - label: "process heat - medium"
+    name: "18"
+    color:
+      - 0.6823529411764706
+      - 0.07058823529411765
+      - 0.22745098039215686
+    position:
+      - 0.667193696804889
+      - 0.724112255493735
+    type: "carrier"
+  - label: "non-solid biomass"
+    name: "27"
+    color:
+      - 0.682
+      - 0.898
+      - 0.443
+    position:
+      - 0.923278733169715
+      - 0.198897562480868
+    type: "carrier"
+  - label: "refined oil"
+    name: "3"
+    color:
+      - 0.33725490196078434
+      - 0.3411764705882353
+      - 0.3254901960784314
+    position:
+      - 0.923278733169715
+      - 0.124809783679442
+    type: "carrier"
+  - label: "process heat - high"
+    name: "16"
+    color:
+      - 0.6823529411764706
+      - 0.07058823529411765
+      - 0.22745098039215686
+    position:
+      - 0.872552265430033
+      - 0.872552265430033
+    type: "carrier"
+  - label: "solid biomass"
+    name: "28"
+    color:
+      - 0.682
+      - 0.898
+      - 0.443
+    position:
+      - 0.923278733169715
+      - 0.462748804430674
+    type: "carrier"
+edges:
+  - 66: "5"
+  - 5: "29"
+  - 5: "43"
+  - 5: "54"
+  - 9: "49"
+  - 9: "56"
+  - 9: "31"
+  - 9: "32"
+  - 9: "64"
+  - 9: "33"
+  - 9: "35"
+  - 9: "48"
+  - 9: "62"
+  - 9: "50"
+  - 9: "41"
+  - 49: "5"
+  - 49: "17"
+  - 22: "55"
+  - 22: "37"
+  - 22: "38"
+  - 55: "5"
+  - 55: "4"
+  - 11: "46"
+  - 11: "57"
+  - 11: "34"
+  - 11: "45"
+  - 11: "47"
+  - 11: "42"
+  - 11: "58"
+  - 46: "5"
+  - 46: "17"
+  - 29: "5"
+  - 43: "5"
+  - 56: "5"
+  - 56: "4"
+  - 30: "5"
+  - 31: "5"
+  - 32: "5"
+  - 32: "4"
+  - 64: "5"
+  - 64: "18"
+  - 57: "5"
+  - 57: "4"
+  - 63: "5"
+  - 33: "5"
+  - 33: "4"
+  - 34: "5"
+  - 34: "4"
+  - 27: "44"
+  - 27: "59"
+  - 44: "5"
+  - 44: "4"
+  - 35: "5"
+  - 35: "17"
+  - 3: "61"
+  - 61: "5"
+  - 65: "5"
+  - 45: "5"
+  - 45: "4"
+  - 47: "5"
+  - 47: "4"
+  - 48: "5"
+  - 48: "16"
+  - 28: "51"
+  - 28: "60"
+  - 51: "5"
+  - 51: "4"
+  - 42: "5"
+  - 42: "18"
+  - 62: "5"
+  - 60: "5"
+  - 60: "17"
+  - 37: "5"
+  - 37: "18"
+  - 53: "5"
+  - 39: "5"
+  - 50: "5"
+  - 50: "4"
+  - 38: "5"
+  - 38: "17"
+  - 40: "5"
+  - 59: "5"
+  - 59: "17"
+  - 58: "5"
+  - 41: "5"
+  - 41: "18"
+  - 54: "5"

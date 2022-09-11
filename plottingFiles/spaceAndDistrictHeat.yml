@@ -1,0 +1,443 @@
+vertices:
+  - label: "pit thermal storage"
+    name: "159"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.817398373983739
+      - 0.192539109506618
+    type: "technology"
+  - label: "DH plant, solid BM"
+    name: "91"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.522628726287262
+      - 0.150421179302045
+    type: "technology"
+  - label: "DH boiler, non-solid BM"
+    name: "92"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.826558265582655
+      - 0.417569193742478
+    type: "technology"
+  - label: "space boiler, solid BM"
+    name: "154"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.321951219512195
+      - 0.0794223826714801
+    type: "technology"
+  - label: "pem electrolysis"
+    name: "45"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.673387533875338
+      - 0.716293622141997
+    type: "technology"
+  - label: "ground HP"
+    name: "43"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.222764227642276
+      - 0.379061371841155
+    type: "technology"
+  - label: "DH engine, biogas"
+    name: "137"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.707859078590786
+      - 0.241877256317689
+    type: "technology"
+  - label: "air HP"
+    name: "84"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.272628726287262
+      - 0.288808664259927
+    type: "technology"
+  - label: "DH boiler, solid BM"
+    name: "160"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.634688346883468
+      - 0.107099879663056
+    type: "technology"
+  - label: "CCGT extract, H2"
+    name: "117"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.53550135501355
+      - 0.851985559566786
+    type: "technology"
+  - label: "water tank storage"
+    name: "118"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.843956639566395
+      - 0.305198555956678
+    type: "technology"
+  - label: "DH boiler, H2"
+    name: "157"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.804688346883468
+      - 0.641395908543922
+    type: "technology"
+  - label: "alkali electrolysis"
+    name: "44"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.743387533875338
+      - 0.686293622141997
+    type: "technology"
+  - label: "CCGT extract, gas"
+    name: "124"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.252032520325203
+      - 0.623345367027677
+    type: "technology"
+  - label: "gasification"
+    name: "57"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.253658536585365
+      - 0.459687123947051
+    type: "technology"
+  - label: "OCGT CHP, H2"
+    name: "129"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.605420054200542
+      - 0.795427196149217
+    type: "technology"
+  - label: "thermal solar"
+    name: "31"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.059620596205962
+      - 0.247894103489771
+    type: "technology"
+  - label: "space boiler, gas"
+    name: "155"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.116531165311653
+      - 0.353790613718411
+    type: "technology"
+  - label: "resistive heating"
+    name: "156"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.315989159891598
+      - 0.220216606498194
+    type: "technology"
+  - label: "OCGT CHP, gas"
+    name: "64"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.269376693766937
+      - 0.700361010830324
+    type: "technology"
+  - label: "DH air HP"
+    name: "65"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.538536585365853
+      - 0.40003008423586
+    type: "technology"
+  - label: "DH engine, gas"
+    name: "138"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.295934959349593
+      - 0.778580024067388
+    type: "technology"
+  - label: "pem FC"
+    name: "75"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.36910569105691
+      - 0.924187725631768
+    type: "technology"
+  - label: "DH boiler, electric"
+    name: "70"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.527487804878048
+      - 0.350820697954271
+    type: "technology"
+  - label: "CCGT back, H2"
+    name: "71"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.447696476964769
+      - 0.886883273164861
+    type: "technology"
+  - label: "DH substation"
+    name: "125"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.333875338753387
+      - 0.148014440433213
+    type: "technology"
+  - label: "CCGT back, gas"
+    name: "78"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.236314363143631
+      - 0.539109506618531
+    type: "technology"
+  - label: "DH plant, non-solid BM"
+    name: "144"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.855718157181571
+      - 0.588736462093862
+    type: "technology"
+  - label: "DH boiler, gas"
+    name: "85"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.311653116531165
+      - 0.867629362214199
+    type: "technology"
+  - label: "district heat"
+    name: "4"
+    color:
+      - 0.6
+      - 0.0
+      - 0.169
+    position:
+      - 0.688346883468834
+      - 0.457280385078219
+    type: "carrier"
+  - label: "solid biomass"
+    name: "29"
+    color:
+      - 0.682
+      - 0.898
+      - 0.443
+    position:
+      - 0.490514905149051
+      - 0.0408303249097472
+    type: "carrier"
+  - label: "electricity"
+    name: "5"
+    color:
+      - 1.0
+      - 0.9215
+      - 0.2313
+    position:
+      - 0.405273712737127
+      - 0.360942238267147
+    type: "carrier"
+  - label: "non-solid biomass"
+    name: "28"
+    color:
+      - 0.682
+      - 0.898
+      - 0.443
+    position:
+      - 0.840027100271002
+      - 0.490720818291215
+    type: "carrier"
+  - label: "space heat"
+    name: "23"
+    color:
+      - 1.0
+      - 0.4549019607843137
+      - 0.5215686274509804
+    position:
+      - 0.200542005420054
+      - 0.151624548736462
+    type: "carrier"
+  - label: "H2"
+    name: "11"
+    color:
+      - 0.329
+      - 0.447
+      - 0.827
+    position:
+      - 0.6710027100271
+      - 0.930542719614921
+    type: "carrier"
+  - label: "raw biogas"
+    name: "22"
+    color:
+      - 0.682
+      - 0.898
+      - 0.443
+    position:
+      - 0.707859078590786
+      - 0.113116726835138
+    type: "carrier"
+  - label: "synthetic gas"
+    name: "9"
+    color:
+      - 0.235
+      - 0.506
+      - 0.325
+    position:
+      - 0.086720867208672
+      - 0.564380264741275
+    type: "carrier"
+edges:
+  - 4: "159"
+  - 4: "118"
+  - 4: "125"
+  - 159: "4"
+  - 29: "91"
+  - 29: "154"
+  - 29: "160"
+  - 29: "57"
+  - 91: "5"
+  - 91: "4"
+  - 5: "45"
+  - 5: "43"
+  - 5: "84"
+  - 5: "44"
+  - 5: "156"
+  - 5: "65"
+  - 5: "70"
+  - 28: "92"
+  - 28: "144"
+  - 92: "4"
+  - 154: "23"
+  - 45: "11"
+  - 45: "4"
+  - 11: "117"
+  - 11: "157"
+  - 11: "129"
+  - 11: "75"
+  - 11: "71"
+  - 43: "23"
+  - 22: "137"
+  - 137: "5"
+  - 137: "4"
+  - 9: "124"
+  - 9: "155"
+  - 9: "64"
+  - 9: "138"
+  - 9: "78"
+  - 9: "85"
+  - 84: "23"
+  - 160: "4"
+  - 117: "5"
+  - 117: "4"
+  - 118: "4"
+  - 157: "4"
+  - 44: "11"
+  - 44: "4"
+  - 124: "5"
+  - 124: "4"
+  - 57: "9"
+  - 57: "4"
+  - 129: "5"
+  - 129: "4"
+  - 31: "23"
+  - 155: "23"
+  - 156: "23"
+  - 64: "5"
+  - 64: "4"
+  - 65: "4"
+  - 138: "5"
+  - 138: "4"
+  - 75: "5"
+  - 75: "4"
+  - 70: "4"
+  - 71: "5"
+  - 71: "4"
+  - 125: "23"
+  - 78: "5"
+  - 78: "4"
+  - 144: "5"
+  - 144: "4"
+  - 85: "4"
