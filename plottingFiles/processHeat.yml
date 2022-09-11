@@ -1,0 +1,497 @@
+vertices:
+  - label: "medium temp. boiler, H2"
+    name: "143"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.818930251126105
+      - 0.560806562699072
+    type: "technology"
+  - label: "methane pyrolysis"
+    name: "64"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.163138391192832
+      - 0.626995951113602
+    type: "technology"
+  - label: "low temp. engine, biogas"
+    name: "130"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.47593778186653
+      - 0.945634104651828
+    type: "technology"
+  - label: "medium temp. boiler, gas"
+    name: "131"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.207368764730995
+      - 0.394665381450017
+    type: "technology"
+  - label: "low temp. boiler, solid BM"
+    name: "37"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.789363049026694
+      - 0.0630687909826788
+    type: "technology"
+  - label: "low temp. CCGT back, gas"
+    name: "39"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.214816445489057
+      - 0.210641653876245
+    type: "technology"
+  - label: "high temp. boiler, oil"
+    name: "95"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.355130246584351
+      - 0.917690621715476
+    type: "technology"
+  - label: "low temp. plant, non-solid BM"
+    name: "40"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.814264918901047
+      - 0.202089777353373
+    type: "technology"
+  - label: "medium temp. boiler, oil"
+    name: "106"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.251051717540746
+      - 0.861913419376834
+    type: "technology"
+  - label: "low temp. boiler, electric"
+    name: "42"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.491641116590691
+      - 0.232391314308295
+    type: "technology"
+  - label: "low temp. boiler, oil"
+    name: "144"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.221270069892236
+      - 0.749347261284029
+    type: "technology"
+  - label: "medium temp. boiler, raw biogas"
+    name: "134"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.756028896444306
+      - 0.828379797985394
+    type: "technology"
+  - label: "DH substation"
+    name: "29"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.626479414498815
+      - 0.00370230723087087
+    type: "technology"
+  - label: "solid oxide electrolysis"
+    name: "46"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.811055438285583
+      - 0.664273427687963
+    type: "technology"
+  - label: "medium temp. CCGT back, H2"
+    name: "116"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.81694028840302
+      - 0.469274039173794
+    type: "technology"
+  - label: "medium temp. boiler, electric"
+    name: "123"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.607057827215825
+      - 0.470268912579685
+    type: "technology"
+  - label: "direct air capture"
+    name: "50"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.817955358293022
+      - 0.274749990007333
+    type: "technology"
+  - label: "low temp. boiler, gas"
+    name: "51"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.192029391893635
+      - 0.137085852033663
+    type: "technology"
+  - label: "solid oxide FC"
+    name: "53"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.191657723649203
+      - 0.507371556910634
+    type: "technology"
+  - label: "low temp. CCGT back, H2"
+    name: "98"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.816065017609047
+      - 0.409903169804826
+    type: "technology"
+  - label: "high temp. boiler, H2"
+    name: "55"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.794373213334607
+      - 0.742186640248324
+    type: "technology"
+  - label: "medium temp. engine, biogas"
+    name: "57"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.600224908645944
+      - 0.87805764555219
+    type: "technology"
+  - label: "medium temp. engine, gas"
+    name: "58"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.211162202009836
+      - 0.333947512087473
+    type: "technology"
+  - label: "medium temp. CCGT back, gas"
+    name: "65"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.19800287121742
+      - 0.449695490058287
+    type: "technology"
+  - label: "low temp. plant, solid BM"
+    name: "125"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.803366049265684
+      - 0.12906640482224
+    type: "technology"
+  - label: "high temp. boiler, gas"
+    name: "132"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.171592838311639
+      - 0.555149001150686
+    type: "technology"
+  - label: "HP"
+    name: "70"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.51939939646667
+      - 0.179664885759866
+    type: "technology"
+  - label: "low temp. boiler, H2"
+    name: "126"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.815232865043803
+      - 0.339765456424835
+    type: "technology"
+  - label: "high temp. boiler, electric"
+    name: "142"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.543967418966146
+      - 0.622682371946423
+    type: "technology"
+  - label: "low temp. engine, gas"
+    name: "127"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.216650127991754
+      - 0.272046834082601
+    type: "technology"
+  - label: "refined oil"
+    name: "3"
+    color:
+      - 0.33725490196078434
+      - 0.3411764705882353
+      - 0.3254901960784314
+    position:
+      - 0.185305645640227
+      - 0.954234538420141
+    type: "carrier"
+  - label: "electricity"
+    name: "5"
+    color:
+      - 1.0
+      - 0.9215
+      - 0.2313
+    position:
+      - 0.535959639972946
+      - 0.347328491688928
+    type: "carrier"
+  - label: "process heat - medium"
+    name: "14"
+    color:
+      - 0.6823529411764706
+      - 0.07058823529411765
+      - 0.22745098039215686
+    position:
+      - 0.674749186902084
+      - 0.623612709072276
+    type: "carrier"
+  - label: "H2"
+    name: "9"
+    color:
+      - 0.329
+      - 0.447
+      - 0.827
+    position:
+      - 0.991275850676057
+      - 0.487204596465323
+    type: "carrier"
+  - label: "synthetic gas"
+    name: "20"
+    color:
+      - 0.235
+      - 0.506
+      - 0.325
+    position:
+      - 0.0
+      - 0.41787083595749
+    type: "carrier"
+  - label: "process heat - high"
+    name: "12"
+    color:
+      - 0.6823529411764706
+      - 0.07058823529411765
+      - 0.22745098039215686
+    position:
+      - 0.546345644804999
+      - 0.794471998815422
+    type: "carrier"
+  - label: "process heat - low"
+    name: "13"
+    color:
+      - 0.6823529411764706
+      - 0.07058823529411765
+      - 0.22745098039215686
+    position:
+      - 0.436699917480631
+      - 0.0484603002201156
+    type: "carrier"
+  - label: "raw biogas"
+    name: "18"
+    color:
+      - 0.682
+      - 0.898
+      - 0.443
+    position:
+      - 0.610007285900059
+      - 1.0
+    type: "carrier"
+  - label: "solid biomass"
+    name: "22"
+    color:
+      - 0.682
+      - 0.898
+      - 0.443
+    position:
+      - 0.931608249401945
+      - 0.124223067723046
+    type: "carrier"
+  - label: "non-solid biomass"
+    name: "21"
+    color:
+      - 0.682
+      - 0.898
+      - 0.443
+    position:
+      - 0.931608249401945
+      - 0.217140830745915
+    type: "carrier"
+  - label: "district heat"
+    name: "4"
+    color:
+      - 0.6
+      - 0.0
+      - 0.169
+    position:
+      - 0.77157035703429
+      - 0.0
+    type: "carrier"
+  - label: "carbon"
+    name: "1"
+    color:
+      - 0.0
+      - 0.0
+      - 0.0
+    position:
+      - 0.931608249401945
+      - 0.289240299928511
+    type: "carrier"
+edges:
+  - 3: "95"
+  - 3: "106"
+  - 3: "144"
+  - 5: "64"
+  - 5: "42"
+  - 5: "46"
+  - 5: "123"
+  - 5: "50"
+  - 5: "70"
+  - 5: "142"
+  - 9: "143"
+  - 9: "116"
+  - 9: "98"
+  - 9: "55"
+  - 9: "126"
+  - 143: "14"
+  - 20: "64"
+  - 20: "131"
+  - 20: "39"
+  - 20: "51"
+  - 20: "53"
+  - 20: "58"
+  - 20: "65"
+  - 20: "132"
+  - 20: "127"
+  - 64: "9"
+  - 64: "12"
+  - 12: "46"
+  - 13: "50"
+  - 18: "130"
+  - 18: "134"
+  - 18: "57"
+  - 130: "5"
+  - 130: "13"
+  - 131: "14"
+  - 22: "37"
+  - 22: "125"
+  - 37: "13"
+  - 39: "5"
+  - 39: "13"
+  - 95: "12"
+  - 21: "40"
+  - 40: "5"
+  - 40: "13"
+  - 106: "14"
+  - 42: "13"
+  - 144: "13"
+  - 134: "14"
+  - 4: "29"
+  - 29: "13"
+  - 46: "9"
+  - 116: "5"
+  - 116: "14"
+  - 123: "14"
+  - 50: "1"
+  - 51: "13"
+  - 53: "5"
+  - 53: "12"
+  - 98: "5"
+  - 98: "13"
+  - 55: "12"
+  - 57: "5"
+  - 57: "14"
+  - 58: "5"
+  - 58: "14"
+  - 65: "5"
+  - 65: "14"
+  - 125: "5"
+  - 125: "13"
+  - 132: "12"
+  - 70: "13"
+  - 126: "13"
+  - 142: "12"
+  - 127: "5"
+  - 127: "13"

@@ -1,0 +1,335 @@
+vertices:
+  - label: "H2 to crude oil"
+    name: "36"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.54710516564413
+      - 0.242069130691923
+    type: "technology"
+  - label: "gasification"
+    name: "31"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.15732638881273
+      - 0.593150374572479
+    type: "technology"
+  - label: "H2 storage tank"
+    name: "40"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.97798992990448
+      - 0.537985444707162
+    type: "technology"
+  - label: "biogas plant"
+    name: "29"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.224410525013185
+      - 0.461112829515809
+    type: "technology"
+  - label: "biogas upgrading"
+    name: "30"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.334738667683236
+      - 0.779957664513036
+    type: "technology"
+  - label: "refinery"
+    name: "37"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.392608227089042
+      - 0.00658590751901344
+    type: "technology"
+  - label: "H2 storage cavern"
+    name: "41"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.979746963406429
+      - 0.381077610092566
+    type: "technology"
+  - label: "methane pyrolysis"
+    name: "39"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.590961153240674
+      - 0.759966111834092
+    type: "technology"
+  - label: "pem electrolysis"
+    name: "42"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.623715951459542
+      - 0.465240179510813
+    type: "technology"
+  - label: "alkali electrolysis"
+    name: "43"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.630431290195981
+      - 0.563777889134858
+    type: "technology"
+  - label: "solid oxide electrolysis"
+    name: "44"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.823468759950584
+      - 0.745133711049217
+    type: "technology"
+  - label: "biogas methanation"
+    name: "38"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.460010079038293
+      - 0.703814449840306
+    type: "technology"
+  - label: "liquifaction"
+    name: "33"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.306897076830919
+      - 0.231695963517489
+    type: "technology"
+  - label: "direct air capture"
+    name: "34"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.813669004312167
+      - 0.292453370336652
+    type: "technology"
+  - label: "gas storage cavern"
+    name: "9"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.563461555095936
+      - 1.0
+    type: "technology"
+  - label: "synthetic gas"
+    name: "26"
+    color:
+      - 0.235
+      - 0.506
+      - 0.325
+    position:
+      - 0.373907464446931
+      - 0.953079558426294
+    type: "carrier"
+  - label: "non-solid biomass"
+    name: "27"
+    color:
+      - 0.682
+      - 0.898
+      - 0.443
+    position:
+      - 0.147230167900163
+      - 0.357948781930297
+    type: "carrier"
+  - label: "other biomass"
+    name: "15"
+    color:
+      - 0.682
+      - 0.898
+      - 0.443
+    position:
+      - 0
+      - 0.294818909586552
+    type: "carrier"
+  - label: "solid biomass"
+    name: "28"
+    color:
+      - 0.682
+      - 0.898
+      - 0.443
+    position:
+      - 0.0193266525789579
+      - 0.487142642389284
+    type: "carrier"
+  - label: "H2"
+    name: "11"
+    color:
+      - 0.329
+      - 0.447
+      - 0.827
+    position:
+      - 0.867292276301184
+      - 0.462946420617442
+    type: "carrier"
+  - label: "carbon"
+    name: "1"
+    color:
+      - 0.0
+      - 0.0
+      - 0.0
+    position:
+      - 0.741183784993568
+      - 0.15
+    type: "carrier"
+  - label: "jet fuel"
+    name: "13"
+    color:
+      - 0.235
+      - 0.506
+      - 0.325
+    position:
+      - 0.537445341745284
+      - 0.12136198812153
+    type: "carrier"
+  - label: "district heat"
+    name: "4"
+    color:
+      - 0.6
+      - 0.0
+      - 0.169
+    position:
+      - 0.482626311600936
+      - 0.349278009000421
+    type: "carrier"
+  - label: "raw biogas"
+    name: "22"
+    color:
+      - 0.682
+      - 0.898
+      - 0.443
+    position:
+      - 0.307034270936601
+      - 0.605024572554299
+    type: "carrier"
+  - label: "crude oil"
+    name: "2"
+    color:
+      - 0.33725490196078434
+      - 0.3411764705882353
+      - 0.3254901960784314
+    position:
+      - 0.311340274465143
+      - 0.104328151583709
+    type: "carrier"
+  - label: "refined oil"
+    name: "3"
+    color:
+      - 0.33725490196078434
+      - 0.3411764705882353
+      - 0.3254901960784314
+    position:
+      - 0.560608660976221
+      - 0.0182134822761872
+    type: "carrier"
+  - label: "electricity"
+    name: "5"
+    color:
+      - 1.0
+      - 0.9215
+      - 0.2313
+    position:
+      - 0.410937265884774
+      - 0.516147794899701
+    type: "carrier"
+  - label: "process heat - high"
+    name: "16"
+    color:
+      - 0.6823529411764706
+      - 0.07058823529411765
+      - 0.22745098039215686
+    position:
+      - 0.71581658899526
+      - 0.929724855105295
+    type: "carrier"
+  - label: "process heat - low"
+    name: "17"
+    color:
+      - 0.6823529411764706
+      - 0.07058823529411765
+      - 0.22745098039215686
+    position:
+      - 1.0
+      - 0.254298493913468
+    type: "carrier"
+edges:
+  - 26: "39"
+  - 27: "15"
+  - 28: "15"
+  - 9: "26"
+  - 26: "9"
+  - 27: "29"
+  - 15: "33"
+  - 28: "31"
+  - 11: "36"
+  - 11: "40"
+  - 11: "41"
+  - 11: "38"
+  - 36: "2"
+  - 1: "36"
+  - 31: "26"
+  - 31: "4"
+  - 40: "11"
+  - 29: "22"
+  - 22: "30"
+  - 22: "38"
+  - 30: "26"
+  - 2: "37"
+  - 37: "3"
+  - 37: "13"
+  - 41: "11"
+  - 39: "11"
+  - 39: "16"
+  - 5: "39"
+  - 5: "42"
+  - 5: "43"
+  - 5: "44"
+  - 5: "33"
+  - 5: "34"
+  - 16: "44"
+  - 42: "11"
+  - 42: "4"
+  - 43: "11"
+  - 43: "4"
+  - 44: "11"
+  - 38: "26"
+  - 33: "2"
+  - 34: "1"
+  - 17: "34"
