@@ -9,7 +9,7 @@
 #$ -m bae
 #$ -M lgo@wip.tu-berlin.de
 
-qsub -t 1001 -v hours='96' -v hours_heu='96' -v nuC='2000' -v nuY='40' start4_16.job
+qsub -t 1001 -v hours='96' -v hours_heu='96' -v nuC='3282' -v nuY='40' start4_16.job
 
 
 
