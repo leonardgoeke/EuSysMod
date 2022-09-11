@@ -10,7 +10,7 @@
 #$ -M lgo@wip.tu-berlin.de
 
 qsub -t 2001 -v hours='8760' -v hours_heu='1752' -v grid='_gridExp' start8_64.job
-
+qsub -t 2002 -v hours='8760' -v hours_heu='1752' -v grid='_noGridExp' start8_64.job
 
 
 
