@@ -69,9 +69,10 @@ reportTimeSeries(:electricity,anyM)
 include("plottingFiles/formatForPlots.jl")
 
 plotSankeyDiagram(anyM,ymlFilter = "plottingFiles/powerAll.yml", name = "powerAll", dropDown = (:timestep,), savaData = true)
-plotSankeyDiagram(anyM,ymlFilter = "plottingFiles/powerToX_sankey.yml", name = "powerToX", dropDown = (:timestep,))
-plotSankeyDiagram(anyM,ymlFilter = "plottingFiles/processHeat_sankey.yml", name = "processHeat", dropDown = (:timestep,))
-plotSankeyDiagram(anyM,ymlFilter = "plottingFiles/spaceAndDistrictHeat_sankey.yml", name = "spaceAndDistrictHeat", dropDown = (:timestep,))
+plotSankeyDiagram(anyM,ymlFilter = "plottingFiles/transport.yml", name = "powerToX", dropDown = (:timestep,))
+plotSankeyDiagram(anyM,ymlFilter = "plottingFiles/powerToX.yml", name = "powerToX", dropDown = (:timestep,))
+plotSankeyDiagram(anyM,ymlFilter = "plottingFiles/processHeat", name = "processHeat", dropDown = (:timestep,))
+plotSankeyDiagram(anyM,ymlFilter = "plottingFiles/spaceAndDistrictHeat.yml", name = "spaceAndDistrictHeat", dropDown = (:timestep,))
 
 plotSankeyDiagram(anyM,ymlFilter = "plottingFiles/powerFull.yml", name = "powerFull", dropDown = (:timestep,),  rmvNode = ("exchange losses; H2","exchange losses; crude oil","final demand; process heat - low","final demand; process heat - medium","final demand; process heat - high","trade buy; non-solid biomass"))
 plotSankeyDiagram(anyM,ymlFilter = "plottingFiles/h2Full.yml", name = "h2Full", dropDown = (:timestep,), rmvNode = ("final demand; electricity","exchange losses; electricity","exchange losses; crude oil"))

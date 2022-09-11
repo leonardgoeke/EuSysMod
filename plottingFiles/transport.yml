@@ -1,0 +1,342 @@
+vertices:
+  - label: "ICE, light road"
+    name: "99"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.245164192532613
+      - 0.565808297567954
+    type: "technology"
+  - label: "BEV, heavy road"
+    name: "108"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.184435447593342
+      - 0.766094420600858
+    type: "technology"
+  - label: "FC, rail freight"
+    name: "93"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.771479982006297
+      - 0.431688125894134
+    type: "technology"
+  - label: "diesel, rail passenger"
+    name: "95"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.670265407107512
+      - 0.766094420600858
+    type: "technology"
+  - label: "BEV, light road"
+    name: "109"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.228295096716149
+      - 0.646280400572246
+    type: "technology"
+  - label: "FC, heavy road"
+    name: "52"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.543184885290148
+      - 0.903791130185979
+    type: "technology"
+  - label: "CNG, private road"
+    name: "97"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.482456140350877
+      - 0.1186695278969955
+    type: "technology"
+  - label: "FC, public road"
+    name: "105"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.42915669892388664
+      - 0.28532012205350354
+    type: "technology"
+  - label: "electric, rail, freight"
+    name: "56"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.742240215924426
+      - 0.606938483547925
+    type: "technology"
+  - label: "electric, rail passenger"
+    name: "102"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.644399460188933
+      - 0.855507868383404
+    type: "technology"
+  - label: "overhead, heavy road"
+    name: "107"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.343004948268106
+      - 0.758941344778254
+    type: "technology"
+  - label: "ICE, private road"
+    name: "100"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.619658119658119
+      - 0.27074391988555
+    type: "technology"
+  - label: "BEV, private road"
+    name: "62"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.498200629779577
+      - 0.206366237482117
+    type: "technology"
+  - label: "diesel, rail freight"
+    name: "98"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.756860098965362
+      - 0.52110157367668
+    type: "technology"
+  - label: "FC, private road"
+    name: "106"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.765856950067476
+      - 0.215307582260371
+    type: "technology"
+  - label: "FC, rail passenger"
+    name: "104"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.698380566801619
+      - 0.698140200286123
+    type: "technology"
+  - label: "BEV, public road"
+    name: "110"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.314889788573999
+      - 0.395922746781115
+    type: "technology"
+  - label: "ICE, heavy road"
+    name: "82"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.472334682860998
+      - 0.807224606580829
+    type: "technology"
+  - label: "ICE, public road"
+    name: "101"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.350877192982456
+      - 0.322603719599427
+    type: "technology"
+  - label: "FC, light road"
+    name: "103"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.258659469185785
+      - 0.485336194563662
+    type: "technology"
+  - label: "refined oil"
+    name: "3"
+    color:
+      - 0.33725490196078434
+      - 0.3411764705882353
+      - 0.3254901960784314
+    position:
+      - 0.511713900134952
+      - 0.575751072961373
+    type: "carrier"
+  - label: "light road"
+    name: "8"
+    color:
+      - 0.43529411764705883
+      - 0.7843137254901961
+      - 0.7137254901960784
+    position:
+      - 0.0634278002699055
+      - 0.51931330472103
+    type: "carrier"
+  - label: "electricity"
+    name: "5"
+    color:
+      - 1.0
+      - 0.9215
+      - 0.2313
+    position:
+      - 0.398110661268556
+      - 0.63519313304721
+    type: "carrier"
+  - label: "heavy road"
+    name: "7"
+    color:
+      - 0.43529411764705883
+      - 0.7843137254901961
+      - 0.7137254901960784
+    position:
+      - 0.318488529014844
+      - 0.922103004291845
+    type: "carrier"
+  - label: "H2"
+    name: "11"
+    color:
+      - 0.329
+      - 0.447
+      - 0.827
+    position:
+      - 0.646423751686909
+      - 0.454935622317596
+    type: "carrier"
+  - label: "rail freight"
+    name: "6"
+    color:
+      - 0.43529411764705883
+      - 0.7843137254901961
+      - 0.7137254901960784
+    position:
+      - 0.9527665317139
+      - 0.525751072961373
+    type: "carrier"
+  - label: "rail passenger"
+    name: "19"
+    color:
+      - 0.43529411764705883
+      - 0.7843137254901961
+      - 0.7137254901960784
+    position:
+      - 0.863697705802968
+      - 0.834763948497854
+    type: "carrier"
+  - label: "synthetic gas"
+    name: "9"
+    color:
+      - 0.235
+      - 0.506
+      - 0.325
+    position:
+      - 0.35357624831309
+      - 0.1050643776824033
+    type: "carrier"
+  - label: "private road"
+    name: "20"
+    color:
+      - 0.43529411764705883
+      - 0.7843137254901961
+      - 0.7137254901960784
+    position:
+      - 0.591093117408906
+      - 0.1379828326180256
+    type: "carrier"
+  - label: "public road"
+    name: "21"
+    color:
+      - 0.43529411764705883
+      - 0.7843137254901961
+      - 0.7137254901960784
+    position:
+      - 0.19298245614035
+      - 0.195278969957081
+    type: "carrier"
+edges:
+  - 3: "99"
+  - 3: "95"
+  - 3: "100"
+  - 3: "98"
+  - 3: "82"
+  - 3: "101"
+  - 99: "8"
+  - 5: "108"
+  - 5: "109"
+  - 5: "56"
+  - 5: "102"
+  - 5: "107"
+  - 5: "62"
+  - 5: "110"
+  - 108: "7"
+  - 11: "93"
+  - 11: "52"
+  - 11: "105"
+  - 11: "106"
+  - 11: "104"
+  - 11: "103"
+  - 93: "6"
+  - 95: "19"
+  - 109: "8"
+  - 52: "7"
+  - 9: "97"
+  - 97: "20"
+  - 105: "21"
+  - 56: "6"
+  - 102: "19"
+  - 107: "7"
+  - 100: "20"
+  - 62: "20"
+  - 98: "6"
+  - 106: "20"
+  - 104: "19"
+  - 110: "21"
+  - 82: "7"
+  - 101: "21"
+  - 103: "8"
