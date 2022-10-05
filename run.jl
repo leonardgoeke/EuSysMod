@@ -37,6 +37,13 @@ writeFixToFiles(feasFix_dic,feasFix_dic,temp_dir,heu_m; skipMustSt = true)
 if isfile(temp_dir * "/par_FixTech_bevFrtRoadLight_expConv.csv") rm(temp_dir * "/par_FixTech_bevFrtRoadLight_expConv.csv") end
 if isfile(temp_dir * "/par_FixTech_nuclearPower_expConv.csv") rm(temp_dir * "/par_FixTech_nuclearPower_expConv.csv") end
 
+if isfile(temp_dir * "/par_FixTech_bevFrtRoadLight_capaConv.csv") rm(temp_dir * "/par_FixTech_bevFrtRoadLight_capaConv.csv") end
+if isfile(temp_dir * "/par_FixTech_nuclearPower_capaConv.csv") rm(temp_dir * "/par_FixTech_nuclearPower_capaConv.csv") end
+
+if isfile(temp_dir * "/par_FixTech_gasStorage_capaStOut.csv") rm(temp_dir * "/par_FixTech_gasStorage_capaStOut.csv") end
+if isfile(temp_dir * "/par_FixTech_gasStorage_capaStIn.csv") rm(temp_dir * "/par_FixTech_gasStorage_capaStIn.csv") end
+
+# add capa and gas 2x
 heu_m = nothing
 
 #endregion
