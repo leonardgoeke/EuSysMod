@@ -37,17 +37,5 @@ ePsngRail,,,,effConv,18.512
 fcFrtRail,,,,effConv,20.135
 dieselFrtRail,,,,effConv,19.114
 eFrtRail,,,,effConv,42.126
-bevFrtRoadLight,,2020,,effConv,0.562
-bevFrtRoadLight,,2025,,effConv,0.619833
-bevFrtRoadLight,,2030,,effConv,0.677667
-bevFrtRoadLight,,2035,,effConv,0.7355
 bevFrtRoadLight,,2040,,effConv,0.793333
-bevFrtRoadLight,,2045,,effConv,0.851167
-bevFrtRoadLight,,2050,,effConv,0.909
-bevFrtRoadHeavy,,2020,,effConv,9.444675
-bevFrtRoadHeavy,,2025,,effConv,10.552601
-bevFrtRoadHeavy,,2030,,effConv,11.660527
-bevFrtRoadHeavy,,2035,,effConv,12.768454
 bevFrtRoadHeavy,,2040,,effConv,13.87638
-bevFrtRoadHeavy,,2045,,effConv,14.984306
-bevFrtRoadHeavy,,2050,,effConv,16.092232
