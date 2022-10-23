@@ -1,4 +1,6 @@
-using AnyMOD, Gurobi, CSV, Statistics
+using AnyMOD 
+
+using Gurobi, CSV, Statistics
 
 # ! string here define scenario, overwrite ARGS with respective values for hard-coding scenarios according to comments
 h = ARGS[1] # resolution of time-series for actual solve, can be 96, 1752, 4392, or 8760
@@ -7,26 +9,26 @@ nuC = ARGS[3] # scenario for nuclear cost
 nuY = ARGS[4] # scenario for nuclear lifetime
 t_int = parse(Int,ARGS[5]) # number of threads
 
-obj_str = h * "hours_" * h_heu * "hoursHeu_" * nuC * "nuCost_" * nuY * "nuYear_v23"
+obj_str = h * "hours_" * h_heu * "hoursHeu_" * nuC * "nuCost_" * nuY * "nuYear"
 temp_dir = "tempFix_" * obj_str # directory for temporary folder
 
 if isdir(temp_dir) rm(temp_dir, recursive = true) end
 mkdir(temp_dir)
 
+inputMod_arr = ["_basis","nuCost/" * nuC,"nuYear/" * nuY,"timeSeries/" * h * "hours_2008_only2040",temp_dir]
+inputHeu_arr = ["_basis","nuCost/" * nuC,"nuYear/" * nuY,"timeSeries/" * h_heu * "hours_2008_only2040"]
+resultDir_str = "results"
+
+#region # * perform heuristic solve
+
+coefRngHeuSca_tup = (mat = (1e-2,1e4), rhs = (1e0,1e5))
+scaFacHeuSca_tup = (capa = 1e0, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e3, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
+
+optMod_dic = Dict{Symbol,NamedTuple}()
+optMod_dic[:heuSca] =  (inputDir = inputHeu_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
+optMod_dic[:top] 	=  (inputDir = inputMod_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
+
 if h_heu != "8760"
-
-    inputMod_arr = ["_basis","nuCost/" * nuC,"nuYear/" * nuY,"timeSeries/" * h * "hours_2008_only2040",temp_dir]
-    inputHeu_arr = ["_basis","nuCost/" * nuC,"nuYear/" * nuY,"timeSeries/" * h_heu * "hours_2008_only2040"]
-    resultDir_str = "results"
-
-    #region # * perform heuristic solve
-
-    coefRngHeuSca_tup = (mat = (1e-2,1e4), rhs = (1e0,1e5))
-    scaFacHeuSca_tup = (capa = 1e0, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e3, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
-
-    optMod_dic = Dict{Symbol,NamedTuple}()
-    optMod_dic[:heuSca] =  (inputDir = inputHeu_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
-    optMod_dic[:top] 	=  (inputDir = inputMod_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
 
     heu_m, heuSca_obj = @suppress heuristicSolve(optMod_dic[:heuSca],1.0,t_int,Gurobi.Optimizer);
     ~, heuCom_obj = @suppress heuristicSolve(optMod_dic[:heuSca],8760/parse(Int,h_heu),t_int,Gurobi.Optimizer)
