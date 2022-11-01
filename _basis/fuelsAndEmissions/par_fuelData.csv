@@ -1,3 +1,9 @@
-carrier_1,carrier_2,timestep_2,technology_3,parameter,value,source
-h2,,2040,,trdBuyPrc,127,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
-electricity,,,,trdSellPrc,0.05,
+carrier_1,region_4,timestep_2,parameter,value,source
+h2,06ES,2040,trdBuyPrc,111.71,see miscInputs -> h2Import
+h2,11ES,2040,trdBuyPrc,111.71,
+h2,30NL,2040,trdBuyPrc,111.71,
+h2,31DE,2040,trdBuyPrc,111.71,
+h2,69GR,2040,trdBuyPrc,111.71,
+h2,90UK,2040,trdBuyPrc,111.71,
+h2,09ES,2040,trdBuyPrc,76.9,
+h2,56IT,2040,trdBuyPrc,73.56,
