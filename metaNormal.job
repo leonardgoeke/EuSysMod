@@ -9,9 +9,8 @@
 #$ -m bae
 #$ -M lgo@wip.tu-berlin.de
 
-#qsub -t 1001 -v hours='8760' -v hours_heu='1752' -v nuC='1875' -v nuY='40' start8_64.job
-#qsub -t 1002 -v hours='8760' -v hours_heu='1752' -v nuC='2000' -v nuY='40' start8_64.job
-#qsub -t 1003 -v hours='8760' -v hours_heu='1752' -v nuC='2250' -v nuY='40' start8_64.job
+
+qsub -t 1004 -v hours='8760' -v hours_heu='1752' -v nuC='2500' -v nuY='40' start8_64.job
 qsub -t 10040 -v hours='8760' -v hours_heu='8760' -v nuC='2500' -v nuY='40' start8_64.job
 qsub -t 10041 -v hours='8760' -v hours_heu='4392' -v nuC='2500' -v nuY='40' start8_64.job
 
