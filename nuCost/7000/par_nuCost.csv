@@ -1,0 +1,5 @@
+technology_3,parameter,value
+nuclearPower,costExpConv,7000
+nuclearPower,costOprConv,75.2536338
+nuclearPower,avaConv,0.95
+nuclearPower,costVarGen,9.288107331
