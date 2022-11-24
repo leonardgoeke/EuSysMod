@@ -73,8 +73,4 @@ reportResults(:cost,anyM, addObjName = true)
 
 reportTimeSeries(:electricity,anyM)
 
-include("plottingFiles/formatForPlots.jl")
-
-plotSankeyDiagram(anyM,ymlFilter = "plottingFiles/powerAll.yml", name = "powerAll", dropDown = (:timestep,), savaData = true)
-
 #endregion
