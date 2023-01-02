@@ -16,7 +16,7 @@ hh0014,01ES,processHeat_high,dem,0.36096639611096937
 hh0015,01ES,processHeat_high,dem,0.36158859626271644
 hh0016,01ES,processHeat_high,dem,0.3607522783527488
 hh0017,01ES,processHeat_high,dem,0.35959154664899656
-hh0018,01ES,processHeat_high,dem,0.3630492128633607
+hh0018,01ES,processHeat_high,dem,0.36396390643471177
 hh0019,01ES,processHeat_high,dem,0.36185071053086465
 hh0020,01ES,processHeat_high,dem,0.3614907853168489
 hh0021,01ES,processHeat_high,dem,0.3584360629052248
@@ -454,7 +454,7 @@ hh0014,02ES,processHeat_high,dem,0.43284909071325967
 hh0015,02ES,processHeat_high,dem,0.43398995093487075
 hh0016,02ES,processHeat_high,dem,0.43301856402909483
 hh0017,02ES,processHeat_high,dem,0.43162246503103185
-hh0018,02ES,processHeat_high,dem,0.4357365991537152
+hh0018,02ES,processHeat_high,dem,0.4369150663230424
 hh0019,02ES,processHeat_high,dem,0.43440993516891385
 hh0020,02ES,processHeat_high,dem,0.4339565218331385
 hh0021,02ES,processHeat_high,dem,0.42998776580738934
@@ -892,7 +892,7 @@ hh0014,03ES,processHeat_high,dem,0.28550615225188436
 hh0015,03ES,processHeat_high,dem,0.2868209626688686
 hh0016,03ES,processHeat_high,dem,0.2862323064499022
 hh0017,03ES,processHeat_high,dem,0.2853042675705885
-hh0018,03ES,processHeat_high,dem,0.28799977494360957
+hh0018,03ES,processHeat_high,dem,0.28888757508254326
 hh0019,03ES,processHeat_high,dem,0.28716614552788927
 hh0020,03ES,processHeat_high,dem,0.2867895082484654
 hh0021,03ES,processHeat_high,dem,0.2838117136923265
@@ -1330,7 +1330,7 @@ hh0014,04ES,processHeat_high,dem,0.7058008479732351
 hh0015,04ES,processHeat_high,dem,0.7072242788200767
 hh0016,04ES,processHeat_high,dem,0.7056078458198072
 hh0017,04ES,processHeat_high,dem,0.7033376032450926
-hh0018,04ES,processHeat_high,dem,0.7100803920041125
+hh0018,04ES,processHeat_high,dem,0.7119073479363833
 hh0019,04ES,processHeat_high,dem,0.7077718669843606
 hh0020,04ES,processHeat_high,dem,0.7070472924318926
 hh0021,04ES,processHeat_high,dem,0.7009349456217161
@@ -1768,7 +1768,7 @@ hh0014,05ES,processHeat_high,dem,0.2279807885966074
 hh0015,05ES,processHeat_high,dem,0.2292035075692718
 hh0016,05ES,processHeat_high,dem,0.22875751996273547
 hh0017,05ES,processHeat_high,dem,0.22801881725023976
-hh0018,05ES,processHeat_high,dem,0.2301645820970716
+hh0018,05ES,processHeat_high,dem,0.23089364180961372
 hh0019,05ES,processHeat_high,dem,0.2294317116273519
 hh0020,05ES,processHeat_high,dem,0.22907502499931204
 hh0021,05ES,processHeat_high,dem,0.22665422795343124
@@ -2206,7 +2206,7 @@ hh0014,06ES,processHeat_high,dem,1.2213106064166697
 hh0015,06ES,processHeat_high,dem,1.2325120367814058
 hh0016,06ES,processHeat_high,dem,1.2304596780850907
 hh0017,06ES,processHeat_high,dem,1.2263894921929783
-hh0018,06ES,processHeat_high,dem,1.2378542732117963
+hh0018,06ES,processHeat_high,dem,1.2430189199738146
 hh0019,06ES,processHeat_high,dem,1.235058753816674
 hh0020,06ES,processHeat_high,dem,1.2327863001334898
 hh0021,06ES,processHeat_high,dem,1.2162300466644624
@@ -2644,7 +2644,7 @@ hh0014,07ES,processHeat_high,dem,0.5200322113135306
 hh0015,07ES,processHeat_high,dem,0.5243030634138625
 hh0016,07ES,processHeat_high,dem,0.5233907905335345
 hh0017,07ES,processHeat_high,dem,0.5216664424590087
-hh0018,07ES,processHeat_high,dem,0.5265597771938914
+hh0018,07ES,processHeat_high,dem,0.5286249822235324
 hh0019,07ES,processHeat_high,dem,0.5252590779440056
 hh0020,07ES,processHeat_high,dem,0.524335746111463
 hh0021,07ES,processHeat_high,dem,0.517651917473754
@@ -3082,7 +3082,7 @@ hh0014,08ES,processHeat_high,dem,0.28178309865891915
 hh0015,08ES,processHeat_high,dem,0.2829100652522173
 hh0016,08ES,processHeat_high,dem,0.282309107674458
 hh0017,08ES,processHeat_high,dem,0.2813934792063687
-hh0018,08ES,processHeat_high,dem,0.28405670373484554
+hh0018,08ES,processHeat_high,dem,0.28490574141237157
 hh0019,08ES,processHeat_high,dem,0.28326892476694926
 hh0020,08ES,processHeat_high,dem,0.2829399800799424
 hh0021,08ES,processHeat_high,dem,0.2800720389931004
@@ -3520,7 +3520,7 @@ hh0014,09ES,processHeat_high,dem,0.402676886005783
 hh0015,09ES,processHeat_high,dem,0.40409763522776154
 hh0016,09ES,processHeat_high,dem,0.4032306948703369
 hh0017,09ES,processHeat_high,dem,0.4019322894911732
-hh0018,09ES,processHeat_high,dem,0.405728077577132
+hh0018,09ES,processHeat_high,dem,0.40688375416988687
 hh0019,09ES,processHeat_high,dem,0.40452207035823357
 hh0020,09ES,processHeat_high,dem,0.4040520049105643
 hh0021,09ES,processHeat_high,dem,0.40014146092367053
@@ -3958,7 +3958,7 @@ hh0014,10ES,processHeat_high,dem,0.23052509690257358
 hh0015,10ES,processHeat_high,dem,0.23133844965127384
 hh0016,10ES,processHeat_high,dem,0.23084214227220767
 hh0017,10ES,processHeat_high,dem,0.2300988291190255
-hh0018,10ES,processHeat_high,dem,0.23227184785128197
+hh0018,10ES,processHeat_high,dem,0.23293345140438243
 hh0019,10ES,processHeat_high,dem,0.23158143094218286
 hh0020,10ES,processHeat_high,dem,0.23131232713553193
 hh0021,10ES,processHeat_high,dem,0.22907361276465663
@@ -4396,7 +4396,7 @@ hh0014,11ES,processHeat_high,dem,1.591781121133905
 hh0015,11ES,processHeat_high,dem,1.6003889779698959
 hh0016,11ES,processHeat_high,dem,1.5972483955294645
 hh0017,11ES,processHeat_high,dem,1.5920676742029107
-hh0018,11ES,processHeat_high,dem,1.6070764572292071
+hh0018,11ES,processHeat_high,dem,1.612251697816661
 hh0019,11ES,processHeat_high,dem,1.6022544810708106
 hh0020,11ES,processHeat_high,dem,1.5998685110271205
 hh0021,11ES,processHeat_high,dem,1.5826654562795603
@@ -4834,7 +4834,7 @@ hh0014,12PT,processHeat_high,dem,0.6401539787475321
 hh0015,12PT,processHeat_high,dem,0.6446570976907268
 hh0016,12PT,processHeat_high,dem,0.6438235331127232
 hh0017,12PT,processHeat_high,dem,0.6419134579517961
-hh0018,12PT,processHeat_high,dem,0.647911748449557
+hh0018,12PT,processHeat_high,dem,0.649606475911059
 hh0019,12PT,processHeat_high,dem,0.6425454820814127
 hh0020,12PT,processHeat_high,dem,0.6400103414881729
 hh0021,12PT,processHeat_high,dem,0.6353842115729098
@@ -5272,7 +5272,7 @@ hh0014,13PT,processHeat_high,dem,0.4063971005340252
 hh0015,13PT,processHeat_high,dem,0.41096576089918047
 hh0016,13PT,processHeat_high,dem,0.41056139474236
 hh0017,13PT,processHeat_high,dem,0.40930477962775336
-hh0018,13PT,processHeat_high,dem,0.4130730876663614
+hh0018,13PT,processHeat_high,dem,0.4146083851983794
 hh0019,13PT,processHeat_high,dem,0.4102006795921016
 hh0020,13PT,processHeat_high,dem,0.4085180561725701
 hh0021,13PT,processHeat_high,dem,0.4041822536115582
@@ -5710,7 +5710,7 @@ hh0014,14FR,processHeat_high,dem,0.2664487931896459
 hh0015,14FR,processHeat_high,dem,0.26789073918223577
 hh0016,14FR,processHeat_high,dem,0.2673668791882097
 hh0017,14FR,processHeat_high,dem,0.26650079497042267
-hh0018,14FR,processHeat_high,dem,0.2690117279028233
+hh0018,14FR,processHeat_high,dem,0.2698745942333081
 hh0019,14FR,processHeat_high,dem,0.26818920850578365
 hh0020,14FR,processHeat_high,dem,0.2677835709518667
 hh0021,14FR,processHeat_high,dem,0.2649168104667434
@@ -6148,7 +6148,7 @@ hh0014,15FR,processHeat_high,dem,0.062526419919712
 hh0015,15FR,processHeat_high,dem,0.06333115296810839
 hh0016,15FR,processHeat_high,dem,0.06325386886758198
 hh0017,15FR,processHeat_high,dem,0.06304718496522767
-hh0018,15FR,processHeat_high,dem,0.06362295598181264
+hh0018,15FR,processHeat_high,dem,0.06393097480476005
 hh0019,15FR,processHeat_high,dem,0.06344422878200634
 hh0020,15FR,processHeat_high,dem,0.0632729555690017
 hh0021,15FR,processHeat_high,dem,0.06233219942024343
@@ -6586,7 +6586,7 @@ hh0014,16FR,processHeat_high,dem,0.3412436074968475
 hh0015,16FR,processHeat_high,dem,0.34466204506274367
 hh0016,16FR,processHeat_high,dem,0.34409294126830825
 hh0017,16FR,processHeat_high,dem,0.3429425198364995
-hh0018,16FR,processHeat_high,dem,0.3461435710922948
+hh0018,16FR,processHeat_high,dem,0.3477015842371497
 hh0019,16FR,processHeat_high,dem,0.3455842271129107
 hh0020,16FR,processHeat_high,dem,0.3449845265496763
 hh0021,16FR,processHeat_high,dem,0.34001675665885245
@@ -7024,7 +7024,7 @@ hh0014,17FR,processHeat_high,dem,0.3127111279231133
 hh0015,17FR,processHeat_high,dem,0.3137641552146509
 hh0016,17FR,processHeat_high,dem,0.31309155287081253
 hh0017,17FR,processHeat_high,dem,0.3120867862945504
-hh0018,17FR,processHeat_high,dem,0.3150364873051757
+hh0018,17FR,processHeat_high,dem,0.31591473558918465
 hh0019,17FR,processHeat_high,dem,0.3140399079511954
 hh0020,17FR,processHeat_high,dem,0.31365907762047884
 hh0021,17FR,processHeat_high,dem,0.31070149070926106
@@ -7462,7 +7462,7 @@ hh0014,18FR,processHeat_high,dem,0.21508239647564384
 hh0015,18FR,processHeat_high,dem,0.21627694556847646
 hh0016,18FR,processHeat_high,dem,0.21584956953568313
 hh0017,18FR,processHeat_high,dem,0.21514527354210863
-hh0018,18FR,processHeat_high,dem,0.2171775963839359
+hh0018,18FR,processHeat_high,dem,0.21789611795242209
 hh0019,18FR,processHeat_high,dem,0.21657960001817506
 hh0020,18FR,processHeat_high,dem,0.21627296088790465
 hh0021,18FR,processHeat_high,dem,0.21388318382342064
@@ -7900,7 +7900,7 @@ hh0014,19FR,processHeat_high,dem,0.7122968245244159
 hh0015,19FR,processHeat_high,dem,0.7155507786466242
 hh0016,19FR,processHeat_high,dem,0.7140605270060802
 hh0017,19FR,processHeat_high,dem,0.711733109135299
-hh0018,19FR,processHeat_high,dem,0.718473854649104
+hh0018,19FR,processHeat_high,dem,0.7207226659058797
 hh0019,19FR,processHeat_high,dem,0.7165612037058247
 hh0020,19FR,processHeat_high,dem,0.7156922096032726
 hh0021,19FR,processHeat_high,dem,0.7081298462189396
@@ -8338,7 +8338,7 @@ hh0014,20FR,processHeat_high,dem,0.5811214415632876
 hh0015,20FR,processHeat_high,dem,0.5836175034100507
 hh0016,20FR,processHeat_high,dem,0.58238891274503
 hh0017,20FR,processHeat_high,dem,0.5804940856246794
-hh0018,20FR,processHeat_high,dem,0.5859917069760235
+hh0018,20FR,processHeat_high,dem,0.5877890084852414
 hh0019,20FR,processHeat_high,dem,0.5844125115631382
 hh0020,20FR,processHeat_high,dem,0.5837230520827797
 hh0021,20FR,processHeat_high,dem,0.5776644818693343
@@ -8776,7 +8776,7 @@ hh0014,21FR,processHeat_high,dem,0.451279282219182
 hh0015,21FR,processHeat_high,dem,0.4520012582089839
 hh0016,21FR,processHeat_high,dem,0.4509499008134415
 hh0017,21FR,processHeat_high,dem,0.44949848537657155
-hh0018,21FR,processHeat_high,dem,0.453826457597016
+hh0018,21FR,processHeat_high,dem,0.4549609007147733
 hh0019,21FR,processHeat_high,dem,0.45232544735676494
 hh0020,21FR,processHeat_high,dem,0.4518838569572358
 hh0021,21FR,processHeat_high,dem,0.44809640899906317
@@ -9219,7 +9219,7 @@ hh0019,22FR,processHeat_high,dem,0.03566441995361919
 hh0020,22FR,processHeat_high,dem,0.03553918891785783
 hh0021,22FR,processHeat_high,dem,0.03461325310346998
 hh0022,22FR,processHeat_high,dem,0.03554082999228857
-hh0023,22FR,processHeat_high,dem,0.035705804517777294
+hh0023,22FR,processHeat_high,dem,0.03592372881355932
 hh0024,22FR,processHeat_high,dem,0.03545781672039154
 hh0025,22FR,processHeat_high,dem,0.03436753099436941
 hh0026,22FR,processHeat_high,dem,0.03407094383519636
@@ -9652,7 +9652,7 @@ hh0014,23FR,processHeat_high,dem,2.991831699354446
 hh0015,23FR,processHeat_high,dem,3.0254046991264967
 hh0016,23FR,processHeat_high,dem,3.020745666776106
 hh0017,23FR,processHeat_high,dem,3.0106393749138722
-hh0018,23FR,processHeat_high,dem,3.038549742768813
+hh0018,23FR,processHeat_high,dem,3.0530853809130125
 hh0019,23FR,processHeat_high,dem,3.0339815889514186
 hh0020,23FR,processHeat_high,dem,3.0282129691741146
 hh0021,23FR,processHeat_high,dem,2.9824696780420505
@@ -10090,7 +10090,7 @@ hh0014,24FR,processHeat_high,dem,0.21910891542997532
 hh0015,24FR,processHeat_high,dem,0.21952291405197852
 hh0016,24FR,processHeat_high,dem,0.219014136967642
 hh0017,24FR,processHeat_high,dem,0.21830682762417244
-hh0018,24FR,processHeat_high,dem,0.22040420890385387
+hh0018,24FR,processHeat_high,dem,0.2209743603376938
 hh0019,24FR,processHeat_high,dem,0.21972503099268345
 hh0020,24FR,processHeat_high,dem,0.219519880835656
 hh0021,24FR,processHeat_high,dem,0.217604219907881
@@ -10528,7 +10528,7 @@ hh0014,25FR,processHeat_high,dem,0.4145288501050006
 hh0015,25FR,processHeat_high,dem,0.416033427693516
 hh0016,25FR,processHeat_high,dem,0.41519277928593795
 hh0017,25FR,processHeat_high,dem,0.41388673648164154
-hh0018,25FR,processHeat_high,dem,0.41776807839822894
+hh0018,25FR,processHeat_high,dem,0.4188749688627488
 hh0019,25FR,processHeat_high,dem,0.4160729517738687
 hh0020,25FR,processHeat_high,dem,0.4153997108430989
 hh0021,25FR,processHeat_high,dem,0.411743936266406
@@ -10966,7 +10966,7 @@ hh0014,26FR,processHeat_high,dem,0.7287583903989534
 hh0015,26FR,processHeat_high,dem,0.7316263112015201
 hh0016,26FR,processHeat_high,dem,0.7300786599938903
 hh0017,26FR,processHeat_high,dem,0.7277188983678025
-hh0018,26FR,processHeat_high,dem,0.7345963313090483
+hh0018,26FR,processHeat_high,dem,0.7367604223098593
 hh0019,26FR,processHeat_high,dem,0.732465502483871
 hh0020,26FR,processHeat_high,dem,0.7315855263042912
 hh0021,26FR,processHeat_high,dem,0.7242809750301173
@@ -11404,7 +11404,7 @@ hh0014,27FR,processHeat_high,dem,0.1270142665528212
 hh0015,27FR,processHeat_high,dem,0.12716873262712158
 hh0016,27FR,processHeat_high,dem,0.12686569154593075
 hh0017,27FR,processHeat_high,dem,0.12645570911867207
-hh0018,27FR,processHeat_high,dem,0.12767922070287022
+hh0018,27FR,processHeat_high,dem,0.12799436345563403
 hh0019,27FR,processHeat_high,dem,0.1272742333132782
 hh0020,27FR,processHeat_high,dem,0.12716526943245188
 hh0021,27FR,processHeat_high,dem,0.1261091649214089
@@ -11842,7 +11842,7 @@ hh0014,28BE,processHeat_high,dem,3.3252572722872586
 hh0015,28BE,processHeat_high,dem,3.351292577097141
 hh0016,28BE,processHeat_high,dem,3.3451934895228916
 hh0017,28BE,processHeat_high,dem,3.3341002667304838
-hh0018,28BE,processHeat_high,dem,3.365496338810938
+hh0018,28BE,processHeat_high,dem,3.3787147685800436
 hh0019,28BE,processHeat_high,dem,3.358403471899178
 hh0020,28BE,processHeat_high,dem,3.3531995813569604
 hh0021,28BE,processHeat_high,dem,3.310122547382297
@@ -12280,7 +12280,7 @@ hh0014,29LU,processHeat_high,dem,0.24122316326687757
 hh0015,29LU,processHeat_high,dem,0.2414425103441852
 hh0016,29LU,processHeat_high,dem,0.2408592443447974
 hh0017,29LU,processHeat_high,dem,0.24008013603876438
-hh0018,29LU,processHeat_high,dem,0.24241094061375118
+hh0018,29LU,processHeat_high,dem,0.2429974083857561
 hh0019,29LU,processHeat_high,dem,0.24163892788577873
 hh0020,29LU,processHeat_high,dem,0.24144347319410092
 hh0021,29LU,processHeat_high,dem,0.23947815629843125
@@ -12718,7 +12718,7 @@ hh0014,30NL,processHeat_high,dem,4.8988517428585885
 hh0015,30NL,processHeat_high,dem,4.939354355019531
 hh0016,30NL,processHeat_high,dem,4.930489175103084
 hh0017,30NL,processHeat_high,dem,4.914085329944312
-hh0018,30NL,processHeat_high,dem,4.960310920937656
+hh0018,30NL,processHeat_high,dem,4.980446776914537
 hh0019,30NL,processHeat_high,dem,4.95072041546143
 hh0020,30NL,processHeat_high,dem,4.943014136455322
 hh0021,30NL,processHeat_high,dem,4.877642466892
@@ -13156,7 +13156,7 @@ hh0014,31DE,processHeat_high,dem,1.7615930962513873
 hh0015,31DE,processHeat_high,dem,1.767423214694952
 hh0016,31DE,processHeat_high,dem,1.7636081247264916
 hh0017,31DE,processHeat_high,dem,1.7579381594924668
-hh0018,31DE,processHeat_high,dem,1.7745702914400894
+hh0018,31DE,processHeat_high,dem,1.779530543530396
 hh0019,31DE,processHeat_high,dem,1.7690991460171297
 hh0020,31DE,processHeat_high,dem,1.7670279674364229
 hh0021,31DE,processHeat_high,dem,1.7502986881233384
@@ -13594,7 +13594,7 @@ hh0014,32DE,processHeat_high,dem,0.8408402441823476
 hh0015,32DE,processHeat_high,dem,0.8438948539804598
 hh0016,32DE,processHeat_high,dem,0.8420828432303147
 hh0017,32DE,processHeat_high,dem,0.8393632017681394
-hh0018,32DE,processHeat_high,dem,0.847298353563323
+hh0018,32DE,processHeat_high,dem,0.8497488301748347
 hh0019,32DE,processHeat_high,dem,0.8448658899651267
 hh0020,32DE,processHeat_high,dem,0.8439038147187539
 hh0021,32DE,processHeat_high,dem,0.8356072648184295
@@ -14032,7 +14032,7 @@ hh0014,33DE,processHeat_high,dem,4.538727992405265
 hh0015,33DE,processHeat_high,dem,4.549710311538051
 hh0016,33DE,processHeat_high,dem,4.539412660324663
 hh0017,33DE,processHeat_high,dem,4.524764640907054
-hh0018,33DE,processHeat_high,dem,4.567995987204269
+hh0018,33DE,processHeat_high,dem,4.580212984919494
 hh0019,33DE,processHeat_high,dem,4.554129106679594
 hh0020,33DE,processHeat_high,dem,4.549556318604422
 hh0021,33DE,processHeat_high,dem,4.5084257250507385
@@ -14470,7 +14470,7 @@ hh0014,34DE,processHeat_high,dem,2.1194870973746673
 hh0015,34DE,processHeat_high,dem,2.12367209031011
 hh0016,34DE,processHeat_high,dem,2.118788780763981
 hh0017,34DE,processHeat_high,dem,2.111959085163548
-hh0018,34DE,processHeat_high,dem,2.1322234637771027
+hh0018,34DE,processHeat_high,dem,2.137732006541206
 hh0019,34DE,processHeat_high,dem,2.125476705949438
 hh0020,34DE,processHeat_high,dem,2.1233906371512563
 hh0021,34DE,processHeat_high,dem,2.104920185355598
@@ -14908,7 +14908,7 @@ hh0014,35DE,processHeat_high,dem,2.495254586597869
 hh0015,35DE,processHeat_high,dem,2.5068550209388674
 hh0016,35DE,processHeat_high,dem,2.5016714289001794
 hh0017,35DE,processHeat_high,dem,2.4935266032891037
-hh0018,35DE,processHeat_high,dem,2.5171254379365395
+hh0018,35DE,processHeat_high,dem,2.525008526307006
 hh0019,35DE,processHeat_high,dem,2.510269097526416
 hh0020,35DE,processHeat_high,dem,2.5071288483124174
 hh0021,35DE,processHeat_high,dem,2.4806565688258293
@@ -15346,7 +15346,7 @@ hh0014,36DE,processHeat_high,dem,2.8837501799606406
 hh0015,36DE,processHeat_high,dem,2.8902671716102337
 hh0016,36DE,processHeat_high,dem,2.88370266714266
 hh0017,36DE,processHeat_high,dem,2.8744099284981623
-hh0018,36DE,processHeat_high,dem,2.901908840212011
+hh0018,36DE,processHeat_high,dem,2.909547910169327
 hh0019,36DE,processHeat_high,dem,2.892825012263999
 hh0020,36DE,processHeat_high,dem,2.8898869406908645
 hh0021,36DE,processHeat_high,dem,2.864237388880278
@@ -15784,7 +15784,7 @@ hh0014,37DE,processHeat_high,dem,3.093081945352496
 hh0015,37DE,processHeat_high,dem,3.1014377975726735
 hh0016,37DE,processHeat_high,dem,3.0945254869821626
 hh0017,37DE,processHeat_high,dem,3.0845545053113113
-hh0018,37DE,processHeat_high,dem,3.113932226420445
+hh0018,37DE,processHeat_high,dem,3.122371502439368
 hh0019,37DE,processHeat_high,dem,3.10438714437117
 hh0020,37DE,processHeat_high,dem,3.101087114342089
 hh0021,37DE,processHeat_high,dem,3.0726745089460077
@@ -16222,7 +16222,7 @@ hh0014,38DK,processHeat_high,dem,0.22179908233254447
 hh0015,38DK,processHeat_high,dem,0.22244547915581975
 hh0016,38DK,processHeat_high,dem,0.2219625231420179
 hh0017,38DK,processHeat_high,dem,0.22125244584113996
-hh0018,38DK,processHeat_high,dem,0.22335156377580376
+hh0018,38DK,processHeat_high,dem,0.22394978148363756
 hh0019,38DK,processHeat_high,dem,0.22259500592280607
 hh0020,38DK,processHeat_high,dem,0.2223215389235559
 hh0021,38DK,processHeat_high,dem,0.22032144093798048
@@ -16660,7 +16660,7 @@ hh0014,39CZ,processHeat_high,dem,1.1174809222406872
 hh0015,39CZ,processHeat_high,dem,1.1194966985542514
 hh0016,39CZ,processHeat_high,dem,1.1168963010321908
 hh0017,39CZ,processHeat_high,dem,1.1132911060854587
-hh0018,39CZ,processHeat_high,dem,1.1239951170713283
+hh0018,39CZ,processHeat_high,dem,1.1268793531768984
 hh0019,39CZ,processHeat_high,dem,1.1204851617635432
 hh0020,39CZ,processHeat_high,dem,1.1194364758436401
 hh0021,39CZ,processHeat_high,dem,1.1097569311618112
@@ -17098,7 +17098,7 @@ hh0014,40CZ,processHeat_high,dem,1.0912099394995776
 hh0015,40CZ,processHeat_high,dem,1.092786345380569
 hh0016,40CZ,processHeat_high,dem,1.090207935045296
 hh0017,40CZ,processHeat_high,dem,1.0866865568804613
-hh0018,40CZ,processHeat_high,dem,1.0971747706239254
+hh0018,40CZ,processHeat_high,dem,1.0999244657695622
 hh0019,40CZ,processHeat_high,dem,1.0937143738761843
 hh0020,40CZ,processHeat_high,dem,1.0927434549508748
 hh0021,40CZ,processHeat_high,dem,1.0835247273586692
@@ -17536,7 +17536,7 @@ hh0014,41PL,processHeat_high,dem,0.9782308209666304
 hh0015,41PL,processHeat_high,dem,0.9825981243405374
 hh0016,41PL,processHeat_high,dem,0.9805776142053382
 hh0017,41PL,processHeat_high,dem,0.9774064718974171
-hh0018,41PL,processHeat_high,dem,0.986633641758092
+hh0018,41PL,processHeat_high,dem,0.9896277318540219
 hh0019,41PL,processHeat_high,dem,0.9836963814210611
 hh0020,41PL,processHeat_high,dem,0.9823971316376562
 hh0021,41PL,processHeat_high,dem,0.9723488883061533
@@ -17974,7 +17974,7 @@ hh0014,42PL,processHeat_high,dem,0.7989647261782149
 hh0015,42PL,processHeat_high,dem,0.8013598068521564
 hh0016,42PL,processHeat_high,dem,0.7995936563778326
 hh0017,42PL,processHeat_high,dem,0.7970154771489651
-hh0018,42PL,processHeat_high,dem,0.8045850392850545
+hh0018,42PL,processHeat_high,dem,0.8068131065254376
 hh0019,42PL,processHeat_high,dem,0.8021835255502304
 hh0020,42PL,processHeat_high,dem,0.8013174573709752
 hh0021,42PL,processHeat_high,dem,0.793795433203894
@@ -18412,7 +18412,7 @@ hh0014,43PL,processHeat_high,dem,1.3089491774224935
 hh0015,43PL,processHeat_high,dem,1.312010562313249
 hh0016,43PL,processHeat_high,dem,1.3090365265425323
 hh0017,43PL,processHeat_high,dem,1.3048158045775744
-hh0018,43PL,processHeat_high,dem,1.3172903970921066
+hh0018,43PL,processHeat_high,dem,1.3207840113033098
 hh0019,43PL,processHeat_high,dem,1.3132211665945137
 hh0020,43PL,processHeat_high,dem,1.3118919491421315
 hh0021,43PL,processHeat_high,dem,1.3001475105677636
@@ -18850,7 +18850,7 @@ hh0014,44PL,processHeat_high,dem,1.1577524721510437
 hh0015,44PL,processHeat_high,dem,1.1609338229484223
 hh0016,44PL,processHeat_high,dem,1.1583831840690857
 hh0017,44PL,processHeat_high,dem,1.1546701308903253
-hh0018,44PL,processHeat_high,dem,1.1656486155764836
+hh0018,44PL,processHeat_high,dem,1.1687582200190663
 hh0019,44PL,processHeat_high,dem,1.1617813852584533
 hh0020,44PL,processHeat_high,dem,1.1604188701488578
 hh0021,44PL,processHeat_high,dem,1.1500114190579391
@@ -19288,7 +19288,7 @@ hh0014,45PL,processHeat_high,dem,0.6785592522015099
 hh0015,45PL,processHeat_high,dem,0.6803079623437215
 hh0016,45PL,processHeat_high,dem,0.6788052803691209
 hh0017,45PL,processHeat_high,dem,0.6766313188232126
-hh0018,45PL,processHeat_high,dem,0.6830743893870683
+hh0018,45PL,processHeat_high,dem,0.684870299559083
 hh0019,45PL,processHeat_high,dem,0.6807607066997778
 hh0020,45PL,processHeat_high,dem,0.6799624861139603
 hh0021,45PL,processHeat_high,dem,0.6739660095047287
@@ -19726,7 +19726,7 @@ hh0014,46SK,processHeat_high,dem,1.7608907410841386
 hh0015,46SK,processHeat_high,dem,1.7626100483310188
 hh0016,46SK,processHeat_high,dem,1.7583876524377915
 hh0017,46SK,processHeat_high,dem,1.752714363502858
-hh0018,46SK,processHeat_high,dem,1.7697089258060454
+hh0018,46SK,processHeat_high,dem,1.7739671930702816
 hh0019,46SK,processHeat_high,dem,1.7638595347331099
 hh0020,46SK,processHeat_high,dem,1.7623262505686121
 hh0021,46SK,processHeat_high,dem,1.74810828429208
@@ -20164,7 +20164,7 @@ hh0014,47CH,processHeat_high,dem,0.6921355342647122
 hh0015,47CH,processHeat_high,dem,0.6971573777997591
 hh0016,47CH,processHeat_high,dem,0.6960252570822414
 hh0017,47CH,processHeat_high,dem,0.6938270652599218
-hh0018,47CH,processHeat_high,dem,0.7002677065901199
+hh0018,47CH,processHeat_high,dem,0.7025575889199234
 hh0019,47CH,processHeat_high,dem,0.6971625269807437
 hh0020,47CH,processHeat_high,dem,0.6955072897983183
 hh0021,47CH,processHeat_high,dem,0.6881501940568716
@@ -20602,7 +20602,7 @@ hh0014,48CH,processHeat_high,dem,0.07088728089197621
 hh0015,48CH,processHeat_high,dem,0.07140160910609196
 hh0016,48CH,processHeat_high,dem,0.07128565933132486
 hh0017,48CH,processHeat_high,dem,0.07106052446474306
-hh0018,48CH,processHeat_high,dem,0.07172016340610048
+hh0018,48CH,processHeat_high,dem,0.07195468905012017
 hh0019,48CH,processHeat_high,dem,0.07140213647597944
 hh0020,48CH,processHeat_high,dem,0.07123261005046788
 hh0021,48CH,processHeat_high,dem,0.0704791094908887
@@ -21040,7 +21040,7 @@ hh0014,49AT,processHeat_high,dem,0.6686715911054812
 hh0015,49AT,processHeat_high,dem,0.6696040542945838
 hh0016,49AT,processHeat_high,dem,0.6680454408780961
 hh0017,49AT,processHeat_high,dem,0.6659020983358613
-hh0018,49AT,processHeat_high,dem,0.6723225123523078
+hh0018,49AT,processHeat_high,dem,0.6739564374316429
 hh0019,49AT,processHeat_high,dem,0.6699645270138249
 hh0020,49AT,processHeat_high,dem,0.6692794904041599
 hh0021,49AT,processHeat_high,dem,0.6638568965021309
@@ -21478,7 +21478,7 @@ hh0014,50AT,processHeat_high,dem,1.1072000814765814
 hh0015,50AT,processHeat_high,dem,1.1087305394357996
 hh0016,50AT,processHeat_high,dem,1.1061575928159166
 hh0017,50AT,processHeat_high,dem,1.1026140553332036
-hh0018,50AT,processHeat_high,dem,1.113242592773527
+hh0018,50AT,processHeat_high,dem,1.1159289987187366
 hh0019,50AT,processHeat_high,dem,1.109250086742498
 hh0020,50AT,processHeat_high,dem,1.1080825371570393
 hh0021,50AT,processHeat_high,dem,1.0991883786849286
@@ -21916,7 +21916,7 @@ hh0014,51AT,processHeat_high,dem,0.6296607704663186
 hh0015,51AT,processHeat_high,dem,0.6307925991081291
 hh0016,51AT,processHeat_high,dem,0.6293586013283199
 hh0017,51AT,processHeat_high,dem,0.6273461441476798
-hh0018,51AT,processHeat_high,dem,0.6333650008452157
+hh0018,51AT,processHeat_high,dem,0.6349313526538782
 hh0019,51AT,processHeat_high,dem,0.6310863789596842
 hh0020,51AT,processHeat_high,dem,0.6303749187687787
 hh0021,51AT,processHeat_high,dem,0.6251870292057947
@@ -22354,7 +22354,7 @@ hh0014,52IT,processHeat_high,dem,4.643019059674458
 hh0015,52IT,processHeat_high,dem,4.669330602652006
 hh0016,52IT,processHeat_high,dem,4.660732528065122
 hh0017,52IT,processHeat_high,dem,4.645908465721042
-hh0018,52IT,processHeat_high,dem,4.689293269573027
+hh0018,52IT,processHeat_high,dem,4.703694353775685
 hh0019,52IT,processHeat_high,dem,4.671282255900181
 hh0020,52IT,processHeat_high,dem,4.662558496896391
 hh0021,52IT,processHeat_high,dem,4.615134494826093
@@ -22792,7 +22792,7 @@ hh0014,53IT,processHeat_high,dem,0.8652630079333827
 hh0015,53IT,processHeat_high,dem,0.8701663702774776
 hh0016,53IT,processHeat_high,dem,0.8685640516602446
 hh0017,53IT,processHeat_high,dem,0.8658014714061525
-hh0018,53IT,processHeat_high,dem,0.8738865697865585
+hh0018,53IT,processHeat_high,dem,0.8765703247474024
 hh0019,53IT,processHeat_high,dem,0.8705300761632933
 hh0020,53IT,processHeat_high,dem,0.868904335269472
 hh0021,53IT,processHeat_high,dem,0.860066500629512
@@ -23230,7 +23230,7 @@ hh0014,54IT,processHeat_high,dem,1.6229847754280669
 hh0015,54IT,processHeat_high,dem,1.632182074237686
 hh0016,54IT,processHeat_high,dem,1.629176584927141
 hh0017,54IT,processHeat_high,dem,1.6239947781791573
-hh0018,54IT,processHeat_high,dem,1.6391600995426328
+hh0018,54IT,processHeat_high,dem,1.6441940526903955
 hh0019,54IT,processHeat_high,dem,1.6328642819710575
 hh0020,54IT,processHeat_high,dem,1.629814859199865
 hh0021,54IT,processHeat_high,dem,1.6132376209071233
@@ -23668,7 +23668,7 @@ hh0014,55IT,processHeat_high,dem,0.6205820205132243
 hh0015,55IT,processHeat_high,dem,0.6240987992069936
 hh0016,55IT,processHeat_high,dem,0.6229495877928095
 hh0017,55IT,processHeat_high,dem,0.6209682160940364
-hh0018,55IT,processHeat_high,dem,0.626766992469493
+hh0018,55IT,processHeat_high,dem,0.6286918292658108
 hh0019,55IT,processHeat_high,dem,0.6243596555378694
 hh0020,55IT,processHeat_high,dem,0.6231936452502826
 hh0021,55IT,processHeat_high,dem,0.6168549930398667
@@ -24106,7 +24106,7 @@ hh0014,56IT,processHeat_high,dem,0.4350980461785881
 hh0015,56IT,processHeat_high,dem,0.4375637050084009
 hh0016,56IT,processHeat_high,dem,0.4367579780868505
 hh0017,56IT,processHeat_high,dem,0.4353688128735613
-hh0018,56IT,processHeat_high,dem,0.43943440966462066
+hh0018,56IT,processHeat_high,dem,0.4407839375297656
 hh0019,56IT,processHeat_high,dem,0.4377465947411771
 hh0020,56IT,processHeat_high,dem,0.43692908991315527
 hh0021,56IT,processHeat_high,dem,0.4324849792219097
@@ -24544,7 +24544,7 @@ hh0014,57SI,processHeat_high,dem,0.27241905004372746
 hh0015,57SI,processHeat_high,dem,0.27312289820355873
 hh0016,57SI,processHeat_high,dem,0.27253076965764733
 hh0017,57SI,processHeat_high,dem,0.27166484896187043
-hh0018,57SI,processHeat_high,dem,0.2742464225541178
+hh0018,57SI,processHeat_high,dem,0.27494741666744216
 hh0019,57SI,processHeat_high,dem,0.27321322134919696
 hh0020,57SI,processHeat_high,dem,0.2728504364690009
 hh0021,57SI,processHeat_high,dem,0.2705332128862598
@@ -24982,7 +24982,7 @@ hh0014,58HU,processHeat_high,dem,0.7954593094076476
 hh0015,58HU,processHeat_high,dem,0.7967109349738472
 hh0016,58HU,processHeat_high,dem,0.7948400683933492
 hh0017,58HU,processHeat_high,dem,0.7922724749305627
-hh0018,58HU,processHeat_high,dem,0.7999092088785049
+hh0018,58HU,processHeat_high,dem,0.8019339068901462
 hh0019,58HU,processHeat_high,dem,0.797409673233618
 hh0020,58HU,processHeat_high,dem,0.7966937787707769
 hh0021,58HU,processHeat_high,dem,0.7899001733521197
@@ -25420,7 +25420,7 @@ hh0014,59RO,processHeat_high,dem,0.9777375623083294
 hh0015,59RO,processHeat_high,dem,0.9802169661558289
 hh0016,59RO,processHeat_high,dem,0.977994019869909
 hh0017,59RO,processHeat_high,dem,0.9748290805337848
-hh0018,59RO,processHeat_high,dem,0.9841382003809984
+hh0018,59RO,processHeat_high,dem,0.986818987005021
 hh0019,59RO,processHeat_high,dem,0.9813141386948309
 hh0020,59RO,processHeat_high,dem,0.9803756143800425
 hh0021,59RO,processHeat_high,dem,0.971312583491562
@@ -25858,7 +25858,7 @@ hh0014,60RO,processHeat_high,dem,1.3127056221160476
 hh0015,60RO,processHeat_high,dem,1.3174415409653968
 hh0016,60RO,processHeat_high,dem,1.3145770819722178
 hh0017,60RO,processHeat_high,dem,1.3103096176366174
-hh0018,60RO,processHeat_high,dem,1.3227280463417321
+hh0018,60RO,processHeat_high,dem,1.3266123618273216
 hh0019,60RO,processHeat_high,dem,1.3192081541570593
 hh0020,60RO,processHeat_high,dem,1.3178222201939256
 hh0021,60RO,processHeat_high,dem,1.3046372726261126
@@ -26296,7 +26296,7 @@ hh0014,61RO,processHeat_high,dem,0.6288436581102108
 hh0015,61RO,processHeat_high,dem,0.6305921712146574
 hh0016,61RO,processHeat_high,dem,0.6291762370885952
 hh0017,61RO,processHeat_high,dem,0.6271397236747724
-hh0018,61RO,processHeat_high,dem,0.6331141774088493
+hh0018,61RO,processHeat_high,dem,0.634867482880223
 hh0019,61RO,processHeat_high,dem,0.6313277054084819
 hh0020,61RO,processHeat_high,dem,0.6307103804997086
 hh0021,61RO,processHeat_high,dem,0.6247732961417441
@@ -26734,7 +26734,7 @@ hh0014,62HR,processHeat_high,dem,0.30520912606267536
 hh0015,62HR,processHeat_high,dem,0.3074235947623404
 hh0016,62HR,processHeat_high,dem,0.3069243665654265
 hh0017,62HR,processHeat_high,dem,0.30595503588986595
-hh0018,62HR,processHeat_high,dem,0.3087951479984882
+hh0018,62HR,processHeat_high,dem,0.30980491118801745
 hh0019,62HR,processHeat_high,dem,0.3074258653826893
 hh0020,62HR,processHeat_high,dem,0.3066959599395145
 hh0021,62HR,processHeat_high,dem,0.30345172141910415
@@ -27172,7 +27172,7 @@ hh0014,63BA,processHeat_high,dem,0.6586609849546123
 hh0015,63BA,processHeat_high,dem,0.6634399512774379
 hh0016,63BA,processHeat_high,dem,0.6623625846202269
 hh0017,63BA,processHeat_high,dem,0.6602707064849044
-hh0018,63BA,processHeat_high,dem,0.6663998516483504
+hh0018,63BA,processHeat_high,dem,0.6685789857573667
 hh0019,63BA,processHeat_high,dem,0.6634448514226424
 hh0020,63BA,processHeat_high,dem,0.6618696683855975
 hh0021,63BA,processHeat_high,dem,0.6548683923528409
@@ -27610,7 +27610,7 @@ hh0014,64ME,processHeat_high,dem,0.1260218326968466
 hh0015,64ME,processHeat_high,dem,0.12693619396638572
 hh0016,64ME,processHeat_high,dem,0.12673006103346643
 hh0017,64ME,processHeat_high,dem,0.12632982127065434
-hh0018,64ME,processHeat_high,dem,0.1275025127219564
+hh0018,64ME,processHeat_high,dem,0.12791944720021364
 hh0019,64ME,processHeat_high,dem,0.12693713151285235
 hh0020,64ME,processHeat_high,dem,0.1266357512008318
 hh0021,64ME,processHeat_high,dem,0.12529619465046882
@@ -28048,7 +28048,7 @@ hh0014,65RS,processHeat_high,dem,1.3832865229614804
 hh0015,65RS,processHeat_high,dem,1.3933230665841558
 hh0016,65RS,processHeat_high,dem,1.3910604355626588
 hh0017,65RS,processHeat_high,dem,1.3866671787911669
-hh0018,65RS,processHeat_high,dem,1.3995392997995997
+hh0018,65RS,processHeat_high,dem,1.4041158071585953
 hh0019,65RS,processHeat_high,dem,1.3933333576215434
 hh0020,65RS,processHeat_high,dem,1.3900252377903803
 hh0021,65RS,processHeat_high,dem,1.3753215115930366
@@ -28486,7 +28486,7 @@ hh0014,66BG,processHeat_high,dem,0.551300117967429
 hh0015,66BG,processHeat_high,dem,0.5530723091535711
 hh0016,66BG,processHeat_high,dem,0.5518629739141825
 hh0017,66BG,processHeat_high,dem,0.5500823433617308
-hh0018,66BG,processHeat_high,dem,0.5552961629425586
+hh0018,66BG,processHeat_high,dem,0.5568587386203727
 hh0019,66BG,processHeat_high,dem,0.5536761834407418
 hh0020,66BG,processHeat_high,dem,0.5530736576017853
 hh0021,66BG,processHeat_high,dem,0.5477866400920355
@@ -28924,7 +28924,7 @@ hh0014,67MK,processHeat_high,dem,0.39578731831353386
 hh0015,67MK,processHeat_high,dem,0.3986589841756802
 hh0016,67MK,processHeat_high,dem,0.39801159793323054
 hh0017,67MK,processHeat_high,dem,0.3967545949281488
-hh0018,67MK,processHeat_high,dem,0.40043757901739435
+hh0018,67MK,processHeat_high,dem,0.401747013863171
 hh0019,67MK,processHeat_high,dem,0.3986619286575519
 hh0020,67MK,processHeat_high,dem,0.39771540611511236
 hh0021,67MK,processHeat_high,dem,0.39350836132412864
@@ -29362,7 +29362,7 @@ hh0014,68GR,processHeat_high,dem,0.23739352629317623
 hh0015,68GR,processHeat_high,dem,0.2382831387761827
 hh0016,68GR,processHeat_high,dem,0.23779026829569974
 hh0017,68GR,processHeat_high,dem,0.2370329747758461
-hh0018,68GR,processHeat_high,dem,0.23926046472718204
+hh0018,68GR,processHeat_high,dem,0.23992588024127529
 hh0019,68GR,processHeat_high,dem,0.23842945338584254
 hh0020,68GR,processHeat_high,dem,0.23809562106672916
 hh0021,68GR,processHeat_high,dem,0.23586544506148868
@@ -29800,7 +29800,7 @@ hh0014,69GR,processHeat_high,dem,0.44673679668396576
 hh0015,69GR,processHeat_high,dem,0.450081793468806
 hh0016,69GR,processHeat_high,dem,0.4492633255769517
 hh0017,69GR,processHeat_high,dem,0.4477827912417107
-hh0018,69GR,processHeat_high,dem,0.4519971284683109
+hh0018,69GR,processHeat_high,dem,0.4537062254222459
 hh0019,69GR,processHeat_high,dem,0.4508987414363169
 hh0020,69GR,processHeat_high,dem,0.45016932381029473
 hh0021,69GR,processHeat_high,dem,0.44459081710428944
@@ -30238,7 +30238,7 @@ hh0014,70AL,processHeat_high,dem,0.5621755192960891
 hh0015,70AL,processHeat_high,dem,0.5662544277719237
 hh0016,70AL,processHeat_high,dem,0.565334881641479
 hh0017,70AL,processHeat_high,dem,0.5635494370745595
-hh0018,70AL,processHeat_high,dem,0.5687807403456023
+hh0018,70AL,processHeat_high,dem,0.5706406589947031
 hh0019,70AL,processHeat_high,dem,0.5662586101081147
 hh0020,70AL,processHeat_high,dem,0.5649141713724605
 hh0021,70AL,processHeat_high,dem,0.5589384933235756
@@ -30690,7 +30690,7 @@ hh0028,72DK,processHeat_high,dem,0.08313633088342247
 hh0029,72DK,processHeat_high,dem,0.08252757432040654
 hh0030,72DK,processHeat_high,dem,0.08351271114680862
 hh0031,72DK,processHeat_high,dem,0.08499200160912025
-hh0032,72DK,processHeat_high,dem,0.08536533554173047
+hh0032,72DK,processHeat_high,dem,0.08586579634825965
 hh0033,72DK,processHeat_high,dem,0.084901656065217
 hh0034,72DK,processHeat_high,dem,0.08462287428454784
 hh0035,72DK,processHeat_high,dem,0.08367436079501277
@@ -31499,7 +31499,7 @@ hh0399,73EE,processHeat_high,dem,0.06722493813072668
 hh0400,73EE,processHeat_high,dem,0.06507568286776189
 hh0401,73EE,processHeat_high,dem,0.06593257905126246
 hh0402,73EE,processHeat_high,dem,0.06795400069024628
-hh0403,73EE,processHeat_high,dem,0.06831246092909427
+hh0403,73EE,processHeat_high,dem,0.06875676046221837
 hh0404,73EE,processHeat_high,dem,0.06787183928978664
 hh0405,73EE,processHeat_high,dem,0.06668995668107826
 hh0406,73EE,processHeat_high,dem,0.0677582908548753
@@ -31552,7 +31552,7 @@ hh0014,74FI,processHeat_high,dem,0.12081389898418649
 hh0015,74FI,processHeat_high,dem,0.12111952393349909
 hh0016,74FI,processHeat_high,dem,0.12089232212661281
 hh0017,74FI,processHeat_high,dem,0.12053766868938208
-hh0018,74FI,processHeat_high,dem,0.12163606365903672
+hh0018,74FI,processHeat_high,dem,0.12197566084086477
 hh0019,74FI,processHeat_high,dem,0.12092571326216894
 hh0020,74FI,processHeat_high,dem,0.12066098302882183
 hh0021,74FI,processHeat_high,dem,0.11989342530812995
@@ -31990,7 +31990,7 @@ hh0014,75FI,processHeat_high,dem,0.8882511970175672
 hh0015,75FI,processHeat_high,dem,0.893216288709671
 hh0016,75FI,processHeat_high,dem,0.8921355838130562
 hh0017,75FI,processHeat_high,dem,0.889682351952209
-hh0018,75FI,processHeat_high,dem,0.8976647916997526
+hh0018,75FI,processHeat_high,dem,0.9005461798145323
 hh0019,75FI,processHeat_high,dem,0.8892408680573973
 hh0020,75FI,processHeat_high,dem,0.8855005186367515
 hh0021,75FI,processHeat_high,dem,0.881068805611601
@@ -32433,7 +32433,7 @@ hh0019,77LT,processHeat_high,dem,0.1756492347744525
 hh0020,77LT,processHeat_high,dem,0.17480114192583907
 hh0021,77LT,processHeat_high,dem,0.17084471322787176
 hh0022,77LT,processHeat_high,dem,0.1755454960463292
-hh0023,77LT,processHeat_high,dem,0.17635276681201226
+hh0023,77LT,processHeat_high,dem,0.17752314337934846
 hh0024,77LT,processHeat_high,dem,0.17519483656377272
 hh0025,77LT,processHeat_high,dem,0.17012217502096635
 hh0026,77LT,processHeat_high,dem,0.1684948687725979
@@ -32866,7 +32866,7 @@ hh0014,78LV,processHeat_high,dem,0.1696447593836465
 hh0015,78LV,processHeat_high,dem,0.16988045522203413
 hh0016,78LV,processHeat_high,dem,0.16947732913683478
 hh0017,78LV,processHeat_high,dem,0.16892907525700465
-hh0018,78LV,processHeat_high,dem,0.17056098607851114
+hh0018,78LV,processHeat_high,dem,0.17098932421762766
 hh0019,78LV,processHeat_high,dem,0.17003495329951326
 hh0020,78LV,processHeat_high,dem,0.16989041424760642
 hh0021,78LV,processHeat_high,dem,0.168451585535537
@@ -33304,7 +33304,7 @@ hh0014,79NO,processHeat_high,dem,0.013783637951217597
 hh0015,79NO,processHeat_high,dem,0.013883646215073438
 hh0016,79NO,processHeat_high,dem,0.013861100425535391
 hh0017,79NO,processHeat_high,dem,0.013817324201477818
-hh0018,79NO,processHeat_high,dem,0.013945587328963982
+hh0018,79NO,processHeat_high,dem,0.013991189537523369
 hh0019,79NO,processHeat_high,dem,0.013883748759218226
 hh0020,79NO,processHeat_high,dem,0.013850785287590978
 hh0021,79NO,processHeat_high,dem,0.013704271289895025
@@ -33742,7 +33742,7 @@ hh0014,80NO,processHeat_high,dem,0.032490003742155764
 hh0015,80NO,processHeat_high,dem,0.03272573750695882
 hh0016,80NO,processHeat_high,dem,0.032672593860190564
 hh0017,80NO,processHeat_high,dem,0.03256940704634057
-hh0018,80NO,processHeat_high,dem,0.03287174156112939
+hh0018,80NO,processHeat_high,dem,0.03297923248130508
 hh0019,80NO,processHeat_high,dem,0.032725979218157245
 hh0020,80NO,processHeat_high,dem,0.03264827960646445
 hh0021,80NO,processHeat_high,dem,0.03230292518332399
@@ -34180,7 +34180,7 @@ hh0014,81NO,processHeat_high,dem,0.06596455305225565
 hh0015,81NO,processHeat_high,dem,0.06644316402928002
 hh0016,81NO,processHeat_high,dem,0.06633526632220509
 hh0017,81NO,processHeat_high,dem,0.06612576582135814
-hh0018,81NO,processHeat_high,dem,0.06673959650289905
+hh0018,81NO,processHeat_high,dem,0.06695783564386183
 hh0019,81NO,processHeat_high,dem,0.06644365477625866
 hh0020,81NO,processHeat_high,dem,0.0662859010191854
 hh0021,81NO,processHeat_high,dem,0.06558472688735477
@@ -34618,7 +34618,7 @@ hh0014,82NO,processHeat_high,dem,0.1250372871289025
 hh0015,82NO,processHeat_high,dem,0.12594450495102333
 hh0016,82NO,processHeat_high,dem,0.12573998243164247
 hh0017,82NO,processHeat_high,dem,0.12534286954197735
-hh0018,82NO,processHeat_high,dem,0.12650639934131613
+hh0018,82NO,processHeat_high,dem,0.12692007651896198
 hh0019,82NO,processHeat_high,dem,0.12594543517290818
 hh0020,82NO,processHeat_high,dem,0.1256464093945753
 hh0021,82NO,processHeat_high,dem,0.12431731812976202
@@ -35056,7 +35056,7 @@ hh0014,83NO,processHeat_high,dem,0.032490003742155764
 hh0015,83NO,processHeat_high,dem,0.03272573750695882
 hh0016,83NO,processHeat_high,dem,0.032672593860190564
 hh0017,83NO,processHeat_high,dem,0.03256940704634057
-hh0018,83NO,processHeat_high,dem,0.03287174156112939
+hh0018,83NO,processHeat_high,dem,0.03297923248130508
 hh0019,83NO,processHeat_high,dem,0.032725979218157245
 hh0020,83NO,processHeat_high,dem,0.03264827960646445
 hh0021,83NO,processHeat_high,dem,0.03230292518332399
@@ -35494,7 +35494,7 @@ hh0014,84NO,processHeat_high,dem,0.027567275902435195
 hh0015,84NO,processHeat_high,dem,0.027767292430146875
 hh0016,84NO,processHeat_high,dem,0.027722200851070782
 hh0017,84NO,processHeat_high,dem,0.027634648402955635
-hh0018,84NO,processHeat_high,dem,0.027891174657927963
+hh0018,84NO,processHeat_high,dem,0.027982379075046738
 hh0019,84NO,processHeat_high,dem,0.027767497518436452
 hh0020,84NO,processHeat_high,dem,0.027701570575181956
 hh0021,84NO,processHeat_high,dem,0.02740854257979005
@@ -35932,7 +35932,7 @@ hh0014,85NO,processHeat_high,dem,0.0009845455679441141
 hh0015,85NO,processHeat_high,dem,0.0009916890153623885
 hh0016,85NO,processHeat_high,dem,0.0009900786018239565
 hh0017,85NO,processHeat_high,dem,0.000986951728676987
-hh0018,85NO,processHeat_high,dem,0.0009961133806402843
+hh0018,85NO,processHeat_high,dem,0.000999370681251669
 hh0019,85NO,processHeat_high,dem,0.000991696339944159
 hh0020,85NO,processHeat_high,dem,0.0009893418062564983
 hh0021,85NO,processHeat_high,dem,0.0009788765207067876
@@ -36370,7 +36370,7 @@ hh0014,86SE,processHeat_high,dem,0.032619192764825874
 hh0015,86SE,processHeat_high,dem,0.032737391016524335
 hh0016,86SE,processHeat_high,dem,0.03268649625215165
 hh0017,86SE,processHeat_high,dem,0.0325951197182698
-hh0018,86SE,processHeat_high,dem,0.032886512587486316
+hh0018,86SE,processHeat_high,dem,0.03298948434170036
 hh0019,86SE,processHeat_high,dem,0.03263539886423955
 hh0020,86SE,processHeat_high,dem,0.03253299446423529
 hh0021,86SE,processHeat_high,dem,0.032359992788904716
@@ -36808,7 +36808,7 @@ hh0014,87SE,processHeat_high,dem,0.15867792644091572
 hh0015,87SE,processHeat_high,dem,0.1595294433417802
 hh0016,87SE,processHeat_high,dem,0.15936519532848237
 hh0017,87SE,processHeat_high,dem,0.1589572059217322
-hh0018,87SE,processHeat_high,dem,0.16032774097578964
+hh0018,87SE,processHeat_high,dem,0.16091949063794128
 hh0019,87SE,processHeat_high,dem,0.15863546790222777
 hh0020,87SE,processHeat_high,dem,0.15788813114995562
 hh0021,87SE,processHeat_high,dem,0.15733529387267045
@@ -37246,7 +37246,7 @@ hh0014,88SE,processHeat_high,dem,0.7645220268970874
 hh0015,88SE,processHeat_high,dem,0.7677725861289235
 hh0016,88SE,processHeat_high,dem,0.7666236252667057
 hh0017,88SE,processHeat_high,dem,0.7644565466109213
-hh0018,88SE,processHeat_high,dem,0.7713626207040623
+hh0018,88SE,processHeat_high,dem,0.7737086876113697
 hh0019,88SE,processHeat_high,dem,0.7652812959169766
 hh0020,88SE,processHeat_high,dem,0.762725010886946
 hh0021,88SE,processHeat_high,dem,0.758475064990298
@@ -37684,7 +37684,7 @@ hh0014,89SE,processHeat_high,dem,0.20524641641296945
 hh0015,89SE,processHeat_high,dem,0.20625700497717628
 hh0016,89SE,processHeat_high,dem,0.2059813724891691
 hh0017,89SE,processHeat_high,dem,0.20541038644671766
-hh0018,89SE,processHeat_high,dem,0.20725328592241862
+hh0018,89SE,processHeat_high,dem,0.20790796791743227
 hh0019,89SE,processHeat_high,dem,0.20544300909977983
 hh0020,89SE,processHeat_high,dem,0.20465852743229807
 hh0021,89SE,processHeat_high,dem,0.20359851779653956
@@ -38122,7 +38122,7 @@ hh0014,90UK,processHeat_high,dem,1.2123268973441128
 hh0015,90UK,processHeat_high,dem,1.2155653134063904
 hh0016,90UK,processHeat_high,dem,1.212861964028639
 hh0017,90UK,processHeat_high,dem,1.2089596456675031
-hh0018,90UK,processHeat_high,dem,1.2204735079805107
+hh0018,90UK,processHeat_high,dem,1.223757213004165
 hh0019,90UK,processHeat_high,dem,1.2166372453769492
 hh0020,90UK,processHeat_high,dem,1.2153117041843922
 hh0021,90UK,processHeat_high,dem,1.2042778542607526
@@ -38560,7 +38560,7 @@ hh0014,91UK,processHeat_high,dem,0.3379080638259835
 hh0015,91UK,processHeat_high,dem,0.3386848314691189
 hh0016,91UK,processHeat_high,dem,0.33791827783412315
 hh0017,91UK,processHeat_high,dem,0.3368302051967227
-hh0018,91UK,processHeat_high,dem,0.34005073327962776
+hh0018,91UK,processHeat_high,dem,0.34094559228376076
 hh0019,91UK,processHeat_high,dem,0.3389746821156606
 hh0020,91UK,processHeat_high,dem,0.3386235262384588
 hh0021,91UK,processHeat_high,dem,0.335621194172203
@@ -38998,7 +38998,7 @@ hh0014,92UK,processHeat_high,dem,2.3940478067299855
 hh0015,92UK,processHeat_high,dem,2.4003595180183575
 hh0016,92UK,processHeat_high,dem,2.3950002119562694
 hh0017,92UK,processHeat_high,dem,2.3872864661263837
-hh0018,92UK,processHeat_high,dem,2.41003592209245
+hh0018,92UK,processHeat_high,dem,2.416529663305642
 hh0019,92UK,processHeat_high,dem,2.4025723656284383
 hh0020,92UK,processHeat_high,dem,2.400013703421826
 hh0021,92UK,processHeat_high,dem,2.378171588366317
@@ -39436,7 +39436,7 @@ hh0014,93UK,processHeat_high,dem,0.6170104166502296
 hh0015,93UK,processHeat_high,dem,0.6186940402040942
 hh0016,93UK,processHeat_high,dem,0.6173169984681065
 hh0017,93UK,processHeat_high,dem,0.6153280767335316
-hh0018,93UK,processHeat_high,dem,0.621186835958767
+hh0018,93UK,processHeat_high,dem,0.622872865615777
 hh0019,93UK,processHeat_high,dem,0.6192828821658937
 hh0020,93UK,processHeat_high,dem,0.6186218347629427
 hh0021,93UK,processHeat_high,dem,0.6129449721215529
@@ -39874,7 +39874,7 @@ hh0014,94UK,processHeat_high,dem,0.1634700212637129
 hh0015,94UK,processHeat_high,dem,0.16387237674216168
 hh0016,94UK,processHeat_high,dem,0.16350422683957394
 hh0017,94UK,processHeat_high,dem,0.16297789389443626
-hh0018,94UK,processHeat_high,dem,0.164533524739384
+hh0018,94UK,processHeat_high,dem,0.16497087210744463
 hh0019,94UK,processHeat_high,dem,0.16401504016191157
 hh0020,94UK,processHeat_high,dem,0.16384154794545777
 hh0021,94UK,processHeat_high,dem,0.16237314308157622
@@ -40312,7 +40312,7 @@ hh0014,95UK,processHeat_high,dem,0.15928349004344708
 hh0015,95UK,processHeat_high,dem,0.15985133287744802
 hh0016,95UK,processHeat_high,dem,0.1595105693592033
 hh0017,95UK,processHeat_high,dem,0.15899794259075742
-hh0018,95UK,processHeat_high,dem,0.16049824219811332
+hh0018,95UK,processHeat_high,dem,0.16095338262606323
 hh0019,95UK,processHeat_high,dem,0.16000657985907354
 hh0020,95UK,processHeat_high,dem,0.159813819025946
 hh0021,95UK,processHeat_high,dem,0.15827639392624576
@@ -40755,7 +40755,7 @@ hh0019,96IE,processHeat_high,dem,0.4458052494202399
 hh0020,96IE,processHeat_high,dem,0.4442398614732229
 hh0021,96IE,processHeat_high,dem,0.43266566379337484
 hh0022,96IE,processHeat_high,dem,0.44426037490360715
-hh0023,96IE,processHeat_high,dem,0.4463225564722162
+hh0023,96IE,processHeat_high,dem,0.44904661016949154
 hh0024,96IE,processHeat_high,dem,0.4432227090048943
 hh0025,96IE,processHeat_high,dem,0.4295941374296176
 hh0026,96IE,processHeat_high,dem,0.4258867979399546
@@ -41188,7 +41188,7 @@ hh0014,98IT,processHeat_high,dem,0.22198879907070823
 hh0015,98IT,processHeat_high,dem,0.2232467882695923
 hh0016,98IT,processHeat_high,dem,0.22283570310553596
 hh0017,98IT,processHeat_high,dem,0.2221269453436537
-hh0018,98IT,processHeat_high,dem,0.22420122942072485
+hh0018,98IT,processHeat_high,dem,0.22488976404579877
 hh0019,98IT,processHeat_high,dem,0.22334009935774343
 hh0020,98IT,processHeat_high,dem,0.22292300505773227
 hh0021,98IT,processHeat_high,dem,0.22065560164383147
@@ -41631,7 +41631,7 @@ hh0019,99FR,processHeat_high,dem,0.001981356664089955
 hh0020,99FR,processHeat_high,dem,0.001974399384325435
 hh0021,99FR,processHeat_high,dem,0.0019229585057483325
 hh0022,99FR,processHeat_high,dem,0.001974490555127143
-hh0023,99FR,processHeat_high,dem,0.001983655806543183
+hh0023,99FR,processHeat_high,dem,0.0019957627118644067
 hh0024,99FR,processHeat_high,dem,0.001969878706688419
 hh0025,99FR,processHeat_high,dem,0.001909307277464967
 hh0026,99FR,processHeat_high,dem,0.001892830213066465
