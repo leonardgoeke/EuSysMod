@@ -3,7 +3,7 @@ electricity,,costLss,13000
 crudeOil,,costLss,13000
 refinedOil,,costLss,13000
 jetFuel,,costLss,13000
-synthGas,,costLss,13000
+gasFuel,,costLss,13000
 rawBiogas,,costLss,13000
 otherBiomass,nonSolidBiomass,costLss,13000
 otherBiomass,solidBiomass,costLss,13000
