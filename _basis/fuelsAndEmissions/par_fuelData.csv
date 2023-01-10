@@ -1,12 +1,9 @@
 carrier_1,carrier_2,timestep_2,technology_3,parameter,value,source
-diesel,,,,emissionFac,262.8736046,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe, uses oil value because refinery efficiencies are neglected"
-gasoline,,,,emissionFac,262.8736046,"uses crude oil values, because energy losses in refinery process are not considered"
-refinedOil,,,,emissionFac,262.8736046,
+crudeOil,,,,emissionFac,262.8736046,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe, uses oil value because refinery efficiencies are neglected, uses crude oil values, because energy losses in refinery process are not considered"
 hardcoal,,,,emissionFac,342.0957868,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe"
 lignite,,,,emissionFac,362,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe"
 gasFuel,,,,emissionFac,201.296363,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe"
 waste,,,,emissionFac,332,used old dynelmod input
-,,,nuclearPlantStock,costVarGen,8.3,"fuel prices of 8.3 €/MWh_el based on Wealer (2020), Economics of Nuclear Power Plant Investment"
 crudeOil,,2020,,trdBuyPrc,29.07294083,computed as median of various sources
 crudeOil,,2025,,trdBuyPrc,39.77561685,"World Bank (2018), Commodity Markets Outlook"
 crudeOil,,2030,,trdBuyPrc,45.04708414,"IRENA (2018), Renewable Energy Prospects for the European Union"
