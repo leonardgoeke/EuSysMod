@@ -43,6 +43,11 @@ set_optimizer_attribute(anyM.optModel, "Method", 2);
 set_optimizer_attribute(anyM.optModel, "Crossover", 0);
 optimize!(anyM.optModel)
 
-reportResults(:summary,anyM, addObjName = true)
+computeResults("aggBenchmark.yml",model = anyM, outputDir = "results/")
 
-printIIS(anyM)
+reportResults(:summary,anyM)
+
+
+
+printDuals(vcat(anyM.parts.bal.cns[:enBalH2],anyM.parts.bal.cns[:enBalGasFuel],anyM.parts.bal.cns[:enBalNaturalGas]),anyM)
+printObject(anyM.parts.tech[:directAirCapture].cns[:convBal],anyM)
