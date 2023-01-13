@@ -531,7 +531,7 @@ stock,power,hardcoalPlantProLowStock,,,effConv,0.7
 stock,power,hardcoalPlantProMedStock,,,effConv,0.7
 stock,power,oilPlantProLowStock,,,effConv,0.95
 stock,power,oilPlantProMedStock,,,effConv,0.95
-stock,power,hardcoalPlantProLowStock,,processHeat_low,effConv,0.56
-stock,power,hardcoalPlantProMedStock,,processHeat_medium,effConv,0.56
-stock,power,oilPlantProLowStock,,processHeat_low,effConv,0.77
-stock,power,oilPlantProMedStock,,processHeat_medium,effConv,0.77
+stock,power,hardcoalPlantProLowStock,,processHeat_low,ratioConvOutFix,0.56
+stock,power,hardcoalPlantProMedStock,,processHeat_medium,ratioConvOutFix,0.56
+stock,power,oilPlantProLowStock,,processHeat_low,ratioConvOutFix,0.77
+stock,power,oilPlantProMedStock,,processHeat_medium,ratioConvOutFix,0.77
