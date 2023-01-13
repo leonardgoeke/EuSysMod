@@ -1,0 +1,268 @@
+timestep_superordinate_dispatch,region_dispatch,technology,carrier,id,variable,value,objName
+10th < 2020,EU < BE,none,jetFuel,none,demand,-51.67286102052,TheModel
+10th < 2020,EU < BE < be,none,electricity,none,demand,-73.57110149036123,TheModel
+10th < 2020,EU < BE < be < 28BE,none,processHeat_high,none,demand,-28.833046449928432,TheModel
+10th < 2020,EU < BE < be < 28BE,none,processHeat_low,none,demand,-17.08193103626496,TheModel
+10th < 2020,EU < BE < be,none,frtRail,none,missCapa,-6.275972755247495e-17,TheModel
+10th < 2020,EU < BE < be,none,frtRoadHeavy,none,missCapa,0.0,TheModel
+10th < 2020,EU < BE < be,none,frtRoadLight,none,missCapa,0.0,TheModel
+10th < 2020,EU < BE < be,none,psngRail,none,missCapa,0.0,TheModel
+10th < 2020,EU < BE < be,none,psngRoadPrvt,none,missCapa,0.0,TheModel
+10th < 2020,EU < BE < be,none,psngRoadPub,none,missCapa,0.0,TheModel
+10th < 2020,EU < BE < be < 28BE,none,processHeat_high,none,missCapa,0.14699999999999175,TheModel
+10th < 2020,EU < BE < be < 28BE,none,processHeat_low,none,missCapa,0.03199999999956774,TheModel
+10th < 2020,EU < BE < be < 28BE,none,processHeat_medium,none,missCapa,2.9417809334911364e-18,TheModel
+10th < 2020,EU < BE < be < 28BE,none,spaceHeat,none,missCapa,0.0,TheModel
+10th < 2020,EU < BE,powerToX < refinery,none,none,capaConv,52.03455833,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < coalBoilerProLowStock,none,none,capaConv,0.0249,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < coalBoilerProLowStock,none,none,mustCapaConv,0.024899999999999218,TheModel
+10th < 2020,EU < BE < be < 28BE,wind < offshore < offshore_b,none,none,capaConv,1.155,TheModel
+10th < 2020,EU < BE < be,transport < bev < bevPsngRoadPub,none,none,capaConv,0.00375,TheModel
+10th < 2020,EU < BE < be,transport < dieselPsngRoadPub,none,none,capaConv,0.76741,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < oilBoilerProLowStock,none,none,capaConv,0.1326,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < oilBoilerProLowStock,none,none,mustCapaConv,0.08059182909899222,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < gasPlantStock_chp_b,none,none,insCapaConv,0.08507,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < gasPlantStock_chp_b,none,none,capaConv,0.0850699999999977,TheModel
+10th < 2020,EU < BE < be < 28BE,heatpump < heatpumpAir < heatpumpAirSpace,none,none,capaConv,0.05701,TheModel
+10th < 2020,EU < BE < be,transport < ottoPsngRoadPrvt,none,none,capaConv,6.11691,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < bioBoilerProMedStock,none,none,capaConv,0.51842,TheModel
+10th < 2020,EU < BE < be < 28BE,miscProHeat < electricHeatPro < eBoilerProLow,none,none,capaConv,0.03315,TheModel
+10th < 2020,EU < BE < be < 28BE,miscProHeat < electricHeatPro < eBoilerProLow,none,none,mustCapaConv,0.03314999999999862,TheModel
+10th < 2020,EU < BE < be < 28BE,transport < cngPsngRoadPrvt,none,none,capaConv,0.01432,TheModel
+10th < 2020,EU < BE < be < 28BE,engine < engineMed < gasEngineProMed,none,none,capaConv,1.0652,TheModel
+10th < 2020,EU < BE < be < 28BE,engine < engineMed < gasEngineProMed,none,none,mustCapaConv,1.0652,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < bioBoilerSpaceStock,none,none,capaConv,3.23703,TheModel
+10th < 2020,EU < BE < be,transport < ottoFrtRoadHeavy,none,none,capaConv,0.00814,TheModel
+10th < 2020,EU < BE < be,transport < dieselFrtRail,none,none,capaConv,0.01548,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < gasBoilerProHighStock,none,none,capaConv,2.24032,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < gasBoilerProHighStock,none,none,mustCapaConv,2.2403199999999996,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < gasBoilerProLowStock,none,none,capaConv,1.01669,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < gasBoilerProLowStock,none,none,mustCapaConv,1.0166899999999996,TheModel
+10th < 2020,EU < BE < be,stock < power < nuclearPlantStock,none,none,insCapaConv,17.93637,TheModel
+10th < 2020,EU < BE < be,stock < power < nuclearPlantStock,none,none,capaConv,17.93637,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < hardcoalPlantProLowStock,none,none,capaConv,0.02187,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < hardcoalPlantProLowStock,none,none,mustCapaConv,0.021869999999999973,TheModel
+10th < 2020,EU < BE < be < 28BE,ccgt < ccgtProMed < ccgtGasBackProMed,none,none,capaConv,0.04382,TheModel
+10th < 2020,EU < BE < be < 28BE,ccgt < ccgtProMed < ccgtGasBackProMed,none,none,mustCapaConv,0.04381999999999997,TheModel
+10th < 2020,EU < BE < be < 28BE,wind < onshore < onshore_c,none,none,capaConv,0.76525,TheModel
+10th < 2020,EU < BE < be,stock < power < bioPlantStock,none,none,insCapaConv,1.44272,TheModel
+10th < 2020,EU < BE < be,stock < power < bioPlantStock,none,none,capaConv,1.4427199999999987,TheModel
+10th < 2020,EU < BE < be,transport < eFrtRail,none,none,capaConv,0.02146,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < gasPlantStock_chp_a,none,none,insCapaConv,0.70349,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < gasPlantStock_chp_a,none,none,capaConv,0.7034899999999991,TheModel
+10th < 2020,EU < BE,bioConversion < biogasPlant,none,none,capaConv,0.331937911,TheModel
+10th < 2020,EU < BE < be < 28BE,solar < rooftopResi_a < pvResi_a,none,none,capaConv,0.64378,TheModel
+10th < 2020,EU < BE < be,transport < dieselPsngRail,none,none,capaConv,0.08894,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < coalBoilerProHighStock,none,none,capaConv,1.80295,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < coalBoilerProHighStock,none,none,mustCapaConv,1.8029499999999983,TheModel
+10th < 2020,EU < BE < be < 28BE,wind < onshore < onshore_b,none,none,capaConv,0.21771,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < gasBoilerProMedStock,none,none,capaConv,1.10927,TheModel
+10th < 2020,EU < BE < be < 28BE,solar < rooftopInd_a < pvInd_a,none,none,capaConv,1.4669,TheModel
+10th < 2020,EU < BE < be,stock < power < runOfRiver,none,none,capaConv,0.13,TheModel
+10th < 2020,EU < BE < be,bioConversion < liquifaction,none,none,capaConv,1.074563657,TheModel
+10th < 2020,EU < BE < be,transport < dieselPsngRoadPrvt,none,none,capaConv,6.60871,TheModel
+10th < 2020,EU < BE < be < 28BE,miscProHeat < electricHeatPro < eBoilerProHigh,none,none,capaConv,0.1361,TheModel
+10th < 2020,EU < BE < be < 28BE,miscProHeat < electricHeatPro < eBoilerProHigh,none,none,mustCapaConv,0.13609999999999728,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < coalBoilerProMedStock,none,none,capaConv,0.33514,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < hardcoalPlantProMedStock,none,none,capaConv,0.29434,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < hardcoalPlantProMedStock,none,none,mustCapaConv,0.29434,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < bioPlantStock_chp,none,none,insCapaConv,0.08617,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < bioPlantStock_chp,none,none,capaConv,0.08616999999999936,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < coalBoilerSpaceStock,none,none,capaConv,0.26121,TheModel
+10th < 2020,EU < BE < be < 28BE,wind < onshore < onshore_a,none,none,capaConv,1.43005,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < oilPlantProLowStock,none,none,capaConv,0.03128,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < oilPlantProLowStock,none,none,mustCapaConv,0.031279999999998184,TheModel
+10th < 2020,EU < BE < be,transport < bev < bevFrtRoadHeavy,none,none,capaConv,0.00036,TheModel
+10th < 2020,EU < BE < be,transport < dieselFrtRoadHeavy,none,none,capaConv,1.30479,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < oilLiquidBoilerSpaceStock,none,none,capaConv,18.27996,TheModel
+10th < 2020,EU < BE < be < 28BE,miscProHeat < electricHeatPro < eBoilerProMed,none,none,capaConv,0.08044,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < resistiveHeatSpaceStock,none,none,capaConv,4.16913,TheModel
+10th < 2020,EU < BE < be < 28BE,networkHeat < heatGrid < districtHeatSpace,none,none,capaConv,0.73345,TheModel
+10th < 2020,EU < BE < be < 28BE,networkHeat < gasBoilerDh,none,none,capaConv,0.4985,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < oilBoilerProMedStock,none,none,capaConv,0.61176,TheModel
+10th < 2020,EU < BE < be,transport < ottoPsngRoadPub,none,none,capaConv,0.00676,TheModel
+10th < 2020,EU < BE < be < 28BE,solar < rooftopInd_b < pvInd_b,none,none,capaConv,1.00011,TheModel
+10th < 2020,EU < BE < be,transport < ePsngRail,none,none,capaConv,0.10097,TheModel
+10th < 2020,EU < BE < be < 28BE,networkHeat < oilBoilerDh,none,none,capaConv,0.2631,TheModel
+10th < 2020,EU < BE < be < 28BE,wind < offshore < offshore_a,none,none,capaConv,1.155,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < gasBoilerSpaceStock,none,none,capaConv,30.34389,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < bioBoilerProLowStock,none,none,capaConv,0.24089,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < bioBoilerProLowStock,none,none,mustCapaConv,0.2408899999999995,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < gasPlantStock_a,none,none,insCapaConv,6.70948,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < gasPlantStock_a,none,none,capaConv,0.4100290841956033,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < oilPlantProMedStock,none,none,capaConv,0.08976,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < oilPlantProMedStock,none,none,mustCapaConv,0.08975999999999999,TheModel
+10th < 2020,EU < BE < be < 28BE,engine < engineLow < gasEngineProLow,none,none,capaConv,0.92687,TheModel
+10th < 2020,EU < BE < be < 28BE,engine < engineLow < gasEngineProLow,none,none,mustCapaConv,0.9268699999999994,TheModel
+10th < 2020,EU < BE < be < 28BE,solar < rooftopResi_b < pvResi_b,none,none,capaConv,0.93349,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < oilBoilerProHighStock,none,none,capaConv,0.89106,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < oilBoilerProHighStock,none,none,mustCapaConv,0.6639860610665197,TheModel
+10th < 2020,EU < BE < be,transport < ottoFrtRoadLight,none,none,capaConv,4.67172,TheModel
+10th < 2020,EU < BE < be,transport < bev < bevPsngRoadPrvt,none,none,capaConv,0.35855,TheModel
+10th < 2020,EU < BE < be < 28BE,engine < engineLow < bioGasEngineProMed,none,none,capaConv,0.49457,TheModel
+10th < 2020,EU < BE < be < 28BE,engine < engineLow < bioGasEngineProMed,none,none,mustCapaConv,0.4421121146539796,TheModel
+10th < 2020,EU < BE < be < 28BE,networkHeat < heatGrid < districtHeatPro,none,none,capaConv,0.67741,TheModel
+10th < 2020,EU < BE < be < 28BE,networkHeat < heatGrid < districtHeatPro,none,none,mustCapaConv,0.6774099999999931,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < gasPlantStock_b,none,none,insCapaConv,0.94928,TheModel
+10th < 2020,EU < BE,powerToX < refinery,crudeOil,none,use,-195.6594480584249,TheModel
+10th < 2020,EU < BE,stock < heat < coalBoilerProLowStock,hardcoal,none,use,-0.20500215821966072,TheModel
+10th < 2020,EU < BE < be,transport < bev < bevPsngRoadPub,electricity,none,use,-0.006691526604272537,TheModel
+10th < 2020,EU < BE,transport < dieselPsngRoadPub,diesel,none,use,-3.6523424945704277,TheModel
+10th < 2020,EU < BE,stock < heat < oilBoilerProLowStock,refinedOil,none,use,-0.6681411002960402,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < gasPlantStock_chp_b,gasFuel,none,use,-0.6706918799999677,TheModel
+10th < 2020,EU < BE < be,heatpump < heatpumpAir < heatpumpAirSpace,electricity,none,use,-0.11394178746217935,TheModel
+10th < 2020,EU < BE,transport < ottoPsngRoadPrvt,gasoline,none,use,-29.112274179985658,TheModel
+10th < 2020,EU < BE,stock < heat < bioBoilerProMedStock,rawBiogas,none,use,-4.013205636124611,TheModel
+10th < 2020,EU < BE < be,miscProHeat < electricHeatPro < eBoilerProLow,electricity,none,use,-0.2772718011019845,TheModel
+10th < 2020,EU < BE < be < 28BE,transport < cngPsngRoadPrvt,gasFuel,none,use,-0.06815332680346688,TheModel
+10th < 2020,EU < BE < be < 28BE,engine < engineMed < gasEngineProMed,gasFuel,none,use,-8.90766125897348,TheModel
+10th < 2020,EU < BE,stock < heat < bioBoilerSpaceStock,otherBiomass < solidBiomass,none,use,-6.469619089084341,TheModel
+10th < 2020,EU < BE,transport < ottoFrtRoadHeavy,gasoline,none,use,-0.03835731403724361,TheModel
+10th < 2020,EU < BE,transport < dieselFrtRail,diesel,none,use,-0.07294486748114631,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < gasBoilerProHighStock,gasFuel,none,use,-18.873899524471472,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < gasBoilerProLowStock,gasFuel,none,use,-8.470588703380317,TheModel
+10th < 2020,EU < BE,stock < power < hardcoalPlantProLowStock,hardcoal,none,use,-0.18549246860134783,TheModel
+10th < 2020,EU < BE < be < 28BE,ccgt < ccgtProMed < ccgtGasBackProMed,gasFuel,none,use,-0.3571087786913125,TheModel
+10th < 2020,EU < BE,stock < power < bioPlantStock,otherBiomass < solidBiomass,none,use,-11.37440447999999,TheModel
+10th < 2020,EU < BE < be,transport < eFrtRail,electricity,none,use,-0.10112382791636951,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < gasPlantStock_chp_a,gasFuel,none,use,-5.546315159999983,TheModel
+10th < 2020,EU < BE,bioConversion < biogasPlant,otherBiomass < nonSolidBiomass,none,use,-2.828111002516651,TheModel
+10th < 2020,EU < BE,transport < dieselPsngRail,diesel,none,use,-0.4191031339646741,TheModel
+10th < 2020,EU < BE,stock < heat < coalBoilerProHighStock,hardcoal,none,use,-14.302165117788956,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < gasBoilerProMedStock,gasFuel,none,use,-9.245984089072776,TheModel
+10th < 2020,EU < BE,bioConversion < liquifaction,otherBiomass,none,use,-8.254632694900415,TheModel
+10th < 2020,EU < BE < be,bioConversion < liquifaction,electricity,none,use,-0.43445435236317975,TheModel
+10th < 2020,EU < BE,transport < dieselPsngRoadPrvt,diesel,none,use,-31.452903099115893,TheModel
+10th < 2020,EU < BE < be,miscProHeat < electricHeatPro < eBoilerProHigh,electricity,none,use,-1.1606559070793205,TheModel
+10th < 2020,EU < BE,stock < heat < coalBoilerProMedStock,hardcoal,none,use,-2.760426466532669,TheModel
+10th < 2020,EU < BE,stock < power < hardcoalPlantProMedStock,hardcoal,none,use,-2.4975696870884025,TheModel
+10th < 2020,EU < BE,stock < power < bioPlantStock_chp,otherBiomass < solidBiomass,none,use,-0.6793642799999913,TheModel
+10th < 2020,EU < BE,stock < heat < coalBoilerSpaceStock,hardcoal,none,use,-0.522061643623853,TheModel
+10th < 2020,EU < BE,stock < power < oilPlantProLowStock,refinedOil,none,use,-0.2653042715066222,TheModel
+10th < 2020,EU < BE < be,transport < bev < bevFrtRoadHeavy,electricity,none,use,-0.0004910541270430052,TheModel
+10th < 2020,EU < BE,transport < dieselFrtRoadHeavy,diesel,none,use,-6.148432405731583,TheModel
+10th < 2020,EU < BE,stock < heat < oilLiquidBoilerSpaceStock,refinedOil,none,use,-36.53484155651885,TheModel
+10th < 2020,EU < BE < be,miscProHeat < electricHeatPro < eBoilerProMed,electricity,none,use,-0.6731084830643186,TheModel
+10th < 2020,EU < BE < be,stock < heat < resistiveHeatSpaceStock,electricity,none,use,-8.332540332611748,TheModel
+10th < 2020,EU < BE < be < 28BE,networkHeat < heatGrid < districtHeatSpace,districtHeat,none,use,-1.4658937732702233,TheModel
+10th < 2020,EU < BE < be < 28BE,networkHeat < gasBoilerDh,gasFuel,none,use,-4.289600167887113,TheModel
+10th < 2020,EU < BE,stock < heat < oilBoilerProMedStock,refinedOil,none,use,-5.073983887543571,TheModel
+10th < 2020,EU < BE,transport < ottoPsngRoadPub,gasoline,none,use,-0.0321729391893461,TheModel
+10th < 2020,EU < BE < be,transport < ePsngRail,electricity,none,use,-0.47579090888703784,TheModel
+10th < 2020,EU < BE,networkHeat < oilBoilerDh,refinedOil,none,use,-2.2528103444734047,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < gasBoilerSpaceStock,gasFuel,none,use,-60.64615094116381,TheModel
+10th < 2020,EU < BE,stock < heat < bioBoilerProLowStock,otherBiomass < solidBiomass,none,use,-1.86396436865118,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < gasPlantStock_a,gasFuel,none,use,-3.2326692997981366,TheModel
+10th < 2020,EU < BE,stock < power < oilPlantProMedStock,refinedOil,none,use,-0.7616425056501174,TheModel
+10th < 2020,EU < BE < be < 28BE,engine < engineLow < gasEngineProLow,gasFuel,none,use,-7.5045516834538,TheModel
+10th < 2020,EU < BE,stock < heat < oilBoilerProHighStock,refinedOil,none,use,-5.267166744104811,TheModel
+10th < 2020,EU < BE,transport < ottoFrtRoadLight,gasoline,none,use,-22.234166193735494,TheModel
+10th < 2020,EU < BE < be,transport < bev < bevPsngRoadPrvt,electricity,none,use,-0.5355774635146958,TheModel
+10th < 2020,EU < BE,engine < engineLow < bioGasEngineProMed,rawBiogas,none,use,-3.5667762261518816,TheModel
+10th < 2020,EU < BE < be < 28BE,networkHeat < heatGrid < districtHeatPro,districtHeat,none,use,-5.745516833801457,TheModel
+10th < 2020,EU < BE,powerToX < refinery,refinedOil,none,gen,50.82389041009343,TheModel
+10th < 2020,EU < BE,powerToX < refinery,jetFuel,none,gen,51.672861020519996,TheModel
+10th < 2020,EU < BE,powerToX < refinery,diesel,none,gen,41.745726000863726,TheModel
+10th < 2020,EU < BE,powerToX < refinery,gasoline,none,gen,51.416970626947744,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < coalBoilerProLowStock,processHeat_low,none,gen,0.1435015107537625,TheModel
+10th < 2020,EU < BE < be < 28BE,wind < offshore < offshore_b,electricity,none,gen,4.787257462100189,TheModel
+10th < 2020,EU < BE < be,transport < bev < bevPsngRoadPub,psngRoadPub,none,gen,0.051364158214395994,TheModel
+10th < 2020,EU < BE < be,transport < dieselPsngRoadPub,psngRoadPub,none,gen,14.890600350363632,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < oilBoilerProLowStock,processHeat_low,none,gen,0.46769877020722816,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < gasPlantStock_chp_b,districtHeat,none,gen,0.06422295312479157,TheModel
+10th < 2020,EU < BE < be,stock < power < gasPlantStock_chp_b,electricity,none,gen,0.52625417802718,TheModel
+10th < 2020,EU < BE < be < 28BE,heatpump < heatpumpAir < heatpumpAirSpace,spaceHeat,none,gen,0.4337634818172497,TheModel
+10th < 2020,EU < BE < be,transport < ottoPsngRoadPrvt,psngRoadPrvt,none,gen,53.21723720101379,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < bioBoilerProMedStock,processHeat_medium,none,gen,2.8092439452872275,TheModel
+10th < 2020,EU < BE < be < 28BE,miscProHeat < electricHeatPro < eBoilerProLow,processHeat_low,none,gen,0.27449908309096466,TheModel
+10th < 2020,EU < BE < be,transport < cngPsngRoadPrvt,psngRoadPrvt,none,gen,0.11906386192565664,TheModel
+10th < 2020,EU < BE < be,engine < engineMed < gasEngineProMed,electricity,none,gen,4.180238177291541,TheModel
+10th < 2020,EU < BE < be < 28BE,engine < engineMed < gasEngineProMed,processHeat_medium,none,gen,4.183226192206831,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < bioBoilerSpaceStock,spaceHeat,none,gen,4.185513748865264,TheModel
+10th < 2020,EU < BE < be,transport < ottoFrtRoadHeavy,frtRoadHeavy,none,gen,0.16033357267567827,TheModel
+10th < 2020,EU < BE < be,transport < dieselFrtRail,frtRail,none,gen,1.394268197034631,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < gasBoilerProHighStock,processHeat_high,none,gen,13.973858239523476,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < gasBoilerProLowStock,processHeat_low,none,gen,5.9294120923662215,TheModel
+10th < 2020,EU < BE < be,stock < power < nuclearPlantStock,electricity,none,gen,44.07288963660001,TheModel
+10th < 2020,EU < BE < be,stock < power < hardcoalPlantProLowStock,electricity,none,gen,0.057131680329215125,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < hardcoalPlantProLowStock,processHeat_low,none,gen,0.07271304769172834,TheModel
+10th < 2020,EU < BE < be,ccgt < ccgtProMed < ccgtGasBackProMed,electricity,none,gen,0.1795746999837738,TheModel
+10th < 2020,EU < BE < be < 28BE,ccgt < ccgtProMed < ccgtGasBackProMed,processHeat_medium,none,gen,0.125388818079913,TheModel
+10th < 2020,EU < BE < be < 28BE,wind < onshore < onshore_c,electricity,none,gen,1.6389957426378747,TheModel
+10th < 2020,EU < BE < be,stock < power < bioPlantStock,electricity,none,gen,3.753553478399997,TheModel
+10th < 2020,EU < BE < be,transport < eFrtRail,frtRail,none,gen,4.259942374804982,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < gasPlantStock_chp_a,districtHeat,none,gen,0.36386774673378686,TheModel
+10th < 2020,EU < BE < be,stock < power < gasPlantStock_chp_a,electricity,none,gen,4.965031858994196,TheModel
+10th < 2020,EU < BE,bioConversion < biogasPlant,rawBiogas,none,gen,2.828111002516651,TheModel
+10th < 2020,EU < BE < be < 28BE,solar < rooftopResi_a < pvResi_a,electricity,none,gen,0.6050443263347233,TheModel
+10th < 2020,EU < BE < be,transport < dieselPsngRail,psngRail,none,gen,2.8825913554090286,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < coalBoilerProHighStock,processHeat_high,none,gen,10.011515582452269,TheModel
+10th < 2020,EU < BE < be < 28BE,wind < onshore < onshore_b,electricity,none,gen,0.6033425734818065,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < gasBoilerProMedStock,processHeat_medium,none,gen,6.472188862350943,TheModel
+10th < 2020,EU < BE < be < 28BE,solar < rooftopInd_a < pvInd_a,electricity,none,gen,1.3786379233595418,TheModel
+10th < 2020,EU < BE < be,stock < power < runOfRiver,electricity,none,gen,0.3852865318081364,TheModel
+10th < 2020,EU < BE,bioConversion < liquifaction,crudeOil,none,gen,7.125051378756148,TheModel
+10th < 2020,EU < BE < be,transport < dieselPsngRoadPrvt,psngRoadPrvt,none,gen,64.54135715938581,TheModel
+10th < 2020,EU < BE < be < 28BE,miscProHeat < electricHeatPro < eBoilerProHigh,processHeat_high,none,gen,1.1606559070793205,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < coalBoilerProMedStock,processHeat_medium,none,gen,1.9322985265728685,TheModel
+10th < 2020,EU < BE < be,stock < power < hardcoalPlantProMedStock,electricity,none,gen,0.769251463623228,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < hardcoalPlantProMedStock,processHeat_medium,none,gen,0.9790473173386539,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < bioPlantStock_chp,districtHeat,none,gen,0.1686298016629925,TheModel
+10th < 2020,EU < BE < be,stock < power < bioPlantStock_chp,electricity,none,gen,0.49741893844899865,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < coalBoilerSpaceStock,spaceHeat,none,gen,0.511620410751376,TheModel
+10th < 2020,EU < BE < be < 28BE,wind < onshore < onshore_a,electricity,none,gen,3.6135786246459523,TheModel
+10th < 2020,EU < BE < be,stock < power < oilPlantProLowStock,electricity,none,gen,0.057968983324196956,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < oilPlantProLowStock,processHeat_low,none,gen,0.19407007460709416,TheModel
+10th < 2020,EU < BE < be,transport < bev < bevFrtRoadHeavy,frtRoadHeavy,none,gen,0.004637846637329896,TheModel
+10th < 2020,EU < BE < be,transport < dieselFrtRoadHeavy,frtRoadHeavy,none,gen,30.729865163846455,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < oilLiquidBoilerSpaceStock,spaceHeat,none,gen,28.058758315406475,TheModel
+10th < 2020,EU < BE < be < 28BE,miscProHeat < electricHeatPro < eBoilerProMed,processHeat_medium,none,gen,0.6663773982336754,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < resistiveHeatSpaceStock,spaceHeat,none,gen,7.757595049661537,TheModel
+10th < 2020,EU < BE < be < 28BE,networkHeat < heatGrid < districtHeatSpace,spaceHeat,none,gen,1.319304395943201,TheModel
+10th < 2020,EU < BE < be < 28BE,networkHeat < gasBoilerDh,districtHeat,none,gen,4.451992174855641,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < oilBoilerProMedStock,processHeat_medium,none,gen,3.5517887212805,TheModel
+10th < 2020,EU < BE < be,transport < ottoPsngRoadPub,psngRoadPub,none,gen,0.10562375935862324,TheModel
+10th < 2020,EU < BE < be < 28BE,solar < rooftopInd_b < pvInd_b,electricity,none,gen,0.9628101615337811,TheModel
+10th < 2020,EU < BE < be,transport < ePsngRail,psngRail,none,gen,8.807841305316845,TheModel
+10th < 2020,EU < BE < be < 28BE,networkHeat < oilBoilerDh,districtHeat,none,gen,2.1626979306944683,TheModel
+10th < 2020,EU < BE < be < 28BE,wind < offshore < offshore_a,electricity,none,gen,4.787257462100191,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < gasBoilerSpaceStock,spaceHeat,none,gen,44.981971963549704,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < bioBoilerProLowStock,processHeat_low,none,gen,1.304775058055826,TheModel
+10th < 2020,EU < BE < be,stock < power < gasPlantStock_a,electricity,none,gen,1.7304478761819424,TheModel
+10th < 2020,EU < BE < be,stock < power < oilPlantProMedStock,electricity,none,gen,0.16641888748455066,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < oilPlantProMedStock,processHeat_medium,none,gen,0.5571414928830609,TheModel
+10th < 2020,EU < BE < be,engine < engineLow < gasEngineProLow,electricity,none,gen,3.5217788978031095,TheModel
+10th < 2020,EU < BE < be < 28BE,engine < engineLow < gasEngineProLow,processHeat_low,none,gen,3.524296249070833,TheModel
+10th < 2020,EU < BE < be < 28BE,solar < rooftopResi_b < pvResi_b,electricity,none,gen,0.8986748034618011,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < oilBoilerProHighStock,processHeat_high,none,gen,3.687016720873368,TheModel
+10th < 2020,EU < BE < be,transport < ottoFrtRoadLight,frtRoadLight,none,gen,3.9799157486786534,TheModel
+10th < 2020,EU < BE < be,transport < bev < bevPsngRoadPrvt,psngRoadPrvt,none,gen,2.6184382191233477,TheModel
+10th < 2020,EU < BE < be,engine < engineLow < bioGasEngineProMed,electricity,none,gen,1.5439045671374225,TheModel
+10th < 2020,EU < BE < be < 28BE,engine < engineLow < bioGasEngineProMed,processHeat_medium,none,gen,1.649974346217747,TheModel
+10th < 2020,EU < BE < be < 28BE,networkHeat < heatGrid < districtHeatPro,processHeat_low,none,gen,5.170965150421311,TheModel
+10th < 2020,EU < BE,powerToX < refinery,crudeOil,none,emission,51.433704385164624,TheModel
+10th < 2020,EU < BE,stock < heat < coalBoilerProLowStock,hardcoal,none,emission,0.07013037461185291,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < gasPlantStock_chp_b,gasFuel,none,emission,0.13500783613762593,TheModel
+10th < 2020,EU < BE < be < 28BE,transport < cngPsngRoadPrvt,gasFuel,none,emission,0.013719016811888298,TheModel
+10th < 2020,EU < BE < be < 28BE,engine < engineMed < gasEngineProMed,gasFuel,none,emission,1.7930798142673627,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < gasBoilerProHighStock,gasFuel,none,emission,3.7992473299035368,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < gasBoilerProLowStock,gasFuel,none,emission,1.7050986984593437,TheModel
+10th < 2020,EU < BE,stock < power < hardcoalPlantProLowStock,hardcoal,none,emission,0.06345619199165238,TheModel
+10th < 2020,EU < BE < be < 28BE,ccgt < ccgtProMed < ccgtGasBackProMed,gasFuel,none,emission,0.07188469834593311,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < gasPlantStock_chp_a,gasFuel,none,emission,1.1164530697597597,TheModel
+10th < 2020,EU < BE,stock < heat < coalBoilerProHighStock,hardcoal,none,emission,4.892710428913527,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < gasBoilerProMedStock,gasFuel,none,emission,1.8611829694862179,TheModel
+10th < 2020,EU < BE,bioConversion < liquifaction,otherBiomass,none,emission,-1.8729879386592232,TheModel
+10th < 2020,EU < BE,stock < heat < coalBoilerProMedStock,hardcoal,none,emission,0.9443302639720372,TheModel
+10th < 2020,EU < BE,stock < power < hardcoalPlantProMedStock,hardcoal,none,emission,0.8544080671923368,TheModel
+10th < 2020,EU < BE,stock < heat < coalBoilerSpaceStock,hardcoal,none,emission,0.17859508873360316,TheModel
+10th < 2020,EU < BE < be < 28BE,networkHeat < gasBoilerDh,gasFuel,none,emission,0.8634809125198653,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < heat < gasBoilerSpaceStock,gasFuel,none,emission,12.207849614405303,TheModel
+10th < 2020,EU < BE < be < 28BE,stock < power < gasPlantStock_a,gasFuel,none,emission,0.6507245728311215,TheModel
+10th < 2020,EU < BE < be < 28BE,engine < engineLow < gasEngineProLow,gasFuel,none,emission,1.5106389598247774,TheModel
+10th < 2020,EU < BE,none,rawBiogas,none,lss,4.7518708597598405,TheModel
+10th < 2020,EU < BE,none,crudeOil,none,trdBuy,188.53439667966876,TheModel
+10th < 2020,EU < BE,none,hardcoal,none,trdBuy,20.472717541854887,TheModel
+10th < 2020,EU < BE < be < 28BE,none,gasFuel < naturalGas,none,trdBuy,127.81337481369567,TheModel
+10th < 2020,EU < BE,none,otherBiomass < solidBiomass,none,trdBuy,32.89938477,TheModel
+10th < 2020,EU < BE,none,otherBiomass < nonSolidBiomass,none,trdBuy,10.742806380000001,TheModel

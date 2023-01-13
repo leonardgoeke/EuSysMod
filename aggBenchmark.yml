@@ -1,0 +1,547 @@
+
+sets:
+    timestep:
+        10th < 2020: "2020"
+        20th < 2025: "2025"
+        20th < 2030: "2030"
+        30th < 2035: "2035"
+        30th < 2040: "2040"
+        40th < 2045: "2035"
+        40th < 2050: "2040"
+
+    region:
+        EU < ES < es < 01ES: "ES"
+        EU < ES < es < 02ES: "ES"
+        EU < ES < es < 03ES: "ES"
+        EU < ES < es < 04ES: "ES"
+        EU < ES < es < 05ES: "ES"
+        EU < ES < es < 06ES: "ES"
+        EU < ES < es < 07ES: "ES"
+        EU < ES < es < 08ES: "ES"
+        EU < ES < es < 09ES: "ES"
+        EU < ES < es < 10ES: "ES"
+        EU < ES < es < 11ES: "ES"
+        EU < PT < pt < 12PT: "PT"
+        EU < PT < pt < 13PT: "PT"
+        EU < FR < fr < 14FR: "FR"
+        EU < FR < fr < 15FR: "FR"
+        EU < FR < fr < 16FR: "FR"
+        EU < FR < fr < 17FR: "FR"
+        EU < FR < fr < 18FR: "FR"
+        EU < FR < fr < 19FR: "FR"
+        EU < FR < fr < 20FR: "FR"
+        EU < FR < fr < 21FR: "FR"
+        EU < FR < fr < 22FR: "FR"
+        EU < FR < fr < 23FR: "FR"
+        EU < FR < fr < 24FR: "FR"
+        EU < FR < fr < 25FR: "FR"
+        EU < FR < fr < 26FR: "FR"
+        EU < FR < fr < 27FR: "FR"
+        EU < BE < be < 28BE: "BE"
+        EU < LU < lu < 29LU: "FR"
+        EU < NL < nl < 30NL: "NL"
+        EU < DE < de < 31DE: "DE"
+        EU < DE < de < 32DE: "DE"
+        EU < DE < de < 33DE: "DE"
+        EU < DE < de < 34DE: "DE"
+        EU < DE < de < 35DE: "DE"
+        EU < DE < de < 36DE: "DE"
+        EU < DE < de < 37DE: "DE"
+        EU < DK < dk_w < 38DK: "DK"
+        EU < CZ < cz < 39CZ: "CZ"
+        EU < CZ < cz < 40CZ: "CZ"
+        EU < PL < pl < 41PL: "PL"
+        EU < PL < pl < 42PL: "PL"
+        EU < PL < pl < 43PL: "PL"
+        EU < PL < pl < 44PL: "PL"
+        EU < PL < pl < 45PL: "PL"
+        EU < SK < sk < 46SK: "SK"
+        nonEU < CH < ch < 47CH: "CH"
+        nonEU < CH < ch < 48CH: "CH"
+        EU < AT < at < 49AT: "AT"
+        EU < AT < at < 50AT: "AT"
+        EU < AT < at < 51AT: "AT"
+        EU < IT < it_n < 52IT: "IT"
+        EU < IT < it_cn < 53IT: "IT"
+        EU < IT < it_cs < 54IT: "IT"
+        EU < IT < it_s < 55IT: "IT"
+        EU < IT < it_sic < 56IT: "IT"
+        EU < SI < si < 57SI: "SI"
+        EU < HU < hu < 58HU: "HU"
+        EU < RO < ro < 59RO: "RO"
+        EU < RO < ro < 60RO: "RO"
+        EU < RO < ro < 61RO: "RO"
+        EU < HR < hr < 62HR: "HR"
+        nonEU < BA < ba < 63BA: "BA"
+        nonEU < ME < me < 64ME: "ME"
+        nonEU < RS < rs < 65RS: "RS"
+        EU < BG < bg < 66BG: "BG"
+        nonEU < MK < mk < 67MK: "MK"
+        EU < GR < gr < 68GR: "GR"
+        EU < GR < gr < 69GR: "GR"
+        nonEU < AL < al < 70AL: "AL"
+        EU < DK < dk_e < 72DK: "DK"
+        EU < EE < ee < 73EE: "EE"
+        EU < FI < fi < 74FI: "FI"
+        EU < FI < fi < 75FI: "FI"
+        EU < LT < lt < 77LT: "LT"
+        EU < LV < lv < 78LV: "LV"
+        nonEU < NO < no_s < 79NO: "NO"
+        nonEU < NO < no_s < 80NO: "NO"
+        nonEU < NO < no_s < 81NO: "NO"
+        nonEU < NO < no_s < 82NO: "NO"
+        nonEU < NO < no_m < 83NO: "NO"
+        nonEU < NO < no_n < 84NO: "NO"
+        nonEU < NO < no_n < 85NO: "NO"
+        EU < SE < se_1 < 86SE: "SE"
+        EU < SE < se_2 < 87SE: "SE"
+        EU < SE < se_3 < 88SE: "SE"
+        EU < SE < se_4 < 89SE: "SE"
+        nonEU < UK < uk < 90UK: "UK"
+        nonEU < UK < uk < 91UK: "UK"
+        nonEU < UK < uk < 92UK: "UK"
+        nonEU < UK < uk < 93UK: "UK"
+        nonEU < UK < uk < 94UK: "UK"
+        nonEU < UK < ni < 95UK: "UK"
+        EU < IE < ie < 96IE: "IE"
+        EU < IT < it_sar < 98IT: "IT"
+        EU < FR < fr_co < 99FR: "FR"
+        EU < ES: "ES"
+        EU < PT: "PT"
+        EU < FR: "FR"
+        EU < BE: "BE"
+        EU < LU: "FR"
+        EU < NL: "NL"
+        EU < DE: "DE"
+        EU < DK: "DK"
+        EU < CZ: "CZ"
+        EU < PL: "PL"
+        EU < SK: "SK"
+        EU < BG: "BG"
+        EU < AT: "AT"
+        EU < IT: "IT"
+        EU < SI: "SI"
+        EU < HU: "HU"
+        EU < RO: "RO"
+        EU < HR: "HR"
+        EU < EE: "EE"
+        EU < FI: "FI"
+        EU < LT: "LT"
+        EU < LV: "LV"
+        EU < GR: "GR"
+        EU < SE: "SE"
+        EU < IE: "IE"
+        nonEU < CH: "CH"
+        nonEU < BA: "BA"
+        nonEU < ME: "ME"
+        nonEU < RS: "RS"
+        nonEU < MK: "MK"
+        nonEU < AL: "AL"
+        nonEU < NO: "NO"
+        nonEU < UK: "UK"
+        EU < ES < es: "ES"
+        EU < PT < pt: "PT"
+        EU < FR < fr: "FR"
+        EU < BE < be: "BE"
+        EU < LU < lu: "FR"
+        EU < NL < nl: "NL"
+        EU < DE < de: "DE"
+        EU < SI < si: "SI"
+        EU < HU < hu: "HU"
+        EU < RO < ro: "RO"
+        EU < HR < hr: "HR"
+        EU < BG < bg: "BG"
+        EU < GR < gr: "GR"
+        EU < CZ < cz: "CZ"
+        EU < PL < pl: "PL"
+        EU < SK < sk: "SK"
+        EU < EE < ee: "EE"
+        EU < FI < fi: "FI"
+        EU < LT < lt: "LT"
+        EU < LV < lv: "LV"
+        EU < AT < at: "AT"
+        EU < IE < ie: "IE"
+        EU < IT < it_n: "IT"
+        EU < DK < dk_w: "DK"
+        EU < IT < it_s: "IT"
+        EU < DK < dk_e: "DK"
+        EU < SE < se_1: "SE"
+        EU < SE < se_2: "SE"
+        EU < SE < se_3: "SE"
+        EU < SE < se_4: "SE"
+        EU < FR < fr_co: "FR"
+        EU < IT < it_cn: "IT"
+        EU < IT < it_cs: "IT"
+        EU < IT < it_sic: "IT"
+        EU < IT < it_sar: "IT"
+        nonEU < NO < no_s: "NO"
+        nonEU < NO < no_m: "NO"
+        nonEU < NO < no_n: "NO"
+        nonEU < UK < uk: "UK"
+        nonEU < UK < ni: "UK"
+        nonEU < CH < ch: "CH"
+        nonEU < BA < ba: "BA"
+        nonEU < ME < me: "ME"
+        nonEU < RS < rs: "RS"
+        nonEU < AL < al: "AL"
+        nonEU < MK < mk: "MK"
+
+    carrier:
+        gasFuel: "gas" 
+        otherBiomass: "biomass" 
+        otherBiomass < nonSolidBiomass: "biomass" 
+        otherBiomass < solidBiomass: "biomass" 
+        rawBiogas: "gas" 
+        crudeOil: "oil" 
+        diesel: "oil" 
+        gasoline: "oil"
+        refinedOil: "oil"
+
+    technology:
+        bioConversion < biogasPlant: ""
+        bioConversion < biogasUpgrading: ""
+        bioConversion < gasification: ""
+        bioConversion < liquifaction: ""
+        bioConversion < nonSolidBioPlantDh: "chp plant"
+        bioConversion < nonSolidBioPlantProLow: "chp plant"
+        ccgt < ccgtGas < ccgtGasBackProLow: "chp plant"
+        ccgt < ccgtProMed < ccgtGasBackProMed: "chp plant"
+        engine < engineLow < bioGasEngineProMed: "chp plant"
+        engine < engineLow < gasEngineProLow: "chp plant"
+        engine < engineMed < gasEngineProMed: "chp plant"
+        engine < enginePeak < dieselEngine: "power plant"
+        heatpump < heatpumpAir < heatpumpAirDh: ""
+        heatpump < heatpumpAir < heatpumpAirSpace: ""
+        heatpump < heatpumpGroundSpace: ""
+        heatpump < heatpumpPro: ""
+        miscProHeat < bioBoilerPro < bioBoilerProLow: "process heat"
+        miscProHeat < bioBoilerPro < bioBoilerProMed: "process heat"
+        miscProHeat < coalBoilerPro < coalBoilerProHigh: "process heat"
+        miscProHeat < coalBoilerPro < coalBoilerProLow: "process heat"
+        miscProHeat < coalBoilerPro < coalBoilerProMed: "process heat"
+        miscProHeat < electricHeatPro < eBoilerProHigh: "process heat"
+        miscProHeat < electricHeatPro < eBoilerProLow: "process heat"
+        miscProHeat < electricHeatPro < eBoilerProMed: "process heat"
+        miscProHeat < gasBoilerPro < gasBoilerProHigh: "process heat"
+        miscProHeat < gasBoilerPro < gasBoilerProLow: "process heat"
+        miscProHeat < gasBoilerPro < gasBoilerProMed: "process heat"
+        miscProHeat < h2BoilerPro < h2BoilerProHigh: "process heat"
+        miscProHeat < h2BoilerPro < h2BoilerProMed: "process heat"
+        miscProHeat < oilBoilerPro < oilBoilerProHigh: "process heat"
+        miscProHeat < oilBoilerPro < oilBoilerProLow: "process heat"
+        miscProHeat < oilBoilerPro < oilBoilerProMed: "process heat"
+        miscSpaceHeat < bioBoilerSpace: "space heat"
+        miscSpaceHeat < gasBoilerSpace: "space heat"
+        miscSpaceHeat < resistiveHeatSpace: "space heat"
+        networkHeat < eBoilerDh: "heat plant"
+        networkHeat < gasBoilerDh: "heat plant"
+        networkHeat < h2BoilerDh: "heat plant"
+        networkHeat < heatGrid < districtHeatPro: "process heat"
+        networkHeat < heatGrid < districtHeatSpace: "space heat"
+        networkHeat < oilBoilerDh: "heat plant"
+        networkHeat < solidBioBoilerDh: "heat plant"
+        powerToX < directAirCapture: ""
+        powerToX < electrolysis < alkElectrolysis: ""
+        powerToX < h2ToDiesel: ""
+        powerToX < h2ToGasoline: ""
+        powerToX < refinery: ""
+        powerToX < synthFuel < bioMethanation: ""
+        stock < heat < bioBoilerSpaceStock: "space heat"
+        stock < heat < coalBoilerSpaceStock: "space heat"
+        stock < heat < gasBoilerSpaceStock: "space heat"
+        stock < heat < oilLiquidBoilerSpaceStock: "space heat"
+        stock < heat < resistiveHeatSpaceStock: "space heat"
+        stock < power < bioPlantStock: "power plant"
+        stock < power < bioPlantStock_chp: "chp plant"
+        stock < power < gasPlantStock_a: "power plant"
+        stock < power < gasPlantStock_b: "power plant"
+        stock < power < gasPlantStock_chp_a: "chp plant"
+        stock < power < gasPlantStock_chp_b: "chp plant"
+        stock < power < hardcoalPlantProLowStock: "chp plant"
+        stock < power < hardcoalPlantProMedStock: "chp plant"
+        stock < power < hardcoalPlantStock_a: "power plant"
+        stock < power < hardcoalPlantStock_chp: "chp plant"
+        stock < power < lignitePlantStock_a: "power plant"
+        stock < power < lignitePlantStock_b: "power plant"
+        stock < power < lignitePlantStock_c: "power plant"
+        stock < power < lignitePlantStock_chp: "chp plant"
+        stock < power < oilLiquidPlantStock: "power plant"
+        stock < power < oilLiquidPlantStock_chp: "chp plant"
+        stock < power < oilPlantProLowStock: "chp plant"
+        stock < power < oilPlantProMedStock: "chp plant"
+        stock < power < wastePlantStock: "power plant"
+        stock < power < wastePlantStock_chp: "chp plant"
+        thermal < retrofittedCoal: "chp plant"
+        transport < bev < bevFrtRoadHeavy: "gas"
+        transport < bev < bevFrtRoadLight: "gas"
+        transport < bev < bevPsngRoadPrvt: "gas"
+        transport < bev < bevPsngRoadPub: "gas"
+        transport < cngPsngRoadPrvt: "road"
+        transport < dieselFrtRail: "rail"
+        transport < dieselFrtRoadHeavy: "road"
+        transport < dieselFrtRoadLight: "road"
+        transport < dieselPsngRail: "rail"
+        transport < dieselPsngRoadPrvt: "road"
+        transport < dieselPsngRoadPub: "road"
+        transport < eFrtRail: "rail"
+        transport < ePsngRail: "rail"
+        transport < fcevPsngRoadPrvt: "road"
+        transport < ottoFrtRoadHeavy: "road"
+        transport < ottoFrtRoadLight: "road"
+        transport < ottoPsngRoadPrvt: "road"
+        transport < ottoPsngRoadPub: "road"
+
+variables:
+
+    biomass;chp plant:
+        -   file: "summary"
+            variable: "use"
+            carrier: "biomass"
+            technology: "chp plant"
+            factor: -1.0
+
+    biomass;heating plants:
+        -   file: "summary"
+            variable: "use"
+            carrier: "biomass"
+            technology: "heating plants"
+            factor: -1.0
+            
+    biomass;power plant:
+        -   file: "summary"
+            variable: "use"
+            carrier: "biomass"
+            technology: "power plant"
+            factor: -1.0
+            
+    biomass;process heat:
+        -   file: "summary"
+            variable: "use"
+            carrier: "biomass"
+            technology: "process heat"
+            factor: -1.0
+            
+    biomass;rail:
+        -   file: "summary"
+            variable: "use"
+            carrier: "biomass"
+            technology: "rail"
+            factor: -1.0
+            
+    biomass;road:
+        -   file: "summary"
+            variable: "use"
+            carrier: "biomass"
+            technology: "road"
+            factor: -1.0
+            
+    biomass;space heat:
+        -   file: "summary"
+            variable: "use"
+            carrier: "biomass"
+            technology: "space heat"
+            factor: -1.0
+            
+    gas;chp plant:
+        -   file: "summary"
+            variable: "use"
+            carrier: "gas"
+            technology: "chp plant"
+            factor: -1.0
+            
+    gas;heating plants:
+        -   file: "summary"
+            variable: "use"
+            carrier: "gas"
+            technology: "heating plants"
+            factor: -1.0
+            
+    gas;power plant:
+        -   file: "summary"
+            variable: "use"
+            carrier: "gas"
+            technology: "power plant"
+            factor: -1.0
+            
+    gas;process heat:
+        -   file: "summary"
+            variable: "use"
+            carrier: "gas"
+            technology: "process heat"
+            factor: -1.0
+            
+    gas;rail:
+        -   file: "summary"
+            variable: "use"
+            carrier: "gas"
+            technology: "rail"
+            factor: -1.0
+            
+    gas;road:
+        -   file: "summary"
+            variable: "use"
+            carrier: "gas"
+            technology: "road"
+            factor: -1.0
+            
+    gas;space heat:
+        -   file: "summary"
+            variable: "use"
+            carrier: "gas"
+            technology: "space heat"
+            factor: -1.0
+            
+    hardcoal;chp plant:
+        -   file: "summary"
+            variable: "use"
+            carrier: "hardcoal"
+            technology: "chp plant"
+            factor: -1.0
+            
+    hardcoal;heating plants:
+        -   file: "summary"
+            variable: "use"
+            carrier: "hardcoal"
+            technology: "heating plant"
+            factor: -1.0
+            
+    hardcoal;power plant:
+        -   file: "summary"
+            variable: "use"
+            carrier: "hardcoal"
+            technology: "power plant"
+            factor: -1.0
+            
+    hardcoal;process heat:
+        -   file: "summary"
+            variable: "use"
+            carrier: "hardcoal"
+            technology: "process heat"
+            factor: -1.0
+            
+    hardcoal;rail:
+        -   file: "summary"
+            variable: "use"
+            carrier: "hardcoal"
+            technology: "rail"
+            factor: -1.0
+            
+    hardcoal;road:
+        -   file: "summary"
+            variable: "use"
+            carrier: "hardcoal"
+            technology: "road"
+            factor: -1.0
+            
+    hardcoal;space heat:
+        -   file: "summary"
+            variable: "use"
+            carrier: "hardcoal"
+            technology: "space heat"
+            factor: -1.0
+            
+    lignite;chp plant:
+        -   file: "summary"
+            variable: "use"
+            carrier: "lignite"
+            technology: "chp plant"
+            factor: -1.0
+            
+    lignite;heating plants:
+        -   file: "summary"
+            variable: "use"
+            carrier: "lignite"
+            technology: "heating plants"
+            factor: -1.0
+            
+    lignite;power plant:
+        -   file: "summary"
+            variable: "use"
+            carrier: "lignite"
+            technology: "power plant"
+            factor: -1.0
+            
+    lignite;process heat:
+        -   file: "summary"
+            variable: "use"
+            carrier: "lignite"
+            technology: "process heat"
+            factor: -1.0
+            
+    lignite;rail:
+        -   file: "summary"
+            variable: "use"
+            carrier: "lignite"
+            technology: "rail"
+            factor: -1.0
+            
+    lignite;road:
+        -   file: "summary"
+            variable: "use"
+            carrier: "lignite"
+            technology: "road"
+            factor: -1.0
+            
+    lignite;space heat:
+        -   file: "summary"
+            variable: "use"
+            carrier: "lignite"
+            technology: "space heat"
+            factor: -1.0
+            
+    oil;other transport:
+        -   file: "summary"
+            variable: "demand"
+            carrier: "jetFuel"
+            factor: -1.0       
+            
+    oil;chp plant:
+        -   file: "summary"
+            variable: "use"
+            carrier: "oil"
+            technology: "chp plant"
+            factor: -1.0
+            
+    oil;heating plants:
+        -   file: "summary"
+            variable: "use"
+            carrier: "oil"
+            technology: "heating plants"
+            factor: -1.0
+            
+    oil;power plant:
+        -   file: "summary"
+            variable: "use"
+            carrier: "oil"
+            technology: "power plant"
+            factor: -1.0
+            
+    oil;process heat:
+        -   file: "summary"
+            variable: "use"
+            carrier: "oil"
+            technology: "process heat"
+            factor: -1.0
+            
+    oil;rail:
+        -   file: "summary"
+            variable: "use"
+            carrier: "oil"
+            technology: "rail"
+            factor: -1.0
+            
+    oil;road:
+        -   file: "summary"
+            variable: "use"
+            carrier: "oil"
+            technology: "road"
+            factor: -1.0
+            
+    oil;space heat:
+        -   file: "summary"
+            variable: "use"
+            carrier: "oil"
+            technology: "space heat"
+            factor: -1.0
+            
+aggregations:
