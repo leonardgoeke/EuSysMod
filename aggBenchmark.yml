@@ -189,9 +189,9 @@ sets:
     carrier:
         gasFuel: "gas" 
         otherBiomass: "biomass" 
-        otherBiomass < nonSolidBiomass: "biomass" 
+        otherBiomass < nonSolidBiomass: "biomass"
         otherBiomass < solidBiomass: "biomass" 
-        rawBiogas: "gas" 
+        rawBiogas: "biogas" 
         crudeOil: "oil" 
         diesel: "oil" 
         gasoline: "oil"
@@ -227,7 +227,7 @@ sets:
         miscProHeat < gasBoilerPro < gasBoilerProMed: "process heat"
         miscProHeat < h2BoilerPro < h2BoilerProHigh: "process heat"
         miscProHeat < h2BoilerPro < h2BoilerProMed: "process heat"
-        miscProHeat < oilBoilerPro < oilBoilerProHigh: "process heat"
+        miscProHeat < oilBoilerPro < oilBoilerProHighStock: "process heat"
         miscProHeat < oilBoilerPro < oilBoilerProLow: "process heat"
         miscProHeat < oilBoilerPro < oilBoilerProMed: "process heat"
         miscSpaceHeat < bioBoilerSpace: "space heat"
@@ -290,8 +290,68 @@ sets:
         transport < ottoFrtRoadLight: "road"
         transport < ottoPsngRoadPrvt: "road"
         transport < ottoPsngRoadPub: "road"
+        stock < heat < bioBoilerProLowStock: "process heat"
+        stock < heat < bioBoilerProMedStock: "process heat"
+        stock < heat < coalBoilerProHighStock: "process heat"
+        stock < heat < coalBoilerProLowStock: "process heat"
+        stock < heat < coalBoilerProMedStock: "process heat"
+        stock < heat < gasBoilerProHighStock: "process heat"
+        stock < heat < gasBoilerProLowStock: "process heat"
+        stock < heat < gasBoilerProMedStock: "process heat"
+        stock < heat < oilBoilerProHighStock: "process heat"
+        stock < heat < oilBoilerProLowStock: "process heat"
+        stock < heat < oilBoilerProMedStock: "process heat"
 
 variables:
+
+    biogas;chp plant:
+        -   file: "summary"
+            variable: "use"
+            carrier: "biogas"
+            technology: "chp plant"
+            factor: -1.0
+
+    biogas;heating plants:
+        -   file: "summary"
+            variable: "use"
+            carrier: "biogas"
+            technology: "heating plants"
+            factor: -1.0
+            
+    biogas;power plant:
+        -   file: "summary"
+            variable: "use"
+            carrier: "biogas"
+            technology: "power plant"
+            factor: -1.0
+            
+    biogas;process heat:
+        -   file: "summary"
+            variable: "use"
+            carrier: "biogas"
+            technology: "process heat"
+            factor: -1.0
+            
+    biogas;rail:
+        -   file: "summary"
+            variable: "use"
+            carrier: "biogas"
+            technology: "rail"
+            factor: -1.0
+            
+    biogas;road:
+        -   file: "summary"
+            variable: "use"
+            carrier: "biogas"
+            technology: "road"
+            factor: -1.0
+            
+    biogas;space heat:
+        -   file: "summary"
+            variable: "use"
+            carrier: "biogas"
+            technology: "space heat"
+            factor: -1.0
 
     biomass;chp plant:
         -   file: "summary"

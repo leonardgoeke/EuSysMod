@@ -1,4 +1,5 @@
 b = "C:/Users/pacop/.julia/dev/AnyMOD.jl/"
+
 	
 using Base.Threads, CSV, Dates, LinearAlgebra, Requires, YAML
 using MathOptInterface, Reexport, Statistics, SparseArrays
@@ -47,7 +48,7 @@ computeResults("aggBenchmark.yml",model = anyM, outputDir = "results/")
 
 reportResults(:summary,anyM)
 
-
+printIIS(anyM)
 
 printDuals(vcat(anyM.parts.bal.cns[:enBalH2],anyM.parts.bal.cns[:enBalGasFuel],anyM.parts.bal.cns[:enBalNaturalGas]),anyM)
 printObject(anyM.parts.tech[:directAirCapture].cns[:convBal],anyM)
