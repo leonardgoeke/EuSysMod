@@ -20,7 +20,7 @@ crudeOil,,2,1,2,2,eq
 refinedOil,,2,1,2,2,eq
 diesel,,2,1,2,2,eq
 gasoline,,2,1,2,2,eq
-jetFuel,,2,1,2,2,eq
+avaAndNavi,,2,1,2,2,eq
 otherBiomass,solidBiomass,2,1,2,2,ineq
 otherBiomass,nonSolidBiomass,2,1,2,2,ineq
 rawBiogas,,2,1,2,2,eq
