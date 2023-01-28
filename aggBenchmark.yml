@@ -187,13 +187,13 @@ sets:
         nonEU < MK < mk: "MK"
 
     carrier:
-        gasFuel: "gas" 
-        otherBiomass: "biomass" 
+        gasFuel: "naturalGas" 
+        otherBiomass: "biomass"
         otherBiomass < nonSolidBiomass: "biomass"
-        otherBiomass < solidBiomass: "biomass" 
-        rawBiogas: "biogas" 
-        crudeOil: "oil" 
-        diesel: "oil" 
+        otherBiomass < solidBiomass: "biomass"
+        rawBiogas: "biogas"
+        crudeOil: "oil"
+        diesel: "oil"
         gasoline: "oil"
         refinedOil: "oil"
 
@@ -202,13 +202,13 @@ sets:
         bioConversion < biogasUpgrading: ""
         bioConversion < gasification: ""
         bioConversion < liquifaction: ""
-        bioConversion < nonSolidBioPlantDh: "chp plant"
-        bioConversion < nonSolidBioPlantProLow: "chp plant"
-        ccgt < ccgtGas < ccgtGasBackProLow: "chp plant"
-        ccgt < ccgtProMed < ccgtGasBackProMed: "chp plant"
-        engine < engineLow < bioGasEngineProMed: "chp plant"
-        engine < engineLow < gasEngineProLow: "chp plant"
-        engine < engineMed < gasEngineProMed: "chp plant"
+        bioConversion < nonSolidBioPlantDh: "chp plant, main"
+        bioConversion < nonSolidBioPlantProLow: "chp plant, auto"
+        ccgt < ccgtGas < ccgtGasBackProLow: "chp plant, auto"
+        ccgt < ccgtProMed < ccgtGasBackProMed: "chp plant, auto"
+        engine < engineLow < bioGasEngineProMed: "chp plant, auto"
+        engine < engineLow < gasEngineProLow: "chp plant, auto"
+        engine < engineMed < gasEngineProMed: "chp plant, auto"
         engine < enginePeak < dieselEngine: "power plant"
         heatpump < heatpumpAir < heatpumpAirDh: ""
         heatpump < heatpumpAir < heatpumpAirSpace: ""
@@ -252,30 +252,30 @@ sets:
         stock < heat < oilLiquidBoilerSpaceStock: "space heat"
         stock < heat < resistiveHeatSpaceStock: "space heat"
         stock < power < bioPlantStock: "power plant"
-        stock < power < bioPlantStock_chp: "chp plant"
+        stock < power < bioPlantStock_chp: "chp plant, main"
         stock < power < gasPlantStock_a: "power plant"
         stock < power < gasPlantStock_b: "power plant"
-        stock < power < gasPlantStock_chp_a: "chp plant"
-        stock < power < gasPlantStock_chp_b: "chp plant"
-        stock < power < hardcoalPlantProLowStock: "chp plant"
-        stock < power < hardcoalPlantProMedStock: "chp plant"
+        stock < power < gasPlantStock_chp_a: "chp plant, main"
+        stock < power < gasPlantStock_chp_b: "chp plant, main"
+        stock < power < hardcoalPlantProLowStock: "chp plant, main"
+        stock < power < hardcoalPlantProMedStock: "chp plant, main"
         stock < power < hardcoalPlantStock_a: "power plant"
-        stock < power < hardcoalPlantStock_chp: "chp plant"
+        stock < power < hardcoalPlantStock_chp: "chp plant, main"
         stock < power < lignitePlantStock_a: "power plant"
         stock < power < lignitePlantStock_b: "power plant"
         stock < power < lignitePlantStock_c: "power plant"
-        stock < power < lignitePlantStock_chp: "chp plant"
+        stock < power < lignitePlantStock_chp: "chp plant, main"
         stock < power < oilLiquidPlantStock: "power plant"
-        stock < power < oilLiquidPlantStock_chp: "chp plant"
-        stock < power < oilPlantProLowStock: "chp plant"
-        stock < power < oilPlantProMedStock: "chp plant"
+        stock < power < oilLiquidPlantStock_chp: "chp plant, main"
+        stock < power < oilPlantProLowStock: "chp plant, main"
+        stock < power < oilPlantProMedStock: "chp plant, main"
         stock < power < wastePlantStock: "power plant"
-        stock < power < wastePlantStock_chp: "chp plant"
-        thermal < retrofittedCoal: "chp plant"
-        transport < bev < bevFrtRoadHeavy: "gas"
-        transport < bev < bevFrtRoadLight: "gas"
-        transport < bev < bevPsngRoadPrvt: "gas"
-        transport < bev < bevPsngRoadPub: "gas"
+        stock < power < wastePlantStock_chp: "chp plant, main"
+        thermal < retrofittedCoal: "chp plant, main"
+        transport < bev < bevFrtRoadHeavy: ""
+        transport < bev < bevFrtRoadLight: ""
+        transport < bev < bevPsngRoadPrvt: ""
+        transport < bev < bevPsngRoadPub: ""
         transport < cngPsngRoadPrvt: "road"
         transport < dieselFrtRail: "rail"
         transport < dieselFrtRoadHeavy: "road"
@@ -301,14 +301,32 @@ sets:
         stock < heat < oilBoilerProHighStock: "process heat"
         stock < heat < oilBoilerProLowStock: "process heat"
         stock < heat < oilBoilerProMedStock: "process heat"
+        stock < trans < dieselFrtRailStock: "rail"
+        stock < trans < dieselFrtRoadHeavyStock: "road"
+        stock < trans < dieselFrtRoadLightStock: "road"
+        stock < trans < dieselPsngRailStock: "rail"
+        stock < trans < dieselPsngRoadPubStock: "road"
+        stock < trans < ottoPsngRoadPrvtStock: "road"
+        stock < trans < dieselPsngRoadPrvtStock: "road"
+        stock < trans < ottoFrtRoadHeavyStock: "road"
+        stock < trans < ottoFrtRoadLightStock: "road"
+        stock < trans < ottoPsngRoadPubStock: "road"
+        powerToX < avaAndNaviTech: "aviation and navigation"
 
 variables:
 
-    biogas;chp plant:
+    biogas;chp plant main:
         -   file: "summary"
             variable: "use"
             carrier: "biogas"
-            technology: "chp plant"
+            technology: "chp plant, main"
+            factor: -1.0
+
+    biogas;chp plant auto:
+        -   file: "summary"
+            variable: "use"
+            carrier: "biogas"
+            technology: "chp plant, auto"
             factor: -1.0
 
     biogas;heating plants:
@@ -353,11 +371,25 @@ variables:
             technology: "space heat"
             factor: -1.0
 
-    biomass;chp plant:
+    biogas;aviation and navigation:
+        -   file: "summary"
+            variable: "use"
+            carrier: "biogas"
+            technology: "aviation and navigation"
+            factor: -1.0
+
+    biomass;chp plant main:
         -   file: "summary"
             variable: "use"
             carrier: "biomass"
-            technology: "chp plant"
+            technology: "chp plant, main"
+            factor: -1.0
+
+    biomass;chp plant auto:
+        -   file: "summary"
+            variable: "use"
+            carrier: "biomass"
+            technology: "chp plant, auto"
             factor: -1.0
 
     biomass;heating plants:
@@ -401,61 +433,89 @@ variables:
             carrier: "biomass"
             technology: "space heat"
             factor: -1.0
-            
-    gas;chp plant:
+
+    biomass;aviation and navigation:
         -   file: "summary"
             variable: "use"
-            carrier: "gas"
-            technology: "chp plant"
+            carrier: "biomass"
+            technology: "aviation and navigation"
+            factor: -1.0
+            
+    gas;chp plant main:
+        -   file: "summary"
+            variable: "use"
+            carrier: "naturalGas"
+            technology: "chp plant, main"
+            factor: -1.0
+
+    gas;chp plant auto:
+        -   file: "summary"
+            variable: "use"
+            carrier: "naturalGas"
+            technology: "chp plant, auto"
             factor: -1.0
             
     gas;heating plants:
         -   file: "summary"
             variable: "use"
-            carrier: "gas"
+            carrier: "naturalGas"
             technology: "heating plants"
             factor: -1.0
             
     gas;power plant:
         -   file: "summary"
             variable: "use"
-            carrier: "gas"
+            carrier: "naturalGas"
             technology: "power plant"
             factor: -1.0
             
     gas;process heat:
         -   file: "summary"
             variable: "use"
-            carrier: "gas"
+            carrier: "naturalGas"
             technology: "process heat"
             factor: -1.0
             
     gas;rail:
         -   file: "summary"
             variable: "use"
-            carrier: "gas"
+            carrier: "naturalGas"
             technology: "rail"
             factor: -1.0
             
     gas;road:
         -   file: "summary"
             variable: "use"
-            carrier: "gas"
+            carrier: "naturalGas"
             technology: "road"
             factor: -1.0
             
     gas;space heat:
         -   file: "summary"
             variable: "use"
-            carrier: "gas"
+            carrier: "naturalGas"
             technology: "space heat"
             factor: -1.0
-            
-    hardcoal;chp plant:
+    
+    gas;aviation and navigation:
+        -   file: "summary"
+            variable: "use"
+            carrier: "gas"
+            technology: "aviation and navigation"
+            factor: -1.0
+
+    hardcoal;chp plant main:
         -   file: "summary"
             variable: "use"
             carrier: "hardcoal"
-            technology: "chp plant"
+            technology: "chp plant, main"
+            factor: -1.0
+
+    hardcoal;chp plant auto:
+        -   file: "summary"
+            variable: "use"
+            carrier: "hardcoal"
+            technology: "chp plant, auto"
             factor: -1.0
             
     hardcoal;heating plants:
@@ -500,13 +560,20 @@ variables:
             technology: "space heat"
             factor: -1.0
             
-    lignite;chp plant:
+    lignite;chp plant main:
         -   file: "summary"
             variable: "use"
             carrier: "lignite"
-            technology: "chp plant"
+            technology: "chp plant, main"
             factor: -1.0
-            
+
+    lignite;chp plant auto:
+        -   file: "summary"
+            variable: "use"
+            carrier: "lignite"
+            technology: "chp plant, auto"
+            factor: -1.0
+
     lignite;heating plants:
         -   file: "summary"
             variable: "use"
@@ -555,11 +622,18 @@ variables:
             carrier: "jetFuel"
             factor: -1.0       
             
-    oil;chp plant:
+    oil;chp plant main:
         -   file: "summary"
             variable: "use"
             carrier: "oil"
-            technology: "chp plant"
+            technology: "chp plant, main"
+            factor: -1.0
+
+    oil;chp plant auto:
+        -   file: "summary"
+            variable: "use"
+            carrier: "oil"
+            technology: "chp plant, auto"
             factor: -1.0
             
     oil;heating plants:
@@ -604,4 +678,11 @@ variables:
             technology: "space heat"
             factor: -1.0
             
+    oil;aviation and navigation:
+        -   file: "summary"
+            variable: "use"
+            carrier: "oil"
+            technology: "aviation and navigation"
+            factor: -1.0
+
 aggregations:
