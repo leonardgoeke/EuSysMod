@@ -6,7 +6,7 @@ gasFuel,,,,emissionFac,201.296363,"UBA (2016), CO2-Emissionsfaktoren für fossile
 waste,,,,emissionFac,332,used old dynelmod input
 crudeOil,,2020,,trdBuyPrc,29.1,
 crudeOil,,2025,,trdBuyPrc,39.8,
-crudeOil,,2030,,trdBuyPrc,45.0,
+crudeOil,,2030,,trdBuyPrc,45,
 crudeOil,,2035,,trdBuyPrc,49.4,
 crudeOil,,2040,,trdBuyPrc,53.2,
 crudeOil,,2045,,trdBuyPrc,53.2,

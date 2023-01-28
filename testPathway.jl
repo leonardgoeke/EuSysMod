@@ -52,3 +52,27 @@ printIIS(anyM)
 
 printDuals(vcat(anyM.parts.bal.cns[:enBalH2],anyM.parts.bal.cns[:enBalGasFuel],anyM.parts.bal.cns[:enBalNaturalGas]),anyM)
 printObject(anyM.parts.tech[:directAirCapture].cns[:convBal],anyM)
+
+anyM.parts.tech[:avaAndNaviTech]
+
+inDir = input_arr
+outDir = resultDir_str
+
+objName = ""
+
+csvDelim = ","
+interCapa = :linear
+supTsLvl = 2
+shortExp = 5
+redStep = 1.0
+holdFixed = false
+emissionLoss = true
+forceScr = nothing
+reportLvl = 2
+errCheckLvl = 1
+errWrtLvl = 1
+coefRng = (mat = (1e-2,1e4), rhs = (1e-2,1e2))
+scaFac = (capa = 1e2,  capaStSize = 1e2, insCapa = 1e1,dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
+bound = (capa = NaN, disp = NaN, obj = NaN)
+avaMin = 0.01
+checkRng = (print = false, all = true)

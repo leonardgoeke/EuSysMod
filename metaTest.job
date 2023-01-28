@@ -10,6 +10,8 @@
 #$ -M lgo@wip.tu-berlin.de
 
 qsub -t 1 -v hours='96' start8_64.job
+qsub -t 2 -v hours='192' start8_64.job
+qsub -t 3 -v hours='360' start8_64.job
 
 
 
