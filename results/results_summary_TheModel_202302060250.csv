@@ -1,0 +1,15 @@
+region_dispatch,(Mehrere Elemente),
+technology,(Alle),
+,,
+Summe von value,Spaltenbeschriftungen,
+Zeilenbeschriftungen,emission,Gesamtergebnis
+crudeOil,76.91,76.91
+diesel,456.16,456.16
+gasFuel,992.64,992.64
+gasoline,457.48,457.48
+hardcoal,272.81,272.81
+lignite,137.06,137.06
+otherBiomass,-42.75,-42.75
+refinedOil,481.06,481.06
+waste,0.12,0.12
+Gesamtergebnis,2831.49,2831.49

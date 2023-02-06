@@ -32,7 +32,7 @@ h = "96"
 
 b = "" # add the model dir here
 
-input_arr = [b * "_basis",b * "timeSeries/" * h * "hours_2008"]
+input_arr = [b * "_basis",b * "timeSeries/" * h * "hours_2008_only2020"]
 resultDir_str = b * "results"
 
 anyM = anyModel(input_arr, resultDir_str, objName = "TheModel", supTsLvl = 2, reportLvl = 2, shortExp = 5, emissionLoss = false)
@@ -45,34 +45,14 @@ set_optimizer_attribute(anyM.optModel, "Crossover", 0);
 optimize!(anyM.optModel)
 
 computeResults("aggBenchmark.yml",model = anyM, outputDir = "results/")
+computeResults("aggAutoGen.yml",model = anyM, outputDir = "results/")
 
 reportResults(:summary,anyM)
 
 printIIS(anyM)
 
-printDuals(vcat(anyM.parts.bal.cns[:enBalH2],anyM.parts.bal.cns[:enBalGasFuel],anyM.parts.bal.cns[:enBalNaturalGas]),anyM)
-printObject(anyM.parts.tech[:directAirCapture].cns[:convBal],anyM)
+printObject( anyM.parts.lim.cns[:genFix],anyM)
 
-anyM.parts.tech[:avaAndNaviTech]
+bla_df = DataFrame(a = [1,1,1], b = [2,2,3], c = [1,6,7])
 
-inDir = input_arr
-outDir = resultDir_str
-
-objName = ""
-
-csvDelim = ","
-interCapa = :linear
-supTsLvl = 2
-shortExp = 5
-redStep = 1.0
-holdFixed = false
-emissionLoss = true
-forceScr = nothing
-reportLvl = 2
-errCheckLvl = 1
-errWrtLvl = 1
-coefRng = (mat = (1e-2,1e4), rhs = (1e-2,1e2))
-scaFac = (capa = 1e2,  capaStSize = 1e2, insCapa = 1e1,dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
-bound = (capa = NaN, disp = NaN, obj = NaN)
-avaMin = 0.01
-checkRng = (print = false, all = true)
+bla_df[!,end-1]

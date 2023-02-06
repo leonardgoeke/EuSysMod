@@ -1,0 +1,715 @@
+timestep,region,variable,value
+2020,AT,gas;road,0.022939876759267626
+2020,BE,gas;road,0.06815332680346688
+2020,BG,gas;road,0.0008566758955743044
+2020,DE,gas;road,0.949910788875975
+2020,DK,gas;road,0.0019989104230067104
+2020,EE,gas;road,0.00571117263716203
+2020,ES,gas;road,0.0573972850034786
+2020,FI,gas;road,0.009613807272556082
+2020,FR,gas;road,0.005758765742472333
+2020,GR,gas;road,1.475386264600191
+2020,HR,gas;road,4.759310530968359e-5
+2020,HU,gas;road,0.0098517727991045
+2020,IT,gas;road,10.693790018243423
+2020,LT,gas;road,0.00133260694867114
+2020,LU,gas;road,0.0014277931592905076
+2020,LV,gas;road,0.002332062160174495
+2020,PL,gas;road,0.03064995981943653
+2020,PT,gas;road,0.0003807448424774687
+2020,RO,gas;road,0.0012850138433616435
+2020,SE,gas;road,0.09152154151052151
+2020,SI,gas;road,0.0031887380557487997
+2020,SK,gas;road,0.003379110476987535
+2020,AL,gas;road,0.0001427793159290507
+2020,BA,gas;road,0.00019037242123873436
+2020,CH,gas;road,0.03893116014332117
+2020,ME,gas;road,9.518621061936718e-5
+2020,NO,gas;road,0.0029507725292003822
+2020,RS,gas;road,0.0004759310530968357
+2020,UK,gas;road,0.004749899754040786
+2020,AT,biogas;process heat,0.28550052993597724
+2020,BE,biogas;process heat,0.42359980789463886
+2020,BG,biogas;process heat,0.04171797121391831
+2020,CZ,biogas;process heat,0.06850384280019833
+2020,DE,biogas;process heat,0.924427222119991
+2020,DK,biogas;process heat,0.24018121446427643
+2020,EE,biogas;process heat,0.005875148407353695
+2020,ES,biogas;process heat,0.36515709897839793
+2020,FI,biogas;process heat,0.8951367540506466
+2020,FR,biogas;process heat,0.595736035015469
+2020,GR,biogas;process heat,0.18277246144315662
+2020,HR,biogas;process heat,0.3949522232930854
+2020,HU,biogas;process heat,0.10193508976359604
+2020,IE,biogas;process heat,0.045087463771941436
+2020,IT,biogas;process heat,0.18991940980167282
+2020,LT,biogas;process heat,0.04778471328906289
+2020,LU,biogas;process heat,0.1677582727259075
+2020,LV,biogas;process heat,0.0004643325434040995
+2020,NL,biogas;process heat,0.4635179281081084
+2020,PL,biogas;process heat,0.19448531441345634
+2020,PT,biogas;process heat,0.07969035343275047
+2020,RO,biogas;process heat,0.03695769615405803
+2020,SE,biogas;process heat,0.2382148116061773
+2020,SI,biogas;process heat,0.007593850015819879
+2020,SK,biogas;process heat,0.0028012751474868446
+2020,CH,biogas;process heat,5.167600627382884
+2020,NO,biogas;process heat,0.05199586194762256
+2020,UK,biogas;process heat,1.6298599071763116
+2020,AT,gas;space heat,21.115207138104836
+2020,BE,gas;space heat,63.34391912454083
+2020,BG,gas;space heat,2.071962670211941
+2020,CZ,gas;space heat,35.59676306769133
+2020,DE,gas;space heat,373.38267505196836
+2020,DK,gas;space heat,9.962321679206905
+2020,EE,gas;space heat,1.5727875760468442
+2020,ES,gas;space heat,65.61772562303375
+2020,FI,gas;space heat,0.6498121051734413
+2020,FR,gas;space heat,204.8522398652849
+2020,GR,gas;space heat,6.3287091904441155
+2020,HR,gas;space heat,8.024927402716775
+2020,HU,gas;space heat,46.509496823417
+2020,IE,gas;space heat,11.62397151010286
+2020,IT,gas;space heat,271.61518820042056
+2020,LT,gas;space heat,2.955527984802251
+2020,LU,gas;space heat,4.115195673528367
+2020,LV,gas;space heat,2.627864776829786
+2020,NL,gas;space heat,133.86434897008482
+2020,PL,gas;space heat,58.43565104837415
+2020,PT,gas;space heat,6.2715977926750295
+2020,RO,gas;space heat,40.16461881730636
+2020,SE,gas;space heat,1.4788980723045007
+2020,SI,gas;space heat,1.5744448167074243
+2020,SK,gas;space heat,17.92188687311793
+2020,AL,gas;space heat,0.8812664916370527
+2020,BA,gas;space heat,0.7124947689601524
+2020,CH,gas;space heat,17.21235941042839
+2020,ME,gas;space heat,0.19054812028992432
+2020,MK,gas;space heat,0.06949029664458803
+2020,NO,gas;space heat,0.5963388782305963
+2020,RS,gas;space heat,4.7572502397242244
+2020,UK,gas;space heat,365.1129797715702
+2020,AT,oil;rail,1.3061278015777869
+2020,BE,oil;rail,0.615083562810984
+2020,BG,oil;rail,0.3349432287183384
+2020,CZ,oil;rail,1.924462782900527
+2020,DE,oil;rail,9.311544275589098
+2020,DK,oil;rail,0.1555497464827288
+2020,EE,oil;rail,0.3119005670915423
+2020,ES,oil;rail,1.6884286477499708
+2020,FI,oil;rail,0.843201200715525
+2020,FR,oil;rail,7.208489084579045
+2020,GR,oil;rail,0.2079022967227503
+2020,HR,oil;rail,0.24018087180323183
+2020,HU,oil;rail,1.3151281049943884
+2020,IE,oil;rail,0.03562423760707147
+2020,IT,oil;rail,5.250004212323616
+2020,LT,oil;rail,7.088186599644051
+2020,LU,oil;rail,0.022948417611962698
+2020,LV,oil;rail,2.4414854482772306
+2020,NL,oil;rail,1.317814059417144
+2020,PL,oil;rail,5.7279156115444065
+2020,PT,oil;rail,0.28325038658215157
+2020,RO,oil;rail,2.079447065294255
+2020,SE,oil;rail,0.5712600959133962
+2020,SI,oil;rail,0.6099001419951404
+2020,SK,oil;rail,1.0039343680140975
+2020,AL,oil;rail,0.11799350657157003
+2020,BA,oil;rail,0.15748174878681587
+2020,CH,oil;rail,1.5425860347950942
+2020,ME,oil;rail,0.04556698117200807
+2020,MK,oil;rail,0.10479934449487692
+2020,NO,oil;rail,0.14697354113287803
+2020,RS,oil;rail,0.39521227620437616
+2020,UK,oil;rail,5.0233473566489915
+2020,FI,hardcoal;heating plant,2.7392605508169665
+2020,PL,hardcoal;heating plant,129.9296891403086
+2020,SI,hardcoal;heating plant,0.5133359457582047
+2020,AL,hardcoal;heating plant,0.05511497866310316
+2020,CZ,lignite;heating plant,10.343093629813515
+2020,DE,lignite;heating plant,0.633347971676276
+2020,HU,lignite;heating plant,0.011169003843119713
+2020,PL,lignite;heating plant,1.2211439833604416
+2020,RO,lignite;heating plant,0.5107079888087904
+2020,SK,lignite;heating plant,0.09548399619572621
+2020,AL,lignite;heating plant,1.4143277539429013
+2020,BA,lignite;heating plant,1.6142674149174758
+2020,ME,lignite;heating plant,0.23567291271563018
+2020,RS,lignite;heating plant,2.422711115189137
+2020,AT,oil;road,45.58047734928417
+2020,BE,oil;road,92.6054422910901
+2020,BG,oil;road,34.488575502987096
+2020,CZ,oil;road,71.49071801801271
+2020,DE,oil;road,655.1884163833178
+2020,DK,oil;road,39.97768703590119
+2020,EE,oil;road,6.6860106528988
+2020,ES,oil;road,213.8267924289853
+2020,FI,oil;road,52.764221800678925
+2020,FR,oil;road,471.1687493538451
+2020,GR,oil;road,88.32994743585186
+2020,HR,oil;road,15.425441911402684
+2020,HU,oil;road,38.58523274528327
+2020,IE,oil;road,14.842324634641672
+2020,IT,oil;road,658.1539250080551
+2020,LT,oil;road,37.675681005287416
+2020,LU,oil;road,4.887761784646232
+2020,LV,oil;road,12.463228464419569
+2020,NL,oil;road,152.0943650634411
+2020,PL,oil;road,229.45164109620262
+2020,PT,oil;road,47.138160348600046
+2020,RO,oil;road,57.09238674038823
+2020,SE,oil;road,72.10404161757778
+2020,SI,oil;road,20.66343522814948
+2020,SK,oil;road,30.717648709449545
+2020,AL,oil;road,5.198212004361678
+2020,BA,oil;road,6.939949622201965
+2020,CH,oil;road,45.608343716827804
+2020,ME,oil;road,2.1225809930861232
+2020,MK,oil;road,4.413993299013509
+2020,NO,oil;road,36.400700501254384
+2020,RS,oil;road,17.41865695236519
+2020,UK,oil;road,401.62812940693505
+2020,CZ,"lignite;chp plant, auto",7.970566307968937
+2020,DE,"lignite;chp plant, auto",4.3318637937408795
+2020,HR,"lignite;chp plant, auto",0.027593990312319152
+2020,RO,"lignite;chp plant, auto",0.005812571886439031
+2020,SK,"lignite;chp plant, auto",0.029170793711557303
+2020,RS,"lignite;chp plant, auto",0.08096867393645805
+2020,AT,oil;aviation and navigation,11.795798997719997
+2020,BE,oil;aviation and navigation,21.322423004279997
+2020,BG,oil;aviation and navigation,2.8538130023999995
+2020,CZ,oil;aviation and navigation,5.48459899776
+2020,DE,oil;aviation and navigation,124.97501600964
+2020,DK,oil;aviation and navigation,13.941791998920001
+2020,EE,oil;aviation and navigation,0.87406199892
+2020,ES,oil;aviation and navigation,96.59697201600001
+2020,FI,oil;aviation and navigation,12.05970500028
+2020,FR,oil;aviation and navigation,96.87529400892001
+2020,GR,oil;aviation and navigation,23.20878900012
+2020,HR,oil;aviation and navigation,3.0284900041199996
+2020,HU,oil;aviation and navigation,3.3337499956800003
+2020,IE,oil;aviation and navigation,14.023151996880001
+2020,IT,oil;aviation and navigation,63.70482499296
+2020,LT,oil;aviation and navigation,1.5035409960000001
+2020,LU,oil;aviation and navigation,6.99116900028
+2020,LV,oil;aviation and navigation,1.84700899776
+2020,NL,oil;aviation and navigation,49.5399250008
+2020,PL,oil;aviation and navigation,12.93043199712
+2020,PT,oil;aviation and navigation,19.896588998639995
+2020,RO,oil;aviation and navigation,3.0340620036000003
+2020,SE,oil;aviation and navigation,13.900579991999999
+2020,SI,oil;aviation and navigation,0.32553400416
+2020,SK,oil;aviation and navigation,0.5292219971999998
+2020,AL,oil;aviation and navigation,0.6842330003999999
+2020,BA,oil;aviation and navigation,0.11025399948000002
+2020,CH,oil;aviation and navigation,22.524000002519998
+2020,ME,oil;aviation and navigation,0.29306700012000003
+2020,MK,oil;aviation and navigation,0.32507800236
+2020,NO,oil;aviation and navigation,21.387711993839996
+2020,RS,oil;aviation and navigation,1.7304470011200002
+2020,UK,oil;aviation and navigation,161.35957801151997
+2020,AT,oil;space heat,15.433464676017815
+2020,BE,oil;space heat,40.41036130130112
+2020,BG,oil;space heat,2.134673425720472
+2020,CZ,oil;space heat,4.81920984408602
+2020,DE,oil;space heat,204.00750698545627
+2020,DK,oil;space heat,7.7423111395404325
+2020,EE,oil;space heat,1.409415527752018
+2020,ES,oil;space heat,68.05300040804369
+2020,FI,oil;space heat,13.791429226556797
+2020,FR,oil;space heat,121.36465425467799
+2020,GR,oil;space heat,18.068138803259654
+2020,HR,oil;space heat,3.9759654935943582
+2020,HU,oil;space heat,5.987268190051159
+2020,IE,oil;space heat,19.620976452206
+2020,IT,oil;space heat,54.8788851943906
+2020,LT,oil;space heat,1.435819091112798
+2020,LU,oil;space heat,3.105186498276437
+2020,LV,oil;space heat,2.69512701893557
+2020,NL,oil;space heat,11.557890839782479
+2020,PL,oil;space heat,40.0852024035046
+2020,PT,oil;space heat,11.376784202333853
+2020,RO,oil;space heat,11.469470659279894
+2020,SE,oil;space heat,10.425850253851458
+2020,SI,oil;space heat,3.3343586452891563
+2020,SK,oil;space heat,0.8412851881957712
+2020,CH,oil;space heat,32.94260331976529
+2020,NO,oil;space heat,8.772390250293114
+2020,UK,oil;space heat,69.372959649612
+2020,AT,biomass;heating plant,3.725374539090443
+2020,BE,biomass;heating plant,0.7009560941563122
+2020,BG,biomass;heating plant,1.0608359977443973
+2020,CZ,biomass;heating plant,6.249155812111678
+2020,DK,biomass;heating plant,8.08749260103761
+2020,EE,biomass;heating plant,1.1793221923561967
+2020,FR,biomass;heating plant,37.89073398148159
+2020,HR,biomass;heating plant,0.034545151318203855
+2020,HU,biomass;heating plant,3.561887020584805
+2020,IE,biomass;heating plant,0.13917062303083863
+2020,LT,biomass;heating plant,9.164919590952344
+2020,LU,biomass;heating plant,0.01546787916885051
+2020,LV,biomass;heating plant,5.036495608656677
+2020,NL,biomass;heating plant,12.250207717314012
+2020,PL,biomass;heating plant,0.4765000644754874
+2020,RO,biomass;heating plant,1.4778261435069675
+2020,SE,biomass;heating plant,25.647516287665113
+2020,SK,biomass;heating plant,1.2645896899946278
+2020,AL,biomass;heating plant,0.0394413455115138
+2020,CH,biomass;heating plant,1.824388931067952
+2020,ME,biomass;heating plant,0.01550451480596141
+2020,NO,biomass;heating plant,5.3036202774148515
+2020,RS,biomass;heating plant,0.1354605891558391
+2020,UK,biomass;heating plant,5.589789616054311
+2020,ES,gas;power plant,151.7086155621907
+2020,FR,gas;power plant,4.141038044142119
+2020,GR,gas;power plant,40.15888011132007
+2020,IE,gas;power plant,36.63012637584701
+2020,IT,gas;power plant,355.4691503603054
+2020,PT,gas;power plant,51.56530892133488
+2020,UK,gas;power plant,230.9623172881157
+2020,BE,gas;power plant,4.256198030388293
+2020,PL,gas;power plant,1.0690271645176267e-5
+2020,AT,hardcoal;space heat,0.22781399365374613
+2020,BE,hardcoal;space heat,0.6290282190487932
+2020,BG,hardcoal;space heat,1.2444781671614291
+2020,CZ,hardcoal;space heat,2.8549547254613086
+2020,DE,hardcoal;space heat,4.0383131807768855
+2020,EE,hardcoal;space heat,0.02849245286717086
+2020,ES,hardcoal;space heat,1.61755054084631
+2020,FR,hardcoal;space heat,0.7055902409990363
+2020,HU,hardcoal;space heat,0.17770766810287555
+2020,IE,hardcoal;space heat,1.9314478438120561
+2020,LT,hardcoal;space heat,0.7207295463900265
+2020,LV,hardcoal;space heat,0.07912713450208447
+2020,PL,hardcoal;space heat,71.4533988708997
+2020,RO,hardcoal;space heat,0.6124347537754582
+2020,SK,hardcoal;space heat,1.5581956658162996
+2020,AL,hardcoal;space heat,0.04891799463795308
+2020,BA,hardcoal;space heat,1.327134983940551
+2020,ME,hardcoal;space heat,0.2440701614820377
+2020,MK,hardcoal;space heat,0.8291620935867308
+2020,RS,hardcoal;space heat,1.5407296971133082
+2020,UK,hardcoal;space heat,5.541041282205902
+2020,AT,hardcoal;process heat,25.514150702526425
+2020,BE,hardcoal;process heat,29.433896320981287
+2020,BG,hardcoal;process heat,2.2680382428121653
+2020,CZ,hardcoal;process heat,20.509042579796827
+2020,DE,hardcoal;process heat,145.83463901931526
+2020,DK,hardcoal;process heat,1.2025017734188446
+2020,EE,hardcoal;process heat,0.3202910271086197
+2020,ES,hardcoal;process heat,16.66640124965652
+2020,FI,hardcoal;process heat,8.539369380500029
+2020,FR,hardcoal;process heat,55.78628693719897
+2020,GR,hardcoal;process heat,2.2454474972754617
+2020,HR,hardcoal;process heat,0.8437877377306156
+2020,HU,hardcoal;process heat,6.01800985354949
+2020,IE,hardcoal;process heat,0.9204891007617422
+2020,IT,hardcoal;process heat,21.008715657494005
+2020,LT,hardcoal;process heat,1.2273886460366203
+2020,LU,hardcoal;process heat,0.5292978889946991
+2020,LV,hardcoal;process heat,0.33707554610643803
+2020,NL,hardcoal;process heat,27.58459831670806
+2020,PL,hardcoal;process heat,51.70447634814886
+2020,PT,hardcoal;process heat,0.12575719452556172
+2020,RO,hardcoal;process heat,9.782763408769725
+2020,SE,hardcoal;process heat,16.120097079803042
+2020,SI,hardcoal;process heat,0.46295491326937943
+2020,SK,hardcoal;process heat,17.30999116371855
+2020,AL,hardcoal;process heat,1.3875066925369317
+2020,BA,hardcoal;process heat,4.188746849942529
+2020,CH,hardcoal;process heat,3.506517626474131
+2020,ME,hardcoal;process heat,0.12964088709652638
+2020,MK,hardcoal;process heat,1.3723118575228803
+2020,NO,hardcoal;process heat,8.219291138430137
+2020,RS,hardcoal;process heat,8.475066938377015
+2020,UK,hardcoal;process heat,38.95882176723192
+2020,AT,gas;process heat,31.579315191438475
+2020,BE,gas;process heat,46.04469370339852
+2020,BG,gas;process heat,9.605800587141376
+2020,CZ,gas;process heat,23.602299321430266
+2020,DE,gas;process heat,226.50204878208658
+2020,DK,gas;process heat,7.872008710323096
+2020,EE,gas;process heat,1.1570366718957523
+2020,ES,gas;process heat,100.02413532428059
+2020,FI,gas;process heat,7.395901155537518
+2020,FR,gas;process heat,122.13470792246751
+2020,GR,gas;process heat,3.889229300201702
+2020,HR,gas;process heat,4.6588527983596135
+2020,HU,gas;process heat,16.619122739149013
+2020,IE,gas;process heat,11.071714189587336
+2020,IT,gas;process heat,99.32646945604444
+2020,LT,gas;process heat,3.530226842418317
+2020,LU,gas;process heat,3.134319833263017
+2020,LV,gas;process heat,1.1336176094243597
+2020,NL,gas;process heat,58.6206057609441
+2020,PL,gas;process heat,45.47799895771338
+2020,PT,gas;process heat,14.631519122770205
+2020,RO,gas;process heat,25.26667512364774
+2020,SE,gas;process heat,4.019120226491458
+2020,SI,gas;process heat,5.255986734985847
+2020,SK,gas;process heat,9.759666366824979
+2020,AL,gas;process heat,0.07546560029560467
+2020,BA,gas;process heat,0.888841225955006
+2020,CH,gas;process heat,7.9557474295118435
+2020,ME,gas;process heat,1.7037275885364944
+2020,MK,gas;process heat,0.4119225589175277
+2020,NO,gas;process heat,3.527545151836769
+2020,RS,gas;process heat,5.761889231848963
+2020,UK,gas;process heat,92.07789063605335
+2020,AT,"biomass;chp plant, auto",4.855187681059014
+2020,BE,"biomass;chp plant, auto",3.386631625208739
+2020,BG,"biomass;chp plant, auto",0.18931222069194314
+2020,DE,"biomass;chp plant, auto",7.8121063952312975
+2020,DK,"biomass;chp plant, auto",1.9216105579328946
+2020,EE,"biomass;chp plant, auto",0.17448760163199045
+2020,ES,"biomass;chp plant, auto",7.862828830597049
+2020,FI,"biomass;chp plant, auto",22.784634100197344
+2020,FR,"biomass;chp plant, auto",5.690964039714504
+2020,GR,"biomass;chp plant, auto",1.027435889087451
+2020,HR,"biomass;chp plant, auto",0.3810868879354291
+2020,HU,"biomass;chp plant, auto",0.42085114833120546
+2020,IE,"biomass;chp plant, auto",1.8866258319777147
+2020,IT,"biomass;chp plant, auto",0.9462727796336109
+2020,LT,"biomass;chp plant, auto",0.4373420507229011
+2020,LV,"biomass;chp plant, auto",0.44042560192300667
+2020,NL,"biomass;chp plant, auto",2.4746361249976445
+2020,PL,"biomass;chp plant, auto",7.184949900267037
+2020,PT,"biomass;chp plant, auto",4.198433764830655
+2020,RO,"biomass;chp plant, auto",0.2601897806941868
+2020,SE,"biomass;chp plant, auto",21.37258533791883
+2020,SK,"biomass;chp plant, auto",1.9862276934660779
+2020,CH,"biomass;chp plant, auto",14.077670021515958
+2020,NO,"biomass;chp plant, auto",21.26542006366036
+2020,UK,"biomass;chp plant, auto",2.257971540706825
+2020,BG,"gas;chp plant, auto",0.9227067100329273
+2020,CZ,"gas;chp plant, auto",56.948998628415836
+2020,DE,"gas;chp plant, auto",57.08914226480257
+2020,DK,"gas;chp plant, auto",5.990579254658694
+2020,EE,"gas;chp plant, auto",0.3812396075790216
+2020,ES,"gas;chp plant, auto",43.38062039291566
+2020,FI,"gas;chp plant, auto",6.792702046167916
+2020,FR,"gas;chp plant, auto",47.86104089288014
+2020,GR,"gas;chp plant, auto",1.5625180426395027
+2020,IT,"gas;chp plant, auto",39.82702436073996
+2020,LT,"gas;chp plant, auto",1.24068306697518
+2020,NL,"gas;chp plant, auto",64.96248398516997
+2020,PL,"gas;chp plant, auto",17.206208349254698
+2020,PT,"gas;chp plant, auto",4.883469817134429
+2020,RO,"gas;chp plant, auto",1.8711199302252746
+2020,SE,"gas;chp plant, auto",4.022726804421866
+2020,SK,"gas;chp plant, auto",4.206790477556745
+2020,AL,"gas;chp plant, auto",3.4145941742746917
+2020,BA,"gas;chp plant, auto",0.02854223522680327
+2020,ME,"gas;chp plant, auto",0.400259928038151
+2020,NO,"gas;chp plant, auto",0.6438513225833664
+2020,RS,"gas;chp plant, auto",18.77919377786745
+2020,UK,"gas;chp plant, auto",27.17264415283211
+2020,AT,"gas;chp plant, auto",8.636929824587767
+2020,BE,"gas;chp plant, auto",15.90366666428719
+2020,CH,"gas;chp plant, auto",17.145438893461254
+2020,HR,"gas;chp plant, auto",1.0647466368754377
+2020,HU,"gas;chp plant, auto",1.3524853292720525
+2020,IE,"gas;chp plant, auto",2.950740356821193
+2020,LU,"gas;chp plant, auto",0.279268170093022
+2020,LV,"gas;chp plant, auto",0.6241544207783996
+2020,SI,"gas;chp plant, auto",1.2201495292169646
+2020,AT,oil;process heat,4.200277256592706
+2020,BE,oil;process heat,15.20274657963296
+2020,BG,oil;process heat,4.702413754799441
+2020,CZ,oil;process heat,1.6429550721735717
+2020,DE,oil;process heat,39.37894706613826
+2020,DK,oil;process heat,4.929025077415138
+2020,EE,oil;process heat,0.7482969244953268
+2020,ES,oil;process heat,34.169028642354256
+2020,FI,oil;process heat,12.468504497285647
+2020,FR,oil;process heat,29.725491854021158
+2020,GR,oil;process heat,10.053447912704877
+2020,HR,oil;process heat,2.9675630812290636
+2020,HU,oil;process heat,7.875826391018892
+2020,IE,oil;process heat,3.840879097935119
+2020,IT,oil;process heat,20.42042721510285
+2020,LT,oil;process heat,0.4894337341236495
+2020,LU,oil;process heat,0.37549479496060156
+2020,LV,oil;process heat,0.5729053174283074
+2020,NL,oil;process heat,36.04377165427811
+2020,PL,oil;process heat,10.523114539341101
+2020,PT,oil;process heat,6.459846120643492
+2020,RO,oil;process heat,14.015182426800049
+2020,SE,oil;process heat,11.963113523267182
+2020,SI,oil;process heat,1.1056673539378554
+2020,SK,oil;process heat,3.359917970448756
+2020,AL,oil;process heat,1.3490509983259096
+2020,BA,oil;process heat,1.326296676068997
+2020,CH,oil;process heat,6.093061351948939
+2020,ME,oil;process heat,0.7740645364791042
+2020,MK,oil;process heat,1.643063098483634
+2020,NO,oil;process heat,10.441395583473312
+2020,RS,oil;process heat,4.311985811983362
+2020,UK,oil;process heat,25.187408680023154
+2020,BE,"hardcoal;chp plant, auto",0.9758292514269693
+2020,CZ,"hardcoal;chp plant, auto",0.03131494245071925
+2020,DE,"hardcoal;chp plant, auto",3.2542530177619593
+2020,DK,"hardcoal;chp plant, auto",0.5660712404178094
+2020,ES,"hardcoal;chp plant, auto",1.2032227407411378
+2020,FI,"hardcoal;chp plant, auto",0.8976896574284182
+2020,FR,"hardcoal;chp plant, auto",2.6880559614378594
+2020,IE,"hardcoal;chp plant, auto",0.31590403535048284
+2020,NL,"hardcoal;chp plant, auto",3.115337715730621
+2020,PL,"hardcoal;chp plant, auto",7.693303626751242
+2020,UK,"hardcoal;chp plant, auto",2.0505897141970038
+2020,AT,"hardcoal;chp plant, auto",0.5388070909858351
+2020,GR,"hardcoal;chp plant, auto",0.21998489906675797
+2020,HU,"hardcoal;chp plant, auto",0.11146569704198772
+2020,LT,"hardcoal;chp plant, auto",0.1503900750933883
+2020,PT,"hardcoal;chp plant, auto",0.1548690358594217
+2020,SE,"hardcoal;chp plant, auto",2.468970760718031
+2020,SI,"hardcoal;chp plant, auto",0.1389731836769711
+2020,SK,"hardcoal;chp plant, auto",0.6502217882153732
+2020,CH,"hardcoal;chp plant, auto",2.527220987325488
+2020,NO,"hardcoal;chp plant, auto",0.2496124426069666
+2020,FI,"oil;chp plant, main",0.031083068654039873
+2020,FR,"oil;chp plant, main",0.027758366421796514
+2020,IT,"oil;chp plant, main",3.104752027193408
+2020,BE,"biogas;chp plant, main",0.47777039008439437
+2020,BG,"biogas;chp plant, main",1.3931027970685346
+2020,CZ,"biogas;chp plant, main",2.698687405398349
+2020,DE,"biogas;chp plant, main",3.77901329577066
+2020,DK,"biogas;chp plant, main",1.5995017875098738
+2020,EE,"biogas;chp plant, main",0.18692247573538762
+2020,FR,"biogas;chp plant, main",7.547664374802006
+2020,HU,"biogas;chp plant, main",0.7169529102156104
+2020,IT,"biogas;chp plant, main",2.649453770951676
+2020,LT,"biogas;chp plant, main",0.4013832883451531
+2020,LU,"biogas;chp plant, main",5.272908010436894e-5
+2020,LV,"biogas;chp plant, main",0.9274856648003653
+2020,NL,"biogas;chp plant, main",2.53992307018667
+2020,PL,"biogas;chp plant, main",3.5518056900784
+2020,RO,"biogas;chp plant, main",0.2812222945670539
+2020,SK,"biogas;chp plant, main",1.511919725707789
+2020,RS,"biogas;chp plant, main",0.03390119624887075
+2020,BG,"lignite;chp plant, main",7.161475182366126
+2020,CZ,"lignite;chp plant, main",48.059960605552746
+2020,DE,"lignite;chp plant, main",52.15213436532869
+2020,GR,"lignite;chp plant, main",1.8761356926868182
+2020,HU,"lignite;chp plant, main",25.074623968411554
+2020,PL,"lignite;chp plant, main",148.62286077264181
+2020,RO,"lignite;chp plant, main",28.715478805917975
+2020,SK,"lignite;chp plant, main",14.297020771388498
+2020,BA,"lignite;chp plant, main",13.027171168378494
+2020,RS,"lignite;chp plant, main",23.131305571600162
+2020,BE,biogas;power plant,1.9267408039798382
+2020,BG,biogas;power plant,0.21602158438917796
+2020,ES,biogas;power plant,3.2990089023019498
+2020,FR,biogas;power plant,2.4741447825383815
+2020,IT,biogas;power plant,1.5430959840752925
+2020,PT,biogas;power plant,1.2567095775672021
+2020,RS,biogas;power plant,0.1103759845085551
+2020,UK,biogas;power plant,16.162390878518465
+2020,BE,"biomass;chp plant, main",0.3043223939041994
+2020,BG,"biomass;chp plant, main",0.1332395974558264
+2020,DE,"biomass;chp plant, main",35.281471004797474
+2020,DK,"biomass;chp plant, main",5.562950335456353
+2020,FR,"biomass;chp plant, main",4.409048858397491
+2020,GR,"biomass;chp plant, main",0.08738109588264761
+2020,HU,"biomass;chp plant, main",0.3681827961221747
+2020,IT,"biomass;chp plant, main",3.074807683744237
+2020,LT,"biomass;chp plant, main",1.1069135944801933
+2020,LV,"biomass;chp plant, main",1.084838376816014
+2020,NL,"biomass;chp plant, main",0.14585399570684826
+2020,PL,"biomass;chp plant, main",2.2371297126903986
+2020,SK,"biomass;chp plant, main",1.5996633614033104
+2020,RS,"biomass;chp plant, main",0.04178519639361806
+2020,AT,lignite;process heat,0.0016509362151331081
+2020,BG,lignite;process heat,0.015482194381178274
+2020,CZ,lignite;process heat,8.84471609053554
+2020,DE,lignite;process heat,1.6499810976871634
+2020,FR,lignite;process heat,0.27703079619370774
+2020,GR,lignite;process heat,0.013661406719389825
+2020,HR,lignite;process heat,0.08598558571324406
+2020,HU,lignite;process heat,0.09139861572143267
+2020,IT,lignite;process heat,0.004362485301852566
+2020,NL,lignite;process heat,0.04513417983754769
+2020,PL,lignite;process heat,0.3585058291939007
+2020,RO,lignite;process heat,0.407655323078469
+2020,SK,lignite;process heat,0.11491665743783519
+2020,BA,lignite;process heat,0.7834059577889254
+2020,ME,lignite;process heat,0.03904699160018252
+2020,MK,lignite;process heat,0.08919154923410112
+2020,RS,lignite;process heat,1.2582173756471446
+2020,IE,lignite;power plant,5.554540709754147
+2020,AT,"gas;chp plant, main",34.442042244894424
+2020,BE,"gas;chp plant, main",0.2727863151664253
+2020,BG,"gas;chp plant, main",6.701013462964122
+2020,DE,"gas;chp plant, main",186.39345395900452
+2020,EE,"gas;chp plant, main",0.06709600686878898
+2020,ES,"gas;chp plant, main",7.460629170743851
+2020,FI,"gas;chp plant, main",17.042955827368456
+2020,FR,"gas;chp plant, main",39.60221033937623
+2020,HR,"gas;chp plant, main",14.559139916365675
+2020,IT,"gas;chp plant, main",43.512584117396614
+2020,LT,"gas;chp plant, main",11.5754791529681
+2020,LV,"gas;chp plant, main",14.578540312207531
+2020,NL,"gas;chp plant, main",28.722200255647756
+2020,PL,"gas;chp plant, main",8.398893877810258
+2020,PT,"gas;chp plant, main",4.997667595300626
+2020,MK,"gas;chp plant, main",8.310397016030086
+2020,RS,"gas;chp plant, main",0.5937882914955183
+2020,DK,"gas;chp plant, main",1.5673764196471625
+2020,HU,"gas;chp plant, main",1.616674394142997
+2020,LU,"gas;chp plant, main",1.3419908112856382
+2020,RO,"gas;chp plant, main",9.284422762074835
+2020,SI,"gas;chp plant, main",2.655067540012829
+2020,SK,"gas;chp plant, main",1.778367569388694
+2020,AT,biomass;space heat,22.30219302784919
+2020,BE,biomass;space heat,7.73441090384826
+2020,BG,biomass;space heat,9.659203117841127
+2020,CZ,biomass;space heat,25.37481897074288
+2020,DE,biomass;space heat,104.98719654456576
+2020,DK,biomass;space heat,10.92366679500358
+2020,EE,biomass;space heat,4.601907138159244
+2020,ES,biomass;space heat,24.0246954867226
+2020,FI,biomass;space heat,17.2263713871228
+2020,FR,biomass;space heat,81.13561157030396
+2020,GR,biomass;space heat,8.549107448366685
+2020,HR,biomass;space heat,11.868619381398267
+2020,HU,biomass;space heat,15.191948634354356
+2020,IE,biomass;space heat,0.5324531893752152
+2020,IT,biomass;space heat,74.06246649273122
+2020,LT,biomass;space heat,5.959664428418218
+2020,LU,biomass;space heat,0.21890453960009312
+2020,LV,biomass;space heat,7.004840292940867
+2020,NL,biomass;space heat,8.00138218654686
+2020,PL,biomass;space heat,69.39017374320957
+2020,PT,biomass;space heat,9.22982258523706
+2020,RO,biomass;space heat,36.68868802536326
+2020,SE,biomass;space heat,11.083602364842609
+2020,SI,biomass;space heat,4.7579406092688945
+2020,SK,biomass;space heat,7.145201619460771
+2020,AL,biomass;space heat,2.271113045174189
+2020,BA,biomass;space heat,17.479893942800363
+2020,CH,biomass;space heat,11.976161832829257
+2020,ME,biomass;space heat,1.5957476839088789
+2020,MK,biomass;space heat,7.305214995318758
+2020,NO,biomass;space heat,6.155010227077631
+2020,RS,biomass;space heat,1.7308707556387681
+2020,UK,biomass;space heat,25.898278779668885
+2020,AT,"oil;chp plant, auto",1.4940897668532436
+2020,BE,"oil;chp plant, auto",3.366740502728882
+2020,CZ,"oil;chp plant, auto",0.15966761070751104
+2020,DE,"oil;chp plant, auto",11.253835839992167
+2020,DK,"oil;chp plant, auto",1.4268556665583256
+2020,ES,"oil;chp plant, auto",3.205984652689806
+2020,FI,"oil;chp plant, auto",1.7282598773140485
+2020,FR,"oil;chp plant, auto",2.7442692318406263
+2020,GR,"oil;chp plant, auto",0.10300076805400918
+2020,HR,"oil;chp plant, auto",0.819113398442626
+2020,IE,"oil;chp plant, auto",0.9162647635534716
+2020,IT,"oil;chp plant, auto",1.9013211850389617
+2020,NL,"oil;chp plant, auto",3.93223439268926
+2020,PL,"oil;chp plant, auto",1.0260848021116504
+2020,PT,"oil;chp plant, auto",0.824044952520208
+2020,RO,"oil;chp plant, auto",0.4943494534162509
+2020,SE,"oil;chp plant, auto",0.555982580787717
+2020,SI,"oil;chp plant, auto",0.26816939287014574
+2020,SK,"oil;chp plant, auto",0.02329847846724492
+2020,AL,"oil;chp plant, auto",0.39799154079407656
+2020,BA,"oil;chp plant, auto",0.04990991512158503
+2020,CH,"oil;chp plant, auto",2.656466252440688
+2020,NO,"oil;chp plant, auto",0.6941623819306444
+2020,RS,"oil;chp plant, auto",0.7904773498648011
+2020,UK,"oil;chp plant, auto",11.787262442826702
+2020,AT,gas;heating plant,8.501686378876814
+2020,BG,gas;heating plant,7.252796660847456
+2020,CZ,gas;heating plant,4.292358841805632
+2020,DE,gas;heating plant,140.0501406625891
+2020,DK,gas;heating plant,22.75198216821888
+2020,EE,gas;heating plant,4.2533066031583004
+2020,FI,gas;heating plant,19.92936537032812
+2020,FR,gas;heating plant,3.5773608793690523
+2020,HR,gas;heating plant,3.3980416563106455
+2020,HU,gas;heating plant,6.700819402535196
+2020,IE,gas;heating plant,0.20182828272177178
+2020,IT,gas;heating plant,16.221927119109665
+2020,LU,gas;heating plant,0.6126034993360152
+2020,LV,gas;heating plant,0.12431198138813862
+2020,NL,gas;heating plant,7.196666539476049
+2020,PL,gas;heating plant,43.20018347978072
+2020,PT,gas;heating plant,4.231086058819778
+2020,RO,gas;heating plant,13.804545712823199
+2020,SE,gas;heating plant,2.5118039841370283
+2020,SI,gas;heating plant,2.1536395022307366
+2020,SK,gas;heating plant,11.97818161679573
+2020,AL,gas;heating plant,1.3476809406626
+2020,BA,gas;heating plant,1.0040188649178339
+2020,CH,gas;heating plant,3.1610681562620897
+2020,ME,gas;heating plant,0.2550742033194887
+2020,MK,gas;heating plant,1.7336243457370593
+2020,NO,gas;heating plant,0.2337139697361288
+2020,RS,gas;heating plant,5.666761706131074
+2020,UK,gas;heating plant,17.972464992215517
+2020,AT,"hardcoal;chp plant, main",0.8903080126410543
+2020,BG,"hardcoal;chp plant, main",1.0998537589443393
+2020,DE,"hardcoal;chp plant, main",3.561076632652422
+2020,FI,"hardcoal;chp plant, main",6.433138387951969
+2020,FR,"hardcoal;chp plant, main",1.1070983532889933
+2020,IT,"hardcoal;chp plant, main",0.01895112654948799
+2020,NL,"hardcoal;chp plant, main",4.937214373589483
+2020,PL,"hardcoal;chp plant, main",0.5036567651110562
+2020,FR,oil;power plant,0.33227776113406154
+2020,IT,oil;power plant,1.9221849345232491
+2020,AT,biomass;process heat,13.314807216064876
+2020,BE,biomass;process heat,7.350855205830659
+2020,BG,biomass;process heat,2.317575109990224
+2020,CZ,biomass;process heat,5.502743186597311
+2020,DE,biomass;process heat,23.782499861959266
+2020,DK,biomass;process heat,1.2200474274625828
+2020,EE,biomass;process heat,0.13009662055435484
+2020,ES,biomass;process heat,21.00543627816237
+2020,FI,biomass;process heat,47.844217098275664
+2020,FR,biomass;process heat,15.072747963549917
+2020,GR,biomass;process heat,1.3761025769037794
+2020,HR,biomass;process heat,0.3743470789727365
+2020,HU,biomass;process heat,2.5353121454522434
+2020,IE,biomass;process heat,1.6967826162706081
+2020,IT,biomass;process heat,4.5855720561286475
+2020,LT,biomass;process heat,1.2476440718205226
+2020,LV,biomass;process heat,4.337567434125404
+2020,NL,biomass;process heat,0.9102730016555365
+2020,PL,biomass;process heat,20.950824998957735
+2020,PT,biomass;process heat,12.11044222657607
+2020,RO,biomass;process heat,2.717585180724457
+2020,SE,biomass;process heat,49.00779255363155
+2020,SK,biomass;process heat,4.695534046649444
+2020,CH,biomass;process heat,0.704530484245512
+2020,NO,biomass;process heat,3.503006934068286
+2020,UK,biomass;process heat,11.267214639917187
+2020,FI,oil;heating plant,0.7975670815684852
+2020,HR,oil;heating plant,0.01651861304513934
+2020,LU,oil;heating plant,0.0025687714140452686
+2020,SE,oil;heating plant,13.028570751073875
+2020,IT,hardcoal;power plant,14.49925654261396
+2020,AT,lignite;space heat,0.006613622414846904
+2020,BG,lignite;space heat,0.10624163571122555
+2020,CZ,lignite;space heat,5.049350214832583
+2020,FR,lignite;space heat,0.0010462066890974562
+2020,GR,lignite;space heat,0.046902212443637216
+2020,HR,lignite;space heat,0.032302584694511714
+2020,HU,lignite;space heat,0.6808430075829757
+2020,NL,lignite;space heat,0.019571622014708634
+2020,PL,lignite;space heat,0.7117444389690845
+2020,RO,lignite;space heat,0.478111300472613
+2020,SK,lignite;space heat,0.19569270328983837
+2020,BA,lignite;space heat,1.1554114733519116
+2020,ME,lignite;space heat,0.0487509123033263
+2020,MK,lignite;space heat,0.019923549461066562
+2020,RS,lignite;space heat,1.3204329018038037
+2020,BE,biomass;power plant,13.06153048583498
+2020,BG,biomass;power plant,0.5739551737531856
+2020,ES,biomass;power plant,18.49980598012978
+2020,FR,biomass;power plant,17.030754125820646
+2020,HU,biomass;power plant,6.989165972355765
+2020,IT,biomass;power plant,1.8080640253098896
+2020,LT,biomass;power plant,0.6709283754854357
+2020,NL,biomass;power plant,3.296618474648017
+2020,PT,biomass;power plant,2.5989141014585178
+2020,RO,biomass;power plant,2.806703969059082
