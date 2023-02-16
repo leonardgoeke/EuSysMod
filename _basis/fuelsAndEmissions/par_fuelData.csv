@@ -1,40 +1,40 @@
-carrier_1,carrier_2,timestep_2,technology_3,parameter,value,source,,workaround für jet fuel
-,,,refinery,effConv,0.95,,,
-crudeOil,,,refinery,emissionFac,13.14368023,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe, split crude oil emissions between refinery and final use",,
-diesel,,,,emissionFac,249.7299244,,,
-gasoline,,,,emissionFac,249.7299244,,,
-refinedOil,,,,emissionFac,249.7299244,,,
-hardcoal,,,,emissionFac,342.0957868,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe",,
-lignite,,,,emissionFac,362,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe",,
-gasFuel,,,,emissionFac,201.296363,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe",,
-waste,,,,emissionFac,332,used old dynelmod input,,
-crudeOil,,2020,,trdBuyPrc,29.1,,,
-crudeOil,,2025,,trdBuyPrc,39.8,,,
-crudeOil,,2030,,trdBuyPrc,45,,,
-crudeOil,,2035,,trdBuyPrc,49.4,,,
-crudeOil,,2040,,trdBuyPrc,53.2,,,
-crudeOil,,2045,,trdBuyPrc,53.2,,,
-crudeOil,,2050,,trdBuyPrc,53.2,,,
-hardcoal,,2020,,trdBuyPrc,11.9,,,
-hardcoal,,2025,,trdBuyPrc,24.8,,,
-hardcoal,,2030,,trdBuyPrc,24.8,,,
-hardcoal,,2035,,trdBuyPrc,24.8,,,
-hardcoal,,2040,,trdBuyPrc,24.8,,,
-hardcoal,,2045,,trdBuyPrc,24.8,,,
-hardcoal,,2050,,trdBuyPrc,24.8,,,
-gasFuel,naturalGas,2020,,trdBuyPrc,10.1,,,
-gasFuel,naturalGas,2025,,trdBuyPrc,61.6,,,
-gasFuel,naturalGas,2030,,trdBuyPrc,41.5,,,
-gasFuel,naturalGas,2035,,trdBuyPrc,41.5,,,
-gasFuel,naturalGas,2040,,trdBuyPrc,41.5,,,
-gasFuel,naturalGas,2045,,trdBuyPrc,41.5,,,
-gasFuel,naturalGas,2050,,trdBuyPrc,41.5,,,
-h2,,2020,,trdBuyPrc,275,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang",,
-h2,,2025,,trdBuyPrc,242,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang",,
-h2,,2030,,trdBuyPrc,213,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang",,
-h2,,2035,,trdBuyPrc,187,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang",,
-h2,,2040,,trdBuyPrc,164,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang",,
-h2,,2045,,trdBuyPrc,145,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang",,
-h2,,2050,,trdBuyPrc,127,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang",,
-lignite,,,,trdBuyPrc,1.5,,,
-waste,,,,trdBuyPrc,14.07599999,,,
+region_2,carrier_1,carrier_2,timestep_2,technology_3,parameter,value
+,,,,refinery,effConv,0.95
+,crudeOil,,,refinery,emissionFac,13.14368023
+,diesel,,,,emissionFac,249.7299244
+,gasoline,,,,emissionFac,249.7299244
+,refinedOil,,,,emissionFac,249.7299244
+,hardcoal,,,,emissionFac,342.0957868
+,lignite,,,,emissionFac,362
+,gasFuel,,,,emissionFac,201.296363
+,waste,,,,emissionFac,332
+,crudeOil,,2020,,trdBuyPrc,21.6
+,crudeOil,,2025,,trdBuyPrc,31.6
+,crudeOil,,2030,,trdBuyPrc,29.7
+,crudeOil,,2035,,trdBuyPrc,28.2
+,crudeOil,,2040,,trdBuyPrc,25.4
+,crudeOil,,2045,,trdBuyPrc,22.8
+,crudeOil,,2050,,trdBuyPrc,20.6
+,hardcoal,,2020,,trdBuyPrc,6.8
+,hardcoal,,2025,,trdBuyPrc,6.5
+,hardcoal,,2030,,trdBuyPrc,6.1
+,hardcoal,,2035,,trdBuyPrc,5.8
+,hardcoal,,2040,,trdBuyPrc,5.5
+,hardcoal,,2045,,trdBuyPrc,5.3
+,hardcoal,,2050,,trdBuyPrc,5.0
+,gasFuel,naturalGas,2020,,trdBuyPrc,21.6
+,gasFuel,naturalGas,2025,,trdBuyPrc,31.6
+,gasFuel,naturalGas,2030,,trdBuyPrc,29.7
+,gasFuel,naturalGas,2035,,trdBuyPrc,28.2
+,gasFuel,naturalGas,2040,,trdBuyPrc,25.4
+,gasFuel,naturalGas,2045,,trdBuyPrc,22.8
+,gasFuel,naturalGas,2050,,trdBuyPrc,20.6
+,h2,,2020,,trdBuyPrc,275
+,h2,,2025,,trdBuyPrc,242
+,h2,,2030,,trdBuyPrc,213
+,h2,,2035,,trdBuyPrc,187
+,h2,,2040,,trdBuyPrc,164
+,h2,,2045,,trdBuyPrc,145
+,h2,,2050,,trdBuyPrc,127
+,lignite,,,,trdBuyPrc,5.1
+,waste,,,,trdBuyPrc,14.07599999

@@ -1,0 +1,9 @@
+carrier_1,carrier_2,timestep_2,parameter,value
+gasFuel,naturalGas,2030,trdBuyUp,2185380.01
+gasFuel,naturalGas,2040,trdBuyUp,2185380.01
+gasFuel,naturalGas,2045,trdBuyUp,2185380.01
+gasFuel,naturalGas,2050,trdBuyUp,2185380.01
+hardcoal,,2030,trdBuyUp,501387.6759
+hardcoal,,2040,trdBuyUp,501387.6759
+hardcoal,,2045,trdBuyUp,501387.6759
+hardcoal,,2050,trdBuyUp,501387.6759

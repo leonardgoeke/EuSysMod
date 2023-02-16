@@ -17,4 +17,4 @@ export GUROBI_HOME
 module add gurobi/9.0.2
 module add julia/1.7.3
 
-julia run.jl $hours $NSLOTS
+julia run.jl $hours $scr $NSLOTS

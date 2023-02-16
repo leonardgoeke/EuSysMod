@@ -29,13 +29,14 @@ include(b* "src/dataHandling/gurobiTools.jl")
 using Gurobi
 
 h = "96"
+scr ="notOil"
 
 b = "" # add the model dir here
 
-input_arr = [b * "_basis",b * "timeSeries/" * h * "hours_2008_only2020"]
+input_arr = [b * "_basis",b * scr, b * "timeSeries/" * h * "hours_2008"]
 resultDir_str = b * "results"
 
-anyM = anyModel(input_arr, resultDir_str, objName = "TheModel", supTsLvl = 2, reportLvl = 2, shortExp = 5, emissionLoss = false)
+anyM = anyModel(input_arr, resultDir_str, objName = "euInde_" * scr, supTsLvl = 2, reportLvl = 2, shortExp = 5, emissionLoss = false)
 createOptModel!(anyM)
 setObjective!(:cost,anyM)
 
@@ -44,8 +45,8 @@ set_optimizer_attribute(anyM.optModel, "Method", 2);
 set_optimizer_attribute(anyM.optModel, "Crossover", 0);
 optimize!(anyM.optModel)
 
-computeResults("aggBenchmark.yml",model = anyM, outputDir = "results/")
-computeResults("aggAutoGen.yml",model = anyM, outputDir = "results/")
+#computeResults("aggBenchmark.yml",model = anyM, outputDir = "results/")
+#computeResults("aggAutoGen.yml",model = anyM, outputDir = "results/")
 
 reportResults(:summary,anyM)
 

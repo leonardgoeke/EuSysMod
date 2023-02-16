@@ -166,7 +166,7 @@ stock,chp,oilPlantProMedStock,,refinedOil,electricity; processHeat_medium,,,stoc
 stock,power,pumpedStorage,,,,electricity,electricity,stock,none,,,,
 stock,power,reservoir,,,,,electricity,stock,none,,,ineq,
 stock,power,runOfRiver,,,electricity,,,stock,none,,,,
-thermal,,retrofittedCoal,onlyElec; elecAndHeat ,solidBiomass,electricity; districtHeat,,,mature,none,,,,
+thermal,,retrofittedCoal,onlyElec; elecAndHeat ,solidBiomass,electricity; districtHeat,,,stock,none,,,,
 thermal,,wastePlant,onlyElec; onlyHeat,waste,electricity; districtHeat,,,mature,none,,,,
 transport,,dieselPsngRoadPrvt,,diesel,psngRoadPrvt,,,mature,none,,,,
 transport,,ottoFrtRoadHeavy,,gasoline,frtRoadHeavy,,,mature,none,,,,
