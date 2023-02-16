@@ -9,7 +9,9 @@
 #$ -m bae
 #$ -M lgo@wip.tu-berlin.de
 
-qsub -t 2001 -v hours='96' -v hours_heu='96' -v grid='_gridExp' start8_64.job
+qsub -t 2001 -v hours='96' -v hours_heu='96' -v trn='reference' start8_64.job
+qsub -t 2002 -v hours='96' -v hours_heu='96' -v trn='avoid' start8_64.job
+qsub -t 2003 -v hours='96' -v hours_heu='96' -v trn='shift' start8_64.job
 
 
 
