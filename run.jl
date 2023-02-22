@@ -1,6 +1,6 @@
 using AnyMOD, Gurobi, CSV, Statistics
 
-# For example
+# For example 2
 # ! string here define scenario, overwrite ARGS with respective values for hard-coding scenarios according to comments
 h = ARGS[1] # resolution of time-series for actual solve, can be 96, 1752, 4392, or 8760
 h_heu = ARGS[2] # resolution of time-series for pre-screening, can be 96, 1752, 4392, or 8760
