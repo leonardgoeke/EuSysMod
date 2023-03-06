@@ -8,10 +8,6 @@ processHeat_low,,4,2,4,4,eq
 processHeat_medium,,4,2,4,4,none
 processHeat_high,,4,2,4,4,eq
 capturedCO2,,2,1,4,4,eq
-psngRoadPrvt,,3,2,3,3,none
-psngRoadPub,,3,2,3,3,none
-frtRoadLight,,3,2,3,3,none
-frtRoadHeavy,,3,2,3,3,none
 psngRail,,5,2,3,3,none
 frtRail,,5,2,3,3,none
 crudeOil,,2,1,2,2,eq
@@ -20,3 +16,7 @@ jetFuel,,2,1,2,2,eq
 otherBiomass,solidBiomass,2,1,2,2,ineq
 otherBiomass,nonSolidBiomass,2,1,2,2,ineq
 rawBiogas,,2,1,2,2,eq
+psngRoadPrvt,,3,2,3,3,none
+psngRoadPub,,3,2,3,3,none
+frtRoadLight,,3,2,3,3,none
+frtRoadHeavy,,3,2,3,3,none
