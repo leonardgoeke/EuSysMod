@@ -107,10 +107,6 @@ stock,power,oilPlantProMedStock,,refinedOil,electricity; processHeat_medium,,,st
 stock,power,pumpedStorage,,,,electricity,electricity,stock,none,,,
 stock,power,reservoir,,,,,electricity,stock,none,,ineq,
 stock,power,runOfRiver,,,electricity,,,stock,none,,,
-transport,bev,bevFrtRoadHeavy,,electricity,frtRoadHeavy,electricity,,emerging,none,,,
-transport,bev,bevFrtRoadLight,,electricity,frtRoadLight,electricity,,emerging,none,,,
-transport,bev,bevPsngRoadPrvt,,electricity,psngRoadPrvt,electricity,,mature,none,,,
-transport,bev,bevPsngRoadPub,,electricity,psngRoadPub,electricity,,mature,none,,,
 transport,,cngPsngRoadPrvt,,synthGas,psngRoadPrvt,,,mature,none,,,
 transport,,dieselFrtRail,,refinedOil,frtRail,,,mature,none,,,
 transport,,dieselFrtRoadHeavy,,refinedOil,frtRoadHeavy,,,mature,none,,,
@@ -133,3 +129,7 @@ wind,onshore,onshore_a,,,electricity,,,mature,none,4,,yes
 wind,onshore,onshore_b,,,electricity,,,mature,none,4,,yes
 wind,onshore,onshore_c,,,electricity,,,mature,none,4,,yes
 powerToX,,gasStorage,,,,synthGas,synthGas,stock,decomm,,,
+transport,bev,bevFrtRoadHeavy,,electricity,frtRoadHeavy,electricity,,emerging,none,,,
+transport,bev,bevFrtRoadLight,,electricity,frtRoadLight,electricity,,emerging,none,,,
+transport,bev,bevPsngRoadPrvt,,electricity,psngRoadPrvt,electricity,,mature,none,,,
+transport,bev,bevPsngRoadPub,,electricity,psngRoadPub,electricity,,mature,none,,,

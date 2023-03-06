@@ -11,7 +11,7 @@ capturedCO2,,2,1,4,4,eq
 psngRoadPrvt,,3,2,3,3,none
 psngRoadPub,,3,2,3,3,none
 frtRoadLight,,3,2,3,3,none
-frtRoadHeavy,,5,2,3,3,none
+frtRoadHeavy,,3,2,3,3,none
 psngRail,,5,2,3,3,none
 frtRail,,5,2,3,3,none
 crudeOil,,2,1,2,2,eq
