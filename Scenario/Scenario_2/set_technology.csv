@@ -117,11 +117,11 @@ transport,,eFrtRail,,electricity,frtRail,,,mature,none,,,
 transport,,ePsngRail,,electricity,psngRail,,,mature,none,,,
 transport,,fcevPsngRoadPrvt,,h2,psngRoadPrvt,,,mature,none,,,
 transport,,fcFrtRail,,h2,frtRail,,,mature,none,,,
-transport,,fcFrtRoadHeavy,,h2,frtRoadHeavy,,,mature,none,,,
+transport,,fcFrtRoadHeavy,,h2,frtRoadHeavy,,,stock,none,,,
 transport,,fcFrtRoadLight,,h2,frtRoadLight,,,mature,none,,,
 transport,,fcPsngRail,,h2,psngRail,,,mature,none,,,
 transport,,fcPsngRoadPub,,h2,psngRoadPub,,,mature,none,,,
-transport,,oberFrtRoadHeavy,,electricity,frtRoadHeavy,,,mature,none,,,
+transport,,oberFrtRoadHeavy,,electricity,frtRoadHeavy,,,stock,none,,,
 transport,,ottoPsngRoadPrvt,,refinedOil,psngRoadPrvt,,,mature,none,,,
 wind,offshore,offshore_a,,,electricity,,,mature,none,4,,yes
 wind,offshore,offshore_b,,,electricity,,,mature,none,4,,yes
