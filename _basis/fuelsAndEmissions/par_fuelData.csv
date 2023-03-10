@@ -1,9 +1,18 @@
-carrier_1,region_4,timestep_2,parameter,value,source
-h2,06ES,2040,trdBuyPrc,111.71,see miscInputs -> h2Import
-h2,11ES,2040,trdBuyPrc,111.71,
-h2,30NL,2040,trdBuyPrc,111.71,
-h2,31DE,2040,trdBuyPrc,111.71,
-h2,69GR,2040,trdBuyPrc,111.71,
-h2,90UK,2040,trdBuyPrc,111.71,
-h2,09ES,2040,trdBuyPrc,76.9,
-h2,56IT,2040,trdBuyPrc,73.56,
+carrier_1,region_4,timestep_2,technology_3,parameter,value,source
+h2,06ES,2040,,trdBuyPrc,111.71,see miscInputs -> h2Import
+h2,11ES,2040,,trdBuyPrc,111.71,
+h2,30NL,2040,,trdBuyPrc,111.71,
+h2,31DE,2040,,trdBuyPrc,111.71,
+h2,69GR,2040,,trdBuyPrc,111.71,
+h2,90UK,2040,,trdBuyPrc,111.71,
+h2,09ES,2040,,trdBuyPrc,76.9,
+h2,56IT,2040,,trdBuyPrc,73.56,
+crudeOil,,,refinery,emissionFac,13.14368023,
+diesel,,,,emissionFac,249.7299244,
+gasoline,,,,emissionFac,249.7299244,
+refinedOil,,,,emissionFac,249.7299244,
+hardcoal,,,,emissionFac,342.0957868,
+lignite,,,,emissionFac,362,
+gasFuel,,,,emissionFac,201.296363,
+waste,,,,emissionFac,332,
+,,,refinery,effConv,0.95,
