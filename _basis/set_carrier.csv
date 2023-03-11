@@ -16,7 +16,6 @@ psngRail,,5,2,3,3,none
 frtRail,,5,2,3,3,none
 crudeOil,,2,1,2,2,eq
 refinedOil,,2,1,2,2,eq
-jetFuel,,2,1,2,2,eq
 otherBiomass,solidBiomass,2,1,2,2,ineq
 otherBiomass,nonSolidBiomass,2,1,2,2,ineq
 rawBiogas,,2,1,2,2,eq
