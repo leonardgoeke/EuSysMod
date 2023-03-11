@@ -1,9 +1,9 @@
 region_2,carrier_1,carrier_2,timestep_2,technology_3,parameter,value
 ,,,,refinery,effConv,0.95
 ,crudeOil,,,refinery,emissionFac,13.14368023
-,diesel,,,,emissionFac,249.7299244
-,gasoline,,,,emissionFac,249.7299244
-,refinedOil,,,,emissionFac,249.7299244
+,diesel,,,,emissionFac,262.8736046
+,gasoline,,,,emissionFac,262.8736046
+,refinedOil,,,,emissionFac,262.8736046
 ,hardcoal,,,,emissionFac,342.0957868
 ,lignite,,,,emissionFac,362
 ,gasFuel,,,,emissionFac,201.296363
@@ -21,7 +21,7 @@ region_2,carrier_1,carrier_2,timestep_2,technology_3,parameter,value
 ,hardcoal,,2035,,trdBuyPrc,5.8
 ,hardcoal,,2040,,trdBuyPrc,5.5
 ,hardcoal,,2045,,trdBuyPrc,5.3
-,hardcoal,,2050,,trdBuyPrc,5.0
+,hardcoal,,2050,,trdBuyPrc,5
 ,gasFuel,naturalGas,2020,,trdBuyPrc,21.6
 ,gasFuel,naturalGas,2025,,trdBuyPrc,31.6
 ,gasFuel,naturalGas,2030,,trdBuyPrc,29.7
