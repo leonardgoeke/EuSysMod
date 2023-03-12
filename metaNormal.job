@@ -10,11 +10,15 @@
 #$ -M lgo@wip.tu-berlin.de
 
 qsub -t 2001 -v hours='8760' -v hours_heu='1752' -v trn='reference' start8_64.job
-qsub -t 2002 -v hours='8760' -v hours_heu='1752' -v trn='avoid' start8_64.job
-qsub -t 2003 -v hours='8760' -v hours_heu='1752' -v trn='shift' start8_64.job
+qsub -t 3001 -v hours='4392' -v hours_heu='1752' -v trn='reference' start8_64.job
 
+#qsub -t 2002 -v hours='8760' -v hours_heu='1752' -v trn='avoid' start8_64.job
+#qsub -t 2003 -v hours='8760' -v hours_heu='1752' -v trn='shift' start8_64.job
+#qsub -t 2004 -v hours='8760' -v hours_heu='1752' -v trn='avoidShift' start8_64.job
 
-
+#qsub -t 3002 -v hours='4392' -v hours_heu='1752' -v trn='avoid' start8_64.job
+#qsub -t 3003 -v hours='4392' -v hours_heu='1752' -v trn='shift' start8_64.job
+#qsub -t 3004 -v hours='4392' -v hours_heu='1752' -v trn='avoidShift' start8_64.job
 
 
 

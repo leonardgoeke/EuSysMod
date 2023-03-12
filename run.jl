@@ -6,7 +6,7 @@ h_heu = ARGS[2] # resolution of time-series for pre-screening, can be 96, 1752, 
 trn = ARGS[3] # scenario for transport in germany
 t_int = parse(Int,ARGS[4]) # number of threads
 
-obj_str = h * "hours_" * h_heu * "hoursHeu" * trn
+obj_str = h * "hours_" * h_heu * "hoursHeu_" * trn
 temp_dir = "tempFix_" * obj_str # directory for temporary folder
 
 if isdir(temp_dir) rm(temp_dir, recursive = true) end
@@ -14,6 +14,12 @@ mkdir(temp_dir)
 
 inputMod_arr = ["_basis","transportScr/" * trn,"timeSeries/" * h * "hours_2008_only2040",temp_dir]
 inputHeu_arr = ["_basis","transportScr/" * trn,"timeSeries/" * h_heu * "hours_2008_only2040"]
+
+# add folder to fix eu to reference results
+if trn != "reference"
+    push!(inputMod_arr, "fixEU_" * h)
+    push!(inputHeu_arr, "fixEU_" * h)
+end
 resultDir_str = "results"
 
 #region # * perform heuristic solve
@@ -25,19 +31,17 @@ optMod_dic = Dict{Symbol,NamedTuple}()
 optMod_dic[:heuSca] =  (inputDir = inputHeu_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
 optMod_dic[:top] 	=  (inputDir = inputMod_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
 
-heu_m, heuSca_obj = @suppress heuristicSolve(optMod_dic[:heuSca],1.0,t_int,Gurobi.Optimizer);
-~, heuCom_obj = @suppress heuristicSolve(optMod_dic[:heuSca],8760/parse(Int,h_heu),t_int,Gurobi.Optimizer)
-# ! write fixes to files and limits to dictionary
-fix_dic, lim_dic, cntHeu_arr = evaluateHeu(heu_m,heuSca_obj,heuCom_obj,(thrsAbs = 0.001, thrsRel = 0.05),true) # get fixed and limited variables
-feasFix_dic = getFeasResult(optMod_dic[:top],fix_dic,lim_dic,t_int,0.001,Gurobi.Optimizer) # ensure feasiblity with fixed variables
-# ! write fixed variable values to files
-writeFixToFiles(fix_dic,feasFix_dic,temp_dir,heu_m; skipMustSt = true)
-
-
-
-if isfile(temp_dir * "/par_FixTech_bevFrtRoadLight_expConv.csv") rm(temp_dir * "/par_FixTech_bevFrtRoadLight_expConv.csv") end
-
-heu_m = nothing
+# heuristic presolved not needed if only results for germany are computed anyway
+if trn == "reference"
+    heu_m, heuSca_obj = @suppress heuristicSolve(optMod_dic[:heuSca],1.0,t_int,Gurobi.Optimizer);
+    ~, heuCom_obj = @suppress heuristicSolve(optMod_dic[:heuSca],8760/parse(Int,h_heu),t_int,Gurobi.Optimizer)
+    # ! write fixes to files and limits to dictionary
+    fix_dic, lim_dic, cntHeu_arr = evaluateHeu(heu_m,heuSca_obj,heuCom_obj,(thrsAbs = 0.001, thrsRel = 0.05),true) # get fixed and limited variables
+    feasFix_dic = getFeasResult(optMod_dic[:top],fix_dic,lim_dic,t_int,0.001,Gurobi.Optimizer) # ensure feasiblity with fixed variables
+    # ! write fixed variable values to files
+    writeFixToFiles(fix_dic,feasFix_dic,temp_dir,heu_m; skipMustSt = true)
+    heu_m = nothing
+end
 
 #endregion
 
@@ -68,10 +72,66 @@ reportResults(:cost,anyM, addObjName = true)
 
 reportTimeSeries(:electricity,anyM)
 
+# write fix for europe fo file
+if trn == "reference"
+    # store solutions as benders object
+    sol_obj = bendersData()
+	sol_obj.objVal = 0.0
+    sol_obj.capa = writeResult(anyM,[:capa,:exp,:mustCapa,:mustExp])
+    # get feasible solutions
+    fixSol_dic, limSol_dic, cntHeuSol_arr = evaluateHeu(anyM,sol_obj,copy(sol_obj),(thrsAbs = 0.001, thrsRel = 0.05),true) # get fixed and limited variables
+    feasFixSol_dic = getFeasResult(optMod_dic[:top],fixSol_dic,limSol_dic,t_int,0.001,Gurobi.Optimizer) # ensure feasiblity with fixed variables
+    # filter results for rest of EU and write to folder 
+
+    de_arr = getfield.(filter(x -> occursin("de",x.val) || occursin("DE",x.val), collect(values(anyM.sets[:R].nodes))),:idx)
+    for sys in (:tech,:exc)
+		part_dic = getfield(anyM.parts,sys)
+		for sSym in keys(feasFixSol_dic[sys])
+            for x in keys(feasFixSol_dic[sys][sSym])
+                feasFixSol_dic[sys][sSym][x] = filter(x -> sys == :tech ? !(x.R_exp in de_arr) : !(x.R_from in de_arr && x.R_to in de_arr), feasFixSol_dic[sys][sSym][x])
+            end
+            
+        end
+    end
+    writeFixToFiles(fixSol_dic,feasFixSol_dic,"fixEU_" * h,anyM, skipMustSt = true)
+end
+
 #endregion
 
 
+b = "C:/Users/pacop/.julia/dev/AnyMOD.jl/"
+	
+using Base.Threads, CSV, Dates, LinearAlgebra, Requires, YAML
+using MathOptInterface, Reexport, Statistics, SparseArrays
+using DataFrames, JuMP, Suppressor, Plotly
+using DelimitedFiles
+
+include(b* "src/objects.jl")
+include(b* "src/tools.jl")
+include(b* "src/modelCreation.jl")
+include(b* "src/decomposition.jl")
+
+include(b* "src/optModel/technology.jl")
+include(b* "src/optModel/exchange.jl")
+include(b* "src/optModel/system.jl")
+include(b* "src/optModel/cost.jl")
+include(b* "src/optModel/other.jl")
+include(b* "src/optModel/objective.jl")
+
+include(b* "src/dataHandling/mapping.jl")
+include(b* "src/dataHandling/parameter.jl")
+include(b* "src/dataHandling/readIn.jl")
+include(b* "src/dataHandling/tree.jl")
+include(b* "src/dataHandling/util.jl")
+
+include(b* "src/dataHandling/gurobiTools.jl")
 
 
+h = "96"
+h_heu = "96"
+trn = "avoid"
+t_int = 4
 
 
+printObject(feasFixSol_dic[:tech][:heatpumpPro][:mustCapaConv],anyM)
+printObject(sol_obj.capa[:tech][:heatpumpPro][:mustCapaConv],anyM)
