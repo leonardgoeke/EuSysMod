@@ -8,13 +8,13 @@ grid = "_gridExp" # scenario for grid expansion, can be "_gridExp" and "_noGridE
 t_int = 4 # number of threads
 obj_str = h * "hours_" * "hoursHeu" * grid
 
-# inputMod_arr = ["_basis", grid, "timeSeries/" * h * "hours_2008_only2040", "Scenario_" * h * "/Scenario_$i"]
+inputMod_arr = ["_basis", grid, "timeSeries/$h" * "hours_2008_only2040", "_bevScenario/costData_Scr$i", "_bevScenario/timeSeries_$h" * "_Scr$i/"]
 
-#   inputMod_arr = ["_basis", grid, "_bevScenario/Scenario_$i/costData", "_bevScenario/timeSeries_Scr$i/" * h]
-
-inputMod_arr = ["_basis", grid, "timeSeries/$hhours_2008_only2040", "_bevScenario/costData_Scr$i", "_bevScenario/timeSeries_$h_Scr$i/"]
-
-resultDir_str = "results_" * h
+# Create the results directory if it doesn't already exist
+if !isdir(resultDir_str)
+    mkdir(resultDir_str)
+end
+resultDir_str = "results_$h"
 
 #region # * create and solve main model
 
