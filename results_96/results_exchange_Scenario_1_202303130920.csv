@@ -1,0 +1,826 @@
+timestep_superordinate_expansion,timestep_superordinate_dispatch,region_from,region_to,carrier,exchange,directed,variable,value,objName
+none,30th < 2040,EU < BE < be,nonEU < UK < uk,none,powerGrid < hvdc,no,expExc,1.400000922877983,Scenario_1
+none,30th < 2040,EU < DE < de,EU < DK < dk_e,none,powerGrid < hvdc,no,expExc,0.025625670259454617,Scenario_1
+none,30th < 2040,EU < DE < de,nonEU < NO < no_s,none,powerGrid < hvdc,no,expExc,1.9999946305951553,Scenario_1
+none,30th < 2040,EU < DE < de,EU < SE < se_4,none,powerGrid < hvdc,no,expExc,1.3999996368244805,Scenario_1
+none,30th < 2040,EU < DK < dk_e,EU < PL < pl,none,powerGrid < hvdc,no,expExc,0.22193298489583685,Scenario_1
+none,30th < 2040,EU < DK < dk_w,nonEU < NO < no_s,none,powerGrid < hvdc,no,expExc,4.434710041188655,Scenario_1
+none,30th < 2040,EU < DK < dk_w,nonEU < UK < uk,none,powerGrid < hvdc,no,expExc,1.0079104563069093e-5,Scenario_1
+none,30th < 2040,EU < EE < ee,EU < FI < fi,none,powerGrid < hvdc,no,expExc,1.7226108950971084,Scenario_1
+none,30th < 2040,EU < FI < fi,EU < SE < se_1,none,powerGrid < hvdc,no,expExc,2.9999993778760707,Scenario_1
+none,30th < 2040,EU < FI < fi,EU < SE < se_2,none,powerGrid < hvdc,no,expExc,0.7999998905529337,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < IE < ie,none,powerGrid < hvdc,no,expExc,1.3999994001760767,Scenario_1
+none,30th < 2040,EU < FR < fr,nonEU < UK < uk,none,powerGrid < hvdc,no,expExc,6.199999315752825,Scenario_1
+none,30th < 2040,EU < GR < gr,EU < IT < it_s,none,powerGrid < hvdc,no,expExc,0.9999999330304705,Scenario_1
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_sic,none,powerGrid < hvdc,no,expExc,3.516538217819019e-5,Scenario_1
+none,30th < 2040,EU < IT < it_cs,nonEU < ME < me,none,powerGrid < hvdc,no,expExc,1.5999998853652477,Scenario_1
+none,30th < 2040,EU < IT < it_sar,EU < IT < it_sic,none,powerGrid < hvdc,no,expExc,1.988596937846912e-5,Scenario_1
+none,30th < 2040,EU < NL < nl,nonEU < NO < no_s,none,powerGrid < hvdc,no,expExc,0.11517655974017783,Scenario_1
+none,30th < 2040,EU < NL < nl,nonEU < UK < uk,none,powerGrid < hvdc,no,expExc,2.0000007436500407,Scenario_1
+none,30th < 2040,nonEU < NO < no_s,nonEU < UK < uk,none,powerGrid < hvdc,no,expExc,4.248297436156568,Scenario_1
+none,30th < 2040,EU < PL < pl,EU < SE < se_4,none,powerGrid < hvdc,no,expExc,0.37636367590293623,Scenario_1
+none,30th < 2040,nonEU < UK < ni,nonEU < UK < uk,none,powerGrid < hvdc,no,expExc,2.1788279999923446,Scenario_1
+none,30th < 2040,EU < SI < si < 57SI,EU < AT < at < 50AT,none,h2Grid,yes,expExc,1.134025283422882,Scenario_1
+none,30th < 2040,EU < FR < fr < 27FR,EU < BE < be < 28BE,none,h2Grid,yes,expExc,0.17482975305306309,Scenario_1
+none,30th < 2040,EU < LU < lu < 29LU,EU < BE < be < 28BE,none,h2Grid,yes,expExc,0.0017978618390361986,Scenario_1
+none,30th < 2040,EU < NL < nl < 30NL,EU < BE < be < 28BE,none,h2Grid,yes,expExc,0.1841457286975659,Scenario_1
+none,30th < 2040,EU < DK < dk_w < 38DK,EU < DE < de < 31DE,none,h2Grid,yes,expExc,0.22848945388987474,Scenario_1
+none,30th < 2040,EU < NL < nl < 30NL,EU < DE < de < 33DE,none,h2Grid,yes,expExc,5.353868088497114,Scenario_1
+none,30th < 2040,EU < DK < dk_w < 38DK,EU < DK < dk_e < 72DK,none,h2Grid,yes,expExc,0.010444223805403767,Scenario_1
+none,30th < 2040,nonEU < NO < no_s < 79NO,EU < DK < dk_w < 38DK,none,h2Grid,yes,expExc,4.481746885827195e-5,Scenario_1
+none,30th < 2040,EU < SE < se_1 < 86SE,EU < FI < fi < 74FI,none,h2Grid,yes,expExc,0.16659251064557223,Scenario_1
+none,30th < 2040,EU < IT < it_sar < 98IT,EU < FR < fr_co < 99FR,none,h2Grid,yes,expExc,0.008649534757210664,Scenario_1
+none,30th < 2040,EU < RO < ro < 59RO,EU < HU < hu < 58HU,none,h2Grid,yes,expExc,0.4135024371697785,Scenario_1
+none,30th < 2040,EU < IT < it_s < 55IT,EU < IT < it_cs < 54IT,none,h2Grid,yes,expExc,5.9387368826143217e-5,Scenario_1
+none,30th < 2040,nonEU < BA < ba < 63BA,EU < IT < it_cs < 54IT,none,h2Grid,yes,expExc,0.42418933524487756,Scenario_1
+none,30th < 2040,EU < SI < si < 57SI,EU < IT < it_n < 52IT,none,h2Grid,yes,expExc,0.18378438825797977,Scenario_1
+none,30th < 2040,nonEU < CH < ch < 48CH,EU < IT < it_n < 52IT,none,h2Grid,yes,expExc,0.26373522142712436,Scenario_1
+none,30th < 2040,EU < IT < it_sic < 56IT,EU < IT < it_s < 55IT,none,h2Grid,yes,expExc,2.7486496815279828e-5,Scenario_1
+none,30th < 2040,nonEU < AL < al < 70AL,EU < IT < it_s < 55IT,none,h2Grid,yes,expExc,0.35531945485397665,Scenario_1
+none,30th < 2040,EU < LV < lv < 78LV,EU < LT < lt < 77LT,none,h2Grid,yes,expExc,0.10455227456323576,Scenario_1
+none,30th < 2040,EU < ES < es < 04ES,EU < FR < fr < 14FR,none,h2Grid,yes,expExc,0.826830021859727,Scenario_1
+none,30th < 2040,EU < ES < es < 06ES,EU < FR < fr < 14FR,none,h2Grid,yes,expExc,1.87927296574419e-5,Scenario_1
+none,30th < 2040,EU < ES < es < 06ES,EU < FR < fr < 15FR,none,h2Grid,yes,expExc,4.275166084172683,Scenario_1
+none,30th < 2040,EU < FR < fr < 14FR,EU < FR < fr < 17FR,none,h2Grid,yes,expExc,0.42922877161862794,Scenario_1
+none,30th < 2040,EU < FR < fr < 14FR,EU < FR < fr < 18FR,none,h2Grid,yes,expExc,1.9413958325719045e-5,Scenario_1
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 16FR,none,h2Grid,yes,expExc,0.4414956036341354,Scenario_1
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 18FR,none,h2Grid,yes,expExc,0.27204523370541034,Scenario_1
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 19FR,none,h2Grid,yes,expExc,3.4159931154676926,Scenario_1
+none,30th < 2040,EU < FR < fr < 16FR,EU < IT < it_n < 52IT,none,h2Grid,yes,expExc,4.04067364206215e-5,Scenario_1
+none,30th < 2040,EU < FR < fr < 19FR,EU < FR < fr < 20FR,none,h2Grid,yes,expExc,2.5877431205334336,Scenario_1
+none,30th < 2040,EU < FR < fr < 20FR,nonEU < CH < ch < 47CH,none,h2Grid,yes,expExc,0.5406540124224194,Scenario_1
+none,30th < 2040,EU < FR < fr < 20FR,nonEU < CH < ch < 48CH,none,h2Grid,yes,expExc,0.1491642202130677,Scenario_1
+none,30th < 2040,EU < FR < fr < 20FR,EU < IT < it_n < 52IT,none,h2Grid,yes,expExc,1.235614401968316,Scenario_1
+none,30th < 2040,EU < FR < fr < 25FR,EU < LU < lu < 29LU,none,h2Grid,yes,expExc,0.2234405834329957,Scenario_1
+none,30th < 2040,EU < FR < fr < 26FR,nonEU < UK < uk < 90UK,none,h2Grid,yes,expExc,1.5200091740466175,Scenario_1
+none,30th < 2040,EU < CZ < cz < 39CZ,EU < DE < de < 34DE,none,h2Grid,yes,expExc,0.4964215887584769,Scenario_1
+none,30th < 2040,EU < HU < hu < 58HU,EU < SK < sk < 46SK,none,h2Grid,yes,expExc,0.19209466251994,Scenario_1
+none,30th < 2040,EU < AT < at < 49AT,EU < IT < it_n < 52IT,none,h2Grid,yes,expExc,0.4060482417349714,Scenario_1
+none,30th < 2040,EU < IT < it_cn < 53IT,EU < IT < it_n < 52IT,none,h2Grid,yes,expExc,1.6790482805404428,Scenario_1
+none,30th < 2040,EU < FR < fr_co < 99FR,EU < IT < it_cn < 53IT,none,h2Grid,yes,expExc,8.833743999771669e-5,Scenario_1
+none,30th < 2040,EU < IT < it_s < 55IT,nonEU < AL < al < 70AL,none,h2Grid,yes,expExc,1.0608674786832062e-5,Scenario_1
+none,30th < 2040,EU < HR < hr < 62HR,EU < SI < si < 57SI,none,h2Grid,yes,expExc,0.984633736464468,Scenario_1
+none,30th < 2040,EU < EE < ee < 73EE,EU < LV < lv < 78LV,none,h2Grid,yes,expExc,2.9154087220341825e-5,Scenario_1
+none,30th < 2040,nonEU < UK < ni < 95UK,nonEU < UK < uk < 93UK,none,h2Grid,yes,expExc,0.8353596666716356,Scenario_1
+none,30th < 2040,EU < IE < ie < 96IE,nonEU < UK < ni < 95UK,none,h2Grid,yes,expExc,1.1347245664119936,Scenario_1
+none,30th < 2040,EU < GR < gr,nonEU < AL < al,none,powerGrid < hvac,no,expExc,4.999991795702852,Scenario_1
+none,30th < 2040,nonEU < AL < al,nonEU < ME < me,none,powerGrid < hvac,no,expExc,1.5000062734852648,Scenario_1
+none,30th < 2040,nonEU < AL < al,nonEU < RS < rs,none,powerGrid < hvac,no,expExc,2.466587430366002,Scenario_1
+none,30th < 2040,EU < AT < at,nonEU < CH < ch,none,powerGrid < hvac,no,expExc,0.5999777780891062,Scenario_1
+none,30th < 2040,EU < AT < at,EU < CZ < cz,none,powerGrid < hvac,no,expExc,2.1705491329672735,Scenario_1
+none,30th < 2040,EU < AT < at,EU < DE < de,none,powerGrid < hvac,no,expExc,3.09999952758611,Scenario_1
+none,30th < 2040,EU < AT < at,EU < HU < hu,none,powerGrid < hvac,no,expExc,1.0818830333057164e-5,Scenario_1
+none,30th < 2040,EU < AT < at,EU < IT < it_n,none,powerGrid < hvac,no,expExc,1.3450027754240685,Scenario_1
+none,30th < 2040,EU < AT < at,EU < SI < si,none,powerGrid < hvac,no,expExc,1.0854074276324037,Scenario_1
+none,30th < 2040,EU < AT < at,EU < SK < sk,none,powerGrid < hvac,no,expExc,0.999998939859569,Scenario_1
+none,30th < 2040,EU < HR < hr,nonEU < BA < ba,none,powerGrid < hvac,no,expExc,1.4265480330376947,Scenario_1
+none,30th < 2040,nonEU < BA < ba,nonEU < ME < me,none,powerGrid < hvac,no,expExc,0.3374401548279495,Scenario_1
+none,30th < 2040,nonEU < BA < ba,nonEU < RS < rs,none,powerGrid < hvac,no,expExc,0.5001656149546715,Scenario_1
+none,30th < 2040,EU < BE < be,EU < FR < fr,none,powerGrid < hvac,no,expExc,6.99999829265548,Scenario_1
+none,30th < 2040,EU < BE < be,EU < LU < lu,none,powerGrid < hvac,no,expExc,1.0953855815269226e-5,Scenario_1
+none,30th < 2040,EU < BE < be,EU < NL < nl,none,powerGrid < hvac,no,expExc,2.0000001055192476,Scenario_1
+none,30th < 2040,EU < BG < bg,EU < GR < gr,none,powerGrid < hvac,no,expExc,4.9999381194247965,Scenario_1
+none,30th < 2040,EU < BG < bg,nonEU < MK < mk,none,powerGrid < hvac,no,expExc,1.2710103582843821,Scenario_1
+none,30th < 2040,EU < BG < bg,EU < RO < ro,none,powerGrid < hvac,no,expExc,2.9999961077191664,Scenario_1
+none,30th < 2040,EU < DE < de,nonEU < CH < ch,none,powerGrid < hvac,no,expExc,3.099999428668995,Scenario_1
+none,30th < 2040,EU < FR < fr,nonEU < CH < ch,none,powerGrid < hvac,no,expExc,1.5000005273430648,Scenario_1
+none,30th < 2040,EU < IT < it_n,nonEU < CH < ch,none,powerGrid < hvac,no,expExc,1.3999990999534175,Scenario_1
+none,30th < 2040,EU < CZ < cz,EU < DE < de,none,powerGrid < hvac,no,expExc,0.5000093593747202,Scenario_1
+none,30th < 2040,EU < CZ < cz,EU < SK < sk,none,powerGrid < hvac,no,expExc,0.15928660632481717,Scenario_1
+none,30th < 2040,EU < DE < de,EU < DK < dk_w,none,powerGrid < hvac,no,expExc,1.999990483238262,Scenario_1
+none,30th < 2040,EU < DE < de,EU < FR < fr,none,powerGrid < hvac,no,expExc,1.7999995416980452,Scenario_1
+none,30th < 2040,EU < DE < de,EU < NL < nl,none,powerGrid < hvac,no,expExc,1.0000000509945768,Scenario_1
+none,30th < 2040,EU < DE < de,EU < PL < pl,none,powerGrid < hvac,no,expExc,7.499998296153825,Scenario_1
+none,30th < 2040,EU < EE < ee,EU < LV < lv,none,powerGrid < hvac,no,expExc,2.443145988788589,Scenario_1
+none,30th < 2040,EU < ES < es,EU < FR < fr,none,powerGrid < hvac,no,expExc,8.99999968472931,Scenario_1
+none,30th < 2040,EU < ES < es,EU < PT < pt,none,powerGrid < hvac,no,expExc,5.19935766705162,Scenario_1
+none,30th < 2040,EU < FI < fi,nonEU < NO < no_n,none,powerGrid < hvac,no,expExc,1.5625451093247684,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < IT < it_n,none,powerGrid < hvac,no,expExc,0.17223650130610035,Scenario_1
+none,30th < 2040,EU < GR < gr,nonEU < MK < mk,none,powerGrid < hvac,no,expExc,1.499999652532223,Scenario_1
+none,30th < 2040,EU < HR < hr,EU < HU < hu,none,powerGrid < hvac,no,expExc,0.4480075465033095,Scenario_1
+none,30th < 2040,EU < HR < hr,nonEU < RS < rs,none,powerGrid < hvac,no,expExc,2.0999987270087876,Scenario_1
+none,30th < 2040,EU < HR < hr,EU < SI < si,none,powerGrid < hvac,no,expExc,4.999999104038378,Scenario_1
+none,30th < 2040,EU < HU < hu,EU < RO < ro,none,powerGrid < hvac,no,expExc,2.616999209206905,Scenario_1
+none,30th < 2040,EU < HU < hu,nonEU < RS < rs,none,powerGrid < hvac,no,expExc,2.999999560508442,Scenario_1
+none,30th < 2040,EU < HU < hu,EU < SK < sk,none,powerGrid < hvac,no,expExc,2.999999708447795,Scenario_1
+none,30th < 2040,EU < IE < ie,nonEU < UK < uk,none,powerGrid < hvac,no,expExc,0.49699833487247,Scenario_1
+none,30th < 2040,EU < IT < it_cn,EU < IT < it_cs,none,powerGrid < hvac,no,expExc,0.15837922578227281,Scenario_1
+none,30th < 2040,EU < IT < it_cn,EU < IT < it_n,none,powerGrid < hvac,no,expExc,0.9999999316753782,Scenario_1
+none,30th < 2040,EU < IT < it_n,EU < SI < si,none,powerGrid < hvac,no,expExc,1.999999793204382,Scenario_1
+none,30th < 2040,EU < LT < lt,EU < LV < lv,none,powerGrid < hvac,no,expExc,2.4581659175357746,Scenario_1
+none,30th < 2040,EU < LT < lt,EU < PL < pl,none,powerGrid < hvac,no,expExc,1.5802768458252832,Scenario_1
+none,30th < 2040,nonEU < ME < me,nonEU < RS < rs,none,powerGrid < hvac,no,expExc,0.3805267875886683,Scenario_1
+none,30th < 2040,nonEU < MK < mk,nonEU < RS < rs,none,powerGrid < hvac,no,expExc,2.7936568951960243,Scenario_1
+none,30th < 2040,EU < PL < pl,EU < SK < sk,none,powerGrid < hvac,no,expExc,2.4999992146117123,Scenario_1
+none,30th < 2040,EU < RO < ro,nonEU < RS < rs,none,powerGrid < hvac,no,expExc,2.7757243301488894,Scenario_1
+none,30th < 2040,EU < DK < dk_e,EU < DE < de,none,powerGrid < hvdc,yes,capaExc,0.6106256702465783,Scenario_1
+none,30th < 2040,EU < DE < de,EU < DK < dk_e,none,powerGrid < hvdc,yes,capaExc,0.6256256702465783,Scenario_1
+none,30th < 2040,EU < FI < fi,EU < EE < ee,none,powerGrid < hvdc,yes,capaExc,2.7226108950971084,Scenario_1
+none,30th < 2040,EU < EE < ee,EU < FI < fi,none,powerGrid < hvdc,yes,capaExc,2.7386108950971084,Scenario_1
+none,30th < 2040,EU < SE < se_1,EU < FI < fi,none,powerGrid < hvdc,yes,capaExc,4.199999377869979,Scenario_1
+none,30th < 2040,EU < FI < fi,EU < SE < se_1,none,powerGrid < hvdc,yes,capaExc,4.099999377869979,Scenario_1
+none,30th < 2040,nonEU < UK < uk,nonEU < UK < ni,none,powerGrid < hvdc,yes,capaExc,2.6288279999451696,Scenario_1
+none,30th < 2040,nonEU < UK < ni,nonEU < UK < uk,none,powerGrid < hvdc,yes,capaExc,2.2588279999451695,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < IE < ie,none,powerGrid < hvdc,no,capaExc,1.3999994001637868,Scenario_1
+none,30th < 2040,EU < GR < gr,EU < IT < it_s,none,powerGrid < hvdc,no,capaExc,1.4999999330304705,Scenario_1
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_sic,none,powerGrid < hvdc,no,capaExc,3.516538217819019e-5,Scenario_1
+none,30th < 2040,EU < IT < it_sar,EU < IT < it_sic,none,powerGrid < hvdc,no,capaExc,1.988596937846912e-5,Scenario_1
+none,30th < 2040,EU < DK < dk_w,EU < NL < nl,none,powerGrid < hvdc,no,capaExc,0.7000005952554609,Scenario_1
+none,30th < 2040,EU < DK < dk_e,EU < PL < pl,none,powerGrid < hvdc,no,capaExc,0.2219329848486092,Scenario_1
+none,30th < 2040,EU < FI < fi,EU < SE < se_2,none,powerGrid < hvdc,no,capaExc,0.7999998905529339,Scenario_1
+none,30th < 2040,EU < FI < fi,EU < SE < se_3,none,powerGrid < hvdc,no,capaExc,1.2000001935498257,Scenario_1
+none,30th < 2040,EU < DE < de,EU < SE < se_4,none,powerGrid < hvdc,no,capaExc,2.01499963681012,Scenario_1
+none,30th < 2040,EU < LT < lt,EU < SE < se_4,none,powerGrid < hvdc,no,capaExc,0.7000001049752516,Scenario_1
+none,30th < 2040,EU < PL < pl,EU < SE < se_4,none,powerGrid < hvdc,no,capaExc,0.9763636759029363,Scenario_1
+none,30th < 2040,EU < IT < it_cs,nonEU < ME < me,none,powerGrid < hvdc,no,capaExc,2.1999998853473177,Scenario_1
+none,30th < 2040,EU < DE < de,nonEU < NO < no_s,none,powerGrid < hvdc,no,capaExc,3.399994630584497,Scenario_1
+none,30th < 2040,EU < DK < dk_w,nonEU < NO < no_s,none,powerGrid < hvdc,no,capaExc,6.0747100412025405,Scenario_1
+none,30th < 2040,EU < NL < nl,nonEU < NO < no_s,none,powerGrid < hvdc,no,capaExc,0.8151765597401778,Scenario_1
+none,30th < 2040,EU < BE < be,nonEU < UK < uk,none,powerGrid < hvdc,no,capaExc,2.400000922848269,Scenario_1
+none,30th < 2040,EU < DK < dk_w,nonEU < UK < uk,none,powerGrid < hvdc,no,capaExc,1.0079074517695543e-5,Scenario_1
+none,30th < 2040,EU < FR < fr,nonEU < UK < uk,none,powerGrid < hvdc,no,capaExc,8.19999931571106,Scenario_1
+none,30th < 2040,EU < NL < nl,nonEU < UK < uk,none,powerGrid < hvdc,no,capaExc,3.0000007436379885,Scenario_1
+none,30th < 2040,nonEU < NO < no_s,nonEU < UK < uk,none,powerGrid < hvdc,no,capaExc,4.248297436002543,Scenario_1
+none,30th < 2040,EU < SE < se_3,EU < DK < dk_w,none,powerGrid < hvdc,yes,capaExc,0.68,Scenario_1
+none,30th < 2040,EU < IT < it_sar,EU < FR < fr_co,none,powerGrid < hvdc,yes,capaExc,0.35,Scenario_1
+none,30th < 2040,EU < IT < it_sar,EU < IT < it_cs,none,powerGrid < hvdc,yes,capaExc,0.9,Scenario_1
+none,30th < 2040,EU < IT < it_sic,EU < IT < it_s,none,powerGrid < hvdc,yes,capaExc,1.2,Scenario_1
+none,30th < 2040,EU < FR < fr_co,EU < IT < it_sar,none,powerGrid < hvdc,yes,capaExc,0.3,Scenario_1
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_sar,none,powerGrid < hvdc,yes,capaExc,0.7,Scenario_1
+none,30th < 2040,EU < IT < it_s,EU < IT < it_sic,none,powerGrid < hvdc,yes,capaExc,1.1,Scenario_1
+none,30th < 2040,EU < DK < dk_w,EU < SE < se_3,none,powerGrid < hvdc,yes,capaExc,0.74,Scenario_1
+none,30th < 2040,EU < CZ < cz < 39CZ,EU < DE < de < 34DE,none,h2Grid,yes,capaExc,0.49642158875847686,Scenario_1
+none,30th < 2040,EU < ES < es < 04ES,EU < FR < fr < 14FR,none,h2Grid,yes,capaExc,0.826830021859727,Scenario_1
+none,30th < 2040,EU < ES < es < 06ES,EU < FR < fr < 14FR,none,h2Grid,yes,capaExc,1.8792729657441898e-5,Scenario_1
+none,30th < 2040,EU < ES < es < 06ES,EU < FR < fr < 15FR,none,h2Grid,yes,capaExc,4.2751660841726835,Scenario_1
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 16FR,none,h2Grid,yes,capaExc,0.44149560363413537,Scenario_1
+none,30th < 2040,EU < FR < fr < 14FR,EU < FR < fr < 17FR,none,h2Grid,yes,capaExc,0.42922877161862794,Scenario_1
+none,30th < 2040,EU < FR < fr < 14FR,EU < FR < fr < 18FR,none,h2Grid,yes,capaExc,1.9413958325719045e-5,Scenario_1
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 18FR,none,h2Grid,yes,capaExc,0.27204523370541034,Scenario_1
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 19FR,none,h2Grid,yes,capaExc,3.415993115467693,Scenario_1
+none,30th < 2040,EU < FR < fr < 19FR,EU < FR < fr < 20FR,none,h2Grid,yes,capaExc,2.587743120533433,Scenario_1
+none,30th < 2040,EU < FR < fr_co < 99FR,EU < IT < it_cn < 53IT,none,h2Grid,yes,capaExc,8.833743999771669e-5,Scenario_1
+none,30th < 2040,EU < AT < at < 49AT,EU < IT < it_n < 52IT,none,h2Grid,yes,capaExc,0.40604824173497134,Scenario_1
+none,30th < 2040,EU < FR < fr < 16FR,EU < IT < it_n < 52IT,none,h2Grid,yes,capaExc,4.040673642062149e-5,Scenario_1
+none,30th < 2040,EU < FR < fr < 20FR,EU < IT < it_n < 52IT,none,h2Grid,yes,capaExc,1.235614401968316,Scenario_1
+none,30th < 2040,EU < IT < it_cn < 53IT,EU < IT < it_n < 52IT,none,h2Grid,yes,capaExc,1.6790482805404425,Scenario_1
+none,30th < 2040,EU < FR < fr < 25FR,EU < LU < lu < 29LU,none,h2Grid,yes,capaExc,0.22344058343299567,Scenario_1
+none,30th < 2040,EU < EE < ee < 73EE,EU < LV < lv < 78LV,none,h2Grid,yes,capaExc,2.9154087220341825e-5,Scenario_1
+none,30th < 2040,EU < HR < hr < 62HR,EU < SI < si < 57SI,none,h2Grid,yes,capaExc,0.984633736464468,Scenario_1
+none,30th < 2040,EU < HU < hu < 58HU,EU < SK < sk < 46SK,none,h2Grid,yes,capaExc,0.19209466251994,Scenario_1
+none,30th < 2040,EU < IT < it_s < 55IT,nonEU < AL < al < 70AL,none,h2Grid,yes,capaExc,1.0608674786832064e-5,Scenario_1
+none,30th < 2040,EU < FR < fr < 20FR,nonEU < CH < ch < 47CH,none,h2Grid,yes,capaExc,0.5406540124224194,Scenario_1
+none,30th < 2040,EU < FR < fr < 20FR,nonEU < CH < ch < 48CH,none,h2Grid,yes,capaExc,0.1491642202130677,Scenario_1
+none,30th < 2040,EU < IE < ie < 96IE,nonEU < UK < ni < 95UK,none,h2Grid,yes,capaExc,1.1347245664119936,Scenario_1
+none,30th < 2040,EU < FR < fr < 26FR,nonEU < UK < uk < 90UK,none,h2Grid,yes,capaExc,1.5200091740466177,Scenario_1
+none,30th < 2040,nonEU < UK < ni < 95UK,nonEU < UK < uk < 93UK,none,h2Grid,yes,capaExc,0.8353596666716357,Scenario_1
+none,30th < 2040,EU < DK < dk_w < 38DK,EU < DE < de < 31DE,none,h2Grid,yes,capaExc,0.2284894538898747,Scenario_1
+none,30th < 2040,EU < DK < dk_w < 38DK,EU < DK < dk_e < 72DK,none,h2Grid,yes,capaExc,0.010444223805403767,Scenario_1
+none,30th < 2040,EU < FR < fr < 27FR,EU < BE < be < 28BE,none,h2Grid,yes,capaExc,0.17482975305306309,Scenario_1
+none,30th < 2040,EU < IT < it_s < 55IT,EU < IT < it_cs < 54IT,none,h2Grid,yes,capaExc,5.9387368826143217e-5,Scenario_1
+none,30th < 2040,EU < IT < it_sar < 98IT,EU < FR < fr_co < 99FR,none,h2Grid,yes,capaExc,0.008649534757210664,Scenario_1
+none,30th < 2040,EU < IT < it_sic < 56IT,EU < IT < it_s < 55IT,none,h2Grid,yes,capaExc,2.7486496815279828e-5,Scenario_1
+none,30th < 2040,EU < LU < lu < 29LU,EU < BE < be < 28BE,none,h2Grid,yes,capaExc,0.0017978618390361986,Scenario_1
+none,30th < 2040,EU < LV < lv < 78LV,EU < LT < lt < 77LT,none,h2Grid,yes,capaExc,0.10455227456323576,Scenario_1
+none,30th < 2040,EU < NL < nl < 30NL,EU < BE < be < 28BE,none,h2Grid,yes,capaExc,0.18414572869756587,Scenario_1
+none,30th < 2040,EU < NL < nl < 30NL,EU < DE < de < 33DE,none,h2Grid,yes,capaExc,5.353868088497113,Scenario_1
+none,30th < 2040,EU < RO < ro < 59RO,EU < HU < hu < 58HU,none,h2Grid,yes,capaExc,0.4135024371697786,Scenario_1
+none,30th < 2040,EU < SE < se_1 < 86SE,EU < FI < fi < 74FI,none,h2Grid,yes,capaExc,0.16659251064557223,Scenario_1
+none,30th < 2040,EU < SI < si < 57SI,EU < AT < at < 50AT,none,h2Grid,yes,capaExc,1.134025283422882,Scenario_1
+none,30th < 2040,EU < SI < si < 57SI,EU < IT < it_n < 52IT,none,h2Grid,yes,capaExc,0.18378438825797974,Scenario_1
+none,30th < 2040,nonEU < AL < al < 70AL,EU < IT < it_s < 55IT,none,h2Grid,yes,capaExc,0.3553194548539766,Scenario_1
+none,30th < 2040,nonEU < BA < ba < 63BA,EU < IT < it_cs < 54IT,none,h2Grid,yes,capaExc,0.4241893352448776,Scenario_1
+none,30th < 2040,nonEU < CH < ch < 48CH,EU < IT < it_n < 52IT,none,h2Grid,yes,capaExc,0.26373522142712436,Scenario_1
+none,30th < 2040,nonEU < NO < no_s < 79NO,EU < DK < dk_w < 38DK,none,h2Grid,yes,capaExc,4.4817468858271944e-5,Scenario_1
+none,30th < 2040,EU < CZ < cz,EU < AT < at,none,powerGrid < hvac,yes,capaExc,2.9705491329518674,Scenario_1
+none,30th < 2040,EU < IT < it_n,EU < AT < at,none,powerGrid < hvac,yes,capaExc,1.5800027754142394,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < BE < be,none,powerGrid < hvac,yes,capaExc,10.29999829260709,Scenario_1
+none,30th < 2040,EU < LU < lu,EU < BE < be,none,powerGrid < hvac,yes,capaExc,0.18001095385581525,Scenario_1
+none,30th < 2040,EU < NL < nl,EU < BE < be,none,powerGrid < hvac,yes,capaExc,3.400000105455497,Scenario_1
+none,30th < 2040,EU < GR < gr,EU < BG < bg,none,powerGrid < hvac,yes,capaExc,5.39993811936874,Scenario_1
+none,30th < 2040,nonEU < MK < mk,EU < BG < bg,none,powerGrid < hvac,yes,capaExc,1.3710103582544353,Scenario_1
+none,30th < 2040,nonEU < RS < rs,EU < BG < bg,none,powerGrid < hvac,yes,capaExc,0.200005389287486,Scenario_1
+none,30th < 2040,EU < AT < at,EU < CZ < cz,none,powerGrid < hvac,yes,capaExc,3.0705491329518675,Scenario_1
+none,30th < 2040,EU < DE < de,EU < CZ < cz,none,powerGrid < hvac,yes,capaExc,2.000009359310784,Scenario_1
+none,30th < 2040,EU < PL < pl,EU < CZ < cz,none,powerGrid < hvac,yes,capaExc,0.8000035345504408,Scenario_1
+none,30th < 2040,EU < SK < sk,EU < CZ < cz,none,powerGrid < hvac,yes,capaExc,1.2592866062948007,Scenario_1
+none,30th < 2040,EU < CZ < cz,EU < DE < de,none,powerGrid < hvac,yes,capaExc,2.6000093593107843,Scenario_1
+none,30th < 2040,EU < DK < dk_w,EU < DE < de,none,powerGrid < hvac,yes,capaExc,3.7799904832244144,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < DE < de,none,powerGrid < hvac,yes,capaExc,3.599999541668608,Scenario_1
+none,30th < 2040,EU < PL < pl,EU < DE < de,none,powerGrid < hvac,yes,capaExc,9.999998296091183,Scenario_1
+none,30th < 2040,nonEU < CH < ch,EU < DE < de,none,powerGrid < hvac,yes,capaExc,7.699999428623541,Scenario_1
+none,30th < 2040,EU < SE < se_4,EU < DK < dk_e,none,powerGrid < hvac,yes,capaExc,1.3000025035511302,Scenario_1
+none,30th < 2040,EU < DE < de,EU < DK < dk_w,none,powerGrid < hvac,yes,capaExc,3.4999904832244146,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < ES < es,none,powerGrid < hvac,yes,capaExc,11.799999684675456,Scenario_1
+none,30th < 2040,EU < PT < pt,EU < ES < es,none,powerGrid < hvac,yes,capaExc,8.699357666866437,Scenario_1
+none,30th < 2040,EU < BE < be,EU < FR < fr,none,powerGrid < hvac,yes,capaExc,8.79999829260709,Scenario_1
+none,30th < 2040,EU < DE < de,EU < FR < fr,none,powerGrid < hvac,yes,capaExc,4.099999541668608,Scenario_1
+none,30th < 2040,EU < ES < es,EU < FR < fr,none,powerGrid < hvac,yes,capaExc,11.599999684675455,Scenario_1
+none,30th < 2040,EU < IT < it_n,EU < FR < fr,none,powerGrid < hvac,yes,capaExc,2.3322365013061006,Scenario_1
+none,30th < 2040,nonEU < CH < ch,EU < FR < fr,none,powerGrid < hvac,yes,capaExc,2.8000005273098036,Scenario_1
+none,30th < 2040,EU < BG < bg,EU < GR < gr,none,powerGrid < hvac,yes,capaExc,5.59993811936874,Scenario_1
+none,30th < 2040,nonEU < MK < mk,EU < GR < gr,none,powerGrid < hvac,yes,capaExc,2.349999652503079,Scenario_1
+none,30th < 2040,nonEU < BA < ba,EU < HR < hr,none,powerGrid < hvac,yes,capaExc,2.1765480330075517,Scenario_1
+none,30th < 2040,EU < RO < ro,EU < HU < hu,none,powerGrid < hvac,yes,capaExc,3.716999209173222,Scenario_1
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_cn,none,powerGrid < hvac,yes,capaExc,2.758379225782273,Scenario_1
+none,30th < 2040,EU < IT < it_n,EU < IT < it_cn,none,powerGrid < hvac,yes,capaExc,4.7499999316753785,Scenario_1
+none,30th < 2040,EU < IT < it_cn,EU < IT < it_cs,none,powerGrid < hvac,yes,capaExc,1.5583792257822728,Scenario_1
+none,30th < 2040,EU < IT < it_s,EU < IT < it_cs,none,powerGrid < hvac,yes,capaExc,4.5000000283368475,Scenario_1
+none,30th < 2040,EU < AT < at,EU < IT < it_n,none,powerGrid < hvac,yes,capaExc,1.7500027754142395,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < IT < it_n,none,powerGrid < hvac,yes,capaExc,4.5222365013061,Scenario_1
+none,30th < 2040,EU < IT < it_cn,EU < IT < it_n,none,powerGrid < hvac,yes,capaExc,2.5499999316753783,Scenario_1
+none,30th < 2040,EU < SI < si,EU < IT < it_n,none,powerGrid < hvac,yes,capaExc,2.729999793200732,Scenario_1
+none,30th < 2040,nonEU < CH < ch,EU < IT < it_n,none,powerGrid < hvac,yes,capaExc,5.63999909992562,Scenario_1
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_s,none,powerGrid < hvac,yes,capaExc,9.999000028336848,Scenario_1
+none,30th < 2040,EU < LV < lv,EU < LT < lt,none,powerGrid < hvac,yes,capaExc,3.9581659175357746,Scenario_1
+none,30th < 2040,EU < BE < be,EU < LU < lu,none,powerGrid < hvac,yes,capaExc,0.6800109538558153,Scenario_1
+none,30th < 2040,EU < LT < lt,EU < LV < lv,none,powerGrid < hvac,yes,capaExc,3.658165917535775,Scenario_1
+none,30th < 2040,EU < BE < be,EU < NL < nl,none,powerGrid < hvac,yes,capaExc,4.400000105455497,Scenario_1
+none,30th < 2040,EU < CZ < cz,EU < PL < pl,none,powerGrid < hvac,yes,capaExc,0.6000035345504408,Scenario_1
+none,30th < 2040,EU < DE < de,EU < PL < pl,none,powerGrid < hvac,yes,capaExc,7.999998296091183,Scenario_1
+none,30th < 2040,EU < ES < es,EU < PT < pt,none,powerGrid < hvac,yes,capaExc,9.399357666866438,Scenario_1
+none,30th < 2040,EU < HU < hu,EU < RO < ro,none,powerGrid < hvac,yes,capaExc,3.6169992091732217,Scenario_1
+none,30th < 2040,nonEU < RS < rs,EU < RO < ro,none,powerGrid < hvac,yes,capaExc,3.5757243300762305,Scenario_1
+none,30th < 2040,nonEU < NO < no_n,EU < SE < se_1,none,powerGrid < hvac,yes,capaExc,0.7000002118954813,Scenario_1
+none,30th < 2040,nonEU < NO < no_m,EU < SE < se_2,none,powerGrid < hvac,yes,capaExc,0.600000525954812,Scenario_1
+none,30th < 2040,nonEU < NO < no_n,EU < SE < se_2,none,powerGrid < hvac,yes,capaExc,0.25000043283111323,Scenario_1
+none,30th < 2040,nonEU < NO < no_s,EU < SE < se_3,none,powerGrid < hvac,yes,capaExc,2.1450003138173575,Scenario_1
+none,30th < 2040,EU < DK < dk_e,EU < SE < se_4,none,powerGrid < hvac,yes,capaExc,1.7000025035511301,Scenario_1
+none,30th < 2040,EU < IT < it_n,EU < SI < si,none,powerGrid < hvac,yes,capaExc,2.6799997932007322,Scenario_1
+none,30th < 2040,EU < CZ < cz,EU < SK < sk,none,powerGrid < hvac,yes,capaExc,1.9592866062948007,Scenario_1
+none,30th < 2040,nonEU < RS < rs,nonEU < AL < al,none,powerGrid < hvac,yes,capaExc,2.9665874303366864,Scenario_1
+none,30th < 2040,EU < HR < hr,nonEU < BA < ba,none,powerGrid < hvac,yes,capaExc,2.1265480330075515,Scenario_1
+none,30th < 2040,nonEU < ME < me,nonEU < BA < ba,none,powerGrid < hvac,yes,capaExc,0.7374401548150638,Scenario_1
+none,30th < 2040,EU < DE < de,nonEU < CH < ch,none,powerGrid < hvac,yes,capaExc,5.799999428623542,Scenario_1
+none,30th < 2040,EU < FR < fr,nonEU < CH < ch,none,powerGrid < hvac,yes,capaExc,4.650000527309803,Scenario_1
+none,30th < 2040,EU < IT < it_n,nonEU < CH < ch,none,powerGrid < hvac,yes,capaExc,3.30999909992562,Scenario_1
+none,30th < 2040,nonEU < BA < ba,nonEU < ME < me,none,powerGrid < hvac,yes,capaExc,0.8374401548150637,Scenario_1
+none,30th < 2040,nonEU < RS < rs,nonEU < ME < me,none,powerGrid < hvac,yes,capaExc,0.980526787558734,Scenario_1
+none,30th < 2040,EU < BG < bg,nonEU < MK < mk,none,powerGrid < hvac,yes,capaExc,1.6710103582544353,Scenario_1
+none,30th < 2040,EU < GR < gr,nonEU < MK < mk,none,powerGrid < hvac,yes,capaExc,2.5999996525030795,Scenario_1
+none,30th < 2040,nonEU < RS < rs,nonEU < MK < mk,none,powerGrid < hvac,yes,capaExc,3.5936568951654237,Scenario_1
+none,30th < 2040,EU < SE < se_2,nonEU < NO < no_m,none,powerGrid < hvac,yes,capaExc,1.000000525954812,Scenario_1
+none,30th < 2040,EU < SE < se_1,nonEU < NO < no_n,none,powerGrid < hvac,yes,capaExc,0.6000002118954814,Scenario_1
+none,30th < 2040,EU < SE < se_2,nonEU < NO < no_n,none,powerGrid < hvac,yes,capaExc,0.3000004328311132,Scenario_1
+none,30th < 2040,EU < SE < se_3,nonEU < NO < no_s,none,powerGrid < hvac,yes,capaExc,2.0950003138173576,Scenario_1
+none,30th < 2040,EU < BG < bg,nonEU < RS < rs,none,powerGrid < hvac,yes,capaExc,0.500005389287486,Scenario_1
+none,30th < 2040,EU < RO < ro,nonEU < RS < rs,none,powerGrid < hvac,yes,capaExc,3.7757243300762307,Scenario_1
+none,30th < 2040,nonEU < AL < al,nonEU < RS < rs,none,powerGrid < hvac,yes,capaExc,3.1165874303366863,Scenario_1
+none,30th < 2040,nonEU < ME < me,nonEU < RS < rs,none,powerGrid < hvac,yes,capaExc,0.8805267875587341,Scenario_1
+none,30th < 2040,nonEU < MK < mk,nonEU < RS < rs,none,powerGrid < hvac,yes,capaExc,3.443656895165424,Scenario_1
+none,30th < 2040,EU < AT < at,EU < DE < de,none,powerGrid < hvac,no,capaExc,8.099999527504743,Scenario_1
+none,30th < 2040,EU < BE < be,EU < DE < de,none,powerGrid < hvac,no,capaExc,1.000000602436407,Scenario_1
+none,30th < 2040,EU < AT < at,EU < HU < hu,none,powerGrid < hvac,no,capaExc,0.8000108188174565,Scenario_1
+none,30th < 2040,EU < HR < hr,EU < HU < hu,none,powerGrid < hvac,no,capaExc,2.4480075464729723,Scenario_1
+none,30th < 2040,EU < DE < de,EU < LU < lu,none,powerGrid < hvac,no,capaExc,2.3000008688984037,Scenario_1
+none,30th < 2040,EU < EE < ee,EU < LV < lv,none,powerGrid < hvac,no,capaExc,3.3431459887341077,Scenario_1
+none,30th < 2040,EU < DE < de,EU < NL < nl,none,powerGrid < hvac,no,capaExc,5.2500000509288585,Scenario_1
+none,30th < 2040,EU < LT < lt,EU < PL < pl,none,powerGrid < hvac,no,capaExc,2.0802768457957868,Scenario_1
+none,30th < 2040,EU < BG < bg,EU < RO < ro,none,powerGrid < hvac,no,capaExc,3.299996107639401,Scenario_1
+none,30th < 2040,EU < SE < se_2,EU < SE < se_3,none,powerGrid < hvac,no,capaExc,7.8000019497880375,Scenario_1
+none,30th < 2040,EU < AT < at,EU < SI < si,none,powerGrid < hvac,no,capaExc,2.035407427584995,Scenario_1
+none,30th < 2040,EU < HR < hr,EU < SI < si,none,powerGrid < hvac,no,capaExc,6.499999104001585,Scenario_1
+none,30th < 2040,EU < HU < hu,EU < SI < si,none,powerGrid < hvac,no,capaExc,1.2000033190231016,Scenario_1
+none,30th < 2040,EU < AT < at,EU < SK < sk,none,powerGrid < hvac,no,capaExc,0.9999989398595692,Scenario_1
+none,30th < 2040,EU < HU < hu,EU < SK < sk,none,powerGrid < hvac,no,capaExc,4.9999997084256,Scenario_1
+none,30th < 2040,EU < PL < pl,EU < SK < sk,none,powerGrid < hvac,no,capaExc,3.489999214585267,Scenario_1
+none,30th < 2040,EU < GR < gr,nonEU < AL < al,none,powerGrid < hvac,no,capaExc,5.249991795667171,Scenario_1
+none,30th < 2040,EU < AT < at,nonEU < CH < ch,none,powerGrid < hvac,no,capaExc,1.7999777780071748,Scenario_1
+none,30th < 2040,nonEU < AL < al,nonEU < ME < me,none,powerGrid < hvac,no,capaExc,1.8500062734697904,Scenario_1
+none,30th < 2040,nonEU < AL < al,nonEU < MK < mk,none,powerGrid < hvac,no,capaExc,0.5000055332322764,Scenario_1
+none,30th < 2040,EU < FI < fi,nonEU < NO < no_n,none,powerGrid < hvac,no,capaExc,1.5625451093096383,Scenario_1
+none,30th < 2040,EU < HR < hr,nonEU < RS < rs,none,powerGrid < hvac,no,capaExc,2.6999987269828782,Scenario_1
+none,30th < 2040,EU < HU < hu,nonEU < RS < rs,none,powerGrid < hvac,no,capaExc,3.599999560489355,Scenario_1
+none,30th < 2040,nonEU < BA < ba,nonEU < RS < rs,none,powerGrid < hvac,no,capaExc,1.100165614924922,Scenario_1
+none,30th < 2040,EU < IE < ie,nonEU < UK < ni,none,powerGrid < hvac,no,capaExc,0.3000011443886401,Scenario_1
+none,30th < 2040,EU < IE < ie,nonEU < UK < uk,none,powerGrid < hvac,no,capaExc,0.99699833487247,Scenario_1
+none,30th < 2040,EU < DK < dk_w,EU < DK < dk_e,none,powerGrid < hvac,yes,capaExc,0.59,Scenario_1
+none,30th < 2040,EU < DK < dk_e,EU < DK < dk_w,none,powerGrid < hvac,yes,capaExc,0.6,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < LU < lu,none,powerGrid < hvac,yes,capaExc,0.38,Scenario_1
+none,30th < 2040,EU < SE < se_4,EU < SE < se_3,none,powerGrid < hvac,yes,capaExc,3.2,Scenario_1
+none,30th < 2040,EU < SE < se_3,EU < SE < se_4,none,powerGrid < hvac,yes,capaExc,6.5,Scenario_1
+none,30th < 2040,EU < FR < fr_co,EU < IT < it_cn,none,powerGrid < hvac,no,capaExc,0.6,Scenario_1
+none,30th < 2040,EU < SE < se_1,EU < SE < se_2,none,powerGrid < hvac,no,capaExc,3.3,Scenario_1
+none,30th < 2040,nonEU < NO < no_m,nonEU < NO < no_n,none,powerGrid < hvac,no,capaExc,1.3,Scenario_1
+none,30th < 2040,nonEU < NO < no_m,nonEU < NO < no_s,none,powerGrid < hvac,no,capaExc,1.4,Scenario_1
+none,30th < 2040,EU < DE < de,EU < DK < dk_e,electricity,powerGrid < hvdc,no,exc,1.8562914049105799,Scenario_1
+none,30th < 2040,EU < EE < ee,EU < FI < fi,electricity,powerGrid < hvdc,no,exc,13.81121006891765,Scenario_1
+none,30th < 2040,EU < FI < fi,EU < SE < se_1,electricity,powerGrid < hvdc,no,exc,0.08394044670048535,Scenario_1
+none,30th < 2040,nonEU < UK < ni,nonEU < UK < uk,electricity,powerGrid < hvdc,no,exc,13.152123002338593,Scenario_1
+none,30th < 2040,EU < BE < be,nonEU < UK < uk,electricity,powerGrid < hvdc,no,exc,4.92368888293544,Scenario_1
+none,30th < 2040,EU < DE < de,nonEU < NO < no_s,electricity,powerGrid < hvdc,no,exc,14.862465859078759,Scenario_1
+none,30th < 2040,EU < DE < de,EU < SE < se_4,electricity,powerGrid < hvdc,no,exc,5.095670577952965,Scenario_1
+none,30th < 2040,EU < DE < de,nonEU < UK < uk,electricity,powerGrid < hvdc,no,exc,1.778376940664899e-5,Scenario_1
+none,30th < 2040,EU < DK < dk_e,EU < PL < pl,electricity,powerGrid < hvdc,no,exc,0.7093369223057457,Scenario_1
+none,30th < 2040,EU < DK < dk_w,EU < NL < nl,electricity,powerGrid < hvdc,no,exc,3.3253102586984262,Scenario_1
+none,30th < 2040,EU < DK < dk_w,nonEU < NO < no_s,electricity,powerGrid < hvdc,no,exc,16.1850124199805,Scenario_1
+none,30th < 2040,EU < DK < dk_w,nonEU < UK < uk,electricity,powerGrid < hvdc,no,exc,3.4148885702083126e-5,Scenario_1
+none,30th < 2040,EU < FI < fi,EU < SE < se_2,electricity,powerGrid < hvdc,no,exc,0.41571826951532664,Scenario_1
+none,30th < 2040,EU < FI < fi,EU < SE < se_3,electricity,powerGrid < hvdc,no,exc,3.453942499842788,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < IE < ie,electricity,powerGrid < hvdc,no,exc,3.2401792998146974,Scenario_1
+none,30th < 2040,EU < FR < fr,nonEU < UK < uk,electricity,powerGrid < hvdc,no,exc,41.07175327475071,Scenario_1
+none,30th < 2040,EU < GR < gr,EU < IT < it_s,electricity,powerGrid < hvdc,no,exc,9.781131217546093,Scenario_1
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_sic,electricity,powerGrid < hvdc,no,exc,5.777926492906023e-5,Scenario_1
+none,30th < 2040,EU < IT < it_cs,nonEU < ME < me,electricity,powerGrid < hvdc,no,exc,0.6777930803998975,Scenario_1
+none,30th < 2040,EU < IT < it_sar,EU < IT < it_sic,electricity,powerGrid < hvdc,no,exc,4.9692661964467675e-5,Scenario_1
+none,30th < 2040,EU < LT < lt,EU < SE < se_4,electricity,powerGrid < hvdc,no,exc,4.04916652908281,Scenario_1
+none,30th < 2040,EU < NL < nl,nonEU < NO < no_s,electricity,powerGrid < hvdc,no,exc,3.719056785556623,Scenario_1
+none,30th < 2040,EU < NL < nl,nonEU < UK < uk,electricity,powerGrid < hvdc,no,exc,5.891060510138891,Scenario_1
+none,30th < 2040,nonEU < NO < no_s,nonEU < UK < uk,electricity,powerGrid < hvdc,no,exc,18.962771789249736,Scenario_1
+none,30th < 2040,EU < PL < pl,EU < SE < se_4,electricity,powerGrid < hvdc,no,exc,3.8396918935221156,Scenario_1
+none,30th < 2040,EU < DK < dk_e,EU < DE < de,electricity,powerGrid < hvdc,no,exc,2.0646123769487343,Scenario_1
+none,30th < 2040,EU < SE < se_3,EU < DK < dk_w,electricity,powerGrid < hvdc,no,exc,2.0221762063712245,Scenario_1
+none,30th < 2040,EU < FI < fi,EU < EE < ee,electricity,powerGrid < hvdc,no,exc,3.115338892994878,Scenario_1
+none,30th < 2040,EU < SE < se_1,EU < FI < fi,electricity,powerGrid < hvdc,no,exc,34.48636491946095,Scenario_1
+none,30th < 2040,EU < IT < it_sar,EU < FR < fr_co,electricity,powerGrid < hvdc,no,exc,1.6605595442502235,Scenario_1
+none,30th < 2040,EU < IT < it_sar,EU < IT < it_cs,electricity,powerGrid < hvdc,no,exc,4.605274252775894,Scenario_1
+none,30th < 2040,EU < IT < it_sic,EU < IT < it_s,electricity,powerGrid < hvdc,no,exc,4.172939039868562,Scenario_1
+none,30th < 2040,EU < FR < fr_co,EU < IT < it_sar,electricity,powerGrid < hvdc,no,exc,0.25641977881251027,Scenario_1
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_sar,electricity,powerGrid < hvdc,no,exc,0.46740730661190166,Scenario_1
+none,30th < 2040,EU < IT < it_s,EU < IT < it_sic,electricity,powerGrid < hvdc,no,exc,2.7121590539337253,Scenario_1
+none,30th < 2040,EU < DK < dk_w,EU < SE < se_3,electricity,powerGrid < hvdc,no,exc,3.4861319837472977,Scenario_1
+none,30th < 2040,nonEU < UK < uk,nonEU < UK < ni,electricity,powerGrid < hvdc,no,exc,1.0223413140947826,Scenario_1
+none,30th < 2040,nonEU < UK < uk,EU < BE < be,electricity,powerGrid < hvdc,no,exc,11.594853214544797,Scenario_1
+none,30th < 2040,nonEU < NO < no_s,EU < DE < de,electricity,powerGrid < hvdc,no,exc,14.892014707542373,Scenario_1
+none,30th < 2040,EU < SE < se_4,EU < DE < de,electricity,powerGrid < hvdc,no,exc,8.263186471565682,Scenario_1
+none,30th < 2040,nonEU < UK < uk,EU < DE < de,electricity,powerGrid < hvdc,no,exc,2.947293578306255e-5,Scenario_1
+none,30th < 2040,EU < PL < pl,EU < DK < dk_e,electricity,powerGrid < hvdc,no,exc,0.8495984867602302,Scenario_1
+none,30th < 2040,EU < NL < nl,EU < DK < dk_w,electricity,powerGrid < hvdc,no,exc,2.5747003650023634,Scenario_1
+none,30th < 2040,nonEU < NO < no_s,EU < DK < dk_w,electricity,powerGrid < hvdc,no,exc,23.104565848937078,Scenario_1
+none,30th < 2040,nonEU < UK < uk,EU < DK < dk_w,electricity,powerGrid < hvdc,no,exc,2.951963923675902e-5,Scenario_1
+none,30th < 2040,EU < SE < se_2,EU < FI < fi,electricity,powerGrid < hvdc,no,exc,6.188355572462504,Scenario_1
+none,30th < 2040,EU < SE < se_3,EU < FI < fi,electricity,powerGrid < hvdc,no,exc,5.497904294889671,Scenario_1
+none,30th < 2040,EU < IE < ie,EU < FR < fr,electricity,powerGrid < hvdc,no,exc,5.674910382924229,Scenario_1
+none,30th < 2040,nonEU < UK < uk,EU < FR < fr,electricity,powerGrid < hvdc,no,exc,24.712504230954753,Scenario_1
+none,30th < 2040,EU < IT < it_s,EU < GR < gr,electricity,powerGrid < hvdc,no,exc,2.2810175151327097,Scenario_1
+none,30th < 2040,EU < IT < it_sic,EU < IT < it_cs,electricity,powerGrid < hvdc,no,exc,0.00018067227008404,Scenario_1
+none,30th < 2040,nonEU < ME < me,EU < IT < it_cs,electricity,powerGrid < hvdc,no,exc,15.214971884828877,Scenario_1
+none,30th < 2040,EU < IT < it_sic,EU < IT < it_sar,electricity,powerGrid < hvdc,no,exc,8.044593527583346e-5,Scenario_1
+none,30th < 2040,EU < SE < se_4,EU < LT < lt,electricity,powerGrid < hvdc,no,exc,1.1118833040059928,Scenario_1
+none,30th < 2040,nonEU < NO < no_s,EU < NL < nl,electricity,powerGrid < hvdc,no,exc,3.336354801198286,Scenario_1
+none,30th < 2040,nonEU < UK < uk,EU < NL < nl,electricity,powerGrid < hvdc,no,exc,10.52810859407195,Scenario_1
+none,30th < 2040,nonEU < UK < uk,nonEU < NO < no_s,electricity,powerGrid < hvdc,no,exc,15.759057172181276,Scenario_1
+none,30th < 2040,EU < SE < se_4,EU < PL < pl,electricity,powerGrid < hvdc,no,exc,3.972826047747336,Scenario_1
+30th < 2040,30th < 2040,EU < BG,EU < GR,otherBiomass < solidBiomass,biomassExc,no,exc,1.0544024919220993e-5,Scenario_1
+30th < 2040,30th < 2040,EU < RO,nonEU < RS,otherBiomass < solidBiomass,biomassExc,no,exc,2.6418313953049844e-5,Scenario_1
+none,30th < 2040,EU < FR,EU < LU,otherBiomass < solidBiomass,biomassExc,no,exc,2.3134185674192214e-5,Scenario_1
+none,30th < 2040,EU < DE,EU < NL,otherBiomass < solidBiomass,biomassExc,no,exc,0.00010636891179694765,Scenario_1
+none,30th < 2040,EU < IE,nonEU < UK,otherBiomass < solidBiomass,biomassExc,no,exc,5.0884717043481194e-5,Scenario_1
+30th < 2040,30th < 2040,nonEU < MK,EU < GR,otherBiomass < solidBiomass,biomassExc,no,exc,0.00012019418613435457,Scenario_1
+none,30th < 2040,EU < LU,EU < BE,otherBiomass < solidBiomass,biomassExc,no,exc,1.772370131163587e-5,Scenario_1
+none,30th < 2040,EU < SK,EU < HU,otherBiomass < solidBiomass,biomassExc,no,exc,1.863493239694003e-5,Scenario_1
+none,30th < 2040,EU < IT < it_n < 52IT,EU < AT < at < 49AT,h2,h2Grid,no,exc,1.4064336576502544e-5,Scenario_1
+none,30th < 2040,EU < SI < si < 57SI,EU < AT < at < 50AT,h2,h2Grid,no,exc,9.934057711698193,Scenario_1
+none,30th < 2040,EU < HU < hu < 58HU,EU < AT < at < 51AT,h2,h2Grid,no,exc,1.3186677361622256e-5,Scenario_1
+none,30th < 2040,EU < FR < fr < 26FR,EU < BE < be < 28BE,h2,h2Grid,no,exc,8.108213491277539e-5,Scenario_1
+none,30th < 2040,EU < FR < fr < 27FR,EU < BE < be < 28BE,h2,h2Grid,no,exc,1.5314996178472329,Scenario_1
+none,30th < 2040,EU < LU < lu < 29LU,EU < BE < be < 28BE,h2,h2Grid,no,exc,0.007874789291418967,Scenario_1
+none,30th < 2040,EU < NL < nl < 30NL,EU < BE < be < 28BE,h2,h2Grid,no,exc,1.2098444913199533,Scenario_1
+none,30th < 2040,EU < DK < dk_w < 38DK,EU < DE < de < 31DE,h2,h2Grid,no,exc,1.3914678674738137,Scenario_1
+none,30th < 2040,EU < NL < nl < 30NL,EU < DE < de < 33DE,h2,h2Grid,no,exc,45.398308763339024,Scenario_1
+none,30th < 2040,EU < FR < fr < 25FR,EU < DE < de < 35DE,h2,h2Grid,no,exc,1.545141833919137e-5,Scenario_1
+none,30th < 2040,EU < FR < fr < 25FR,EU < DE < de < 36DE,h2,h2Grid,no,exc,4.378821451676401e-5,Scenario_1
+none,30th < 2040,EU < DK < dk_w < 38DK,EU < DK < dk_e < 72DK,h2,h2Grid,no,exc,0.04576814311392255,Scenario_1
+none,30th < 2040,EU < SE < se_4 < 89SE,EU < DK < dk_e < 72DK,h2,h2Grid,no,exc,4.000725717824866e-5,Scenario_1
+none,30th < 2040,nonEU < NO < no_s < 79NO,EU < DK < dk_w < 38DK,h2,h2Grid,no,exc,0.00019791966776360354,Scenario_1
+none,30th < 2040,EU < SE < se_1 < 86SE,EU < FI < fi < 74FI,h2,h2Grid,no,exc,1.35864119683986,Scenario_1
+none,30th < 2040,EU < IT < it_sar < 98IT,EU < FR < fr_co < 99FR,h2,h2Grid,no,exc,0.07576499529207376,Scenario_1
+none,30th < 2040,EU < GR < gr < 69GR,EU < GR < gr < 68GR,h2,h2Grid,no,exc,1.4831616802780234e-5,Scenario_1
+none,30th < 2040,nonEU < BA < ba < 63BA,EU < HR < hr < 62HR,h2,h2Grid,no,exc,2.7654080824122358e-5,Scenario_1
+none,30th < 2040,EU < RO < ro < 59RO,EU < HU < hu < 58HU,h2,h2Grid,no,exc,3.622275664880728,Scenario_1
+none,30th < 2040,nonEU < RS < rs < 65RS,EU < HU < hu < 58HU,h2,h2Grid,no,exc,1.055309390897781e-5,Scenario_1
+none,30th < 2040,EU < IT < it_cs < 54IT,EU < IT < it_cn < 53IT,h2,h2Grid,no,exc,5.894441232051431e-5,Scenario_1
+none,30th < 2040,EU < IT < it_s < 55IT,EU < IT < it_cs < 54IT,h2,h2Grid,no,exc,0.000508030705959737,Scenario_1
+none,30th < 2040,nonEU < BA < ba < 63BA,EU < IT < it_cs < 54IT,h2,h2Grid,no,exc,2.869422872512817,Scenario_1
+none,30th < 2040,EU < SI < si < 57SI,EU < IT < it_n < 52IT,h2,h2Grid,no,exc,1.6099190294526988,Scenario_1
+none,30th < 2040,nonEU < CH < ch < 48CH,EU < IT < it_n < 52IT,h2,h2Grid,no,exc,1.1551585206154351,Scenario_1
+none,30th < 2040,EU < IT < it_sic < 56IT,EU < IT < it_s < 55IT,h2,h2Grid,no,exc,0.0002181314123845163,Scenario_1
+none,30th < 2040,nonEU < AL < al < 70AL,EU < IT < it_s < 55IT,h2,h2Grid,no,exc,1.5869766750613739,Scenario_1
+none,30th < 2040,EU < LV < lv < 78LV,EU < LT < lt < 77LT,h2,h2Grid,no,exc,0.8884622604506389,Scenario_1
+none,30th < 2040,EU < SK < sk < 46SK,EU < PL < pl < 43PL,h2,h2Grid,no,exc,1.8667115628129124e-5,Scenario_1
+none,30th < 2040,EU < ES < es < 04ES,EU < FR < fr < 14FR,h2,h2Grid,no,exc,7.231519655482523,Scenario_1
+none,30th < 2040,EU < ES < es < 05ES,EU < FR < fr < 14FR,h2,h2Grid,no,exc,6.918352161607254e-5,Scenario_1
+none,30th < 2040,EU < ES < es < 06ES,EU < FR < fr < 14FR,h2,h2Grid,no,exc,0.00012273040447808437,Scenario_1
+none,30th < 2040,EU < ES < es < 06ES,EU < FR < fr < 15FR,h2,h2Grid,no,exc,35.567820193145906,Scenario_1
+none,30th < 2040,EU < FR < fr < 14FR,EU < FR < fr < 17FR,h2,h2Grid,no,exc,3.750285386998146,Scenario_1
+none,30th < 2040,EU < FR < fr < 14FR,EU < FR < fr < 18FR,h2,h2Grid,no,exc,0.00014192439216058835,Scenario_1
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 16FR,h2,h2Grid,no,exc,3.1674791261460378,Scenario_1
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 18FR,h2,h2Grid,no,exc,1.9618846649647808,Scenario_1
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 19FR,h2,h2Grid,no,exc,29.154946227117712,Scenario_1
+none,30th < 2040,EU < FR < fr < 16FR,EU < IT < it_n < 52IT,h2,h2Grid,no,exc,0.0003501936838959976,Scenario_1
+none,30th < 2040,EU < FR < fr < 18FR,EU < FR < fr < 24FR,h2,h2Grid,no,exc,1.1670930059470387e-5,Scenario_1
+none,30th < 2040,EU < FR < fr < 19FR,EU < FR < fr < 20FR,h2,h2Grid,no,exc,21.937967674648558,Scenario_1
+none,30th < 2040,EU < FR < fr < 19FR,EU < FR < fr < 24FR,h2,h2Grid,no,exc,1.989333562709316e-5,Scenario_1
+none,30th < 2040,EU < FR < fr < 20FR,nonEU < CH < ch < 47CH,h2,h2Grid,no,exc,4.7361252747687095,Scenario_1
+none,30th < 2040,EU < FR < fr < 20FR,nonEU < CH < ch < 48CH,h2,h2Grid,no,exc,1.3066747546575435,Scenario_1
+none,30th < 2040,EU < FR < fr < 20FR,EU < IT < it_n < 52IT,h2,h2Grid,no,exc,10.823975388555715,Scenario_1
+none,30th < 2040,EU < FR < fr < 25FR,EU < LU < lu < 29LU,h2,h2Grid,no,exc,1.9561311261384087,Scenario_1
+none,30th < 2040,EU < FR < fr < 25FR,nonEU < CH < ch < 47CH,h2,h2Grid,no,exc,2.2430025528084635e-5,Scenario_1
+none,30th < 2040,EU < FR < fr < 26FR,nonEU < UK < uk < 90UK,h2,h2Grid,no,exc,9.986452737433483,Scenario_1
+none,30th < 2040,EU < BE < be < 28BE,EU < LU < lu < 29LU,h2,h2Grid,no,exc,1.5015457185731777e-5,Scenario_1
+none,30th < 2040,EU < CZ < cz < 39CZ,EU < DE < de < 34DE,h2,h2Grid,no,exc,4.348649961864835,Scenario_1
+none,30th < 2040,EU < AT < at < 49AT,EU < DE < de < 37DE,h2,h2Grid,no,exc,1.1144344181079606e-5,Scenario_1
+none,30th < 2040,EU < LT < lt < 77LT,EU < PL < pl < 41PL,h2,h2Grid,no,exc,1.353737075091292e-5,Scenario_1
+none,30th < 2040,EU < HU < hu < 58HU,EU < SK < sk < 46SK,h2,h2Grid,no,exc,1.6827428679216148,Scenario_1
+none,30th < 2040,EU < AT < at < 49AT,EU < IT < it_n < 52IT,h2,h2Grid,no,exc,1.7784859333122143,Scenario_1
+none,30th < 2040,EU < IT < it_cn < 53IT,EU < IT < it_n < 52IT,h2,h2Grid,no,exc,14.553715636682291,Scenario_1
+none,30th < 2040,EU < FR < fr_co < 99FR,EU < IT < it_cn < 53IT,h2,h2Grid,no,exc,0.00041000554008201385,Scenario_1
+none,30th < 2040,EU < IT < it_s < 55IT,nonEU < AL < al < 70AL,h2,h2Grid,no,exc,6.979093509672264e-5,Scenario_1
+none,30th < 2040,EU < HR < hr < 62HR,EU < SI < si < 57SI,h2,h2Grid,no,exc,8.625385356863546,Scenario_1
+none,30th < 2040,EU < GR < gr < 68GR,nonEU < AL < al < 70AL,h2,h2Grid,no,exc,2.098862664941429e-5,Scenario_1
+none,30th < 2040,EU < EE < ee < 73EE,EU < LV < lv < 78LV,h2,h2Grid,no,exc,0.0001894246681492186,Scenario_1
+none,30th < 2040,nonEU < NO < no_m < 83NO,nonEU < NO < no_s < 82NO,h2,h2Grid,no,exc,1.237261624479856e-5,Scenario_1
+none,30th < 2040,nonEU < UK < ni < 95UK,nonEU < UK < uk < 93UK,h2,h2Grid,no,exc,3.6588874715340847,Scenario_1
+none,30th < 2040,EU < IE < ie < 96IE,nonEU < UK < ni < 95UK,h2,h2Grid,no,exc,9.940156389423079,Scenario_1
+none,30th < 2040,nonEU < AL < al,nonEU < RS < rs,electricity,powerGrid < hvac,no,exc,16.330001365546288,Scenario_1
+none,30th < 2040,EU < AT < at,EU < CZ < cz,electricity,powerGrid < hvac,no,exc,8.332440057118516,Scenario_1
+none,30th < 2040,EU < AT < at,EU < IT < it_n,electricity,powerGrid < hvac,no,exc,8.389582438477872,Scenario_1
+none,30th < 2040,EU < HR < hr,nonEU < BA < ba,electricity,powerGrid < hvac,no,exc,0.4251761417221048,Scenario_1
+none,30th < 2040,nonEU < BA < ba,nonEU < ME < me,electricity,powerGrid < hvac,no,exc,0.803283573588326,Scenario_1
+none,30th < 2040,EU < BE < be,EU < FR < fr,electricity,powerGrid < hvac,no,exc,1.197890840267676,Scenario_1
+none,30th < 2040,EU < BE < be,EU < LU < lu,electricity,powerGrid < hvac,no,exc,1.053002637700208,Scenario_1
+none,30th < 2040,EU < BE < be,EU < NL < nl,electricity,powerGrid < hvac,no,exc,6.538187286287249,Scenario_1
+none,30th < 2040,EU < BG < bg,EU < GR < gr,electricity,powerGrid < hvac,no,exc,0.00028665672218037257,Scenario_1
+none,30th < 2040,EU < BG < bg,nonEU < MK < mk,electricity,powerGrid < hvac,no,exc,0.479127186966521,Scenario_1
+none,30th < 2040,EU < BG < bg,nonEU < RS < rs,electricity,powerGrid < hvac,no,exc,0.28065083715822847,Scenario_1
+none,30th < 2040,EU < DE < de,nonEU < CH < ch,electricity,powerGrid < hvac,no,exc,8.960424795707045,Scenario_1
+none,30th < 2040,EU < FR < fr,nonEU < CH < ch,electricity,powerGrid < hvac,no,exc,18.65172037633332,Scenario_1
+none,30th < 2040,EU < IT < it_n,nonEU < CH < ch,electricity,powerGrid < hvac,no,exc,8.095811226034664,Scenario_1
+none,30th < 2040,EU < CZ < cz,EU < DE < de,electricity,powerGrid < hvac,no,exc,11.125694684389968,Scenario_1
+none,30th < 2040,EU < CZ < cz,EU < PL < pl,electricity,powerGrid < hvac,no,exc,3.1023492452840085,Scenario_1
+none,30th < 2040,EU < CZ < cz,EU < SK < sk,electricity,powerGrid < hvac,no,exc,1.0032997280913665,Scenario_1
+none,30th < 2040,EU < DE < de,EU < DK < dk_w,electricity,powerGrid < hvac,no,exc,7.9554987709223335,Scenario_1
+none,30th < 2040,EU < DE < de,EU < FR < fr,electricity,powerGrid < hvac,no,exc,2.150622497919694,Scenario_1
+none,30th < 2040,EU < DE < de,EU < PL < pl,electricity,powerGrid < hvac,no,exc,14.067007927687653,Scenario_1
+none,30th < 2040,EU < DK < dk_e,EU < SE < se_4,electricity,powerGrid < hvac,no,exc,0.9112087352713281,Scenario_1
+none,30th < 2040,EU < ES < es,EU < FR < fr,electricity,powerGrid < hvac,no,exc,82.63376317116006,Scenario_1
+none,30th < 2040,EU < ES < es,EU < PT < pt,electricity,powerGrid < hvac,no,exc,5.551441704284997,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < IT < it_n,electricity,powerGrid < hvac,no,exc,13.406341756987285,Scenario_1
+none,30th < 2040,EU < GR < gr,nonEU < MK < mk,electricity,powerGrid < hvac,no,exc,8.965968868522312,Scenario_1
+none,30th < 2040,EU < HU < hu,EU < RO < ro,electricity,powerGrid < hvac,no,exc,0.6601480323645262,Scenario_1
+none,30th < 2040,EU < IT < it_cn,EU < IT < it_cs,electricity,powerGrid < hvac,no,exc,4.325911063415378,Scenario_1
+none,30th < 2040,EU < IT < it_cn,EU < IT < it_n,electricity,powerGrid < hvac,no,exc,12.817772238083455,Scenario_1
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_s,electricity,powerGrid < hvac,no,exc,0.41335816329473046,Scenario_1
+none,30th < 2040,EU < IT < it_n,EU < SI < si,electricity,powerGrid < hvac,no,exc,0.7334281133185415,Scenario_1
+none,30th < 2040,EU < LT < lt,EU < LV < lv,electricity,powerGrid < hvac,no,exc,4.294570390624224,Scenario_1
+none,30th < 2040,nonEU < ME < me,nonEU < RS < rs,electricity,powerGrid < hvac,no,exc,2.4948770068484403,Scenario_1
+none,30th < 2040,nonEU < MK < mk,nonEU < RS < rs,electricity,powerGrid < hvac,no,exc,19.35310311264543,Scenario_1
+none,30th < 2040,EU < SE < se_2,nonEU < NO < no_m,electricity,powerGrid < hvac,no,exc,1.7972585051696834,Scenario_1
+none,30th < 2040,EU < SE < se_1,nonEU < NO < no_n,electricity,powerGrid < hvac,no,exc,0.49315129580918843,Scenario_1
+none,30th < 2040,EU < SE < se_2,nonEU < NO < no_n,electricity,powerGrid < hvac,no,exc,0.045766124495521976,Scenario_1
+none,30th < 2040,EU < SE < se_3,nonEU < NO < no_s,electricity,powerGrid < hvac,no,exc,1.609350991209373,Scenario_1
+none,30th < 2040,EU < RO < ro,nonEU < RS < rs,electricity,powerGrid < hvac,no,exc,12.783422197484548,Scenario_1
+none,30th < 2040,EU < GR < gr,nonEU < AL < al,electricity,powerGrid < hvac,no,exc,12.692446834013808,Scenario_1
+none,30th < 2040,nonEU < AL < al,nonEU < ME < me,electricity,powerGrid < hvac,no,exc,7.88956822954089,Scenario_1
+none,30th < 2040,nonEU < AL < al,nonEU < MK < mk,electricity,powerGrid < hvac,no,exc,1.1020264623149643,Scenario_1
+none,30th < 2040,EU < AT < at,nonEU < CH < ch,electricity,powerGrid < hvac,no,exc,8.420499403263332,Scenario_1
+none,30th < 2040,EU < AT < at,EU < DE < de,electricity,powerGrid < hvac,no,exc,50.2477972054295,Scenario_1
+none,30th < 2040,EU < AT < at,EU < HU < hu,electricity,powerGrid < hvac,no,exc,0.5110723433146437,Scenario_1
+none,30th < 2040,EU < AT < at,EU < SI < si,electricity,powerGrid < hvac,no,exc,0.8070091191356086,Scenario_1
+none,30th < 2040,EU < AT < at,EU < SK < sk,electricity,powerGrid < hvac,no,exc,2.100674116745283,Scenario_1
+none,30th < 2040,nonEU < BA < ba,nonEU < RS < rs,electricity,powerGrid < hvac,no,exc,3.453757570639218,Scenario_1
+none,30th < 2040,EU < BE < be,EU < DE < de,electricity,powerGrid < hvac,no,exc,3.839194674342174,Scenario_1
+none,30th < 2040,EU < BG < bg,EU < RO < ro,electricity,powerGrid < hvac,no,exc,2.4138154327801735,Scenario_1
+none,30th < 2040,EU < DE < de,EU < LU < lu,electricity,powerGrid < hvac,no,exc,3.100286816623558,Scenario_1
+none,30th < 2040,EU < DE < de,EU < NL < nl,electricity,powerGrid < hvac,no,exc,9.957023147248846,Scenario_1
+none,30th < 2040,EU < EE < ee,EU < LV < lv,electricity,powerGrid < hvac,no,exc,12.543025847283014,Scenario_1
+none,30th < 2040,EU < FI < fi,nonEU < NO < no_n,electricity,powerGrid < hvac,no,exc,0.6413156497082935,Scenario_1
+none,30th < 2040,EU < HR < hr,EU < HU < hu,electricity,powerGrid < hvac,no,exc,17.50593009209124,Scenario_1
+none,30th < 2040,EU < HR < hr,nonEU < RS < rs,electricity,powerGrid < hvac,no,exc,0.6322942449147948,Scenario_1
+none,30th < 2040,EU < HR < hr,EU < SI < si,electricity,powerGrid < hvac,no,exc,52.371275536073355,Scenario_1
+none,30th < 2040,EU < HU < hu,nonEU < RS < rs,electricity,powerGrid < hvac,no,exc,0.5031344008514577,Scenario_1
+none,30th < 2040,EU < HU < hu,EU < SI < si,electricity,powerGrid < hvac,no,exc,1.4978970815425687,Scenario_1
+none,30th < 2040,EU < HU < hu,EU < SK < sk,electricity,powerGrid < hvac,no,exc,38.065938332623084,Scenario_1
+none,30th < 2040,EU < IE < ie,nonEU < UK < ni,electricity,powerGrid < hvac,no,exc,1.7057154370654959,Scenario_1
+none,30th < 2040,EU < IE < ie,nonEU < UK < uk,electricity,powerGrid < hvac,no,exc,7.2911955991513615,Scenario_1
+none,30th < 2040,EU < LT < lt,EU < PL < pl,electricity,powerGrid < hvac,no,exc,12.093879342588192,Scenario_1
+none,30th < 2040,EU < PL < pl,EU < SK < sk,electricity,powerGrid < hvac,no,exc,2.8460211660278825,Scenario_1
+none,30th < 2040,EU < SE < se_2,EU < SE < se_3,electricity,powerGrid < hvac,no,exc,47.89992444826128,Scenario_1
+none,30th < 2040,EU < CZ < cz,EU < AT < at,electricity,powerGrid < hvac,no,exc,3.7774624737713975,Scenario_1
+none,30th < 2040,EU < IT < it_n,EU < AT < at,electricity,powerGrid < hvac,no,exc,3.6681906171450867,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < BE < be,electricity,powerGrid < hvac,no,exc,46.195241156597625,Scenario_1
+none,30th < 2040,EU < LU < lu,EU < BE < be,electricity,powerGrid < hvac,no,exc,0.2886821895849232,Scenario_1
+none,30th < 2040,EU < NL < nl,EU < BE < be,electricity,powerGrid < hvac,no,exc,13.517114819947093,Scenario_1
+none,30th < 2040,EU < GR < gr,EU < BG < bg,electricity,powerGrid < hvac,no,exc,37.656004113909866,Scenario_1
+none,30th < 2040,nonEU < MK < mk,EU < BG < bg,electricity,powerGrid < hvac,no,exc,7.265310082296995,Scenario_1
+none,30th < 2040,nonEU < RS < rs,EU < BG < bg,electricity,powerGrid < hvac,no,exc,0.25600161802185706,Scenario_1
+none,30th < 2040,EU < DE < de,EU < CZ < cz,electricity,powerGrid < hvac,no,exc,2.3657184348425306,Scenario_1
+none,30th < 2040,EU < PL < pl,EU < CZ < cz,electricity,powerGrid < hvac,no,exc,0.7536320502547385,Scenario_1
+none,30th < 2040,EU < SK < sk,EU < CZ < cz,electricity,powerGrid < hvac,no,exc,5.349021676157267,Scenario_1
+none,30th < 2040,EU < DK < dk_w,EU < DE < de,electricity,powerGrid < hvac,no,exc,15.105627786142195,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < DE < de,electricity,powerGrid < hvac,no,exc,20.01927405373577,Scenario_1
+none,30th < 2040,EU < PL < pl,EU < DE < de,electricity,powerGrid < hvac,no,exc,29.037555753406977,Scenario_1
+none,30th < 2040,nonEU < CH < ch,EU < DE < de,electricity,powerGrid < hvac,no,exc,24.621562035599393,Scenario_1
+none,30th < 2040,EU < DK < dk_w,EU < DK < dk_e,electricity,powerGrid < hvac,no,exc,2.5162454820459277,Scenario_1
+none,30th < 2040,EU < SE < se_4,EU < DK < dk_e,electricity,powerGrid < hvac,no,exc,4.241359926107465,Scenario_1
+none,30th < 2040,EU < DK < dk_e,EU < DK < dk_w,electricity,powerGrid < hvac,no,exc,1.9233433385140177,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < ES < es,electricity,powerGrid < hvac,no,exc,12.239193212784805,Scenario_1
+none,30th < 2040,EU < PT < pt,EU < ES < es,electricity,powerGrid < hvac,no,exc,37.37336281275673,Scenario_1
+none,30th < 2040,EU < IT < it_n,EU < FR < fr,electricity,powerGrid < hvac,no,exc,2.676037173617264,Scenario_1
+none,30th < 2040,nonEU < CH < ch,EU < FR < fr,electricity,powerGrid < hvac,no,exc,0.986328474378406,Scenario_1
+none,30th < 2040,nonEU < MK < mk,EU < GR < gr,electricity,powerGrid < hvac,no,exc,0.8383610174323888,Scenario_1
+none,30th < 2040,nonEU < BA < ba,EU < HR < hr,electricity,powerGrid < hvac,no,exc,15.102225585170329,Scenario_1
+none,30th < 2040,EU < RO < ro,EU < HU < hu,electricity,powerGrid < hvac,no,exc,28.813679078505192,Scenario_1
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_cn,electricity,powerGrid < hvac,no,exc,5.349499152587136,Scenario_1
+none,30th < 2040,EU < IT < it_n,EU < IT < it_cn,electricity,powerGrid < hvac,no,exc,2.1045199877723215,Scenario_1
+none,30th < 2040,EU < IT < it_s,EU < IT < it_cs,electricity,powerGrid < hvac,no,exc,21.600508171346192,Scenario_1
+none,30th < 2040,EU < SI < si,EU < IT < it_n,electricity,powerGrid < hvac,no,exc,21.675266095074257,Scenario_1
+none,30th < 2040,nonEU < CH < ch,EU < IT < it_n,electricity,powerGrid < hvac,no,exc,13.219240089121207,Scenario_1
+none,30th < 2040,EU < LV < lv,EU < LT < lt,electricity,powerGrid < hvac,no,exc,15.722860050613027,Scenario_1
+none,30th < 2040,nonEU < RS < rs,EU < RO < ro,electricity,powerGrid < hvac,no,exc,1.6195529910043232,Scenario_1
+none,30th < 2040,nonEU < NO < no_n,EU < SE < se_1,electricity,powerGrid < hvac,no,exc,0.45053249205700674,Scenario_1
+none,30th < 2040,nonEU < NO < no_m,EU < SE < se_2,electricity,powerGrid < hvac,no,exc,0.18580230534363054,Scenario_1
+none,30th < 2040,nonEU < NO < no_n,EU < SE < se_2,electricity,powerGrid < hvac,no,exc,1.5432239549613238,Scenario_1
+none,30th < 2040,EU < SE < se_4,EU < SE < se_3,electricity,powerGrid < hvac,no,exc,13.008396024621224,Scenario_1
+none,30th < 2040,nonEU < NO < no_s,EU < SE < se_3,electricity,powerGrid < hvac,no,exc,7.43989288657516,Scenario_1
+none,30th < 2040,EU < SE < se_3,EU < SE < se_4,electricity,powerGrid < hvac,no,exc,11.92280612071253,Scenario_1
+none,30th < 2040,nonEU < RS < rs,nonEU < AL < al,electricity,powerGrid < hvac,no,exc,0.8674167334946044,Scenario_1
+none,30th < 2040,nonEU < ME < me,nonEU < BA < ba,electricity,powerGrid < hvac,no,exc,2.7605176335674995,Scenario_1
+none,30th < 2040,nonEU < RS < rs,nonEU < ME < me,electricity,powerGrid < hvac,no,exc,0.3751881625030736,Scenario_1
+none,30th < 2040,nonEU < RS < rs,nonEU < MK < mk,electricity,powerGrid < hvac,no,exc,1.2574552167931294,Scenario_1
+none,30th < 2040,EU < FR < fr_co,EU < IT < it_cn,electricity,powerGrid < hvac,no,exc,2.529896077825613,Scenario_1
+none,30th < 2040,EU < SE < se_1,EU < SE < se_2,electricity,powerGrid < hvac,no,exc,18.825122868332237,Scenario_1
+none,30th < 2040,nonEU < NO < no_m,nonEU < NO < no_n,electricity,powerGrid < hvac,no,exc,8.703027205447618e-5,Scenario_1
+none,30th < 2040,nonEU < NO < no_m,nonEU < NO < no_s,electricity,powerGrid < hvac,no,exc,6.960670076160453,Scenario_1
+none,30th < 2040,nonEU < AL < al,EU < GR < gr,electricity,powerGrid < hvac,no,exc,3.0728661157415895,Scenario_1
+none,30th < 2040,nonEU < ME < me,nonEU < AL < al,electricity,powerGrid < hvac,no,exc,1.0107947693563,Scenario_1
+none,30th < 2040,nonEU < MK < mk,nonEU < AL < al,electricity,powerGrid < hvac,no,exc,0.5656736205565359,Scenario_1
+none,30th < 2040,nonEU < CH < ch,EU < AT < at,electricity,powerGrid < hvac,no,exc,0.6861090860351423,Scenario_1
+none,30th < 2040,EU < DE < de,EU < AT < at,electricity,powerGrid < hvac,no,exc,4.990125958415774,Scenario_1
+none,30th < 2040,EU < HU < hu,EU < AT < at,electricity,powerGrid < hvac,no,exc,5.912795831943842,Scenario_1
+none,30th < 2040,EU < SI < si,EU < AT < at,electricity,powerGrid < hvac,no,exc,15.873189698165291,Scenario_1
+none,30th < 2040,EU < SK < sk,EU < AT < at,electricity,powerGrid < hvac,no,exc,3.7859074472058367,Scenario_1
+none,30th < 2040,nonEU < RS < rs,nonEU < BA < ba,electricity,powerGrid < hvac,no,exc,2.4252033451463437,Scenario_1
+none,30th < 2040,EU < DE < de,EU < BE < be,electricity,powerGrid < hvac,no,exc,2.122614711090501,Scenario_1
+none,30th < 2040,EU < RO < ro,EU < BG < bg,electricity,powerGrid < hvac,no,exc,10.013391844057107,Scenario_1
+none,30th < 2040,EU < LU < lu,EU < DE < de,electricity,powerGrid < hvac,no,exc,0.1616835595720082,Scenario_1
+none,30th < 2040,EU < NL < nl,EU < DE < de,electricity,powerGrid < hvac,no,exc,27.23453349365854,Scenario_1
+none,30th < 2040,EU < LV < lv,EU < EE < ee,electricity,powerGrid < hvac,no,exc,4.823519953654436,Scenario_1
+none,30th < 2040,nonEU < NO < no_n,EU < FI < fi,electricity,powerGrid < hvac,no,exc,10.05576991990934,Scenario_1
+none,30th < 2040,EU < HU < hu,EU < HR < hr,electricity,powerGrid < hvac,no,exc,0.386211011266136,Scenario_1
+none,30th < 2040,nonEU < RS < rs,EU < HR < hr,electricity,powerGrid < hvac,no,exc,16.637914554440364,Scenario_1
+none,30th < 2040,EU < SI < si,EU < HR < hr,electricity,powerGrid < hvac,no,exc,0.0001501656662309513,Scenario_1
+none,30th < 2040,nonEU < RS < rs,EU < HU < hu,electricity,powerGrid < hvac,no,exc,29.143295812781655,Scenario_1
+none,30th < 2040,EU < SI < si,EU < HU < hu,electricity,powerGrid < hvac,no,exc,2.8397421679011567,Scenario_1
+none,30th < 2040,EU < SK < sk,EU < HU < hu,electricity,powerGrid < hvac,no,exc,1.6226773878136023,Scenario_1
+none,30th < 2040,nonEU < UK < ni,EU < IE < ie,electricity,powerGrid < hvac,no,exc,0.2532012969004518,Scenario_1
+none,30th < 2040,nonEU < UK < uk,EU < IE < ie,electricity,powerGrid < hvac,no,exc,0.371034421415107,Scenario_1
+none,30th < 2040,EU < PL < pl,EU < LT < lt,electricity,powerGrid < hvac,no,exc,2.22592627442793,Scenario_1
+none,30th < 2040,EU < SK < sk,EU < PL < pl,electricity,powerGrid < hvac,no,exc,23.465840656518733,Scenario_1
+none,30th < 2040,EU < SE < se_3,EU < SE < se_2,electricity,powerGrid < hvac,no,exc,0.06116482067445723,Scenario_1
+none,30th < 2040,EU < IT < it_cn,EU < FR < fr_co,electricity,powerGrid < hvac,no,exc,0.721083917282033,Scenario_1
+none,30th < 2040,EU < SE < se_2,EU < SE < se_1,electricity,powerGrid < hvac,no,exc,0.0003666127454069634,Scenario_1
+none,30th < 2040,nonEU < NO < no_n,nonEU < NO < no_m,electricity,powerGrid < hvac,no,exc,10.594447203368832,Scenario_1
+none,30th < 2040,nonEU < NO < no_s,nonEU < NO < no_m,electricity,powerGrid < hvac,no,exc,3.484884691035889,Scenario_1
+30th < 2040,30th < 2040,EU < AT,EU < DE,crudeOil,liquidExc,no,exc,21.80840805592398,Scenario_1
+30th < 2040,30th < 2040,EU < AT,EU < DE,jetFuel,liquidExc,no,exc,47.15330019673222,Scenario_1
+30th < 2040,30th < 2040,EU < CZ,EU < DE,crudeOil,liquidExc,no,exc,14.193278554946966,Scenario_1
+30th < 2040,30th < 2040,EU < DE,EU < NL,jetFuel,liquidExc,no,exc,150.45453269324864,Scenario_1
+30th < 2040,30th < 2040,EU < EE,EU < LV,crudeOil,liquidExc,no,exc,9.487014113596528,Scenario_1
+30th < 2040,30th < 2040,EU < ES,EU < FR,jetFuel,liquidExc,no,exc,2.8177687229670876,Scenario_1
+30th < 2040,30th < 2040,EU < ES,EU < PT,crudeOil,liquidExc,no,exc,5.528291304946383,Scenario_1
+30th < 2040,30th < 2040,EU < FI,EU < SE,crudeOil,liquidExc,no,exc,30.734003611344132,Scenario_1
+30th < 2040,30th < 2040,EU < FR,nonEU < UK,crudeOil,liquidExc,no,exc,5.2777223823519765,Scenario_1
+30th < 2040,30th < 2040,EU < HR,EU < SI,jetFuel,liquidExc,no,exc,9.98383306808125,Scenario_1
+30th < 2040,30th < 2040,EU < IE,nonEU < UK,crudeOil,liquidExc,no,exc,6.201350876208569,Scenario_1
+30th < 2040,30th < 2040,EU < LT,EU < PL,crudeOil,liquidExc,no,exc,4.800344163811092,Scenario_1
+30th < 2040,30th < 2040,nonEU < AL,nonEU < MK,crudeOil,liquidExc,no,exc,0.6722443104303649,Scenario_1
+none,30th < 2040,EU < CZ,EU < DE,jetFuel,liquidExc,no,exc,6.794829037471041,Scenario_1
+none,30th < 2040,EU < ES,EU < FR,crudeOil,liquidExc,no,exc,40.96777297539656,Scenario_1
+none,30th < 2040,EU < BG,EU < GR,crudeOil,liquidExc,no,exc,16.23650010829708,Scenario_1
+none,30th < 2040,EU < DE,EU < LU,crudeOil,liquidExc,no,exc,31.26785038502928,Scenario_1
+none,30th < 2040,EU < DE,EU < LU,jetFuel,liquidExc,no,exc,1.6083116919241938,Scenario_1
+none,30th < 2040,EU < FR,EU < LU,crudeOil,liquidExc,no,exc,3.0593169136145326e-5,Scenario_1
+none,30th < 2040,EU < BE,EU < NL,jetFuel,liquidExc,no,exc,1.4178486584236335e-5,Scenario_1
+none,30th < 2040,EU < DE,EU < NL,crudeOil,liquidExc,no,exc,63.61194623008302,Scenario_1
+none,30th < 2040,EU < LT,EU < PL,jetFuel,liquidExc,no,exc,1.0226314741957534,Scenario_1
+none,30th < 2040,EU < ES,EU < PT,jetFuel,liquidExc,no,exc,6.717308295663728,Scenario_1
+none,30th < 2040,EU < FI,EU < SE,jetFuel,liquidExc,no,exc,1.9133768462821248,Scenario_1
+none,30th < 2040,EU < HR,EU < SI,crudeOil,liquidExc,no,exc,2.11375721855419,Scenario_1
+none,30th < 2040,nonEU < AL,nonEU < MK,jetFuel,liquidExc,no,exc,2.3657309796195607,Scenario_1
+none,30th < 2040,EU < RO,nonEU < RS,crudeOil,liquidExc,no,exc,34.00450282815923,Scenario_1
+none,30th < 2040,EU < FR,nonEU < UK,jetFuel,liquidExc,no,exc,56.794700057396454,Scenario_1
+none,30th < 2040,EU < IE,nonEU < UK,jetFuel,liquidExc,no,exc,2.9211742506540017,Scenario_1
+30th < 2040,30th < 2040,EU < SI,EU < AT,crudeOil,liquidExc,no,exc,1.477388148287536,Scenario_1
+30th < 2040,30th < 2040,EU < SK,EU < AT,crudeOil,liquidExc,no,exc,5.704773869064225,Scenario_1
+30th < 2040,30th < 2040,EU < SK,EU < AT,jetFuel,liquidExc,no,exc,5.4406028828009445,Scenario_1
+30th < 2040,30th < 2040,nonEU < RS,EU < BG,jetFuel,liquidExc,no,exc,5.408962125348158,Scenario_1
+30th < 2040,30th < 2040,EU < PL,EU < DE,crudeOil,liquidExc,no,exc,40.166370966825845,Scenario_1
+30th < 2040,30th < 2040,nonEU < CH,EU < DE,crudeOil,liquidExc,no,exc,2.5691502289115718e-5,Scenario_1
+30th < 2040,30th < 2040,nonEU < CH,EU < DE,jetFuel,liquidExc,no,exc,0.00015011718675828116,Scenario_1
+30th < 2040,30th < 2040,EU < SE,EU < DK,jetFuel,liquidExc,no,exc,30.65071017686359,Scenario_1
+30th < 2040,30th < 2040,nonEU < MK,EU < GR,crudeOil,liquidExc,no,exc,3.7821705486022554,Scenario_1
+30th < 2040,30th < 2040,nonEU < MK,EU < GR,jetFuel,liquidExc,no,exc,39.713094718146124,Scenario_1
+30th < 2040,30th < 2040,nonEU < BA,EU < HR,crudeOil,liquidExc,no,exc,3.8629586549461266,Scenario_1
+30th < 2040,30th < 2040,EU < RO,EU < HU,crudeOil,liquidExc,no,exc,22.907890261225777,Scenario_1
+30th < 2040,30th < 2040,EU < SI,EU < IT,jetFuel,liquidExc,no,exc,8.553896266901985,Scenario_1
+30th < 2040,30th < 2040,nonEU < NO,EU < SE,jetFuel,liquidExc,no,exc,2.0860216435697834,Scenario_1
+30th < 2040,30th < 2040,nonEU < ME,nonEU < BA,crudeOil,liquidExc,no,exc,4.810386755130138,Scenario_1
+30th < 2040,30th < 2040,nonEU < RS,nonEU < MK,crudeOil,liquidExc,no,exc,16.037354990629467,Scenario_1
+30th < 2040,30th < 2040,nonEU < RS,nonEU < MK,jetFuel,liquidExc,no,exc,21.06448314560896,Scenario_1
+none,30th < 2040,EU < DK,EU < DE,crudeOil,liquidExc,no,exc,71.7793179889973,Scenario_1
+none,30th < 2040,EU < DK,EU < DE,jetFuel,liquidExc,no,exc,54.48691905726091,Scenario_1
+none,30th < 2040,EU < HU,EU < AT,crudeOil,liquidExc,no,exc,17.155231383933447,Scenario_1
+none,30th < 2040,EU < HU,EU < AT,jetFuel,liquidExc,no,exc,26.85952579903352,Scenario_1
+none,30th < 2040,EU < LU,EU < BE,crudeOil,liquidExc,no,exc,32.033563251177604,Scenario_1
+none,30th < 2040,EU < LU,EU < BE,jetFuel,liquidExc,no,exc,1.6083125381045644,Scenario_1
+none,30th < 2040,EU < LV,EU < LT,crudeOil,liquidExc,no,exc,27.358644435863027,Scenario_1
+none,30th < 2040,EU < PL,EU < DE,jetFuel,liquidExc,no,exc,1.3263868564240089,Scenario_1
+none,30th < 2040,EU < SE,EU < DK,crudeOil,liquidExc,no,exc,83.6219307496623,Scenario_1
+none,30th < 2040,EU < SI,EU < AT,jetFuel,liquidExc,no,exc,1.4299410055700565,Scenario_1
+none,30th < 2040,EU < SI,EU < IT,crudeOil,liquidExc,no,exc,9.776202652959531,Scenario_1
+none,30th < 2040,nonEU < BA,EU < HR,jetFuel,liquidExc,no,exc,5.914435975744356,Scenario_1
+none,30th < 2040,nonEU < CH,EU < FR,crudeOil,liquidExc,no,exc,21.026131951945963,Scenario_1
+none,30th < 2040,nonEU < CH,EU < FR,jetFuel,liquidExc,no,exc,0.8796033474862479,Scenario_1
+none,30th < 2040,nonEU < NO,EU < SE,crudeOil,liquidExc,no,exc,7.08254602766459,Scenario_1
+none,30th < 2040,nonEU < RS,EU < RO,jetFuel,liquidExc,no,exc,11.623516999152674,Scenario_1
+none,30th < 2040,EU < DK < dk_e,EU < DE < de,none,powerGrid < hvdc,yes,flhExc,3381.1424536328745,Scenario_1
+none,30th < 2040,EU < FI < fi,EU < EE < ee,none,powerGrid < hvdc,yes,flhExc,1144.2468325551024,Scenario_1
+none,30th < 2040,EU < SE < se_1,EU < FI < fi,none,powerGrid < hvdc,yes,flhExc,8211.040482808508,Scenario_1
+none,30th < 2040,nonEU < UK < uk,nonEU < UK < ni,none,powerGrid < hvdc,yes,flhExc,388.8962359333155,Scenario_1
+none,30th < 2040,EU < DE < de,EU < DK < dk_e,none,powerGrid < hvdc,yes,flhExc,2967.095969989464,Scenario_1
+none,30th < 2040,EU < DK < dk_w,EU < SE < se_3,none,powerGrid < hvdc,yes,flhExc,4710.989167226078,Scenario_1
+none,30th < 2040,EU < EE < ee,EU < FI < fi,none,powerGrid < hvdc,yes,flhExc,5043.144352358941,Scenario_1
+none,30th < 2040,EU < FI < fi,EU < SE < se_1,none,powerGrid < hvdc,yes,flhExc,20.473282789641267,Scenario_1
+none,30th < 2040,EU < FR < fr_co,EU < IT < it_sar,none,powerGrid < hvdc,yes,flhExc,854.732596041701,Scenario_1
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_sar,none,powerGrid < hvdc,yes,flhExc,667.7247237312881,Scenario_1
+none,30th < 2040,EU < IT < it_s,EU < IT < it_sic,none,powerGrid < hvdc,yes,flhExc,2465.5991399397503,Scenario_1
+none,30th < 2040,EU < IT < it_sar,EU < FR < fr_co,none,powerGrid < hvdc,yes,flhExc,4744.455840714924,Scenario_1
+none,30th < 2040,EU < IT < it_sar,EU < IT < it_cs,none,powerGrid < hvdc,yes,flhExc,5116.971391973215,Scenario_1
+none,30th < 2040,EU < IT < it_sic,EU < IT < it_s,none,powerGrid < hvdc,yes,flhExc,3477.4491998904687,Scenario_1
+none,30th < 2040,EU < SE < se_3,EU < DK < dk_w,none,powerGrid < hvdc,yes,flhExc,2973.7885387812125,Scenario_1
+none,30th < 2040,nonEU < UK < ni,nonEU < UK < uk,none,powerGrid < hvdc,yes,flhExc,5822.542930518767,Scenario_1
+none,30th < 2040,EU < BE < be,nonEU < UK < uk,none,powerGrid < hvdc,no,flhExc,6882.723227404592,Scenario_1
+none,30th < 2040,EU < DE < de,nonEU < NO < no_s,none,powerGrid < hvdc,no,flhExc,8751.33163416379,Scenario_1
+none,30th < 2040,EU < DE < de,EU < SE < se_4,none,powerGrid < hvdc,no,flhExc,6629.706926730079,Scenario_1
+none,30th < 2040,EU < DK < dk_e,EU < PL < pl,none,powerGrid < hvdc,no,flhExc,7024.352013872108,Scenario_1
+none,30th < 2040,EU < DK < dk_w,EU < NL < nl,none,powerGrid < hvdc,no,flhExc,8428.57943791836,Scenario_1
+none,30th < 2040,EU < DK < dk_w,nonEU < NO < no_s,none,powerGrid < hvdc,no,flhExc,6467.728994870655,Scenario_1
+none,30th < 2040,EU < DK < dk_w,nonEU < UK < uk,none,powerGrid < hvdc,no,flhExc,6316.901896802244,Scenario_1
+none,30th < 2040,EU < FI < fi,EU < SE < se_2,none,powerGrid < hvdc,no,flhExc,8255.093431841982,Scenario_1
+none,30th < 2040,EU < FI < fi,EU < SE < se_3,none,powerGrid < hvdc,no,flhExc,7459.871125729753,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < IE < ie,none,powerGrid < hvdc,no,flhExc,6367.923930321645,Scenario_1
+none,30th < 2040,EU < FR < fr,nonEU < UK < uk,none,powerGrid < hvdc,no,flhExc,8022.471096999233,Scenario_1
+none,30th < 2040,EU < GR < gr,EU < IT < it_s,none,powerGrid < hvdc,no,flhExc,8041.432847473186,Scenario_1
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_sic,none,powerGrid < hvdc,no,flhExc,6780.860045962745,Scenario_1
+none,30th < 2040,EU < IT < it_cs,nonEU < ME < me,none,powerGrid < hvdc,no,flhExc,7223.984451580895,Scenario_1
+none,30th < 2040,EU < IT < it_sar,EU < IT < it_sic,none,powerGrid < hvdc,no,flhExc,6544.242061501131,Scenario_1
+none,30th < 2040,EU < LT < lt,EU < SE < se_4,none,powerGrid < hvdc,no,flhExc,7372.927227305589,Scenario_1
+none,30th < 2040,EU < NL < nl,nonEU < NO < no_s,none,powerGrid < hvdc,no,flhExc,8655.071717228584,Scenario_1
+none,30th < 2040,EU < NL < nl,nonEU < UK < uk,none,powerGrid < hvdc,no,flhExc,5473.055011413074,Scenario_1
+none,30th < 2040,nonEU < NO < no_s,nonEU < UK < uk,none,powerGrid < hvdc,no,flhExc,8173.116285874441,Scenario_1
+none,30th < 2040,EU < PL < pl,EU < SE < se_4,none,powerGrid < hvdc,no,flhExc,8001.647474282033,Scenario_1
+none,30th < 2040,EU < AT < at < 49AT,EU < IT < it_n < 52IT,none,h2Grid,yes,flhExc,4379.98678608498,Scenario_1
+none,30th < 2040,EU < IT < it_s < 55IT,nonEU < AL < al < 70AL,none,h2Grid,yes,flhExc,6578.666657154021,Scenario_1
+none,30th < 2040,EU < LU < lu < 29LU,EU < BE < be < 28BE,none,h2Grid,yes,flhExc,4380.085900060318,Scenario_1
+none,30th < 2040,nonEU < AL < al < 70AL,EU < IT < it_s < 55IT,none,h2Grid,yes,flhExc,4466.337695225733,Scenario_1
+none,30th < 2040,nonEU < RS < rs,nonEU < AL < al,none,powerGrid < hvac,yes,flhExc,292.3954725299159,Scenario_1
+none,30th < 2040,EU < CZ < cz,EU < AT < at,none,powerGrid < hvac,yes,flhExc,1271.637769551952,Scenario_1
+none,30th < 2040,EU < IT < it_n,EU < AT < at,none,powerGrid < hvac,yes,flhExc,2321.635552939693,Scenario_1
+none,30th < 2040,nonEU < BA < ba,EU < HR < hr,none,powerGrid < hvac,yes,flhExc,6938.613509163908,Scenario_1
+none,30th < 2040,nonEU < ME < me,nonEU < BA < ba,none,powerGrid < hvac,yes,flhExc,3743.3785176232855,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < BE < be,none,powerGrid < hvac,yes,flhExc,4484.975613030408,Scenario_1
+none,30th < 2040,EU < LU < lu,EU < BE < be,none,powerGrid < hvac,yes,flhExc,1603.6923498341725,Scenario_1
+none,30th < 2040,EU < NL < nl,EU < BE < be,none,powerGrid < hvac,yes,flhExc,3975.6218825576207,Scenario_1
+none,30th < 2040,EU < GR < gr,EU < BG < bg,none,powerGrid < hvac,yes,flhExc,6973.414006142704,Scenario_1
+none,30th < 2040,nonEU < MK < mk,EU < BG < bg,none,powerGrid < hvac,yes,flhExc,5299.237922277377,Scenario_1
+none,30th < 2040,nonEU < RS < rs,EU < BG < bg,none,powerGrid < hvac,yes,flhExc,1279.9735993807774,Scenario_1
+none,30th < 2040,nonEU < CH < ch,EU < DE < de,none,powerGrid < hvac,yes,flhExc,3197.605696446235,Scenario_1
+none,30th < 2040,nonEU < CH < ch,EU < FR < fr,none,powerGrid < hvac,yes,flhExc,352.26010308150006,Scenario_1
+none,30th < 2040,nonEU < CH < ch,EU < IT < it_n,none,powerGrid < hvac,yes,flhExc,2343.8372692817525,Scenario_1
+none,30th < 2040,EU < DE < de,EU < CZ < cz,none,powerGrid < hvac,yes,flhExc,1182.853682073654,Scenario_1
+none,30th < 2040,EU < PL < pl,EU < CZ < cz,none,powerGrid < hvac,yes,flhExc,942.0359007266629,Scenario_1
+none,30th < 2040,EU < SK < sk,EU < CZ < cz,none,powerGrid < hvac,yes,flhExc,4247.660262103235,Scenario_1
+none,30th < 2040,EU < DK < dk_w,EU < DE < de,none,powerGrid < hvac,yes,flhExc,3996.2078881364705,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < DE < de,none,powerGrid < hvac,yes,flhExc,5560.910167354296,Scenario_1
+none,30th < 2040,EU < PL < pl,EU < DE < de,none,powerGrid < hvac,yes,flhExc,2903.7560701142547,Scenario_1
+none,30th < 2040,EU < SE < se_4,EU < DK < dk_e,none,powerGrid < hvac,yes,flhExc,3262.5782754430275,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < ES < es,none,powerGrid < hvac,yes,flhExc,1037.2197915123445,Scenario_1
+none,30th < 2040,EU < PT < pt,EU < ES < es,none,powerGrid < hvac,yes,flhExc,4296.106016551317,Scenario_1
+none,30th < 2040,EU < IT < it_n,EU < FR < fr,none,powerGrid < hvac,yes,flhExc,1147.4124395697556,Scenario_1
+none,30th < 2040,nonEU < MK < mk,EU < GR < gr,none,powerGrid < hvac,yes,flhExc,356.74942187306993,Scenario_1
+none,30th < 2040,EU < RO < ro,EU < HU < hu,none,powerGrid < hvac,yes,flhExc,7751.8658081485755,Scenario_1
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_cn,none,powerGrid < hvac,yes,flhExc,1939.36319654163,Scenario_1
+none,30th < 2040,EU < IT < it_n,EU < IT < it_cn,none,powerGrid < hvac,yes,flhExc,443.05684590400267,Scenario_1
+none,30th < 2040,EU < IT < it_s,EU < IT < it_cs,none,powerGrid < hvac,yes,flhExc,4800.112896739139,Scenario_1
+none,30th < 2040,EU < SI < si,EU < IT < it_n,none,powerGrid < hvac,yes,flhExc,7939.658511717885,Scenario_1
+none,30th < 2040,EU < LV < lv,EU < LT < lt,none,powerGrid < hvac,yes,flhExc,3972.258964930295,Scenario_1
+none,30th < 2040,nonEU < RS < rs,nonEU < ME < me,none,powerGrid < hvac,yes,flhExc,382.63938044691065,Scenario_1
+none,30th < 2040,nonEU < RS < rs,nonEU < MK < mk,none,powerGrid < hvac,yes,flhExc,349.9096473246498,Scenario_1
+none,30th < 2040,nonEU < NO < no_m,EU < SE < se_2,none,powerGrid < hvac,yes,flhExc,309.67023745179836,Scenario_1
+none,30th < 2040,nonEU < NO < no_n,EU < SE < se_1,none,powerGrid < hvac,yes,flhExc,643.6176509676211,Scenario_1
+none,30th < 2040,nonEU < NO < no_n,EU < SE < se_2,none,powerGrid < hvac,yes,flhExc,6172.88513257832,Scenario_1
+none,30th < 2040,nonEU < NO < no_s,EU < SE < se_3,none,powerGrid < hvac,yes,flhExc,3468.4810247578603,Scenario_1
+none,30th < 2040,nonEU < RS < rs,EU < RO < ro,none,powerGrid < hvac,yes,flhExc,452.9300475939643,Scenario_1
+none,30th < 2040,EU < AT < at,EU < CZ < cz,none,powerGrid < hvac,yes,flhExc,2713.664460763127,Scenario_1
+none,30th < 2040,EU < AT < at,EU < IT < it_n,none,powerGrid < hvac,yes,flhExc,4794.039504589923,Scenario_1
+none,30th < 2040,EU < BE < be,EU < FR < fr,none,powerGrid < hvac,yes,flhExc,136.12398553236406,Scenario_1
+none,30th < 2040,EU < BE < be,EU < LU < lu,none,powerGrid < hvac,yes,flhExc,1548.5083464162537,Scenario_1
+none,30th < 2040,EU < BE < be,EU < NL < nl,none,powerGrid < hvac,yes,flhExc,1485.9516203603368,Scenario_1
+none,30th < 2040,EU < BG < bg,EU < GR < gr,none,powerGrid < hvac,yes,flhExc,0.051189266036512256,Scenario_1
+none,30th < 2040,EU < BG < bg,nonEU < MK < mk,none,powerGrid < hvac,yes,flhExc,286.7290346823613,Scenario_1
+none,30th < 2040,EU < BG < bg,nonEU < RS < rs,none,powerGrid < hvac,yes,flhExc,561.2956243494885,Scenario_1
+none,30th < 2040,EU < CZ < cz,EU < DE < de,none,powerGrid < hvac,yes,flhExc,4279.097936531733,Scenario_1
+none,30th < 2040,EU < CZ < cz,EU < PL < pl,none,powerGrid < hvac,yes,flhExc,5170.551616180858,Scenario_1
+none,30th < 2040,EU < CZ < cz,EU < SK < sk,none,powerGrid < hvac,yes,flhExc,512.0739992137763,Scenario_1
+none,30th < 2040,EU < DE < de,EU < DK < dk_w,none,powerGrid < hvac,yes,flhExc,2273.005829316776,Scenario_1
+none,30th < 2040,EU < DE < de,EU < FR < fr,none,powerGrid < hvac,yes,flhExc,524.5421313009315,Scenario_1
+none,30th < 2040,EU < DE < de,EU < PL < pl,none,powerGrid < hvac,yes,flhExc,1758.3763654750805,Scenario_1
+none,30th < 2040,EU < DE < de,nonEU < CH < ch,none,powerGrid < hvac,yes,flhExc,1544.9009790391544,Scenario_1
+none,30th < 2040,EU < DK < dk_e,EU < DK < dk_w,none,powerGrid < hvac,yes,flhExc,3205.5722308566965,Scenario_1
+none,30th < 2040,EU < DK < dk_e,EU < SE < se_4,none,powerGrid < hvac,yes,flhExc,536.0043490335495,Scenario_1
+none,30th < 2040,EU < DK < dk_w,EU < DK < dk_e,none,powerGrid < hvac,yes,flhExc,4264.822850925301,Scenario_1
+none,30th < 2040,EU < ES < es,EU < FR < fr,none,powerGrid < hvac,yes,flhExc,7123.60046701777,Scenario_1
+none,30th < 2040,EU < ES < es,EU < PT < pt,none,powerGrid < hvac,yes,flhExc,590.6192636816362,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < IT < it_n,none,powerGrid < hvac,yes,flhExc,2964.5379566317024,Scenario_1
+none,30th < 2040,EU < FR < fr,nonEU < CH < ch,none,powerGrid < hvac,yes,flhExc,4011.1222067159692,Scenario_1
+none,30th < 2040,EU < GR < gr,nonEU < MK < mk,none,powerGrid < hvac,yes,flhExc,3448.4500257107984,Scenario_1
+none,30th < 2040,EU < HR < hr,nonEU < BA < ba,none,powerGrid < hvac,yes,flhExc,199.93723871864924,Scenario_1
+none,30th < 2040,EU < HU < hu,EU < RO < ro,none,powerGrid < hvac,yes,flhExc,182.51262833851263,Scenario_1
+none,30th < 2040,EU < IT < it_cn,EU < IT < it_cs,none,powerGrid < hvac,yes,flhExc,2775.903959605124,Scenario_1
+none,30th < 2040,EU < IT < it_cn,EU < IT < it_n,none,powerGrid < hvac,yes,flhExc,5026.577482949984,Scenario_1
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_s,none,powerGrid < hvac,yes,flhExc,41.339950207349396,Scenario_1
+none,30th < 2040,EU < IT < it_n,EU < SI < si,none,powerGrid < hvac,yes,flhExc,273.6672275793746,Scenario_1
+none,30th < 2040,EU < IT < it_n,nonEU < CH < ch,none,powerGrid < hvac,yes,flhExc,2445.865083835397,Scenario_1
+none,30th < 2040,EU < LT < lt,EU < LV < lv,none,powerGrid < hvac,yes,flhExc,1173.9681817158107,Scenario_1
+none,30th < 2040,EU < RO < ro,nonEU < RS < rs,none,powerGrid < hvac,yes,flhExc,3385.687375441007,Scenario_1
+none,30th < 2040,EU < SE < se_1,nonEU < NO < no_n,none,powerGrid < hvac,yes,flhExc,821.9185360806076,Scenario_1
+none,30th < 2040,EU < SE < se_2,nonEU < NO < no_m,none,powerGrid < hvac,yes,flhExc,1797.2575598934216,Scenario_1
+none,30th < 2040,EU < SE < se_2,nonEU < NO < no_n,none,powerGrid < hvac,yes,flhExc,152.5535282186951,Scenario_1
+none,30th < 2040,EU < SE < se_3,EU < SE < se_4,none,powerGrid < hvac,yes,flhExc,1834.2778647250045,Scenario_1
+none,30th < 2040,EU < SE < se_3,nonEU < NO < no_s,none,powerGrid < hvac,yes,flhExc,768.1865155795277,Scenario_1
+none,30th < 2040,EU < SE < se_4,EU < SE < se_3,none,powerGrid < hvac,yes,flhExc,4065.123757694132,Scenario_1
+none,30th < 2040,nonEU < AL < al,nonEU < RS < rs,none,powerGrid < hvac,yes,flhExc,5239.70584190611,Scenario_1
+none,30th < 2040,nonEU < BA < ba,nonEU < ME < me,none,powerGrid < hvac,yes,flhExc,959.2131079094473,Scenario_1
+none,30th < 2040,nonEU < ME < me,nonEU < RS < rs,none,powerGrid < hvac,yes,flhExc,2833.391376729721,Scenario_1
+none,30th < 2040,nonEU < MK < mk,nonEU < RS < rs,none,powerGrid < hvac,yes,flhExc,5619.927798212244,Scenario_1
+none,30th < 2040,EU < GR < gr,nonEU < AL < al,none,powerGrid < hvac,no,flhExc,3002.92144508998,Scenario_1
+none,30th < 2040,nonEU < AL < al,nonEU < ME < me,none,powerGrid < hvac,no,flhExc,4810.990712049889,Scenario_1
+none,30th < 2040,nonEU < AL < al,nonEU < MK < mk,none,powerGrid < hvac,no,flhExc,3335.363255063768,Scenario_1
+none,30th < 2040,EU < AT < at,nonEU < CH < ch,none,powerGrid < hvac,no,flhExc,5059.289398217323,Scenario_1
+none,30th < 2040,EU < AT < at,EU < DE < de,none,powerGrid < hvac,no,flhExc,6819.497084694482,Scenario_1
+none,30th < 2040,EU < AT < at,EU < HU < hu,none,powerGrid < hvac,no,flhExc,8029.726628889827,Scenario_1
+none,30th < 2040,EU < AT < at,EU < SI < si,none,powerGrid < hvac,no,flhExc,8195.017170145587,Scenario_1
+none,30th < 2040,EU < AT < at,EU < SK < sk,none,powerGrid < hvac,no,flhExc,5886.5878045608515,Scenario_1
+none,30th < 2040,nonEU < BA < ba,nonEU < RS < rs,none,powerGrid < hvac,no,flhExc,5343.705380381986,Scenario_1
+none,30th < 2040,EU < BE < be,EU < DE < de,none,powerGrid < hvac,no,flhExc,5961.805793823813,Scenario_1
+none,30th < 2040,EU < BG < bg,EU < RO < ro,none,powerGrid < hvac,no,flhExc,3765.824828722869,Scenario_1
+none,30th < 2040,EU < DE < de,EU < LU < lu,none,powerGrid < hvac,no,flhExc,1418.247453862008,Scenario_1
+none,30th < 2040,EU < DE < de,EU < NL < nl,none,powerGrid < hvac,no,flhExc,7084.105958118468,Scenario_1
+none,30th < 2040,EU < EE < ee,EU < LV < lv,none,powerGrid < hvac,no,flhExc,5194.671683336613,Scenario_1
+none,30th < 2040,EU < FI < fi,nonEU < NO < no_n,none,powerGrid < hvac,no,flhExc,6845.93712263693,Scenario_1
+none,30th < 2040,EU < HR < hr,EU < HU < hu,none,powerGrid < hvac,no,flhExc,7308.858638583825,Scenario_1
+none,30th < 2040,EU < HR < hr,nonEU < RS < rs,none,powerGrid < hvac,no,flhExc,6396.376645204498,Scenario_1
+none,30th < 2040,EU < HR < hr,EU < SI < si,none,powerGrid < hvac,no,flhExc,8057.143526296526,Scenario_1
+none,30th < 2040,EU < HU < hu,nonEU < RS < rs,none,powerGrid < hvac,no,flhExc,8235.12050918229,Scenario_1
+none,30th < 2040,EU < HU < hu,EU < SI < si,none,powerGrid < hvac,no,flhExc,3614.689376838482,Scenario_1
+none,30th < 2040,EU < HU < hu,EU < SK < sk,none,powerGrid < hvac,no,flhExc,7937.723606974737,Scenario_1
+none,30th < 2040,EU < IE < ie,nonEU < UK < ni,none,powerGrid < hvac,no,flhExc,6529.697538180872,Scenario_1
+none,30th < 2040,EU < IE < ie,nonEU < UK < uk,none,powerGrid < hvac,no,flhExc,7685.298713710063,Scenario_1
+none,30th < 2040,EU < LT < lt,EU < PL < pl,none,powerGrid < hvac,no,flhExc,6883.605730629685,Scenario_1
+none,30th < 2040,EU < PL < pl,EU < SK < sk,none,powerGrid < hvac,no,flhExc,7539.217118612841,Scenario_1
+none,30th < 2040,EU < SE < se_2,EU < SE < se_3,none,powerGrid < hvac,no,flhExc,6148.856061534582,Scenario_1
+none,30th < 2040,EU < FR < fr_co,EU < IT < it_cn,none,powerGrid < hvac,no,flhExc,5418.299991846077,Scenario_1
+none,30th < 2040,EU < SE < se_1,EU < SE < se_2,none,powerGrid < hvac,no,flhExc,5704.693782144741,Scenario_1
+none,30th < 2040,nonEU < NO < no_m,nonEU < NO < no_n,none,powerGrid < hvac,no,flhExc,8149.641718185297,Scenario_1
+none,30th < 2040,nonEU < NO < no_m,nonEU < NO < no_s,none,powerGrid < hvac,no,flhExc,7461.110547997388,Scenario_1
+none,30th < 2040,EU < SI < si < 57SI,EU < AT < at < 50AT,none,h2Grid,yes,flhExc,8759.996674601256,Scenario_1
+none,30th < 2040,EU < FR < fr < 27FR,EU < BE < be < 28BE,none,h2Grid,yes,flhExc,8759.948413256656,Scenario_1
+none,30th < 2040,EU < NL < nl < 30NL,EU < BE < be < 28BE,none,h2Grid,yes,flhExc,6570.038305406242,Scenario_1
+none,30th < 2040,EU < DK < dk_w < 38DK,EU < DE < de < 31DE,none,h2Grid,yes,flhExc,6089.855981468891,Scenario_1
+none,30th < 2040,EU < NL < nl < 30NL,EU < DE < de < 33DE,none,h2Grid,yes,flhExc,8479.534425003512,Scenario_1
+none,30th < 2040,EU < DK < dk_w < 38DK,EU < DK < dk_e < 72DK,none,h2Grid,yes,flhExc,4382.148828546017,Scenario_1
+none,30th < 2040,nonEU < NO < no_s < 79NO,EU < DK < dk_w < 38DK,none,h2Grid,yes,flhExc,4416.127746738503,Scenario_1
+none,30th < 2040,EU < SE < se_1 < 86SE,EU < FI < fi < 74FI,none,h2Grid,yes,flhExc,8155.475846872776,Scenario_1
+none,30th < 2040,EU < IT < it_sar < 98IT,EU < FR < fr_co < 99FR,none,h2Grid,yes,flhExc,8759.430121823887,Scenario_1
+none,30th < 2040,EU < RO < ro < 59RO,EU < HU < hu < 58HU,none,h2Grid,yes,flhExc,8759.986252253866,Scenario_1
+none,30th < 2040,EU < IT < it_s < 55IT,EU < IT < it_cs < 54IT,none,h2Grid,yes,flhExc,8554.524573179848,Scenario_1
+none,30th < 2040,nonEU < BA < ba < 63BA,EU < IT < it_cs < 54IT,none,h2Grid,yes,flhExc,6764.486124707368,Scenario_1
+none,30th < 2040,EU < SI < si < 57SI,EU < IT < it_n < 52IT,none,h2Grid,yes,flhExc,8759.824731101977,Scenario_1
+none,30th < 2040,nonEU < CH < ch < 48CH,EU < IT < it_n < 52IT,none,h2Grid,yes,flhExc,4379.9933674563445,Scenario_1
+none,30th < 2040,EU < IT < it_sic < 56IT,EU < IT < it_s < 55IT,none,h2Grid,yes,flhExc,7935.948107554265,Scenario_1
+none,30th < 2040,EU < LV < lv < 78LV,EU < LT < lt < 77LT,none,h2Grid,yes,flhExc,8497.780312883344,Scenario_1
+none,30th < 2040,EU < ES < es < 04ES,EU < FR < fr < 14FR,none,h2Grid,yes,flhExc,8746.077747899388,Scenario_1
+none,30th < 2040,EU < ES < es < 06ES,EU < FR < fr < 14FR,none,h2Grid,yes,flhExc,6530.7385736527785,Scenario_1
+none,30th < 2040,EU < ES < es < 06ES,EU < FR < fr < 15FR,none,h2Grid,yes,flhExc,8319.63472128566,Scenario_1
+none,30th < 2040,EU < FR < fr < 14FR,EU < FR < fr < 17FR,none,h2Grid,yes,flhExc,8737.264682550904,Scenario_1
+none,30th < 2040,EU < FR < fr < 14FR,EU < FR < fr < 18FR,none,h2Grid,yes,flhExc,7310.4304531534435,Scenario_1
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 16FR,none,h2Grid,yes,flhExc,7174.429598105144,Scenario_1
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 18FR,none,h2Grid,yes,flhExc,7211.611974386756,Scenario_1
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 19FR,none,h2Grid,yes,flhExc,8534.837525024119,Scenario_1
+none,30th < 2040,EU < FR < fr < 16FR,EU < IT < it_n < 52IT,none,h2Grid,yes,flhExc,8666.71537761899,Scenario_1
+none,30th < 2040,EU < FR < fr < 19FR,EU < FR < fr < 20FR,none,h2Grid,yes,flhExc,8477.645057028032,Scenario_1
+none,30th < 2040,EU < FR < fr < 20FR,nonEU < CH < ch < 47CH,none,h2Grid,yes,flhExc,8759.992834508585,Scenario_1
+none,30th < 2040,EU < FR < fr < 20FR,nonEU < CH < ch < 48CH,none,h2Grid,yes,flhExc,8759.974428124091,Scenario_1
+none,30th < 2040,EU < FR < fr < 20FR,EU < IT < it_n < 52IT,none,h2Grid,yes,flhExc,8759.994518769996,Scenario_1
+none,30th < 2040,EU < FR < fr < 25FR,EU < LU < lu < 29LU,none,h2Grid,yes,flhExc,8754.591919175704,Scenario_1
+none,30th < 2040,EU < FR < fr < 26FR,nonEU < UK < uk < 90UK,none,h2Grid,yes,flhExc,6569.995042100453,Scenario_1
+none,30th < 2040,EU < CZ < cz < 39CZ,EU < DE < de < 34DE,none,h2Grid,yes,flhExc,8759.99364318657,Scenario_1
+none,30th < 2040,EU < HU < hu < 58HU,EU < SK < sk < 46SK,none,h2Grid,yes,flhExc,8759.966809316948,Scenario_1
+none,30th < 2040,EU < IT < it_cn < 53IT,EU < IT < it_n < 52IT,none,h2Grid,yes,flhExc,8667.836300691619,Scenario_1
+none,30th < 2040,EU < FR < fr_co < 99FR,EU < IT < it_cn < 53IT,none,h2Grid,yes,flhExc,4641.356372706878,Scenario_1
+none,30th < 2040,EU < HR < hr < 62HR,EU < SI < si < 57SI,none,h2Grid,yes,flhExc,8759.993729074107,Scenario_1
+none,30th < 2040,EU < EE < ee < 73EE,EU < LV < lv < 78LV,none,h2Grid,yes,flhExc,6497.362332683508,Scenario_1
+none,30th < 2040,nonEU < UK < ni < 95UK,nonEU < UK < uk < 93UK,none,h2Grid,yes,flhExc,4380.014522501869,Scenario_1
+none,30th < 2040,EU < IE < ie < 96IE,nonEU < UK < ni < 95UK,none,h2Grid,yes,flhExc,8759.97284596906,Scenario_1
+none,30th < 2040,EU < FR < fr,EU < LU < lu,none,powerGrid < hvac,yes,flhExc,0.0,Scenario_1
