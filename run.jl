@@ -6,7 +6,7 @@ h_heu = ARGS[2] # resolution of time-series for pre-screening, can be 96, 1752, 
 grid = ARGS[3] # scenario for grid expansion, can be "_gridExp" and "_noGridExp"
 t_int = parse(Int,ARGS[4]) # number of threads
 
-obj_str = h * "hours_" * h_heu * "hoursHeu" * grid
+obj_str = h * "hours_" * h_heu * "hoursHeu" * grid * "_updated"
 temp_dir = "tempFix_" * obj_str # directory for temporary folder
 
 if isdir(temp_dir) rm(temp_dir, recursive = true) end
