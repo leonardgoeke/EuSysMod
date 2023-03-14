@@ -1,5 +1,5 @@
 parameter,value
-rateDisc,0.05
+rateDisc,0
 rateExpConv,0.05
 rateExpStIn,0.05
 rateExpStOut,0.05
