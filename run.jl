@@ -12,7 +12,8 @@ temp_dir = "tempFix_" * obj_str # directory for temporary folder
 if isdir(temp_dir) rm(temp_dir, recursive = true) end
 mkdir(temp_dir)
 
-inputMod_arr = ["_basis","transportScr/" * trn,"timeSeries/" * h * "hours_2008_only2040",temp_dir]
+inputFeas_arr = ["_basis","transportScr/" * trn,"timeSeries/" * h * "hours_2008_only2040",temp_dir]
+inputWrtEU_arr = ["_basis","transportScr/" * trn,"timeSeries/" * h * "hours_2008_only2040"]
 inputHeu_arr = ["_basis","transportScr/" * trn,"timeSeries/" * h_heu * "hours_2008_only2040"]
 
 # add folder to fix eu to reference results
@@ -29,7 +30,8 @@ scaFacHeuSca_tup = (capa = 1e0, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1,
 
 optMod_dic = Dict{Symbol,NamedTuple}()
 optMod_dic[:heuSca] =  (inputDir = inputHeu_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
-optMod_dic[:top] 	=  (inputDir = inputMod_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
+optMod_dic[:feas] 	=  (inputDir = inputFeas_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
+optMod_dic[:wrtEU] 	=  (inputDir = inputWrtEU_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
 
 # heuristic presolved not needed if only results for germany are computed anyway
 if trn == "reference"
@@ -37,7 +39,7 @@ if trn == "reference"
     ~, heuCom_obj = @suppress heuristicSolve(optMod_dic[:heuSca],8760/parse(Int,h_heu),t_int,Gurobi.Optimizer)
     # ! write fixes to files and limits to dictionary
     fix_dic, lim_dic, cntHeu_arr = evaluateHeu(heu_m,heuSca_obj,heuCom_obj,(thrsAbs = 0.001, thrsRel = 0.05),true) # get fixed and limited variables
-    feasFix_dic = getFeasResult(optMod_dic[:top],fix_dic,lim_dic,t_int,0.001,Gurobi.Optimizer) # ensure feasiblity with fixed variables
+    feasFix_dic = getFeasResult(optMod_dic[:feas],fix_dic,lim_dic,t_int,0.001,Gurobi.Optimizer) # ensure feasiblity with fixed variables
     # ! write fixed variable values to files
     writeFixToFiles(fix_dic,feasFix_dic,temp_dir,heu_m; skipMustSt = true)
     heu_m = nothing
@@ -77,10 +79,10 @@ if trn == "reference"
     # store solutions as benders object
     sol_obj = bendersData()
 	sol_obj.objVal = 0.0
-    sol_obj.capa = writeResult(anyM,[:capa,:exp,:mustCapa,:mustExp])
+    sol_obj.capa = writeResult(anyM,[:capa,:exp,:mustCapa,:mustExp]; rmvCons = false)
     # get feasible solutions
     fixSol_dic, limSol_dic, cntHeuSol_arr = evaluateHeu(anyM,sol_obj,copy(sol_obj),(thrsAbs = 0.001, thrsRel = 0.05),true) # get fixed and limited variables
-    feasFixSol_dic = getFeasResult(optMod_dic[:top],fixSol_dic,limSol_dic,t_int,0.001,Gurobi.Optimizer) # ensure feasiblity with fixed variables
+    feasFixSol_dic = getFeasResult(optMod_dic[:wrtEU],fixSol_dic,limSol_dic,t_int,0.001,Gurobi.Optimizer) # ensure feasiblity with fixed variables
     # filter results for rest of EU and write to folder 
 
     de_arr = getfield.(filter(x -> occursin("de",x.val) || occursin("DE",x.val), collect(values(anyM.sets[:R].nodes))),:idx)
