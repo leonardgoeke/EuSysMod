@@ -1,9 +1,0 @@
-region_1,region_1,exchange_1,exchange_2,parameter_1,value_1,parameter_2,value_2,parameter_3,value_3
-BE,DE,powerGrid,hvac,capaExcResi,1,lossExc,0.0176,costOprExc,5.61
-DE,NL,powerGrid,hvac,capaExcResi,4.25,lossExc,0.0171,costOprExc,5.45
-BE,FR,powerGrid,hvac,capaExcResiDir,1.8,lossExc,0.0248,costOprExc,7.9
-BE,NL,powerGrid,hvac,capaExcResiDir,2.4,lossExc,0.0083,costOprExc,2.63
-DE,FR,powerGrid,hvac,capaExcResiDir,2.3,lossExc,0.0403,costOprExc,12.82
-FR,BE,powerGrid,hvac,capaExcResiDir,3.3,,,,
-NL,BE,powerGrid,hvac,capaExcResiDir,1.4,,,,
-FR,DE,powerGrid,hvac,capaExcResiDir,1.8,,,,

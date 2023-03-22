@@ -1,3 +1,0 @@
-exchange_1,exchange_2,carrier_exchange,exchange_type,exchange_decomm,exchange_symmetry,comment
-powerGrid,hvac,electricity,mature,none,undirected,
-h2Grid,,h2,mature,none,directed,
