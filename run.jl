@@ -6,6 +6,8 @@ h_heu = ARGS[2] # resolution of time-series for pre-screening, can be 96, 1752, 
 trn = ARGS[3] # scenario for transport in germany
 t_int = parse(Int,ARGS[4]) # number of threads
 
+engScr = occursin("mix",trn) ? "mix" : "improve"
+
 obj_str = h * "hours_" * h_heu * "hoursHeu_" * trn
 temp_dir = "tempFix_" * obj_str # directory for temporary folder
 
@@ -17,9 +19,9 @@ inputWrtEU_arr = ["_basis","transportScr/" * trn,"timeSeries/" * h * "hours_2008
 inputHeu_arr = ["_basis","transportScr/" * trn,"timeSeries/" * h_heu * "hours_2008_only2040"]
 
 # add folder to fix eu to reference results
-if trn != "reference"
-    push!(inputMod_arr, "fixEU_" * h)
-    push!(inputHeu_arr, "fixEU_" * h)
+if !occursin("reference",trn)
+    push!(inputMod_arr, "fixEU_" * engScr * "_" * h)
+    push!(inputHeu_arr, "fixEU_" * engScr * "_" * h)
 end
 resultDir_str = "results"
 
@@ -34,7 +36,7 @@ optMod_dic[:feas] 	=  (inputDir = inputMod_arr, resultDir = resultDir_str, suffi
 optMod_dic[:wrtEU] 	=  (inputDir = inputWrtEU_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
 
 # heuristic presolved not needed if only results for germany are computed anyway
-if trn == "reference"
+if occursin("reference",trn)
     heu_m, heuSca_obj = @suppress heuristicSolve(optMod_dic[:heuSca],1.0,t_int,Gurobi.Optimizer);
     ~, heuCom_obj = @suppress heuristicSolve(optMod_dic[:heuSca],8760/parse(Int,h_heu),t_int,Gurobi.Optimizer)
     # ! write fixes to files and limits to dictionary
@@ -75,7 +77,7 @@ reportResults(:cost,anyM, addObjName = true)
 reportTimeSeries(:electricity,anyM)
 
 # write fix for europe fo file
-if trn == "reference"
+if occursin("reference",trn)
     # store solutions as benders object
     sol_obj = bendersData()
 	sol_obj.objVal = 0.0
@@ -94,7 +96,7 @@ if trn == "reference"
             end
         end
     end
-    writeFixToFiles(feasFixSol_dic,feasFixSol_dic,"fixEU_" * h,anyM, skipMustSt = true)
+    writeFixToFiles(feasFixSol_dic,feasFixSol_dic,"fixEU_" * engScr * "_" * h,anyM, skipMustSt = true)
 end
 
 #endregion
