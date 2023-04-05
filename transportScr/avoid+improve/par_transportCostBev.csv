@@ -6,7 +6,7 @@ bevFrtRoadHeavy,costExpConv,1028.593333
 bevPsngRoadPrvt,effConv,4.889
 bevPsngRoadPub,effConv,7.676
 bevFrtRoadLight,effConv,0.793333333
-bevFrtRoadHeavy,effConv,13.8764
+bevFrtRoadHeavy,effConv,13.87637976
 bevPsngRoadPrvt,effStIn,0.96
 bevPsngRoadPub,effStIn,0.96
 bevFrtRoadLight,effStIn,0.96
@@ -35,7 +35,7 @@ bevPsngRoadPrvt,useFix,0
 bevPsngRoadPub,useFix,0
 bevFrtRoadLight,useFix,0
 bevFrtRoadHeavy,useFix,0
-bevPsngRoadPrvt,desFac,0.886424124
-bevPsngRoadPub,desFac,1.17
+bevPsngRoadPrvt,desFac,0.669991277
+bevPsngRoadPub,desFac,0.942085124
 bevFrtRoadLight,desFac,0.082224401
 bevFrtRoadHeavy,desFac,1.8511951

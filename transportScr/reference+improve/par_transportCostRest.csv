@@ -1,7 +1,7 @@
 technology_3,timestep_2,parameter,value
-ottoPsngRoadPrvt,2040,costExpConv,10136.07763
-cngPsngRoadPrvt,2040,costExpConv,9825.95062
-fcevPsngRoadPrvt,2040,costExpConv,23385.23804
+ottoPsngRoadPrvt,2040,costExpConv,8901.998033
+cngPsngRoadPrvt,2040,costExpConv,8629.629355
+fcevPsngRoadPrvt,2040,costExpConv,20538.05728
 dieselPsngRoadPub,2040,costExpConv,5988.02771
 fcPsngRoadPub,2040,costExpConv,8192.4827
 dieselFrtRoadLight,2040,costExpConv,8567.055399
