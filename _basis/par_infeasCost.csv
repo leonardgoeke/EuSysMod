@@ -2,7 +2,6 @@ carrier_1,carrier_2,parameter,value
 electricity,,costLss,13000
 crudeOil,,costLss,13000
 refinedOil,,costLss,13000
-jetFuel,,costLss,13000
 synthGas,,costLss,13000
 rawBiogas,,costLss,13000
 otherBiomass,nonSolidBiomass,costLss,13000
@@ -10,7 +9,8 @@ otherBiomass,solidBiomass,costLss,13000
 districtHeat,,costLss,13000
 processHeat_low,,costLss,13000
 processHeat_high,,costLss,13000
-capturedCO2,,costLss,50000
+h2,,costLss,13000
+capturedCO2,,costLss,13000
 frtRoadHeavy,,costMissCapa,50000
 frtRoadLight,,costMissCapa,50000
 frtRail,,costMissCapa,50000
