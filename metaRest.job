@@ -10,20 +10,22 @@
 #$ -M lgo@wip.tu-berlin.de
 
 #qsub -t 3001 -v hours='8760' -v hours_heu='1752' -v trn='avoid+improve' start8_64.job
-#qsub -t 3002 -v hours='4392' -v hours_heu='1752' -v trn='avoid+improve' start8_64.job
-qsub -t 3003 -v hours='96' -v hours_heu='96' -v trn='avoid+improve' start4_16.job
+qsub -t 3002 -v hours='4392' -v hours_heu='1752' -v trn='avoid+improve' start8_64.job
 
 #qsub -t 4001 -v hours='8760' -v hours_heu='1752' -v trn='avoid+mix' start8_64.job
-#qsub -t 4002 -v hours='4392' -v hours_heu='1752' -v trn='avoid+mix' start8_64.job
-qsub -t 4003 -v hours='96' -v hours_heu='96' -v trn='avoid+mix' start4_16.job
+qsub -t 4002 -v hours='4392' -v hours_heu='1752' -v trn='avoid+mix' start8_64.job
 
 #qsub -t 5001 -v hours='8760' -v hours_heu='1752' -v trn='avoid+shift+improve' start8_64.job
-#qsub -t 5002 -v hours='4392' -v hours_heu='1752' -v trn='avoid+shift+improve' start8_64.job
+qsub -t 5002 -v hours='4392' -v hours_heu='1752' -v trn='avoid+shift+improve' start8_64.job
 
 #qsub -t 6001 -v hours='8760' -v hours_heu='1752' -v trn='avoid+shift+mix' start8_64.job
-#qsub -t 6002 -v hours='4392' -v hours_heu='1752' -v trn='avoid+shift+mix' start8_64.job
+qsub -t 6002 -v hours='4392' -v hours_heu='1752' -v trn='avoid+shift+mix' start8_64.job
 
+#qsub -t 7001 -v hours='8760' -v hours_heu='1752' -v trn='shift+improve' start8_64.job
+qsub -t 7002 -v hours='4392' -v hours_heu='1752' -v trn='shift+improve' start8_64.job
 
+#qsub -t 8001 -v hours='8760' -v hours_heu='1752' -v trn='shift+mix' start8_64.job
+qsub -t 8002 -v hours='4392' -v hours_heu='1752' -v trn='shift+mix' start8_64.job
 
 
 
