@@ -31,10 +31,6 @@ bevPsngRoadPrvt,stInToConvFix,1
 bevPsngRoadPub,stInToConvFix,1
 bevFrtRoadLight,stInToConvFix,1
 bevFrtRoadHeavy,stInToConvFix,1
-bevPsngRoadPrvt,useFix,0
-bevPsngRoadPub,useFix,0
-bevFrtRoadLight,useFix,0
-bevFrtRoadHeavy,useFix,0
 bevPsngRoadPrvt,desFac,1.000904125
 bevPsngRoadPub,desFac,1.165024669
 bevFrtRoadLight,desFac,0.082224401

@@ -1,0 +1,5 @@
+region_3,timestep_5,technology_3,parameter,value
+all,all,bevPsngRoadPrvt,useFix,0.0
+all,all,bevPsngRoadPub,useFix,0.0
+all,all,bevFrtRoadLight,useFix,0.0
+all,all,bevFrtRoadHeavy,useFix,0.0
