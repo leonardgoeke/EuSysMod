@@ -15,7 +15,7 @@ if isdir(temp_dir) rm(temp_dir, recursive = true) end
 mkdir(temp_dir)
 
 inputMod_arr = ["_basis","transportScr/" * trn,"timeSeries/" * h * "hours_2008_only2040",temp_dir]
-inputWrtEU_arr = ["_basis","transportScr/" * trn,"timeSeries/" * h * "hours_2008_only2040"]
+inputWrtEU_arr = ["_basis","transportScr/" * trn,"timeSeries/" * h * "hours_2008_only2040",temp_dir]
 inputHeu_arr = ["_basis","transportScr/" * trn,"timeSeries/" * h_heu * "hours_2008_only2040"]
 
 # add folder to fix eu to reference results
@@ -77,14 +77,12 @@ reportResults(:cost,anyM, addObjName = true)
 reportTimeSeries(:electricity,anyM)
 
 # write fix for europe fo file
+
 if occursin("reference",trn)
-    # store solutions as benders object
-    sol_obj = bendersData()
-	sol_obj.objVal = 0.0
-    sol_obj.capa = writeResult(anyM,[:capa,:exp,:mustCapa,:mustExp])
-    # get feasible solutions
-    fixSol_dic, limSol_dic, cntHeuSol_arr = evaluateHeu(anyM,sol_obj,copy(sol_obj),(thrsAbs = 0.001, thrsRel = 0.05),true) # get fixed and limited variables
-    feasFixSol_dic = getFeasResult(optMod_dic[:wrtEU],fixSol_dic,limSol_dic,t_int,0.001,Gurobi.Optimizer) # ensure feasiblity with fixed variables
+   
+    # get feasible capacity solutions
+    capaRes_dic = writeResult(anyM,[:capa,:exp,:mustCapa,:mustExp])
+    feasFixSol_dic = getFeasResult(optMod_dic[:wrtEU],capaRes_dic,Dict{Symbol,Dict{Symbol,Dict{Symbol,DataFrame}}}(),t_int,0.001,Gurobi.Optimizer) 
 
     # filter results for rest of EU and write to folder 
     de_arr = getfield.(filter(x -> occursin("de",x.val) || occursin("DE",x.val), collect(values(anyM.sets[:R].nodes))),:idx)
@@ -98,5 +96,7 @@ if occursin("reference",trn)
     end
     writeFixToFiles(feasFixSol_dic,feasFixSol_dic,"fixEU_" * engScr * "_" * h,anyM, skipMustSt = true)
 end
+
+rm(temp_dir, recursive = true)
 
 #endregion
