@@ -1,50 +1,48 @@
-using AnyMOD, Gurobi
+using AnyMOD, Gurobi, CSV, Base.Threads
 
+method = Symbol(ARGS[1])
+scr = parse(Int,ARGS[2])
+rad = parse(Float64,ARGS[3])
+shr = parse(Float64,ARGS[4])
+ram = parse(Int,ARGS[5])
+t_int = parse(Int,ARGS[6])
 
-# ! set options
-
-method = Symbol(ARGS[1]) # optins are :all, :fixAndLim, :fixAndQtr :onlyFix and :none
-resHeu = parse(Int,ARGS[2])
-resMod = parse(Int,ARGS[3])
-t_int = parse(Int,ARGS[4])
+res = 8760
 dir_str = ""
 
 #region # * set and write options
 
 # ! intermediate definitions of parameters
 
-reso_tup = (heu = resHeu, mod = resMod) 
-suffix_str = "_" * string(method) * "_" * string(resHeu) * "_" * string(resMod)
-inDir_arr = [[dir_str * "_basis",dir_str * "_full",dir_str * "timeSeries/" * string(x) * "hours_2010"] for x in [reso_tup.heu, reso_tup.mod]] # input directories
+suffix_str = "_" * string(method) * "_" * string(res) * "_s" * string(scr) * "_rad" * string(rad) * "_shr" * string(shr)
 
-coefRngHeuSca_tup = (mat = (1e-2,1e4), rhs = (1e0,1e5))
-coefRngHeuCom_tup = (mat = (1e-2,1e4), rhs = (1e0,1e4))
-coefRngTop_tup 	  = (mat = (1e-2,1e4), rhs = (1e0,1e4))
-coefRngSub_tup    = (mat = (1e-2,1e4), rhs = (1e1,1e5))
+inDir_str = [dir_str * "_basis",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"] # input directory
 
-scaFacHeuSca_tup = (capa = 1e0, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e3, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
-scaFacHeuCom_tup = (capa = 1e1, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e0, dispSt = 1e1, dispExc = 1e1, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e1, obj = 1e0)
-scaFacTop_tup  	 = (capa = 1e0, capaStSize = 1e1, insCapa = 1e0, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
-scaFacSub_tup 	 = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e2, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
+coefRngHeu_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
+coefRngTop_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
+coefRngSub_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
+
+scaFacHeu_tup = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
+scaFacTop_tup = (capa = 1e0, capaStSize = 1e1, insCapa = 1e0, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
+scaFacSub_tup = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e2, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
 
 # ! general input parameters
 
+opt_obj = Gurobi.Optimizer # solver option
+
 # structure of subproblems, indicating the year (first integer) and the scenario (second integer)
-sub_tup = ((1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0))
+sub_tup = tuple(collect((x,y) for x in 1:2, y in 1:scr)...)
 
 # options of solution algorithm
-solOpt_tup = (gap = 0.001, gapLim = 0.005, gapSwitch = 0.05, delCut = 30, linPar = (thrsAbs = 0.05, thrsRel = 0.05), quadPar = (startRad = 1e-1, lowRad = 1e-6, extThrs = 5e-4, shrThrs = 5e-4))
+solOpt_tup = (gap = 0.002, delCut = 20, quadPar = (startRad = rad, lowRad = 1e-6, shrThrs = shr, shrFac = 0.05))
 
 # options for different models
-temp_dir = dir_str * "tempFix" * suffix_str # directory for temporary folder
-
 optMod_dic = Dict{Symbol,NamedTuple}()
 
 # options for model generation 
-optMod_dic[:heuSca] =  (inputDir = inDir_arr[1], resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
-optMod_dic[:heuCom] =  (inputDir = inDir_arr[1], resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuCom_tup, scaFac = scaFacHeuCom_tup)
-optMod_dic[:top] 	=  (inputDir = inDir_arr[2], resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngTop_tup,    scaFac = scaFacTop_tup)
-optMod_dic[:sub] 	=  (inputDir = inDir_arr[2], resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngSub_tup,    scaFac = scaFacSub_tup)
+optMod_dic[:heu] =  (inputDir = inDir_str, resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 1, shortExp = 10, coefRng = coefRngHeu_tup, scaFac = scaFacHeu_tup)
+optMod_dic[:top] =  (inputDir = inDir_str, resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 1, shortExp = 10, coefRng = coefRngTop_tup, scaFac = scaFacTop_tup)
+optMod_dic[:sub] =  (inputDir = inDir_str, resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 1, shortExp = 10, coefRng = coefRngSub_tup, scaFac = scaFacSub_tup)
 
 #endregion
 
@@ -53,10 +51,10 @@ optMod_dic[:sub] 	=  (inputDir = inDir_arr[2], resultDir = dir_str * "results", 
 using Distributed, MatheClusterManagers # MatheClusterManagers is an altered version of https://github.com/JuliaParallel/ClusterManagers.jl by https://github.com/mariok90 to run on the cluster of TU Berlinn
 
 # add workers to job
-nb_workers = 8
+nb_workers = scr * 2
 @static if Sys.islinux()
     using MatheClusterManagers
-    qrsh(nb_workers, timelimit=345600, ram=32, mp = t_int)
+    qrsh(nb_workers, timelimit=345600, ram=ram, mp = t_int)
 else
     addprocs(nb_workers; exeflags="--project=.")
 end
@@ -64,15 +62,12 @@ end
 @everywhere using AnyMOD, CSV, ParallelDataTransfer, Distributed, Gurobi
 opt_obj = Gurobi.Optimizer # solver option
 
-heuWrk_int = last(workers())
-subWrk_arr = filter(x-> x != heuWrk_int, workers())
-
 #endregion
 
 #region # * define functions for distributed
 
 # ! run all sub-problems when running code distributed
-function runAllSub(sub_tup::Tuple, capaData_obj::bendersData,sol::Symbol,wrtRes::Bool=false)
+function runAllSub(sub_tup::Tuple, capaData_obj::resData,sol::Symbol,wrtRes::Bool=false)
 	solvedFut_dic = Dict{Int, Future}()
 	for j in 1:length(sub_tup)
 		solvedFut_dic[j] = @spawnat j+1 runSubDis(copy(capaData_obj),sol,wrtRes)
@@ -81,7 +76,7 @@ function runAllSub(sub_tup::Tuple, capaData_obj::bendersData,sol::Symbol,wrtRes:
 end
 
 # ! get results of all sub-problems when running code distributed
-function getSubResults(cutData_dic::Dict{Tuple{Int64,Int64},bendersData}, sub_tup::Tuple, solvedFut_dic::Dict{Int, Future})
+function getSubResults(cutData_dic::Dict{Tuple{Int64,Int64},resData}, sub_tup::Tuple, solvedFut_dic::Dict{Int, Future})
 	runTime_arr = []
 	for (k,v) in solvedFut_dic
 		t_fl, cutData_dic[sub_tup[k]] = fetch(v)
@@ -92,50 +87,24 @@ end
 
 #endregion
 
-report_m = @suppress anyModel(String[], optMod_dic[:heuSca].resultDir; objName="decomposition" * optMod_dic[:heuSca].suffix) # creates empty model just for reporting
 
-#region # * solve heuristic models and write results
-passobj(1, heuWrk_int, [:optMod_dic, :reso_tup, :opt_obj])
-
-if method in (:all, :fixAndLim, :onlyFix, :fixAndQtr)
-    # heuristic solve for re-scaled and compressed time-series
-	produceMessageShort(" - Started heuristic pre-solve",report_m)
-	heu_future = @spawnat heuWrk_int begin
-		heuristicSolve(optMod_dic[:heuCom],8760 / reso_tup.heu,t_int,opt_obj,false)
-	end
-    heu_m, heuSca_obj = heuristicSolve(optMod_dic[:heuSca], 1.0, t_int, opt_obj)
-	produceMessageShort(" - Finished scaled heuristic",report_m)
-	heuCom_obj = fetch(heu_future)
-	produceMessageShort(" - Finished compressed heuristic",report_m)
-	rmprocs(heuWrk_int)
-	produceMessageShort(" - Removed worker $heuWrk_int used for compressed heuristic",report_m)
-    # write fixes to files and limits to dictionary
-    fix_dic, lim_dic, cntHeu_arr = @time evaluateHeu(heu_m, heuSca_obj, heuCom_obj, solOpt_tup.linPar) # get fixed and limited variables
-	produceMessageShort(" - Get exact feasible solution",report_m)
-    feasFix_dic = @time getFeasResult(optMod_dic[:top], fix_dic, lim_dic, t_int, solOpt_tup.linPar.thrsAbs, opt_obj) # ensure feasiblity with fixed variables
-	produceMessageShort(" - Heuristic found $(cntHeu_arr[1]) fixed variables and $(cntHeu_arr[2]) limited variables",report_m)
-    # write fixed variable values to files
-    writeFixToFiles(fix_dic, feasFix_dic, temp_dir, heu_m)
-	heu_m = nothing
-end
-
-#endregion
+report_m = @suppress anyModel(String[],optMod_dic[:heu].resultDir, objName = "decomposition" * optMod_dic[:heu].suffix) # creates empty model just for reporting
 
 #region # * create top and sub-problems 
 
+produceMessage(report_m.options,report_m.report, 1," - Create top model and sub models", testErr = false, printErr = false)
+
 modOptSub_tup = optMod_dic[:sub]
-inputDir_arr = method in (:all, :fixAndLim, :fixAndQtr, :onlyFix) ? vcat(modOptSub_tup.inputDir, [temp_dir]) : modOptSub_tup.inputDir
 
 # ! create sub-problems
-passobj(1, workers(), [:inputDir_arr, :modOptSub_tup, :sub_tup,:t_int])
+passobj(1, workers(), [:modOptSub_tup, :sub_tup,:t_int])
 produceMessageShort(" - Start creating sub-problems",report_m)
 
-
-subTasks_arr = map(subWrk_arr) do w
+subTasks_arr = map(workers()) do w
 	t = @async @everywhere w begin
 		# create sub-problem
 		function buildSub(id)
-			sub_m = @suppress anyModel(inputDir_arr, modOptSub_tup.resultDir, objName = "subModel_" * string(myid()-1) * modOptSub_tup.suffix, supTsLvl = modOptSub_tup.supTsLvl, shortExp = modOptSub_tup.shortExp, coefRng = modOptSub_tup.coefRng, scaFac = modOptSub_tup.scaFac, reportLvl = 1, holdFixed = true, checkRng = (print = true, all = false))
+			sub_m = @suppress anyModel(modOptSub_tup.inputDir, modOptSub_tup.resultDir, objName = "subModel_" * string(myid()-1) * modOptSub_tup.suffix,  supTsLvl = modOptSub_tup.supTsLvl, shortExp = modOptSub_tup.shortExp, coefRng = modOptSub_tup.coefRng, scaFac = modOptSub_tup.scaFac, reportLvl = 1)
 			sub_m.subPro = sub_tup[id]
 			prepareMod!(sub_m, Gurobi.Optimizer, t_int)
 			return sub_m
@@ -143,7 +112,7 @@ subTasks_arr = map(subWrk_arr) do w
 		const SUB_M = @suppress buildSub(myid() - 1)
 
 		# define function to run sub-problem
-		function runSubDis(capaData_obj::bendersData,sol::Symbol,wrtRes::Bool)
+		function runSubDis(capaData_obj::resData,sol::Symbol,wrtRes::Bool)
 			start_time = now()
 			result_obj = runSub(SUB_M, capaData_obj,sol,wrtRes)
 			elapsed_time = now() - start_time
@@ -157,27 +126,16 @@ subTasks_arr = map(subWrk_arr) do w
 	return w => t
 end
 
-
-# reporting on creation of sub-problems
-for (w,t) in subTasks_arr
-	@async begin 
-		produceMessageShort(" - Started building sub-problem on worker $w",report_m)
-		wait(t)
-		produceMessageShort(" - Sub-problem on worker $w ready",report_m)
-	end
-end
-
 # ! create top-problem
-modOptTop_tup = optMod_dic[:top]
-inputDir_arr = method in (:all,:fixAndLim,:fixAndQtr,:onlyFix) ? vcat(modOptTop_tup.inputDir,[temp_dir]) : modOptTop_tup.inputDir
 
-top_m = anyModel(inputDir_arr, modOptTop_tup.resultDir, objName = "topModel" * modOptTop_tup.suffix, supTsLvl = modOptTop_tup.supTsLvl, shortExp = modOptTop_tup.shortExp, coefRng = modOptTop_tup.coefRng, scaFac = modOptTop_tup.scaFac, reportLvl = 1, holdFixed = true, checkRng = (print = true, all = false))
+modOpt_tup = optMod_dic[:top]
+top_m = anyModel(modOpt_tup.inputDir, modOpt_tup.resultDir, objName = "topModel" * modOpt_tup.suffix, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, coefRng = modOpt_tup.coefRng, scaFac = modOpt_tup.scaFac, reportLvl = 1)
 top_m.subPro = tuple(0,0)
 prepareMod!(top_m,opt_obj,t_int)
 
 # create seperate variables for costs of subproblems and aggregate them (cannot be part of model creation, because requires information about subproblems) 
-top_m.parts.obj.var[:cut] = map(y -> map(x -> y == 1 ? top_m.supTs.step[x] : sub_tup[x][2], 1:length(sub_tup)),1:2) |> (z -> createVar(DataFrame(Ts_disSup = z[1], scr = z[2]),"subCut",NaN,top_m.optModel,top_m.lock,top_m.sets, scaFac = 1e2))
-push!(top_m.parts.obj.cns[:objEqn], (name = :aggCut, group = :benders, cns = @constraint(top_m.optModel, sum(top_m.parts.obj.var[:cut][!,:var]) == filter(x -> x.name == :benders,top_m.parts.obj.var[:objVar])[1,:var])))
+top_m.parts.obj.var[:cut] = map(y -> map(x -> y == 1 ? top_m.supTs.step[sub_tup[x][1]] : sub_tup[x][2], 1:length(sub_tup)),1:2) |> (z -> createVar(DataFrame(Ts_disSup = z[1], scr = z[2]),"subCut",NaN,top_m.optModel,top_m.lock,top_m.sets, scaFac = 1e2))
+push!(top_m.parts.obj.cns[:objEqn], (name = :aggCut, cns = @constraint(top_m.optModel, sum(top_m.parts.obj.var[:cut][!,:var]) == filter(x -> x.name == :benders,top_m.parts.obj.var[:objVar])[1,:var])))
 
 # wait for all sub-problems to be created
 subTasks_arr = getindex.(values(subTasks_arr), 2)
@@ -189,51 +147,46 @@ else
 	produceMessageShort(" - Sub-problems ready",report_m)
 end
 
-
 #endregion
 
-#region # * add linear and quadratic trust region
+#region # * add quadratic trust region
+cutData_dic = Dict{Tuple{Int64,Int64},resData}()
 
-if method in (:all, :fixAndLim, :fixAndQtr, :onlyFix)
-	produceMessageShort(" - Create cuts from heuristic solution",report_m)
-    # ! create cuts from heuristic solutions  
-    for z in [heuCom_obj, heuSca_obj]
-        # run subproblems and get cut info
-        cutData_dic = Dict{Tuple{Int64,Int64},bendersData}()
-		solvedFut_dic = runAllSub(sub_tup, z, :barrier)
+if method in (:qtrNoIni,:qtrFixIni,:qtrDynIni)
+	# ! get starting solution with heuristic solve or generic
+	if method in (:qtrFixIni,:qtrDynIni)
+		produceMessage(report_m.options,report_m.report, 1," - Started heuristic pre-solve for starting solution", testErr = false, printErr = false)
+		~, heuSol_obj =  @suppress heuristicSolve(optMod_dic[:heu],1.0,t_int,opt_obj,true,true);			
+	elseif method == :qtrNoIni
+		@suppress optimize!(top_m.optModel)
+		heuSol_obj = resData()
+		heuSol_obj.objVal = Inf
+		heuSol_obj.capa = writeResult(top_m,[:capa,:exp,:mustCapa,:mustExp])
+	end
+	# !  solve sub-problems with capacity of heuristic solution to use for creation of cuts in first iteration
+	solvedFut_dic = runAllSub(sub_tup, copy(heuSol_obj), :barrier)
 
-		for (k,v) in solvedFut_dic
-			x = sub_tup[k]
-			~, dual_etr = fetch(v)
-			# removes entries without dual values
-			for sys in [:exc,:tech]
-				for sSym in keys(dual_etr.capa[sys])
-					for capaSym in keys(dual_etr.capa[sys][sSym])
-						if !("dual" in names(dual_etr.capa[sys][sSym][capaSym])) delete!(dual_etr.capa[sys][sSym],capaSym) end
-					end
-					removeEmptyDic!(dual_etr.capa[sys],sSym)
+	for (k,v) in solvedFut_dic
+		x = sub_tup[k]
+		~, dual_etr = fetch(v)
+		# removes entries without dual values
+		for sys in [:exc,:tech]
+			for sSym in keys(dual_etr.capa[sys])
+				for capaSym in keys(dual_etr.capa[sys][sSym])
+					if !("dual" in names(dual_etr.capa[sys][sSym][capaSym])) delete!(dual_etr.capa[sys][sSym],capaSym) end
 				end
+				removeEmptyDic!(dual_etr.capa[sys],sSym)
 			end
-			cutData_dic[x] = dual_etr
 		end
-        # add cuts to top-problem
-        addCuts!(top_m, cutData_dic, 0)
-    end
+		cutData_dic[x] = dual_etr
+	end
 
-    # ! add linear trust region
-    if method in (:all, :fixAndLim)
-        addLinearTrust!(top_m, lim_dic)
-		produceMessageShort(" - Enforced linear trust region",report_m)
-    end
-
-    # ! add quadratic trust region
-    if method in (:all, :fixAndQtr)
-        qctVar_dic = filterQtrVar(feasFix_dic, top_m) # get variables for quadratic trust region
-        trustReg_obj, eleNum_int = quadTrust(qctVar_dic, solOpt_tup.quadPar)
-        trustReg_obj.cns = centerQuadTrust(trustReg_obj.var, top_m, trustReg_obj.rad)
-        trustReg_obj.objVal = Inf
-		produceMessageShort(" - Initialized quadratic trust region with $eleNum_int variables",report_m)
-    end
+	heuSol_obj.objVal = method == :qtrFixIni ? heuSol_obj.objVal + sum(map(x -> x.objVal, values(cutData_dic))) : Inf
+	# ! create quadratic trust region
+	trustReg_obj, eleNum_int = quadTrust(heuSol_obj.capa,solOpt_tup.quadPar)
+	trustReg_obj.cns = centerQuadTrust(trustReg_obj.var,top_m,trustReg_obj.rad);
+	trustReg_obj.objVal = heuSol_obj.objVal
+	produceMessage(report_m.options,report_m.report, 1," - Initialized quadratic trust region with $eleNum_int variables", testErr = false, printErr = false)
 end
 
 #endregion
@@ -242,38 +195,38 @@ end
 
 # initialize loop variables
 itrReport_df = DataFrame(i = Int[], low = Float64[], best = Float64[], gap = Float64[], solCur = Float64[], time = Float64[])
-cutData_dic = Dict{Tuple{Int64,Int64},bendersData}()
 
-let i = 1, gap_fl = 1.0, currentBest_fl = Inf, rmvLim_boo = false
+let i = 1, gap_fl = 1.0, currentBest_fl = method == :none ? Inf : trustReg_obj.objVal
 	while true
-		produceMessageShort(" - Started iteration $i",report_m)
+
+		produceMessage(report_m.options,report_m.report, 1," - Started iteration $i", testErr = false, printErr = false)
 
 		#region # * solve top-problem and sub-problems
 
 		startTop = now()
-		capaData_obj, allVal_dic, objTopTrust_fl, lowLimTrust_fl = runTop(top_m, cutData_dic, i)
-		timeTop = now() - startTop
+		capaData_obj, allVal_dic, objTopTrust_fl, lowLimTrust_fl = @suppress runTop(top_m,cutData_dic,i);
+		timeTop = now() - startTop 
 
-		solvedFut_dic = runAllSub(sub_tup, capaData_obj, solOpt_tup.gapSwitch < gap_fl ? :barrier : :simplex)
-		
+		solvedFut_dic = runAllSub(sub_tup, capaData_obj,:barrier)
+
 		#endregion
 
 		#region # * compute bounds and analyze cuts
 
-		if method in (:all, :fixAndQtr) # run top-problem without trust region to obtain lower limits
+		if method in (:qtrNoIni,:qtrFixIni,:qtrDynIni) # run top-problem without trust region to obtain lower limits
 			objTop_fl, lowLim_fl = @suppress runTopWithoutQuadTrust(top_m,trustReg_obj)
-		else # without quad trust region, lower limit corresponds unaltered of standard top-problem
+		else # without quad trust region, lower limit corresponds result of unaltered top-problem
 			lowLim_fl = lowLimTrust_fl
 		end
 
 		# ! delete cuts that not were binding for the defined number of iterations
 		deleteCuts!(top_m,solOpt_tup.delCut,i) 
-		
+
 		# ! get objective of sub-problems and current best solution
 		timeSub = getSubResults(cutData_dic, sub_tup, solvedFut_dic)
 		objSub_fl = sum(map(x -> x.objVal, values(cutData_dic))) # objective of sub-problems
 		currentBest_fl = min(objTopTrust_fl + objSub_fl, currentBest_fl) # current best solution
-		
+
 		#endregion
 
 		#region # * result reporting 
@@ -284,51 +237,42 @@ let i = 1, gap_fl = 1.0, currentBest_fl = Inf, rmvLim_boo = false
 		
 		# write to reporting files
 		push!(itrReport_df, (i = i, low = lowLim_fl, best = currentBest_fl, gap = gap_fl, solCur = objTopTrust_fl + objSub_fl, time = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60))
-		CSV.write(modOptTop_tup.resultDir * "/iterationBenders$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
 		
 		#endregion
 		
 		#region # * check convergence and adjust limits	
 		
-		if method in (:all,:fixAndLim) && gap_fl < solOpt_tup.gapLim && !rmvLim_boo
-			# ! remove limits if they are binding anywhere
-			binLim_boo = checkLinearTrust(top_m)
-			if binLim_boo
-				deleteLinearTrust!(top_m)	
-				produceMessage(report_m.options,report_m.report, 1," - Removed lower and upper limits!", testErr = false, printErr = false)
-			end
-			rmvLim_boo = true
-		elseif gap_fl < solOpt_tup.gap
+		if gap_fl < solOpt_tup.gap
 			# ! terminate or adjust quadratic trust region
 			produceMessage(report_m.options,report_m.report, 1," - Finished iteration!", testErr = false, printErr = false)
 			break
 		end
 
-		if method in (:all,:fixAndQtr) # adjust trust region in case algorithm has not converged yet
+		if method in (:qtrNoIni,:qtrFixIni,:qtrDynIni) # adjust trust region in case algorithm has not converged yet
 			global trustReg_obj = adjustQuadTrust(top_m,allVal_dic,trustReg_obj,objSub_fl,objTopTrust_fl,lowLim_fl,lowLimTrust_fl,report_m)
 		end
 		#endregion
-		
+
 		i += 1
 	end
 end
+
+itrReport_df[!,:case] .= suffix_str
+CSV.write(modOpt_tup.resultDir * "/iterationBenders$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
 
 #endregion
 
 #region # * write final results and clean up
 
 # run top-problem with optimal values fixed
-top_m = computeFeas(top_m, trustReg_obj.var, solOpt_tup.linPar.thrsAbs)
-foreach(x -> reportResults(x, top_m), [:summary, :cost])
-
+foreach(x -> reportResults(x,top_m), [:summary,:cost])
+	
 # obtain capacities
-capaData_obj = bendersData()
-capaData_obj.capa = writeResult(top_m, [:capa], true)
+capaData_obj = resData()
+capaData_obj.capa = writeResult(top_m,[:capa],true)
 
 # run sub-problems with optimal values fixed
 solvedFut_dic = runAllSub(sub_tup, capaData_obj,:simplex,true)
 wait.(values(solvedFut_dic))
-
-rm(temp_dir; force=true, recursive=true) # remove temporal files again
 
 #endregion

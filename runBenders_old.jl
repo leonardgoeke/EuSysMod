@@ -1,19 +1,47 @@
-using AnyMOD, Gurobi, CSV, Base.Threads
+#using AnyMOD, Gurobi, CSV, Base.Threads
+
+b = "C:/Users/lgoeke/git/AnyMOD.jl/"
+
+using Base.Threads, CSV, Dates, LinearAlgebra, Requires, YAML
+using MathOptInterface, Reexport, Statistics, SparseArrays, CategoricalArrays
+using DataFrames, JuMP, Suppressor
+using DelimitedFiles
+
+include(b* "src/objects.jl")
+include(b* "src/tools.jl")
+include(b* "src/modelCreation.jl")
+include(b* "src/decomposition.jl")
+
+include(b* "src/optModel/technology.jl")
+include(b* "src/optModel/exchange.jl")
+include(b* "src/optModel/system.jl")
+include(b* "src/optModel/cost.jl")
+include(b* "src/optModel/other.jl")
+include(b* "src/optModel/objective.jl")
+
+include(b* "src/dataHandling/mapping.jl")
+include(b* "src/dataHandling/parameter.jl")
+include(b* "src/dataHandling/readIn.jl")
+include(b* "src/dataHandling/tree.jl")
+include(b* "src/dataHandling/util.jl")
+
+include(b* "src/dataHandling/gurobiTools.jl")
 
 method = :qtrNoIni
 scr = 2
 rad = 5e-2
-shr = 1e-3
+shr = 7.5e-4
 t_int = 4
+useVI = false
 
-res = 8760
-dir_str = "C:/Users/pacop/Desktop/work/git/TheModel/"
+res = 96
+dir_str = "C:/Users/lgoeke/git/EuSysMod/"
 
 #region # * set and write options
 
 # ! intermediate definitions of parameters
 
-suffix_str = "_" * string(method) * "_" * string(res) * "_s" * string(scr) * "_rad" * string(rad) * "_shr" * string(shr)
+suffix_str = "_" * string(method) * "_" * string(res) * "_s" * string(scr) * "_rad" * string(rad) * "_shr" * string(shr) * "_" * (useVI ? "withVI" : "withoutVI") * "_noBuy"
 inDir_str = [dir_str * "_basis",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"] # input directory
 
 #coefRngHeu_tup = (mat = (1e-2,1e4), rhs = (1e0,1e4))
@@ -33,7 +61,7 @@ opt_obj = Gurobi.Optimizer # solver option
 sub_tup = tuple(collect((x,y) for x in 1:2, y in 1:scr)...)
 
 # options of solution algorithm
-solOpt_tup = (gap = 0.002, delCut = 20, quadPar = (startRad = rad, lowRad = 1e-6, shrThrs = shr, shrFac = 0.5))
+solOpt_tup = (gap = 0.01, delCut = 20, quadPar = (startRad = rad, lowRad = 1e-6, shrThrs = shr, shrFac = 0.5))
 
 # options for different models
 optMod_dic = Dict{Symbol,NamedTuple}()
@@ -53,7 +81,7 @@ produceMessage(report_m.options,report_m.report, 1," - Create top model and sub 
 # ! create top-problem
 
 modOpt_tup = optMod_dic[:top]
-top_m = anyModel(modOpt_tup.inputDir, modOpt_tup.resultDir, objName = "topModel" * modOpt_tup.suffix, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, coefRng = modOpt_tup.coefRng, scaFac = modOpt_tup.scaFac, reportLvl = 1)
+top_m = anyModel(modOpt_tup.inputDir, modOpt_tup.resultDir, objName = "topModel" * modOpt_tup.suffix, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, coefRng = modOpt_tup.coefRng, scaFac = modOpt_tup.scaFac, reportLvl = 1, createVI = useVI)
 top_m.subPro = tuple(0,0)
 prepareMod!(top_m,opt_obj,t_int)
 
@@ -78,8 +106,20 @@ push!(top_m.parts.obj.cns[:objEqn], (name = :aggCut, cns = @constraint(top_m.opt
 
 #endregion
 
+#region # * do first solve without trust-region or cuts from heuristic solution
+cutData_dic = Dict{Tuple{Int64,Int64},resData}()
+subRes_dic = Dict(x => Array{resData,1}() for x in collect(sub_tup))
+
+capaData_obj, ~, ~, ~ = @suppress runTop(top_m,cutData_dic,0);
+
+for x in collect(sub_tup)
+	dual_etr = @suppress runSub(sub_dic[x],copy(capaData_obj),:barrier)
+	push!(subRes_dic[x],dual_etr)
+end
+
+#endregion
+
 #region # * add quadratic trust region
-cutData_dic = Dict{Tuple{Int64,Int64},bendersData}()
 
 if method in (:qtrNoIni,:qtrFixIni,:qtrDynIni)
 	# ! get starting solution with heuristic solve or generic
@@ -88,13 +128,14 @@ if method in (:qtrNoIni,:qtrFixIni,:qtrDynIni)
 		~, heuSol_obj =  @suppress heuristicSolve(optMod_dic[:heu],1.0,t_int,opt_obj,true,true);			
 	elseif method == :qtrNoIni
 		@suppress optimize!(top_m.optModel)
-		heuSol_obj = bendersData()
+		heuSol_obj = resData()
 		heuSol_obj.objVal = Inf
 		heuSol_obj.capa = writeResult(top_m,[:capa,:exp,:mustCapa,:mustExp])
 	end
 	# !  solve sub-problems with capacity of heuristic solution to use for creation of cuts in first iteration
 	for x in collect(sub_tup)
 		dual_etr = @suppress runSub(sub_dic[x],copy(heuSol_obj),:barrier)
+		push!(subRes_dic[x],dual_etr)
 		cutData_dic[x] = dual_etr
 	end
 	heuSol_obj.objVal = method == :qtrFixIni ? heuSol_obj.objVal + sum(map(x -> x.objVal, values(cutData_dic))) : Inf
@@ -131,6 +172,7 @@ let i = 1, gap_fl = 1.0, currentBest_fl = method == :none ? Inf : trustReg_obj.o
 		for x in collect(sub_tup)
 			dual_etr = @suppress runSub(sub_dic[x],copy(capaData_obj),:barrier)
 			cutData_dic[x] = dual_etr
+			push!(subRes_dic[x],dual_etr)
 		end
 		timeSub = now() - startSub
 
@@ -160,6 +202,7 @@ let i = 1, gap_fl = 1.0, currentBest_fl = method == :none ? Inf : trustReg_obj.o
 		
 		# write to reporting files
 		push!(itrReport_df, (i = i, low = lowLim_fl, best = currentBest_fl, gap = gap_fl, solCur = objTopTrust_fl + objSub_fl, time = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60))
+		CSV.write(modOpt_tup.resultDir * "/iterationBenders$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
 		
 		#endregion
 		
@@ -183,8 +226,6 @@ end
 itrReport_df[!,:case] .= suffix_str
 CSV.write(modOpt_tup.resultDir * "/iterationBenders$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
 
-
-
 #endregion
 
 #region # * write final results and clean up
@@ -193,7 +234,7 @@ CSV.write(modOpt_tup.resultDir * "/iterationBenders$(replace(top_m.options.objNa
 foreach(x -> reportResults(x,top_m), [:summary,:cost])
 	
 # obtain capacities
-capaData_obj = bendersData()
+capaData_obj = resData()
 capaData_obj.capa = writeResult(top_m,[:capa],true)
 
 # run sub-problems with optimal values fixed
@@ -202,34 +243,3 @@ for x in collect(sub_tup)
 end
 
 #endregion
-
-b = "C:/Users/pacop/.julia/dev/AnyMOD.jl/"
-
-using Base.Threads, CSV, Dates, LinearAlgebra, Requires, YAML
-using MathOptInterface, Reexport, Statistics, PyCall, SparseArrays
-using DataFrames, JuMP, Suppressor
-using DelimitedFiles
-
-pyimport_conda("networkx","networkx")
-pyimport_conda("matplotlib.pyplot","matplotlib")
-pyimport_conda("plotly","plotly")
-
-include(b* "src/objects.jl")
-include(b* "src/tools.jl")
-include(b* "src/modelCreation.jl")
-include(b* "src/decomposition.jl")
-
-include(b* "src/optModel/technology.jl")
-include(b* "src/optModel/exchange.jl")
-include(b* "src/optModel/system.jl")
-include(b* "src/optModel/cost.jl")
-include(b* "src/optModel/other.jl")
-include(b* "src/optModel/objective.jl")
-
-include(b* "src/dataHandling/mapping.jl")
-include(b* "src/dataHandling/parameter.jl")
-include(b* "src/dataHandling/readIn.jl")
-include(b* "src/dataHandling/tree.jl")
-include(b* "src/dataHandling/util.jl")
-
-include(b* "src/dataHandling/gurobiTools.jl")
