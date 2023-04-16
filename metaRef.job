@@ -10,10 +10,10 @@
 #$ -M lgo@wip.tu-berlin.de
 
 qsub -t 1001 -v hours='8760' -v hours_heu='1752' -v trn='reference+improve' start8_64.job
-qsub -t 1002 -v hours='4392' -v hours_heu='1752' -v trn='reference+improve' start8_64.job
+qsub -t 1002 -v hours='4392' -v hours_heu='1752' -v trn='reference+improve' start4_16.job
 
 qsub -t 2001 -v hours='8760' -v hours_heu='1752' -v trn='reference+mix' start8_64.job
-qsub -t 2002 -v hours='4392' -v hours_heu='1752' -v trn='reference+mix' start8_64.job
+qsub -t 2002 -v hours='4392' -v hours_heu='1752' -v trn='reference+mix' start4_16.job
 
 
 

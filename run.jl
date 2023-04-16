@@ -1,5 +1,16 @@
 using AnyMOD, Gurobi, CSV, Statistics
 
+function filterDE!(feasFixSol_dic::Dict{Symbol, Dict{Symbol, Dict{Symbol, DataFrame}}},mod_m::anyModel)
+    de_arr = getfield.(filter(x -> occursin("de",x.val) || occursin("DE",x.val), collect(values(mod_m.sets[:R].nodes))),:idx)
+    for sys in (:tech,:exc)
+        for sSym in keys(feasFixSol_dic[sys])
+            for x in keys(feasFixSol_dic[sys][sSym])
+                feasFixSol_dic[sys][sSym][x] = filter(x -> sys == :tech ? !(x.R_exp in de_arr) : !(x.R_from in de_arr && x.R_to in de_arr), feasFixSol_dic[sys][sSym][x])
+            end
+        end
+    end
+end
+
 # ! string here define scenario, overwrite ARGS with respective values for hard-coding scenarios according to comments
 h = ARGS[1] # resolution of time-series for actual solve, can be 96, 1752, 4392, or 8760
 h_heu = ARGS[2] # resolution of time-series for pre-screening, can be 96, 1752, 4392, or 8760
@@ -37,13 +48,14 @@ optMod_dic[:wrtEU] 	=  (inputDir = inputWrtEU_arr, resultDir = resultDir_str, su
 
 # heuristic presolved not needed if only results for germany are computed anyway
 if occursin("reference",trn)
-    heu_m, heuSca_obj = @suppress heuristicSolve(optMod_dic[:heuSca],1.0,t_int,Gurobi.Optimizer);
-    ~, heuCom_obj = @suppress heuristicSolve(optMod_dic[:heuSca],8760/parse(Int,h_heu),t_int,Gurobi.Optimizer)
+    heu_m, heuSca_obj = @suppress heuristicSolve(optMod_dic[:heuSca],1.0,t_int,Gurobi.Optimizer,fltSt = false);
+    ~, heuCom_obj = @suppress heuristicSolve(optMod_dic[:heuSca],8760/parse(Int,h_heu),t_int,Gurobi.Optimizer,fltSt = false)
     # ! write fixes to files and limits to dictionary
     fix_dic, lim_dic, cntHeu_arr = evaluateHeu(heu_m,heuSca_obj,heuCom_obj,(thrsAbs = 0.001, thrsRel = 0.05),true) # get fixed and limited variables
     feasFix_dic = getFeasResult(optMod_dic[:feas],fix_dic,lim_dic,t_int,0.001,Gurobi.Optimizer) # ensure feasiblity with fixed variables
-    # ! write fixed variable values to files
-    writeFixToFiles(fix_dic,feasFix_dic,temp_dir,heu_m; skipMustSt = true)
+    # filter results for rest of EU and write to folder
+    filterDE!(feasFix_dic,heu_m)
+    writeFixToFiles(fix_dic,feasFix_dic,temp_dir,heu_m; skipMustSt = false)
     heu_m = nothing
 end
 
@@ -81,20 +93,15 @@ reportTimeSeries(:electricity,anyM)
 if occursin("reference",trn)
    
     # get feasible capacity solutions
-    capaRes_dic = writeResult(anyM,[:capa,:exp,:mustCapa,:mustExp])
-    feasFixSol_dic = getFeasResult(optMod_dic[:wrtEU],capaRes_dic,Dict{Symbol,Dict{Symbol,Dict{Symbol,DataFrame}}}(),t_int,0.001,Gurobi.Optimizer) 
+    capaRes_dic = writeResult(anyM,[:capa,:exp,:mustCapa,:mustExp],rmvFix = true, fltSt = false)
+    feasFixSol_dic = getFeasResult(optMod_dic[:wrtEU],capaRes_dic,Dict{Symbol,Dict{Symbol,Dict{Symbol,DataFrame}}}(),t_int,0.001,Gurobi.Optimizer)
 
-    # filter results for rest of EU and write to folder 
-    de_arr = getfield.(filter(x -> occursin("de",x.val) || occursin("DE",x.val), collect(values(anyM.sets[:R].nodes))),:idx)
-    for sys in (:tech,:exc)
-		part_dic = getfield(anyM.parts,sys)
-		for sSym in keys(feasFixSol_dic[sys])
-            for x in keys(feasFixSol_dic[sys][sSym])
-                feasFixSol_dic[sys][sSym][x] = filter(x -> sys == :tech ? !(x.R_exp in de_arr) : !(x.R_from in de_arr && x.R_to in de_arr), feasFixSol_dic[sys][sSym][x])
-            end
-        end
-    end
-    writeFixToFiles(feasFixSol_dic,feasFixSol_dic,"fixEU_" * engScr * "_" * h,anyM, skipMustSt = true)
+    # filter results for rest of EU and write to folder
+    filterDE!(feasFixSol_dic,anyM)
+    writeFixToFiles(feasFixSol_dic,feasFixSol_dic,"fixEU_" * engScr * "_" * h,anyM, skipMustSt = false)
+
+    # move fix from heuristic solution to same folder
+    cp(temp_dir,"fixEU_" * engScr * "_" * h * "/heuristicFix")
 end
 
 rm(temp_dir, recursive = true)
