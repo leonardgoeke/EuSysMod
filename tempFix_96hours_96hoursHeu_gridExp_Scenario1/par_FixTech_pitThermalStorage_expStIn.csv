@@ -1,0 +1,17 @@
+timestep_1,timestep_2,region_1,region_2,region_3,region_4,technology_1,technology_2,technology_3,id_1,parameter,value
+30th,2040,EU,CZ,cz,39CZ,networkHeat,,pitThermalStorage,1,expStInFix,0.0
+30th,2040,EU,DK,dk_w,38DK,networkHeat,,pitThermalStorage,1,expStInFix,0.0
+30th,2040,EU,EE,ee,73EE,networkHeat,,pitThermalStorage,1,expStInFix,0.0
+30th,2040,EU,FI,fi,74FI,networkHeat,,pitThermalStorage,1,expStInFix,0.0
+30th,2040,EU,FI,fi,75FI,networkHeat,,pitThermalStorage,1,expStInFix,0.0
+30th,2040,EU,FR,fr_co,99FR,networkHeat,,pitThermalStorage,1,expStInFix,0.0
+30th,2040,EU,LT,lt,77LT,networkHeat,,pitThermalStorage,1,expStInFix,0.0
+30th,2040,EU,LV,lv,78LV,networkHeat,,pitThermalStorage,1,expStInFix,0.0
+30th,2040,EU,PL,pl,44PL,networkHeat,,pitThermalStorage,1,expStInFix,0.0
+30th,2040,EU,SE,se_3,88SE,networkHeat,,pitThermalStorage,1,expStInFix,0.0
+30th,2040,nonEU,NO,no_m,83NO,networkHeat,,pitThermalStorage,1,expStInFix,0.0
+30th,2040,nonEU,NO,no_n,84NO,networkHeat,,pitThermalStorage,1,expStInFix,0.0
+30th,2040,nonEU,NO,no_n,85NO,networkHeat,,pitThermalStorage,1,expStInFix,0.0
+30th,2040,nonEU,NO,no_s,79NO,networkHeat,,pitThermalStorage,1,expStInFix,0.0
+30th,2040,nonEU,NO,no_s,80NO,networkHeat,,pitThermalStorage,1,expStInFix,0.0
+30th,2040,nonEU,NO,no_s,81NO,networkHeat,,pitThermalStorage,1,expStInFix,0.0

@@ -1,16 +1,19 @@
 #!/bin/bash --login
 #$ -cwd
 #$ -N anyMOD
-#$ -o /net/work/goeke/julia/job_log.$JOB_ID.$TASK_ID.out
+#$ -o /net/work/aliasghari/job_log.$JOB_ID.$TASK_ID.out
 #$ -j y
 #$ -l h_rt=172800
-#$ -l mem_free=4G
-#$ -pe mp 1
+#$ -l mem_free=8G
+#$ -pe mp 8
 #$ -m bae
-#$ -M lgo@wip.tu-berlin.de
+#$ -M pa@wip.tu-berlin.de
 
-qsub -t 2001 -v hours='8760' -v hours_heu='1752' -v grid='_gridExp' start8_64.job
-qsub -t 2002 -v hours='8760' -v hours_heu='1752' -v grid='_noGridExp' start8_64.job
+qsub -t 101 -v hours='8760' -v hours_heu='1752' -v grid='_gridExp' -v bevScr='0' start8_64.job
+qsub -t 102 -v hours='8760' -v hours_heu='1752' -v grid='_gridExp' -v bevScr='1' start8_64.job
+qsub -t 103 -v hours='8760' -v hours_heu='1752' -v grid='_gridExp' -v bevScr='2' start8_64.job
+qsub -t 104 -v hours='8760' -v hours_heu='1752' -v grid='_gridExp' -v bevScr='3' start8_64.job
+
 
 
 

@@ -1,0 +1,17 @@
+timestep_1,timestep_2,timestep_1,region_1,region_2,region_3,region_1,region_2,region_3,exchange_1,exchange_2,parameter,value
+30th,2040,,EU,IT,it_cn,EU,IT,it_cs,powerGrid,hvac,capaExcFixDir,1.4
+30th,2040,,EU,IT,it_cs,EU,IT,it_s,powerGrid,hvac,capaExcFixDir,9.999
+30th,2040,,EU,BE,be,EU,LU,lu,powerGrid,hvac,capaExcFixDir,0.68
+30th,2040,,EU,BG,bg,nonEU,MK,mk,powerGrid,hvac,capaExcFixDir,0.4
+30th,2040,,EU,SE,se_2,nonEU,NO,no_m,powerGrid,hvac,capaExcFixDir,1.0
+30th,2040,,EU,SE,se_1,nonEU,NO,no_n,powerGrid,hvac,capaExcFixDir,0.6
+30th,2040,,EU,SE,se_2,nonEU,NO,no_n,powerGrid,hvac,capaExcFixDir,0.3
+30th,2040,,EU,SE,se_3,nonEU,NO,no_s,powerGrid,hvac,capaExcFixDir,2.095
+30th,2040,,EU,BG,bg,nonEU,RS,rs,powerGrid,hvac,capaExcFixDir,0.5
+30th,2040,,EU,BE,be,EU,DE,de,powerGrid,hvac,capaExcFix,1.0
+30th,2040,,EU,HR,hr,EU,HU,hu,powerGrid,hvac,capaExcFix,2.0
+30th,2040,,EU,DE,de,EU,LU,lu,powerGrid,hvac,capaExcFix,2.3
+30th,2040,,EU,DE,de,EU,NL,nl,powerGrid,hvac,capaExcFix,5.25
+30th,2040,,EU,SE,se_2,EU,SE,se_3,powerGrid,hvac,capaExcFix,7.8
+30th,2040,,EU,HU,hu,EU,SI,si,powerGrid,hvac,capaExcFix,1.2
+30th,2040,,EU,IE,ie,nonEU,UK,ni,powerGrid,hvac,capaExcFix,0.3

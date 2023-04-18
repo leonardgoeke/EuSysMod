@@ -1,0 +1,15 @@
+timestep_1,timestep_2,timestep_1,region_1,region_2,region_3,region_4,technology_1,technology_2,technology_3,parameter,value
+30th,2040,,EU,FI,fi,74FI,miscSpaceHeat,,bioBoilerSpace,capaConvFix,2.320298372514
+30th,2040,,EU,FI,fi,75FI,miscSpaceHeat,,bioBoilerSpace,capaConvFix,6.511366919256
+30th,2040,,EU,FR,fr,23FR,miscSpaceHeat,,bioBoilerSpace,capaConvFix,0.0
+30th,2040,,EU,LT,lt,77LT,miscSpaceHeat,,bioBoilerSpace,capaConvFix,2.472220404484
+30th,2040,,EU,LV,lv,78LV,miscSpaceHeat,,bioBoilerSpace,capaConvFix,2.228262021451
+30th,2040,,EU,RO,ro,59RO,miscSpaceHeat,,bioBoilerSpace,capaConvFix,4.096728837259
+30th,2040,,EU,RO,ro,60RO,miscSpaceHeat,,bioBoilerSpace,capaConvFix,1.510791273656
+30th,2040,,EU,RO,ro,61RO,miscSpaceHeat,,bioBoilerSpace,capaConvFix,4.723098667615
+30th,2040,,EU,SE,se_1,86SE,miscSpaceHeat,,bioBoilerSpace,capaConvFix,0.94065961096
+30th,2040,,EU,SE,se_2,87SE,miscSpaceHeat,,bioBoilerSpace,capaConvFix,3.081047906865
+30th,2040,,EU,SE,se_3,88SE,miscSpaceHeat,,bioBoilerSpace,capaConvFix,9.05620114071
+30th,2040,,EU,SE,se_4,89SE,miscSpaceHeat,,bioBoilerSpace,capaConvFix,5.553952805718
+30th,2040,,nonEU,AL,al,70AL,miscSpaceHeat,,bioBoilerSpace,capaConvFix,1.575255860546
+30th,2040,,nonEU,ME,me,64ME,miscSpaceHeat,,bioBoilerSpace,capaConvFix,0.336555643986

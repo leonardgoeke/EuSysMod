@@ -1,14 +1,14 @@
 #!/bin/bash --login
 #$ -cwd
 #$ -N anyMOD
-#$ -o /net/work/goeke/julia/job_log.$JOB_ID.$TASK_ID.out
+#$ -o /net/work/aliasghari/job_log.$JOB_ID.$TASK_ID.out
 #$ -j y
 #$ -l h_rt=792000
 #$ -l mem_free=64G
 #$ -l el8
 #$ -pe mp 8
 #$ -m bae
-#$ -M lgo@wip.tu-berlin.de
+#$ -M pa@wip.tu-berlin.de
 
 
 GUROBI_HOME=/afs/math/software/gurobi/9.0.2/
@@ -17,4 +17,4 @@ export GUROBI_HOME
 module add gurobi/9.0.2
 module add julia/1.7.3
 
-julia run.jl $hours $hours_heu $grid $NSLOTS
+julia run.jl $hours $hours_heu $grid $bevScr $NSLOTS

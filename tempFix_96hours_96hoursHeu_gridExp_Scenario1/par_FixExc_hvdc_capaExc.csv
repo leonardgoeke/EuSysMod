@@ -1,0 +1,10 @@
+timestep_1,timestep_2,timestep_1,region_1,region_2,region_3,region_1,region_2,region_3,exchange_1,exchange_2,parameter,value
+30th,2040,,EU,IT,it_cs,EU,IT,it_sic,powerGrid,hvdc,capaExcFix,0.0
+30th,2040,,EU,IT,it_sar,EU,IT,it_sic,powerGrid,hvdc,capaExcFix,0.0
+30th,2040,,EU,DK,dk_w,EU,NL,nl,powerGrid,hvdc,capaExcFix,0.7
+30th,2040,,EU,DK,dk_e,EU,PL,pl,powerGrid,hvdc,capaExcFix,0.0
+30th,2040,,EU,FI,fi,EU,SE,se_2,powerGrid,hvdc,capaExcFix,0.8
+30th,2040,,EU,FI,fi,EU,SE,se_3,powerGrid,hvdc,capaExcFix,1.2
+30th,2040,,EU,LT,lt,EU,SE,se_4,powerGrid,hvdc,capaExcFix,0.7
+30th,2040,,EU,DE,de,nonEU,UK,uk,powerGrid,hvdc,capaExcFix,0.0
+30th,2040,,EU,DK,dk_w,nonEU,UK,uk,powerGrid,hvdc,capaExcFix,0.0

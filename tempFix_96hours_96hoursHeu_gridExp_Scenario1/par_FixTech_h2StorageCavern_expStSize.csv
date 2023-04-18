@@ -1,0 +1,7 @@
+timestep_1,region_1,region_2,region_3,region_4,technology_1,technology_2,technology_3,id_1,parameter,value
+30th,EU,DE,de,31DE,powerToX,h2Storage,h2StorageCavern,1,expStSizeFix,0.0
+30th,EU,DE,de,32DE,powerToX,h2Storage,h2StorageCavern,1,expStSizeFix,0.0
+30th,EU,DE,de,33DE,powerToX,h2Storage,h2StorageCavern,1,expStSizeFix,0.0
+30th,EU,DE,de,34DE,powerToX,h2Storage,h2StorageCavern,1,expStSizeFix,0.0
+30th,EU,DE,de,35DE,powerToX,h2Storage,h2StorageCavern,1,expStSizeFix,0.0
+30th,EU,GR,gr,68GR,powerToX,h2Storage,h2StorageCavern,1,expStSizeFix,0.0

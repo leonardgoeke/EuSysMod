@@ -1,0 +1,6 @@
+timestep_1,timestep_2,timestep_1,region_1,region_2,region_3,technology_1,technology_2,technology_3,parameter,value
+30th,2040,,EU,FI,fi,transport,,dieselPsngRoadPub,capaConvFix,0.42351974491
+30th,2040,,EU,LT,lt,transport,,dieselPsngRoadPub,capaConvFix,0.14853814079
+30th,2040,,EU,LV,lv,transport,,dieselPsngRoadPub,capaConvFix,0.133289183223
+30th,2040,,EU,SE,se_3,transport,,dieselPsngRoadPub,capaConvFix,0.301797890606
+30th,2040,,EU,SE,se_4,transport,,dieselPsngRoadPub,capaConvFix,0.089668874172
