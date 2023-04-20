@@ -27,7 +27,7 @@ include(b* "src/dataHandling/util.jl")
 
 include(b* "src/dataHandling/gurobiTools.jl")
 
-method = :qtrNoIni
+method = :qtrFixIni
 scr = 2
 rad = 5e-2
 shr = 7.5e-4
@@ -61,7 +61,7 @@ opt_obj = Gurobi.Optimizer # solver option
 sub_tup = tuple(collect((x,y) for x in 1:2, y in 1:scr)...)
 
 # options of solution algorithm
-solOpt_tup = (gap = 0.01, delCut = 20, quadPar = (startRad = rad, lowRad = 1e-6, shrThrs = shr, shrFac = 0.5))
+solOpt_tup = (gap = 0.01, delCut = 1000, quadPar = (startRad = rad, lowRad = 1e-6, shrThrs = shr, shrFac = 0.5))
 
 # options for different models
 optMod_dic = Dict{Symbol,NamedTuple}()
@@ -125,7 +125,7 @@ if method in (:qtrNoIni,:qtrFixIni,:qtrDynIni)
 	# ! get starting solution with heuristic solve or generic
 	if method in (:qtrFixIni,:qtrDynIni)
 		produceMessage(report_m.options,report_m.report, 1," - Started heuristic pre-solve for starting solution", testErr = false, printErr = false)
-		~, heuSol_obj =  @suppress heuristicSolve(optMod_dic[:heu],1.0,t_int,opt_obj,true,true);			
+		~, heuSol_obj =  @suppress heuristicSolve(optMod_dic[:heu],1.0,t_int,opt_obj,rtrnMod = true,solDet = true,fltSt = true);			
 	elseif method == :qtrNoIni
 		@suppress optimize!(top_m.optModel)
 		heuSol_obj = resData()
@@ -140,7 +140,7 @@ if method in (:qtrNoIni,:qtrFixIni,:qtrDynIni)
 	end
 	heuSol_obj.objVal = method == :qtrFixIni ? heuSol_obj.objVal + sum(map(x -> x.objVal, values(cutData_dic))) : Inf
 	# ! create quadratic trust region
-	trustReg_obj, eleNum_int = quadTrust(heuSol_obj.capa,solOpt_tup.quadPar)
+	trustReg_obj, eleNum_int = quadTrust(filterQtrVar(heuSol_obj.capa,top_m),solOpt_tup.quadPar)
 	trustReg_obj.cns = centerQuadTrust(trustReg_obj.var,top_m,trustReg_obj.rad);
 	trustReg_obj.objVal = heuSol_obj.objVal
 	produceMessage(report_m.options,report_m.report, 1," - Initialized quadratic trust region with $eleNum_int variables", testErr = false, printErr = false)
@@ -235,7 +235,7 @@ foreach(x -> reportResults(x,top_m), [:summary,:cost])
 	
 # obtain capacities
 capaData_obj = resData()
-capaData_obj.capa = writeResult(top_m,[:capa],true)
+capaData_obj.capa = writeResult(top_m,[:capa],rmvFix = true)
 
 # run sub-problems with optimal values fixed
 for x in collect(sub_tup)
