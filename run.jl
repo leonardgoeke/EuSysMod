@@ -17,8 +17,6 @@ h_heu = ARGS[2] # resolution of time-series for pre-screening, can be 96, 1752, 
 trn = ARGS[3] # scenario for transport in germany
 t_int = parse(Int,ARGS[4]) # number of threads
 
-engScr = occursin("mix",trn) ? "mix" : "improve"
-
 obj_str = h * "hours_" * h_heu * "hoursHeu_" * trn
 temp_dir = "tempFix_" * obj_str # directory for temporary folder
 
@@ -30,9 +28,9 @@ inputWrtEU_arr = ["_basis","transportScr/" * trn,"timeSeries/" * h * "hours_2008
 inputHeu_arr = ["_basis","transportScr/" * trn,"timeSeries/" * h_heu * "hours_2008_only2040"]
 
 # add folder to fix eu to reference results
-if !occursin("reference",trn)
-    push!(inputMod_arr, "fixEU_" * engScr * "_" * h)
-    push!(inputHeu_arr, "fixEU_" * engScr * "_" * h)
+if !occursin("reference+improve",trn)
+    push!(inputMod_arr, "fixEU_" * h)
+    push!(inputHeu_arr, "fixEU_" * h)
 end
 resultDir_str = "results"
 
@@ -47,7 +45,7 @@ optMod_dic[:feas] 	=  (inputDir = inputMod_arr, resultDir = resultDir_str, suffi
 optMod_dic[:wrtEU] 	=  (inputDir = inputWrtEU_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
 
 # heuristic presolved not needed if only results for germany are computed anyway
-if occursin("reference",trn)
+if occursin("reference+improve",trn)
     heu_m, heuSca_obj = @suppress heuristicSolve(optMod_dic[:heuSca],1.0,t_int,Gurobi.Optimizer,fltSt = false);
     ~, heuCom_obj = @suppress heuristicSolve(optMod_dic[:heuSca],8760/parse(Int,h_heu),t_int,Gurobi.Optimizer,fltSt = false)
     # ! write fixes to files and limits to dictionary
@@ -90,7 +88,7 @@ reportTimeSeries(:electricity,anyM)
 
 # write fix for europe fo file
 
-if occursin("reference",trn)
+if occursin("reference+improve",trn)
    
     # get feasible capacity solutions
     capaRes_dic = writeResult(anyM,[:capa,:exp,:mustCapa,:mustExp],rmvFix = true, fltSt = false)
@@ -98,10 +96,10 @@ if occursin("reference",trn)
 
     # filter results for rest of EU and write to folder
     filterDE!(feasFixSol_dic,anyM)
-    writeFixToFiles(feasFixSol_dic,feasFixSol_dic,"fixEU_" * engScr * "_" * h,anyM, skipMustSt = false)
+    writeFixToFiles(feasFixSol_dic,feasFixSol_dic,"fixEU_" * h,anyM, skipMustSt = false)
 
     # move fix from heuristic solution to same folder
-    cp(temp_dir,"fixEU_" * engScr * "_" * h * "/heuristicFix")
+    cp(temp_dir,"fixEU_" * h * "/heuristicFix")
 end
 
 rm(temp_dir, recursive = true)

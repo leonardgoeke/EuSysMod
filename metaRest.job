@@ -9,6 +9,8 @@
 #$ -m bae
 #$ -M lgo@wip.tu-berlin.de
 
+qsub -t 2001 -v hours='8760' -v hours_heu='1752' -v trn='reference+mix' start8_64.job
+
 qsub -t 3001 -v hours='8760' -v hours_heu='1752' -v trn='avoid+improve' start8_64.job
 #qsub -t 3002 -v hours='4392' -v hours_heu='1752' -v trn='avoid+improve' start4_16.job
 
