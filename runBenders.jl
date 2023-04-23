@@ -30,15 +30,17 @@ include(b* "src/dataHandling/gurobiTools.jl")
 
 include(b* "src/decomposition_new.jl")
 
-#meth_dic = Dict(:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
-#meth_dic = Dict(:prx => (start = 1e-4, low = 1e-8, ov = 0.9, fac = 2.0),)
-meth_dic = Dict(:lvl => (la = 0.5,),:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0))
-swt_ntup = (itr = 5,avgImp = 0.2, itrAvg = 5)
+#meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
+#meth_tup = (:prx => (start = 1e-4, low = 1e-8, ov = 0.9, fac = 2.0),)
+meth_tup = (:lvl => (la = 0.5,),:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0))
+swt_ntup = (itr = 8, avgImp = 0.2, itrAvg = 5)
 
-iniStab = false
+iniStab = false # initialize stabilizatio
+srsThr = 0.0 # threshold for serious step
+
 useVI = false # use vaild inequalities
+delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
 gap = 0.01
-delCut = 1000 # number of iterations since cut creation or last binding before cut is deleted
 
 res = 96
 scr = 2
@@ -126,7 +128,7 @@ end
 
 #region # * add stabilization method
 
-if !isempty(meth_dic)
+if !isempty(meth_tup)
 	# ! get starting solution with heuristic solve or generic
 	if iniStab
 		produceMessage(report_m.options,report_m.report, 1," - Started heuristic pre-solve for starting solution", testErr = false, printErr = false)
@@ -148,9 +150,11 @@ if !isempty(meth_dic)
 	startSol_obj.objVal = startSol_obj.objVal + sum(map(x -> x.objVal, values(cutData_dic)))
 	
 	# ! initialize stabilization
-	stab_obj, eleNum_int = stabObj(meth_dic,swt_ntup,startSol_obj.objVal,lowBd_fl,startSol_obj.capa,top_m)
+	stab_obj, eleNum_int = stabObj(meth_tup,swt_ntup,startSol_obj.objVal,lowBd_fl,startSol_obj.capa,top_m)
 	centerStab!(stab_obj.method[stab_obj.actMet],stab_obj,top_m)
 	produceMessage(report_m.options,report_m.report, 1," - Initialized stabilization with $eleNum_int variables", testErr = false, printErr = false)
+else
+	stab_obj = nothing
 end
 
 #endregion
@@ -161,7 +165,7 @@ end
 itrReport_df = DataFrame(i = Int[], low = Float64[], best = Float64[], gap = Float64[], solCur = Float64[], stabMeth = Int[], time = Float64[])
 nameStab_dic = Dict(:lvl => "level bundle",:qtr => "quadratic trust-region", :prx => "proximal bundle")
 
-let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_dic) ? startSol_obj.objVal : Inf
+let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objVal : Inf, minStep_fl = 0.0
 	while true
 
 		produceMessage(report_m.options,report_m.report, 1," - Started iteration $i", testErr = false, printErr = false)
@@ -169,7 +173,7 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_dic) ? startSol_obj.objV
 		#region # * solve top-problem 
 
 		startTop = now()
-		capaData_obj, allVal_dic, objTop_fl, lowLim_fl = @suppress runTop(top_m,cutData_dic,i);
+		capaData_obj, allVal_dic, objTop_fl, lowLim_fl = runTop(top_m,cutData_dic,stab_obj,i); # @suppress 
 		timeTop = now() - startTop
 
 		#endregion
@@ -189,6 +193,7 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_dic) ? startSol_obj.objV
 		#region # * adjust refinements
 
 		# ! get objective of sub-problems and current best solution
+		expStep_fl = (currentBest_fl - lowLim_fl) # expected step size
 		objSub_fl = sum(map(x -> x.objVal, values(cutData_dic))) # objective of sub-problems
 		currentBest_fl = min(objTop_fl + objSub_fl, currentBest_fl) # current best solution
 
@@ -196,11 +201,11 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_dic) ? startSol_obj.objV
 		deleteCuts!(top_m,delCut,i)
 
 		# ! adapt center and parameter for stabilization
-		if !isempty(meth_dic)
+		if !isempty(meth_tup)
 			
 			# adjust center of stabilization 
 			adjCtr_boo = false
-			if currentBest_fl < stab_obj.objVal
+			if currentBest_fl < stab_obj.objVal - srsThr * expStep_fl
 				stab_obj.var = filterStabVar(allVal_dic,top_m)
 				stab_obj.objVal = currentBest_fl
 				adjCtr_boo = true
@@ -210,7 +215,7 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_dic) ? startSol_obj.objV
 			# solve problem without stabilization method
 			objTopNoStab_fl, lowLimNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj) # run top without trust region
 			
-			# adjust dynamic parameter of stabilization TODO wrap into function at a latter point, see what is not method specific
+			# adjust dynamic parameter of stabilization
 			opt_tup = stab_obj.methodOpt[stab_obj.actMet]
 			if stab_obj.method[stab_obj.actMet] == :qtr # adjust radius of quadratic trust-region
 				if !adjCtr_boo && abs(1 - lowLimNoStab_fl / lowLim_fl) < opt_tup.thr && stab_obj.dynPar[stab_obj.actMet] > opt_tup.low
@@ -218,10 +223,10 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_dic) ? startSol_obj.objV
 					produceMessage(report_m.options,report_m.report, 1," - Reduced quadratic trust-region!", testErr = false, printErr = false)	
 				end
 			elseif stab_obj.method[stab_obj.actMet] == :prx # adjust penalty term
-				if stab_obj.objVal * (1 - opt_tup.ov) + objTopNoStab_fl * opt_tup.ov > objTop_fl + objSub_fl
+				if currentBest_fl * (1 - opt_tup.ov) + objTopNoStab_fl * opt_tup.ov > objTop_fl + objSub_fl
 					stab_obj.dynPar[stab_obj.actMet] = max(opt_tup.low,stab_obj.dynPar[stab_obj.actMet] * opt_tup.fac)
 					produceMessage(report_m.options,report_m.report, 1," - Increased penalty term of proximal bundle!", testErr = false, printErr = false)
-				elseif stab_obj.objVal * opt_tup.ov + objTopNoStab_fl * (1 - opt_tup.ov) < objTop_fl + objSub_fl && stab_obj.dynPar[stab_obj.actMet] > opt_tup.low
+				elseif currentBest_fl * opt_tup.ov + objTopNoStab_fl * (1 - opt_tup.ov) < objTop_fl + objSub_fl && stab_obj.dynPar[stab_obj.actMet] > opt_tup.low
 					stab_obj.dynPar[stab_obj.actMet] = max(opt_tup.low,stab_obj.dynPar[stab_obj.actMet] / opt_tup.fac)
 					produceMessage(report_m.options,report_m.report, 1," - Reduced penalty term of proximal bundle!", testErr = false, printErr = false)
 				end
@@ -239,7 +244,7 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_dic) ? startSol_obj.objV
 		produceMessage(report_m.options,report_m.report, 1," - Time for top: $(Dates.toms(timeTop) / Dates.toms(Second(1))) Time for sub: $(Dates.toms(timeSub) / Dates.toms(Second(1)))", testErr = false, printErr = false)
 		
 		# write to reporting files
-		push!(itrReport_df, (i = i, low = lowLim_fl, best = currentBest_fl, gap = gap_fl, solCur = objTop_fl + objSub_fl, stabMeth = isempty(meth_dic) ? 0 : stab_obj.actMet,time = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60))
+		push!(itrReport_df, (i = i, low = lowLim_fl, best = currentBest_fl, gap = gap_fl, solCur = objTop_fl + objSub_fl, stabMeth = isempty(meth_tup) ? 0 : stab_obj.actMet,time = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60))
 		CSV.write(modOpt_tup.resultDir * "/iterationBenders$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
 		
 		#endregion
@@ -253,16 +258,15 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_dic) ? startSol_obj.objV
 		end
 
 		# switch and update stabilization method
-		if !isempty(meth_dic)
+		if !isempty(meth_tup)
 			# switch stabilization method
-			if !isempty(stab_obj.ruleSw) && i > stab_obj.ruleSw.itr
+			if !isempty(stab_obj.ruleSw) && i > stab_obj.ruleSw.itr && length(stab_obj.method) > 1
 				min_boo = itrReport_df[i - stab_obj.ruleSw.itr,:stabMeth] == stab_obj.actMet # check if method as been used for the minimum number of iterations 
 				pro_boo = itrReport_df[(i - min(i,stab_obj.ruleSw.itrAvg) + 1):end,:gap] |> (x -> (x[1]/x[end])^(1/(length(x) -1)) - 1 < stab_obj.ruleSw.avgImp) # check if progress in last iterations is below threshold
 				if min_boo && pro_boo
 					stab_obj.actMet = stab_obj.actMet + 1 |> (x -> length(stab_obj.method) < x ? 1 : x)
 					produceMessage(report_m.options,report_m.report, 1," - Switched stabilization to $(nameStab_dic[stab_obj.method[stab_obj.actMet]]) method!", testErr = false, printErr = false)
 				end
-				
 			end
 
 			# update stabilization method
