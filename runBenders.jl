@@ -26,8 +26,6 @@ include(b* "src/dataHandling/tree.jl")
 include(b* "src/dataHandling/util.jl")
 
 include(b* "src/dataHandling/gurobiTools.jl")
-
-
 include(b* "src/decomposition_new.jl")
 
 #meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
@@ -35,12 +33,13 @@ include(b* "src/decomposition_new.jl")
 meth_tup = (:lvl => (la = 0.5,),:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0))
 swt_ntup = (itr = 8, avgImp = 0.2, itrAvg = 5)
 
-iniStab = false # initialize stabilizatio
+iniStab = true # initialize stabilizatio
 srsThr = 0.0 # threshold for serious step
 
+gap = 0.001
+conSub = (rng = [1e-2,1e-8], int = :log) # range and interpolation method for convergence criteria of subproblems
 useVI = false # use vaild inequalities
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
-gap = 0.01
 
 res = 96
 scr = 2
@@ -51,7 +50,7 @@ dir_str = "C:/Users/lgoeke/git/EuSysMod/"
 
 # ! intermediate definitions of parameters
 
-suffix_str = "test"
+suffix_str = "_log"
 #suffix_str = "_" * string(method) * "_" * string(res) * "_s" * string(scr) * "_rad" * string(rad) * "_shr" * string(shr) * "_" * (useVI ? "withVI" : "withoutVI") * "_noBuy"
 inDir_str = [dir_str * "_basis",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"] # input directory
 
@@ -179,10 +178,9 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objV
 		#endregion
 		
 		#region # * solve of sub-problems 
-
 		startSub = now()
 		for x in collect(sub_tup)
-			dual_etr = @suppress runSub(sub_dic[x],copy(capaData_obj),:barrier)
+			dual_etr = @suppress runSub(sub_dic[x],copy(capaData_obj),:barrier,getConvTol(gap_fl,gap,conSub))
 			cutData_dic[x] = dual_etr
 			push!(subRes_dic[x],dual_etr)
 		end
@@ -198,7 +196,13 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objV
 		currentBest_fl = min(objTop_fl + objSub_fl, currentBest_fl) # current best solution
 
 		# ! delete cuts that not were binding for the defined number of iterations
-		deleteCuts!(top_m,delCut,i)
+		try
+			deleteCuts!(top_m,delCut,i)
+		catch
+			produceMessage(report_m.options,report_m.report, 1," - Skipped deletion of inactive cuts due to numerical problems", testErr = false, printErr = false)
+		end
+		
+		
 
 		# ! adapt center and parameter for stabilization
 		if !isempty(meth_tup)
