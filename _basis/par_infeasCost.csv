@@ -2,7 +2,7 @@ carrier_1,carrier_2,parameter,value
 electricity,,costLss,13000
 crudeOil,,costLss,13000
 refinedOil,,costLss,13000
-jetFuel,,costLss,13000
+avaAndNavi,,costLss,13000
 synthGas,,costLss,13000
 rawBiogas,,costLss,13000
 otherBiomass,nonSolidBiomass,costLss,13000
