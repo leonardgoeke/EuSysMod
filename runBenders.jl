@@ -1,5 +1,6 @@
 #using AnyMOD, Gurobi, CSV, Base.Threads
 
+
 b = "C:/Users/lgoeke/git/AnyMOD.jl/"
 
 using Base.Threads, CSV, Dates, LinearAlgebra, Requires, YAML
@@ -28,15 +29,20 @@ include(b* "src/dataHandling/util.jl")
 include(b* "src/dataHandling/gurobiTools.jl")
 include(b* "src/decomposition_new.jl")
 
-#meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
-#meth_tup = (:prx => (start = 1e-4, low = 1e-8, ov = 0.9, fac = 2.0),)
-meth_tup = (:lvl => (la = 0.5,),:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0))
-swt_ntup = (itr = 8, avgImp = 0.2, itrAvg = 5)
+meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
+#meth_tup = (:prx => (start = 1.0, low = 0.0, fac = 2.0),:lvl => (la = 0.5,))
+#meth_tup = (:prx => (start = 1.0, low = 0.0, fac = 2.0),)
+#meth_tup = (:lvl => (la = 0.5,),:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0))
+#meth_tup = tuple()
+swt_ntup = (itr = 6, avgImp = 0.2, itrAvg = 4)
 
 iniStab = true # initialize stabilizatio
 srsThr = 0.0 # threshold for serious step
+linStab = (rel = 0.5, abs = 5.0)
 
-gap = 0.001
+suffix_str = "lin_0.4_3"
+
+gap = 0.01
 conSub = (rng = [1e-2,1e-8], int = :log) # range and interpolation method for convergence criteria of subproblems
 useVI = false # use vaild inequalities
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
@@ -50,7 +56,6 @@ dir_str = "C:/Users/lgoeke/git/EuSysMod/"
 
 # ! intermediate definitions of parameters
 
-suffix_str = "_log"
 #suffix_str = "_" * string(method) * "_" * string(res) * "_s" * string(scr) * "_rad" * string(rad) * "_shr" * string(shr) * "_" * (useVI ? "withVI" : "withoutVI") * "_noBuy"
 inDir_str = [dir_str * "_basis",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"] # input directory
 
@@ -125,7 +130,7 @@ end
 
 #endregion
 
-#region # * add stabilization method
+#region # * add stabilization methods
 
 if !isempty(meth_tup)
 	# ! get starting solution with heuristic solve or generic
@@ -161,8 +166,14 @@ end
 #region # * run benders iteration
 
 # initialize loop variables
-itrReport_df = DataFrame(i = Int[], low = Float64[], best = Float64[], gap = Float64[], solCur = Float64[], stabMeth = Int[], time = Float64[])
-nameStab_dic = Dict(:lvl => "level bundle",:qtr => "quadratic trust-region", :prx => "proximal bundle")
+itrReport_df = DataFrame(i = Int[], low = Float64[], best = Float64[], gap = Float64[], solCur = Float64[], time = Float64[])
+
+if !isempty(meth_tup)
+	itrReport_df[!,:actMethod] = Symbol[]
+	foreach(x -> itrReport_df[!,Symbol("dynPar_",x)] = Float64[], stab_obj.method)
+end
+
+nameStab_dic = Dict(:lvl => "level bundle",:qtr => "quadratic trust-region", :prx => "proximal bundle")  
 
 let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objVal : Inf, minStep_fl = 0.0
 	while true
@@ -172,7 +183,7 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objV
 		#region # * solve top-problem 
 
 		startTop = now()
-		capaData_obj, allVal_dic, objTop_fl, lowLim_fl = runTop(top_m,cutData_dic,stab_obj,i); # @suppress 
+		capaData_obj, allVal_dic, objTop_fl, lowLim_fl = @suppress runTop(top_m,cutData_dic,stab_obj,i); 
 		timeTop = now() - startTop
 
 		#endregion
@@ -202,8 +213,6 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objV
 			produceMessage(report_m.options,report_m.report, 1," - Skipped deletion of inactive cuts due to numerical problems", testErr = false, printErr = false)
 		end
 		
-		
-
 		# ! adapt center and parameter for stabilization
 		if !isempty(meth_tup)
 			
@@ -217,26 +226,11 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objV
 			end
 
 			# solve problem without stabilization method
-			objTopNoStab_fl, lowLimNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj) # run top without trust region
+			objTopNoStab_fl, lowLimNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj,!isempty(linStab)) # run top without trust region
 			
-			# adjust dynamic parameter of stabilization
-			opt_tup = stab_obj.methodOpt[stab_obj.actMet]
-			if stab_obj.method[stab_obj.actMet] == :qtr # adjust radius of quadratic trust-region
-				if !adjCtr_boo && abs(1 - lowLimNoStab_fl / lowLim_fl) < opt_tup.thr && stab_obj.dynPar[stab_obj.actMet] > opt_tup.low
-					stab_obj.dynPar[stab_obj.actMet] = max(opt_tup.low,stab_obj.dynPar[stab_obj.actMet] / opt_tup.fac)
-					produceMessage(report_m.options,report_m.report, 1," - Reduced quadratic trust-region!", testErr = false, printErr = false)	
-				end
-			elseif stab_obj.method[stab_obj.actMet] == :prx # adjust penalty term
-				if currentBest_fl * (1 - opt_tup.ov) + objTopNoStab_fl * opt_tup.ov > objTop_fl + objSub_fl
-					stab_obj.dynPar[stab_obj.actMet] = max(opt_tup.low,stab_obj.dynPar[stab_obj.actMet] * opt_tup.fac)
-					produceMessage(report_m.options,report_m.report, 1," - Increased penalty term of proximal bundle!", testErr = false, printErr = false)
-				elseif currentBest_fl * opt_tup.ov + objTopNoStab_fl * (1 - opt_tup.ov) < objTop_fl + objSub_fl && stab_obj.dynPar[stab_obj.actMet] > opt_tup.low
-					stab_obj.dynPar[stab_obj.actMet] = max(opt_tup.low,stab_obj.dynPar[stab_obj.actMet] / opt_tup.fac)
-					produceMessage(report_m.options,report_m.report, 1," - Reduced penalty term of proximal bundle!", testErr = false, printErr = false)
-				end
-			elseif stab_obj.method[stab_obj.actMet] == :lvl # adjust level
-				stab_obj.dynPar[stab_obj.actMet] = (opt_tup.la * lowLimNoStab_fl  + (1 - opt_tup.la) * currentBest_fl) / top_m.options.scaFac.obj
-			end
+			# adjust dynamic parameters of stabilization
+			foreach(i -> adjustDynPar!(stab_obj,top_m,i,adjCtr_boo,lowLimNoStab_fl,lowLim_fl,currentBest_fl,report_m), 1:length(stab_obj.method))
+
 			lowLim_fl = lowLimNoStab_fl # set lower limit for convergence check to lower limit without trust region
 		end
 
@@ -248,7 +242,12 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objV
 		produceMessage(report_m.options,report_m.report, 1," - Time for top: $(Dates.toms(timeTop) / Dates.toms(Second(1))) Time for sub: $(Dates.toms(timeSub) / Dates.toms(Second(1)))", testErr = false, printErr = false)
 		
 		# write to reporting files
-		push!(itrReport_df, (i = i, low = lowLim_fl, best = currentBest_fl, gap = gap_fl, solCur = objTop_fl + objSub_fl, stabMeth = isempty(meth_tup) ? 0 : stab_obj.actMet,time = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60))
+		etr_arr = Pair{Symbol,Any}[:i => i, :low => lowLim_fl, :best => currentBest_fl, :gap => gap_fl, :solCur => objTop_fl + objSub_fl,:time => Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60]
+		if !isempty(meth_tup) # add info about stabilization
+			push!(etr_arr, :actMethod => stab_obj.method[stab_obj.actMet])
+			append!(etr_arr, map(x -> Symbol("dynPar_",stab_obj.method[x]) => stab_obj.dynPar[x], 1:length(stab_obj.method)))
+		end
+		push!(itrReport_df, (;zip(getindex.(etr_arr,1), getindex.(etr_arr,2))...))
 		CSV.write(modOpt_tup.resultDir * "/iterationBenders$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
 		
 		#endregion
@@ -261,11 +260,11 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objV
 			break
 		end
 
-		# switch and update stabilization method
+		# switch and update quadratic stabilization method
 		if !isempty(meth_tup)
 			# switch stabilization method
 			if !isempty(stab_obj.ruleSw) && i > stab_obj.ruleSw.itr && length(stab_obj.method) > 1
-				min_boo = itrReport_df[i - stab_obj.ruleSw.itr,:stabMeth] == stab_obj.actMet # check if method as been used for the minimum number of iterations 
+				min_boo = itrReport_df[i - stab_obj.ruleSw.itr,:actMethod] == stab_obj.method[stab_obj.actMet] # check if method as been used for the minimum number of iterations 
 				pro_boo = itrReport_df[(i - min(i,stab_obj.ruleSw.itrAvg) + 1):end,:gap] |> (x -> (x[1]/x[end])^(1/(length(x) -1)) - 1 < stab_obj.ruleSw.avgImp) # check if progress in last iterations is below threshold
 				if min_boo && pro_boo
 					stab_obj.actMet = stab_obj.actMet + 1 |> (x -> length(stab_obj.method) < x ? 1 : x)
@@ -295,7 +294,7 @@ foreach(x -> reportResults(x,top_m), [:summary,:cost])
 	
 # obtain capacities
 capaData_obj = resData()
-capaData_obj.capa = writeResult(top_m,[:capa],true)
+capaData_obj.capa = writeResult(top_m,[:capa])
 
 # run sub-problems with optimal values fixed
 for x in collect(sub_tup)
@@ -303,5 +302,3 @@ for x in collect(sub_tup)
 end
 
 #endregion
-
-

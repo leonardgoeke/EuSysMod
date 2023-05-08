@@ -25,3 +25,5 @@ optimize!(anyM.optModel)
 reportResults(:cost,anyM)
 reportResults(:summary,anyM)
 reportResults(:exchange,anyM)
+
+printObject(filter(x -> x.scr == 1, anyM.parts.tech[:pumpedStorage].cns[:stBal]),anyM)
