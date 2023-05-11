@@ -1,4 +1,4 @@
-#using AnyMOD, Gurobi, CSV, Base.Threads
+using AnyMOD, Gurobi, CSV, Base.Threads
 
 
 b = "C:/Users/lgoeke/git/AnyMOD.jl/"
@@ -27,7 +27,6 @@ include(b* "src/dataHandling/tree.jl")
 include(b* "src/dataHandling/util.jl")
 
 include(b* "src/dataHandling/gurobiTools.jl")
-include(b* "src/decomposition_new.jl")
 
 meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
 #meth_tup = (:prx => (start = 1.0, low = 0.0, fac = 2.0),:lvl => (la = 0.5,))
@@ -117,22 +116,11 @@ push!(top_m.parts.obj.cns[:objEqn], (name = :aggCut, cns = @constraint(top_m.opt
 
 #endregion
 
-#region # * do first solve without trust-region or cuts from heuristic solution
-cutData_dic = Dict{Tuple{Int64,Int64},resData}()
-subRes_dic = Dict(x => Array{resData,1}() for x in collect(sub_tup))
-
-capaData_obj, ~, ~, ~ = @suppress runTop(top_m,cutData_dic,0);
-
-for x in collect(sub_tup)
-	dual_etr = @suppress runSub(sub_dic[x],copy(capaData_obj),:barrier)
-	push!(subRes_dic[x],dual_etr)
-end
-
-#endregion
-
 #region # * add stabilization methods
+cutData_dic = Dict{Tuple{Int64,Int64},resData}()
 
 if !isempty(meth_tup)
+	
 	# ! get starting solution with heuristic solve or generic
 	if iniStab
 		produceMessage(report_m.options,report_m.report, 1," - Started heuristic pre-solve for starting solution", testErr = false, printErr = false)
@@ -148,7 +136,6 @@ if !isempty(meth_tup)
 	# !  solve sub-problems with capacity of heuristic solution to use for creation of cuts in first iteration and to compute corresponding objective value
 	for x in collect(sub_tup)
 		dual_etr = @suppress runSub(sub_dic[x],copy(startSol_obj),:barrier)
-		push!(subRes_dic[x],dual_etr)
 		cutData_dic[x] = dual_etr
 	end
 	startSol_obj.objVal = startSol_obj.objVal + sum(map(x -> x.objVal, values(cutData_dic)))
@@ -226,7 +213,7 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objV
 			end
 
 			# solve problem without stabilization method
-			objTopNoStab_fl, lowLimNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj,!isempty(linStab)) # run top without trust region
+			objTopNoStab_fl, lowLimNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj) # run top without trust region
 			
 			# adjust dynamic parameters of stabilization
 			foreach(i -> adjustDynPar!(stab_obj,top_m,i,adjCtr_boo,lowLimNoStab_fl,lowLim_fl,currentBest_fl,report_m), 1:length(stab_obj.method))
@@ -298,7 +285,7 @@ capaData_obj.capa = writeResult(top_m,[:capa])
 
 # run sub-problems with optimal values fixed
 for x in collect(sub_tup)
-	runSub(sub_dic[x],copy(capaData_obj),:simplex,true)
+	runSub(sub_dic[x],copy(capaData_obj),:barrier,1e-8,true)
 end
 
 #endregion

@@ -1,21 +1,68 @@
 using AnyMOD, Gurobi, CSV, Base.Threads
 
-method = Symbol(ARGS[1])
-scr = parse(Int,ARGS[2])
-rad = parse(Float64,ARGS[3])
-shr = parse(Float64,ARGS[4])
-ram = parse(Int,ARGS[5])
-t_int = parse(Int,ARGS[6])
+#region # * specify setting
 
-res = 8760
-dir_str = ""
+# ! settings for stabilization
 
-#region # * set and write options
+# stabilization method
+method = parse(Int,ARGS[1])
+if method == 0 
+	meth_tup = tuple()
+elseif method == 1
+	meth_tup = (:prx => (start = 1.0, low = 0.0, fac = 2.0),)
+elseif method == 2
+	meth_tup = (:lvl => (la = 0.5,),)
+elseif method == 3
+	meth_tup = (:qtr => (start = 1e-2, low = 1e-6,  thr = 5e-4, fac = 2.0),)
+end
+
+# rules for switching between stabilization methods
+switch = parse(Int,ARGS[2])
+if switch == 1
+	swt_ntup = (itr = 6, avgImp = 0.2, itrAvg = 4)
+end
+
+# initialization for method
+iniStab = parse(Bool,ARGS[3])
+
+# ! settings for other refinements
+
+# range and interpolation method for convergence criteria of subproblems
+convSub = Symbol(ARGS[4])
+if convSub == :none
+	conSub = (rng = [1e-8,1e-8], int = :lin)
+else
+	conSub = (rng = [1e-2,1e-8], int = convSub)
+end
+
+# use of vaild inequalities
+useVI = parse(Bool,ARGS[5])
+
+# ! additional settings
+
+# number of scenarios
+scr = parse(Int,ARGS[6])
+
+# computational resources
+ram = parse(Int,ARGS[7])
+t_int = parse(Int,ARGS[8])
+
+# fixed settings
+srsThr = 0.0 # threshold for serious step
+dir_str = "" # folder with data files
+res = 96 # temporal resolution
+gap = 0.01 # optimality gap
+delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
+
+suffix_str = "_method_" * string(method) * "_switch_" * string(switch) * "_ini_" * string(iniStab) * "_conv_" * string(convSub) * "_vi_" * string(useVI) * "_scr" * string(scr) # suffix for result files
+
+#endregion
+
+#region # * write inputs for model objects
 
 # ! intermediate definitions of parameters
 
-suffix_str = "_" * string(method) * "_" * string(res) * "_s" * string(scr) * "_rad" * string(rad) * "_shr" * string(shr)
-
+#suffix_str = "_" * string(method) * "_" * string(res) * "_s" * string(scr) * "_rad" * string(rad) * "_shr" * string(shr) * "_" * (useVI ? "withVI" : "withoutVI") * "_noBuy"
 inDir_str = [dir_str * "_basis",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"] # input directory
 
 coefRngHeu_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
@@ -33,9 +80,6 @@ opt_obj = Gurobi.Optimizer # solver option
 # structure of subproblems, indicating the year (first integer) and the scenario (second integer)
 sub_tup = tuple(collect((x,y) for x in 1:2, y in 1:scr)...)
 
-# options of solution algorithm
-solOpt_tup = (gap = 0.002, delCut = 20, quadPar = (startRad = rad, lowRad = 1e-6, shrThrs = shr, shrFac = 0.05))
-
 # options for different models
 optMod_dic = Dict{Symbol,NamedTuple}()
 
@@ -46,7 +90,7 @@ optMod_dic[:sub] =  (inputDir = inDir_str, resultDir = dir_str * "results", suff
 
 #endregion
 
-#region # * initialize workers
+#region # * initialize distributed computing
 
 using Distributed, MatheClusterManagers # MatheClusterManagers is an altered version of https://github.com/JuliaParallel/ClusterManagers.jl by https://github.com/mariok90 to run on the cluster of TU Berlinn
 
@@ -62,21 +106,17 @@ end
 @everywhere using AnyMOD, CSV, ParallelDataTransfer, Distributed, Gurobi
 opt_obj = Gurobi.Optimizer # solver option
 
-#endregion
-
-#region # * define functions for distributed
-
-# ! run all sub-problems when running code distributed
-function runAllSub(sub_tup::Tuple, capaData_obj::resData,sol::Symbol,wrtRes::Bool=false)
+# function to run sub-problems
+function runAllSub(sub_tup::Tuple, capaData_obj::resData,sol_sym::Symbol,optTol_fl::Float64,wrtRes::Bool=false)
 	solvedFut_dic = Dict{Int, Future}()
 	for j in 1:length(sub_tup)
-		solvedFut_dic[j] = @spawnat j+1 runSubDis(copy(capaData_obj),sol,wrtRes)
+		solvedFut_dic[j] = @spawnat j+1 runSubDis(copy(capaData_obj),sol_sym,optTol_fl,wrtRes)
 	end
 	return solvedFut_dic
 end
 
-# ! get results of all sub-problems when running code distributed
-function getSubResults(cutData_dic::Dict{Tuple{Int64,Int64},resData}, sub_tup::Tuple, solvedFut_dic::Dict{Int, Future})
+# function to get results of sub-problems
+function getSubResults!(cutData_dic::Dict{Tuple{Int64,Int64},resData}, sub_tup::Tuple, solvedFut_dic::Dict{Int, Future})
 	runTime_arr = []
 	for (k,v) in solvedFut_dic
 		t_fl, cutData_dic[sub_tup[k]] = fetch(v)
@@ -87,14 +127,10 @@ end
 
 #endregion
 
-
+#region # * create top and sub-problems 
 report_m = @suppress anyModel(String[],optMod_dic[:heu].resultDir, objName = "decomposition" * optMod_dic[:heu].suffix) # creates empty model just for reporting
 
-#region # * create top and sub-problems 
-
 produceMessage(report_m.options,report_m.report, 1," - Create top model and sub models", testErr = false, printErr = false)
-
-modOptSub_tup = optMod_dic[:sub]
 
 # ! create sub-problems
 passobj(1, workers(), [:modOptSub_tup, :sub_tup,:t_int])
@@ -112,9 +148,9 @@ subTasks_arr = map(workers()) do w
 		const SUB_M = @suppress buildSub(myid() - 1)
 
 		# define function to run sub-problem
-		function runSubDis(capaData_obj::resData,sol::Symbol,wrtRes::Bool)
+		function runSubDis(capaData_obj::resData,sol_sym::Symbol,optTol_fl::Float64,wrtRes::Bool)
 			start_time = now()
-			result_obj = runSub(SUB_M, capaData_obj,sol,wrtRes)
+			result_obj = runSub(SUB_M, capaData_obj,sol_sym,optTol_fl,wrtRes)
 			elapsed_time = now() - start_time
 			println("$(Dates.toms(elapsed_time) / Dates.toms(Second(1))) seconds for $(SUB_M.subPro[1])")
 			return elapsed_time, result_obj
@@ -129,7 +165,7 @@ end
 # ! create top-problem
 
 modOpt_tup = optMod_dic[:top]
-top_m = anyModel(modOpt_tup.inputDir, modOpt_tup.resultDir, objName = "topModel" * modOpt_tup.suffix, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, coefRng = modOpt_tup.coefRng, scaFac = modOpt_tup.scaFac, reportLvl = 1)
+top_m = anyModel(modOpt_tup.inputDir, modOpt_tup.resultDir, objName = "topModel" * modOpt_tup.suffix, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, coefRng = modOpt_tup.coefRng, scaFac = modOpt_tup.scaFac, reportLvl = 1, createVI = useVI)
 top_m.subPro = tuple(0,0)
 prepareMod!(top_m,opt_obj,t_int)
 
@@ -149,44 +185,34 @@ end
 
 #endregion
 
-#region # * add quadratic trust region
+#region # * add stabilization methods
 cutData_dic = Dict{Tuple{Int64,Int64},resData}()
+if !isempty(meth_tup)
 
-if method in (:qtrNoIni,:qtrFixIni,:qtrDynIni)
 	# ! get starting solution with heuristic solve or generic
-	if method in (:qtrFixIni,:qtrDynIni)
+	if iniStab
 		produceMessage(report_m.options,report_m.report, 1," - Started heuristic pre-solve for starting solution", testErr = false, printErr = false)
-		~, heuSol_obj =  @suppress heuristicSolve(optMod_dic[:heu],1.0,t_int,opt_obj,true,true);			
-	elseif method == :qtrNoIni
+		heu_m, startSol_obj =  @suppress heuristicSolve(optMod_dic[:heu],1.0,t_int,opt_obj,rtrnMod = true,solDet = true,fltSt = true);
+		lowBd_fl = value(heu_m.parts.obj.var[:objVar][1,:var])
+	else
 		@suppress optimize!(top_m.optModel)
-		heuSol_obj = resData()
-		heuSol_obj.objVal = Inf
-		heuSol_obj.capa = writeResult(top_m,[:capa,:exp,:mustCapa,:mustExp])
+		startSol_obj = resData()
+		startSol_obj.objVal = value(top_m.parts.obj.var[:objVar][1,:var])
+		startSol_obj.capa = writeResult(top_m,[:capa,:exp,:mustCapa,:mustExp])
+		lowBd_fl = startSol_obj.objVal
 	end
-	# !  solve sub-problems with capacity of heuristic solution to use for creation of cuts in first iteration
-	solvedFut_dic = runAllSub(sub_tup, copy(heuSol_obj), :barrier)
-
-	for (k,v) in solvedFut_dic
-		x = sub_tup[k]
-		~, dual_etr = fetch(v)
-		# removes entries without dual values
-		for sys in [:exc,:tech]
-			for sSym in keys(dual_etr.capa[sys])
-				for capaSym in keys(dual_etr.capa[sys][sSym])
-					if !("dual" in names(dual_etr.capa[sys][sSym][capaSym])) delete!(dual_etr.capa[sys][sSym],capaSym) end
-				end
-				removeEmptyDic!(dual_etr.capa[sys],sSym)
-			end
-		end
-		cutData_dic[x] = dual_etr
-	end
-
-	heuSol_obj.objVal = method == :qtrFixIni ? heuSol_obj.objVal + sum(map(x -> x.objVal, values(cutData_dic))) : Inf
-	# ! create quadratic trust region
-	trustReg_obj, eleNum_int = quadTrust(heuSol_obj.capa,solOpt_tup.quadPar)
-	trustReg_obj.cns = centerQuadTrust(trustReg_obj.var,top_m,trustReg_obj.rad);
-	trustReg_obj.objVal = heuSol_obj.objVal
-	produceMessage(report_m.options,report_m.report, 1," - Initialized quadratic trust region with $eleNum_int variables", testErr = false, printErr = false)
+	
+	# !  solve sub-problems with capacity of heuristic solution to use for creation of cuts in first iteration and to compute corresponding objective value
+	solvedFut_dic = runAllSub(sub_tup, startSol_obj,:barrier,1e-8)
+	getSubResults!(cutData_dic, sub_tup, solvedFut_dic)
+	startSol_obj.objVal = startSol_obj.objVal + sum(map(x -> x.objVal, values(cutData_dic)))
+	
+	# ! initialize stabilization
+	stab_obj, eleNum_int = stabObj(meth_tup,swt_ntup,startSol_obj.objVal,lowBd_fl,startSol_obj.capa,top_m)
+	centerStab!(stab_obj.method[stab_obj.actMet],stab_obj,top_m)
+	produceMessage(report_m.options,report_m.report, 1," - Initialized stabilization with $eleNum_int variables", testErr = false, printErr = false)
+else
+	stab_obj = nothing
 end
 
 #endregion
@@ -196,61 +222,108 @@ end
 # initialize loop variables
 itrReport_df = DataFrame(i = Int[], low = Float64[], best = Float64[], gap = Float64[], solCur = Float64[], time = Float64[])
 
-let i = 1, gap_fl = 1.0, currentBest_fl = method == :none ? Inf : trustReg_obj.objVal
+if !isempty(meth_tup)
+	itrReport_df[!,:actMethod] = Symbol[]
+	foreach(x -> itrReport_df[!,Symbol("dynPar_",x)] = Float64[], stab_obj.method)
+end
+
+nameStab_dic = Dict(:lvl => "level bundle",:qtr => "quadratic trust-region", :prx => "proximal bundle")  
+
+let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objVal : Inf, minStep_fl = 0.0
 	while true
 
 		produceMessage(report_m.options,report_m.report, 1," - Started iteration $i", testErr = false, printErr = false)
 
-		#region # * solve top-problem and sub-problems
+		#region # * solve top-problem and start sub-problems 
 
 		startTop = now()
-		capaData_obj, allVal_dic, objTopTrust_fl, lowLimTrust_fl = @suppress runTop(top_m,cutData_dic,i);
-		timeTop = now() - startTop 
+		capaData_obj, allVal_dic, objTop_fl, lowLim_fl = @suppress runTop(top_m,cutData_dic,stab_obj,i); 
+		timeTop = now() - startTop
 
-		solvedFut_dic = runAllSub(sub_tup, capaData_obj,:barrier)
+		solvedFut_dic = runAllSub(sub_tup, startSol_obj,:barrier,getConvTol(gap_fl,gap,conSub))
 
 		#endregion
 
-		#region # * compute bounds and analyze cuts
+		#region # * adjust refinements
 
-		if method in (:qtrNoIni,:qtrFixIni,:qtrDynIni) # run top-problem without trust region to obtain lower limits
-			objTop_fl, lowLim_fl = @suppress runTopWithoutQuadTrust(top_m,trustReg_obj)
-		else # without quad trust region, lower limit corresponds result of unaltered top-problem
-			lowLim_fl = lowLimTrust_fl
+		# solve problem without stabilization
+		if !isempty(meth_tup)
+			objTopNoStab_fl, lowLimNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj) # run top without trust region
 		end
 
 		# ! delete cuts that not were binding for the defined number of iterations
-		deleteCuts!(top_m,solOpt_tup.delCut,i) 
+		try
+			deleteCuts!(top_m,delCut,i)
+		catch
+			produceMessage(report_m.options,report_m.report, 1," - Skipped deletion of inactive cuts due to numerical problems", testErr = false, printErr = false)
+		end
 
 		# ! get objective of sub-problems and current best solution
 		timeSub = getSubResults(cutData_dic, sub_tup, solvedFut_dic)
+		expStep_fl = (currentBest_fl - lowLim_fl) # expected step size
 		objSub_fl = sum(map(x -> x.objVal, values(cutData_dic))) # objective of sub-problems
-		currentBest_fl = min(objTopTrust_fl + objSub_fl, currentBest_fl) # current best solution
+		currentBest_fl = min(objTop_fl + objSub_fl, currentBest_fl) # current best solution
+		
+		# ! adapt center and parameter for stabilization
+		if !isempty(meth_tup)
+			
+			# adjust center of stabilization 
+			adjCtr_boo = false
+			if currentBest_fl < stab_obj.objVal - srsThr * expStep_fl
+				stab_obj.var = filterStabVar(allVal_dic,top_m)
+				stab_obj.objVal = currentBest_fl
+				adjCtr_boo = true
+				produceMessage(report_m.options,report_m.report, 1," - Updated reference point for stabilization!", testErr = false, printErr = false)
+			end
+			
+			# adjust dynamic parameters of stabilization
+			foreach(i -> adjustDynPar!(stab_obj,top_m,i,adjCtr_boo,lowLimNoStab_fl,lowLim_fl,currentBest_fl,report_m), 1:length(stab_obj.method))
+
+			lowLim_fl = lowLimNoStab_fl # set lower limit for convergence check to lower limit without trust region
+		end
 
 		#endregion
 
 		#region # * result reporting 
-
 		gap_fl = 1 - lowLim_fl/currentBest_fl
 		produceMessage(report_m.options,report_m.report, 1," - Lower: $(round(lowLim_fl, sigdigits = 8)), Upper: $(round(currentBest_fl, sigdigits = 8)), gap: $(round(gap_fl, sigdigits = 4))", testErr = false, printErr = false)
 		produceMessage(report_m.options,report_m.report, 1," - Time for top: $(Dates.toms(timeTop) / Dates.toms(Second(1))) Time for sub: $(Dates.toms(timeSub) / Dates.toms(Second(1)))", testErr = false, printErr = false)
 		
 		# write to reporting files
-		push!(itrReport_df, (i = i, low = lowLim_fl, best = currentBest_fl, gap = gap_fl, solCur = objTopTrust_fl + objSub_fl, time = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60))
+		etr_arr = Pair{Symbol,Any}[:i => i, :low => lowLim_fl, :best => currentBest_fl, :gap => gap_fl, :solCur => objTop_fl + objSub_fl,:time => Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60]
+		if !isempty(meth_tup) # add info about stabilization
+			push!(etr_arr, :actMethod => stab_obj.method[stab_obj.actMet])
+			append!(etr_arr, map(x -> Symbol("dynPar_",stab_obj.method[x]) => stab_obj.dynPar[x], 1:length(stab_obj.method)))
+		end
+		push!(itrReport_df, (;zip(getindex.(etr_arr,1), getindex.(etr_arr,2))...))
+		#CSV.write(modOpt_tup.resultDir * "/iterationBenders$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
 		
 		#endregion
 		
-		#region # * check convergence and adjust limits	
+		#region # * check convergence and adapt stabilization	
 		
-		if gap_fl < solOpt_tup.gap
-			# ! terminate or adjust quadratic trust region
+		# check for termination
+		if gap_fl < gap
 			produceMessage(report_m.options,report_m.report, 1," - Finished iteration!", testErr = false, printErr = false)
 			break
 		end
 
-		if method in (:qtrNoIni,:qtrFixIni,:qtrDynIni) # adjust trust region in case algorithm has not converged yet
-			global trustReg_obj = adjustQuadTrust(top_m,allVal_dic,trustReg_obj,objSub_fl,objTopTrust_fl,lowLim_fl,lowLimTrust_fl,report_m)
+		# switch and update quadratic stabilization method
+		if !isempty(meth_tup)
+			# switch stabilization method
+			if !isempty(stab_obj.ruleSw) && i > stab_obj.ruleSw.itr && length(stab_obj.method) > 1
+				min_boo = itrReport_df[i - stab_obj.ruleSw.itr,:actMethod] == stab_obj.method[stab_obj.actMet] # check if method as been used for the minimum number of iterations 
+				pro_boo = itrReport_df[(i - min(i,stab_obj.ruleSw.itrAvg) + 1):end,:gap] |> (x -> (x[1]/x[end])^(1/(length(x) -1)) - 1 < stab_obj.ruleSw.avgImp) # check if progress in last iterations is below threshold
+				if min_boo && pro_boo
+					stab_obj.actMet = stab_obj.actMet + 1 |> (x -> length(stab_obj.method) < x ? 1 : x)
+					produceMessage(report_m.options,report_m.report, 1," - Switched stabilization to $(nameStab_dic[stab_obj.method[stab_obj.actMet]]) method!", testErr = false, printErr = false)
+				end
+			end
+
+			# update stabilization method
+			centerStab!(stab_obj.method[stab_obj.actMet],stab_obj,top_m)
 		end
+
 		#endregion
 
 		i += 1
@@ -269,10 +342,10 @@ foreach(x -> reportResults(x,top_m), [:summary,:cost])
 	
 # obtain capacities
 capaData_obj = resData()
-capaData_obj.capa = writeResult(top_m,[:capa],true)
+capaData_obj.capa = writeResult(top_m,[:capa])
 
 # run sub-problems with optimal values fixed
-solvedFut_dic = runAllSub(sub_tup, capaData_obj,:simplex,true)
+solvedFut_dic = runAllSub(sub_tup, capaData_obj,:barrier,1e-8,true)
 wait.(values(solvedFut_dic))
 
 #endregion
