@@ -97,8 +97,8 @@ using Distributed, MatheClusterManagers # MatheClusterManagers is an altered ver
 # add workers to job
 nb_workers = scr * 2
 @static if Sys.islinux()
-    using MatheClusterManagers
-    qrsh(nb_workers, timelimit=345600, ram=ram, mp = t_int)
+    #qrsh(nb_workers, timelimit=345600, ram=ram, mp = t_int, sshflags="-vvv")
+	addprocs_slurm(nb_workers; kwargs...)
 else
     addprocs(nb_workers; exeflags="--project=.")
 end
