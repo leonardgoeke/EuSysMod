@@ -113,7 +113,10 @@ report_m = @suppress anyModel(String[],optMod_dic[:heu].resultDir, objName = "de
 produceMessage(report_m.options,report_m.report, 1," - Create top model and sub models", testErr = false, printErr = false)
 
 # ! create sub-problems
-@passobj 1 workers() modOptSub_tup sub_tup t_int
+@passobj 1 workers() modOptSub_tup 
+@passobj 1 workers() sub_tup 
+@passobj 1 workers() t_int
+ 
 
 passobj(1, workers(), [:modOptSub_tup, :sub_tup,:t_int])
 produceMessageShort(" - Start creating sub-problems",report_m)
