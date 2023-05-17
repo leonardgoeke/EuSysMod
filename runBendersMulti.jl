@@ -50,7 +50,7 @@ t_int = parse(Int,ARGS[8])
 # fixed settings
 srsThr = 0.0 # threshold for serious step
 dir_str = "" # folder with data files
-res = 96 # temporal resolution
+res = 8760 # temporal resolution
 gap = 0.01 # optimality gap
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
 
@@ -136,6 +136,7 @@ report_m = @suppress anyModel(String[],optMod_dic[:heu].resultDir, objName = "de
 produceMessage(report_m.options,report_m.report, 1," - Create top model and sub models", testErr = false, printErr = false)
 
 # ! create sub-problems
+modOptSub_tup = optMod_dic[:sub]
 passobj(1, workers(), [:modOptSub_tup, :sub_tup,:t_int])
 produceMessageShort(" - Start creating sub-problems",report_m)
 
@@ -206,7 +207,7 @@ if !isempty(meth_tup)
 	end
 	
 	# !  solve sub-problems with capacity of heuristic solution to use for creation of cuts in first iteration and to compute corresponding objective value
-	solvedFut_dic = runAllSub(sub_tup, startSol_obj,:barrier,1e-8)
+	solvedFut_dic = @suppress runAllSub(sub_tup, startSol_obj,:barrier,1e-8)
 	getSubResults!(cutData_dic, sub_tup, solvedFut_dic)
 	startSol_obj.objVal = startSol_obj.objVal + sum(map(x -> x.objVal, values(cutData_dic)))
 	
@@ -243,7 +244,7 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objV
 		capaData_obj, allVal_dic, objTop_fl, lowLim_fl = @suppress runTop(top_m,cutData_dic,stab_obj,i); 
 		timeTop = now() - startTop
 
-		solvedFut_dic = runAllSub(sub_tup, startSol_obj,:barrier,getConvTol(gap_fl,gap,conSub))
+		solvedFut_dic = @suppress runAllSub(sub_tup, capaData_obj,:barrier,getConvTol(gap_fl,gap,conSub))
 
 		#endregion
 
@@ -262,7 +263,7 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objV
 		end
 
 		# ! get objective of sub-problems and current best solution
-		timeSub = getSubResults(cutData_dic, sub_tup, solvedFut_dic)
+		timeSub = getSubResults!(cutData_dic, sub_tup, solvedFut_dic)
 		expStep_fl = (currentBest_fl - lowLim_fl) # expected step size
 		objSub_fl = sum(map(x -> x.objVal, values(cutData_dic))) # objective of sub-problems
 		currentBest_fl = min(objTop_fl + objSub_fl, currentBest_fl) # current best solution
@@ -348,7 +349,7 @@ capaData_obj = resData()
 capaData_obj.capa = writeResult(top_m,[:capa])
 
 # run sub-problems with optimal values fixed
-solvedFut_dic = runAllSub(sub_tup, capaData_obj,:barrier,1e-8,true)
+solvedFut_dic = @suppress runAllSub(sub_tup, capaData_obj,:barrier,1e-8,true)
 wait.(values(solvedFut_dic))
 
 #endregion

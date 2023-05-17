@@ -97,13 +97,13 @@ prepareMod!(top_m,opt_obj,t_int)
 
 # ! create sub-problems
 
-modOpt_tup = optMod_dic[:sub]
+modOptSub_tup = optMod_dic[:sub]
 
 sub_dic = Dict{Tuple{Int,Int},anyModel}()
 
 for (id,x) in enumerate(sub_tup)
 	# create sub-problem
-	s = anyModel(modOpt_tup.inputDir, modOpt_tup.resultDir, objName = "subModel_" * string(id) * modOpt_tup.suffix, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, coefRng = modOpt_tup.coefRng, scaFac = modOpt_tup.scaFac, reportLvl = 1)
+	s = anyModel(modOptSub_tup.inputDir, modOptSub_tup.resultDir, objName = "subModel_" * string(id) * modOptSub_tup.suffix, supTsLvl = modOptSub_tup.supTsLvl, shortExp = modOptSub_tup.shortExp, coefRng = modOptSub_tup.coefRng, scaFac = modOptSub_tup.scaFac, reportLvl = 1)
 	s.subPro = x
 	prepareMod!(s,opt_obj,t_int)
 	set_optimizer_attribute(s.optModel, "Threads", t_int)
