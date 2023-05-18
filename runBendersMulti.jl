@@ -9,7 +9,7 @@ method = parse(Int,ARGS[1])
 if method == 0 
 	meth_tup = tuple()
 elseif method == 1
-	meth_tup = (:prx => (start = 1.0, low = 1e-4, fac = 2.0),)
+	meth_tup = (:prx => (start = 1.0, low = 0.0, fac = 2.0),)
 elseif method == 2
 	meth_tup = (:lvl => (la = 0.5,),)
 elseif method == 3
@@ -154,7 +154,7 @@ subTasks_arr = map(workers()) do w
 		# define function to run sub-problem
 		function runSubDis(capaData_obj::resData,sol_sym::Symbol,optTol_fl::Float64,wrtRes::Bool)
 			start_time = now()
-			result_obj = runSub(SUB_M, capaData_obj,sol_sym,optTol_fl,wrtRes)
+			result_obj = @suppress runSub(SUB_M, capaData_obj,sol_sym,optTol_fl,wrtRes)
 			elapsed_time = now() - start_time
 			println("$(Dates.toms(elapsed_time) / Dates.toms(Second(1))) seconds for $(SUB_M.subPro[1])")
 			return elapsed_time, result_obj
@@ -241,7 +241,7 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objV
 		#region # * solve top-problem and start sub-problems 
 
 		startTop = now()
-		capaData_obj, allVal_dic, objTop_fl, lowLim_fl = @suppress runTop(top_m,cutData_dic,stab_obj,i); 
+		capaData_obj, allVal_dic, objTop_fl, lowLim_fl = runTop(top_m,cutData_dic,stab_obj,i); 
 		timeTop = now() - startTop
 
 		solvedFut_dic = @suppress runAllSub(sub_tup, capaData_obj,:barrier,getConvTol(gap_fl,gap,conSub))
