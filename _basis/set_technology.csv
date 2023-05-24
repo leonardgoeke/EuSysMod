@@ -7,7 +7,7 @@ ocgt,,ocgtGas,,gasFuel,electricity,,,mature,none
 ocgt,,ocgtH2,,h2,electricity,,,mature,none
 powerToX,electrolysis,alkElectrolysis,,electricity,h2,,,mature,none
 powerToX,electrolysis,pemElectrolysis,,electricity,h2,,,mature,none
-powerToX,h2Storage,h2StorageTank,,,,h2,h2,mature,none
+powerToX,h2Storage,h2Cavern,,,,h2,h2,mature,none
 powerToX,synthFuel,methanePyrolysis,,gasFuel; electricity,h2,,,mature,none
 solar,,openspace,,,electricity,,,mature,none
 solar,,rooftopResi,,,electricity,,,mature,none
