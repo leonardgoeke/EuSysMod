@@ -300,7 +300,10 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objV
 			append!(etr_arr, map(x -> Symbol("dynPar_",stab_obj.method[x]) => stab_obj.dynPar[x], 1:length(stab_obj.method)))
 		end
 		push!(itrReport_df, (;zip(getindex.(etr_arr,1), getindex.(etr_arr,2))...))
-		#CSV.write(modOpt_tup.resultDir * "/iterationBenders$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
+		# write result file each 100th iteration
+		if i%100 == 0
+			CSV.write(modOpt_tup.resultDir * "/iterationBenders$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
+		end
 		
 		#endregion
 		
