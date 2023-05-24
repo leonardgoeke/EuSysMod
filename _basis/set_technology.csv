@@ -21,5 +21,3 @@ stock,power,reservoir,,,,,electricity,stock,none
 stock,power,runOfRiver,,,electricity,,,stock,none
 wind,,offshore,,,electricity,,,mature,none
 wind,,onshore,,,electricity,,,mature,none
-ccgt,ccgtGas,ccgtGasBackDh,,gasFuel,electricity,,,mature,none
-ccgt,ccgtH2,ccgtH2BackDh,,h2,electricity,,,mature,none
