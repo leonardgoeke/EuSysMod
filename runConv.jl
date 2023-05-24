@@ -26,4 +26,9 @@ reportResults(:cost,anyM)
 reportResults(:summary,anyM)
 reportResults(:exchange,anyM)
 
-printObject(filter(x -> x.scr == 1, anyM.parts.tech[:pumpedStorage].cns[:stBal]),anyM)
+
+scr = 2
+t_int = 4
+b = "" # add the model dir here
+input_arr = [b * "_basis",b * "timeSeries/96hours_det",b * "timeSeries/96hours_s" * string(scr) * "_stoch"]
+resultDir_str = b * "results"

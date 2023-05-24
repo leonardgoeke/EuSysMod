@@ -9,26 +9,26 @@
 #$ -m bae
 #$ -M lgo@wip.tu-berlin.de
 
-#qsub -t 1 -v method='0' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 5400
+qsub -t 1 -v method='0' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
+sleep 900
 
 qsub -t 2 -v method='1' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-sleep 5400
+sleep 900
 
-#qsub -t 3 -v method='2' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 5400
+qsub -t 3 -v method='2' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
+sleep 900
 
-#qsub -t 4 -v method='3' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 5400
+qsub -t 4 -v method='3' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
+sleep 900
 
 qsub -t 5 -v method='0' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-sleep 5400
+sleep 900
 
 qsub -t 6 -v method='1' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-sleep 5400
+sleep 900
 
 qsub -t 7 -v method='2' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-sleep 5400
+sleep 900
 
-#qsub -t 8 -v method='3' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 5400
+qsub -t 8 -v method='3' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
+sleep 900
