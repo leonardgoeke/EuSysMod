@@ -28,9 +28,8 @@ include(b* "src/dataHandling/util.jl")
 
 include(b* "src/dataHandling/gurobiTools.jl")
 
-meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
-#meth_tup = (:prx => (start = 1.0, low = 0.0, fac = 2.0),:lvl => (la = 0.5,))
-#meth_tup = (:prx => (start = 1.0, low = 0.0, fac = 2.0),)
+#meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
+meth_tup = (:prx => (start = 0.5, max = 5e3, fac = 2.0),)
 #meth_tup = (:lvl => (la = 0.5,),:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0))
 #meth_tup = tuple()
 swt_ntup = (itr = 6, avgImp = 0.2, itrAvg = 4)
@@ -180,7 +179,6 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objV
 		for x in collect(sub_tup)
 			dual_etr = @suppress runSub(sub_dic[x],copy(capaData_obj),:barrier,getConvTol(gap_fl,gap,conSub))
 			cutData_dic[x] = dual_etr
-			push!(subRes_dic[x],dual_etr)
 		end
 		timeSub = now() - startSub
 
