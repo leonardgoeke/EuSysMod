@@ -105,14 +105,20 @@
 #qsub -t 32 -v method='15' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
 #sleep 900
 
-qsub -t 33 -v method='16' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
+#qsub -t 33 -v method='16' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
+#sleep 900
+
+#qsub -t 34 -v method='17' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
+#sleep 900
+
+#qsub -t 35 -v method='16' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
+#sleep 900
+
+#qsub -t 36 -v method='17' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
+#sleep 900
+
+qsub -t 37 -v method='18' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
 sleep 900
 
-qsub -t 34 -v method='17' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-sleep 900
-
-qsub -t 35 -v method='16' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-sleep 900
-
-qsub -t 36 -v method='17' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
+qsub -t 38 -v method='18' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
 sleep 900

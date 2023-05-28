@@ -42,6 +42,8 @@ elseif method == 16
 	meth_tup = (:prx => (start = 0.5, max = 5e2, fac = 2.0),)
 elseif method == 17
 	meth_tup = (:prx => (start = 0.5, max = 5e1, fac = 2.0),)
+elseif method == 18
+	meth_tup = (:prx => (start = 0.5, max = 5e0, fac = 2.0),)
 end
 
 
