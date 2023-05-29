@@ -9,15 +9,15 @@ method = parse(Int,ARGS[1])
 if method == 0 
 	meth_tup = tuple()
 elseif method == 1
-	meth_tup = (:prx => (start = 0.5, max = 5e5, fac = 2.0),)
+	meth_tup = (:prx => (start = 0.5, max = 5e1, fac = 2.0),)
 elseif method == 2
 	meth_tup = (:lvl => (la = 0.5,),)
 elseif method == 3
 	meth_tup = (:qtr => (start = 1e-2, low = 1e-6,  thr = 5e-4, fac = 2.0),)
 elseif method == 4
-	meth_tup = (:prx => (start = 0.1, max = 5e5, fac = 2.0),)
+	meth_tup = (:prx => (start = 0.1, max = 5e1, fac = 2.0),)
 elseif method == 5
-	meth_tup = (:prx => (start = 0.05, max = 5e5, fac = 2.0),)
+	meth_tup = (:prx => (start = 0.05, max = 5e1, fac = 2.0),)
 elseif method == 6
 	meth_tup = (:lvl => (la = 0.25,),)
 elseif method == 7
@@ -35,15 +35,11 @@ elseif method == 12
 elseif method == 13
 	meth_tup = (:lvl => (la = 0.375,),)
 elseif method == 14
-	meth_tup = (:prx => (start = 0.5, max = 5e4, fac = 2.0),)
-elseif method == 15
-	meth_tup = (:prx => (start = 0.5, max = 5e3, fac = 2.0),)
-elseif method == 16
-	meth_tup = (:prx => (start = 0.5, max = 5e2, fac = 2.0),)
-elseif method == 17
-	meth_tup = (:prx => (start = 0.5, max = 5e1, fac = 2.0),)
-elseif method == 18
 	meth_tup = (:prx => (start = 0.5, max = 5e0, fac = 2.0),)
+elseif method == 15
+	meth_tup = (:prx => (start = 0.1, max = 5e0, fac = 2.0),)
+elseif method == 16
+	meth_tup = (:prx => (start = 0.05, max = 5e0, fac = 2.0),)
 end
 
 
