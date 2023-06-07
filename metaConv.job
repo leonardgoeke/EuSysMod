@@ -19,8 +19,12 @@
 
 #qsub -t 1005 -v scr='10' startConv32_16.job
 
-qsub -t 1006 -v scr='12' startConv32_16.job
+#qsub -t 1006 -v scr='12' startConv32_16.job
 
-qsub -t 1007 -v scr='14' startConv32_16.job
+#qsub -t 1007 -v scr='14' startConv32_16.job
 
-qsub -t 1008 -v scr='16' startConv32_16.job
+#qsub -t 1008 -v scr='16' startConv32_16.job
+
+qsub -t 1009 -v scr='18' startConv32_16.job
+
+qsub -t 1010 -v scr='20' startConv32_16.job

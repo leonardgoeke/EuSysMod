@@ -28,21 +28,21 @@ include(b* "src/dataHandling/util.jl")
 
 include(b* "src/dataHandling/gurobiTools.jl")
 
-#meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
-meth_tup = (:prx => (start = 0.5, max = 5e3, fac = 2.0),)
+meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
+#meth_tup = (:prx => (start = 0.5, max = 5e0, fac = 2.0),)
 #meth_tup = (:lvl => (la = 0.5,),:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0))
 #meth_tup = tuple()
 swt_ntup = (itr = 6, avgImp = 0.2, itrAvg = 4)
 
-iniStab = true # initialize stabilizatio
+iniStab = false # initialize stabilizatio
 srsThr = 0.0 # threshold for serious step
 linStab = (rel = 0.5, abs = 5.0)
 
-suffix_str = "lin_0.4_3"
+suffix_str = "true_vi_false_ini"
 
 gap = 0.01
 conSub = (rng = [1e-2,1e-8], int = :log) # range and interpolation method for convergence criteria of subproblems
-useVI = false # use vaild inequalities
+useVI = true # use vaild inequalities
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
 
 res = 96
