@@ -1,3 +1,5 @@
+import Pkg; Pkg.activate(".")
+# Pkg.instantiate()
 using AnyMOD, Gurobi, CSV, Base.Threads
 
 #region # * specify setting
