@@ -1,4 +1,5 @@
-
+import Pkg; Pkg.activate(".")
+# Pkg.instantiate()
 # ! import AnyMOD and packages
 
 using AnyMOD, Gurobi
