@@ -44,9 +44,6 @@ elseif method == 16
 	meth_tup = (:prx => (start = 0.05, max = 5e0, fac = 2.0),)
 end
 
-
-
-
 # rules for switching between stabilization methods
 switch = parse(Int,ARGS[2])
 if switch == 1
@@ -122,8 +119,6 @@ optMod_dic[:sub] =  (inputDir = inDir_str, resultDir = dir_str * "results", suff
 #endregion
 
 #region # * initialize distributed computing
-
- 
 
 # add workers to job
 nb_workers = scr * 2
@@ -237,7 +232,7 @@ if !isempty(meth_tup)
 		lowBd_fl = startSol_obj.objVal
 	end
 	
-	# !  solve sub-problems with capacity of heuristic solution to use for creation of cuts in first iteration and to compute corresponding objective value
+	# ! solve sub-problems with capacity of heuristic solution to use for creation of cuts in first iteration and to compute corresponding objective value
 	solvedFut_dic = @suppress runAllSub(sub_tup, startSol_obj,:barrier,1e-8)
 	getSubResults!(cutData_dic, sub_tup, solvedFut_dic)
 	startSol_obj.objVal = startSol_obj.objVal + sum(map(x -> x.objVal, values(cutData_dic)))

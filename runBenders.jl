@@ -34,7 +34,9 @@ meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
 #meth_tup = (:prx => (start = 0.5, max = 5e0, fac = 2.0),)
 #meth_tup = (:lvl => (la = 0.5,),:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0))
 #meth_tup = tuple()
+#meth_tup = (:box => (low = 0.05, up = 0.05, minUp = 0.5),)
 swt_ntup = (itr = 6, avgImp = 0.2, itrAvg = 4)
+
 
 iniStab = false # initialize stabilizatio
 srsThr = 0.0 # threshold for serious step
@@ -42,7 +44,7 @@ linStab = (rel = 0.5, abs = 5.0)
 
 suffix_str = "true_vi_false_ini"
 
-gap = 0.01
+gap = 0.001
 conSub = (rng = [1e-2,1e-8], int = :log) # range and interpolation method for convergence criteria of subproblems
 useVI = true # use vaild inequalities
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
@@ -64,8 +66,8 @@ coefRngTop_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
 coefRngSub_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
 
 scaFacHeu_tup = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
-scaFacTop_tup = (capa = 1e0, capaStSize = 1e1, insCapa = 1e0, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
-scaFacSub_tup = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e2, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
+scaFacTop_tup = (capa = 1e2, capaStSize = 1e1, insCapa = 1e2, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
+scaFacSub_tup = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e1, dispSt = 1e2, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
 
 # ! general input parameters
 
@@ -129,12 +131,13 @@ if !isempty(meth_tup)
 		lowBd_fl = value(heu_m.parts.obj.var[:objVar][1,:var])
 	else
 		@suppress optimize!(top_m.optModel)
+		reportResults(:summary,top_m)
 		startSol_obj = resData()
 		startSol_obj.objVal = value(top_m.parts.obj.var[:objVar][1,:var])
 		startSol_obj.capa = writeResult(top_m,[:capa,:exp,:mustCapa,:mustExp])
 		lowBd_fl = startSol_obj.objVal
 	end
-	# !  solve sub-problems with capacity of heuristic solution to use for creation of cuts in first iteration and to compute corresponding objective value
+	# ! solve sub-problems with capacity of heuristic solution to use for creation of cuts in first iteration and to compute corresponding objective value
 	for x in collect(sub_tup)
 		dual_etr = @suppress runSub(sub_dic[x],copy(startSol_obj),:barrier)
 		cutData_dic[x] = dual_etr
@@ -161,7 +164,7 @@ if !isempty(meth_tup)
 	foreach(x -> itrReport_df[!,Symbol("dynPar_",x)] = Float64[], stab_obj.method)
 end
 
-nameStab_dic = Dict(:lvl => "level bundle",:qtr => "quadratic trust-region", :prx => "proximal bundle")  
+nameStab_dic = Dict(:lvl => "level bundle",:qtr => "quadratic trust-region", :prx => "proximal bundle", :box => "box-step method")
 
 let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objVal : Inf, minStep_fl = 0.0
 	while true
@@ -289,3 +292,11 @@ for x in collect(sub_tup)
 end
 
 #endregion
+
+allVar_df[50,:]
+bla = collect(allVar_df[50,:var].terms)[1]
+
+findall(allVar_df[!,:value] .!= 0.0)
+
+lower_bound(bla[1])
+upper_bound(bla[1])
