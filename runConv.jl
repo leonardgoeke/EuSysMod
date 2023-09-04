@@ -11,8 +11,14 @@ b = "" # add the model dir here
 input_arr = [b * "_basis",b * "timeSeries/8760hours_det",b * "timeSeries/8760hours_s" * string(scr) * "_stoch"]
 resultDir_str = b * "results"
 
+scr = 2
+t_int = 4
+b = "" # add the model dir here
+input_arr = [b * "_basis",b * "timeSeries/96hours_det",b * "timeSeries/96hours_s" * string(scr) * "_stoch"]
+resultDir_str = b * "results"
+
 # create and solve model
-anyM = anyModel(input_arr, resultDir_str, objName = "conv_s" * string(scr), supTsLvl = 1,reportLvl = 2, shortExp = 10, checkRng = (print = true, all = true), coefRng = (mat = (1e-2,1e3), rhs = (1e0,1e3)), scaFac = (capa = 1e2, capaStSize = 1e3, insCapa = 1e1, dispConv = 0.4e1, dispSt = 1e1, dispExc = 1e2, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0))
+anyM = anyModel(input_arr, resultDir_str, objName = "conv_s" * string(scr), supTsLvl = 1, reportLvl = 2, shortExp = 10, checkRng = (print = true, all = true), coefRng = (mat = (1e-2,1e3), rhs = (1e0,1e3)), scaFac =  (capa = 1e2, capaStSize = 1e1, insCapa = 1e2, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3))
 createOptModel!(anyM)
 setObjective!(:cost,anyM)
 
@@ -28,8 +34,23 @@ reportResults(:summary,anyM)
 reportResults(:exchange,anyM)
 
 
-scr = 2
-t_int = 4
-b = "" # add the model dir here
-input_arr = [b * "_basis",b * "timeSeries/96hours_det",b * "timeSeries/96hours_s" * string(scr) * "_stoch"]
-resultDir_str = b * "results"
+# compute near optimal solution
+costOpt_fl = objective_value(anyM.optModel)*1.05*1e3
+
+
+obj_tup = (:cost => (fac = 0.0,flt = x -> true),:capaExc => (fac = 1.0, flt = x -> x.R_from == 3 && x.Exc == sysInt(:hvac,anyM.sets[:Exc])))
+@suppress setObjective!(obj_tup,anyM,true)
+
+# delete old restriction to near optimum
+if :nearOpt in keys(anyM.parts.obj.cns) delete(anyM.optModel,anyM.parts.obj.cns[:nearOpt][1,:cns]) end
+
+# restrict system costs to near-optimum
+cost_expr = sum(filter(x -> x.name in (:cost,:benders), anyM.parts.obj.var[:objVar])[!,:var])
+nearOpt_eqn = @constraint(anyM.optModel, costOpt_fl  >= cost_expr)
+anyM.parts.obj.cns[:nearOpt] = DataFrame(cns = nearOpt_eqn)
+
+optimize!(anyM.optModel)
+
+nearOpt_fl = objective_value(anyM.optModel)
+
+# für grid richtig: 0.0365

@@ -151,7 +151,7 @@ function getSubResults!(cutData_dic::Dict{Tuple{Int64,Int64},resData}, sub_tup::
 		t_fl, cutData_dic[sub_tup[k]] = fetch(v)
 		push!(runTime_arr, t_fl)
 	end
-	return maximum(runTime_arr)
+	return runTime_arr
 end
 
 #endregion
@@ -250,7 +250,7 @@ end
 #region # * run benders iteration
 
 # initialize loop variables
-itrReport_df = DataFrame(i = Int[], low = Float64[], best = Float64[], gap = Float64[], solCur = Float64[], time = Float64[])
+itrReport_df = DataFrame(i = Int[], low = Float64[], best = Float64[], gap = Float64[], solCur = Float64[], time_ges = Float64[], time_top = Float64[], time_sub = String[])
 
 if !isempty(meth_tup)
 	itrReport_df[!,:actMethod] = Symbol[]
@@ -316,11 +316,16 @@ let i = 1, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objV
 
 		#region # * result reporting 
 		gap_fl = 1 - lowLim_fl/currentBest_fl
+		timeTop_fl = Dates.toms(timeTop) / Dates.toms(Second(1))
+		timeSub_arr = Dates.toms.(timeSub) ./ Dates.toms(Second(1))
+
 		produceMessage(report_m.options,report_m.report, 1," - Lower: $(round(lowLim_fl, sigdigits = 8)), Upper: $(round(currentBest_fl, sigdigits = 8)), gap: $(round(gap_fl, sigdigits = 4))", testErr = false, printErr = false)
-		produceMessage(report_m.options,report_m.report, 1," - Time for top: $(Dates.toms(timeTop) / Dates.toms(Second(1))) Time for sub: $(Dates.toms(timeSub) / Dates.toms(Second(1)))", testErr = false, printErr = false)
+		produceMessage(report_m.options,report_m.report, 1," - Time for top: $timeTop_fl Time for sub: $(maximum(timeSub_arr))", testErr = false, printErr = false)
 		
+
 		# write to reporting files
-		etr_arr = Pair{Symbol,Any}[:i => i, :low => lowLim_fl, :best => currentBest_fl, :gap => gap_fl, :solCur => objTop_fl + objSub_fl,:time => Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60]
+		etr_arr = Pair{Symbol,Any}[:i => i, :low => lowLim_fl, :best => currentBest_fl, :gap => gap_fl, :solCur => objTop_fl + objSub_fl,
+										:time_ges => Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60, :time_top => timeTop_fl/60,  :time_sub => string(timeSub_str./60)]
 		if !isempty(meth_tup) # add info about stabilization
 			push!(etr_arr, :actMethod => stab_obj.method[stab_obj.actMet])
 			append!(etr_arr, map(x -> Symbol("dynPar_",stab_obj.method[x]) => stab_obj.dynPar[x], 1:length(stab_obj.method)))
