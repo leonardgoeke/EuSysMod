@@ -41,7 +41,8 @@ swt_ntup = (itr = 6, avgImp = 0.2, itrAvg = 4)
 nearOptOpj_tup = ("tradeOffWind_1" => (:min,((0.0,(variable = :capaConv, system = :onshore)),(1.0,(variable = :capaConv, system = :offshore)))),
 					"tradeOffWind_2" => (:min,((0.25,(variable = :capaConv, system = :onshore)),(0.75,(variable = :capaConv, system = :offshore)))))
 
-nearOpt_ntup = (cutThres = 0.1, lssThres = 0.05, optThres = 0.05, feasGap = 0.001, cutDel = 20, obj = nearOptOpj_tup)
+nearOpt_ntup = (cutThres = 0.1, lssThres = 0.05, optThres = 0.05, feasGap = 0.0001, cutDel = 20, obj = nearOptOpj_tup)
+#nearOpt_ntup = tuple()
 
 iniStab = false # initialize stabilizatio
 srsThr = 0.0 # threshold for serious step
@@ -49,7 +50,7 @@ linStab = (rel = 0.5, abs = 5.0)
 
 suffix_str = "nearOpt_focus2_noChangeCuts"
 
-gap = 0.01
+gap = 0.001
 conSub = (rng = [1e-2,1e-8], int = :log) # range and interpolation method for convergence criteria of subproblems
 useVI = false # use vaild inequalities
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
@@ -60,6 +61,8 @@ t_int = 4
 dir_str = "C:/Users/lgoeke/git/EuSysMod/"
 
 #region # * set and write options
+
+if !isempty(nearOpt_ntup) && any(getindex.(meth_tup,1) .!= :qtr) error("Near-optimal can only be paired with quadratic stabilization!") end
 
 # ! intermediate definitions of parameters
 
@@ -185,7 +188,7 @@ let i = 1, gap = gap, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startS
 		#region # * solve top-problem 
 
 		startTop = now()
-		capaData_obj, allVal_dic, objTop_fl, lowLim_fl = @suppress runTop(top_m,cutData_dic,stab_obj,i); 
+		capaData_obj, allVal_dic, topCost_fl, estCost_fl = @suppress runTop(top_m,cutData_dic,stab_obj,i); 
 		timeTop = now() - startTop
 
 		# get objective value for near-optimal
@@ -207,9 +210,9 @@ let i = 1, gap = gap, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startS
 		#region # * adjust refinements
 
 		# ! get objective of sub-problems, current best solution and current error of cutting plane
-		expStep_fl = nOpt_int == 0 ? (currentBest_fl - lowLim_fl) : 0.0 # expected step size
-		objSub_fl = sum(map(x -> x.objVal, values(cutData_dic))) # objective of sub-problems
-		currentBest_fl = min(nOpt_int == 0 ? (objTop_fl + objSub_fl) : (objSub_fl - (lowLim_fl - objTop_fl)), currentBest_fl) # current best value
+		expStep_fl = nOpt_int == 0 ? (currentBest_fl - estCost_fl) : 0.0 # expected step size
+		subCost_fl = sum(map(x -> x.objVal, values(cutData_dic))) # objective of sub-problems
+		currentBest_fl = min(nOpt_int == 0 ? (topCost_fl + subCost_fl) : (subCost_fl - (estCost_fl - topCost_fl)), currentBest_fl) # current best value
 
 		# ! delete cuts that not were binding for the defined number of iterations
 		try
@@ -231,12 +234,13 @@ let i = 1, gap = gap, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startS
 			end
 
 			# solve problem without stabilization method
-			objTopNoStab_fl, lowLimNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj) # run top without trust region
+			topCostNoStab_fl, estCostNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj) # run top without trust region
 			
 			# adjust dynamic parameters of stabilization
-			foreach(i -> adjustDynPar!(stab_obj,top_m,i,adjCtr_boo,lowLimNoStab_fl,lowLim_fl,currentBest_fl,report_m), 1:length(stab_obj.method))
+			foreach(i -> adjustDynPar!(stab_obj,top_m,i,adjCtr_boo,estCostNoStab_fl,estCost_fl,currentBest_fl,nOpt_int != 0,report_m), 1:length(stab_obj.method))
+	
 
-			lowLim_fl = lowLimNoStab_fl # set lower limit for convergence check to lower limit without trust region
+			estCost_fl = estCostNoStab_fl # set lower limit for convergence check to lower limit without trust region
 		end
 
 		#endregion
@@ -244,19 +248,19 @@ let i = 1, gap = gap, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startS
 		#region # * result reporting
 
 		# computes optimality gap for cost minimization and feasibility gap for near-optimal
-		gap_fl = nOpt_int > 0 ? abs(currentBest_fl / objSub_fl) : (1 - lowLim_fl/currentBest_fl)
+		gap_fl = nOpt_int > 0 ? abs(currentBest_fl / costOpt_fl) : (1 - estCost_fl/currentBest_fl)
 
 		timeTop_fl = Dates.toms(timeTop) / Dates.toms(Second(1))
 		timeSub_fl = Dates.toms(timeSub) / Dates.toms(Second(1))
 		if nOpt_int == 0
-			produceMessage(report_m.options,report_m.report, 1," - Lower: $(round(lowLim_fl, sigdigits = 8)), Upper: $(round(currentBest_fl, sigdigits = 8)), Optimality gap: $(round(gap_fl, sigdigits = 4))", testErr = false, printErr = false)
+			produceMessage(report_m.options,report_m.report, 1," - Lower: $(round(estCost_fl, sigdigits = 8)), Upper: $(round(currentBest_fl, sigdigits = 8)), Optimality gap: $(round(gap_fl, sigdigits = 4))", testErr = false, printErr = false)
 		else
 			produceMessage(report_m.options,report_m.report, 1," - Objective: $(nearOpt_ntup.obj[nOpt_int][1]), Objective value: $(round(nearOptObj_fl, sigdigits = 8)), Feasibility gap: $(round(gap_fl, sigdigits = 4))", testErr = false, printErr = false)
 		end
 		produceMessage(report_m.options,report_m.report, 1," - Time for top: $timeTop_fl Time for sub: $timeSub_fl", testErr = false, printErr = false)
 
 		# write to reporting files
-		etr_arr = Pair{Symbol,Any}[:i => i, :lowCost => lowLim_fl, :bestObj => nOpt_int == 0 ? currentBest_fl : nearOptObj_fl, :gap => gap_fl, :curCost => objTop_fl + objSub_fl,
+		etr_arr = Pair{Symbol,Any}[:i => i, :lowCost => estCost_fl, :bestObj => nOpt_int == 0 ? currentBest_fl : nearOptObj_fl, :gap => gap_fl, :curCost => topCost_fl + subCost_fl,
 						:time_ges => Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60, :time_top => timeTop_fl/60, :time_sub => timeSub_fl/60]
 		
 		if !isempty(meth_tup) # add info about stabilization
@@ -270,18 +274,18 @@ let i = 1, gap = gap, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startS
 		end
 
 		push!(itrReport_df, (;zip(getindex.(etr_arr,1), getindex.(etr_arr,2))...))
-		CSV.write(modOpt_tup.resultDir * "/iterationBenders_$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
+		CSV.write(modOpt_tup.resultDir * "/iterationCuttingPlane_$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
 		
 		# add results for near-optimal solutions
 		
 		if !isempty(nearOpt_ntup)
 			lss_fl = sum(map(x -> sum(value.(sub_dic[x].parts.bal.var[:lss][!,:var])),sub_tup))
-			if nOpt_int == 0 || ((objTop_fl + objSub_fl) <= costOpt_fl * (1 + nearOpt_ntup.cutThres) && lss_fl <= lssOpt_fl * (1 + nearOpt_ntup.lssThres))
+			if nOpt_int == 0 || ((topCost_fl + subCost_fl) <= costOpt_fl * (1 + nearOpt_ntup.cutThres) && lss_fl <= lssOpt_fl * (1 + nearOpt_ntup.lssThres))
 				newRes_df = getCapaResult(top_m)
 				newRes_df[!,:iteration] .= i
-				newRes_df[!,:cost] .= objTop_fl + objSub_fl
+				newRes_df[!,:cost] .= topCost_fl + subCost_fl
 				newRes_df[!,:lss] .= lss_fl
-				if nOpt_int != 0 newRes_df[!,:thrs] .= (objTop_fl + objSub_fl)/costOpt_fl - 1 end
+				if nOpt_int != 0 newRes_df[!,:thrs] .= (topCost_fl + subCost_fl)/costOpt_fl - 1 end
 				append!(nearOpt_df,newRes_df)
 			end
 		end
@@ -310,7 +314,7 @@ let i = 1, gap = gap, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startS
 				currentBest_fl = Inf
 				if !isempty(meth_tup) # reset current best tracking for stabilization
 					stab_obj.objVal = Inf
-					stab_obj.dynPar = [meth_tup[1][2].start]
+					stab_obj.dynPar = writeStabOpt(meth_tup)[3]
 				end 
 				nOpt_int = nOpt_int + 1 # update near-opt counter
 				# adapt the objective and constraint to near-optimal
@@ -369,17 +373,6 @@ end
 
 #endregion
 
-
-
-
-# 2. zfw irgendwann ändern => feasibility gap
-	# bringe basis algorithmus zum laufen
-		# grössenordnung kosten ist off
-		# von oben durchgehen und fixen
-		# überlege anpassung trust-region
-	# passe reporting an
-	# ermögliche verschiedene near-optimal rechnungen
-	# überlege und passe code ggf. für near-optimal ohne qtr an (ggf. nur fehlermeldung)
 
 
 i = 1
