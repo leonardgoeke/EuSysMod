@@ -44,7 +44,7 @@ nearOptOpj_tup = ("tradeOffWind_1" => (:min,((0.0,(variable = :capaConv, system 
 nearOpt_ntup = (cutThres = 0.1, lssThres = 0.05, optThres = 0.05, feasGap = 0.0001, cutDel = 20, obj = nearOptOpj_tup)
 #nearOpt_ntup = tuple()
 
-iniStab = false # initialize stabilizatio
+iniStab = false # initialize stabilization
 srsThr = 0.0 # threshold for serious step
 linStab = (rel = 0.5, abs = 5.0)
 
@@ -81,9 +81,6 @@ scaFacSub_tup = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e1, di
 
 opt_obj = Gurobi.Optimizer # solver option
 
-# structure of subproblems, indicating the year (first integer) and the scenario (second integer)
-sub_tup = tuple(collect((x,y) for x in 1:2, y in 1:scr)...)
-
 # options for different models
 optMod_dic = Dict{Symbol,NamedTuple}()
 
@@ -102,7 +99,11 @@ produceMessage(report_m.options,report_m.report, 1," - Create top model and sub 
 # ! create top-problem
 
 modOpt_tup = optMod_dic[:top]
-top_m = anyModel(modOpt_tup.inputDir, modOpt_tup.resultDir, objName = "topModel" * modOpt_tup.suffix, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, coefRng = modOpt_tup.coefRng, scaFac = modOpt_tup.scaFac, reportLvl = 1, createVI = useVI)
+
+top_m = anyModel(modOpt_tup.inputDir, modOpt_tup.resultDir, objName = "topModel" * modOpt_tup.suffix, lvlFrs = 2, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, coefRng = modOpt_tup.coefRng, scaFac = modOpt_tup.scaFac, reportLvl = 1, createVI = useVI)
+
+sub_tup = tuple([(x.Ts_dis,x.scr) for x in eachrow(top_m.parts.obj.par[:scrProb].data)]...) # get all time-step/scenario combinations
+
 top_m.subPro = tuple(0,0)
 prepareMod!(top_m,opt_obj,t_int)
 
@@ -114,7 +115,7 @@ sub_dic = Dict{Tuple{Int,Int},anyModel}()
 
 for (id,x) in enumerate(sub_tup)
 	# create sub-problem
-	s = anyModel(modOptSub_tup.inputDir, modOptSub_tup.resultDir, objName = "subModel_" * string(id) * modOptSub_tup.suffix, supTsLvl = modOptSub_tup.supTsLvl, shortExp = modOptSub_tup.shortExp, coefRng = modOptSub_tup.coefRng, scaFac = modOptSub_tup.scaFac, reportLvl = 1)
+	s = anyModel(modOptSub_tup.inputDir, modOptSub_tup.resultDir, objName = "subModel_" * string(id) * modOptSub_tup.suffix, lvlFrs = 2, supTsLvl = modOptSub_tup.supTsLvl, shortExp = modOptSub_tup.shortExp, coefRng = modOptSub_tup.coefRng, scaFac = modOptSub_tup.scaFac, reportLvl = 1)
 	s.subPro = x
 	prepareMod!(s,opt_obj,t_int)
 	set_optimizer_attribute(s.optModel, "Threads", t_int)
@@ -122,7 +123,7 @@ for (id,x) in enumerate(sub_tup)
 end
 
 # create seperate variables for costs of subproblems and aggregate them (cannot be part of model creation, because requires information about subproblems) 
-top_m.parts.obj.var[:cut] = map(y -> map(x -> y == 1 ? top_m.supTs.step[sub_tup[x][1]] : sub_tup[x][2], 1:length(sub_tup)),1:2) |> (z -> createVar(DataFrame(Ts_disSup = z[1], scr = z[2]),"subCut",NaN,top_m.optModel,top_m.lock,top_m.sets, scaFac = 1e2))
+top_m.parts.obj.var[:cut] = map(y -> map(x -> y == 1 ? sub_tup[x][1] : sub_tup[x][2], 1:length(sub_tup)),1:2) |> (z -> createVar(DataFrame(Ts_dis = z[1], scr = z[2]),"subCut",NaN,top_m.optModel,top_m.lock,top_m.sets, scaFac = 1e2))
 push!(top_m.parts.obj.cns[:objEqn], (name = :aggCut, cns = @constraint(top_m.optModel, sum(top_m.parts.obj.var[:cut][!,:var]) == filter(x -> x.name == :benders,top_m.parts.obj.var[:objVar])[1,:var])))
 
 #endregion
@@ -142,7 +143,7 @@ if !isempty(meth_tup)
 		reportResults(:summary,top_m)
 		startSol_obj = resData()
 		startSol_obj.objVal = value(top_m.parts.obj.var[:objVar][1,:var])
-		startSol_obj.capa = writeResult(top_m,[:capa,:exp,:mustCapa,:mustExp])
+		startSol_obj.capa, startSol_obj.stLvl = writeResult(top_m,[:capa,:exp,:mustCapa,:mustExp,:stLvl])
 		lowBd_fl = startSol_obj.objVal
 	end
 	# ! solve sub-problems with capacity of heuristic solution to use for creation of cuts in first iteration and to compute corresponding objective value
@@ -153,12 +154,13 @@ if !isempty(meth_tup)
 	startSol_obj.objVal = startSol_obj.objVal + sum(map(x -> x.objVal, values(cutData_dic)))
 	
 	# ! initialize stabilization
-	stab_obj, eleNum_int = stabObj(meth_tup,swt_ntup,startSol_obj.objVal,lowBd_fl,startSol_obj.capa,top_m)
+	stab_obj, eleNum_int = stabObj(meth_tup,swt_ntup,startSol_obj,top_m)
 	centerStab!(stab_obj.method[stab_obj.actMet],stab_obj,top_m)
 	produceMessage(report_m.options,report_m.report, 1," - Initialized stabilization with $eleNum_int variables", testErr = false, printErr = false)
 else
 	stab_obj = nothing
 end
+
 
 #endregion
 
@@ -188,7 +190,7 @@ let i = 1, gap = gap, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startS
 		#region # * solve top-problem 
 
 		startTop = now()
-		capaData_obj, allVal_dic, topCost_fl, estCost_fl = @suppress runTop(top_m,cutData_dic,stab_obj,i); 
+		resData_obj, stabVar_obj, topCost_fl, estCost_fl = @suppress runTop(top_m,cutData_dic,stab_obj,i); 
 		timeTop = now() - startTop
 
 		# get objective value for near-optimal
@@ -199,9 +201,8 @@ let i = 1, gap = gap, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startS
 		#region # * solve of sub-problems 
 		startSub = now()
 		for x in collect(sub_tup)
-			dual_etr = @suppress runSub(sub_dic[x],copy(capaData_obj),:barrier,nOpt_int == 0 ? getConvTol(gap_fl,gap,conSub) : conSub.rng[2])
+			dual_etr = @suppress runSub(sub_dic[x],copy(resData_obj),:barrier,nOpt_int == 0 ? getConvTol(gap_fl,gap,conSub) : conSub.rng[2])
 			cutData_dic[x] = dual_etr
-			
 		end
 		timeSub = now() - startSub
 
@@ -239,7 +240,6 @@ let i = 1, gap = gap, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startS
 			# adjust dynamic parameters of stabilization
 			foreach(i -> adjustDynPar!(stab_obj,top_m,i,adjCtr_boo,estCostNoStab_fl,estCost_fl,currentBest_fl,nOpt_int != 0,report_m), 1:length(stab_obj.method))
 	
-
 			estCost_fl = estCostNoStab_fl # set lower limit for convergence check to lower limit without trust region
 		end
 
@@ -363,18 +363,18 @@ end
 foreach(x -> reportResults(x,top_m), [:summary,:cost])
 	
 # obtain capacities
-capaData_obj = resData()
-capaData_obj.capa = writeResult(top_m,[:capa])
+resData_obj = resData()
+resData_obj.capa = writeResult(top_m,[:capa])
 
 # run sub-problems with optimal values fixed
 for x in collect(sub_tup)
-	runSub(sub_dic[x],copy(capaData_obj),:barrier,1e-8,true)
+	runSub(sub_dic[x],copy(resData_obj),:barrier,1e-8,true)
 end
 
 #endregion
 
 
-
+# debug loop
 i = 1
 gap_fl = 1.0
 currentBest_fl = !isempty(meth_tup) ? startSol_obj.objVal : Inf
@@ -382,3 +382,44 @@ minStep_fl = 0.0
 nOpt_int = 0
 costOpt_fl = Inf
 nearOptObj_fl = Inf
+
+# debug constructor
+anyM = anyModel()
+
+inDir = modOpt_tup.inputDir
+outDir = modOpt_tup.resultDir
+
+objName = "topModel" * modOpt_tup.suffix
+lvlFrs = 2
+
+createVI = useVI
+csvDelim = ","
+interCapa = :linear
+supTsLvl = modOpt_tup.supTsLvl
+shortExp = modOpt_tup.shortExp
+redStep = 1.0
+holdFixed = false
+emissionLoss = true
+forceScr = nothing
+reportLvl = 2
+errCheckLvl = 1
+errWrtLvl = 1
+coefRng = modOpt_tup.coefRng
+scaFac = modOpt_tup.scaFac
+bound = (capa = NaN, disp = NaN, obj = NaN)
+avaMin = 0.01
+checkRng = (print = false, all = true)
+
+anyM.subPro = tuple(0,0)
+
+tSym = :pumpedStorage
+tInt = sysInt(tSym,anyM.sets[:Te])
+part = anyM.parts.tech[tSym]
+prepTech_dic = prepSys_dic[:Te][tSym]
+
+s1 = sub_dic[(3,2)]
+s2 = sub_dic[(9,2)]
+
+s2.parts.tech[:h2Cavern].var[:stLvl]
+
+top_m.parts.tech[:h2Cavern].var[:stLvl]
