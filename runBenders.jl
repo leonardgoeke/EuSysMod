@@ -29,7 +29,11 @@ include(b* "src/dataHandling/util.jl")
 
 include(b* "src/dataHandling/gurobiTools.jl")
 
+#region # * set and write algorithm options
 
+suffix_str = "_test"
+
+# defines stabilization options
 meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
 #meth_tup = (:prx => (start = 0.5, max = 5e0, fac = 2.0),)
 #meth_tup = (:lvl => (la = 0.5,),:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0))
@@ -37,30 +41,32 @@ meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
 #meth_tup = (:box => (low = 0.05, up = 0.05, minUp = 0.5),)
 swt_ntup = (itr = 6, avgImp = 0.2, itrAvg = 4)
 
+iniStab = false # initialize stabilization
+srsThr = 0.0 # threshold for serious step
+
 # defines objectives for near-optimal (can only take top-problem variables, must specify a variable)
 nearOptOpj_tup = ("tradeOffWind_1" => (:min,((0.0,(variable = :capaConv, system = :onshore)),(1.0,(variable = :capaConv, system = :offshore)))),
 					"tradeOffWind_2" => (:min,((0.25,(variable = :capaConv, system = :onshore)),(0.75,(variable = :capaConv, system = :offshore)))))
 
-nearOpt_ntup = (cutThres = 0.1, lssThres = 0.05, optThres = 0.05, feasGap = 0.0001, cutDel = 20, obj = nearOptOpj_tup)
-#nearOpt_ntup = tuple()
-
-iniStab = false # initialize stabilization
-srsThr = 0.0 # threshold for serious step
-linStab = (rel = 0.5, abs = 5.0)
-
-suffix_str = "nearOpt_focus2_noChangeCuts"
+#nearOpt_ntup = (cutThres = 0.1, lssThres = 0.05, optThres = 0.05, feasGap = 0.0001, cutDel = 20, obj = nearOptOpj_tup)
+nearOpt_ntup = tuple()
 
 gap = 0.001
 conSub = (rng = [1e-2,1e-8], int = :log) # range and interpolation method for convergence criteria of subproblems
 useVI = false # use vaild inequalities
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
 
+reportFreq = 1
+
+#endregion
+
+#region # * set and write model options
+
 res = 96
+frs = 2
 scr = 2
 t_int = 4
 dir_str = "C:/Users/lgoeke/git/EuSysMod/"
-
-#region # * set and write options
 
 if !isempty(nearOpt_ntup) && any(getindex.(meth_tup,1) .!= :qtr) error("Near-optimal can only be paired with quadratic stabilization!") end
 
@@ -74,8 +80,8 @@ coefRngTop_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
 coefRngSub_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
 
 scaFacHeu_tup = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
-scaFacTop_tup = (capa = 1e2, capaStSize = 1e1, insCapa = 1e2, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
-scaFacSub_tup = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e1, dispSt = 1e2, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
+scaFacTop_tup = (capa = 1e2, capaStSize = 1e1, insCapa = 1e2, dispConv = 1e3, dispSt = 1e0, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
+scaFacSub_tup = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e1, dispSt = 1e0, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
 
 # ! general input parameters
 
@@ -94,18 +100,18 @@ optMod_dic[:sub] =  (inputDir = inDir_str, resultDir = dir_str * "results", suff
 report_m = @suppress anyModel(String[],optMod_dic[:heu].resultDir, objName = "decomposition" * optMod_dic[:heu].suffix) # creates empty model just for reporting
 
 #region # * create top and sub-problems 
-produceMessage(report_m.options,report_m.report, 1," - Create top model and sub models", testErr = false, printErr = false)
+produceMessage(report_m.options,report_m.report, 1," - Created top-problem and sub-problems", testErr = false, printErr = false)
 
 # ! create top-problem
 
 modOpt_tup = optMod_dic[:top]
 
-top_m = anyModel(modOpt_tup.inputDir, modOpt_tup.resultDir, objName = "topModel" * modOpt_tup.suffix, lvlFrs = 2, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, coefRng = modOpt_tup.coefRng, scaFac = modOpt_tup.scaFac, reportLvl = 1, createVI = useVI)
+top_m = @suppress anyModel(modOpt_tup.inputDir, modOpt_tup.resultDir, objName = "topModel" * modOpt_tup.suffix, lvlFrs = frs, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, coefRng = modOpt_tup.coefRng, scaFac = modOpt_tup.scaFac, reportLvl = 1, createVI = useVI)
 
 sub_tup = tuple([(x.Ts_dis,x.scr) for x in eachrow(top_m.parts.obj.par[:scrProb].data)]...) # get all time-step/scenario combinations
 
 top_m.subPro = tuple(0,0)
-prepareMod!(top_m,opt_obj,t_int)
+@suppress prepareMod!(top_m,opt_obj,t_int)
 
 # ! create sub-problems
 
@@ -115,9 +121,9 @@ sub_dic = Dict{Tuple{Int,Int},anyModel}()
 
 for (id,x) in enumerate(sub_tup)
 	# create sub-problem
-	s = anyModel(modOptSub_tup.inputDir, modOptSub_tup.resultDir, objName = "subModel_" * string(id) * modOptSub_tup.suffix, lvlFrs = 2, supTsLvl = modOptSub_tup.supTsLvl, shortExp = modOptSub_tup.shortExp, coefRng = modOptSub_tup.coefRng, scaFac = modOptSub_tup.scaFac, reportLvl = 1)
+	s = @suppress anyModel(modOptSub_tup.inputDir, modOptSub_tup.resultDir, objName = "subModel_" * string(id) * modOptSub_tup.suffix, lvlFrs = frs, supTsLvl = modOptSub_tup.supTsLvl, shortExp = modOptSub_tup.shortExp, coefRng = modOptSub_tup.coefRng, scaFac = modOptSub_tup.scaFac, reportLvl = 1)
 	s.subPro = x
-	prepareMod!(s,opt_obj,t_int)
+	@suppress prepareMod!(s,opt_obj,t_int)
 	set_optimizer_attribute(s.optModel, "Threads", t_int)
 	sub_dic[x] = s
 end
@@ -125,6 +131,8 @@ end
 # create seperate variables for costs of subproblems and aggregate them (cannot be part of model creation, because requires information about subproblems) 
 top_m.parts.obj.var[:cut] = map(y -> map(x -> y == 1 ? sub_tup[x][1] : sub_tup[x][2], 1:length(sub_tup)),1:2) |> (z -> createVar(DataFrame(Ts_dis = z[1], scr = z[2]),"subCut",NaN,top_m.optModel,top_m.lock,top_m.sets, scaFac = 1e2))
 push!(top_m.parts.obj.cns[:objEqn], (name = :aggCut, cns = @constraint(top_m.optModel, sum(top_m.parts.obj.var[:cut][!,:var]) == filter(x -> x.name == :benders,top_m.parts.obj.var[:objVar])[1,:var])))
+
+produceMessage(report_m.options,report_m.report, 1," - Finished creation of problems", testErr = false, printErr = false)
 
 #endregion
 
@@ -161,7 +169,6 @@ else
 	stab_obj = nothing
 end
 
-
 #endregion
 
 #region # * run benders iteration
@@ -169,20 +176,26 @@ end
 # initialize loop variables
 itrReport_df = DataFrame(i = Int[], lowCost = Float64[], bestObj = Float64[], gap = Float64[], curCost = Float64[], time_ges = Float64[], time_top = Float64[], time_sub = Float64[])
 
-if !isempty(meth_tup)
-	itrReport_df[!,:actMethod] = Symbol[]
-	foreach(x -> itrReport_df[!,Symbol("dynPar_",x)] = Float64[], stab_obj.method)
-end
-
-if !isempty(nearOpt_ntup)
-	nearOpt_df = DataFrame(iteration = Int[], timestep = String[], region = String[], system = String[], id = String[], capacity_variable = Symbol[], capacity_value = Float64[], cost = Float64[], lss = Float64[])
-	itrReport_df[!,:objective] = String[]
-	nOpt_int = 0
-end
-
 nameStab_dic = Dict(:lvl => "level bundle",:qtr => "quadratic trust-region", :prx => "proximal bundle", :box => "box-step method")
 
 let i = 1, gap = gap, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startSol_obj.objVal : Inf, minStep_fl = 0.0, nOpt_int = 0, costOpt_fl = Inf, lssOpt_fl = Inf, nearOptObj_fl = Inf
+	
+	if top_m.options.lvlFrs != 0
+		stReport_df = DataFrame(iteration = Int[], timestep_superordinate_expansion = String[], timestep_superordinate_dispatch = String[], timestep_dispatch = String[], region_dispatch = String[], carrier = String[],
+				technology = String[], mode = String[], scenario = String[], id = String[], value = Float64[])
+	end
+	
+	if !isempty(meth_tup)
+		itrReport_df[!,:actMethod] = Symbol[]
+		foreach(x -> itrReport_df[!,Symbol("dynPar_",x)] = Float64[], stab_obj.method)
+	end
+	
+	if !isempty(nearOpt_ntup)
+		nearOpt_df = DataFrame(iteration = Int[], timestep = String[], region = String[], system = String[], id = String[], capacity_variable = Symbol[], capacity_value = Float64[], cost = Float64[], lss = Float64[])
+		itrReport_df[!,:objective] = String[]
+		nOpt_int = 0
+	end
+	
 	while true
 
 		produceMessage(report_m.options,report_m.report, 1," - Started iteration $i", testErr = false, printErr = false)
@@ -208,13 +221,24 @@ let i = 1, gap = gap, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startS
 
 		#endregion
 
-		#region # * adjust refinements
+		#region # * check results
 
 		# ! get objective of sub-problems, current best solution and current error of cutting plane
 		expStep_fl = nOpt_int == 0 ? (currentBest_fl - estCost_fl) : 0.0 # expected step size
 		subCost_fl = sum(map(x -> x.objVal, values(cutData_dic))) # objective of sub-problems
 		currentBest_fl = min(nOpt_int == 0 ? (topCost_fl + subCost_fl) : (subCost_fl - (estCost_fl - topCost_fl)), currentBest_fl) # current best value
 
+		# reporting on current results
+		if top_m.options.lvlFrs != 0 && i%reportFreq == 0 
+			stReport_df = writeStLvlRes(top_m,sub_dic,sub_tup,i,stReport_df) 
+		end
+		
+		if !isempty(nearOpt_ntup) nearOpt_df, lss_fl = writeCapaRes(top_m,sub_dic,sub_tup,nearOpt_df,i,nOpt_int,nearOpt_ntup,topCost_fl,subCost_fl,costOpt_fl,lssOpt_fl) end
+
+		#endregion
+
+		#region # * adjust refinements
+		
 		# ! delete cuts that not were binding for the defined number of iterations
 		try
 			deleteCuts!(top_m, nOpt_int == 0 ? delCut : nearOpt_ntup.cutDel,i)
@@ -228,7 +252,7 @@ let i = 1, gap = gap, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startS
 			# adjust center of stabilization 
 			adjCtr_boo = false
 			if currentBest_fl < stab_obj.objVal - srsThr * expStep_fl
-				stab_obj.var = filterStabVar(allVal_dic,top_m)
+				stab_obj.var = filterStabVar(stabVar_obj.capa,stabVar_obj.stLvl,top_m)
 				stab_obj.objVal = currentBest_fl
 				adjCtr_boo = true
 				produceMessage(report_m.options,report_m.report, 1," - Updated reference point for stabilization!", testErr = false, printErr = false)
@@ -245,7 +269,7 @@ let i = 1, gap = gap, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startS
 
 		#endregion
 
-		#region # * result reporting
+		#region # * report on iteration
 
 		# computes optimality gap for cost minimization and feasibility gap for near-optimal
 		gap_fl = nOpt_int > 0 ? abs(currentBest_fl / costOpt_fl) : (1 - estCost_fl/currentBest_fl)
@@ -274,22 +298,11 @@ let i = 1, gap = gap, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startS
 		end
 
 		push!(itrReport_df, (;zip(getindex.(etr_arr,1), getindex.(etr_arr,2))...))
-		CSV.write(modOpt_tup.resultDir * "/iterationCuttingPlane_$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
-		
-		# add results for near-optimal solutions
-		
-		if !isempty(nearOpt_ntup)
-			lss_fl = sum(map(x -> sum(value.(sub_dic[x].parts.bal.var[:lss][!,:var])),sub_tup))
-			if nOpt_int == 0 || ((topCost_fl + subCost_fl) <= costOpt_fl * (1 + nearOpt_ntup.cutThres) && lss_fl <= lssOpt_fl * (1 + nearOpt_ntup.lssThres))
-				newRes_df = getCapaResult(top_m)
-				newRes_df[!,:iteration] .= i
-				newRes_df[!,:cost] .= topCost_fl + subCost_fl
-				newRes_df[!,:lss] .= lss_fl
-				if nOpt_int != 0 newRes_df[!,:thrs] .= (topCost_fl + subCost_fl)/costOpt_fl - 1 end
-				append!(nearOpt_df,newRes_df)
-			end
+		if i%reportFreq == 0 
+			CSV.write(modOpt_tup.resultDir * "/iterationCuttingPlane_$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
+			if !isempty(nearOpt_ntup) CSV.write(modOpt_tup.resultDir * "/nearOptSol_$(replace(top_m.options.objName,"topModel" => "")).csv",  nearOpt_df) end
 		end
-
+		
 		#endregion
 		
 		#region # * check convergence and adapt stabilization	
@@ -322,7 +335,7 @@ let i = 1, gap = gap, gap_fl = 1.0, currentBest_fl = !isempty(meth_tup) ? startS
 				produceMessage(report_m.options,report_m.report, 1," - Switched to near-optimal for $(nearOpt_ntup.obj[nOpt_int][1])", testErr = false, printErr = false)
 			else
 				produceMessage(report_m.options,report_m.report, 1," - Finished iteration!", testErr = false, printErr = false)
-				break
+				#break
 			end
 		end
 
@@ -360,11 +373,11 @@ end
 #region # * write final results and clean up
 
 # run top-problem with optimal values fixed
-foreach(x -> reportResults(x,top_m), [:summary,:cost])
+foreach(x -> reportResults(x,top_m), [:summary,:cost,:exchange])
 	
 # obtain capacities
 resData_obj = resData()
-resData_obj.capa = writeResult(top_m,[:capa])
+resData_obj.capa, resData_obj.stLvl = writeResult(top_m,[:capa,:stLvl])
 
 # run sub-problems with optimal values fixed
 for x in collect(sub_tup)
@@ -382,44 +395,3 @@ minStep_fl = 0.0
 nOpt_int = 0
 costOpt_fl = Inf
 nearOptObj_fl = Inf
-
-# debug constructor
-anyM = anyModel()
-
-inDir = modOpt_tup.inputDir
-outDir = modOpt_tup.resultDir
-
-objName = "topModel" * modOpt_tup.suffix
-lvlFrs = 2
-
-createVI = useVI
-csvDelim = ","
-interCapa = :linear
-supTsLvl = modOpt_tup.supTsLvl
-shortExp = modOpt_tup.shortExp
-redStep = 1.0
-holdFixed = false
-emissionLoss = true
-forceScr = nothing
-reportLvl = 2
-errCheckLvl = 1
-errWrtLvl = 1
-coefRng = modOpt_tup.coefRng
-scaFac = modOpt_tup.scaFac
-bound = (capa = NaN, disp = NaN, obj = NaN)
-avaMin = 0.01
-checkRng = (print = false, all = true)
-
-anyM.subPro = tuple(0,0)
-
-tSym = :pumpedStorage
-tInt = sysInt(tSym,anyM.sets[:Te])
-part = anyM.parts.tech[tSym]
-prepTech_dic = prepSys_dic[:Te][tSym]
-
-s1 = sub_dic[(3,2)]
-s2 = sub_dic[(9,2)]
-
-s2.parts.tech[:h2Cavern].var[:stLvl]
-
-top_m.parts.tech[:h2Cavern].var[:stLvl]
