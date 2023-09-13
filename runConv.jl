@@ -29,7 +29,7 @@ set_optimizer_attribute(convM.optModel, "Threads",t_int);
 
 optimize!(convM.optModel)
 
-objective_value(convM.optModel) # 51118.20748213092
+objective_value(convM.optModel)
 
 reportResults(:cost,convM)
 reportResults(:summary,convM)
