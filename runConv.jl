@@ -29,10 +29,15 @@ set_optimizer_attribute(convM.optModel, "Threads",t_int);
 
 optimize!(convM.optModel)
 
-objective_value(convM.optModel)
+objective_value(convM.optModel) # 51.1735553e
+
+
 
 reportResults(:cost,convM)
 reportResults(:summary,convM)
 reportResults(:exchange,convM)
 
-convM.parts.tech[:reservoir].balSign
+reportTimeSeries(:electricity,convM)
+
+
+# write stress indicator
