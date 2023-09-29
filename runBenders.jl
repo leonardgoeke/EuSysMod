@@ -31,7 +31,7 @@ include(b* "src/dataHandling/gurobiTools.jl")
 
 #region # * set and write algorithm options withVI_normalStab
 
-suffix_str = "withVI_onlyCapaStab_allFrs_noDeg"
+suffix_str = "withVI_weightStab1Num1_allFrs_noDeg"
 
 # defines stabilization options
 meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
@@ -41,8 +41,10 @@ meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
 swt_ntup = (itr = 6, avgImp = 0.2, itrAvg = 4)
 #meth_tup = tuple()
 
+weight_ntup = (capa = 1.0, capaStSize = 1e-1, stLvl = 1e-2) # weight of variables in stabilization (-> small value for variables with large numbers to equalize)
 iniStab = false # initialize stabilization
 srsThr = 0.0 # threshold for serious step
+addVio = 1e4
 
 # defines objectives for near-optimal (can only take top-problem variables, must specify a variable)
 nearOptOpj_tup = ("tradeOffWind_1" => (:min,((0.0,(variable = :capaConv, system = :onshore)),(1.0,(variable = :capaConv, system = :offshore)))),
@@ -147,7 +149,6 @@ if !isempty(meth_tup)
 		lowBd_fl = value(heu_m.parts.obj.var[:objVar][1,:var])
 	else
 		@suppress optimize!(top_m.optModel)
-		reportResults(:summary,top_m)
 		startSol_obj = resData()
 		startSol_obj.objVal = value(top_m.parts.obj.var[:objVar][1,:var])
 		startSol_obj.capa, startSol_obj.stLvl = writeResult(top_m,[:capa,:exp,:mustCapa,:mustExp,:stLvl])
@@ -161,8 +162,8 @@ if !isempty(meth_tup)
 	startSol_obj.objVal = startSol_obj.objVal + sum(map(x -> x.objVal, values(cutData_dic)))
 	
 	# ! initialize stabilization
-	stab_obj, eleNum_int = stabObj(meth_tup,swt_ntup,startSol_obj,top_m)
-	centerStab!(stab_obj.method[stab_obj.actMet],stab_obj,top_m)
+	stab_obj, eleNum_int = stabObj(meth_tup,swt_ntup,weight_ntup,startSol_obj,addVio,top_m)
+	centerStab!(stab_obj.method[stab_obj.actMet],stab_obj,top_m,report_m)
 	produceMessage(report_m.options,report_m.report, 1," - Initialized stabilization with $eleNum_int variables", testErr = false, printErr = false)
 else
 	stab_obj = nothing
@@ -210,10 +211,10 @@ while true
 
 	produceMessage(report_m.options,report_m.report, 1," - Started iteration $i", testErr = false, printErr = false)
 
-	#region # * solve top-problem 
+	#region # * solve top-problem   @suppress 
 
 	startTop = now()
-	resData_obj, stabVar_obj, topCost_fl, estCost_fl = @suppress runTop(top_m,cutData_dic,stab_obj,i); 
+	resData_obj, stabVar_obj, topCost_fl, estCost_fl = runTop(top_m,cutData_dic,stab_obj,i); 
 	timeTop = now() - startTop
 
 	# get objective value for near-optimal
@@ -222,9 +223,9 @@ while true
 	#endregion
 	
 	#region # * solve of sub-problems  
-	startSub = now()
+	startSub = now() # 
 	for x in collect(sub_tup)
-		dual_etr = @suppress runSub(sub_dic[x],copy(resData_obj),:barrier,nOpt_int == 0 ? getConvTol(gap_fl,gap,conSub) : conSub.rng[2])
+		dual_etr = runSub(sub_dic[x],copy(resData_obj),:barrier,nOpt_int == 0 ? getConvTol(gap_fl,gap,conSub) : conSub.rng[2])
 		cutData_dic[x] = dual_etr
 	end
 	timeSub = now() - startSub
@@ -254,11 +255,7 @@ while true
 	#region # * adjust refinements
 	
 	# ! delete cuts that not were binding for the defined number of iterations
-	try
-		deleteCuts!(top_m, nOpt_int == 0 ? delCut : nearOpt_ntup.cutDel,i)
-	catch
-		produceMessage(report_m.options,report_m.report, 1," - Skipped deletion of inactive cuts due to numerical problems", testErr = false, printErr = false)
-	end
+	deleteCuts!(top_m, nOpt_int == 0 ? delCut : nearOpt_ntup.cutDel,i)
 	
 	# ! adapt center and parameter for stabilization
 	if !isempty(meth_tup)
@@ -266,7 +263,7 @@ while true
 		# adjust center of stabilization 
 		adjCtr_boo = false
 		if best_obj.objVal < stab_obj.objVal - srsThr * expStep_fl
-			stab_obj.var = filterStabVar(stabVar_obj.capa,stabVar_obj.stLvl,top_m)
+			stab_obj.var = filterStabVar(stabVar_obj.capa,stabVar_obj.stLvl,stab_obj.weight,top_m)
 			stab_obj.objVal = best_obj.objVal
 			adjCtr_boo = true
 			produceMessage(report_m.options,report_m.report, 1," - Updated reference point for stabilization!", testErr = false, printErr = false)
@@ -366,7 +363,7 @@ while true
 		end
 
 		# update stabilization method
-		centerStab!(stab_obj.method[stab_obj.actMet],stab_obj,top_m)
+		centerStab!(stab_obj.method[stab_obj.actMet],stab_obj,top_m,report_m)
 	end
 
 	#endregion
@@ -396,5 +393,18 @@ end
 
 #endregion
 
+optimize!(top_m.optModel)
+printIIS(top_m)
 
+anyM = s
 
+s = sub_dic[(7,2)]
+
+printObject(s.parts.tech[:pumpedStorage].cns[:stBal],s)
+
+tSym = :pumpedStorage
+tInt = sysInt(tSym,anyM.sets[:Te])
+part = anyM.parts.tech[tSym]
+prepTech_dic = prepSys_dic[:Te][tSym]
+
+printObject(top_m.parts.tech[:pumpedStorage].cns[:stSizeRestr],top_m)

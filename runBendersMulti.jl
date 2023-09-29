@@ -91,7 +91,7 @@ suffix_str = "_method_" * string(method) * "_switch_" * string(switch) * "_ini_"
 # ! intermediate definitions of parameters
 
 #suffix_str = "_" * string(method) * "_" * string(res) * "_s" * string(scr) * "_rad" * string(rad) * "_shr" * string(shr) * "_" * (useVI ? "withVI" : "withoutVI") * "_noBuy"
-inDir_str = [dir_str * "_basis",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"] # input directory
+inDir_arr = [dir_str * "_basis",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"] # input directory
 
 coefRngHeu_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
 coefRngTop_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
@@ -112,9 +112,9 @@ sub_tup = tuple(collect((x,y) for x in 1:2, y in 1:scr)...)
 optMod_dic = Dict{Symbol,NamedTuple}()
 
 # options for model generation 
-optMod_dic[:heu] =  (inputDir = inDir_str, resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 1, shortExp = 10, coefRng = coefRngHeu_tup, scaFac = scaFacHeu_tup)
-optMod_dic[:top] =  (inputDir = inDir_str, resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 1, shortExp = 10, coefRng = coefRngTop_tup, scaFac = scaFacTop_tup)
-optMod_dic[:sub] =  (inputDir = inDir_str, resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 1, shortExp = 10, coefRng = coefRngSub_tup, scaFac = scaFacSub_tup)
+optMod_dic[:heu] =  (inputDir = inDir_arr, resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 1, shortExp = 10, coefRng = coefRngHeu_tup, scaFac = scaFacHeu_tup)
+optMod_dic[:top] =  (inputDir = inDir_arr, resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 1, shortExp = 10, coefRng = coefRngTop_tup, scaFac = scaFacTop_tup)
+optMod_dic[:sub] =  (inputDir = inDir_arr, resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 1, shortExp = 10, coefRng = coefRngSub_tup, scaFac = scaFacSub_tup)
 
 #endregion
 
