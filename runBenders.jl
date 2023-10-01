@@ -31,20 +31,20 @@ include(b* "src/dataHandling/gurobiTools.jl")
 
 #region # * set and write algorithm options withVI_normalStab
 
-suffix_str = "withVI_weightStab1Num1_allFrs_noDeg"
+suffix_str = "withVI_weightStab1Num1Lvl_onlyRes_minSpillAllDisMitCrt_iniStab"
 
 # defines stabilization options
 meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
 #meth_tup = (:prx => (start = 0.5, max = 5e0, fac = 2.0),)
-#meth_tup = (:lvl => (la = 0.5,),:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0))
+#meth_tup = (:lvl => (la = 0.5,),)
 #meth_tup = (:box => (low = 0.05, up = 0.05, minUp = 0.5),)
 swt_ntup = (itr = 6, avgImp = 0.2, itrAvg = 4)
 #meth_tup = tuple()
 
 weight_ntup = (capa = 1.0, capaStSize = 1e-1, stLvl = 1e-2) # weight of variables in stabilization (-> small value for variables with large numbers to equalize)
-iniStab = false # initialize stabilization
+iniStab = true # initialize stabilization
 srsThr = 0.0 # threshold for serious step
-addVio = 1e4
+solOpt = (dbInf = true, numFoc = 1, addVio = 1e4) # options for solving top problem
 
 # defines objectives for near-optimal (can only take top-problem variables, must specify a variable)
 nearOptOpj_tup = ("tradeOffWind_1" => (:min,((0.0,(variable = :capaConv, system = :onshore)),(1.0,(variable = :capaConv, system = :offshore)))),
@@ -122,7 +122,7 @@ sub_dic = Dict{Tuple{Int,Int},anyModel}()
 
 for (id,x) in enumerate(sub_tup)
 	# create sub-problem
-	s = @suppress anyModel(modOptSub_tup.inputDir, modOptSub_tup.resultDir, objName = "subModel_" * string(id) * modOptSub_tup.suffix, lvlFrs = frs, supTsLvl = modOptSub_tup.supTsLvl, shortExp = modOptSub_tup.shortExp, coefRng = modOptSub_tup.coefRng, scaFac = modOptSub_tup.scaFac, reportLvl = 1)
+	s = @suppress anyModel(modOptSub_tup.inputDir, modOptSub_tup.resultDir, objName = "subModel_" * string(id) * modOptSub_tup.suffix, lvlFrs = frs, supTsLvl = modOptSub_tup.supTsLvl, shortExp = modOptSub_tup.shortExp, coefRng = modOptSub_tup.coefRng, scaFac = modOptSub_tup.scaFac, dbInf = solOpt.dbInf, reportLvl = 1)
 	s.subPro = x
 	@suppress prepareMod!(s,opt_obj,t_int)
 	set_optimizer_attribute(s.optModel, "Threads", t_int)
@@ -162,8 +162,8 @@ if !isempty(meth_tup)
 	startSol_obj.objVal = startSol_obj.objVal + sum(map(x -> x.objVal, values(cutData_dic)))
 	
 	# ! initialize stabilization
-	stab_obj, eleNum_int = stabObj(meth_tup,swt_ntup,weight_ntup,startSol_obj,addVio,top_m)
-	centerStab!(stab_obj.method[stab_obj.actMet],stab_obj,top_m,report_m)
+	stab_obj, eleNum_int = stabObj(meth_tup,swt_ntup,weight_ntup,startSol_obj,lowBd_fl,top_m)
+	centerStab!(stab_obj.method[stab_obj.actMet],stab_obj,solOpt.addVio,top_m,report_m)
 	produceMessage(report_m.options,report_m.report, 1," - Initialized stabilization with $eleNum_int variables", testErr = false, printErr = false)
 else
 	stab_obj = nothing
@@ -211,10 +211,10 @@ while true
 
 	produceMessage(report_m.options,report_m.report, 1," - Started iteration $i", testErr = false, printErr = false)
 
-	#region # * solve top-problem   @suppress 
+	#region # * solve top-problem 
 
 	startTop = now()
-	resData_obj, stabVar_obj, topCost_fl, estCost_fl = runTop(top_m,cutData_dic,stab_obj,i); 
+	resData_obj, stabVar_obj, topCost_fl, estCost_fl = runTop(top_m,cutData_dic,stab_obj,solOpt.numFoc,i); 
 	timeTop = now() - startTop
 
 	# get objective value for near-optimal
@@ -223,7 +223,7 @@ while true
 	#endregion
 	
 	#region # * solve of sub-problems  
-	startSub = now() # 
+	startSub = now()
 	for x in collect(sub_tup)
 		dual_etr = runSub(sub_dic[x],copy(resData_obj),:barrier,nOpt_int == 0 ? getConvTol(gap_fl,gap,conSub) : conSub.rng[2])
 		cutData_dic[x] = dual_etr
@@ -338,7 +338,7 @@ while true
 			best_obj.objVal = Inf
 			if !isempty(meth_tup) # reset current best tracking for stabilization
 				stab_obj.objVal = Inf
-				stab_obj.dynPar = writeStabOpt(meth_tup)[3]
+				stab_obj.dynPar = writeStabOpt(meth_tup,estCost_fl,best_obj.objVal)[3]
 			end 
 			nOpt_int = nOpt_int + 1 # update near-opt counter
 			# adapt the objective and constraint to near-optimal
@@ -363,7 +363,7 @@ while true
 		end
 
 		# update stabilization method
-		centerStab!(stab_obj.method[stab_obj.actMet],stab_obj,top_m,report_m)
+		centerStab!(stab_obj.method[stab_obj.actMet],stab_obj,solOpt.addVio,top_m,report_m)
 	end
 
 	#endregion
@@ -392,19 +392,3 @@ for x in collect(sub_tup)
 end
 
 #endregion
-
-optimize!(top_m.optModel)
-printIIS(top_m)
-
-anyM = s
-
-s = sub_dic[(7,2)]
-
-printObject(s.parts.tech[:pumpedStorage].cns[:stBal],s)
-
-tSym = :pumpedStorage
-tInt = sysInt(tSym,anyM.sets[:Te])
-part = anyM.parts.tech[tSym]
-prepTech_dic = prepSys_dic[:Te][tSym]
-
-printObject(top_m.parts.tech[:pumpedStorage].cns[:stSizeRestr],top_m)
