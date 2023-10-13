@@ -34,9 +34,9 @@ include(b* "src/dataHandling/gurobiTools.jl")
 suffix_str = "withVI_weightStab1Num1Lvl_onlyRes_minSpillAllDisMitCrt_iniStab"
 
 # defines stabilization options
-#meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
-meth_tup = (:prx => (start = 1.0, a = 4., min = 0.001, ),)
-#meth_tup = (:lvl => (la = 0.5,mu_max=1.0),)
+meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
+#meth_tup = (:prx => (start = 1.0, a = 4., min = 0.001, ),)
+#meth_tup = (:lvl => (la = 0.6,mu_max=5.0),)
 #meth_tup = (:box => (low = 0.05, up = 0.05, minUp = 0.5),)
 swt_ntup = (itr = 6, avgImp = 0.2, itrAvg = 4)
 #meth_tup = tuple()
@@ -209,7 +209,7 @@ null_step_count = 0
 serious_step_count = 0
 	
 # iteration algorithm
-while i<100#true
+while true
 
 	produceMessage(report_m.options,report_m.report, 1," - Started iteration $i", testErr = false, printErr = false)
 
