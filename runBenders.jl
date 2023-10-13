@@ -38,7 +38,8 @@ meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
 #meth_tup = (:prx => (start = 1.0, a = 4., min = 0.001, ),)
 #meth_tup = (:lvl => (la = 0.6,mu_max=5.0),)
 #meth_tup = (:box => (low = 0.05, up = 0.05, minUp = 0.5),)
-swt_ntup = (itr = 6, avgImp = 0.2, itrAvg = 4)
+#meth_tup = (:dsb => (start = 10.0, min = 1e-2, la = 0.5, mu_max = 100.0),)
+swt_ntup = (itr = 6, avgImp = 0.5, itrAvg = 4)
 #meth_tup = tuple()
 
 weight_ntup = (capa = 1.0, capaStSize = 1e-1, stLvl = 1e-2) # weight of variables in stabilization (-> small value for variables with large numbers to equalize)
@@ -264,13 +265,10 @@ while true
 	# ! adapt center and parameter for stabilization
 	if !isempty(meth_tup)
 		
-		# adjust center of stabilization 
+		# determine serious step 
 		adjCtr_boo = false
 		if best_obj.objVal < stab_obj.objVal - srsThr * expStep_fl
-			stab_obj.var = filterStabVar(stabVar_obj.capa,stabVar_obj.stLvl,stab_obj.weight,top_m)
-			stab_obj.objVal = best_obj.objVal
 			adjCtr_boo = true
-			produceMessage(report_m.options,report_m.report, 1," - Updated reference point for stabilization!", testErr = false, printErr = false)
 		end
 
 		null_step_count = adjCtr_boo ? 0 : null_step_count + 1
@@ -281,6 +279,13 @@ while true
 
 		# adjust dynamic parameters of stabilization
 		foreach(i -> adjustDynPar!(stab_obj,top_m,i,adjCtr_boo,serious_step_count,null_step_count,level_dual,estCostNoStab_fl,estCost_fl,best_obj.objVal,currentCost,nOpt_int != 0,report_m), 1:length(stab_obj.method))
+
+		# update center of stabilisation
+		if adjCtr_boo
+			stab_obj.var = filterStabVar(stabVar_obj.capa,stabVar_obj.stLvl,stab_obj.weight,top_m)
+			stab_obj.objVal = best_obj.objVal
+			produceMessage(report_m.options,report_m.report, 1," - Updated reference point for stabilization!", testErr = false, printErr = false)
+		end
 
 		estCost_fl = estCostNoStab_fl # set lower limit for convergence check to lower limit without trust region
 	end
