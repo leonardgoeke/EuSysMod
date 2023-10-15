@@ -9,260 +9,275 @@
 #$ -m bae
 #$ -M lgo@wip.tu-berlin.de
 
-#qsub -t 1 -v method='0' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
 
-#qsub -t 2 -v method='1' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 1 -v method='box_1' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 3 -v method='2' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 2 -v method='box_2' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 4 -v method='3' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 3 -v method='box_3' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 5 -v method='0' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 4 -v method='box_4' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 6 -v method='1' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 5 -v method='qtr_1' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 7 -v method='2' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 6 -v method='qtr_2' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 8 -v method='3' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 7 -v method='qtr_3' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 9 -v method='4' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 8 -v method='qtr_4' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 10 -v method='5' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 9 -v method='qtr_5' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 11 -v method='6' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 10 -v method='lvl_1' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 12 -v method='7' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 11 -v method='lvl_2' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 13 -v method='4' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 12 -v method='lvl_3' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 14 -v method='5' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 13 -v method='lvl_4' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 15 -v method='6' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 14 -v method='lvl_5' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 16 -v method='7' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 15 -v method='lvl_6' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 17 -v method='8' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 16 -v method='lvl_7' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 18 -v method='9' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 17 -v method='lvl_8' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 19 -v method='10' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 18 -v method='lvl_9' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 20 -v method='11' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 19 -v method='prx1_1' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 21 -v method='8' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 20 -v method='prx1_2' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 22 -v method='9' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 21 -v method='prx1_3' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 23 -v method='10' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 22 -v method='prx1_4' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 24 -v method='11' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 23 -v method='prx1_5' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 25 -v method='12' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 24 -v method='prx1_6' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 26 -v method='13' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 25 -v method='prx1_7' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 27 -v method='12' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 26 -v method='prx1_8' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 28 -v method='13' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 27 -v method='prx1_9' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 29 -v method='14' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 28 -v method='prx1_10' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 30 -v method='15' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 29 -v method='prx1_11' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 31 -v method='14' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 30 -v method='prx1_12' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 32 -v method='15' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 31 -v method='prx1_13' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 33 -v method='16' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 32 -v method='prx1_14' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 34 -v method='16' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 33 -v method='prx1_15' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 35 -v method='3' -v switch='1' -v ini='false' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 34 -v method='prx1_16' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 36 -v method='6' -v switch='1' -v ini='false' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 35 -v method='prx1_17' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 37 -v method='15' -v switch='1' -v ini='false' -v conv='log' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 36 -v method='prx1_18' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 38 -v method='3' -v switch='1' -v ini='false' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 37 -v method='prx1_19' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 39 -v method='6' -v switch='1' -v ini='false' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 38 -v method='prx1_20' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 40 -v method='15' -v switch='1' -v ini='false' -v conv='log' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 39 -v method='prx1_21' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 41 -v method='3' -v switch='1' -v ini='false' -v conv='log' -v vi='false' -v scr='6' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 40 -v method='prx1_22' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 42 -v method='3' -v switch='1' -v ini='false' -v conv='log' -v vi='false' -v scr='8' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 41 -v method='prx1_23' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 43 -v method='6' -v switch='1' -v ini='false' -v conv='log' -v vi='false' -v scr='6' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 42 -v method='prx1_24' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 44 -v method='6' -v switch='1' -v ini='false' -v conv='log' -v vi='false' -v scr='8' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 43 -v method='prx1_25' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 45 -v method='3' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='6' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 44 -v method='prx1_26' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 46 -v method='3' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='8' -v ram='16' startBendersOnly4_16.job
-#sleep 600
+qsub -t 45 -v method='prx1_27' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='4' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 47 -v method='3' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='10' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 46 -v method='box_1' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 48 -v method='3' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='12' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 47 -v method='box_2' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 49 -v method='3' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='14' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 48 -v method='box_3' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 50 -v method='6' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='6' -v ram='16' startBendersOnly4_16.job
-#sleep 600
+qsub -t 49 -v method='box_4' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 51 -v method='6' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='8' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 50 -v method='qtr_1' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 52 -v method='6' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='10' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 51 -v method='qtr_2' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 53 -v method='6' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='12' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 52 -v method='qtr_3' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 54 -v method='6' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='14' -v ram='16' startBendersOnly4_16.job
-#sleep 600
+qsub -t 53 -v method='qtr_4' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 55 -v method='3' -v switch='1' -v ini='true' -v conv='log' -v vi='true' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 600
+qsub -t 54 -v method='qtr_5' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 56 -v method='3' -v switch='1' -v ini='true' -v conv='log' -v vi='true' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 600
+qsub -t 55 -v method='lvl_1' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 57 -v method='3' -v switch='1' -v ini='true' -v conv='log' -v vi='true' -v scr='6' -v ram='16' startBendersOnly4_16.job
-#sleep 600
+qsub -t 56 -v method='lvl_2' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 58 -v method='6' -v switch='1' -v ini='true' -v conv='log' -v vi='true' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 600
+qsub -t 57 -v method='lvl_3' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 59 -v method='6' -v switch='1' -v ini='true' -v conv='log' -v vi='true' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 600
+qsub -t 58 -v method='lvl_4' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 60 -v method='6' -v switch='1' -v ini='true' -v conv='log' -v vi='true' -v scr='6' -v ram='16' startBendersOnly4_16.job
-#sleep 600
+qsub -t 59 -v method='lvl_5' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 61 -v method='3' -v switch='1' -v ini='true' -v conv='lin' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 60 -v method='lvl_6' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 62 -v method='3' -v switch='1' -v ini='true' -v conv='lin' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 61 -v method='lvl_7' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 63 -v method='3' -v switch='1' -v ini='true' -v conv='lin' -v vi='false' -v scr='6' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 62 -v method='lvl_8' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 64 -v method='6' -v switch='1' -v ini='true' -v conv='lin' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 63 -v method='lvl_9' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 65 -v method='6' -v switch='1' -v ini='true' -v conv='lin' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 64 -v method='prx1_1' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 66 -v method='6' -v switch='1' -v ini='true' -v conv='lin' -v vi='false' -v scr='6' -v ram='16' startBendersOnly4_16.job
-#sleep 600
+qsub -t 65 -v method='prx1_2' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 67 -v method='3' -v switch='1' -v ini='true' -v conv='exp' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 66 -v method='prx1_3' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 68 -v method='3' -v switch='1' -v ini='true' -v conv='exp' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 67 -v method='prx1_4' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 69 -v method='3' -v switch='1' -v ini='true' -v conv='exp' -v vi='false' -v scr='6' -v ram='16' startBendersOnly4_16.job
-#sleep 600
+qsub -t 68 -v method='prx1_5' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 70 -v method='6' -v switch='1' -v ini='true' -v conv='exp' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 69 -v method='prx1_6' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 71 -v method='6' -v switch='1' -v ini='true' -v conv='exp' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 70 -v method='prx1_7' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 72 -v method='6' -v switch='1' -v ini='true' -v conv='exp' -v vi='false' -v scr='6' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 71 -v method='prx1_8' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 73 -v method='3' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='16' -v ram='16' startBendersOnly4_16.job
-#sleep 600
+qsub -t 72 -v method='prx1_9' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 74 -v method='6' -v switch='1' -v ini='true' -v conv='log' -v vi='false' -v scr='16' -v ram='16' startBendersOnly4_16.job
-#sleep 300
+qsub -t 73 -v method='prx1_10' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 75 -v method='3' -v switch='1' -v ini='false' -v conv='log' -v vi='true' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 600
+qsub -t 74 -v method='prx1_11' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 76 -v method='3' -v switch='1' -v ini='false' -v conv='log' -v vi='true' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 600
+qsub -t 75 -v method='prx1_12' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 77 -v method='3' -v switch='1' -v ini='false' -v conv='log' -v vi='true' -v scr='6' -v ram='16' startBendersOnly4_16.job
-#sleep 600
+qsub -t 76 -v method='prx1_13' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 78 -v method='6' -v switch='1' -v ini='false' -v conv='log' -v vi='true' -v scr='2' -v ram='16' startBendersOnly4_16.job
-#sleep 600
+qsub -t 77 -v method='prx1_14' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 79 -v method='6' -v switch='1' -v ini='false' -v conv='log' -v vi='true' -v scr='4' -v ram='16' startBendersOnly4_16.job
-#sleep 600
+qsub -t 78 -v method='prx1_15' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-#qsub -t 80 -v method='6' -v switch='1' -v ini='false' -v conv='log' -v vi='true' -v scr='6' -v ram='16' startBendersOnly4_16.job
-#sleep 600
+qsub -t 79 -v method='prx1_16' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-qsub -t 81 -v method='3' -v switch='1' -v ini='true' -v conv='none' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-sleep 600
+qsub -t 80 -v method='prx1_17' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-qsub -t 82 -v method='3' -v switch='1' -v ini='true' -v conv='none' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-sleep 600
+qsub -t 81 -v method='prx1_18' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-qsub -t 83 -v method='3' -v switch='1' -v ini='true' -v conv='none' -v vi='false' -v scr='6' -v ram='16' startBendersOnly4_16.job
-sleep 600
+qsub -t 82 -v method='prx1_19' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-qsub -t 84 -v method='6' -v switch='1' -v ini='true' -v conv='none' -v vi='false' -v scr='2' -v ram='16' startBendersOnly4_16.job
-sleep 600
+qsub -t 83 -v method='prx1_20' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-qsub -t 85 -v method='6' -v switch='1' -v ini='true' -v conv='none' -v vi='false' -v scr='4' -v ram='16' startBendersOnly4_16.job
-sleep 600
+qsub -t 84 -v method='prx1_21' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
 
-qsub -t 86 -v method='6' -v switch='1' -v ini='true' -v conv='none' -v vi='false' -v scr='6' -v ram='16' startBendersOnly4_16.job
-sleep 600
+qsub -t 85 -v method='prx1_22' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
+
+qsub -t 86 -v method='prx1_23' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
+
+qsub -t 87 -v method='prx1_24' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
+
+qsub -t 88 -v method='prx1_25' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
+
+qsub -t 89 -v method='prx1_26' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+sleep 300
+
+qsub -t 90 -v method='prx1_27' -v srs='0.0' -v ini='false' -v conv='0' -v vi='falsch' -v scr='6' -v ram='16' startBendersOnly2_16.job
+
+
+

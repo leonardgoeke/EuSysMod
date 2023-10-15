@@ -10,11 +10,10 @@
 #$ -M lgo@wip.tu-berlin.de
 
 
-GUROBI_HOME=/afs/math/software/gurobi/9.0.2/
+GUROBI_HOME=/afs/math/software/gurobi/10.0.1/
 export GUROBI_HOME
 
-module add gurobi/9.0.2
+module add gurobi/10.0.1
 module add julia/1.7.3
 
-julia runBendersMulti.jl $method $switch $ini $conv $vi $scr $ram $NSLOTS
-
+julia runBendersMulti.jl $method $srs $ini $conv $vi $scr $ram $NSLOTS

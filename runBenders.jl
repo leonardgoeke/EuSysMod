@@ -1,8 +1,8 @@
 import Pkg; Pkg.activate(".")
 # Pkg.instantiate()
-#using AnyMOD, Gurobi, CSV, Base.Threads
+#using AnyMOD, Gurobi, CSV, YAML, Base.Threads
 
-b = "C:/Felix Data/PhD/Benders Paper/2nd revision/git/AnyMOD.jl/"
+b = "C:/Users/pacop/.julia/dev/AnyMOD.jl/"
 
 using Base.Threads, CSV, Dates, LinearAlgebra, Requires, YAML
 using MathOptInterface, Reexport, Statistics, SparseArrays, CategoricalArrays
@@ -31,45 +31,46 @@ include(b* "src/dataHandling/gurobiTools.jl")
 
 #region # * set and write algorithm options withVI_normalStab
 
+using AnyMOD, Gurobi, CSV, YAML, Base.Threads
 suffix_str = "withVI_weightStab1Num1Lvl_onlyRes_minSpillAllDisMitCrt_iniStab"
 
-# defines stabilization options
-meth_tup = (:qtr => (start = 5e-2, low = 1e-6,  thr = 7.5e-4, fac = 2.0),)
-#meth_tup = (:prx => (start = 1.0, a = 4., min = 0.001, ),)
-#meth_tup = (:lvl => (la = 0.6,mu_max=5.0),)
-#meth_tup = (:box => (low = 0.05, up = 0.05, minUp = 0.5),)
-#meth_tup = (:dsb => (start = 10.0, min = 1e-2, la = 0.5, mu_max = 100.0),)
-swt_ntup = (itr = 6, avgImp = 0.5, itrAvg = 4)
-#meth_tup = tuple()
+methKey_str = "qtr_1"
+
+# write tuple for stabilization
+stabMap_dic = YAML.load_file("stabMap.yaml")
+if methKey_str in keys(stabMap_dic)
+	meth_tup = tuple(map(x -> Symbol(x[1]) => (; (Symbol(k) => v for (k, v) in x[2])...), collect(stabMap_dic[methKey_str]))...)
+else
+	meth_tup = tuple()
+end
+
+swt_ntup = (itr = 6, avgImp = 0.2, itrAvg = 4)
 
 weight_ntup = (capa = 1.0, capaStSize = 1e-1, stLvl = 1e-2) # weight of variables in stabilization (-> small value for variables with large numbers to equalize)
 iniStab = true # initialize stabilization
 srsThr = 0.0 # threshold for serious step
-solOpt = (dbInf = true, numFoc = 1, addVio = 1e4) # options for solving top problem
+solOpt = (dbInf = true, numFoc = 3, addVio = 1e4) # options for solving top problem
 
 # defines objectives for near-optimal (can only take top-problem variables, must specify a variable)
-nearOptOpj_tup = ("tradeOffWind_1" => (:min,((0.0,(variable = :capaConv, system = :onshore)),(1.0,(variable = :capaConv, system = :offshore)))),
-					"tradeOffWind_2" => (:min,((0.25,(variable = :capaConv, system = :onshore)),(0.75,(variable = :capaConv, system = :offshore)))))
-
-#nearOpt_ntup = (cutThres = 0.1, lssThres = 0.05, optThres = 0.05, feasGap = 0.0001, cutDel = 20, obj = nearOptOpj_tup)
 nearOpt_ntup = tuple()
 
 gap = 0.001
-conSub = (rng = [1e-3,1e-8], int = :log) # range and interpolation method for convergence criteria of subproblems
+conSub = (rng = [1e-3,1e-8], int = :log, crs = false) # range and interpolation method for convergence criteria of subproblems
 useVI = (bal = false, st = true) # use vaild inequalities
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
 
 reportFreq = 100 # number of iterations report files are written
+timeLim = 6 # set a time-limti in minuts for the algorithm
 
 #endregion
 
 #region # * set and write model options
 
 res = 96 # temporal resolution
-frs = 2 # level of foresight
+frs = 0 # level of foresight
 scr = 2 # number of scenarios
 t_int = 4
-dir_str = "C:/Felix Data/PhD/Benders Paper/2nd revision/git/EuSysMod/"
+dir_str = "C:/Users/pacop/Desktop/work/git/TheModel/"
 
 if !isempty(nearOpt_ntup) && any(getindex.(meth_tup,1) .!= :qtr) error("Near-optimal can only be paired with quadratic stabilization!") end
 
@@ -206,8 +207,8 @@ minStep_fl = 0.0
 nOpt_int = 0
 costOpt_fl = Inf
 nearOptObj_fl = Inf
-null_step_count = 0
-serious_step_count = 0
+cntNull_int = 0
+cntSrs_int = 0
 	
 # iteration algorithm
 while true
@@ -217,7 +218,7 @@ while true
 	#region # * solve top-problem 
 
 	startTop = now()
-	resData_obj, stabVar_obj, topCost_fl, estCost_fl, level_dual = @suppress runTop(top_m,cutData_dic,stab_obj,solOpt.numFoc,i); 
+	resData_obj, stabVar_obj, topCost_fl, estCost_fl, levelDual_fl = @suppress runTop(top_m,cutData_dic,stab_obj,solOpt.numFoc,i); 
 	timeTop = now() - startTop
 
 	# get objective value for near-optimal
@@ -227,9 +228,9 @@ while true
 	
 	#region # * solve of sub-problems  
 	startSub = now()
-	last_cutData_dic = !isempty(meth_tup) ? cutData_dic : nothing
+	prevCutData_dic = !isempty(meth_tup) ? cutData_dic : nothing # save values of previous cut for proximal method variation 2
 	for x in collect(sub_tup)
-		dual_etr = runSub(sub_dic[x],copy(resData_obj),:barrier,nOpt_int == 0 ? getConvTol(gap_fl,gap,conSub) : conSub.rng[2])
+		dual_etr = runSub(sub_dic[x],copy(resData_obj),:barrier,nOpt_int == 0 ? getConvTol(gap_fl,gap,conSub) : conSub.rng[2],conSub.crs)
 		cutData_dic[x] = dual_etr
 	end
 	timeSub = now() - startSub
@@ -271,14 +272,15 @@ while true
 			adjCtr_boo = true
 		end
 
-		null_step_count = adjCtr_boo ? 0 : null_step_count + 1
-		serious_step_count = adjCtr_boo ? serious_step_count + 1 : 0
+		# initialize counters
+		cntNull_int = adjCtr_boo ? 0 : cntNull_int + 1
+		cntSrs_int = adjCtr_boo ? cntSrs_int + 1 : 0
 
 		# solve problem without stabilization method
 		topCostNoStab_fl, estCostNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj)
 
 		# adjust dynamic parameters of stabilization
-		foreach(i -> adjustDynPar!(stab_obj,top_m,i,adjCtr_boo,serious_step_count,null_step_count,level_dual,estCostNoStab_fl,estCost_fl,best_obj.objVal,currentCost,nOpt_int != 0,report_m), 1:length(stab_obj.method))
+		foreach(i -> adjustDynPar!(stab_obj,top_m,i,adjCtr_boo,cntSrs_int,cntNull_int,levelDual_fl,estCostNoStab_fl,estCost_fl,best_obj.objVal,currentCost,nOpt_int != 0,report_m), 1:length(stab_obj.method))
 
 		# update center of stabilisation
 		if adjCtr_boo
@@ -312,7 +314,7 @@ while true
 	
 	if !isempty(meth_tup) # add info about stabilization
 		push!(etr_arr, :actMethod => stab_obj.method[stab_obj.actMet])	
-		append!(etr_arr, map(x -> Symbol("dynPar_",stab_obj.method[x]) => isa(stab_obj.dynPar[x],Dict) ? [stab_obj.dynPar[x][j] for j in keys(stab_obj.dynPar[x])] : stab_obj.dynPar[x], 1:length(stab_obj.method)))
+		append!(etr_arr, map(x -> Symbol("dynPar_",stab_obj.method[x]) => isa(stab_obj.dynPar[x],Dict) ? [round(stab_obj.dynPar[x][j], digits = 2) for j in keys(stab_obj.dynPar[x])] : stab_obj.dynPar[x], 1:length(stab_obj.method)))
 	end
 
 	# add info about near-optimal
@@ -378,6 +380,11 @@ while true
 		centerStab!(stab_obj.method[stab_obj.actMet],stab_obj,solOpt.addVio,top_m,report_m)
 	end
 
+	if Dates.value(floor(now() - report_m.options.startTime,Dates.Minute(1))) > timeLim
+		produceMessage(report_m.options,report_m.report, 1," - Aborted due to time-limit!", testErr = false, printErr = false)
+		break
+	end
+
 	#endregion
 
 	i = i + 1
@@ -400,7 +407,7 @@ end
 
 # run top-problem and sub-problems with optimal values fixed
 for x in collect(sub_tup)
-	runSub(sub_dic[x],copy(best_obj),:barrier,1e-8,true)
+	runSub(sub_dic[x],copy(best_obj),:barrier,1e-8,false,true)
 end
 
 #endregion

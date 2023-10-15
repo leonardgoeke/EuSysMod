@@ -1,0 +1,221 @@
+box_1:
+  box:
+      low: 0.025
+      up: 0.025
+      minUp: 0.5
+box_2:
+  box:
+      low: 0.05
+      up: 0.05
+      minUp: 0.5
+box_3:
+  box:
+      low: 0.075
+      up: 0.075
+      minUp: 0.5
+box_4:
+  box:
+      low: 0.1
+      up: 0.1
+      minUp: 0.5
+qtr_1:
+  qtr:
+    start: 1e-2 
+    low: 1e-6 
+    thr: 5e-4 
+    fac: 2.0
+qtr_2:
+  qtr:
+    start: 0.5e-2 
+    low: 1e-6 
+    thr: 5e-4 
+    fac: 2.0
+qtr_3:
+  qtr:
+    start: 2e-2 
+    low: 1e-6 
+    thr: 5e-4 
+    fac: 2.0
+qtr_4:
+  qtr:
+    start: 1e-2 
+    low: 1e-6 
+    thr: 5e-3 
+    fac: 2.0
+qtr_5:
+  qtr:
+    start: 1e-2 
+    low: 1e-6 
+    thr: 1e-3 
+    fac: 2.0
+lvl_1:
+  lvl:
+    lam: 0.2
+    myMax: 1.0
+lvl_2:
+  lvl:
+    lam: 0.5
+    myMax: 1.0
+lvl_3:
+  lvl:
+    lam: 0.7
+    myMax: 1.0
+lvl_4:
+  lvl:
+    lam: 0.2
+    myMax: 5.0
+lvl_5:
+  lvl:
+    lam: 0.5
+    myMax: 5.0
+lvl_6:
+  lvl:
+    lam: 0.7
+    myMax: 5.0
+lvl_7:
+  lvl:
+    lam: 0.2
+    myMax: 10.0
+lvl_8:
+  lvl:
+    lam: 0.5
+    myMax: 10.0
+lvl_9:
+  lvl:
+    lam: 0.7
+    myMax: 10.0
+prx1_1:
+  prx:
+    start: 1
+    a: 2
+    min: 1e-6
+prx1_2:
+  prx:
+    start: 5
+    a: 2
+    min: 1e-6
+prx1_3:
+  prx:
+    start: 10
+    a: 2
+    min: 1e-6
+prx1_4:
+  prx:
+    start: 1
+    a: 4
+    min: 1e-6
+prx1_5:
+  prx:
+    start: 5
+    a: 4
+    min: 1e-6
+prx1_6:
+  prx:
+    start: 10
+    a: 4
+    min: 1e-6
+prx1_7:
+  prx:
+    start: 1
+    a: 5
+    min: 1e-6
+prx1_8:
+  prx:
+    start: 5
+    a: 5
+    min: 1e-6
+prx1_9:
+  prx:
+    start: 10
+    a: 5
+    min: 1e-6
+prx1_10:
+  prx:
+    start: 1
+    a: 2
+    min: 1e-5
+prx1_11:
+  prx:
+    start: 5
+    a: 2
+    min: 1e-5
+prx1_12:
+  prx:
+    start: 10
+    a: 2
+    min: 1e-5
+prx1_13:
+  prx:
+    start: 1
+    a: 4
+    min: 1e-5
+prx1_14:
+  prx:
+    start: 5
+    a: 4
+    min: 1e-5
+prx1_15:
+  prx:
+    start: 10
+    a: 4
+    min: 1e-5
+prx1_16:
+  prx:
+    start: 1
+    a: 5
+    min: 1e-5
+prx1_17:
+  prx:
+    start: 5
+    a: 5
+    min: 1e-5
+prx1_18:
+  prx:
+    start: 10
+    a: 5
+    min: 1e-5
+prx1_19:
+  prx:
+    start: 1
+    a: 2
+    min: 1e-3
+prx1_20:
+  prx:
+    start: 5
+    a: 2
+    min: 1e-3
+prx1_21:
+  prx:
+    start: 10
+    a: 2
+    min: 1e-3
+prx1_22:
+  prx:
+    start: 1
+    a: 4
+    min: 1e-3
+prx1_23:
+  prx:
+    start: 5
+    a: 4
+    min: 1e-3
+prx1_24:
+  prx:
+    start: 10
+    a: 4
+    min: 1e-3
+prx1_25:
+  prx:
+    start: 1
+    a: 5
+    min: 1e-3
+prx1_26:
+  prx:
+    start: 5
+    a: 5
+    min: 1e-3
+prx1_27:
+  prx:
+    start: 10
+    a: 5
+    min: 1e-3
