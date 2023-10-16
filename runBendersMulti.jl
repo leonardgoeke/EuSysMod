@@ -118,7 +118,7 @@ end
 
 # function to get results of sub-problems
 function getSubResults!(cutData_dic::Dict{Tuple{Int64,Int64},resData}, sub_tup::Tuple, solvedFut_dic::Dict{Int, Future})
-	runTime_arr = []
+	runTime_arr = Millisecond[]
 	for (k,v) in solvedFut_dic
 		t_fl, cutData_dic[sub_tup[k]] = fetch(v)
 		push!(runTime_arr, t_fl)
@@ -208,10 +208,8 @@ if !isempty(meth_tup)
 		lowBd_fl = startSol_obj.objVal
 	end
 	# ! solve sub-problems with capacity of heuristic solution to use for creation of cuts in first iteration and to compute corresponding objective value
-	for x in collect(sub_tup)
-		dual_etr = @suppress runSub(sub_dic[x],copy(startSol_obj),:barrier)
-		cutData_dic[x] = dual_etr
-	end
+	solvedFut_dic = @suppress runAllSub(sub_tup, startSol_obj,:barrier,1e-8)
+	getSubResults!(cutData_dic, sub_tup, solvedFut_dic)
 	startSol_obj.objVal = startSol_obj.objVal + sum(map(x -> x.objVal, values(cutData_dic)))
 	
 	# ! initialize stabilization
@@ -347,7 +345,7 @@ let i = 1, gap_fl = 1.0, minStep_fl = 0.0, nOpt_int = 0, costOpt_fl = Inf, nearO
 		else
 			produceMessage(report_m.options,report_m.report, 1," - Objective: $(nearOpt_ntup.obj[nOpt_int][1]), Objective value: $(round(nearOptObj_fl, sigdigits = 8)), Feasibility gap: $(round(gap_fl, sigdigits = 4))", testErr = false, printErr = false)
 		end
-		produceMessage(report_m.options,report_m.report, 1," - Time for top: $timeTop_fl Time for sub: $timeSub_fl", testErr = false, printErr = false)
+		produceMessage(report_m.options,report_m.report, 1," - Time for top: $timeTop_fl Time for sub: $timeSubMax_fl", testErr = false, printErr = false)
 
 		# write to reporting files
 		etr_arr = Pair{Symbol,Any}[:i => i, :lowCost => estCost_fl, :bestObj => nOpt_int == 0 ? best_obj.objVal : nearOptObj_fl, :gap => gap_fl, :curCost => topCost_fl + subCost_fl,
