@@ -39,7 +39,7 @@ useVI = (bal = parse(Bool,ARGS[5]), st = false) # use vaild inequalities
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
 
 weight_ntup = (capa = 1.0, capaStSize = 1e-1, stLvl = 1e-2) # weight of variables in stabilization (-> small value for variables with large numbers to equalize)
-solOpt = (dbInf = true, numFoc = 0, addVio = 1e4) # options for solving top problem
+solOpt = (dbInf = true, numFoc = 3, addVio = 1e4) # options for solving top problem
 
 # defines objectives for near-optimal (can only take top-problem variables, must specify a variable)
 nearOpt_ntup = tuple()
