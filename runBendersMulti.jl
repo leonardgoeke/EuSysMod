@@ -391,7 +391,7 @@ let i = 1, gap_fl = 1.0, minStep_fl = 0.0, nOpt_int = 0, costOpt_fl = Inf, nearO
 				best_obj.objVal = Inf
 				if !isempty(meth_tup) # reset current best tracking for stabilization
 					stab_obj.objVal = Inf
-					stab_obj.dynPar = writeStabOpt(meth_tup,estCost_fl,best_obj.objVal)[3]
+					stab_obj.dynPar = writeStabOpt(meth_tup,estCost_fl,best_obj.objVal,top_m)[3]
 				end 
 				nOpt_int = nOpt_int + 1 # update near-opt counter
 				# adapt the objective and constraint to near-optimal
