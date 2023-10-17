@@ -86,136 +86,136 @@ lvl_9:
     myMax: 10.0
 prx1_1:
   prx:
-    start: 1
-    a: 2
+    start: 1.0
+    a: 2.0
     min: 1e-6
 prx1_2:
   prx:
-    start: 5
-    a: 2
+    start: 5.0
+    a: 2.0
     min: 1e-6
 prx1_3:
   prx:
-    start: 10
-    a: 2
+    start: 10.0
+    a: 2.0
     min: 1e-6
 prx1_4:
   prx:
-    start: 1
-    a: 4
+    start: 1.0
+    a: 4.0
     min: 1e-6
 prx1_5:
   prx:
-    start: 5
-    a: 4
+    start: 5.0
+    a: 4.0
     min: 1e-6
 prx1_6:
   prx:
-    start: 10
-    a: 4
+    start: 10.0
+    a: 4.0
     min: 1e-6
 prx1_7:
   prx:
-    start: 1
-    a: 5
+    start: 1.0
+    a: 5.0
     min: 1e-6
 prx1_8:
   prx:
-    start: 5
-    a: 5
+    start: 5.0
+    a: 5.0
     min: 1e-6
 prx1_9:
   prx:
-    start: 10
-    a: 5
+    start: 10.0
+    a: 5.0
     min: 1e-6
 prx1_10:
   prx:
-    start: 1
-    a: 2
+    start: 1.0
+    a: 2.0
     min: 1e-5
 prx1_11:
   prx:
-    start: 5
-    a: 2
+    start: 5.0
+    a: 2.0
     min: 1e-5
 prx1_12:
   prx:
-    start: 10
-    a: 2
+    start: 10.0
+    a: 2.0
     min: 1e-5
 prx1_13:
   prx:
-    start: 1
-    a: 4
+    start: 1.0
+    a: 4.0
     min: 1e-5
 prx1_14:
   prx:
-    start: 5
-    a: 4
+    start: 5.0
+    a: 4.0
     min: 1e-5
 prx1_15:
   prx:
-    start: 10
-    a: 4
+    start: 10.0
+    a: 4.0
     min: 1e-5
 prx1_16:
   prx:
-    start: 1
-    a: 5
+    start: 1.0
+    a: 5.0
     min: 1e-5
 prx1_17:
   prx:
-    start: 5
-    a: 5
+    start: 5.0
+    a: 5.0
     min: 1e-5
 prx1_18:
   prx:
-    start: 10
-    a: 5
+    start: 10.0
+    a: 5.0
     min: 1e-5
 prx1_19:
   prx:
-    start: 1
-    a: 2
+    start: 1.0
+    a: 2.0
     min: 1e-3
 prx1_20:
   prx:
-    start: 5
-    a: 2
+    start: 5.0
+    a: 2.0
     min: 1e-3
 prx1_21:
   prx:
-    start: 10
-    a: 2
+    start: 10.0
+    a: 2.0
     min: 1e-3
 prx1_22:
   prx:
-    start: 1
-    a: 4
+    start: 1.0
+    a: 4.0
     min: 1e-3
 prx1_23:
   prx:
-    start: 5
-    a: 4
+    start: 5.0
+    a: 4.0
     min: 1e-3
 prx1_24:
   prx:
-    start: 10
-    a: 4
+    start: 10.0
+    a: 4.0
     min: 1e-3
 prx1_25:
   prx:
-    start: 1
-    a: 5
+    start: 1.0
+    a: 5.0
     min: 1e-3
 prx1_26:
   prx:
-    start: 5
-    a: 5
+    start: 5.0
+    a: 5.0
     min: 1e-3
 prx1_27:
   prx:
-    start: 10
-    a: 5
+    start: 10.0
+    a: 5.0
     min: 1e-3
