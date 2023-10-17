@@ -353,7 +353,7 @@ let i = 1, gap_fl = 1.0, minStep_fl = 0.0, nOpt_int = 0, costOpt_fl = Inf, nearO
 		
 		if !isempty(meth_tup) # add info about stabilization
 			push!(etr_arr, :actMethod => stab_obj.method[stab_obj.actMet])	
-			append!(etr_arr, map(x -> Symbol("dynPar_",stab_obj.method[x]) => isa(stab_obj.dynPar[x],Dict) ? [round(stab_obj.dynPar[x][j], digits = 2) for j in keys(stab_obj.dynPar[x])] : stab_obj.dynPar[x], 1:length(stab_obj.method)))
+			append!(etr_arr, map(x -> Symbol("dynPar_",stab_obj.method[x]) => isa(stab_obj.dynPar[x],Dict) ? [round(stab_obj.dynPar[x][j], sigdigits = 2) for j in keys(stab_obj.dynPar[x])] : stab_obj.dynPar[x], 1:length(stab_obj.method)))
 		end
 
 		# add info about near-optimal

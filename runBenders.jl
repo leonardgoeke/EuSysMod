@@ -2,7 +2,7 @@ import Pkg; Pkg.activate(".")
 # Pkg.instantiate()
 #using AnyMOD, Gurobi, CSV, YAML, Base.Threads
 
-b = "C:/Users/pacop/.julia/dev/AnyMOD.jl/"
+b = "C:/Users/lgoeke/git/AnyMOD.jl/"
 
 using Base.Threads, CSV, Dates, LinearAlgebra, Requires, YAML
 using MathOptInterface, Reexport, Statistics, SparseArrays, CategoricalArrays
@@ -31,10 +31,10 @@ include(b* "src/dataHandling/gurobiTools.jl")
 
 #region # * set and write algorithm options withVI_normalStab
 
-using AnyMOD, Gurobi, CSV, YAML, Base.Threads
-suffix_str = "withVI_weightStab1Num1Lvl_onlyRes_minSpillAllDisMitCrt_iniStab"
+#using AnyMOD, Gurobi, CSV, YAML, Base.Threads
+suffix_str = "test"
 
-methKey_str = "qtr_1"
+methKey_str = "qtr_3"
 
 # write tuple for stabilization
 stabMap_dic = YAML.load_file("stabMap.yaml")
@@ -55,12 +55,12 @@ solOpt = (dbInf = true, numFoc = 3, addVio = 1e4) # options for solving top prob
 nearOpt_ntup = tuple()
 
 gap = 0.001
-conSub = (rng = [1e-3,1e-8], int = :log, crs = false) # range and interpolation method for convergence criteria of subproblems
+conSub = (rng = [1e-8,1e-8], int = :lin, crs = true) # range and interpolation method for convergence criteria of subproblems
 useVI = (bal = false, st = true) # use vaild inequalities
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
 
 reportFreq = 100 # number of iterations report files are written
-timeLim = 6 # set a time-limti in minuts for the algorithm
+timeLim = 120 # set a time-limti in minuts for the algorithm
 
 #endregion
 
@@ -70,7 +70,7 @@ res = 96 # temporal resolution
 frs = 0 # level of foresight
 scr = 2 # number of scenarios
 t_int = 4
-dir_str = "C:/Users/pacop/Desktop/work/git/TheModel/"
+dir_str = "C:/Users/lgoeke/git/EuSysMod/"
 
 if !isempty(nearOpt_ntup) && any(getindex.(meth_tup,1) .!= :qtr) error("Near-optimal can only be paired with quadratic stabilization!") end
 
@@ -314,7 +314,7 @@ while true
 	
 	if !isempty(meth_tup) # add info about stabilization
 		push!(etr_arr, :actMethod => stab_obj.method[stab_obj.actMet])	
-		append!(etr_arr, map(x -> Symbol("dynPar_",stab_obj.method[x]) => isa(stab_obj.dynPar[x],Dict) ? [round(stab_obj.dynPar[x][j], digits = 2) for j in keys(stab_obj.dynPar[x])] : stab_obj.dynPar[x], 1:length(stab_obj.method)))
+		append!(etr_arr, map(x -> Symbol("dynPar_",stab_obj.method[x]) => isa(stab_obj.dynPar[x],Dict) ? [round(stab_obj.dynPar[x][j], sigdigits = 2) for j in keys(stab_obj.dynPar[x])] : stab_obj.dynPar[x], 1:length(stab_obj.method)))
 	end
 
 	# add info about near-optimal
