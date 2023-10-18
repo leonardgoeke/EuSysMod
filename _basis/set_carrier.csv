@@ -4,7 +4,7 @@ gasFuel,,2,1,1,1,eq
 gasFuel,naturalGas,2,1,1,1,ineq
 gasFuel,synthGas,2,1,1,1,ineq
 h2,,2,1,1,1,eq
-oil,,2,1,1,1,eq
-hardcoal,,2,1,1,1,eq
-lignite,,2,1,1,1,eq
-waste,,2,1,1,1,eq
+oil,,1,1,1,1,eq
+hardcoal,,1,1,1,1,eq
+lignite,,1,1,1,1,eq
+waste,,1,1,1,1,eq
