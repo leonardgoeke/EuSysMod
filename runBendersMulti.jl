@@ -33,7 +33,7 @@ elseif convSub == 4
 end
 
 # other settings
-gap = 0.001 # optimality gap
+gap = 0.002 # optimality gap
 useVI = (bal = parse(Bool,ARGS[5]), st = false) # use vaild inequalities
 
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
@@ -44,7 +44,7 @@ solOpt = (dbInf = true, numFoc = 3, addVio = 1e4) # options for solving top prob
 # defines objectives for near-optimal (can only take top-problem variables, must specify a variable)
 nearOpt_ntup = tuple()
 
-reportFreq = 100 # number of iterations report files are written
+reportFreq = 50 # number of iterations report files are written
 timeLim = 360 # set a time-limti in minuts for the algorithm
 
 #endregion
@@ -57,7 +57,7 @@ scr = parse(Int,ARGS[6]) # number of scenarios
 # computational resources
 ram = parse(Int,ARGS[7])
 t_int = parse(Int,ARGS[8])
-dir_str = "C:/Users/pacop/Desktop/work/git/TheModel/"
+dir_str = ""
 
 if !isempty(nearOpt_ntup) && any(getindex.(meth_tup,1) .!= :qtr) error("Near-optimal can only be paired with quadratic stabilization!") end
 
@@ -447,7 +447,7 @@ end
 @suppress computeFeas(top_m,best_obj.capa,1e-5,wrtRes_boo = true)
 
 # run top-problem and sub-problems with optimal values fixed
-solvedFut_dic = @suppress runAllSub(sub_tup, capaData_obj,:barrier,1e-8,false,true)
+solvedFut_dic = @suppress runAllSub(sub_tup, best_obj,:barrier,1e-8,false,true)
 wait.(values(solvedFut_dic))
 
 #endregion
