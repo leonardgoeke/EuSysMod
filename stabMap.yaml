@@ -20,13 +20,13 @@ box_4:
       minUp: 0.5
 qtr_1:
   qtr:
-    start: 1e-2 
+    start: 0.5e-2 
     low: 1e-6 
     thr: 5e-4 
     fac: 2.0
 qtr_2:
   qtr:
-    start: 0.5e-2 
+    start: 1e-2 
     low: 1e-6 
     thr: 5e-4 
     fac: 2.0
@@ -38,13 +38,31 @@ qtr_3:
     fac: 2.0
 qtr_4:
   qtr:
-    start: 1e-2 
+    start: 5e-2 
     low: 1e-6 
-    thr: 5e-3 
+    thr: 5e-4 
     fac: 2.0
 qtr_5:
   qtr:
+    start: 0.5e-2 
+    low: 1e-6 
+    thr: 1e-3 
+    fac: 2.0
+qtr_6:
+  qtr:
     start: 1e-2 
+    low: 1e-6 
+    thr: 1e-3 
+    fac: 2.0
+qtr_7:
+  qtr:
+    start: 2e-2 
+    low: 1e-6 
+    thr: 1e-3 
+    fac: 2.0
+qtr_8:
+  qtr:
+    start: 5e-2 
     low: 1e-6 
     thr: 1e-3 
     fac: 2.0
