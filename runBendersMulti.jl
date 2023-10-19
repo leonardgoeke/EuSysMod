@@ -38,8 +38,8 @@ useVI = (bal = parse(Bool,ARGS[5]), st = false) # use vaild inequalities
 
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
 
-weight_ntup = (capa = 1.0, capaStSize = 1e-1, stLvl = 1e-2) # weight of variables in stabilization (-> small value for variables with large numbers to equalize)
-solOpt = (dbInf = true, numFoc = 3, addVio = 1e4) # options for solving top problem
+weight_ntup = (capa = 1.0, capaStSize = 1.0, stLvl = 1.0) # weight of variables in stabilization (-> small value for variables with large numbers to equalize)
+solOpt = (dbInf = true, numFoc = 3, addVio = 1e6) # options for solving top problem
 
 # defines objectives for near-optimal (can only take top-problem variables, must specify a variable)
 nearOpt_ntup = tuple()
@@ -146,7 +146,7 @@ subTasks_arr = map(workers()) do w
 	t = @async @everywhere w begin
 		# create sub-problem
 		function buildSub(id)
-			sub_m = @suppress anyModel(modOptSub_tup.inputDir, modOptSub_tup.resultDir, objName = "subModel_" * string(myid()-1) * modOptSub_tup.suffix, lvlFrs = frs, supTsLvl = modOptSub_tup.supTsLvl, shortExp = modOptSub_tup.shortExp, coefRng = modOptSub_tup.coefRng, scaFac = modOptSub_tup.scaFac, reportLvl = 1)
+			sub_m = @suppress anyModel(modOptSub_tup.inputDir, modOptSub_tup.resultDir, objName = "subModel_" * string(myid()-1) * modOptSub_tup.suffix, lvlFrs = frs, supTsLvl = modOptSub_tup.supTsLvl,  dbInf = solOpt.dbInf, shortExp = modOptSub_tup.shortExp, coefRng = modOptSub_tup.coefRng, scaFac = modOptSub_tup.scaFac, reportLvl = 1)
 			sub_m.subPro = sub_tup[id]
 			prepareMod!(sub_m, Gurobi.Optimizer, t_int)
 			return sub_m
