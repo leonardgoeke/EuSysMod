@@ -1,6 +1,0 @@
-errStatus,section,location,message
-green,timestep mapping,,superordinate dispatch level provided via options was used
-yellow,technology mapping,carrier,some carrier of technology 'reservoir'  can be discharged but not charged
-yellow,technology mapping,storage capacity,"in some cases limits prevent energy capacity for technology 'h2Cavern', but other storage capacity exists, therefore respective variables exist anyway"
-yellow,technology mapping,storage expansion,"in some cases limits prevent energy expansion for technology 'h2Cavern', but other storage expansion exists, therefore respective variables exist anyway"
-yellow,limit,expExc,"limits were provided without specificing the superordinate dispatch timestep, this means the sum over all years was limited instead of enforcing the same limit for each year (see https://leonardgoeke.github.io/AnyMOD.jl/stable/parameter_list/#Limits-on-quantities-dispatched)"
