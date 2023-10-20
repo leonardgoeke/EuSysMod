@@ -10,14 +10,41 @@
 #$ -M lgo@wip.tu-berlin.de
 
 
-qsub -t 1 -v method='box_1' -v srs='0.0' -v ini='false' -v conv='0' -v vi='false' -v scr='4' -v ram='16' startBendersOnly2_16.job
-sleep 600
+qsub -t 1 -v method='none' -v srs='0.0' -v ini='false' -v conv='0' -v vi='false' -v time='14400' -v scr='4' -v ram='16' startBendersOnly4_16.job
+sleep 15000
 
-qsub -t 7 -v method='qtr_3' -v srs='0.0' -v ini='false' -v conv='0' -v vi='false' -v scr='4' -v ram='16' startBendersOnly2_16.job
-sleep 600
+qsub -t 2 -v method='qtr_1' -v srs='0.0' -v ini='false' -v conv='0' -v vi='false' -v time='360' -v scr='4' -v ram='16' startBendersOnly4_16.job
+sleep 15000
 
-qsub -t 10 -v method='lvl_1' -v srs='0.0' -v ini='false' -v conv='0' -v vi='false' -v scr='4' -v ram='16' startBendersOnly2_16.job
-sleep 600
+qsub -t 3 -v method='qtr_2' -v srs='0.0' -v ini='false' -v conv='0' -v vi='false' -v time='360' -v scr='4' -v ram='16' startBendersOnly4_16.job
+sleep 15000
 
-qsub -t 19 -v method='prx1_1' -v srs='0.0' -v ini='false' -v conv='0' -v vi='false' -v scr='4' -v ram='16' startBendersOnly2_16.job
-sleep 600
+qsub -t 4 -v method='qtr_3' -v srs='0.0' -v ini='false' -v conv='0' -v vi='false' -v time='360' -v scr='4' -v ram='16' startBendersOnly4_16.job
+sleep 15000
+
+qsub -t 5 -v method='qtr_4' -v srs='0.0' -v ini='false' -v conv='0' -v vi='false' -v time='360' -v scr='4' -v ram='16' startBendersOnly4_16.job
+sleep 15000
+
+qsub -t 6 -v method='qtr_5' -v srs='0.0' -v ini='false' -v conv='0' -v vi='false' -v time='360' -v scr='4' -v ram='16' startBendersOnly4_16.job
+sleep 15000
+
+qsub -t 7 -v method='lvl1_1' -v srs='0.0' -v ini='false' -v conv='0' -v vi='false' -v time='360' -v scr='4' -v ram='16' startBendersOnly4_16.job
+sleep 15000
+
+qsub -t 8 -v method='lvl1_2' -v srs='0.0' -v ini='false' -v conv='0' -v vi='false' -v time='360' -v scr='4' -v ram='16' startBendersOnly4_16.job
+sleep 15000
+
+qsub -t 9 -v method='lvl1_3' -v srs='0.0' -v ini='false' -v conv='0' -v vi='false' -v time='360' -v scr='4' -v ram='16' startBendersOnly4_16.job
+sleep 15000
+
+qsub -t 10 -v method='prx1_1' -v srs='0.0' -v ini='false' -v conv='0' -v vi='false' -v time='360' -v scr='4' -v ram='16' startBendersOnly4_16.job
+sleep 15000
+
+qsub -t 11 -v method='prx1_2' -v srs='0.0' -v ini='false' -v conv='0' -v vi='false' -v time='360' -v scr='4' -v ram='16' startBendersOnly4_16.job
+sleep 15000
+
+qsub -t 12 -v method='prx1_3' -v srs='0.0' -v ini='false' -v conv='0' -v vi='false' -v time='360' -v scr='4' -v ram='16' startBendersOnly4_16.job
+sleep 15000
+
+qsub -t 13 -v method='prx1_4' -v srs='0.0' -v ini='false' -v conv='0' -v vi='false' -v time='360' -v scr='4' -v ram='16' startBendersOnly4_16.job
+sleep 15000

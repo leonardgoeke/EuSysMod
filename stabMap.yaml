@@ -20,86 +20,77 @@ box_4:
       minUp: 0.5
 qtr_1:
   qtr:
-    start: 0.5e-2 
+    start: 1e-0
     low: 1e-6 
     thr: 5e-4 
     fac: 2.0
 qtr_2:
   qtr:
-    start: 1e-2 
+    start: 5e-1
     low: 1e-6 
     thr: 5e-4 
     fac: 2.0
 qtr_3:
   qtr:
-    start: 2e-2 
+    start: 1e-1
     low: 1e-6 
     thr: 5e-4 
     fac: 2.0
 qtr_4:
   qtr:
-    start: 5e-2 
+    start: 5e-2
     low: 1e-6 
     thr: 5e-4 
     fac: 2.0
 qtr_5:
   qtr:
-    start: 0.5e-2 
+    start: 1e-2
     low: 1e-6 
-    thr: 1e-3 
+    thr: 5e-4 
     fac: 2.0
-qtr_6:
-  qtr:
-    start: 1e-2 
-    low: 1e-6 
-    thr: 1e-3 
-    fac: 2.0
-qtr_7:
-  qtr:
-    start: 2e-2 
-    low: 1e-6 
-    thr: 1e-3 
-    fac: 2.0
-qtr_8:
-  qtr:
-    start: 5e-2 
-    low: 1e-6 
-    thr: 1e-3 
-    fac: 2.0
-lvl_1:
-  lvl:
+lvl1_1:
+  lvl1:
+    lam: 0.25
+lvl1_2:
+  lvl1:
+    lam: 0.50
+lvl1_3:
+  lvl1:
+    lam: 0.75
+lvl2_1:
+  lvl2:
     lam: 0.2
     myMax: 1.0
-lvl_2:
-  lvl:
+lvl2_2:
+  lvl2:
     lam: 0.5
     myMax: 1.0
-lvl_3:
-  lvl:
+lvl2_3:
+  lvl2:
     lam: 0.7
     myMax: 1.0
-lvl_4:
-  lvl:
+lvl2_4:
+  lvl2:
     lam: 0.2
     myMax: 5.0
-lvl_5:
-  lvl:
+lvl2_5:
+  lvl2:
     lam: 0.5
     myMax: 5.0
-lvl_6:
-  lvl:
+lvl2_6:
+  lvl2:
     lam: 0.7
     myMax: 5.0
-lvl_7:
-  lvl:
+lvl2_7:
+  lvl2:
     lam: 0.2
     myMax: 10.0
-lvl_8:
-  lvl:
+lvl2_8:
+  lvl2:
     lam: 0.5
     myMax: 10.0
-lvl_9:
-  lvl:
+lvl2_9:
+  lvl2:
     lam: 0.7
     myMax: 10.0
 prx1_1:

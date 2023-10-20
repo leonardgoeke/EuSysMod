@@ -178,7 +178,7 @@ end
 # initialize loop variables
 itrReport_df = DataFrame(i = Int[], lowCost = Float64[], bestObj = Float64[], gap = Float64[], curCost = Float64[], time_ges = Float64[], time_top = Float64[], time_sub = Float64[])
 
-nameStab_dic = Dict(:lvl => "level bundle",:qtr => "quadratic trust-region", :prx => "proximal bundle", :box => "box-step method")
+nameStab_dic = Dict(:lvl1 => "level bundle",:lvl2 => "level bundle",:qtr => "quadratic trust-region", :prx => "proximal bundle", :box => "box-step method")
 
 # initialize reporting
 if top_m.options.lvlFrs != 0

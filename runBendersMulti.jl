@@ -38,14 +38,14 @@ useVI = (bal = parse(Bool,ARGS[5]), st = false) # use vaild inequalities
 
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
 
-weight_ntup = (capa = 1.0, capaStSize = 1.0, stLvl = 1.0) # weight of variables in stabilization (-> small value for variables with large numbers to equalize)
+weight_ntup = (capa = 1.0, capaStSize = 1e-1, stLvl = 1e-2)  # weight of variables in stabilization (-> small value for variables with large numbers to equalize)
 solOpt = (dbInf = true, numFoc = 3, addVio = 1e6) # options for solving top problem
 
 # defines objectives for near-optimal (can only take top-problem variables, must specify a variable)
 nearOpt_ntup = tuple()
 
 reportFreq = 50 # number of iterations report files are written
-timeLim = 360 # set a time-limti in minuts for the algorithm
+timeLim = parse(Float64,ARGS[6])  # set a time-limti in minuts for the algorithm
 
 #endregion
 
@@ -53,10 +53,10 @@ timeLim = 360 # set a time-limti in minuts for the algorithm
 
 res = 8760 # temporal resolution
 frs = 0 # level of foresight
-scr = parse(Int,ARGS[6]) # number of scenarios
+scr = parse(Int,ARGS[7]) # number of scenarios
 # computational resources
-ram = parse(Int,ARGS[7])
-t_int = parse(Int,ARGS[8])
+ram = parse(Int,ARGS[8])
+t_int = parse(Int,ARGS[9])
 dir_str = ""
 
 if !isempty(nearOpt_ntup) && any(getindex.(meth_tup,1) .!= :qtr) error("Near-optimal can only be paired with quadratic stabilization!") end
@@ -227,7 +227,7 @@ end
 # initialize loop variables
 itrReport_df = DataFrame(i = Int[], lowCost = Float64[], bestObj = Float64[], gap = Float64[], curCost = Float64[], time_ges = Float64[], time_top = Float64[], timeMax_sub = Float64[], timeSum_sub = Float64[])
 
-nameStab_dic = Dict(:lvl => "level bundle",:qtr => "quadratic trust-region", :prx => "proximal bundle", :box => "box-step method")
+nameStab_dic = Dict(:lvl1 => "level bundle",:lvl2 => "level bundle",:qtr => "quadratic trust-region", :prx => "proximal bundle", :box => "box-step method")
 
 # initialize reporting
 if top_m.options.lvlFrs != 0
