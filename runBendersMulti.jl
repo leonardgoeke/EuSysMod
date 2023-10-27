@@ -1,4 +1,4 @@
-using AnyMOD, Gurobi, CSV, YAML, Base.Threads
+using AnyMOD, Gurobi, CSV, YAML, Base.Threads, Dates
 
 #region # * set and write algorithm options
 
@@ -195,7 +195,8 @@ end
 produceMessage(report_m.options,report_m.report, 1," - Created top-problem and sub-problems", testErr = false, printErr = false)
 
 # initialize loop variables
-itrReport_df = DataFrame(i = Int[], lowCost = Float64[], bestObj = Float64[], gap = Float64[], curCost = Float64[], time_ges = Float64[], time_top = Float64[], time_sub = Float64[])
+itrReport_df = DataFrame(i = Int[], lowCost = Float64[], bestObj = Float64[], gap = Float64[], curCost = Float64[], time_ges = Float64[], time_top = Float64[], timeMax_sub = Float64[], timeSum_sub = Float64[])
+
 
 #endregion
 
@@ -218,7 +219,7 @@ if !isempty(meth_tup)
 	end
 
 	# initialize iteration variables
-	push!(itrReport_df, (i = 0, lowCost = 0, bestObj = Inf, gap = 1.0, curCost = Inf, time_ges = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60, time_top = 0, time_sub = 0))
+	push!(itrReport_df, (i = 0, lowCost = 0, bestObj = Inf, gap = 1.0, curCost = Inf, time_ges = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60, time_top = 0, timeMax_sub = 0, timeSum_sub = 0))
 
 	# ! solve sub-problems with capacity of heuristic solution to use for creation of cuts in first iteration and to compute corresponding objective value
 	solvedFut_dic = @suppress runAllSub(sub_tup, startSol_obj,:barrier,1e-8)
@@ -226,8 +227,9 @@ if !isempty(meth_tup)
 	startSol_obj.objVal = startSol_obj.objVal + sum(map(x -> x.objVal, values(cutData_dic)))
 
 	# write results for first iteration
-	timeSub_fl = Dates.toms(timeSub) / Dates.toms(Second(1))/60
-	push!(itrReport_df, (i = 1, lowCost = lowBd_fl, bestObj = startSol_obj.objVal, gap = 1 - lowBd_fl/startSol_obj.objVal, curCost = startSol_obj.objVal, time_ges = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60, time_top = 0, time_sub = timeSub_fl))
+	timeSubMax_fl = Dates.toms(typeof(timeSub) <: Vector ? maximum(timeSub) : timeSub) / Dates.toms(Second(1))
+	timeSubSum_fl = Dates.toms(typeof(timeSub) <: Vector ? sum(timeSub) : timeSub) / Dates.toms(Second(1))
+	push!(itrReport_df, (i = 1, lowCost = lowBd_fl, bestObj = startSol_obj.objVal, gap = 1 - lowBd_fl/startSol_obj.objVal, curCost = startSol_obj.objVal, time_ges = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60, time_top = 0, timeMax_sub = timeSubMax_fl/60, timeSum_sub = timeSubSum_fl/60))
 	iIni_fl = 2
 	
 	# ! initialize stabilization
@@ -236,7 +238,7 @@ if !isempty(meth_tup)
 	produceMessage(report_m.options,report_m.report, 1," - Initialized stabilization with $eleNum_int variables", testErr = false, printErr = false)
 else
 	stab_obj = nothing
-	push!(itrReport_df, (i = 0, lowCost = 0, bestObj = Inf, gap = 1.0, curCost = Inf, time_ges = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60, time_top = 0, time_sub = 0))
+	push!(itrReport_df, (i = 0, lowCost = 0, bestObj = Inf, gap = 1.0, curCost = Inf, time_ges = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60, time_top = 0, timeMax_sub = 0, timeSum_sub = 0))
 	iIni_fl = 0
 end
 
