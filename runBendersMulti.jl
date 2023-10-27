@@ -209,7 +209,7 @@ if !isempty(meth_tup)
 	if iniStab != 0
 		produceMessage(report_m.options,report_m.report, 1," - Started heuristic pre-solve for starting solution", testErr = false, printErr = false)
 		heu_m, startSol_obj =  @suppress heuristicSolve(optMod_dic[:heu],1.0,t_int,opt_obj,rtrnMod = true,solDet = true,fltSt = true);
-		lowBd_fl = value(heu_m.parts.obj.var[:objVar][1,:var])
+		lowBd_fl = iniStab == 2 ? 0.0 : value(heu_m.parts.obj.var[:objVar][1,:var])
 	else
 		@suppress optimize!(top_m.optModel)
 		startSol_obj = resData()
