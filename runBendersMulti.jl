@@ -197,7 +197,6 @@ produceMessage(report_m.options,report_m.report, 1," - Created top-problem and s
 # initialize loop variables
 itrReport_df = DataFrame(i = Int[], lowCost = Float64[], bestObj = Float64[], gap = Float64[], curCost = Float64[], time_ges = Float64[], time_top = Float64[], timeMax_sub = Float64[], timeSum_sub = Float64[])
 
-
 #endregion
 
 #region # * add stabilization methods
