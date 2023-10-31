@@ -230,7 +230,7 @@ cntNull_int = 0
 cntSrs_int = 0
 	
 # iteration algorithm
-while true
+while true i
 
 	produceMessage(report_m.options,report_m.report, 1," - Started iteration $i", testErr = false, printErr = false)
 
@@ -298,7 +298,7 @@ while true
 		# solve problem without stabilization method
 		topCostNoStab_fl, estCostNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj)
 
-		print(ComputeAuxTermPrx2(cutData_dic,prevCutData_dic))
+		println(Prx2AuxTerm(cutData_dic,prevCutData_dic))
 		# adjust dynamic parameters of stabilization
 		foreach(i -> adjustDynPar!(stab_obj,top_m,i,adjCtr_boo,cntSrs_int,cntNull_int,levelDual_fl,estCostNoStab_fl,estCost_fl,best_obj.objVal,currentCost,nOpt_int != 0,report_m), 1:length(stab_obj.method))
 
@@ -432,39 +432,36 @@ end
 
 #endregion
 
-function ComputeAuxTermPrx2(cutData_dic::Dict,prevCutData_dic)
+
+
+
+function Prx2AuxTerm(cutData_dic,prevCutData_dic)
+
 	diff_x = Float64[]
 	diff_g = Float64[]
-
 	for scen in collect(keys(cutData_dic))
 		for sys in collect(keys(cutData_dic[scen].capa))
-			for sSym in keys(cutData_dic[scen].capa[sys])
-				#print(sort(filter(x-> occursin("capa",lowercase(string(x))), collect(keys(cutData_dic[scen].capa[sys][sSym]))),rev=true))
-				for capaSym in sort(filter(x-> occursin("capa",lowercase(string(x))), collect(keys(cutData_dic[scen].capa[sys][sSym]))),rev=true)
-					#println((cutData_dic[scen].capa[sys][sSym][capaSym][!,:value] , prevCutData_dic[scen].capa[sys][sSym][capaSym][!,:value]))
-					append!(diff_x,cutData_dic[scen].capa[sys][sSym][capaSym][!,:value] - prevCutData_dic[scen].capa[sys][sSym][capaSym][!,:value])
-					append!(diff_g, cutData_dic[scen].capa[sys][sSym][capaSym][!,:dual] - prevCutData_dic[scen].capa[sys][sSym][capaSym][!,:dual])
+			if !isempty(intersect(collect(keys(cutData_dic[scen].capa[sys])),collect(keys(prevCutData_dic[scen].capa[sys]))))
+				for sSym in intersect(collect(keys(cutData_dic[scen].capa[sys])),collect(keys(prevCutData_dic[scen].capa[sys])))
+					#print(sort(filter(x-> occursin("capa",lowercase(string(x))), collect(keys(cutData_dic[scen].capa[sys][sSym]))),rev=true))
+					for capaSym in sort(filter(x-> occursin("capa",lowercase(string(x))), collect(keys(cutData_dic[scen].capa[sys][sSym]))),rev=true)
+						println((scen,sys,sSym,capaSym))
+						#println((cutData_dic[scen].capa[sys][sSym][capaSym][!,:value] , prevCutData_dic[scen].capa[sys][sSym][capaSym][!,:value]))
+						cur = rename(cutData_dic[scen].capa[sys][sSym][capaSym],[:value,:dual] .=> [:cur_val,:cur_dual])
+						prev = rename(prevCutData_dic[scen].capa[sys][sSym][capaSym],[:value,:dual] .=> [:prev_val,:prev_dual])
+						if :dir in Symbol.(names(cur)) && :dir in Symbol.(names(prev))
+							tmp_df = joinMissing(cur,prev,intCol(cur,:dir),:outer,Dict(:cur_val => 0, :cur_dual => 0, :prev_val => 0, :prev_dual=>0))
+						else
+							tmp_df = joinMissing(cur,prev,intCol(cur),:outer,Dict(:cur_val => 0, :cur_dual => 0, :prev_val => 0, :prev_dual=>0))
+						end
+						tmp_df.diff_val = tmp_df.cur_val - tmp_df.prev_val
+						tmp_df.diff_dual = tmp_df.cur_dual - tmp_df.prev_dual
+						append!(diff_x,tmp_df[!,:diff_val])
+						append!(diff_g,tmp_df[!,:diff_dual])
+					end
 				end
 			end
 		end
 	end
-
-	for scen in keys(cutData_dic)
-		for sys in keys(cutData_dic[scen].stLvl)
-			for sSym in keys(cutData_dic[scen].stLvl[sys])
-				for capaSym in keys(cutData_dic[scen].stLvl[sys][sSym])
-					append!(diff_x,cutData_dic[scen].stLvl[sys][sSym][capaSym][!,:value] - prevCutData_dic[scen].stLvl[sys][sSym][capaSym][!,:value])
-					append!(diff_g, cutData_dic[scen].stLvl[sys][sSym][capaSym][!,:dual] - prevCutData_dic[scen].stLvl[sys][sSym][capaSym][!,:dual])
-				end
-			end
-		end
-	end
-
-	return dot(diff_x,diff_g), norm(diff_g,2)  
+	return dot(diff_x,diff_g)/norm(diff_g,2)
 end
-
-ComputeAuxTermPrx2(cutData_dic,prevCutData_dic)
-
-
-cutData_dic[(2,1)].capa[:tech][:openspace][:capaConv]
-prevCutData_dic[(2,1)].capa[:tech][:openspace][:capaConv]
