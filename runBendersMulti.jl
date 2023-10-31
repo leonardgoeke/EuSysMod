@@ -103,7 +103,7 @@ nb_workers = scr * 2
 @static if Sys.islinux()
 	# MatheClusterManagers is an altered version of https://github.com/JuliaParallel/ClusterManagers.jl by https://github.com/mariok90 to run on the cluster of TU Berlin
 	using MatheClusterManagers
-	qrsh(nb_workers, timelimit=345600, ram=ram, mp = t_int)
+	qsub(nb_workers, timelimit=345600, ram=ram, mp = t_int)
 	#addprocs_slurm(nb_workers; kwargs...)
 else
     addprocs(nb_workers; exeflags="--project=.")
