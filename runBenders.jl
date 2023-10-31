@@ -230,7 +230,7 @@ cntNull_int = 0
 cntSrs_int = 0
 	
 # iteration algorithm
-while true i
+while true
 
 	produceMessage(report_m.options,report_m.report, 1," - Started iteration $i", testErr = false, printErr = false)
 
