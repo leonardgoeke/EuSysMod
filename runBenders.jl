@@ -48,7 +48,7 @@ end
 swt_ntup = (itr = 6, avgImp = 0.2, itrAvg = 4)
 
 weight_ntup = (capa = 1.0, capaStSize = 1e-1, stLvl = 1e-2) # weight of variables in stabilization (-> small value for variables with large numbers to equalize)
-iniStab = true # initialize stabilization
+iniStab = 2 # initialize stabilization
 srsThr = 0.0 # threshold for serious step
 solOpt = (dbInf = true, numFoc = 3, addVio = 1e4) # options for solving top problem
 
@@ -78,7 +78,13 @@ if !isempty(nearOpt_ntup) && any(getindex.(meth_tup,1) .!= :qtr) error("Near-opt
 # ! intermediate definitions of parameters
 
 #suffix_str = "_" * string(method) * "_" * string(res) * "_s" * string(scr) * "_rad" * string(rad) * "_shr" * string(shr) * "_with" * (useVI.bal ? "" : "outVI")* "VIBal_with" * (useVI.st ? "" : "out") * "VISt"
-inDir_arr = [dir_str * "_basis",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"] # input directory
+inDir_arr = [dir_str * "_basis",dir_str * "_full",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"] # input directory
+
+if iniStab in (0,1)
+	heuInDir_arr = inDir_arr
+elseif iniStab == 2
+	heuInDir_arr =  [dir_str * "_basis",dir_str * "_heu",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"]
+end 
 
 coefRngHeu_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
 coefRngTop_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
@@ -96,9 +102,9 @@ opt_obj = Gurobi.Optimizer # solver option
 optMod_dic = Dict{Symbol,NamedTuple}()
 
 # options for model generation 
-optMod_dic[:heu] =  (inputDir = inDir_arr, resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 1, shortExp = 10, coefRng = coefRngHeu_tup, scaFac = scaFacHeu_tup)
-optMod_dic[:top] =  (inputDir = inDir_arr, resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 1, shortExp = 10, coefRng = coefRngTop_tup, scaFac = scaFacTop_tup)
-optMod_dic[:sub] =  (inputDir = inDir_arr, resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 1, shortExp = 10, coefRng = coefRngSub_tup, scaFac = scaFacSub_tup)
+optMod_dic[:heu] =  (inputDir = heuInDir_arr, resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 1, shortExp = 10, coefRng = coefRngHeu_tup, scaFac = scaFacHeu_tup)
+optMod_dic[:top] =  (inputDir = inDir_arr, 	  resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 1, shortExp = 10, coefRng = coefRngTop_tup, scaFac = scaFacTop_tup)
+optMod_dic[:sub] =  (inputDir = inDir_arr, 	  resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 1, shortExp = 10, coefRng = coefRngSub_tup, scaFac = scaFacSub_tup)
 
 #endregion
 
@@ -138,6 +144,9 @@ push!(top_m.parts.obj.cns[:objEqn], (name = :aggCut, cns = @constraint(top_m.opt
 
 produceMessage(report_m.options,report_m.report, 1," - Created top-problem and sub-problems", testErr = false, printErr = false)
 
+# initialize loop variables
+itrReport_df = DataFrame(i = Int[], lowCost = Float64[], bestObj = Float64[], gap = Float64[], curCost = Float64[], time_ges = Float64[], time_top = Float64[], time_sub = Float64[])
+
 #endregion
 
 #region # * add stabilization methods
@@ -146,10 +155,10 @@ cutData_dic = Dict{Tuple{Int64,Int64},resData}()
 if !isempty(meth_tup)
 	
 	# ! get starting solution with heuristic solve or generic
-	if iniStab
+	if iniStab != 0
 		produceMessage(report_m.options,report_m.report, 1," - Started heuristic pre-solve for starting solution", testErr = false, printErr = false)
 		heu_m, startSol_obj =  @suppress heuristicSolve(optMod_dic[:heu],1.0,t_int,opt_obj,rtrnMod = true,solDet = true,fltSt = true);
-		lowBd_fl = value(heu_m.parts.obj.var[:objVar][1,:var])
+		lowBd_fl = iniStab == 2 ? 0.0 : value(heu_m.parts.obj.var[:objVar][1,:var])
 	else
 		@suppress optimize!(top_m.optModel)
 		startSol_obj = resData()
@@ -157,27 +166,36 @@ if !isempty(meth_tup)
 		startSol_obj.capa, startSol_obj.stLvl = writeResult(top_m,[:capa,:exp,:mustCapa,:mustExp,:stLvl])
 		lowBd_fl = startSol_obj.objVal
 	end
-	# ! solve sub-problems with capacity of heuristic solution to use for creation of cuts in first iteration and to compute corresponding objective value
+	
+	# initialize iteration variables
+	push!(itrReport_df, (i = 0, lowCost = 0, bestObj = Inf, gap = 1.0, curCost = Inf, time_ges = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60, time_top = 0, time_sub = 0))
+
+	# solve sub-problems with capacity of heuristic solution to use for creation of cuts in first iteration and to compute corresponding objective value
+	startSub = now()
 	for x in collect(sub_tup)
 		dual_etr = @suppress runSub(sub_dic[x],copy(startSol_obj),:barrier)
 		cutData_dic[x] = dual_etr
 	end
 	startSol_obj.objVal = startSol_obj.objVal + sum(map(x -> x.objVal, values(cutData_dic)))
+	timeSub_fl = Dates.toms(now() - startSub) / Dates.toms(Second(1))/60
+
+	# write results for first iteration
+	push!(itrReport_df, (i = 1, lowCost = lowBd_fl, bestObj = startSol_obj.objVal, gap = 1 - lowBd_fl/startSol_obj.objVal, curCost = startSol_obj.objVal, time_ges = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60, time_top = 0, time_sub = timeSub_fl))
+	iIni_fl = 2
 	
-	# ! initialize stabilization
+	# initialize stabilization
 	stab_obj, eleNum_int = stabObj(meth_tup,swt_ntup,weight_ntup,startSol_obj,lowBd_fl,top_m)
 	centerStab!(stab_obj.method[stab_obj.actMet],stab_obj,solOpt.addVio,top_m,report_m)
 	produceMessage(report_m.options,report_m.report, 1," - Initialized stabilization with $eleNum_int variables", testErr = false, printErr = false)
 else
 	stab_obj = nothing
+	push!(itrReport_df, (i = 0, lowCost = 0, bestObj = Inf, gap = 1.0, curCost = Inf, time_ges = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60, time_top = 0, time_sub = 0))
+	iIni_fl = 0
 end
 
 #endregion
 
 #region # * benders iteration
-
-# initialize loop variables
-itrReport_df = DataFrame(i = Int[], lowCost = Float64[], bestObj = Float64[], gap = Float64[], curCost = Float64[], time_ges = Float64[], time_top = Float64[], time_sub = Float64[])
 
 nameStab_dic = Dict(:lvl1 => "level bundle",:lvl2 => "level bundle",:qtr => "quadratic trust-region", :prx => "proximal bundle", :box => "box-step method")
 
@@ -188,8 +206,8 @@ if top_m.options.lvlFrs != 0
 end
 
 if !isempty(meth_tup)
-	itrReport_df[!,:actMethod] = Symbol[]
-	foreach(x -> itrReport_df[!,Symbol("dynPar_",x)] = Union{Float64,Vector{Float64}}[], stab_obj.method)
+	itrReport_df[!,:actMethod] = fill(Symbol(),size(itrReport_df,1))
+	foreach(x -> itrReport_df[!,Symbol("dynPar_",x)] = Union{Float64,Vector{Float64}}[fill(Float64[],size(itrReport_df,1))...], stab_obj.method)
 end
 
 if !isempty(nearOpt_ntup)
@@ -202,7 +220,7 @@ end
 best_obj = !isempty(meth_tup) ? startSol_obj : resData()
 
 # initialize loop variables
-i = 1
+i = iIni_fl
 gap_fl = 1.0
 minStep_fl = 0.0
 nOpt_int = 0
