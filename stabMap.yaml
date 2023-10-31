@@ -228,3 +228,431 @@ prx1_27:
     start: 10.0
     a: 5.0
     min: 1e-3
+dsb_1:
+  dsb:
+    start: 1.0
+    min: 1e-6
+    lam: 0.2
+    myMax: 1.0
+dsb_2:
+  dsb:
+    start: 5.0
+    min: 1e-6
+    lam: 0.2
+    myMax: 1.0
+dsb_3:
+  dsb:
+    start: 10.0
+    min: 1e-6
+    lam: 0.2
+    myMax: 1.0
+dsb_4:
+  dsb:
+    start: 1.0
+    min: 1e-5
+    lam: 0.2
+    myMax: 1.0
+dsb_5:
+  dsb:
+    start: 5.0
+    min: 1e-5
+    lam: 0.2
+    myMax: 1.0
+dsb_6:
+  dsb:
+    start: 10.0
+    min: 1e-5
+    lam: 0.2
+    myMax: 1.0
+dsb_7:
+  dsb:
+    start: 1.0
+    min: 1e-3
+    lam: 0.2
+    myMax: 1.0
+dsb_8:
+  dsb:
+    start: 5.0
+    min: 1e-3
+    lam: 0.2
+    myMax: 1.0
+dsb_9:
+  dsb:
+    start: 10.0
+    min: 1e-3
+    lam: 0.2
+    myMax: 1.0
+dsb_10:
+  dsb:
+    start: 1.0
+    min: 1e-6
+    lam: 0.5
+    myMax: 1.0
+dsb_11:
+  dsb:
+    start: 5.0
+    min: 1e-6
+    lam: 0.5
+    myMax: 1.0
+dsb_12:
+  dsb:
+    start: 10.0
+    min: 1e-6
+    lam: 0.5
+    myMax: 1.0
+dsb_13:
+  dsb:
+    start: 1.0
+    min: 1e-5
+    lam: 0.5
+    myMax: 1.0
+dsb_14:
+  dsb:
+    start: 5.0
+    min: 1e-5
+    lam: 0.5
+    myMax: 1.0
+dsb_15:
+  dsb:
+    start: 10.0
+    min: 1e-5
+    lam: 0.5
+    myMax: 1.0
+dsb_16:
+  dsb:
+    start: 1.0
+    min: 1e-3
+    lam: 0.5
+    myMax: 1.0
+dsb_17:
+  dsb:
+    start: 5.0
+    min: 1e-3
+    lam: 0.5
+    myMax: 1.0
+dsb_18:
+  dsb:
+    start: 10.0
+    min: 1e-3
+    lam: 0.5
+    myMax: 1.0
+dsb_19:
+  dsb:
+    start: 1.0
+    min: 1e-6
+    lam: 0.7
+    myMax: 1.0
+dsb_20:
+  dsb:
+    start: 5.0
+    min: 1e-6
+    lam: 0.7
+    myMax: 1.0
+dsb_21:
+  dsb:
+    start: 10.0
+    min: 1e-6
+    lam: 0.7
+    myMax: 1.0
+dsb_22:
+  dsb:
+    start: 1.0
+    min: 1e-5
+    lam: 0.7
+    myMax: 1.0
+dsb_23:
+    start: 5.0
+    min: 1e-5
+    lam: 0.7
+    myMax: 1.0
+dsb_24:
+    start: 10.0
+    min: 1e-5
+    lam: 0.7
+    myMax: 1.0
+dsb_25:
+    start: 1.0
+    min: 1e-3
+    lam: 0.7
+    myMax: 1.0
+dsb_26:
+    start: 5.0
+    min: 1e-3
+    lam: 0.7
+    myMax: 1.0
+dsb_27:
+    start: 10.0
+    min: 1e-3
+    lam: 0.7
+    myMax: 1.0
+dsb_28:
+    start: 1.0
+    min: 1e-6
+    lam: 0.2
+    myMax: 5.0
+dsb_29:
+    start: 5.0
+    min: 1e-6
+    lam: 0.2
+    myMax: 5.0
+dsb_30:
+    start: 10.0
+    min: 1e-6
+    lam: 0.2
+    myMax: 5.0
+dsb_31:
+    start: 1.0
+    min: 1e-5
+    lam: 0.2
+    myMax: 5.0
+dsb_32:
+    start: 5.0
+    min: 1e-5
+    lam: 0.2
+    myMax: 5.0
+dsb_33:
+    start: 10.0
+    min: 1e-5
+    lam: 0.2
+    myMax: 5.0
+dsb_34:
+    start: 1.0
+    min: 1e-3
+    lam: 0.2
+    myMax: 5.0
+dsb_35:
+    start: 5.0
+    min: 1e-3
+    lam: 0.2
+    myMax: 5.0
+dsb_36:
+    start: 10.0
+    min: 1e-3
+    lam: 0.2
+    myMax: 5.0
+dsb_37:
+    start: 1.0
+    min: 1e-6
+    lam: 0.5
+    myMax: 5.0
+dsb_38:
+    start: 5.0
+    min: 1e-6
+    lam: 0.5
+    myMax: 5.0
+dsb_39:
+    start: 10.0
+    min: 1e-6
+    lam: 0.5
+    myMax: 5.0
+dsb_40:
+    start: 1.0
+    min: 1e-5
+    lam: 0.5
+    myMax: 5.0
+dsb_41:
+    start: 5.0
+    min: 1e-5
+    lam: 0.5
+    myMax: 5.0
+dsb_42:
+    start: 10.0
+    min: 1e-5
+    lam: 0.5
+    myMax: 5.0
+dsb_43:
+    start: 1.0
+    min: 1e-3
+    lam: 0.5
+    myMax: 5.0
+dsb_44:
+    start: 5.0
+    min: 1e-3
+    lam: 0.5
+    myMax: 5.0
+dsb_45:
+    start: 10.0
+    min: 1e-3
+    lam: 0.5
+    myMax: 5.0
+dsb_46:
+    start: 1.0
+    min: 1e-6
+    lam: 0.7
+    myMax: 5.0
+dsb_47:
+    start: 5.0
+    min: 1e-6
+    lam: 0.7
+    myMax: 5.0
+dsb_48:
+    start: 10.0
+    min: 1e-6
+    lam: 0.7
+    myMax: 5.0
+dsb_49:
+    start: 1.0
+    min: 1e-5
+    lam: 0.7
+    myMax: 5.0
+dsb_50:
+    start: 5.0
+    min: 1e-5
+    lam: 0.7
+    myMax: 5.0
+dsb_51:
+    start: 10.0
+    min: 1e-5
+    lam: 0.7
+    myMax: 5.0
+dsb_52:
+    start: 1.0
+    min: 1e-3
+    lam: 0.7
+    myMax: 5.0
+dsb_53:
+    start: 5.0
+    min: 1e-3
+    lam: 0.7
+    myMax: 5.0
+dsb_54:
+    start: 10.0
+    min: 1e-3
+    lam: 0.7
+    myMax: 5.0
+dsb_55:
+    start: 1.0
+    min: 1e-6
+    lam: 0.2
+    myMax: 10.0
+dsb_56:
+    start: 5.0
+    min: 1e-6
+    lam: 0.2
+    myMax: 10.0
+dsb_57:
+    start: 10.0
+    min: 1e-6
+    lam: 0.2
+    myMax: 10.0
+dsb_58:
+    start: 1.0
+    min: 1e-5
+    lam: 0.2
+    myMax: 10.0
+dsb_59:
+    start: 5.0
+    min: 1e-5
+    lam: 0.2
+    myMax: 10.0
+dsb_60:
+    start: 10.0
+    min: 1e-5
+    lam: 0.2
+    myMax: 10.0
+dsb_61:
+    start: 1.0
+    min: 1e-3
+    lam: 0.2
+    myMax: 10.0
+dsb_62:
+    start: 5.0
+    min: 1e-3
+    lam: 0.2
+    myMax: 10.0
+dsb_63:
+    start: 10.0
+    min: 1e-3
+    lam: 0.2
+    myMax: 10.0
+dsb_64:
+    start: 1.0
+    min: 1e-6
+    lam: 0.5
+    myMax: 10.0
+dsb_65:
+  dsb:
+    start: 5.0
+    min: 1e-6
+    lam: 0.5
+    myMax: 10.0
+dsb_66:
+    start: 10.0
+    min: 1e-6
+    lam: 0.5
+    myMax: 10.0
+dsb_67:
+    start: 1.0
+    min: 1e-5
+    lam: 0.5
+    myMax: 10.0
+dsb_68:
+    start: 5.0
+    min: 1e-5
+    lam: 0.5
+    myMax: 10.0
+dsb_69:
+    start: 10.0
+    min: 1e-5
+    lam: 0.5
+    myMax: 10.0
+dsb_70:
+    start: 1.0
+    min: 1e-3
+    lam: 0.5
+    myMax: 10.0
+dsb_71:
+    start: 5.0
+    min: 1e-3
+    lam: 0.5
+    myMax: 10.0
+dsb_72:
+    start: 10.0
+    min: 1e-3
+    lam: 0.5
+    myMax: 10.0
+dsb_73:
+    start: 1.0
+    min: 1e-6
+    lam: 0.7
+    myMax: 10.0
+dsb_74:
+    start: 5.0
+    min: 1e-6
+    lam: 0.7
+    myMax: 10.0
+dsb_75:
+    start: 10.0
+    min: 1e-6
+    lam: 0.7
+    myMax: 10.0
+dsb_76:
+    start: 1.0
+    min: 1e-5
+    lam: 0.7
+    myMax: 10.0
+dsb_77:
+    start: 5.0
+    min: 1e-5
+    lam: 0.7
+    myMax: 10.0
+dsb_78:
+    start: 10.0
+    min: 1e-5
+    lam: 0.7
+    myMax: 10.0
+dsb_79:
+    start: 1.0
+    min: 1e-3
+    lam: 0.7
+    myMax: 10.0
+dsb_80:
+    start: 5.0
+    min: 1e-3
+    lam: 0.7
+    myMax: 10.0
+dsb_81:
+    start: 10.0
+    min: 1e-3
+    lam: 0.7
+    myMax: 10.0

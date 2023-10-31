@@ -3,6 +3,7 @@ import Pkg; Pkg.activate(".")
 #using AnyMOD, Gurobi, CSV, YAML, Base.Threads
 
 b = "C:/Users/lgoeke/git/AnyMOD.jl/"
+b = "C:/Felix Data/PhD/Benders Paper/2nd revision/git/AnyMOD.jl-1/"
 
 using Base.Threads, CSV, Dates, LinearAlgebra, Requires, YAML
 using MathOptInterface, Reexport, Statistics, SparseArrays, CategoricalArrays
@@ -34,7 +35,7 @@ include(b* "src/dataHandling/gurobiTools.jl")
 #using AnyMOD, Gurobi, CSV, YAML, Base.Threads
 suffix_str = "test"
 
-methKey_str = "qtr_3"
+methKey_str = "prx1_1"
 
 # write tuple for stabilization
 stabMap_dic = YAML.load_file("stabMap.yaml")
@@ -70,7 +71,7 @@ res = 96 # temporal resolution
 frs = 0 # level of foresight
 scr = 2 # number of scenarios
 t_int = 4
-dir_str = "C:/Users/lgoeke/git/EuSysMod/"
+dir_str = "C:/Felix Data/PhD/Benders Paper/2nd revision/git/EuSysMod-1/"
 
 if !isempty(nearOpt_ntup) && any(getindex.(meth_tup,1) .!= :qtr) error("Near-optimal can only be paired with quadratic stabilization!") end
 
@@ -228,7 +229,7 @@ while true
 	
 	#region # * solve of sub-problems  
 	startSub = now()
-	prevCutData_dic = !isempty(meth_tup) ? cutData_dic : nothing # save values of previous cut for proximal method variation 2
+	prevCutData_dic = !isempty(meth_tup) && stab_obj.method[stab_obj.actMet] == :prx ? copy(cutData_dic) : nothing # save values of previous cut for proximal method variation 2
 	for x in collect(sub_tup)
 		dual_etr = runSub(sub_dic[x],copy(resData_obj),:barrier,nOpt_int == 0 ? getConvTol(gap_fl,gap,conSub) : conSub.rng[2],conSub.crs)
 		cutData_dic[x] = dual_etr
@@ -279,6 +280,7 @@ while true
 		# solve problem without stabilization method
 		topCostNoStab_fl, estCostNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj)
 
+		print(ComputeAuxTermPrx2(cutData_dic,prevCutData_dic))
 		# adjust dynamic parameters of stabilization
 		foreach(i -> adjustDynPar!(stab_obj,top_m,i,adjCtr_boo,cntSrs_int,cntNull_int,levelDual_fl,estCostNoStab_fl,estCost_fl,best_obj.objVal,currentCost,nOpt_int != 0,report_m), 1:length(stab_obj.method))
 
@@ -395,7 +397,7 @@ end
 #region # * write results
 
 # write dataframe for reporting on iteration
-itrReport_df[!,:case] .= suffix_str
+	itrReport_df[!,:case] .= suffix_str
 CSV.write(modOpt_tup.resultDir * "/iterationCuttingPlane_$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
 
 if !isempty(nearOpt_ntup)
@@ -411,3 +413,40 @@ for x in collect(sub_tup)
 end
 
 #endregion
+
+function ComputeAuxTermPrx2(cutData_dic::Dict,prevCutData_dic)
+	diff_x = Float64[]
+	diff_g = Float64[]
+
+	for scen in collect(keys(cutData_dic))
+		for sys in collect(keys(cutData_dic[scen].capa))
+			for sSym in keys(cutData_dic[scen].capa[sys])
+				#print(sort(filter(x-> occursin("capa",lowercase(string(x))), collect(keys(cutData_dic[scen].capa[sys][sSym]))),rev=true))
+				for capaSym in sort(filter(x-> occursin("capa",lowercase(string(x))), collect(keys(cutData_dic[scen].capa[sys][sSym]))),rev=true)
+					#println((cutData_dic[scen].capa[sys][sSym][capaSym][!,:value] , prevCutData_dic[scen].capa[sys][sSym][capaSym][!,:value]))
+					append!(diff_x,cutData_dic[scen].capa[sys][sSym][capaSym][!,:value] - prevCutData_dic[scen].capa[sys][sSym][capaSym][!,:value])
+					append!(diff_g, cutData_dic[scen].capa[sys][sSym][capaSym][!,:dual] - prevCutData_dic[scen].capa[sys][sSym][capaSym][!,:dual])
+				end
+			end
+		end
+	end
+
+	for scen in keys(cutData_dic)
+		for sys in keys(cutData_dic[scen].stLvl)
+			for sSym in keys(cutData_dic[scen].stLvl[sys])
+				for capaSym in keys(cutData_dic[scen].stLvl[sys][sSym])
+					append!(diff_x,cutData_dic[scen].stLvl[sys][sSym][capaSym][!,:value] - prevCutData_dic[scen].stLvl[sys][sSym][capaSym][!,:value])
+					append!(diff_g, cutData_dic[scen].stLvl[sys][sSym][capaSym][!,:dual] - prevCutData_dic[scen].stLvl[sys][sSym][capaSym][!,:dual])
+				end
+			end
+		end
+	end
+
+	return dot(diff_x,diff_g), norm(diff_g,2)  
+end
+
+ComputeAuxTermPrx2(cutData_dic,prevCutData_dic)
+
+
+cutData_dic[(2,1)].capa[:tech][:openspace][:capaConv]
+prevCutData_dic[(2,1)].capa[:tech][:openspace][:capaConv]
