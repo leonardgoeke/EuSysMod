@@ -35,7 +35,7 @@ include(b* "src/dataHandling/gurobiTools.jl")
 #using AnyMOD, Gurobi, CSV, YAML, Base.Threads
 suffix_str = "test"
 
-methKey_str = "prx1_1"
+methKey_str = "dsb_59"
 
 # write tuple for stabilization
 stabMap_dic = YAML.load_file("stabMap.yaml")
@@ -56,7 +56,7 @@ solOpt = (dbInf = true, numFoc = 3, addVio = 1e4) # options for solving top prob
 nearOpt_ntup = tuple()
 
 gap = 0.001
-conSub = (rng = [1e-8,1e-8], int = :lin, crs = true) # range and interpolation method for convergence criteria of subproblems
+conSub = (rng = [1e-2,1e-8], int = :lin, crs = true) # range and interpolation method for convergence criteria of subproblems
 useVI = (bal = false, st = true) # use vaild inequalities
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
 
@@ -298,7 +298,7 @@ while true
 		# solve problem without stabilization method
 		topCostNoStab_fl, estCostNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj)
 
-		println(Prx2AuxTerm(cutData_dic,prevCutData_dic))
+		#println(Prx2AuxTerm(cutData_dic,prevCutData_dic))
 		# adjust dynamic parameters of stabilization
 		foreach(i -> adjustDynPar!(stab_obj,top_m,i,adjCtr_boo,cntSrs_int,cntNull_int,levelDual_fl,estCostNoStab_fl,estCost_fl,best_obj.objVal,currentCost,nOpt_int != 0,report_m), 1:length(stab_obj.method))
 
@@ -415,7 +415,7 @@ end
 #region # * write results
 
 # write dataframe for reporting on iteration
-	itrReport_df[!,:case] .= suffix_str
+itrReport_df[!,:case] .= suffix_str
 CSV.write(modOpt_tup.resultDir * "/iterationCuttingPlane_$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
 
 if !isempty(nearOpt_ntup)
@@ -431,7 +431,6 @@ for x in collect(sub_tup)
 end
 
 #endregion
-
 
 
 

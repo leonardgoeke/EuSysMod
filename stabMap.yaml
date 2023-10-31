@@ -738,3 +738,9 @@ dsb_81:
     min: 1e-3
     lam: 0.7
     myMax: 10.0
+dsb_82:
+  dsb:
+    start: 10.0
+    min: 1e-3
+    lam: 0.5
+    myMax: 1000.0
