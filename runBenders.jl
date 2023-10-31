@@ -406,7 +406,7 @@ while true
 	end
 
 	#endregion
-	Prx2AuxTerm(cutData_dic,prevCutData_dic)
+	println(computePrx2Aux(cutData_dic,prevCutData_dic))
 	i = i + 1
 end
 
