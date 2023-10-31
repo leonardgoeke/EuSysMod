@@ -434,33 +434,52 @@ end
 
 
 
-function Prx2AuxTerm(cutData_dic,prevCutData_dic)
+function computePrx2Aux(cutData_dic::Dict{Tuple{Int64, Int64}, resData},prevCutData_dic::Dict{Tuple{Int64, Int64}, resData})
 
-	diff_x = Float64[]
-	diff_g = Float64[]
-	for scen in collect(keys(cutData_dic))
-		for sys in collect(keys(cutData_dic[scen].capa))
-			if !isempty(intersect(collect(keys(cutData_dic[scen].capa[sys])),collect(keys(prevCutData_dic[scen].capa[sys]))))
-				for sSym in intersect(collect(keys(cutData_dic[scen].capa[sys])),collect(keys(prevCutData_dic[scen].capa[sys])))
-					#print(sort(filter(x-> occursin("capa",lowercase(string(x))), collect(keys(cutData_dic[scen].capa[sys][sSym]))),rev=true))
-					for capaSym in sort(filter(x-> occursin("capa",lowercase(string(x))), collect(keys(cutData_dic[scen].capa[sys][sSym]))),rev=true)
-						println((scen,sys,sSym,capaSym))
-						#println((cutData_dic[scen].capa[sys][sSym][capaSym][!,:value] , prevCutData_dic[scen].capa[sys][sSym][capaSym][!,:value]))
-						cur = rename(cutData_dic[scen].capa[sys][sSym][capaSym],[:value,:dual] .=> [:cur_val,:cur_dual])
-						prev = rename(prevCutData_dic[scen].capa[sys][sSym][capaSym],[:value,:dual] .=> [:prev_val,:prev_dual])
-						if :dir in Symbol.(names(cur)) && :dir in Symbol.(names(prev))
-							tmp_df = joinMissing(cur,prev,intCol(cur,:dir),:outer,Dict(:cur_val => 0, :cur_dual => 0, :prev_val => 0, :prev_dual=>0))
-						else
-							tmp_df = joinMissing(cur,prev,intCol(cur),:outer,Dict(:cur_val => 0, :cur_dual => 0, :prev_val => 0, :prev_dual=>0))
+	diffVal_arr = Float64[]
+	diffDual_arr = Float64[]
+	
+	for scr in collect(keys(cutData_dic)) # loop over scenarios
+		for sys in (:exc,:tech)
+			
+			allSys_arr = unique(union(keys(cutData_dic[scr].capa[sys]),keys(prevCutData_dic[scr].capa[sys])))
+			
+			for sSym in allSys_arr #intersect(keys(cutData_dic[scr].capa[sys]),keys(prevCutData_dic[scr].capa[sys]))
+				
+				# get relevant dictionaries for systems (handles problem, if system only exits in current or previous)
+			
+				curCapa_dic = sSym in keys(cutData_dic[scr].capa[sys]) ? cutData_dic[scr].capa[sys][sSym] : Dict{Symbol, DataFrame}()
+				prevCapa_dic = sSym in keys(prevCutData_dic[scr].capa[sys]) ? prevCutData_dic[scr].capa[sys][sSym] : Dict{Symbol, DataFrame}()
+
+				allVar_arr = unique(union(keys(curCapa_dic),keys(prevCapa_dic)))
+				
+				for capaSym in filter(x-> occursin("capa",lowercase(string(x))), allVar_arr)
+					
+					# get current and previous values
+					if capaSym in keys(curCapa_dic) 
+						curCut_df = curCapa_dic[capaSym]
+					else # case if capacity variable only exists in previous 
+						curCut_df = filter(x -> false, copy(prevCapa_dic[capaSym]))
 						end
-						tmp_df.diff_val = tmp_df.cur_val - tmp_df.prev_val
-						tmp_df.diff_dual = tmp_df.cur_dual - tmp_df.prev_dual
-						append!(diff_x,tmp_df[!,:diff_val])
-						append!(diff_g,tmp_df[!,:diff_dual])
+					curCut_df = rename(curCut_df,[:value,:dual] .=> [:valueCur,:dualCur])
+
+					if capaSym in keys(prevCapa_dic) 
+						prevCut_df = prevCapa_dic[capaSym]
+					else # case if capacity variable only exists in current 
+						prevCut_df = filter(x -> false, copy(curCapa_dic[capaSym]))
 					end
+					prevCut_df = rename(prevCut_df,[:value,:dual] .=> [:valuePrev,:dualPrev])
+					
+					# join values for current and previous cut to compute difference
+					join_df = joinMissing(curCut_df,prevCut_df,intCol(curCut_df,:dir),:outer,Dict(:valueCur => 0, :dualCur => 0, :valuePrev => 0, :dualPrev=>0))
+					join_df[!,:valueDiff] = join_df[!,:valueCur] .- join_df[!,:valuePrev]
+					join_df[!,:dualDiff] = join_df[!,:dualCur] - join_df[!,:dualPrev]
+					# add difference to array
+					append!(diffVal_arr,join_df[!,:valueDiff])
+					append!(diffDual_arr,join_df[!,:dualDiff])
 				end
 			end
 		end
 	end
-	return dot(diff_x,diff_g)/norm(diff_g,2)
+	return dot(diffVal_arr,diffDual_arr)/norm(diffDual_arr,2)
 end
