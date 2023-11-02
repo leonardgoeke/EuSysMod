@@ -35,7 +35,7 @@ include(b* "src/dataHandling/gurobiTools.jl")
 #using AnyMOD, Gurobi, CSV, YAML, Base.Threads
 suffix_str = "test"
 
-methKey_str = "dsb_59"
+methKey_str = "prx2_26"
 
 # write tuple for stabilization
 stabMap_dic = YAML.load_file("stabMap.yaml")
@@ -247,7 +247,7 @@ while true
 	
 	#region # * solve of sub-problems  
 	startSub = now()
-	prevCutData_dic = !isempty(meth_tup) && stab_obj.method[stab_obj.actMet] == :prx ? copy(cutData_dic) : nothing # save values of previous cut for proximal method variation 2
+	prevCutData_dic = !isempty(meth_tup) && stab_obj.method[stab_obj.actMet] == :prx2 ? copy(cutData_dic) : nothing # save values of previous cut for proximal method variation 2
 	for x in collect(sub_tup)
 		dual_etr = runSub(sub_dic[x],copy(resData_obj),:barrier,nOpt_int == 0 ? getConvTol(gap_fl,gap,conSub) : conSub.rng[2],conSub.crs)
 		cutData_dic[x] = dual_etr
@@ -298,9 +298,10 @@ while true
 		# solve problem without stabilization method
 		topCostNoStab_fl, estCostNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj)
 
-		#println(Prx2AuxTerm(cutData_dic,prevCutData_dic))
+		#println(computePrx2Aux(cutData_dic,prevCutData_dic))
 		# adjust dynamic parameters of stabilization
-		foreach(i -> adjustDynPar!(stab_obj,top_m,i,adjCtr_boo,cntSrs_int,cntNull_int,levelDual_fl,estCostNoStab_fl,estCost_fl,best_obj.objVal,currentCost,nOpt_int != 0,report_m), 1:length(stab_obj.method))
+		prx2Aux_fl = stab_obj.method[stab_obj.actMet] == :prx2 ? computePrx2Aux(cutData_dic,prevCutData_dic) : nothing
+		foreach(i -> adjustDynPar!(stab_obj,top_m,i,adjCtr_boo,cntSrs_int,cntNull_int,levelDual_fl,prx2Aux_fl,estCostNoStab_fl,estCost_fl,best_obj.objVal,currentCost,nOpt_int != 0,report_m), 1:length(stab_obj.method))
 
 		# update center of stabilisation
 		if adjCtr_boo
@@ -406,7 +407,6 @@ while true
 	end
 
 	#endregion
-	println(computePrx2Aux(cutData_dic,prevCutData_dic))
 	i = i + 1
 end
 
@@ -432,54 +432,3 @@ end
 
 #endregion
 
-
-
-function computePrx2Aux(cutData_dic::Dict{Tuple{Int64, Int64}, resData},prevCutData_dic::Dict{Tuple{Int64, Int64}, resData})
-
-	diffVal_arr = Float64[]
-	diffDual_arr = Float64[]
-	
-	for scr in collect(keys(cutData_dic)) # loop over scenarios
-		for sys in (:exc,:tech)
-			
-			allSys_arr = unique(union(keys(cutData_dic[scr].capa[sys]),keys(prevCutData_dic[scr].capa[sys])))
-			
-			for sSym in allSys_arr #intersect(keys(cutData_dic[scr].capa[sys]),keys(prevCutData_dic[scr].capa[sys]))
-				
-				# get relevant dictionaries for systems (handles problem, if system only exits in current or previous)
-			
-				curCapa_dic = sSym in keys(cutData_dic[scr].capa[sys]) ? cutData_dic[scr].capa[sys][sSym] : Dict{Symbol, DataFrame}()
-				prevCapa_dic = sSym in keys(prevCutData_dic[scr].capa[sys]) ? prevCutData_dic[scr].capa[sys][sSym] : Dict{Symbol, DataFrame}()
-
-				allVar_arr = unique(union(keys(curCapa_dic),keys(prevCapa_dic)))
-				
-				for capaSym in filter(x-> occursin("capa",lowercase(string(x))), allVar_arr)
-					
-					# get current and previous values
-					if capaSym in keys(curCapa_dic) 
-						curCut_df = curCapa_dic[capaSym]
-					else # case if capacity variable only exists in previous 
-						curCut_df = filter(x -> false, copy(prevCapa_dic[capaSym]))
-						end
-					curCut_df = rename(curCut_df,[:value,:dual] .=> [:valueCur,:dualCur])
-
-					if capaSym in keys(prevCapa_dic) 
-						prevCut_df = prevCapa_dic[capaSym]
-					else # case if capacity variable only exists in current 
-						prevCut_df = filter(x -> false, copy(curCapa_dic[capaSym]))
-					end
-					prevCut_df = rename(prevCut_df,[:value,:dual] .=> [:valuePrev,:dualPrev])
-					
-					# join values for current and previous cut to compute difference
-					join_df = joinMissing(curCut_df,prevCut_df,intCol(curCut_df,:dir),:outer,Dict(:valueCur => 0, :dualCur => 0, :valuePrev => 0, :dualPrev=>0))
-					join_df[!,:valueDiff] = join_df[!,:valueCur] .- join_df[!,:valuePrev]
-					join_df[!,:dualDiff] = join_df[!,:dualCur] - join_df[!,:dualPrev]
-					# add difference to array
-					append!(diffVal_arr,join_df[!,:valueDiff])
-					append!(diffDual_arr,join_df[!,:dualDiff])
-				end
-			end
-		end
-	end
-	return dot(diffVal_arr,diffDual_arr)/norm(diffDual_arr,2)
-end

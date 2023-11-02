@@ -289,6 +289,9 @@ let i = iIni_fl, gap_fl = 1.0, minStep_fl = 0.0, nOpt_int = 0, costOpt_fl = Inf,
 
 		# solve problem without stabilization method
 		if !isempty(meth_tup) topCostNoStab_fl, estCostNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj) end
+		
+		# if method is prx2, recorf the current cutData_dic
+		prevCutData_dic = !isempty(meth_tup) && stab_obj.method[stab_obj.actMet] == :prx2 ? copy(cutData_dic) : nothing
 
 		# get result of sub-problem
 		timeSub = getSubResults!(cutData_dic, sub_tup, solvedFut_dic)
@@ -335,7 +338,8 @@ let i = iIni_fl, gap_fl = 1.0, minStep_fl = 0.0, nOpt_int = 0, costOpt_fl = Inf,
 			cntSrs_int = adjCtr_boo ? cntSrs_int + 1 : 0
 
 			# adjust dynamic parameters of stabilization
-			foreach(i -> adjustDynPar!(stab_obj,top_m,i,adjCtr_boo,cntSrs_int,cntNull_int,levelDual_fl,estCostNoStab_fl,estCost_fl,best_obj.objVal,currentCost,nOpt_int != 0,report_m), 1:length(stab_obj.method))
+			prx2Aux_fl = stab_obj.method[stab_obj.actMet] == :prx2 ? computePrx2Aux(cutData_dic,prevCutData_dic) : nothing
+			foreach(i -> adjustDynPar!(stab_obj,top_m,i,adjCtr_boo,cntSrs_int,cntNull_int,levelDual_fl,prx2Aux_fl,estCostNoStab_fl,estCost_fl,best_obj.objVal,currentCost,nOpt_int != 0,report_m), 1:length(stab_obj.method))
 
 			# update center of stabilisation
 			if adjCtr_boo

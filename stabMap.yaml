@@ -252,6 +252,141 @@ prx1_27:
     start: 10.0
     a: 5.0
     min: 1e-3
+prx2_1:
+  prx2:
+    start: 1.0
+    a: 2.0
+    min: 1e-6
+prx2_2:
+  prx2:
+    start: 5.0
+    a: 2.0
+    min: 1e-6
+prx2_3:
+  prx2:
+    start: 10.0
+    a: 2.0
+    min: 1e-6
+prx2_4:
+  prx2:
+    start: 1.0
+    a: 4.0
+    min: 1e-6
+prx2_5:
+  prx2:
+    start: 5.0
+    a: 4.0
+    min: 1e-6
+prx2_6:
+  prx2:
+    start: 10.0
+    a: 4.0
+    min: 1e-6
+prx2_7:
+  prx2:
+    start: 1.0
+    a: 5.0
+    min: 1e-6
+prx2_8:
+  prx2:
+    start: 5.0
+    a: 5.0
+    min: 1e-6
+prx2_9:
+  prx2:
+    start: 10.0
+    a: 5.0
+    min: 1e-6
+prx2_10:
+  prx2:
+    start: 1.0
+    a: 2.0
+    min: 1e-5
+prx2_11:
+  prx2:
+    start: 5.0
+    a: 2.0
+    min: 1e-5
+prx2_12:
+  prx2:
+    start: 10.0
+    a: 2.0
+    min: 1e-5
+prx2_13:
+  prx2:
+    start: 1.0
+    a: 4.0
+    min: 1e-5
+prx2_14:
+  prx2:
+    start: 5.0
+    a: 4.0
+    min: 1e-5
+prx2_15:
+  prx2:
+    start: 10.0
+    a: 4.0
+    min: 1e-5
+prx2_16:
+  prx2:
+    start: 1.0
+    a: 5.0
+    min: 1e-5
+prx2_17:
+  prx2:
+    start: 5.0
+    a: 5.0
+    min: 1e-5
+prx2_18:
+  prx2:
+    start: 10.0
+    a: 5.0
+    min: 1e-5
+prx2_19:
+  prx2:
+    start: 1.0
+    a: 2.0
+    min: 1e-3
+prx2_20:
+  prx2:
+    start: 5.0
+    a: 2.0
+    min: 1e-3
+prx2_21:
+  prx2:
+    start: 10.0
+    a: 2.0
+    min: 1e-3
+prx2_22:
+  prx2:
+    start: 1.0
+    a: 4.0
+    min: 1e-3
+prx2_23:
+  prx2:
+    start: 5.0
+    a: 4.0
+    min: 1e-3
+prx2_24:
+  prx2:
+    start: 10.0
+    a: 4.0
+    min: 1e-3
+prx2_25:
+  prx2:
+    start: 1.0
+    a: 5.0
+    min: 1e-3
+prx2_26:
+  prx2:
+    start: 5.0
+    a: 5.0
+    min: 1e-3
+prx2_27:
+  prx2:
+    start: 10.0
+    a: 5.0
+    min: 1e-3
 dsb_1:
   dsb:
     start: 1.0
