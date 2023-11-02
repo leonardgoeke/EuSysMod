@@ -34,7 +34,7 @@ include(b* "src/dataHandling/gurobiTools.jl")
 #using AnyMOD, Gurobi, CSV, YAML, Base.Threads
 suffix_str = "test"
 
-methKey_str = "qtr_3"
+methKey_str = "qtr_5"
 
 # write tuple for stabilization
 stabMap_dic = YAML.load_file("stabMap.yaml")
@@ -55,7 +55,7 @@ solOpt = (dbInf = true, numFoc = 3, addVio = 1e4) # options for solving top prob
 nearOpt_ntup = tuple()
 
 gap = 0.001
-conSub = (rng = [1e-8,1e-8], int = :lin, crs = true) # range and interpolation method for convergence criteria of subproblems
+conSub = (rng = [1e-2,1e-8], int = :log, crs = false) # range and interpolation method for convergence criteria of subproblems
 useVI = (bal = false, st = true) # use vaild inequalities
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
 
@@ -404,7 +404,7 @@ while true
 	end
 
 	#endregion
-	Prx2AuxTerm(cutData_dic,prevCutData_dic)
+
 	i = i + 1
 end
 
