@@ -56,7 +56,7 @@ solOpt = (dbInf = true, numFoc = 3, addVio = 1e4) # options for solving top prob
 nearOpt_ntup = tuple()
 
 gap = 0.001
-conSub = (rng = [1e-2,1e-8], int = :lin, crs = true) # range and interpolation method for convergence criteria of subproblems
+conSub = (rng = [1e-2,1e-8], int = :log, crs = false) # range and interpolation method for convergence criteria of subproblems
 useVI = (bal = false, st = true) # use vaild inequalities
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
 
@@ -407,6 +407,7 @@ while true
 	end
 
 	#endregion
+
 	i = i + 1
 end
 
