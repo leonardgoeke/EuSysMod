@@ -8,13 +8,7 @@ scr = parse(Int,ARGS[1])
 t_int = parse(Int,ARGS[2])
 
 b = "" # add the model dir here
-input_arr = [b * "_basis",b * "timeSeries/8760hours_det",b * "timeSeries/8760hours_s" * string(scr) * "_stoch"]
-resultDir_str = b * "results"
-
-scr = 2
-t_int = 4
-b = "" # add the model dir here
-input_arr = [b * "_basis",b * "timeSeries/96hours_det",b * "timeSeries/96hours_s" * string(scr) * "_stoch"]
+input_arr = [b * "_basis",b * "_full",b * "timeSeries/8760hours_det",b * "timeSeries/8760hours_s" * string(scr) * "_stoch"]
 resultDir_str = b * "results"
 
 # create and solve model
