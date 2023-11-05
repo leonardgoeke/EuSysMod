@@ -118,137 +118,137 @@ lvl2_9:
     lam: 0.7
     myMax: 10.0
 prx1_1:
-  prx:
+  prx1:
     start: 1.0
     a: 2.0
     min: 1e-6
 prx1_2:
-  prx:
+  prx1:
     start: 5.0
     a: 2.0
     min: 1e-6
 prx1_3:
-  prx:
+  prx1:
     start: 10.0
     a: 2.0
     min: 1e-6
 prx1_4:
-  prx:
+  prx1:
     start: 1.0
     a: 4.0
     min: 1e-6
 prx1_5:
-  prx:
+  prx1:
     start: 5.0
     a: 4.0
     min: 1e-6
 prx1_6:
-  prx:
+  prx1:
     start: 10.0
     a: 4.0
     min: 1e-6
 prx1_7:
-  prx:
+  prx1:
     start: 1.0
     a: 5.0
     min: 1e-6
 prx1_8:
-  prx:
+  prx1:
     start: 5.0
     a: 5.0
     min: 1e-6
 prx1_9:
-  prx:
+  prx1:
     start: 10.0
     a: 5.0
     min: 1e-6
 prx1_10:
-  prx:
+  prx1:
     start: 1.0
     a: 2.0
     min: 1e-5
 prx1_11:
-  prx:
+  prx1:
     start: 5.0
     a: 2.0
     min: 1e-5
 prx1_12:
-  prx:
+  prx1:
     start: 10.0
     a: 2.0
     min: 1e-5
 prx1_13:
-  prx:
+  prx1:
     start: 1.0
     a: 4.0
     min: 1e-5
 prx1_14:
-  prx:
+  prx1:
     start: 5.0
     a: 4.0
     min: 1e-5
 prx1_15:
-  prx:
+  prx1:
     start: 10.0
     a: 4.0
     min: 1e-5
 prx1_16:
-  prx:
+  prx1:
     start: 1.0
     a: 5.0
     min: 1e-5
 prx1_17:
-  prx:
+  prx1:
     start: 5.0
     a: 5.0
     min: 1e-5
 prx1_18:
-  prx:
+  prx1:
     start: 10.0
     a: 5.0
     min: 1e-5
 prx1_19:
-  prx:
+  prx1:
     start: 1.0
     a: 2.0
     min: 1e-3
 prx1_20:
-  prx:
+  prx1:
     start: 5.0
     a: 2.0
     min: 1e-3
 prx1_21:
-  prx:
+  prx1:
     start: 10.0
     a: 2.0
     min: 1e-3
 prx1_22:
-  prx:
+  prx1:
     start: 1.0
     a: 4.0
     min: 1e-3
 prx1_23:
-  prx:
+  prx1:
     start: 5.0
     a: 4.0
     min: 1e-3
 prx1_24:
-  prx:
+  prx1:
     start: 10.0
     a: 4.0
     min: 1e-3
 prx1_25:
-  prx:
+  prx1:
     start: 1.0
     a: 5.0
     min: 1e-3
 prx1_26:
-  prx:
+  prx1:
     start: 5.0
     a: 5.0
     min: 1e-3
 prx1_27:
-  prx:
+  prx1:
     start: 10.0
     a: 5.0
     min: 1e-3
