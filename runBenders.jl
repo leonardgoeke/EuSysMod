@@ -424,7 +424,7 @@ if !isempty(nearOpt_ntup)
 end
 
 # run top-problem with optimal values fixed
-@suppress computeFeas(top_m,best_obj.capa,1e-5,wrtRes_boo = true)
+@suppress computeFeas(top_m,best_obj.capa,1e-5,wrtRes = true)
 
 # run top-problem and sub-problems with optimal values fixed
 for x in collect(sub_tup)
