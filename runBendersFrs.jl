@@ -3,7 +3,6 @@ import Pkg; Pkg.activate(".")
 #using AnyMOD, Gurobi, CSV, YAML, Base.Threads
 
 b = "C:/Users/lgoeke/git/AnyMOD.jl/"
-#b = "C:/Felix Data/PhD/Benders Paper/2nd revision/git/AnyMOD.jl-1/"
 
 using Base.Threads, CSV, Dates, LinearAlgebra, Requires, YAML
 using MathOptInterface, Reexport, Statistics, SparseArrays, CategoricalArrays
@@ -35,7 +34,7 @@ include(b* "src/dataHandling/gurobiTools.jl")
 #using AnyMOD, Gurobi, CSV, YAML, Base.Threads
 suffix_str = "test"
 
-methKey_str = "prx2_26"
+methKey_str = "qtr_5"
 
 # write tuple for stabilization
 stabMap_dic = YAML.load_file("stabMap.yaml")
@@ -53,7 +52,13 @@ srsThr = 0.0 # threshold for serious step
 solOpt = (dbInf = true, numFoc = 3, addVio = 1e4) # options for solving top problem
 
 # defines objectives for near-optimal (can only take top-problem variables, must specify a variable)
-nearOpt_ntup = tuple()
+nearOptOpj_tup = ("tradeOffWind_1" => (:min,((0.0,(variable = :capaConv, system = :onshore)),(1.0,(variable = :capaConv, system = :offshore)))),
+                	"tradeOffWind_2" => (:min,((0.25,(variable = :capaConv, system = :onshore)),(0.75,(variable = :capaConv, system = :offshore)))),
+						"tradeOffWind_3" => (:min,((0.5,(variable = :capaConv, system = :onshore)),(0.5,(variable = :capaConv, system = :offshore)))),
+							"tradeOffWind_4" => (:min,((0.75,(variable = :capaConv, system = :onshore)),(0.25,(variable = :capaConv, system = :offshore)))),
+								"tradeOffWind_5" => (:min,((1.0,(variable = :capaConv, system = :onshore)),(0.0,(variable = :capaConv, system = :offshore)))))
+
+nearOpt_ntup = (cutThres = 0.1, lssThres = 0.05, optThres = 0.05, feasGap = 0.0001, cutDel = 20, obj = nearOptOpj_tup)
 
 gap = 0.001
 conSub = (rng = [1e-2,1e-8], int = :log, crs = false) # range and interpolation method for convergence criteria of subproblems
@@ -68,10 +73,10 @@ timeLim = 120 # set a time-limti in minuts for the algorithm
 #region # * set and write model options
 
 res = 96 # temporal resolution
-frs = 0 # level of foresight
+frs = 2 # level of foresight
 scr = 2 # number of scenarios
 t_int = 4
-dir_str = "C:/Felix Data/PhD/Benders Paper/2nd revision/git/EuSysMod-1/"
+dir_str = "C:/Users/lgoeke/git/EuSysMod/"
 
 if !isempty(nearOpt_ntup) && any(getindex.(meth_tup,1) .!= :qtr) error("Near-optimal can only be paired with quadratic stabilization!") end
 
@@ -157,7 +162,7 @@ if !isempty(meth_tup)
 	# ! get starting solution with heuristic solve or generic
 	if iniStab != 0
 		produceMessage(report_m.options,report_m.report, 1," - Started heuristic pre-solve for starting solution", testErr = false, printErr = false)
-		heu_m, startSol_obj =  @suppress heuristicSolve(optMod_dic[:heu],1.0,t_int,opt_obj,rtrnMod = true,solDet = true,fltSt = true);
+		heu_m, startSol_obj =  @suppress heuristicSolve(optMod_dic[:heu],1.0,t_int,opt_obj,rtrnMod = true,fltSt = true);
 		lowBd_fl = iniStab == 2 ? 0.0 : value(heu_m.parts.obj.var[:objVar][1,:var])
 	else
 		@suppress optimize!(top_m.optModel)
@@ -212,7 +217,7 @@ end
 
 if !isempty(nearOpt_ntup)
 	nearOpt_df = DataFrame(i = Int[], timestep = String[], region = String[], system = String[], id = String[], capacity_variable = Symbol[], capacity_value = Float64[], cost = Float64[], lss = Float64[])
-	itrReport_df[!,:objective] = String[]
+	itrReport_df[!,:objective] = fill("",size(itrReport_df,1))
 	nOpt_int = 0
 end
 
@@ -228,6 +233,7 @@ costOpt_fl = Inf
 nearOptObj_fl = Inf
 cntNull_int = 0
 cntSrs_int = 0
+lssOpt_fl = Inf
 	
 # iteration algorithm
 while true
@@ -431,5 +437,18 @@ for x in collect(sub_tup)
 	runSub(sub_dic[x],copy(best_obj),:barrier,1e-8,false,true)
 end
 
+# write storage levels
+for tSym in (:h2Cavern,:reservoir,:pumpedStorage,:redoxBattery,:lithiumBattery)
+	stLvl_df = DataFrame(Ts_dis = Int[], scr = Int[], lvl = Float64[])
+	for x in collect(sub_tup)
+		append!(stLvl_df,combine(x -> (lvl = sum(value.(x.var)),), groupby(sub_dic[x].parts.tech[tSym].var[:stLvl],[:Ts_dis,:scr])))
+	end
+	stLvl_df = unstack(sort(unique(stLvl_df),:Ts_dis),:scr,:lvl)
+	CSV.write(resultDir_str * "/stLvl_" * string(tSym) * "_" * suffix_str * ".csv",stLvl_df)
+end
+
 #endregion
+
+
+
 

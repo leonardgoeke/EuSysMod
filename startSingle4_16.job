@@ -5,7 +5,7 @@
 #$ -j y
 #$ -l h_rt=172800
 #$ -l mem_free=16G
-#$ -pe mp 32
+#$ -pe mp 4
 #$ -m bae
 #$ -M lgo@wip.tu-berlin.de
 
@@ -16,4 +16,4 @@ export GUROBI_HOME
 module add gurobi/10.0.1
 module add julia/1.7.3
 
-julia runConv.jl $scr $NSLOTS
+julia runConv.jl $scr $scrSing $NSLOTS

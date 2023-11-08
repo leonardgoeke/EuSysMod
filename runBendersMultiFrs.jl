@@ -40,23 +40,34 @@ delCut = 20 # number of iterations since cut creation or last binding before cut
 
 weight_ntup = (capa = 1.0, capaStSize = 1e-1, stLvl = 1e-2)  # weight of variables in stabilization (-> small value for variables with large numbers to equalize)
 solOpt = (dbInf = true, numFoc = 3, addVio = 1e6) # options for solving top problem
+frs = parse(Int,ARGS[6]) # level of foresight
 
 # defines objectives for near-optimal (can only take top-problem variables, must specify a variable)
-nearOpt_ntup = tuple()
+
+if parse(Bool,ARGS[7])
+	nearOptOpj_tup = ("tradeOffWind_1" => (:min,((0.0,(variable = :capaConv, system = :onshore)),(1.0,(variable = :capaConv, system = :offshore)))),
+						"tradeOffWind_2" => (:min,((0.25,(variable = :capaConv, system = :onshore)),(0.75,(variable = :capaConv, system = :offshore)))),
+							"tradeOffWind_3" => (:min,((0.5,(variable = :capaConv, system = :onshore)),(0.5,(variable = :capaConv, system = :offshore)))),
+								"tradeOffWind_4" => (:min,((0.75,(variable = :capaConv, system = :onshore)),(0.25,(variable = :capaConv, system = :offshore)))),
+									"tradeOffWind_5" => (:min,((1.0,(variable = :capaConv, system = :onshore)),(0.0,(variable = :capaConv, system = :offshore)))))
+
+	nearOpt_ntup = (cutThres = 0.1, lssThres = 0.05, optThres = 0.05, feasGap = 0.0001, cutDel = 20, obj = nearOptOpj_tup)
+else
+	nearOpt_ntup = tuple()
+end
 
 reportFreq = 50 # number of iterations report files are written
-timeLim = parse(Float64,ARGS[6])  # set a time-limti in minuts for the algorithm
+timeLim = parse(Float64,ARGS[8])  # set a time-limti in minuts for the algorithm
 
 #endregion
 
 #region # * set and write model options
 
 res = 8760 # temporal resolution
-frs = 0 # level of foresight
-scr = parse(Int,ARGS[7]) # number of scenarios
+scr = parse(Int,ARGS[9]) # number of scenarios
 # computational resources
-ram = parse(Int,ARGS[8])
-t_int = parse(Int,ARGS[9])
+ram = parse(Int,ARGS[10])
+t_int = parse(Int,ARGS[11])
 dir_str = ""
 
 if !isempty(nearOpt_ntup) && any(getindex.(meth_tup,1) .!= :qtr) error("Near-optimal can only be paired with quadratic stabilization!") end
@@ -168,6 +179,9 @@ subTasks_arr = map(workers()) do w
 			return elapsed_time, result_obj
 		end
 
+		# get storage levels
+		function getStlvl(t_sym::Symbol) return SUB_M.parts.tech[t_sym].var[:stLvl] end
+
 		return nothing
 	end
 
@@ -260,7 +274,7 @@ end
 
 if !isempty(nearOpt_ntup)
 	nearOpt_df = DataFrame(i = Int[], timestep = String[], region = String[], system = String[], id = String[], capacity_variable = Symbol[], capacity_value = Float64[], cost = Float64[], lss = Float64[])
-	itrReport_df[!,:objective] = String[]
+	itrReport_df[!,:objective] = fill("",size(itrReport_df,1))
 	nOpt_int = 0
 end
 
@@ -268,7 +282,7 @@ end
 best_obj = !isempty(meth_tup) ? startSol_obj : resData()
 
 # initialize loop variables
-let i = iIni_fl, gap_fl = 1.0, minStep_fl = 0.0, nOpt_int = 0, costOpt_fl = Inf, nearOptObj_fl = Inf, cntNull_int = 0, cntSrs_int = 0, gapTar_fl = gap
+let i = iIni_fl, gap_fl = 1.0, minStep_fl = 0.0, nOpt_int = 0, costOpt_fl = Inf, nearOptObj_fl = Inf, cntNull_int = 0, cntSrs_int = 0, gapTar_fl = gap, lssOpt_fl = Inf
 		
 	# iteration algorithm
 	while true
@@ -472,4 +486,18 @@ end
 solvedFut_dic = @suppress runAllSub(sub_tup, best_obj,:barrier,1e-8,false,true)
 wait.(values(solvedFut_dic))
 
+# write storage levels
+for tSym in (:h2Cavern,:reservoir,:pumpedStorage,:redoxBattery,:lithiumBattery)
+	stLvl_df = DataFrame(Ts_dis = Int[], scr = Int[], lvl = Float64[])
+	for j in 1:length(sub_tup)
+		stData_df = @spawnat j+1 getStlvl(tSym)
+		append!(stLvl_df,combine(x -> (lvl = sum(value.(x.var)),), groupby(stData_df,[:Ts_dis,:scr])))
+	end
+	stLvl_df = unstack(sort(unique(stLvl_df),:Ts_dis),:scr,:lvl)
+	CSV.write(modOpt_tup.resultDir * "/stLvl_" * string(tSym) * "_" * replace(top_m.options.objName,"topModel" => "") * ".csv",stLvl_df)
+end
+
 #endregion
+
+
+
