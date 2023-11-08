@@ -1,9 +1,8 @@
-technology_3,region_1,timestep_1,parameter,value
-h2Cavern,,2030,costExpStSize,2
-h2Cavern,,2040,costExpStSize,1.5
-h2Cavern,,,stOutToStInFix,1
-h2Cavern,,,sizeToStOutFix,1000
-h2Cavern,DE,all,capaStSizeUp,2997035.354
-h2Cavern,FR,all,capaStSizeFix,0
-h2Cavern,BE,all,capaStSizeFix,0
-h2Cavern,NL,all,capaStSizeFix,0
+technology_3,region_1,parameter,value
+h2Cavern,,costExpStSize,1.5
+h2Cavern,,stOutToStInFix,1
+h2Cavern,,sizeToStOutFix,1000
+h2Cavern,DE,capaStSizeUp,2997035.354
+h2Cavern,FR,capaStSizeFix,0
+h2Cavern,BE,capaStSizeFix,0
+h2Cavern,NL,capaStSizeFix,0
