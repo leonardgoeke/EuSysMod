@@ -114,10 +114,10 @@ using Distributed
 opt_obj = Gurobi.Optimizer # solver option
 
 # function to run sub-problems
-function runAllSub(sub_tup::Tuple, capaData_obj::resData,sol_sym::Symbol,optTol_fl::Float64,crs_boo::Bool=false,wrtRes::Bool=false)
+function runAllSub(sub_tup::Tuple, capaData_obj::resData,sol_sym::Symbol,optTol_fl::Float64,crs::Bool=false,wrtRes::Bool=false)
 	solvedFut_dic = Dict{Int, Future}()
 	for j in 1:length(sub_tup)
-		solvedFut_dic[j] = @spawnat j+1 runSubDis(copy(capaData_obj),sol_sym,optTol_fl,crs_boo,wrtRes)
+		solvedFut_dic[j] = @spawnat j+1 runSubDis(copy(capaData_obj),sol_sym,optTol_fl,crs,wrtRes)
 	end
 	return solvedFut_dic
 end
@@ -466,7 +466,7 @@ if !isempty(nearOpt_ntup)
 end
 
 # run top-problem with optimal values fixed
-@suppress computeFeas(top_m,best_obj.capa,1e-5,wrtRes_boo = true)
+@suppress computeFeas(top_m,best_obj.capa,1e-5,wrtRes = true)
 
 # run top-problem and sub-problems with optimal values fixed
 solvedFut_dic = @suppress runAllSub(sub_tup, best_obj,:barrier,1e-8,false,true)
