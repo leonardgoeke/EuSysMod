@@ -16,4 +16,4 @@ export GUROBI_HOME
 module add gurobi/10.0.1
 module add julia/1.7.3
 
-julia runConv.jl $scr $scrSing $NSLOTS
+julia runSingle.jl $scr $scrSing $NSLOTS

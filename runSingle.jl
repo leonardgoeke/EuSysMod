@@ -2,10 +2,10 @@ import Pkg; Pkg.activate(".")
 # Pkg.instantiate()
 # ! import AnyMOD and packages
 
-using AnyMOD, Gurobi
+using AnyMOD, Gurobi, CSV
 
 scr = parse(Int,ARGS[1])
-scrSing = parse(Symbol,ARGS[2])
+scrSing = Symbol(ARGS[2])
 t_int = parse(Int,ARGS[3])
 
 
@@ -38,3 +38,5 @@ for tSym in (:h2Cavern,:reservoir,:pumpedStorage,:redoxBattery,:lithiumBattery)
 	stLvl_df = unstack(sort(unique(stLvl_df),:Ts_dis),:scr,:lvl)
 	CSV.write(resultDir_str * "/stLvl_" * string(tSym) * "_" * string(scrSing) * ".csv",stLvl_df)
 end
+
+# write duals

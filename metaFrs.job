@@ -12,16 +12,19 @@
 qsub -t 1 -v method='qtr_4' -v srs='0.0' -v ini='2' -v conv='4' -v vi='false' -v frs='2' -v no='false' -v time='540' -v scr='4' -v ram='16' startBendersOnly4_16.job
 qsub -t 2 -v method='qtr_5' -v srs='0.0' -v ini='2' -v conv='4' -v vi='false' -v frs='2' -v no='false' -v time='540' -v scr='4' -v ram='16' startBendersOnly4_16.job
 
+sleep 3600
+
 qsub -t 3 -v method='qtr_4' -v srs='0.0' -v ini='2' -v conv='4' -v vi='false' -v frs='0' -v no='false' -v time='540' -v scr='4' -v ram='16' startBendersOnly4_16.job
 qsub -t 4 -v method='qtr_5' -v srs='0.0' -v ini='2' -v conv='4' -v vi='false' -v frs='0' -v no='false' -v time='540' -v scr='4' -v ram='16' startBendersOnly4_16.job
+
+sleep 3600
 
 qsub -t 5 -v method='qtr_4' -v srs='0.0' -v ini='2' -v conv='4' -v vi='false' -v frs='2' -v no='true' -v time='540' -v scr='4' -v ram='16' startBendersOnly4_16.job
 qsub -t 6 -v method='qtr_5' -v srs='0.0' -v ini='2' -v conv='4' -v vi='false' -v frs='2' -v no='true' -v time='540' -v scr='4' -v ram='16' startBendersOnly4_16.job
 
-qsub -t 7 -v method='qtr_4' -v srs='0.0' -v ini='2' -v conv='4' -v vi='false' -v frs='0' -v no='true' -v time='540' -v scr='4' -v ram='16' startBendersOnly4_16.job
-qsub -t 8 -v method='qtr_5' -v srs='0.0' -v ini='2' -v conv='4' -v vi='false' -v frs='0' -v no='true' -v time='540' -v scr='4' -v ram='16' startBendersOnly4_16.job
+sleep 3600
 
-qsub -t 9 -v scr='4' -v scrSing='s2008' startSingle4_16.job
-qsub -t 10 -v scr='4' -v scrSing='s2009' startSingle4_16.job
-qsub -t 11 -v scr='4' -v scrSing='s2014' startSingle4_16.job
-qsub -t 12 -v scr='4' -v scrSing='s2016' startSingle4_16.job
+qsub -t 7 -v scr='4' -v scrSing='s2009' startSingle4_16.job
+qsub -t 8 -v scr='4' -v scrSing='s2014' startSingle4_16.job
+qsub -t 9 -v scr='4' -v scrSing='s2016' startSingle4_16.job
+qsub -t 10 -v scr='4' -v scrSing='s2018' startSingle4_16.job

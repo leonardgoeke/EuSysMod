@@ -110,7 +110,7 @@ optMod_dic[:sub] =  (inputDir = inDir_arr, resultDir = dir_str * "results", suff
 #region # * initialize distributed computing
 
 # add workers to job
-nb_workers = scr * 2
+nb_workers = scr * (frs == 2 ? 4 : 1)
 @static if Sys.islinux()
 	# MatheClusterManagers is an altered version of https://github.com/JuliaParallel/ClusterManagers.jl by https://github.com/mariok90 to run on the cluster of TU Berlin
 	using MatheClusterManagers
@@ -180,7 +180,11 @@ subTasks_arr = map(workers()) do w
 		end
 
 		# get storage levels
-		function getStlvl(t_sym::Symbol) return SUB_M.parts.tech[t_sym].var[:stLvl] end
+		function getStlvl(t_sym::Symbol) return 
+			lvl_df = SUB_M.parts.tech[t_sym].var[:stLvl] 
+			lvl_df[!,:value] .= value.(lvl_df[!,:var])
+			return select(lvl_df,Not([:var]))
+		end
 
 		return nothing
 	end
@@ -210,6 +214,7 @@ produceMessage(report_m.options,report_m.report, 1," - Created top-problem and s
 
 # initialize loop variables
 itrReport_df = DataFrame(i = Int[], lowCost = Float64[], bestObj = Float64[], gap = Float64[], curCost = Float64[], time_ges = Float64[], time_top = Float64[], timeMax_sub = Float64[], timeSum_sub = Float64[])
+nearOpt_df = DataFrame(i = Int[], timestep = String[], region = String[], system = String[], id = String[], capacity_variable = Symbol[], capacity_value = Float64[], cost = Float64[], lss = Float64[])
 
 #endregion
 
@@ -273,7 +278,6 @@ if !isempty(meth_tup)
 end
 
 if !isempty(nearOpt_ntup)
-	nearOpt_df = DataFrame(i = Int[], timestep = String[], region = String[], system = String[], id = String[], capacity_variable = Symbol[], capacity_value = Float64[], cost = Float64[], lss = Float64[])
 	itrReport_df[!,:objective] = fill("",size(itrReport_df,1))
 	nOpt_int = 0
 end
@@ -490,8 +494,9 @@ wait.(values(solvedFut_dic))
 for tSym in (:h2Cavern,:reservoir,:pumpedStorage,:redoxBattery,:lithiumBattery)
 	stLvl_df = DataFrame(Ts_dis = Int[], scr = Int[], lvl = Float64[])
 	for j in 1:length(sub_tup)
-		stData_df = @spawnat j+1 getStlvl(tSym)
-		append!(stLvl_df,combine(x -> (lvl = sum(value.(x.var)),), groupby(stData_df,[:Ts_dis,:scr])))
+		fut = @spawnat j+1 getStlvl(tSym)
+		stData_df = fetch(fut)
+		append!(stLvl_df,combine(x -> (lvl = sum(x.value),), groupby(stData_df,[:Ts_dis,:scr])))
 	end
 	stLvl_df = unstack(sort(unique(stLvl_df),:Ts_dis),:scr,:lvl)
 	CSV.write(modOpt_tup.resultDir * "/stLvl_" * string(tSym) * "_" * replace(top_m.options.objName,"topModel" => "") * ".csv",stLvl_df)
