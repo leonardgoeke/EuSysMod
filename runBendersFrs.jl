@@ -47,7 +47,7 @@ end
 swt_ntup = (itr = 6, avgImp = 0.2, itrAvg = 4)
 
 weight_ntup = (capa = 1.0, capaStSize = 1e-1, stLvl = 1e-2) # weight of variables in stabilization (-> small value for variables with large numbers to equalize)
-iniStab = 2 # initialize stabilization
+iniStab = 0 # initialize stabilization
 srsThr = 0.0 # threshold for serious step
 solOpt = (dbInf = true, numFoc = 3, addVio = 1e4) # options for solving top problem
 
@@ -62,7 +62,7 @@ nearOpt_ntup = (cutThres = 0.1, lssThres = 0.05, optThres = 0.05, feasGap = 0.00
 
 gap = 0.001
 conSub = (rng = [1e-2,1e-8], int = :log, crs = false) # range and interpolation method for convergence criteria of subproblems
-useVI = (bal = false, st = true) # use vaild inequalities
+useVI = (bal = false, st = false) # use vaild inequalities
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
 
 reportFreq = 100 # number of iterations report files are written
@@ -72,9 +72,9 @@ timeLim = 120 # set a time-limti in minuts for the algorithm
 
 #region # * set and write model options
 
-res = 96 # temporal resolution
-frs = 2 # level of foresight
-scr = 2 # number of scenarios
+res = 169 # temporal resolution
+frs = 0 # level of foresight
+scr = 4 # number of scenarios
 t_int = 4
 dir_str = "C:/Users/lgoeke/git/EuSysMod/"
 
@@ -83,12 +83,12 @@ if !isempty(nearOpt_ntup) && any(getindex.(meth_tup,1) .!= :qtr) error("Near-opt
 # ! intermediate definitions of parameters
 
 #suffix_str = "_" * string(method) * "_" * string(res) * "_s" * string(scr) * "_rad" * string(rad) * "_shr" * string(shr) * "_with" * (useVI.bal ? "" : "outVI")* "VIBal_with" * (useVI.st ? "" : "out") * "VISt"
-inDir_arr = [dir_str * "_basis",dir_str * "_full",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"] # input directory
+inDir_arr = [dir_str * "_basis",dir_str * "_full",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr)] # input directory
 
 if iniStab in (0,1)
 	heuInDir_arr = inDir_arr
 elseif iniStab == 2
-	heuInDir_arr =  [dir_str * "_basis",dir_str * "_heu",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"]
+	heuInDir_arr =  [dir_str * "_basis",dir_str * "_heu",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr)]
 end 
 
 coefRngHeu_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))

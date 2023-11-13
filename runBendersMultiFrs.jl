@@ -1,5 +1,5 @@
 using AnyMOD, Gurobi, CSV, YAML, Base.Threads, Dates
-
+include("functions.jl")
 #region # * set and write algorithm options
 
 methKey_str = ARGS[1]
@@ -77,12 +77,12 @@ if !isempty(nearOpt_ntup) && any(getindex.(meth_tup,1) .!= :qtr) error("Near-opt
 suffix_str = "_method_" * string(methKey_str) * "_srs_" * string(srsThr) * "_ini_" * string(iniStab) * "_conv_" * string(convSub) * "_vi_" * string(ARGS[5]) * "_scr" * string(scr) # suffix for result files
 
 dir_str = "" # folder with data files
-inDir_arr = [dir_str * "_basis",dir_str * "_full",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"] # input directory
+inDir_arr = [dir_str * "_basis",dir_str * "_full",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr)] # input directory
 
 if iniStab in (0,1)
 	heuInDir_arr = inDir_arr
 elseif iniStab == 2
-	heuInDir_arr =  [dir_str * "_basis",dir_str * "_heu",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"]
+	heuInDir_arr =  [dir_str * "_basis",dir_str * "_heu",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr)]
 end 
 
 coefRngHeu_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
@@ -110,7 +110,7 @@ optMod_dic[:sub] =  (inputDir = inDir_arr, resultDir = dir_str * "results", suff
 #region # * initialize distributed computing
 
 # add workers to job
-nb_workers = scr * (frs == 2 ? 4 : 1)
+nb_workers = scr * (frs == 3 ? 4 : 1)
 @static if Sys.islinux()
 	# MatheClusterManagers is an altered version of https://github.com/JuliaParallel/ClusterManagers.jl by https://github.com/mariok90 to run on the cluster of TU Berlin
 	using MatheClusterManagers
@@ -179,18 +179,16 @@ subTasks_arr = map(workers()) do w
 			return elapsed_time, result_obj
 		end
 
-		# get storage levels
-		function getStlvl(t_sym::Symbol) return 
-			lvl_df = SUB_M.parts.tech[t_sym].var[:stLvl] 
-			lvl_df[!,:value] .= value.(lvl_df[!,:var])
-			return select(lvl_df,Not([:var]))
-		end
-
 		return nothing
 	end
 
 	return w => t
 end
+
+
+lvl_df = convM.parts.tech[t_sym].var[:stLvl] 
+lvl_df[!,:value] .= value.(lvl_df[!,:var])
+return select(lvl_df,Not([:var]))
 
 # ! finish creating top-problem
 top_m.subPro = tuple(0,0)
@@ -489,18 +487,6 @@ end
 # run top-problem and sub-problems with optimal values fixed
 solvedFut_dic = @suppress runAllSub(sub_tup, best_obj,:barrier,1e-8,false,true)
 wait.(values(solvedFut_dic))
-
-# write storage levels
-for tSym in (:h2Cavern,:reservoir,:pumpedStorage,:redoxBattery,:lithiumBattery)
-	stLvl_df = DataFrame(Ts_dis = Int[], scr = Int[], lvl = Float64[])
-	for j in 1:length(sub_tup)
-		fut = @spawnat j+1 getStlvl(tSym)
-		stData_df = fetch(fut)
-		append!(stLvl_df,combine(x -> (lvl = sum(x.value),), groupby(stData_df,[:Ts_dis,:scr])))
-	end
-	stLvl_df = unstack(sort(unique(stLvl_df),:Ts_dis),:scr,:lvl)
-	CSV.write(modOpt_tup.resultDir * "/stLvl_" * string(tSym) * "_" * replace(top_m.options.objName,"topModel" => "") * ".csv",stLvl_df)
-end
 
 #endregion
 
