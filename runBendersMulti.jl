@@ -39,7 +39,7 @@ useVI = (bal = parse(Bool,ARGS[5]), st = false) # use vaild inequalities
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
 
 weight_ntup = (capa = 1.0, capaStSize = 1e-1, stLvl = 1e-2)  # weight of variables in stabilization (-> small value for variables with large numbers to equalize)
-solOpt = (dbInf = true, numFoc = 3, addVio = 1e6) # options for solving top problem
+solOpt = (dbInf = true, numFoc = (stab = 3, noStab = 3), addVio = 1e6) # options for solving top problem
 
 # defines objectives for near-optimal (can only take top-problem variables, must specify a variable)
 nearOpt_ntup = tuple()
@@ -278,7 +278,7 @@ let i = iIni_fl, gap_fl = 1.0, minStep_fl = 0.0, nOpt_int = 0, costOpt_fl = Inf,
 		#region # * solve top-problem(s) and sub-problems
 
 		startTop = now()
-		resData_obj, stabVar_obj, topCost_fl, estCost_fl, levelDual_fl = @suppress runTop(top_m,cutData_dic,stab_obj,solOpt.numFoc,i); 
+		resData_obj, stabVar_obj, topCost_fl, estCost_fl, levelDual_fl = @suppress runTop(top_m,cutData_dic,stab_obj,solOpt.numFoc.stab,i); 
 		timeTop = now() - startTop
 
 		# get objective value for near-optimal
