@@ -288,7 +288,7 @@ let i = iIni_fl, gap_fl = 1.0, minStep_fl = 0.0, nOpt_int = 0, costOpt_fl = Inf,
 		solvedFut_dic = @suppress runAllSub(sub_tup, resData_obj,:barrier,getConvTol(gap_fl,gapTar_fl,conSub),conSub.crs)
 
 		# solve problem without stabilization method
-		if !isempty(meth_tup) topCostNoStab_fl, estCostNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj) end
+		if !isempty(meth_tup) topCostNoStab_fl, estCostNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj,solOpt.numFoc.noStab) end
 		
 		# if method is prx2, recorf the current cutData_dic
 		prevCutData_dic = !isempty(meth_tup) && stab_obj.method[stab_obj.actMet] == :prx2 ? copy(cutData_dic) : nothing
