@@ -117,6 +117,30 @@ lvl2_9:
   lvl2:
     lam: 0.7
     myMax: 10.0
+lvl2_10:
+  lvl2:
+    lam: 0.2
+    myMax: 50.0
+lvl2_11:
+  lvl2:
+    lam: 0.5
+    myMax: 50.0
+lvl2_12:
+  lvl2:
+    lam: 0.7
+    myMax: 50.0
+lvl2_13:
+  lvl2:
+    lam: 0.2
+    myMax: 100.0
+lvl2_14:
+  lvl2:
+    lam: 0.5
+    myMax: 100.0
+lvl2_15:
+  lvl2:
+    lam: 0.7
+    myMax: 100.0
 prx1_1:
   prx1:
     start: 1.0
