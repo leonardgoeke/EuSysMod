@@ -39,7 +39,7 @@ useVI = (bal = parse(Bool,ARGS[5]), st = false) # use vaild inequalities
 delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
 
 weight_ntup = (capa = 1.0, capaStSize = 1e-1, stLvl = 1e-2)  # weight of variables in stabilization (-> small value for variables with large numbers to equalize)
-solOpt = (dbInf = true, numFoc = (stab = 3, noStab = 3), addVio = 1e6) # options for solving top problem
+solOpt = (dbInf = true, numFoc = (stab = 3, noStab = 0), addVio = 1e6) # options for solving top problem
 
 # defines objectives for near-optimal (can only take top-problem variables, must specify a variable)
 nearOpt_ntup = tuple()
@@ -288,7 +288,7 @@ let i = iIni_fl, gap_fl = 1.0, minStep_fl = 0.0, nOpt_int = 0, costOpt_fl = Inf,
 		solvedFut_dic = @suppress runAllSub(sub_tup, resData_obj,:barrier,getConvTol(gap_fl,gapTar_fl,conSub),conSub.crs)
 
 		# solve problem without stabilization method
-		if !isempty(meth_tup) topCostNoStab_fl, estCostNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj,solOpt.numFoc.noStab) end
+		if !isempty(meth_tup) topCostNoStab_fl, estCostNoStab_fl =  @suppress runTopWithoutStab(top_m,stab_obj,solOpt.numFoc.noStab) end
 		
 		# if method is prx2, recorf the current cutData_dic
 		prevCutData_dic = !isempty(meth_tup) && stab_obj.method[stab_obj.actMet] == :prx2 ? copy(cutData_dic) : nothing
@@ -338,7 +338,7 @@ let i = iIni_fl, gap_fl = 1.0, minStep_fl = 0.0, nOpt_int = 0, costOpt_fl = Inf,
 			cntSrs_int = adjCtr_boo ? cntSrs_int + 1 : 0
 
 			# adjust dynamic parameters of stabilization
-			prx2Aux_fl = stab_obj.method[stab_obj.actMet] == :prx2 ? AnyMOD.computePrx2Aux(cutData_dic,prevCutData_dic) : nothing
+			prx2Aux_fl = stab_obj.method[stab_obj.actMet] == :prx2 ? computePrx2Aux(cutData_dic,prevCutData_dic) : nothing
 			foreach(i -> adjustDynPar!(stab_obj,top_m,i,adjCtr_boo,cntSrs_int,cntNull_int,levelDual_fl,prx2Aux_fl,estCostNoStab_fl,estCost_fl,best_obj.objVal,currentCost,nOpt_int != 0,report_m), 1:length(stab_obj.method))
 
 			# update center of stabilisation
