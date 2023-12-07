@@ -35,7 +35,7 @@ include(b* "src/dataHandling/gurobiTools.jl")
 #using AnyMOD, Gurobi, CSV, YAML, Base.Threads
 suffix_str = "test"
 
-methKey_str = "prx2_26"
+methKey_str = "prx1_18"
 
 # write tuple for stabilization
 stabMap_dic = YAML.load_file("stabMap.yaml")
@@ -48,9 +48,9 @@ end
 swt_ntup = (itr = 6, avgImp = 0.2, itrAvg = 4)
 
 weight_ntup = (capa = 1.0, capaStSize = 1e-1, stLvl = 1e-2) # weight of variables in stabilization (-> small value for variables with large numbers to equalize)
-iniStab = 2 # initialize stabilization
+iniStab = 0 # initialize stabilization
 srsThr = 0.0 # threshold for serious step
-solOpt = (dbInf = true, numFoc = 3, addVio = 1e4) # options for solving top problem
+solOpt = (dbInf = true, numFoc = (stab = 3, noStab = 0), addVio = 1e6) # options for solving top problem
 
 # defines objectives for near-optimal (can only take top-problem variables, must specify a variable)
 nearOpt_ntup = tuple()
@@ -71,7 +71,7 @@ res = 96 # temporal resolution
 frs = 0 # level of foresight
 scr = 2 # number of scenarios
 t_int = 4
-dir_str = "C:/Felix Data/PhD/Benders Paper/2nd revision/git/EuSysMod-1/"
+dir_str = "C:/Users/lgoeke/git/EuSysMod/"
 
 if !isempty(nearOpt_ntup) && any(getindex.(meth_tup,1) .!= :qtr) error("Near-optimal can only be paired with quadratic stabilization!") end
 
@@ -237,7 +237,7 @@ while true
 	#region # * solve top-problem 
 
 	startTop = now()
-	resData_obj, stabVar_obj, topCost_fl, estCost_fl, levelDual_fl = @suppress runTop(top_m,cutData_dic,stab_obj,solOpt.numFoc,i); 
+	resData_obj, stabVar_obj, topCost_fl, estCost_fl, levelDual_fl = @suppress runTop(top_m,cutData_dic,stab_obj,solOpt.numFoc.stab,i); 
 	timeTop = now() - startTop
 
 	# get objective value for near-optimal
@@ -296,7 +296,7 @@ while true
 		cntSrs_int = adjCtr_boo ? cntSrs_int + 1 : 0
 
 		# solve problem without stabilization method
-		topCostNoStab_fl, estCostNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj)
+		topCostNoStab_fl, estCostNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj,solOpt.numFoc.noStab)
 
 		#println(computePrx2Aux(cutData_dic,prevCutData_dic))
 		# adjust dynamic parameters of stabilization
