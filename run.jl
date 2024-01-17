@@ -8,13 +8,26 @@ t_int = parse(Int,ARGS[4]) # number of threads
 
 obj_str = h * "hours_" * h_heu * "hoursHeu" * grid * "_updated"
 temp_dir = "tempFix_" * obj_str # directory for temporary folder
+desFac_dir = "desFac_" * obj_str # directory for design factors
 
-if isdir(temp_dir) rm(temp_dir, recursive = true) end
-mkdir(temp_dir)
+for x in [desFac_dir,temp_dir]
+    if isdir(x) rm(x, recursive = true) end
+    mkdir(x)
+end
 
-inputMod_arr = ["_basis",grid,"timeSeries/" * h * "hours_2008_only2040",temp_dir]
-inputHeu_arr = ["_basis",grid,"timeSeries/" * h_heu * "hours_2008_only2040"]
+inputDes_arr = ["_basis",grid,"timeSeries/8760hours_2008_only2040"]
+inputHeu_arr = ["_basis",grid,"timeSeries/" * h_heu * "hours_2008_only2040",desFac_dir]
+inputMod_arr = ["_basis",grid,"timeSeries/" * h * "hours_2008_only2040",desFac_dir,temp_dir]
+
 resultDir_str = "results"
+
+#region # * compute design factors heuristic solve
+
+anyM = anyModel(inputDes_arr,resultDir_str, objName = obj_str * "_designFactors", supTsLvl = 2, shortExp = 5, redStep = 1.0, emissionLoss = false, holdFixed = true, onlyDesFac = true)
+createOptModel!(anyM);
+exportDesignFactors!(anyM,desFac_dir)
+
+#endregion
 
 #region # * perform heuristic solve
 
@@ -28,14 +41,10 @@ optMod_dic[:top] 	=  (inputDir = inputMod_arr, resultDir = resultDir_str, suffix
 heu_m, heuSca_obj = @suppress heuristicSolve(optMod_dic[:heuSca],1.0,t_int,Gurobi.Optimizer);
 ~, heuCom_obj = @suppress heuristicSolve(optMod_dic[:heuSca],8760/parse(Int,h_heu),t_int,Gurobi.Optimizer)
 # ! write fixes to files and limits to dictionary
-fix_dic, lim_dic, cntHeu_arr = evaluateHeu(heu_m,heuSca_obj,heuCom_obj,(thrsAbs = 0.001, thrsRel = 0.05),true) # get fixed and limited variables
-feasFix_dic = getFeasResult(optMod_dic[:top],fix_dic,lim_dic,t_int,0.001,Gurobi.Optimizer) # ensure feasiblity with fixed variables
+fix_dic, lim_dic, cntHeu_arr = evaluateHeu(heu_m,heuSca_obj,heuCom_obj,(thrsAbs = 0.001, thrsRel = 0.05),false) # get fixed and limited variables
+feasFix_tup = getFeasResult(optMod_dic[:top],fix_dic,lim_dic,t_int,0.001,Gurobi.Optimizer) # ensure feasiblity with fixed variables
 # ! write fixed variable values to files
-writeFixToFiles(fix_dic,feasFix_dic,temp_dir,heu_m; skipMustSt = true)
-
-
-
-if isfile(temp_dir * "/par_FixTech_bevFrtRoadLight_expConv.csv") rm(temp_dir * "/par_FixTech_bevFrtRoadLight_expConv.csv") end
+writeFixToFiles(fix_dic,feasFix_tup[1],temp_dir,heu_m; skipMustSt = true)
 
 heu_m = nothing
 
