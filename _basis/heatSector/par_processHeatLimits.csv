@@ -1,4 +1,4 @@
-timestep_2,region_4,technology_1,technology_2,technology_3,parameter,value,comment,"for eBoilerProHigh and eBoilerProLow potential is estimated in techData -> processHeatPotential, other technologies use existing capacities computed in heatInpus -> heatDemStock as upper limit",,,,,,,,,,,,,,,miscProHeat,electricHeatPro,eBoilerProHigh,capaConvUp
+timestep_2,region_4,technology_1,technology_2,technology_3,parameter,value,comment,"for eBoilerProHigh and eBoilerProMed potential is estimated in techData -> processHeatPotential, other technologies use existing capacities computed in heatInpus -> heatDemStock as upper limit",,,,,,,,,,,,,,,miscProHeat,electricHeatPro,eBoilerProHigh,capaConvUp
 all,01ES,ccgt,ccgtProMed,,capaConvUp,0,,,,,,,,,,,,,,,,,,,,
 all,02ES,ccgt,ccgtProMed,,capaConvUp,0,,,,,,,,,,,,,,,,,,,,
 all,03ES,ccgt,ccgtProMed,,capaConvUp,0,,,,,,,,,,,,,,,,,,,,

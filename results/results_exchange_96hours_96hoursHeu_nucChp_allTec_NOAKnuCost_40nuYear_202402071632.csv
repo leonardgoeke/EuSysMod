@@ -1,0 +1,765 @@
+timestep_superordinate_expansion,timestep_superordinate_dispatch,region_from,region_to,carrier,exchange,directed,variable,value,objName
+none,30th < 2040,EU < BE < be,nonEU < UK < uk,none,powerGrid < hvdc,no,expExc,1.4000000054077189,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < DK < dk_e,none,powerGrid < hvdc,no,expExc,0.5151490373373349,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,nonEU < NO < no_s,none,powerGrid < hvdc,no,expExc,1.9999996747517466,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < SE < se_4,none,powerGrid < hvdc,no,expExc,1.3999999249900408,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_e,EU < PL < pl,none,powerGrid < hvdc,no,expExc,1.9307652407602768e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w,nonEU < NO < no_s,none,powerGrid < hvdc,no,expExc,3.8657531474088165,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < EE < ee,EU < FI < fi,none,powerGrid < hvdc,no,expExc,1.0544744949276759,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FI < fi,EU < SE < se_1,none,powerGrid < hvdc,no,expExc,2.999999914595657,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FI < fi,EU < SE < se_2,none,powerGrid < hvdc,no,expExc,0.7999999832244586,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,EU < IE < ie,none,powerGrid < hvdc,no,expExc,1.3999999535359091,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,nonEU < UK < uk,none,powerGrid < hvdc,no,expExc,6.199999811389427,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < GR < gr,EU < IT < it_s,none,powerGrid < hvdc,no,expExc,0.9999999899748477,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cs,nonEU < ME < me,none,powerGrid < hvdc,no,expExc,1.5999999816517545,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < NL < nl,nonEU < UK < uk,none,powerGrid < hvdc,no,expExc,2.0000000320869042,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s,nonEU < UK < uk,none,powerGrid < hvdc,no,expExc,4.499999875979602,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PL < pl,EU < SE < se_4,none,powerGrid < hvdc,no,expExc,0.10811981005804247,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < UK < ni,nonEU < UK < uk,none,powerGrid < hvdc,no,expExc,2.7387039987436523,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SI < si < 57SI,EU < AT < at < 50AT,none,h2Grid,yes,expExc,0.6146882746216207,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 26FR,EU < BE < be < 28BE,none,h2Grid,yes,expExc,0.3837120628295116,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 27FR,EU < BE < be < 28BE,none,h2Grid,yes,expExc,0.16628725074891187,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w < 38DK,EU < DE < de < 31DE,none,h2Grid,yes,expExc,1.4147373938515517,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w < 38DK,EU < DK < dk_e < 72DK,none,h2Grid,yes,expExc,0.03206589817522627,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_4 < 89SE,EU < DK < dk_e < 72DK,none,h2Grid,yes,expExc,0.08971190498155833,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s < 79NO,EU < DK < dk_w < 38DK,none,h2Grid,yes,expExc,0.1329046332445699,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_1 < 86SE,EU < FI < fi < 74FI,none,h2Grid,yes,expExc,0.010834878127954556,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_sar < 98IT,EU < FR < fr_co < 99FR,none,h2Grid,yes,expExc,0.2717911169586983,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < RO < ro < 59RO,EU < HU < hu < 58HU,none,h2Grid,yes,expExc,2.4275455203005254e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_s < 55IT,EU < IT < it_cs < 54IT,none,h2Grid,yes,expExc,0.9756435096457106,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SI < si < 57SI,EU < IT < it_n < 52IT,none,h2Grid,yes,expExc,0.2309259981210994,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < CH < ch < 48CH,EU < IT < it_n < 52IT,none,h2Grid,yes,expExc,0.22867528408419172,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_sic < 56IT,EU < IT < it_s < 55IT,none,h2Grid,yes,expExc,0.1850468011928187,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LV < lv < 78LV,EU < LT < lt < 77LT,none,h2Grid,yes,expExc,0.23706743221744764,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s < 82NO,nonEU < NO < no_m < 83NO,none,h2Grid,yes,expExc,2.863315197182954e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es < 04ES,EU < FR < fr < 14FR,none,h2Grid,yes,expExc,0.5804431303596049,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es < 06ES,EU < FR < fr < 14FR,none,h2Grid,yes,expExc,1.7143926679382774e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es < 06ES,EU < FR < fr < 15FR,none,h2Grid,yes,expExc,3.5820533602419324,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 14FR,EU < FR < fr < 17FR,none,h2Grid,yes,expExc,0.3102405840453756,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 16FR,none,h2Grid,yes,expExc,0.34041704017375074,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 18FR,none,h2Grid,yes,expExc,0.2138479332031376,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 19FR,none,h2Grid,yes,expExc,2.9320477702221606,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 19FR,EU < FR < fr < 20FR,none,h2Grid,yes,expExc,2.206054705764118,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 20FR,nonEU < CH < ch < 47CH,none,h2Grid,yes,expExc,0.12827964325608526,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 20FR,nonEU < CH < ch < 48CH,none,h2Grid,yes,expExc,0.07039250955538909,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 20FR,EU < IT < it_n < 52IT,none,h2Grid,yes,expExc,1.4289324482465622,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 25FR,EU < LU < lu < 29LU,none,h2Grid,yes,expExc,0.13946108281338432,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 26FR,nonEU < UK < uk < 90UK,none,h2Grid,yes,expExc,0.23710243923790977,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 27FR,EU < LU < lu < 29LU,none,h2Grid,yes,expExc,0.004187846826622107,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ < cz < 39CZ,EU < DE < de < 34DE,none,h2Grid,yes,expExc,1.2858519536110655,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_e < 72DK,EU < DK < dk_w < 38DK,none,h2Grid,yes,expExc,0.019207087638836873,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LT < lt < 77LT,EU < PL < pl < 41PL,none,h2Grid,yes,expExc,0.3073526263916475,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at < 49AT,EU < IT < it_n < 52IT,none,h2Grid,yes,expExc,1.010332368458857,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cn < 53IT,EU < IT < it_n < 52IT,none,h2Grid,yes,expExc,2.2204126780171403,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr_co < 99FR,EU < IT < it_cn < 53IT,none,h2Grid,yes,expExc,0.26793788283062825,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr < 62HR,EU < SI < si < 57SI,none,h2Grid,yes,expExc,0.6078193053609949,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < EE < ee < 73EE,EU < LV < lv < 78LV,none,h2Grid,yes,expExc,0.03194068583862268,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IE < ie < 96IE,nonEU < UK < ni < 95UK,none,h2Grid,yes,expExc,2.045569503188778,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < GR < gr,nonEU < AL < al,none,powerGrid < hvac,no,expExc,4.999988895946398,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < AL < al,nonEU < ME < me,none,powerGrid < hvac,no,expExc,1.9999996700515774,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < AL < al,nonEU < MK < mk,none,powerGrid < hvac,no,expExc,0.3986865527297298,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < AL < al,nonEU < RS < rs,none,powerGrid < hvac,no,expExc,2.331579119193238,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,nonEU < CH < ch,none,powerGrid < hvac,no,expExc,0.20000041364697563,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < CZ < cz,none,powerGrid < hvac,no,expExc,1.3868645129816402,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < DE < de,none,powerGrid < hvac,no,expExc,2.6400003058577477,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < IT < it_n,none,powerGrid < hvac,no,expExc,1.2046660382655205,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < SI < si,none,powerGrid < hvac,no,expExc,0.5617376782820724,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < SK < sk,none,powerGrid < hvac,no,expExc,0.9999991372076074,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr,nonEU < BA < ba,none,powerGrid < hvac,no,expExc,1.2276125158976874,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < BA < ba,nonEU < ME < me,none,powerGrid < hvac,no,expExc,0.22314571810025052,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < BA < ba,nonEU < RS < rs,none,powerGrid < hvac,no,expExc,0.9999989470145529,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BE < be,EU < FR < fr,none,powerGrid < hvac,no,expExc,4.358708710788897,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BE < be,EU < LU < lu,none,powerGrid < hvac,no,expExc,0.47180070274979063,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BE < be,EU < NL < nl,none,powerGrid < hvac,no,expExc,2.000000013869549,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BG < bg,EU < GR < gr,none,powerGrid < hvac,no,expExc,4.758203365460364,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BG < bg,nonEU < MK < mk,none,powerGrid < hvac,no,expExc,1.1815328173433879,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BG < bg,EU < RO < ro,none,powerGrid < hvac,no,expExc,2.9999998121759472,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,nonEU < CH < ch,none,powerGrid < hvac,no,expExc,2.361730931581464,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,nonEU < CH < ch,none,powerGrid < hvac,no,expExc,1.4257553083612218,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_n,nonEU < CH < ch,none,powerGrid < hvac,no,expExc,1.3999988958397092,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ < cz,EU < DE < de,none,powerGrid < hvac,no,expExc,0.5000000644013065,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ < cz,EU < SK < sk,none,powerGrid < hvac,no,expExc,0.06603575228811973,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < FR < fr,none,powerGrid < hvac,no,expExc,1.7999999175235786,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < NL < nl,none,powerGrid < hvac,no,expExc,1.000000009968181,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < PL < pl,none,powerGrid < hvac,no,expExc,6.499999753056825,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_e,EU < SE < se_4,none,powerGrid < hvac,no,expExc,0.30856193729239245,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < EE < ee,EU < LV < lv,none,powerGrid < hvac,no,expExc,2.3317042839272837,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es,EU < FR < fr,none,powerGrid < hvac,no,expExc,8.999999888015058,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es,EU < PT < pt,none,powerGrid < hvac,no,expExc,3.5481444293418534,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FI < fi,nonEU < NO < no_n,none,powerGrid < hvac,no,expExc,1.5945142961214414,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < GR < gr,nonEU < MK < mk,none,powerGrid < hvac,no,expExc,1.4999995877113388,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr,EU < HU < hu,none,powerGrid < hvac,no,expExc,1.019033404381991,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr,nonEU < RS < rs,none,powerGrid < hvac,no,expExc,2.099999808651508,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr,EU < SI < si,none,powerGrid < hvac,no,expExc,4.999999866526586,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HU < hu,EU < RO < ro,none,powerGrid < hvac,no,expExc,2.6169998412789104,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HU < hu,nonEU < RS < rs,none,powerGrid < hvac,no,expExc,2.999999929611251,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HU < hu,EU < SK < sk,none,powerGrid < hvac,no,expExc,2.9999998231555023,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IE < ie,nonEU < UK < ni,none,powerGrid < hvac,no,expExc,0.04608916141634145,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IE < ie,nonEU < UK < uk,none,powerGrid < hvac,no,expExc,0.4999998688716977,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cn,EU < IT < it_cs,none,powerGrid < hvac,no,expExc,0.5321861943588928,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cn,EU < IT < it_n,none,powerGrid < hvac,no,expExc,0.9999999879840936,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_n,EU < SI < si,none,powerGrid < hvac,no,expExc,1.9999999704280338,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LT < lt,EU < LV < lv,none,powerGrid < hvac,no,expExc,2.3029742210348676,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LT < lt,EU < PL < pl,none,powerGrid < hvac,no,expExc,0.9824244612746835,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < ME < me,nonEU < RS < rs,none,powerGrid < hvac,no,expExc,0.49999120499092886,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < MK < mk,nonEU < RS < rs,none,powerGrid < hvac,no,expExc,2.9999996771394004,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_3,nonEU < NO < no_s,none,powerGrid < hvac,no,expExc,0.40246532938396185,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PL < pl,EU < SK < sk,none,powerGrid < hvac,no,expExc,2.4999983116819533,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < RO < ro,nonEU < RS < rs,none,powerGrid < hvac,no,expExc,3.481472908304985,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_e,EU < DE < de,none,powerGrid < hvdc,yes,capaExc,1.100149037334711,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < DK < dk_e,none,powerGrid < hvdc,yes,capaExc,1.115149037334711,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FI < fi,EU < EE < ee,none,powerGrid < hvdc,yes,capaExc,2.0544744949276756,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < EE < ee,EU < FI < fi,none,powerGrid < hvdc,yes,capaExc,2.0704744949276757,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_1,EU < FI < fi,none,powerGrid < hvdc,yes,capaExc,4.199999914585157,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FI < fi,EU < SE < se_1,none,powerGrid < hvdc,yes,capaExc,4.0999999145851564,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < UK < uk,nonEU < UK < ni,none,powerGrid < hvdc,yes,capaExc,3.1887039987336316,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < UK < ni,nonEU < UK < uk,none,powerGrid < hvdc,yes,capaExc,2.8187039987336315,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,EU < IE < ie,none,powerGrid < hvdc,no,capaExc,1.3999999535377945,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < GR < gr,EU < IT < it_s,none,powerGrid < hvdc,no,capaExc,1.4999999899748477,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w,EU < NL < nl,none,powerGrid < hvdc,no,capaExc,0.7000000518614543,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_e,EU < PL < pl,none,powerGrid < hvdc,no,capaExc,1.930764199952483e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FI < fi,EU < SE < se_2,none,powerGrid < hvdc,no,capaExc,0.7999999832244586,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FI < fi,EU < SE < se_3,none,powerGrid < hvdc,no,capaExc,1.2000000327976508,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < SE < se_4,none,powerGrid < hvdc,no,capaExc,2.0149999249890316,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LT < lt,EU < SE < se_4,none,powerGrid < hvdc,no,capaExc,0.7000000130148731,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PL < pl,EU < SE < se_4,none,powerGrid < hvdc,no,capaExc,0.7081198100580425,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cs,nonEU < ME < me,none,powerGrid < hvdc,no,capaExc,2.1999999816525024,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,nonEU < NO < no_s,none,powerGrid < hvdc,no,capaExc,3.3999996747487953,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w,nonEU < NO < no_s,none,powerGrid < hvdc,no,capaExc,5.505753147396261,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < NL < nl,nonEU < NO < no_s,none,powerGrid < hvdc,no,capaExc,0.7000000805465388,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BE < be,nonEU < UK < uk,none,powerGrid < hvdc,no,capaExc,2.400000005397809,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,nonEU < UK < uk,none,powerGrid < hvdc,no,capaExc,8.19999981140042,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < NL < nl,nonEU < UK < uk,none,powerGrid < hvdc,no,capaExc,3.00000003205817,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s,nonEU < UK < uk,none,powerGrid < hvdc,no,capaExc,4.4999998763198175,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_3,EU < DK < dk_w,none,powerGrid < hvdc,yes,capaExc,0.68,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_sar,EU < FR < fr_co,none,powerGrid < hvdc,yes,capaExc,0.35,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_sar,EU < IT < it_cs,none,powerGrid < hvdc,yes,capaExc,0.9,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_sic,EU < IT < it_s,none,powerGrid < hvdc,yes,capaExc,1.2,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr_co,EU < IT < it_sar,none,powerGrid < hvdc,yes,capaExc,0.3,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_sar,none,powerGrid < hvdc,yes,capaExc,0.7,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_s,EU < IT < it_sic,none,powerGrid < hvdc,yes,capaExc,1.1,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w,EU < SE < se_3,none,powerGrid < hvdc,yes,capaExc,0.74,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ < cz < 39CZ,EU < DE < de < 34DE,none,h2Grid,yes,capaExc,1.2858519536110655,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_e < 72DK,EU < DK < dk_w < 38DK,none,h2Grid,yes,capaExc,0.019207087638836873,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es < 04ES,EU < FR < fr < 14FR,none,h2Grid,yes,capaExc,0.5804431303596049,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es < 06ES,EU < FR < fr < 14FR,none,h2Grid,yes,capaExc,1.7143926679382774e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es < 06ES,EU < FR < fr < 15FR,none,h2Grid,yes,capaExc,3.5820533602419324,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 16FR,none,h2Grid,yes,capaExc,0.34041704017375074,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 14FR,EU < FR < fr < 17FR,none,h2Grid,yes,capaExc,0.3102405840453756,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 18FR,none,h2Grid,yes,capaExc,0.21384793320313758,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 19FR,none,h2Grid,yes,capaExc,2.93204777022216,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 19FR,EU < FR < fr < 20FR,none,h2Grid,yes,capaExc,2.206054705764118,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr_co < 99FR,EU < IT < it_cn < 53IT,none,h2Grid,yes,capaExc,0.26793788283062825,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at < 49AT,EU < IT < it_n < 52IT,none,h2Grid,yes,capaExc,1.010332368458857,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 20FR,EU < IT < it_n < 52IT,none,h2Grid,yes,capaExc,1.428932448246562,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cn < 53IT,EU < IT < it_n < 52IT,none,h2Grid,yes,capaExc,2.2204126780171403,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 25FR,EU < LU < lu < 29LU,none,h2Grid,yes,capaExc,0.13946108281338432,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 27FR,EU < LU < lu < 29LU,none,h2Grid,yes,capaExc,0.004187846826622107,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < EE < ee < 73EE,EU < LV < lv < 78LV,none,h2Grid,yes,capaExc,0.03194068583862268,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LT < lt < 77LT,EU < PL < pl < 41PL,none,h2Grid,yes,capaExc,0.3073526263916475,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr < 62HR,EU < SI < si < 57SI,none,h2Grid,yes,capaExc,0.6078193053609949,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 20FR,nonEU < CH < ch < 47CH,none,h2Grid,yes,capaExc,0.12827964325608524,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 20FR,nonEU < CH < ch < 48CH,none,h2Grid,yes,capaExc,0.07039250955538909,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IE < ie < 96IE,nonEU < UK < ni < 95UK,none,h2Grid,yes,capaExc,2.045569503188778,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 26FR,nonEU < UK < uk < 90UK,none,h2Grid,yes,capaExc,0.23710243923790977,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w < 38DK,EU < DE < de < 31DE,none,h2Grid,yes,capaExc,1.4147373938515517,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w < 38DK,EU < DK < dk_e < 72DK,none,h2Grid,yes,capaExc,0.032065898175226266,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 26FR,EU < BE < be < 28BE,none,h2Grid,yes,capaExc,0.3837120628295116,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 27FR,EU < BE < be < 28BE,none,h2Grid,yes,capaExc,0.16628725074891187,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_s < 55IT,EU < IT < it_cs < 54IT,none,h2Grid,yes,capaExc,0.9756435096457106,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_sar < 98IT,EU < FR < fr_co < 99FR,none,h2Grid,yes,capaExc,0.2717911169586983,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_sic < 56IT,EU < IT < it_s < 55IT,none,h2Grid,yes,capaExc,0.1850468011928187,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LV < lv < 78LV,EU < LT < lt < 77LT,none,h2Grid,yes,capaExc,0.23706743221744764,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < RO < ro < 59RO,EU < HU < hu < 58HU,none,h2Grid,yes,capaExc,2.4275455203005254e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_1 < 86SE,EU < FI < fi < 74FI,none,h2Grid,yes,capaExc,0.010834878127954558,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_4 < 89SE,EU < DK < dk_e < 72DK,none,h2Grid,yes,capaExc,0.08971190498155833,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SI < si < 57SI,EU < AT < at < 50AT,none,h2Grid,yes,capaExc,0.6146882746216207,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SI < si < 57SI,EU < IT < it_n < 52IT,none,h2Grid,yes,capaExc,0.2309259981210994,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < CH < ch < 48CH,EU < IT < it_n < 52IT,none,h2Grid,yes,capaExc,0.22867528408419174,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s < 79NO,EU < DK < dk_w < 38DK,none,h2Grid,yes,capaExc,0.1329046332445699,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s < 82NO,nonEU < NO < no_m < 83NO,none,h2Grid,yes,capaExc,2.863315197182954e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ < cz,EU < AT < at,none,powerGrid < hvac,yes,capaExc,2.1868645129796622,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_n,EU < AT < at,none,powerGrid < hvac,yes,capaExc,1.439666038260496,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,EU < BE < be,none,powerGrid < hvac,yes,capaExc,7.658708710807158,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LU < lu,EU < BE < be,none,powerGrid < hvac,yes,capaExc,0.6518007027497906,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < NL < nl,EU < BE < be,none,powerGrid < hvac,yes,capaExc,3.400000013861412,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < GR < gr,EU < BG < bg,none,powerGrid < hvac,yes,capaExc,5.158203365427515,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < MK < mk,EU < BG < bg,none,powerGrid < hvac,yes,capaExc,1.2815328173383482,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS < rs,EU < BG < bg,none,powerGrid < hvac,yes,capaExc,0.20000198792117652,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < CZ < cz,none,powerGrid < hvac,yes,capaExc,2.2868645129796623,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < CZ < cz,none,powerGrid < hvac,yes,capaExc,2.000000064387484,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PL < pl,EU < CZ < cz,none,powerGrid < hvac,yes,capaExc,0.800000173296524,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SK < sk,EU < CZ < cz,none,powerGrid < hvac,yes,capaExc,1.1660357522815004,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ < cz,EU < DE < de,none,powerGrid < hvac,yes,capaExc,2.600000064387484,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w,EU < DE < de,none,powerGrid < hvac,yes,capaExc,1.7800001901469136,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,EU < DE < de,none,powerGrid < hvac,yes,capaExc,3.599999917518727,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PL < pl,EU < DE < de,none,powerGrid < hvac,yes,capaExc,8.999999753049872,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < CH < ch,EU < DE < de,none,powerGrid < hvac,yes,capaExc,6.961730931572211,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_4,EU < DK < dk_e,none,powerGrid < hvac,yes,capaExc,1.6085619372923925,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < DK < dk_w,none,powerGrid < hvac,yes,capaExc,1.5000001901469135,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,EU < ES < es,none,powerGrid < hvac,yes,capaExc,11.799999888099187,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PT < pt,EU < ES < es,none,powerGrid < hvac,yes,capaExc,7.048144429301613,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BE < be,EU < FR < fr,none,powerGrid < hvac,yes,capaExc,6.158708710807158,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < FR < fr,none,powerGrid < hvac,yes,capaExc,4.099999917518727,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es,EU < FR < fr,none,powerGrid < hvac,yes,capaExc,11.599999888099186,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_n,EU < FR < fr,none,powerGrid < hvac,yes,capaExc,2.160000046124649,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < CH < ch,EU < FR < fr,none,powerGrid < hvac,yes,capaExc,2.725755308353878,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BG < bg,EU < GR < gr,none,powerGrid < hvac,yes,capaExc,5.3582033654275145,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < MK < mk,EU < GR < gr,none,powerGrid < hvac,yes,capaExc,2.349999587701723,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < BA < ba,EU < HR < hr,none,powerGrid < hvac,yes,capaExc,1.9776125158927242,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < RO < ro,EU < HU < hu,none,powerGrid < hvac,yes,capaExc,3.7169998412753418,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_cn,none,powerGrid < hvac,yes,capaExc,3.132186194358893,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_n,EU < IT < it_cn,none,powerGrid < hvac,yes,capaExc,4.7499999879840935,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cn,EU < IT < it_cs,none,powerGrid < hvac,yes,capaExc,1.9321861943588927,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_s,EU < IT < it_cs,none,powerGrid < hvac,yes,capaExc,4.500000003578778,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < IT < it_n,none,powerGrid < hvac,yes,capaExc,1.609666038260496,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,EU < IT < it_n,none,powerGrid < hvac,yes,capaExc,4.350000046124649,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cn,EU < IT < it_n,none,powerGrid < hvac,yes,capaExc,2.5499999879840938,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SI < si,EU < IT < it_n,none,powerGrid < hvac,yes,capaExc,2.7299999704306375,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < CH < ch,EU < IT < it_n,none,powerGrid < hvac,yes,capaExc,5.639998895831707,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_s,none,powerGrid < hvac,yes,capaExc,9.999000003578779,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LV < lv,EU < LT < lt,none,powerGrid < hvac,yes,capaExc,3.802974221034868,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BE < be,EU < LU < lu,none,powerGrid < hvac,yes,capaExc,1.1518007027497907,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LT < lt,EU < LV < lv,none,powerGrid < hvac,yes,capaExc,3.5029742210348678,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BE < be,EU < NL < nl,none,powerGrid < hvac,yes,capaExc,4.400000013861412,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ < cz,EU < PL < pl,none,powerGrid < hvac,yes,capaExc,0.6000001732965239,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < PL < pl,none,powerGrid < hvac,yes,capaExc,6.999999753049872,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es,EU < PT < pt,none,powerGrid < hvac,yes,capaExc,7.748144429301613,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HU < hu,EU < RO < ro,none,powerGrid < hvac,yes,capaExc,3.6169998412753417,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS < rs,EU < RO < ro,none,powerGrid < hvac,yes,capaExc,4.2814729082880705,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_n,EU < SE < se_1,none,powerGrid < hvac,yes,capaExc,0.7000000346024303,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_m,EU < SE < se_2,none,powerGrid < hvac,yes,capaExc,0.600000036310475,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_n,EU < SE < se_2,none,powerGrid < hvac,yes,capaExc,0.250000026066446,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s,EU < SE < se_3,none,powerGrid < hvac,yes,capaExc,2.5474653293839618,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_e,EU < SE < se_4,none,powerGrid < hvac,yes,capaExc,2.0085619372923924,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_n,EU < SI < si,none,powerGrid < hvac,yes,capaExc,2.6799999704306376,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ < cz,EU < SK < sk,none,powerGrid < hvac,yes,capaExc,1.8660357522815003,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS < rs,nonEU < AL < al,none,powerGrid < hvac,yes,capaExc,2.8315791191877224,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr,nonEU < BA < ba,none,powerGrid < hvac,yes,capaExc,1.9276125158927242,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < ME < me,nonEU < BA < ba,none,powerGrid < hvac,yes,capaExc,0.6231457180972939,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,nonEU < CH < ch,none,powerGrid < hvac,yes,capaExc,5.061730931572212,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,nonEU < CH < ch,none,powerGrid < hvac,yes,capaExc,4.575755308353878,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_n,nonEU < CH < ch,none,powerGrid < hvac,yes,capaExc,3.309998895831707,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < BA < ba,nonEU < ME < me,none,powerGrid < hvac,yes,capaExc,0.7231457180972939,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS < rs,nonEU < ME < me,none,powerGrid < hvac,yes,capaExc,1.099991204984022,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BG < bg,nonEU < MK < mk,none,powerGrid < hvac,yes,capaExc,1.5815328173383483,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < GR < gr,nonEU < MK < mk,none,powerGrid < hvac,yes,capaExc,2.5999995877017232,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS < rs,nonEU < MK < mk,none,powerGrid < hvac,yes,capaExc,3.799999677143358,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_2,nonEU < NO < no_m,none,powerGrid < hvac,yes,capaExc,1.000000036310475,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_1,nonEU < NO < no_n,none,powerGrid < hvac,yes,capaExc,0.6000000346024303,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_2,nonEU < NO < no_n,none,powerGrid < hvac,yes,capaExc,0.300000026066446,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_3,nonEU < NO < no_s,none,powerGrid < hvac,yes,capaExc,2.497465329383962,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BG < bg,nonEU < RS < rs,none,powerGrid < hvac,yes,capaExc,0.5000019879211764,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < RO < ro,nonEU < RS < rs,none,powerGrid < hvac,yes,capaExc,4.481472908288071,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < AL < al,nonEU < RS < rs,none,powerGrid < hvac,yes,capaExc,2.9815791191877223,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < ME < me,nonEU < RS < rs,none,powerGrid < hvac,yes,capaExc,0.9999912049840219,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < MK < mk,nonEU < RS < rs,none,powerGrid < hvac,yes,capaExc,3.6499996771433576,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < DE < de,none,powerGrid < hvac,no,capaExc,7.640000305841605,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BE < be,EU < DE < de,none,powerGrid < hvac,no,capaExc,1.0000001256836288,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < HU < hu,none,powerGrid < hvac,no,capaExc,0.8000003850280292,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr,EU < HU < hu,none,powerGrid < hvac,no,capaExc,3.0190334043742633,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < LU < lu,none,powerGrid < hvac,no,capaExc,2.300000146272903,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < EE < ee,EU < LV < lv,none,powerGrid < hvac,no,capaExc,3.23170428390611,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < NL < nl,none,powerGrid < hvac,no,capaExc,5.250000009949369,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LT < lt,EU < PL < pl,none,powerGrid < hvac,no,capaExc,1.4824244612681239,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BG < bg,EU < RO < ro,none,powerGrid < hvac,no,capaExc,3.299999812163955,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_2,EU < SE < se_3,none,powerGrid < hvac,no,capaExc,7.800000165486429,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < SI < si,none,powerGrid < hvac,no,capaExc,1.511737678272018,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr,EU < SI < si,none,powerGrid < hvac,no,capaExc,6.499999866505768,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HU < hu,EU < SI < si,none,powerGrid < hvac,no,capaExc,1.2000002332491209,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < SK < sk,none,powerGrid < hvac,no,capaExc,0.9999991372076075,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HU < hu,EU < SK < sk,none,powerGrid < hvac,no,capaExc,4.999999823134534,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PL < pl,EU < SK < sk,none,powerGrid < hvac,no,capaExc,3.4899983116636832,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < GR < gr,nonEU < AL < al,none,powerGrid < hvac,no,capaExc,5.249988895959113,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,nonEU < CH < ch,none,powerGrid < hvac,no,capaExc,1.4000004136290198,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < AL < al,nonEU < ME < me,none,powerGrid < hvac,no,capaExc,2.3499996700635526,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < AL < al,nonEU < MK < mk,none,powerGrid < hvac,no,capaExc,0.8986865527238497,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FI < fi,nonEU < NO < no_n,none,powerGrid < hvac,no,capaExc,1.5945142961195833,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr,nonEU < RS < rs,none,powerGrid < hvac,no,capaExc,2.6999998086452104,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HU < hu,nonEU < RS < rs,none,powerGrid < hvac,no,capaExc,3.5999999296069243,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < BA < ba,nonEU < RS < rs,none,powerGrid < hvac,no,capaExc,1.599998946995985,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IE < ie,nonEU < UK < ni,none,powerGrid < hvac,no,capaExc,0.34608916141634144,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IE < ie,nonEU < UK < uk,none,powerGrid < hvac,no,capaExc,0.9999998688716977,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w,EU < DK < dk_e,none,powerGrid < hvac,yes,capaExc,0.59,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_e,EU < DK < dk_w,none,powerGrid < hvac,yes,capaExc,0.6,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,EU < LU < lu,none,powerGrid < hvac,yes,capaExc,0.38,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_4,EU < SE < se_3,none,powerGrid < hvac,yes,capaExc,3.2,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_3,EU < SE < se_4,none,powerGrid < hvac,yes,capaExc,6.5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr_co,EU < IT < it_cn,none,powerGrid < hvac,no,capaExc,0.6,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_1,EU < SE < se_2,none,powerGrid < hvac,no,capaExc,3.3,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_m,nonEU < NO < no_n,none,powerGrid < hvac,no,capaExc,1.3,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_m,nonEU < NO < no_s,none,powerGrid < hvac,no,capaExc,1.4,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < DK < dk_e,electricity,powerGrid < hvdc,no,exc,3.2643402813711893,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < EE < ee,EU < FI < fi,electricity,powerGrid < hvdc,no,exc,11.180527627223787,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FI < fi,EU < SE < se_1,electricity,powerGrid < hvdc,no,exc,0.07927500502409054,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < UK < ni,nonEU < UK < uk,electricity,powerGrid < hvdc,no,exc,13.896475661929568,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BE < be,nonEU < UK < uk,electricity,powerGrid < hvdc,no,exc,8.612469558019397,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,nonEU < NO < no_s,electricity,powerGrid < hvdc,no,exc,14.935618935169527,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < SE < se_4,electricity,powerGrid < hvdc,no,exc,4.7570692705532105,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_e,EU < PL < pl,electricity,powerGrid < hvdc,no,exc,6.257667700037478e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w,EU < NL < nl,electricity,powerGrid < hvdc,no,exc,2.7718636041987015,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w,nonEU < NO < no_s,electricity,powerGrid < hvdc,no,exc,15.0350746551665,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FI < fi,EU < SE < se_2,electricity,powerGrid < hvdc,no,exc,0.6150305153851484,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FI < fi,EU < SE < se_3,electricity,powerGrid < hvdc,no,exc,4.518533831673467,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,EU < IE < ie,electricity,powerGrid < hvdc,no,exc,3.5071333471777586,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,nonEU < UK < uk,electricity,powerGrid < hvdc,no,exc,37.54946526918012,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < GR < gr,EU < IT < it_s,electricity,powerGrid < hvdc,no,exc,9.940127468955415,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cs,nonEU < ME < me,electricity,powerGrid < hvdc,no,exc,2.516608810027603,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LT < lt,EU < SE < se_4,electricity,powerGrid < hvdc,no,exc,3.498288652495156,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < NL < nl,nonEU < NO < no_s,electricity,powerGrid < hvdc,no,exc,2.677853640284822,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < NL < nl,nonEU < UK < uk,electricity,powerGrid < hvdc,no,exc,10.183273643269535,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s,nonEU < UK < uk,electricity,powerGrid < hvdc,no,exc,19.577032037654106,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PL < pl,EU < SE < se_4,electricity,powerGrid < hvdc,no,exc,2.8895710126263032,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_e,EU < DE < de,electricity,powerGrid < hvdc,no,exc,3.3883996346144696,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_3,EU < DK < dk_w,electricity,powerGrid < hvdc,no,exc,3.685778190029794,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FI < fi,EU < EE < ee,electricity,powerGrid < hvdc,no,exc,3.686436591760332,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_1,EU < FI < fi,electricity,powerGrid < hvdc,no,exc,33.49017645332761,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_sar,EU < FR < fr_co,electricity,powerGrid < hvdc,no,exc,1.1423769121679788,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_sar,EU < IT < it_cs,electricity,powerGrid < hvdc,no,exc,4.467734987823935,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_sic,EU < IT < it_s,electricity,powerGrid < hvdc,no,exc,4.78299340304007,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr_co,EU < IT < it_sar,electricity,powerGrid < hvdc,no,exc,0.25349777737585594,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_sar,electricity,powerGrid < hvdc,no,exc,0.22846294765812983,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_s,EU < IT < it_sic,electricity,powerGrid < hvdc,no,exc,2.6770679008615477,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w,EU < SE < se_3,electricity,powerGrid < hvdc,no,exc,1.6104388957374767,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < UK < uk,nonEU < UK < ni,electricity,powerGrid < hvdc,no,exc,6.2195314510601,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < UK < uk,EU < BE < be,electricity,powerGrid < hvdc,no,exc,10.913072931118391,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s,EU < DE < de,electricity,powerGrid < hvdc,no,exc,14.186830276871873,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_4,EU < DE < de,electricity,powerGrid < hvdc,no,exc,7.551097731828802,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PL < pl,EU < DK < dk_e,electricity,powerGrid < hvdc,no,exc,7.609134211522153e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < NL < nl,EU < DK < dk_w,electricity,powerGrid < hvdc,no,exc,2.701515085158968,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s,EU < DK < dk_w,electricity,powerGrid < hvdc,no,exc,20.65023155381332,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_2,EU < FI < fi,electricity,powerGrid < hvdc,no,exc,4.7196250050312365,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_3,EU < FI < fi,electricity,powerGrid < hvdc,no,exc,4.853810746929175,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IE < ie,EU < FR < fr,electricity,powerGrid < hvdc,no,exc,7.165018287663256,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < UK < uk,EU < FR < fr,electricity,powerGrid < hvdc,no,exc,22.65476963801744,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_s,EU < GR < gr,electricity,powerGrid < hvdc,no,exc,2.026460621681322,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_sic,EU < IT < it_cs,electricity,powerGrid < hvdc,no,exc,1.3670676477394781e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < ME < me,EU < IT < it_cs,electricity,powerGrid < hvdc,no,exc,11.876789515683127,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_4,EU < LT < lt,electricity,powerGrid < hvdc,no,exc,1.608452007327342,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s,EU < NL < nl,electricity,powerGrid < hvdc,no,exc,2.746633412782014,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < UK < uk,EU < NL < nl,electricity,powerGrid < hvdc,no,exc,12.451284503639409,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < UK < uk,nonEU < NO < no_s,electricity,powerGrid < hvdc,no,exc,10.806276394457306,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_4,EU < PL < pl,electricity,powerGrid < hvdc,no,exc,3.0560842108450026,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < DE,EU < NL,otherBiomass < solidBiomass,biomassExc,no,exc,1.7128535666068105e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,nonEU < MK,EU < GR,otherBiomass < solidBiomass,biomassExc,no,exc,2.0426563398047742e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SI < si < 57SI,EU < AT < at < 50AT,h2,h2Grid,no,exc,5.384668420399485,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 26FR,EU < BE < be < 28BE,h2,h2Grid,no,exc,3.361316797158162,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 27FR,EU < BE < be < 28BE,h2,h2Grid,no,exc,1.4566748874761866,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w < 38DK,EU < DE < de < 31DE,h2,h2Grid,no,exc,6.772349115312278,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w < 38DK,EU < DK < dk_e < 72DK,h2,h2Grid,no,exc,0.08225775862139649,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_4 < 89SE,EU < DK < dk_e < 72DK,h2,h2Grid,no,exc,0.5159502492762028,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s < 79NO,EU < DK < dk_w < 38DK,h2,h2Grid,no,exc,0.5821220974184002,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_1 < 86SE,EU < FI < fi < 74FI,h2,h2Grid,no,exc,0.07118451455056114,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_sar < 98IT,EU < FR < fr_co < 99FR,h2,h2Grid,no,exc,2.0023648391693287,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < RO < ro < 59RO,EU < HU < hu < 58HU,h2,h2Grid,no,exc,0.00021200004152837718,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_s < 55IT,EU < IT < it_cs < 54IT,h2,h2Grid,no,exc,8.54650163573858,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SI < si < 57SI,EU < IT < it_n < 52IT,h2,h2Grid,no,exc,1.5172273041211775,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < CH < ch < 48CH,EU < IT < it_n < 52IT,h2,h2Grid,no,exc,1.002520400486032,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_sic < 56IT,EU < IT < it_s < 55IT,h2,h2Grid,no,exc,0.6466235997605884,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LV < lv < 78LV,EU < LT < lt < 77LT,h2,h2Grid,no,exc,1.7953341708336807,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s < 82NO,nonEU < NO < no_m < 83NO,h2,h2Grid,no,exc,0.00018678553844915413,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es < 04ES,EU < FR < fr < 14FR,h2,h2Grid,no,exc,5.074502721862697,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es < 06ES,EU < FR < fr < 14FR,h2,h2Grid,no,exc,0.00011102001756606348,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es < 06ES,EU < FR < fr < 15FR,h2,h2Grid,no,exc,29.956656008804938,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 14FR,EU < FR < fr < 17FR,h2,h2Grid,no,exc,2.5263598106908005,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 14FR,EU < FR < fr < 18FR,h2,h2Grid,no,exc,1.1980554632157742e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 16FR,h2,h2Grid,no,exc,2.23131615395087,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 18FR,h2,h2Grid,no,exc,1.671871164151884,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 19FR,h2,h2Grid,no,exc,25.17149449244349,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 16FR,EU < IT < it_n < 52IT,h2,h2Grid,no,exc,5.537306660276582e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 19FR,EU < FR < fr < 20FR,h2,h2Grid,no,exc,18.995318238944076,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 20FR,nonEU < CH < ch < 47CH,h2,h2Grid,no,exc,1.1237289025305284,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 20FR,nonEU < CH < ch < 48CH,h2,h2Grid,no,exc,0.6166376105452284,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 20FR,EU < IT < it_n < 52IT,h2,h2Grid,no,exc,12.512811356322969,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 25FR,EU < LU < lu < 29LU,h2,h2Grid,no,exc,1.1464475100548768,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 26FR,nonEU < UK < uk < 90UK,h2,h2Grid,no,exc,1.1664355984436425,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 27FR,EU < LU < lu < 29LU,h2,h2Grid,no,exc,0.01834451910038137,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ < cz < 39CZ,EU < DE < de < 34DE,h2,h2Grid,no,exc,11.264060958880076,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_e < 72DK,EU < DK < dk_w < 38DK,h2,h2Grid,no,exc,0.04207297943943078,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LT < lt < 77LT,EU < PL < pl < 41PL,h2,h2Grid,no,exc,2.449457451088717,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at < 49AT,EU < IT < it_n < 52IT,h2,h2Grid,no,exc,3.441234207102857,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cn < 53IT,EU < IT < it_n < 52IT,h2,h2Grid,no,exc,17.089608974532524,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr_co < 99FR,EU < IT < it_cn < 53IT,h2,h2Grid,no,exc,1.971291030651636,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr < 62HR,EU < SI < si < 57SI,h2,h2Grid,no,exc,5.324496047871036,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < EE < ee < 73EE,EU < LV < lv < 78LV,h2,h2Grid,no,exc,0.19148223092785505,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IE < ie < 96IE,nonEU < UK < ni < 95UK,h2,h2Grid,no,exc,15.999813654203091,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < AL < al,nonEU < RS < rs,electricity,powerGrid < hvac,no,exc,15.155014740535867,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < CZ < cz,electricity,powerGrid < hvac,no,exc,5.248300080880712,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < IT < it_n,electricity,powerGrid < hvac,no,exc,6.07371663941639,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr,nonEU < BA < ba,electricity,powerGrid < hvac,no,exc,0.08372721458162728,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < BA < ba,nonEU < ME < me,electricity,powerGrid < hvac,no,exc,0.8218551717571213,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BE < be,EU < FR < fr,electricity,powerGrid < hvac,no,exc,6.294919637133715,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BE < be,EU < LU < lu,electricity,powerGrid < hvac,no,exc,2.798515217122436,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BE < be,EU < NL < nl,electricity,powerGrid < hvac,no,exc,4.587558507258164,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BG < bg,EU < GR < gr,electricity,powerGrid < hvac,no,exc,3.7669612853932975e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BG < bg,nonEU < MK < mk,electricity,powerGrid < hvac,no,exc,0.350940566275109,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BG < bg,nonEU < RS < rs,electricity,powerGrid < hvac,no,exc,0.19281761823723584,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,nonEU < CH < ch,electricity,powerGrid < hvac,no,exc,14.305774057535253,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,nonEU < CH < ch,electricity,powerGrid < hvac,no,exc,15.617109588564162,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_n,nonEU < CH < ch,electricity,powerGrid < hvac,no,exc,6.9121453729800555,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ < cz,EU < DE < de,electricity,powerGrid < hvac,no,exc,10.536465002071619,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ < cz,EU < PL < pl,electricity,powerGrid < hvac,no,exc,3.2857689273996233,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ < cz,EU < SK < sk,electricity,powerGrid < hvac,no,exc,1.6714280575275406,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < DK < dk_w,electricity,powerGrid < hvac,no,exc,5.073561693993568,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < FR < fr,electricity,powerGrid < hvac,no,exc,5.608698388689075,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < PL < pl,electricity,powerGrid < hvac,no,exc,13.004968834172109,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_e,EU < SE < se_4,electricity,powerGrid < hvac,no,exc,1.5300767673281503,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es,EU < FR < fr,electricity,powerGrid < hvac,no,exc,80.48416850742592,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es,EU < PT < pt,electricity,powerGrid < hvac,no,exc,4.114426420902244,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,EU < IT < it_n,electricity,powerGrid < hvac,no,exc,9.593702101938723,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < GR < gr,nonEU < MK < mk,electricity,powerGrid < hvac,no,exc,6.784199088091517,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HU < hu,EU < RO < ro,electricity,powerGrid < hvac,no,exc,0.8759932358286743,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cn,EU < IT < it_cs,electricity,powerGrid < hvac,no,exc,5.4153497654087275,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cn,EU < IT < it_n,electricity,powerGrid < hvac,no,exc,15.848248584948424,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_s,electricity,powerGrid < hvac,no,exc,1.2118314177153315,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_n,EU < SI < si,electricity,powerGrid < hvac,no,exc,1.073217885194261,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LT < lt,EU < LV < lv,electricity,powerGrid < hvac,no,exc,2.28825408713253,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < ME < me,nonEU < RS < rs,electricity,powerGrid < hvac,no,exc,4.0465886540368885,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < MK < mk,nonEU < RS < rs,electricity,powerGrid < hvac,no,exc,20.102052300244615,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_2,nonEU < NO < no_m,electricity,powerGrid < hvac,no,exc,3.6534464380580025,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_1,nonEU < NO < no_n,electricity,powerGrid < hvac,no,exc,1.3192879728499147,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_2,nonEU < NO < no_n,electricity,powerGrid < hvac,no,exc,0.1664256637803636,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_3,nonEU < NO < no_s,electricity,powerGrid < hvac,no,exc,2.9511689414644384,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < RO < ro,nonEU < RS < rs,electricity,powerGrid < hvac,no,exc,11.536906191380288,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < GR < gr,nonEU < AL < al,electricity,powerGrid < hvac,no,exc,12.266538232644294,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < AL < al,nonEU < ME < me,electricity,powerGrid < hvac,no,exc,7.84298738770382,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < AL < al,nonEU < MK < mk,electricity,powerGrid < hvac,no,exc,1.707579403102584,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,nonEU < CH < ch,electricity,powerGrid < hvac,no,exc,7.109717481804449,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < DE < de,electricity,powerGrid < hvac,no,exc,46.615065565039664,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < HU < hu,electricity,powerGrid < hvac,no,exc,0.5246229832101511,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < SI < si,electricity,powerGrid < hvac,no,exc,1.2884404336215418,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < SK < sk,electricity,powerGrid < hvac,no,exc,1.8529990640263387,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < BA < ba,nonEU < RS < rs,electricity,powerGrid < hvac,no,exc,5.107904525561943,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BE < be,EU < DE < de,electricity,powerGrid < hvac,no,exc,2.933536205916223,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BG < bg,EU < RO < ro,electricity,powerGrid < hvac,no,exc,0.8091476056411485,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < LU < lu,electricity,powerGrid < hvac,no,exc,5.364286140306224,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < NL < nl,electricity,powerGrid < hvac,no,exc,11.500653733243029,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < EE < ee,EU < LV < lv,electricity,powerGrid < hvac,no,exc,12.579887474116585,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FI < fi,nonEU < NO < no_n,electricity,powerGrid < hvac,no,exc,0.583850401302861,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr,EU < HU < hu,electricity,powerGrid < hvac,no,exc,20.535679157279873,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr,nonEU < RS < rs,electricity,powerGrid < hvac,no,exc,1.4536490018495734,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr,EU < SI < si,electricity,powerGrid < hvac,no,exc,51.332858377312526,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HU < hu,nonEU < RS < rs,electricity,powerGrid < hvac,no,exc,0.6570123528308934,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HU < hu,EU < SI < si,electricity,powerGrid < hvac,no,exc,1.678903521780925,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HU < hu,EU < SK < sk,electricity,powerGrid < hvac,no,exc,35.91510765125476,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IE < ie,nonEU < UK < ni,electricity,powerGrid < hvac,no,exc,2.1339920693636265,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IE < ie,nonEU < UK < uk,electricity,powerGrid < hvac,no,exc,5.760190236200056,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LT < lt,EU < PL < pl,electricity,powerGrid < hvac,no,exc,8.217424996334797,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PL < pl,EU < SK < sk,electricity,powerGrid < hvac,no,exc,2.4384107575580733,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_2,EU < SE < se_3,electricity,powerGrid < hvac,no,exc,51.46030319122442,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ < cz,EU < AT < at,electricity,powerGrid < hvac,no,exc,6.298887817690882,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_n,EU < AT < at,electricity,powerGrid < hvac,no,exc,1.2477172225915252,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,EU < BE < be,electricity,powerGrid < hvac,no,exc,32.82204097736583,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LU < lu,EU < BE < be,electricity,powerGrid < hvac,no,exc,1.5413368094300923,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < NL < nl,EU < BE < be,electricity,powerGrid < hvac,no,exc,13.18162503307243,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < GR < gr,EU < BG < bg,electricity,powerGrid < hvac,no,exc,31.19484219255677,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < MK < mk,EU < BG < bg,electricity,powerGrid < hvac,no,exc,7.289631067368597,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS < rs,EU < BG < bg,electricity,powerGrid < hvac,no,exc,0.6943734900268339,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < CZ < cz,electricity,powerGrid < hvac,no,exc,2.6276692563735398,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PL < pl,EU < CZ < cz,electricity,powerGrid < hvac,no,exc,0.8819247299450792,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SK < sk,EU < CZ < cz,electricity,powerGrid < hvac,no,exc,4.228117265912231,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w,EU < DE < de,electricity,powerGrid < hvac,no,exc,5.952049529450114,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,EU < DE < de,electricity,powerGrid < hvac,no,exc,17.150109241652405,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PL < pl,EU < DE < de,electricity,powerGrid < hvac,no,exc,20.883261798313967,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < CH < ch,EU < DE < de,electricity,powerGrid < hvac,no,exc,22.282657472430905,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w,EU < DK < dk_e,electricity,powerGrid < hvac,no,exc,2.2980781414548606,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_4,EU < DK < dk_e,electricity,powerGrid < hvac,no,exc,3.9330164836437245,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_e,EU < DK < dk_w,electricity,powerGrid < hvac,no,exc,2.4688160679006956,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,EU < ES < es,electricity,powerGrid < hvac,no,exc,13.81166828377331,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PT < pt,EU < ES < es,electricity,powerGrid < hvac,no,exc,32.67954613355302,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_n,EU < FR < fr,electricity,powerGrid < hvac,no,exc,1.6227323046296023,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < CH < ch,EU < FR < fr,electricity,powerGrid < hvac,no,exc,1.3206718610003354,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < MK < mk,EU < GR < gr,electricity,powerGrid < hvac,no,exc,2.276113171642869,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < BA < ba,EU < HR < hr,electricity,powerGrid < hvac,no,exc,14.023052124596633,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < RO < ro,EU < HU < hu,electricity,powerGrid < hvac,no,exc,28.161344218827008,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_cn,electricity,powerGrid < hvac,no,exc,7.718171370389336,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_n,EU < IT < it_cn,electricity,powerGrid < hvac,no,exc,3.299473215517862,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_s,EU < IT < it_cs,electricity,powerGrid < hvac,no,exc,17.260846872079735,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SI < si,EU < IT < it_n,electricity,powerGrid < hvac,no,exc,21.171230608302913,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < CH < ch,EU < IT < it_n,electricity,powerGrid < hvac,no,exc,11.275881375489055,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LV < lv,EU < LT < lt,electricity,powerGrid < hvac,no,exc,16.80535728324213,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS < rs,EU < RO < ro,electricity,powerGrid < hvac,no,exc,3.738522424489635,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_n,EU < SE < se_1,electricity,powerGrid < hvac,no,exc,0.2934531754165225,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_m,EU < SE < se_2,electricity,powerGrid < hvac,no,exc,0.09348822836268361,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_n,EU < SE < se_2,electricity,powerGrid < hvac,no,exc,1.7105250169497976,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_4,EU < SE < se_3,electricity,powerGrid < hvac,no,exc,13.676135838974632,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s,EU < SE < se_3,electricity,powerGrid < hvac,no,exc,7.213671360224584,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_3,EU < SE < se_4,electricity,powerGrid < hvac,no,exc,10.40592020256049,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS < rs,nonEU < AL < al,electricity,powerGrid < hvac,no,exc,0.8979101808585794,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < ME < me,nonEU < BA < ba,electricity,powerGrid < hvac,no,exc,2.6778280674360455,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS < rs,nonEU < ME < me,electricity,powerGrid < hvac,no,exc,0.11187977853240322,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS < rs,nonEU < MK < mk,electricity,powerGrid < hvac,no,exc,1.8458766324797478,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr_co,EU < IT < it_cn,electricity,powerGrid < hvac,no,exc,1.7184297263661108,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_1,EU < SE < se_2,electricity,powerGrid < hvac,no,exc,21.532204963962464,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_m,nonEU < NO < no_s,electricity,powerGrid < hvac,no,exc,7.8707473380943584,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < AL < al,EU < GR < gr,electricity,powerGrid < hvac,no,exc,3.355758211482601,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < ME < me,nonEU < AL < al,electricity,powerGrid < hvac,no,exc,1.3175101678648118,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < MK < mk,nonEU < AL < al,electricity,powerGrid < hvac,no,exc,1.475197211761227,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < CH < ch,EU < AT < at,electricity,powerGrid < hvac,no,exc,0.8893298104819715,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < AT < at,electricity,powerGrid < hvac,no,exc,5.39229251505368,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HU < hu,EU < AT < at,electricity,powerGrid < hvac,no,exc,5.155701719077789,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SI < si,EU < AT < at,electricity,powerGrid < hvac,no,exc,11.065759943364935,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SK < sk,EU < AT < at,electricity,powerGrid < hvac,no,exc,3.8492051205606073,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS < rs,nonEU < BA < ba,electricity,powerGrid < hvac,no,exc,2.1733414003621427,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < BE < be,electricity,powerGrid < hvac,no,exc,4.0791340140414905,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < RO < ro,EU < BG < bg,electricity,powerGrid < hvac,no,exc,13.201199128893396,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LU < lu,EU < DE < de,electricity,powerGrid < hvac,no,exc,0.06611408973579339,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < NL < nl,EU < DE < de,electricity,powerGrid < hvac,no,exc,25.01102969803783,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LV < lv,EU < EE < ee,electricity,powerGrid < hvac,no,exc,3.7758309633393212,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_n,EU < FI < fi,electricity,powerGrid < hvac,no,exc,10.00113539524647,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HU < hu,EU < HR < hr,electricity,powerGrid < hvac,no,exc,0.5327163449617772,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS < rs,EU < HR < hr,electricity,powerGrid < hvac,no,exc,14.042004130094842,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SI < si,EU < HR < hr,electricity,powerGrid < hvac,no,exc,2.8234093723439777e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS < rs,EU < HU < hu,electricity,powerGrid < hvac,no,exc,28.954975115116397,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SI < si,EU < HU < hu,electricity,powerGrid < hvac,no,exc,1.634093767640485,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SK < sk,EU < HU < hu,electricity,powerGrid < hvac,no,exc,1.3642307614099467,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < UK < ni,EU < IE < ie,electricity,powerGrid < hvac,no,exc,0.357443594403354,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < UK < uk,EU < IE < ie,electricity,powerGrid < hvac,no,exc,0.5999509569673355,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PL < pl,EU < LT < lt,electricity,powerGrid < hvac,no,exc,1.8699202210889392,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SK < sk,EU < PL < pl,electricity,powerGrid < hvac,no,exc,23.207845835829197,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_3,EU < SE < se_2,electricity,powerGrid < hvac,no,exc,3.557624673099619e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cn,EU < FR < fr_co,electricity,powerGrid < hvac,no,exc,0.6394584461247816,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_2,EU < SE < se_1,electricity,powerGrid < hvac,no,exc,4.277539132176017e-5,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_n,nonEU < NO < no_m,electricity,powerGrid < hvac,no,exc,11.044864393173896,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s,nonEU < NO < no_m,electricity,powerGrid < hvac,no,exc,1.5100361013124532,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < AT,EU < DE,crudeOil,liquidExc,no,exc,26.519888176308527,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < AT,EU < DE,jetFuel,liquidExc,no,exc,40.70439965773726,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < BG,EU < GR,crudeOil,liquidExc,no,exc,16.236591213955375,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < DE,EU < NL,crudeOil,liquidExc,no,exc,142.01731022689486,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < ES,EU < FR,jetFuel,liquidExc,no,exc,5.70597050628647,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < ES,EU < PT,crudeOil,liquidExc,no,exc,5.246537500222645,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < FI,EU < SE,crudeOil,liquidExc,no,exc,2.147682456067169,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < FI,EU < SE,jetFuel,liquidExc,no,exc,30.500098803384184,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < FR,nonEU < UK,jetFuel,liquidExc,no,exc,3.821452269028776,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < HR,EU < SI,crudeOil,liquidExc,no,exc,1.4112966900667843,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < HR,EU < SI,jetFuel,liquidExc,no,exc,10.686529436907671,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < IE,nonEU < UK,crudeOil,liquidExc,no,exc,5.561376719555297,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < RO,nonEU < RS,crudeOil,liquidExc,no,exc,35.78230106795971,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,nonEU < AL,nonEU < MK,crudeOil,liquidExc,no,exc,0.8694587150552026,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,nonEU < AL,nonEU < MK,jetFuel,liquidExc,no,exc,2.1686138992733506,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ,EU < DE,crudeOil,liquidExc,no,exc,9.387325133866453,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ,EU < DE,jetFuel,liquidExc,no,exc,11.600900500104702,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES,EU < FR,crudeOil,liquidExc,no,exc,38.07939338728772,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE,EU < LU,crudeOil,liquidExc,no,exc,23.738438420231727,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE,EU < LU,jetFuel,liquidExc,no,exc,9.138404544928866,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < EE,EU < LV,crudeOil,liquidExc,no,exc,9.487338802871701,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE,EU < NL,jetFuel,liquidExc,no,exc,72.97701355825802,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LT,EU < PL,crudeOil,liquidExc,no,exc,1.7179185173732257,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LT,EU < PL,jetFuel,liquidExc,no,exc,4.105947825647222,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES,EU < PT,jetFuel,liquidExc,no,exc,6.999176627312201,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR,nonEU < UK,crudeOil,liquidExc,no,exc,58.24929145072232,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IE,nonEU < UK,jetFuel,liquidExc,no,exc,4.795911739107113,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < HU,EU < AT,jetFuel,liquidExc,no,exc,20.77472154558423,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < SI,EU < AT,crudeOil,liquidExc,no,exc,1.7459677285055666,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < SI,EU < AT,jetFuel,liquidExc,no,exc,1.1616612492431915,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < SK,EU < AT,jetFuel,liquidExc,no,exc,6.516551782940169,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < DK,EU < DE,crudeOil,liquidExc,no,exc,73.90167785438369,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < DK,EU < DE,jetFuel,liquidExc,no,exc,55.02923179326762,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < PL,EU < DE,crudeOil,liquidExc,no,exc,25.42042178540285,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < PL,EU < DE,jetFuel,liquidExc,no,exc,16.073570966928507,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < SE,EU < DK,crudeOil,liquidExc,no,exc,90.44280653245079,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < SE,EU < DK,jetFuel,liquidExc,no,exc,26.140549408985592,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,nonEU < MK,EU < GR,crudeOil,liquidExc,no,exc,18.98037572331758,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,nonEU < MK,EU < GR,jetFuel,liquidExc,no,exc,26.292999653603935,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,nonEU < BA,EU < HR,crudeOil,liquidExc,no,exc,2.5194775487298653,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,nonEU < BA,EU < HR,jetFuel,liquidExc,no,exc,7.25810041442676,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < RO,EU < HU,crudeOil,liquidExc,no,exc,21.13027359628781,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,EU < LV,EU < LT,crudeOil,liquidExc,no,exc,27.359247008066163,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,nonEU < NO,EU < SE,crudeOil,liquidExc,no,exc,11.247012423821229,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+30th < 2040,30th < 2040,nonEU < NO,EU < SE,jetFuel,liquidExc,no,exc,0.23132094742610954,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HU,EU < AT,crudeOil,liquidExc,no,exc,21.462518029089175,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LU,EU < BE,crudeOil,liquidExc,no,exc,24.504060988763083,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LU,EU < BE,jetFuel,liquidExc,no,exc,9.138405638769862,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SI,EU < IT,crudeOil,liquidExc,no,exc,8.805227225398912,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SI,EU < IT,jetFuel,liquidExc,no,exc,9.52486865982507,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SK,EU < AT,crudeOil,liquidExc,no,exc,4.628965178971652,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < CH,EU < FR,crudeOil,liquidExc,no,exc,0.1262010051864225,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < CH,EU < FR,jetFuel,liquidExc,no,exc,21.779790146782535,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < ME,nonEU < BA,crudeOil,liquidExc,no,exc,4.810486414911705,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS,EU < BG,jetFuel,liquidExc,no,exc,5.408962986028638,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS,EU < RO,jetFuel,liquidExc,no,exc,11.623516653963263,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS,nonEU < MK,crudeOil,liquidExc,no,exc,31.985457678204376,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS,nonEU < MK,jetFuel,liquidExc,no,exc,6.894258709556702,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_e,EU < DE < de,none,powerGrid < hvdc,yes,flhExc,3079.9460069732154,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FI < fi,EU < EE < ee,none,powerGrid < hvdc,yes,flhExc,1794.3452697328846,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_1,EU < FI < fi,none,powerGrid < hvdc,yes,flhExc,7973.851698669738,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < UK < uk,nonEU < UK < ni,none,powerGrid < hvdc,yes,flhExc,1950.48880470879,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < DK < dk_e,none,powerGrid < hvdc,yes,flhExc,2927.2681696190175,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w,EU < SE < se_3,none,powerGrid < hvdc,yes,flhExc,2176.268778023617,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < EE < ee,EU < FI < fi,none,powerGrid < hvdc,yes,flhExc,5399.983266934345,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FI < fi,EU < SE < se_1,none,powerGrid < hvdc,yes,flhExc,19.335367481858032,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr_co,EU < IT < it_sar,none,powerGrid < hvdc,yes,flhExc,844.9925912528532,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_sar,none,powerGrid < hvdc,yes,flhExc,326.37563951161405,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_s,EU < IT < it_sic,none,powerGrid < hvdc,yes,flhExc,2433.6980916923158,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_sar,EU < FR < fr_co,none,powerGrid < hvdc,yes,flhExc,3263.934034765654,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_sar,EU < IT < it_cs,none,powerGrid < hvdc,yes,flhExc,4964.149986471038,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_sic,EU < IT < it_s,none,powerGrid < hvdc,yes,flhExc,3985.8278358667253,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_3,EU < DK < dk_w,none,powerGrid < hvdc,yes,flhExc,5420.262044161462,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < UK < ni,nonEU < UK < uk,none,powerGrid < hvdc,yes,flhExc,4930.0939964511645,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BE < be,nonEU < UK < uk,none,powerGrid < hvdc,no,flhExc,8135.642685509642,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,nonEU < NO < no_s,none,powerGrid < hvdc,no,flhExc,8565.427058222609,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < SE < se_4,none,powerGrid < hvdc,no,flhExc,6108.271692590267,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_e,EU < PL < pl,none,powerGrid < hvdc,no,flhExc,7182.027671686112,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w,EU < NL < nl,none,powerGrid < hvdc,no,flhExc,7819.111834067369,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w,nonEU < NO < no_s,none,powerGrid < hvdc,no,flhExc,6481.457714074204,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FI < fi,EU < SE < se_2,none,powerGrid < hvdc,no,flhExc,6668.31954035132,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FI < fi,EU < SE < se_3,none,powerGrid < hvdc,no,flhExc,7810.286935369648,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,EU < IE < ie,none,powerGrid < hvdc,no,flhExc,7622.965706443439,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,nonEU < UK < uk,none,powerGrid < hvdc,no,flhExc,7341.980035596574,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < GR < gr,EU < IT < it_s,none,powerGrid < hvdc,no,flhExc,7977.725447076433,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cs,nonEU < ME < me,none,powerGrid < hvdc,no,flhExc,6542.453838976539,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LT < lt,EU < SE < se_4,none,powerGrid < hvdc,no,flhExc,7295.343664106465,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < NL < nl,nonEU < NO < no_s,none,powerGrid < hvdc,no,flhExc,7749.266326986078,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < NL < nl,nonEU < UK < uk,none,powerGrid < hvdc,no,flhExc,7544.852635011593,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s,nonEU < UK < uk,none,powerGrid < hvdc,no,flhExc,6751.846503818005,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PL < pl,EU < SE < se_4,none,powerGrid < hvdc,no,flhExc,8396.397246652312,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_e < 72DK,EU < DK < dk_w < 38DK,none,h2Grid,yes,flhExc,2190.492396898263,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w < 38DK,EU < DK < dk_e < 72DK,none,h2Grid,yes,flhExc,2565.2722456702572,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS < rs,nonEU < AL < al,none,powerGrid < hvac,yes,flhExc,317.10580671189484,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ < cz,EU < AT < at,none,powerGrid < hvac,yes,flhExc,2880.328333239299,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_n,EU < AT < at,none,powerGrid < hvac,yes,flhExc,866.6712900299457,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < BA < ba,EU < HR < hr,none,powerGrid < hvac,yes,flhExc,7090.899765198146,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < ME < me,nonEU < BA < ba,none,powerGrid < hvac,yes,flhExc,4297.2742805847965,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,EU < BE < be,none,powerGrid < hvac,yes,flhExc,4285.584191372998,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LU < lu,EU < BE < be,none,powerGrid < hvac,yes,flhExc,2364.736341841244,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < NL < nl,EU < BE < be,none,powerGrid < hvac,yes,flhExc,3876.9485233330734,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < GR < gr,EU < BG < bg,none,powerGrid < hvac,yes,flhExc,6047.617742572528,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < MK < mk,EU < BG < bg,none,powerGrid < hvac,yes,flhExc,5688.212559791202,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS < rs,EU < BG < bg,none,powerGrid < hvac,yes,flhExc,3471.832941483041,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < CH < ch,EU < DE < de,none,powerGrid < hvac,yes,flhExc,3200.735232580825,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < CH < ch,EU < FR < fr,none,powerGrid < hvac,yes,flhExc,484.5159273661684,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < CH < ch,EU < IT < it_n,none,powerGrid < hvac,yes,flhExc,1999.2701388332894,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < CZ < cz,none,powerGrid < hvac,yes,flhExc,1313.8345858895184,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PL < pl,EU < CZ < cz,none,powerGrid < hvac,yes,flhExc,1102.4056736275102,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SK < sk,EU < CZ < cz,none,powerGrid < hvac,yes,flhExc,3626.061428767832,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w,EU < DE < de,none,powerGrid < hvac,yes,flhExc,3343.847693049323,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,EU < DE < de,none,powerGrid < hvac,yes,flhExc,4763.919342940705,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PL < pl,EU < DE < de,none,powerGrid < hvac,yes,flhExc,2320.3624857030863,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_4,EU < DK < dk_e,none,powerGrid < hvac,yes,flhExc,2445.051317243005,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,EU < ES < es,none,powerGrid < hvac,yes,flhExc,1170.480374131442,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PT < pt,EU < ES < es,none,powerGrid < hvac,yes,flhExc,4636.616979313401,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_n,EU < FR < fr,none,powerGrid < hvac,yes,flhExc,751.2649398045234,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < MK < mk,EU < GR < gr,none,powerGrid < hvac,yes,flhExc,968.5589663736434,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < RO < ro,EU < HU < hu,none,powerGrid < hvac,yes,flhExc,7576.364116594785,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_cn,none,powerGrid < hvac,yes,flhExc,2464.1483269065743,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_n,EU < IT < it_cn,none,powerGrid < hvac,yes,flhExc,694.6259418661942,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_s,EU < IT < it_cs,none,powerGrid < hvac,yes,flhExc,3835.7437463005467,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SI < si,EU < IT < it_n,none,powerGrid < hvac,yes,flhExc,7755.029610847691,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LV < lv,EU < LT < lt,none,powerGrid < hvac,yes,flhExc,4419.003734048201,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS < rs,nonEU < ME < me,none,powerGrid < hvac,yes,flhExc,101.70970279169491,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS < rs,nonEU < MK < mk,none,powerGrid < hvac,yes,flhExc,485.75704981832575,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_m,EU < SE < se_2,none,powerGrid < hvac,yes,flhExc,155.81370450835664,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_n,EU < SE < se_1,none,powerGrid < hvac,yes,flhExc,419.2188013007616,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_n,EU < SE < se_2,none,powerGrid < hvac,yes,flhExc,6842.099354402337,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s,EU < SE < se_3,none,powerGrid < hvac,yes,flhExc,2831.7054120493262,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < RS < rs,EU < RO < ro,none,powerGrid < hvac,yes,flhExc,873.1860517563027,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < CZ < cz,none,powerGrid < hvac,yes,flhExc,2294.9763971991756,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < IT < it_n,none,powerGrid < hvac,yes,flhExc,3773.2774967284654,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BE < be,EU < FR < fr,none,powerGrid < hvac,yes,flhExc,1022.1167995959182,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BE < be,EU < LU < lu,none,powerGrid < hvac,yes,flhExc,2429.6870200211765,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BE < be,EU < NL < nl,none,powerGrid < hvac,yes,flhExc,1042.6269301831553,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BG < bg,EU < GR < gr,none,powerGrid < hvac,yes,flhExc,0.007030269343076237,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BG < bg,nonEU < MK < mk,none,powerGrid < hvac,yes,flhExc,221.89900988948614,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BG < bg,nonEU < RS < rs,none,powerGrid < hvac,yes,flhExc,385.63370325566154,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ < cz,EU < DE < de,none,powerGrid < hvac,yes,flhExc,4052.4864389008517,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ < cz,EU < PL < pl,none,powerGrid < hvac,yes,flhExc,5476.27996396557,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ < cz,EU < SK < sk,none,powerGrid < hvac,yes,flhExc,895.7106290616225,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < DK < dk_w,none,powerGrid < hvac,yes,flhExc,3382.3740338970565,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < FR < fr,none,powerGrid < hvac,yes,flhExc,1367.9752442735157,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < PL < pl,none,powerGrid < hvac,yes,flhExc,1857.8527561384406,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,nonEU < CH < ch,none,powerGrid < hvac,yes,flhExc,2826.2612633761173,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_e,EU < DK < dk_w,none,powerGrid < hvac,yes,flhExc,4114.693446501159,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_e,EU < SE < se_4,none,powerGrid < hvac,yes,flhExc,761.7772391877267,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w,EU < DK < dk_e,none,powerGrid < hvac,yes,flhExc,3895.04769738112,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es,EU < FR < fr,none,powerGrid < hvac,yes,flhExc,6938.290455502264,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es,EU < PT < pt,none,powerGrid < hvac,yes,flhExc,531.020873248371,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,EU < IT < it_n,none,powerGrid < hvac,yes,flhExc,2205.448735681189,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,nonEU < CH < ch,none,powerGrid < hvac,yes,flhExc,3413.012396019576,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < GR < gr,nonEU < MK < mk,none,powerGrid < hvac,yes,flhExc,2609.307755347926,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr,nonEU < BA < ba,none,powerGrid < hvac,yes,flhExc,43.435708105916284,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HU < hu,EU < RO < ro,none,powerGrid < hvac,yes,flhExc,242.18780046166717,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cn,EU < IT < it_cs,none,powerGrid < hvac,yes,flhExc,2802.705961371162,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cn,EU < IT < it_n,none,powerGrid < hvac,yes,flhExc,6214.999474363637,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cs,EU < IT < it_s,none,powerGrid < hvac,yes,flhExc,121.19526125428548,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_n,EU < SI < si,none,powerGrid < hvac,yes,flhExc,400.45443919232963,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_n,nonEU < CH < ch,none,powerGrid < hvac,yes,flhExc,2088.2621386020833,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LT < lt,EU < LV < lv,none,powerGrid < hvac,yes,flhExc,653.2317804087412,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < RO < ro,nonEU < RS < rs,none,powerGrid < hvac,yes,flhExc,2574.3558931359025,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_1,nonEU < NO < no_n,none,powerGrid < hvac,yes,flhExc,2198.813161276059,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_2,nonEU < NO < no_m,none,powerGrid < hvac,yes,flhExc,3653.4463053996315,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_2,nonEU < NO < no_n,none,powerGrid < hvac,yes,flhExc,554.7521643998209,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_3,EU < SE < se_4,none,powerGrid < hvac,yes,flhExc,1600.9108003939214,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_3,nonEU < NO < no_s,none,powerGrid < hvac,yes,flhExc,1181.6656298457563,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_4,EU < SE < se_3,none,powerGrid < hvac,yes,flhExc,4273.792449679572,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < AL < al,nonEU < RS < rs,none,powerGrid < hvac,yes,flhExc,5082.88196781596,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < BA < ba,nonEU < ME < me,none,powerGrid < hvac,yes,flhExc,1136.5000873123427,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < ME < me,nonEU < RS < rs,none,powerGrid < hvac,yes,flhExc,4046.624244161773,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < MK < mk,nonEU < RS < rs,none,powerGrid < hvac,yes,flhExc,5507.412076260051,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < GR < gr,nonEU < AL < al,none,powerGrid < hvac,no,flhExc,2975.6818068989232,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < AL < al,nonEU < ME < me,none,powerGrid < hvac,no,flhExc,3898.0846134846047,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < AL < al,nonEU < MK < mk,none,powerGrid < hvac,no,flhExc,3541.5870029623347,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,nonEU < CH < ch,none,powerGrid < hvac,no,flhExc,5713.603520695854,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < DE < de,none,powerGrid < hvac,no,flhExc,6807.245549496654,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < HU < hu,none,powerGrid < hvac,no,flhExc,7100.402460542468,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < SI < si,none,powerGrid < hvac,no,flhExc,8172.185263721061,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at,EU < SK < sk,none,powerGrid < hvac,no,flhExc,5702.209104409581,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < BA < ba,nonEU < RS < rs,none,powerGrid < hvac,no,flhExc,4550.781698697179,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BE < be,EU < DE < de,none,powerGrid < hvac,no,flhExc,7012.669338579984,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < BG < bg,EU < RO < ro,none,powerGrid < hvac,no,flhExc,4245.559858182945,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < LU < lu,none,powerGrid < hvac,no,flhExc,2361.0434281240614,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DE < de,EU < NL < nl,none,powerGrid < hvac,no,flhExc,6954.606354683221,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < EE < ee,EU < LV < lv,none,powerGrid < hvac,no,flhExc,5061.019511874089,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FI < fi,nonEU < NO < no_n,none,powerGrid < hvac,no,flhExc,6638.3762267349975,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr,EU < HU < hu,none,powerGrid < hvac,no,flhExc,6978.523480964387,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr,nonEU < RS < rs,none,powerGrid < hvac,no,flhExc,5739.131196353577,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr,EU < SI < si,none,powerGrid < hvac,no,flhExc,7897.367333178345,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HU < hu,nonEU < RS < rs,none,powerGrid < hvac,no,flhExc,8225.552235269224,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HU < hu,EU < SI < si,none,powerGrid < hvac,no,flhExc,2760.8305378834284,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HU < hu,EU < SK < sk,none,powerGrid < hvac,no,flhExc,7455.867946270054,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IE < ie,nonEU < UK < ni,none,powerGrid < hvac,no,flhExc,7198.826029601693,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IE < ie,nonEU < UK < uk,none,powerGrid < hvac,no,flhExc,6360.142027162017,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LT < lt,EU < PL < pl,none,powerGrid < hvac,no,flhExc,6804.626799529891,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < PL < pl,EU < SK < sk,none,powerGrid < hvac,no,flhExc,7348.501146168662,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_2,EU < SE < se_3,none,powerGrid < hvac,no,flhExc,6597.479189189472,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr_co,EU < IT < it_cn,none,powerGrid < hvac,no,flhExc,3929.8136208181545,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_1,EU < SE < se_2,none,powerGrid < hvac,no,flhExc,6524.923557379935,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_m,nonEU < NO < no_n,none,powerGrid < hvac,no,flhExc,8496.04953321069,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_m,nonEU < NO < no_s,none,powerGrid < hvac,no,flhExc,6700.559599576294,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SI < si < 57SI,EU < AT < at < 50AT,none,h2Grid,yes,flhExc,8759.998592317525,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 26FR,EU < BE < be < 28BE,none,h2Grid,yes,flhExc,8759.997724261382,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 27FR,EU < BE < be < 28BE,none,h2Grid,yes,flhExc,8759.991405929948,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < DK < dk_w < 38DK,EU < DE < de < 31DE,none,h2Grid,yes,flhExc,4787.000855950302,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_4 < 89SE,EU < DK < dk_e < 72DK,none,h2Grid,yes,flhExc,5751.190428764882,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s < 79NO,EU < DK < dk_w < 38DK,none,h2Grid,yes,flhExc,4379.9985238075515,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SE < se_1 < 86SE,EU < FI < fi < 74FI,none,h2Grid,yes,flhExc,6569.941416036913,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_sar < 98IT,EU < FR < fr_co < 99FR,none,h2Grid,yes,flhExc,7367.293168281179,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < RO < ro < 59RO,EU < HU < hu < 58HU,none,h2Grid,yes,flhExc,8733.102623844186,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_s < 55IT,EU < IT < it_cs < 54IT,none,h2Grid,yes,flhExc,8759.861108328498,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < SI < si < 57SI,EU < IT < it_n < 52IT,none,h2Grid,yes,flhExc,6570.188356728599,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < CH < ch < 48CH,EU < IT < it_n < 52IT,none,h2Grid,yes,flhExc,4384.034787585231,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_sic < 56IT,EU < IT < it_s < 55IT,none,h2Grid,yes,flhExc,3494.3786955106934,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LV < lv < 78LV,EU < LT < lt < 77LT,none,h2Grid,yes,flhExc,7573.094937759856,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,nonEU < NO < no_s < 82NO,nonEU < NO < no_m < 83NO,none,h2Grid,yes,flhExc,6523.401218032906,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es < 04ES,EU < FR < fr < 14FR,none,h2Grid,yes,flhExc,8742.46322584413,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es < 06ES,EU < FR < fr < 14FR,none,h2Grid,yes,flhExc,6475.763670850025,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < ES < es < 06ES,EU < FR < fr < 15FR,none,h2Grid,yes,flhExc,8362.984298698906,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 14FR,EU < FR < fr < 17FR,none,h2Grid,yes,flhExc,8143.227999858642,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 16FR,none,h2Grid,yes,flhExc,6554.654704746841,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 18FR,none,h2Grid,yes,flhExc,7818.037514366561,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 15FR,EU < FR < fr < 19FR,none,h2Grid,yes,flhExc,8584.953747372354,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 19FR,EU < FR < fr < 20FR,none,h2Grid,yes,flhExc,8610.538165400847,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 20FR,nonEU < CH < ch < 47CH,none,h2Grid,yes,flhExc,8759.993978835935,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 20FR,nonEU < CH < ch < 48CH,none,h2Grid,yes,flhExc,8759.989016445286,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 20FR,EU < IT < it_n < 52IT,none,h2Grid,yes,flhExc,8756.754996835152,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 25FR,EU < LU < lu < 29LU,none,h2Grid,yes,flhExc,8220.555060431887,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 26FR,nonEU < UK < uk < 90UK,none,h2Grid,yes,flhExc,4919.542802650104,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr < 27FR,EU < LU < lu < 29LU,none,h2Grid,yes,flhExc,4380.417875784142,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < CZ < cz < 39CZ,EU < DE < de < 34DE,none,h2Grid,yes,flhExc,8759.998324260541,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < LT < lt < 77LT,EU < PL < pl < 41PL,none,h2Grid,yes,flhExc,7969.534797361609,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < AT < at < 49AT,EU < IT < it_n < 52IT,none,h2Grid,yes,flhExc,3406.041728972867,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IT < it_cn < 53IT,EU < IT < it_n < 52IT,none,h2Grid,yes,flhExc,7696.591333550566,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr_co < 99FR,EU < IT < it_cn < 53IT,none,h2Grid,yes,flhExc,7357.268818525933,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < HR < hr < 62HR,EU < SI < si < 57SI,none,h2Grid,yes,flhExc,8759.9982443939,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < EE < ee < 73EE,EU < LV < lv < 78LV,none,h2Grid,yes,flhExc,5994.931727368067,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < IE < ie < 96IE,nonEU < UK < ni < 95UK,none,h2Grid,yes,flhExc,7821.691528575026,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear
+none,30th < 2040,EU < FR < fr,EU < LU < lu,none,powerGrid < hvac,yes,flhExc,0.0,96hours_96hoursHeu_nucChp_allTec_NOAKnuCost_40nuYear

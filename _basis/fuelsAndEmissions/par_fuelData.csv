@@ -1,39 +1,9 @@
-carrier_1,carrier_2,timestep_2,technology_3,parameter,value,source
-diesel,,,,emissionFac,262.8736046,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe, uses oil value because refinery efficiencies are neglected"
-gasoline,,,,emissionFac,262.8736046,"uses crude oil values, because energy losses in refinery process are not considered"
-refinedOil,,,,emissionFac,262.8736046,
-hardcoal,,,,emissionFac,342.0957868,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe"
-lignite,,,,emissionFac,362,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe"
-gasFuel,,,,emissionFac,201.296363,"UBA (2016), CO2-Emissionsfaktoren für fossile Brennstoffe"
-waste,,,,emissionFac,332,used old dynelmod input
-,,,nuclearPlantStock,costVarGen,8.3,"fuel prices of 8.3 €/MWh_el based on Wealer (2020), Economics of Nuclear Power Plant Investment"
-crudeOil,,2020,,trdBuyPrc,29.07294083,computed as median of various sources
-crudeOil,,2025,,trdBuyPrc,39.77561685,"World Bank (2018), Commodity Markets Outlook"
-crudeOil,,2030,,trdBuyPrc,45.04708414,"IRENA (2018), Renewable Energy Prospects for the European Union"
-crudeOil,,2035,,trdBuyPrc,49.36010284,"Fraunhofer ISE (2018), Stromgestehungskosten erneuerbare Energien"
-crudeOil,,2040,,trdBuyPrc,53.19389723,"IEA (2017), World Energy Outlook 2017"
-crudeOil,,2045,,trdBuyPrc,53.19389723,
-crudeOil,,2050,,trdBuyPrc,53.19389723,
-hardcoal,,2020,,trdBuyPrc,7.085931107,
-hardcoal,,2025,,trdBuyPrc,7.702823932,
-hardcoal,,2030,,trdBuyPrc,8.002933956,
-hardcoal,,2035,,trdBuyPrc,8.10297063,
-hardcoal,,2040,,trdBuyPrc,8.203007305,
-hardcoal,,2045,,trdBuyPrc,8.203007305,
-hardcoal,,2050,,trdBuyPrc,8.203007305,
-gasFuel,naturalGas,2020,,trdBuyPrc,16.79656369,
-gasFuel,naturalGas,2025,,trdBuyPrc,21.95286173,
-gasFuel,naturalGas,2030,,trdBuyPrc,23.89805201,
-gasFuel,naturalGas,2035,,trdBuyPrc,25.28747364,
-gasFuel,naturalGas,2040,,trdBuyPrc,26.67689527,
-gasFuel,naturalGas,2045,,trdBuyPrc,26.67689527,
-gasFuel,naturalGas,2050,,trdBuyPrc,26.67689527,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
-h2,,2020,,trdBuyPrc,275,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
-h2,,2025,,trdBuyPrc,242,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
-h2,,2030,,trdBuyPrc,213,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
-h2,,2035,,trdBuyPrc,187,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
-h2,,2040,,trdBuyPrc,164,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
-h2,,2045,,trdBuyPrc,145,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
-h2,,2050,,trdBuyPrc,127,
-lignite,,,,trdBuyPrc,1.5,
-waste,,,,trdBuyPrc,14.07599999,
+carrier_1,region_4,timestep_2,parameter,value,source
+h2,06ES,2040,trdBuyPrc,111.71,see miscInputs -> h2Import
+h2,11ES,2040,trdBuyPrc,111.71,
+h2,30NL,2040,trdBuyPrc,111.71,
+h2,31DE,2040,trdBuyPrc,111.71,
+h2,69GR,2040,trdBuyPrc,111.71,
+h2,90UK,2040,trdBuyPrc,111.71,
+h2,09ES,2040,trdBuyPrc,76.9,
+h2,56IT,2040,trdBuyPrc,73.56,
