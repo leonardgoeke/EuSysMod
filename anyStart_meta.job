@@ -1,0 +1,12 @@
+#!/bin/bash --login
+#$ -cwd
+#$ -N anyAtom_META
+#$ -o /net/work/wimmers/AnyAtom_2/logs/job_log_META.$JOB_ID.$TASK_ID.out
+#$ -j y
+#$ -l h_rt=100
+#$ -l mem_free=4G
+#$ -pe mp 1
+#$ -m bae
+#$ -M awi@wip.tu-berlin.de
+
+qsub -t 1:24 start4_16_awi.job
