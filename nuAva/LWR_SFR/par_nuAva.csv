@@ -1,0 +1,5 @@
+technology_1,technology_2,technology_3,carrier_1,mode,parameter,value,comment
+,,nuclearPowerFlexChp_HTR,,,avaConv,0,
+,,nuclearPowerFlexChp_SMR,,,avaConv,0,
+,,nuclearPowerFlexChp_SFR,,,avaConv,1,
+,,nuclearPowerFlexChp_LWR,,,avaConv,1,
