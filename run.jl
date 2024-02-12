@@ -23,9 +23,9 @@ resultDir_str = "results"
 
 #region # * compute design factors heuristic solve
 
-anyM = anyModel(inputDes_arr,resultDir_str, objName = obj_str * "_designFactors", supTsLvl = 2, shortExp = 5, redStep = 1.0, emissionLoss = false, holdFixed = true, onlyDesFac = true)
+anyM = anyModel(inputDes_arr,resultDir_str, objName = "designFactors_" * obj_str, supTsLvl = 2, shortExp = 5, redStep = 1.0, emissionLoss = false, holdFixed = true, onlyDesFac = true)
 createOptModel!(anyM);
-exportDesignFactors!(anyM,desFac_dir)
+exportDesignFactors!(anyM,desFac_dir,false)
 
 #endregion
 
