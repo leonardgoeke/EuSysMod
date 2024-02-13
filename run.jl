@@ -6,7 +6,7 @@ using AnyMOD
 if isempty(ARGS)
     h = "96"
     h_heu = "96"
-    scen_number = 10
+    scen_number = 9
     t_int = 8
     @info "No arguments provided, default values used." h h_heu scen_number t_int
 else    
@@ -31,7 +31,9 @@ nuc_scen_ava =["LWR_HTR",
     "No_Nuc"]
 
 nuC = nuc_scen_cost[div(scen_number,8,RoundUp)] #ARGS[3] # scenario for nuclear cost
-nuAva = nuc_scen_ava[div(scen_number,3,RoundUp)] #ARGS[3] # scenario for nuclear cost
+avaNo = scen_number-(div(scen_number,8,RoundUp)-1)*length(nuc_scen_ava)
+nuAva = nuc_scen_ava[avaNo]
+ #ARGS[3] # scenario for nuclear cost
 #nuC = "nucChp_allTec_NOAK"
 nuY = "40"#ARGS[4] # scenario for nuclear lifetime
 
@@ -55,6 +57,7 @@ optMod_dic = Dict{Symbol,NamedTuple}()
 optMod_dic[:heuSca] =  (inputDir = inputHeu_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
 optMod_dic[:top] 	=  (inputDir = inputMod_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
 
+
  if h_heu != "8760"
 
      heu_m, heuSca_obj = @suppress heuristicSolve(optMod_dic[:heuSca],1.0,t_int,Gurobi.Optimizer);
@@ -72,9 +75,9 @@ optMod_dic[:top] 	=  (inputDir = inputMod_arr, resultDir = resultDir_str, suffix
 
  end
 
-endregion
+#endregion
 
-region # * create and solve main model
+#region # * create and solve main model
 
 anyM = anyModel(inputMod_arr,resultDir_str, objName = obj_str, supTsLvl = 2, shortExp = 5, redStep = 1.0, emissionLoss = false, holdFixed = true)
 
@@ -99,6 +102,7 @@ reportResults(:exchange,anyM, addObjName = true)
 reportResults(:cost,anyM, addObjName = true)
 
 reportTimeSeries(:electricity,anyM)
+
 
 
 #endregion
