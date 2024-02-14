@@ -1,10 +1,12 @@
 using AnyMOD, Gurobi, CSV, Statistics
 
-# ! string here define scenario, overwrite ARGS with respective values for hard-coding scenarios according to comments
-h = ARGS[1] # resolution of time-series for actual solve, can be 96, 1752, 4392, or 8760
-h_heu = ARGS[2] # resolution of time-series for pre-screening, can be 96, 1752, 4392, or 8760
-grid = ARGS[3] # scenario for grid expansion, can be "_gridExp" and "_noGridExp"
-t_int = parse(Int,ARGS[4]) # number of threads
+par_df = CSV.read("settings.csv",DataFrame)
+id_int = parse(Int,ARGS[1])
+
+h = string(par_df[id_int,:h]) # resolution of time-series for actual solve, can be 96, 1752, 4392, or 8760
+h_heu = string(par_df[id_int,:h_heu]) # resolution of time-series for pre-screening, can be 96, 1752, 4392, or 8760
+grid = string(par_df[id_int,:grid]) # scenario 
+t_int = parse(Int,ARGS[2]) # number of threads
 
 obj_str = h * "hours_" * h_heu * "hoursHeu" * grid * "_updated"
 temp_dir = "tempFix_" * obj_str # directory for temporary folder
