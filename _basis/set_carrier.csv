@@ -20,3 +20,4 @@ otherBiomass,solidBiomass,2,1,2,2,ineq
 otherBiomass,nonSolidBiomass,2,1,2,2,ineq
 rawBiogas,,2,1,2,2,eq
 avaAndNavi,,2,1,2,2,eq
+uranium,,2,1,2,2,none

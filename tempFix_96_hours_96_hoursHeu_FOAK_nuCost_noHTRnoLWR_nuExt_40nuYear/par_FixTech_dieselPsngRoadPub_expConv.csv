@@ -1,0 +1,13 @@
+timestep_1,timestep_2,region_1,region_2,region_3,technology_1,technology_2,technology_3,parameter,value
+30th,2040,EU,EE,ee,transport,,dieselPsngRoadPub,expConvFix,0.122904096149
+30th,2040,EU,FI,fi,transport,,dieselPsngRoadPub,expConvFix,0.42351974491
+30th,2040,EU,IT,it_n,transport,,dieselPsngRoadPub,expConvFix,2.167844002943
+30th,2040,EU,LT,lt,transport,,dieselPsngRoadPub,expConvFix,0.14853814079
+30th,2040,EU,LV,lv,transport,,dieselPsngRoadPub,expConvFix,0.133289183223
+30th,2040,EU,PL,pl,transport,,dieselPsngRoadPub,expConvFix,1.851896001962
+30th,2040,EU,SE,se_1,transport,,dieselPsngRoadPub,expConvFix,0.013257297032
+30th,2040,EU,SE,se_2,transport,,dieselPsngRoadPub,expConvFix,0.046391954869
+30th,2040,EU,SE,se_3,transport,,dieselPsngRoadPub,expConvFix,0.301797890606
+30th,2040,EU,SE,se_4,transport,,dieselPsngRoadPub,expConvFix,0.089668874172
+30th,2040,nonEU,AL,al,transport,,dieselPsngRoadPub,expConvFix,0.154981604121
+30th,2040,nonEU,NO,no_s,transport,,dieselPsngRoadPub,expConvFix,0.170137355899

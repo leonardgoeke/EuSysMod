@@ -135,3 +135,7 @@ wind,onshore,onshore_b,,,electricity,,,mature,none,4,,yes,
 wind,onshore,onshore_c,,,electricity,,,mature,none,4,,yes,
 powerToX,,gasStorage,,,,synthGas,synthGas,stock,decomm,,,,2
 powerToX,,avaAndNaviTech,,refinedOil,avaAndNavi,,,unrestricted,none,,,,
+nuclear,,nuclearPowerFlexChp_HTR,moreHeat; moreElec,uranium,electricity; processHeat_high; processHeat_medium,,,mature,none,,,,
+nuclear,,nuclearPowerFlexChp_LWR,moreHeat; moreElec,uranium,electricity; districtHeat,,,mature,none,,,,
+nuclear,,nuclearPowerFlexChp_SFR,moreHeat; moreElec,uranium,electricity; processHeat_medium,,,mature,none,,,,
+nuclear,,nuclearPowerFlexChp_SMR,moreHeat; moreElec,uranium,electricity; processHeat_low,,,mature,none,,,,

@@ -1,0 +1,3 @@
+timestep_1,timestep_2,region_1,region_2,region_3,region_4,technology_1,technology_2,technology_3,parameter,value
+30th,2040,EU,EE,ee,73EE,heatpump,,heatpumpPro,expConvFix,0.0
+30th,2040,EU,LT,lt,77LT,heatpump,,heatpumpPro,expConvFix,0.0

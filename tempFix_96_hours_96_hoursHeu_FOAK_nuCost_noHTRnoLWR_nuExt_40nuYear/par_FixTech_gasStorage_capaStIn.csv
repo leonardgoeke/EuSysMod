@@ -1,0 +1,16 @@
+timestep_1,timestep_2,timestep_1,region_1,region_2,region_3,region_4,technology_1,technology_2,technology_3,id_1,parameter,value
+30th,2040,,EU,ES,es,03ES,powerToX,,gasStorage,1,capaStInFix,0.0
+30th,2040,,EU,ES,es,04ES,powerToX,,gasStorage,1,capaStInFix,0.0
+30th,2040,,EU,ES,es,05ES,powerToX,,gasStorage,1,capaStInFix,0.0
+30th,2040,,EU,ES,es,06ES,powerToX,,gasStorage,1,capaStInFix,0.0
+30th,2040,,EU,ES,es,08ES,powerToX,,gasStorage,1,capaStInFix,0.0
+30th,2040,,EU,ES,es,09ES,powerToX,,gasStorage,1,capaStInFix,0.0
+30th,2040,,EU,GR,gr,68GR,powerToX,,gasStorage,1,capaStInFix,0.0
+30th,2040,,EU,IT,it_cn,53IT,powerToX,,gasStorage,1,capaStInFix,0.0
+30th,2040,,EU,IT,it_s,55IT,powerToX,,gasStorage,1,capaStInFix,0.0
+30th,2040,,EU,NL,nl,30NL,powerToX,,gasStorage,1,capaStInFix,0.0
+30th,2040,,EU,PT,pt,13PT,powerToX,,gasStorage,1,capaStInFix,0.0
+30th,2040,,EU,RO,ro,61RO,powerToX,,gasStorage,1,capaStInFix,0.0
+30th,2040,,nonEU,UK,uk,90UK,powerToX,,gasStorage,1,capaStInFix,0.0
+30th,2040,,nonEU,UK,uk,92UK,powerToX,,gasStorage,1,capaStInFix,0.0
+30th,2040,,nonEU,UK,uk,93UK,powerToX,,gasStorage,1,capaStInFix,0.0

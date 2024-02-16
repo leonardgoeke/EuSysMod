@@ -1,3 +1,3 @@
-h	h_heu	grid
-1752	4392	_gridExp
-1752	4392	_noGridExp
+h,h_heu,nuExt,nuCost,nuYear
+96,96,"noHTR, noLWR",FOAK,40
+96,96,,NOAK_mean,40

@@ -1,0 +1,17 @@
+timestep_1,timestep_2,region_1,region_2,region_3,region_4,technology_1,technology_2,technology_3,parameter,value
+30th,2040,EU,EE,ee,73EE,heatpump,heatpumpAir,heatpumpAirDh,expConvFix,0.0
+30th,2040,EU,ES,es,01ES,heatpump,heatpumpAir,heatpumpAirDh,expConvFix,0.0
+30th,2040,EU,ES,es,02ES,heatpump,heatpumpAir,heatpumpAirDh,expConvFix,0.0
+30th,2040,EU,ES,es,03ES,heatpump,heatpumpAir,heatpumpAirDh,expConvFix,0.0
+30th,2040,EU,ES,es,06ES,heatpump,heatpumpAir,heatpumpAirDh,expConvFix,0.0
+30th,2040,EU,ES,es,08ES,heatpump,heatpumpAir,heatpumpAirDh,expConvFix,0.0
+30th,2040,EU,FR,fr_co,99FR,heatpump,heatpumpAir,heatpumpAirDh,expConvFix,0.0
+30th,2040,EU,IT,it_sar,98IT,heatpump,heatpumpAir,heatpumpAirDh,expConvFix,0.0
+30th,2040,EU,PL,pl,42PL,heatpump,heatpumpAir,heatpumpAirDh,expConvFix,0.0
+30th,2040,EU,PT,pt,12PT,heatpump,heatpumpAir,heatpumpAirDh,expConvFix,0.0
+30th,2040,EU,PT,pt,13PT,heatpump,heatpumpAir,heatpumpAirDh,expConvFix,0.0
+30th,2040,EU,SE,se_1,86SE,heatpump,heatpumpAir,heatpumpAirDh,expConvFix,0.0
+30th,2040,EU,SE,se_4,89SE,heatpump,heatpumpAir,heatpumpAirDh,expConvFix,0.0
+30th,2040,nonEU,BA,ba,63BA,heatpump,heatpumpAir,heatpumpAirDh,expConvFix,0.0
+30th,2040,nonEU,NO,no_m,83NO,heatpump,heatpumpAir,heatpumpAirDh,expConvFix,0.0
+30th,2040,nonEU,NO,no_n,85NO,heatpump,heatpumpAir,heatpumpAirDh,expConvFix,0.0

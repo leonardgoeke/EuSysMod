@@ -1,0 +1,9 @@
+timestep_1,timestep_2,region_1,region_2,region_3,region_4,technology_1,technology_2,technology_3,parameter,value
+30th,2040,EU,FR,fr,19FR,networkHeat,,eBoilerDh,expConvFix,0.0
+30th,2040,EU,FR,fr,21FR,networkHeat,,eBoilerDh,expConvFix,0.0
+30th,2040,EU,FR,fr,22FR,networkHeat,,eBoilerDh,expConvFix,0.0
+30th,2040,EU,FR,fr,24FR,networkHeat,,eBoilerDh,expConvFix,0.0
+30th,2040,EU,FR,fr,26FR,networkHeat,,eBoilerDh,expConvFix,0.0
+30th,2040,EU,FR,fr_co,99FR,networkHeat,,eBoilerDh,expConvFix,0.0
+30th,2040,nonEU,NO,no_m,83NO,networkHeat,,eBoilerDh,expConvFix,0.0
+30th,2040,nonEU,UK,ni,95UK,networkHeat,,eBoilerDh,expConvFix,0.0

@@ -1,27 +1,38 @@
 using AnyMOD, Gurobi, CSV, Statistics
 
-par_df = CSV.read("settings.csv",DataFrame)
-id_int = parse(Int,ARGS[1])
+b = "C:/Users/lgoeke/git/EuSysMod/"
+
+if isempty(ARGS)
+    id_int = 2 # id of scenario in corresponding settings.csv
+    t_int = 4 # number of threads
+else
+    id_int = parse(Int,ARGS[1]) # id of scenario in corresponding settings.csv
+    t_int = parse(Int,ARGS[2]) # number of threads
+end
+
+par_df = CSV.read(b * "settings.csv",DataFrame)
+
 
 h = string(par_df[id_int,:h]) # resolution of time-series for actual solve, can be 96, 1752, 4392, or 8760
 h_heu = string(par_df[id_int,:h_heu]) # resolution of time-series for pre-screening, can be 96, 1752, 4392, or 8760
-grid = string(par_df[id_int,:grid]) # scenario 
-t_int = parse(Int,ARGS[2]) # number of threads
+nuExt_arr = par_df[id_int,:nuExt] |> (x -> ismissing(x) ? String[] : collect(split(x,", "))) # array of cases for non-existing technologies
+nuCost_str = par_df[id_int,:nuCost] # cost case
+nuY_str = string(par_df[id_int,:nuYear]) # lifetime case
 
-obj_str = h * "hours_" * h_heu * "hoursHeu" * grid * "_updated"
-temp_dir = "tempFix_" * obj_str # directory for temporary folder
-desFac_dir = "desFac_" * obj_str # directory for design factors
+obj_str = h * "_hours_" * h_heu * "_hoursHeu_" * nuCost_str * "_nuCost_" * join(nuExt_arr,"") * "_nuExt_"* nuY_str * "nuYear"
+temp_dir = b * "tempFix_" * obj_str # directory for temporary folder
+desFac_dir = b * "desFac_" * obj_str # directory for design factors
 
 for x in [desFac_dir,temp_dir]
     if isdir(x) rm(x, recursive = true) end
     mkdir(x)
 end
 
-inputDes_arr = ["_basis",grid,"timeSeries/8760hours_2008_only2040"]
-inputHeu_arr = ["_basis",grid,"timeSeries/" * h_heu * "hours_2008_only2040",desFac_dir]
-inputMod_arr = ["_basis",grid,"timeSeries/" * h * "hours_2008_only2040",desFac_dir,temp_dir]
+inputDes_arr = [b * "_basis", b * "timeSeries/8760hours_2008", b * "nuCost/" * nuCost_str, b * "nuYear/" * nuY_str, map(x -> b * "nuExt/" * x, nuExt_arr)...]
+inputHeu_arr = [b * "_basis", b * "timeSeries/" * h_heu * "hours_2008",desFac_dir, b * "nuCost/" * nuCost_str, b * "nuYear/" * nuY_str, map(x -> b * "nuExt/" * x, nuExt_arr)...]
+inputMod_arr = [b * "_basis", b * "timeSeries/" * h * "hours_2008",desFac_dir,temp_dir, b * "nuCost/" * nuCost_str, b * "nuYear/" * nuY_str, map(x -> b * "nuExt/" * x, nuExt_arr)...]
 
-resultDir_str = "results"
+resultDir_str = b * "results"
 
 #region # * compute design factors heuristic solve
 

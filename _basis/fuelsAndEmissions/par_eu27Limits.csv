@@ -1,8 +1,0 @@
-region_1,technology_1,technology_2,timestep_2,parameter,value,source
-EU,,,2025,emissionUp,2913.48,"based on emissions of energy sector in European Commission (2018), A Clean Planet for all"
-EU,,,2030,emissionUp,2365.37,
-EU,,,2035,emissionUp,1411.5,
-EU,,,2040,emissionUp,637.6,
-EU,,,2045,emissionUp,237.06,
-EU,,,2050,emissionUp,0,
-,stock,power,2020,emissionPrc,25,average ets emisison price in 2020
