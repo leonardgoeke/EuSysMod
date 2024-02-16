@@ -1,6 +1,6 @@
 using AnyMOD, Gurobi, CSV, Statistics
 
-b = "C:/Users/lgoeke/git/EuSysMod/"
+b = ""
 
 if isempty(ARGS)
     id_int = 2 # id of scenario in corresponding settings.csv
