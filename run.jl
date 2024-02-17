@@ -17,9 +17,9 @@ for x in [desFac_dir,temp_dir]
     mkdir(x)
 end
 
-inputDes_arr = ["_basis",grid,"timeSeries/8760hours_2008_only2040"]
-inputHeu_arr = ["_basis",grid,"timeSeries/" * h_heu * "hours_2008_only2040",desFac_dir]
-inputMod_arr = ["_basis",grid,"timeSeries/" * h * "hours_2008_only2040",desFac_dir,temp_dir]
+inputDes_arr = ["_basis",grid,"timeSeries/8760hours_2008"]
+inputHeu_arr = ["_basis",grid,"timeSeries/" * h_heu * "hours_2008",desFac_dir]
+inputMod_arr = ["_basis",grid,"timeSeries/" * h * "hours_2008",desFac_dir,temp_dir]
 
 resultDir_str = "results"
 
@@ -52,7 +52,11 @@ heu_m = nothing
 
 #endregion
 
+
+removeFixStorage(varSym,var_df,part)
+
 #region # * create and solve main model
+
 
 anyM = anyModel(inputMod_arr,resultDir_str, objName = obj_str, supTsLvl = 2, shortExp = 5, redStep = 1.0, emissionLoss = false, holdFixed = true)
 
@@ -80,9 +84,3 @@ reportResults(:cost,anyM, addObjName = true)
 reportTimeSeries(:electricity,anyM)
 
 #endregion
-
-
-
-
-
-
