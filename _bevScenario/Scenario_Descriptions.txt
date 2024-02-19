@@ -1,0 +1,13 @@
+
+Scenario Descriptions:
+
+Scenario 0 :  Passive charging with real plugin charging patterns of BEVs.
+Scenario 1 :  Flexible charging with daily balancing.
+Scenario 2:  Smart charging without a cap on peak demand.
+Scenario 3 : V2G charging without a cap on peak demand.
+Scenario 4 :  Smart charging with an 80% cap on peak demand.
+Scenario 5 :  V2G charging with an 80% cap on peak demand.
+Scenario 6 :  Smart charging with a 70% cap on peak demand.
+Scenario 7 :  V2G charging with a 70% cap on peak demand.
+Scenario 8 :  Smart charging with a 60% cap on peak demand.
+Scenario 9 :  V2G charging with a 60% cap on peak demand.

@@ -2,11 +2,11 @@ using AnyMOD, Gurobi, CSV, Statistics
 
 # For example 2
 # ! string here define scenario, overwrite ARGS with respective values for hard-coding scenarios according to comments
-h = ARGS[1] # resolution of time-series for actual solve, can be 96, 1752, 4392, or 8760
+h =ARGS[1] # resolution of time-series for actual solve, can be 96, 1752, 4392, or 8760
 h_heu = ARGS[2] # resolution of time-series for pre-screening, can be 96, 1752, 4392, or 8760
 grid = ARGS[3] # scenario for grid expansion, can be "_gridExp" and "_noGridExp"
 bevScr = ARGS[4] # number of scenario for bev
-t_int = parse(Int, ARGS[5]) # number of threads
+t_int =parse(Int, ARGS[5]) # number of threads
 #$$$
 
 
@@ -24,7 +24,8 @@ inputMod_arr = ["_basis", grid, "timeSeries/" * h * "hours_2008_only2040", "_bev
 inputHeu_arr = ["_basis", grid, "timeSeries/" * h_heu * "hours_2008_only2040", "_bevScenario/costData_Scr" * bevScr, "_bevScenario/timeSeries_"*h_heu *"_Scr"* bevScr ]
 resultDir_str = "results"
 
-#inputMod_arr = ["_basis", grid, "timeSeries/$h" * "hours_2008_only2040", "_bevScenario/costData_Scr$i", "_bevScenario/timeSeries_$h" * "_Scr$i/"]
+
+
 
 #region # * perform heuristic solve
 

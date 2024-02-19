@@ -20,7 +20,7 @@ bevPsngRoadPub,,stDis,0.0001
 bevFrtRoadLight,,stDis,0.0001
 bevFrtRoadHeavy,,stDis,0.0001
 bevPsngRoadPrvt,,sizeToStOutFix,5
-bevPsngRoadPub,,sizeToStOutFix,5
+bevPsngRoadPub,,sizeToStOutFix,3
 bevFrtRoadLight,,sizeToStOutFix,5
 bevFrtRoadHeavy,,sizeToStOutFix,5
 bevPsngRoadPrvt,,stOutToStInFix,1

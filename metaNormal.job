@@ -10,9 +10,13 @@
 #$ -M pa@wip.tu-berlin.de
 
 qsub -t 101 -v hours='8760' -v hours_heu='1752' -v grid='_gridExp' -v bevScr='0' start8_64.job
-qsub -t 102 -v hours='8760' -v hours_heu='1752' -v grid='_gridExp' -v bevScr='1' start8_64.job
-qsub -t 103 -v hours='8760' -v hours_heu='1752' -v grid='_gridExp' -v bevScr='2' start8_64.job
-qsub -t 104 -v hours='8760' -v hours_heu='1752' -v grid='_gridExp' -v bevScr='3' start8_64.job
+qsub -t 102 -v hours='8760' -v hours_heu='1752' -v grid='_gridExp' -v bevScr='2' start8_64.job
+qsub -t 103 -v hours='8760' -v hours_heu='1752' -v grid='_gridExp' -v bevScr='3' start8_64.job
+qsub -t 104 -v hours='8760' -v hours_heu='1752' -v grid='_gridExp' -v bevScr='4' start8_64.job
+qsub -t 105 -v hours='8760' -v hours_heu='1752' -v grid='_gridExp' -v bevScr='8' start8_64.job
+qsub -t 106 -v hours='8760' -v hours_heu='1752' -v grid='_gridExp' -v bevScr='9' start8_64.job
+
+
 
 
 
