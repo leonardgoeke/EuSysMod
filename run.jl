@@ -23,10 +23,9 @@ obj_str = h * "_hours_" * h_heu * "_hoursHeu_" * nuCost_str * "_nuCost_" * join(
 temp_dir = b * "tempFix_" * obj_str # directory for temporary folder
 desFac_dir = b * "desFac_" * obj_str # directory for design factors
 
-for x in [desFac_dir,temp_dir]
-    if isdir(x) rm(x, recursive = true) end
-    mkdir(x)
-end
+
+if isdir(temp_dir) rm(temp_dir, recursive = true) end
+mkdir(x)
 
 inputDes_arr = [b * "_basis", b * "timeSeries/8760hours_2008", b * "nuCost/" * nuCost_str, b * "nuYear/" * nuY_str, map(x -> b * "nuExt/" * x, nuExt_arr)...]
 inputHeu_arr = [b * "_basis", b * "timeSeries/" * h_heu * "hours_2008",desFac_dir, b * "nuCost/" * nuCost_str, b * "nuYear/" * nuY_str, map(x -> b * "nuExt/" * x, nuExt_arr)...]
@@ -36,9 +35,13 @@ resultDir_str = b * "results"
 
 #region # * compute design factors heuristic solve
 
+if false
+
 anyM = anyModel(inputDes_arr,resultDir_str, objName = "designFactors_" * obj_str, supTsLvl = 2, shortExp = 5, redStep = 1.0, emissionLoss = false, holdFixed = true, onlyDesFac = true)
 createOptModel!(anyM);
 exportDesignFactors!(anyM,desFac_dir,false)
+
+end
 
 #endregion
 
