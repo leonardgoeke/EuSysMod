@@ -1,3 +1,0 @@
-timestep_1,region_1,region_2,region_3,region_4,technology_1,technology_2,technology_3,id_1,parameter,value
-30th,EU,DE,de,32DE,powerToX,h2Storage,h2StorageCavern,1,expStInFix,0.0
-30th,nonEU,BA,ba,63BA,powerToX,h2Storage,h2StorageCavern,1,expStInFix,0.0
