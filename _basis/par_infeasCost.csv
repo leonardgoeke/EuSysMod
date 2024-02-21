@@ -11,6 +11,7 @@ districtHeat,,costLss,13000
 processHeat_low,,costLss,13000
 processHeat_high,,costLss,13000
 capturedCO2,,costLss,50000
+uranium,,costLss,13000
 frtRoadHeavy,,costMissCapa,50000
 frtRoadLight,,costMissCapa,50000
 frtRail,,costMissCapa,50000
