@@ -1,5 +1,5 @@
 #!/bin/bash --login
-#SBATCH --array=1,2
+#SBATCH --array=1,2,3
 #SBATCH --job-name=AnyMOD
 #SBATCH --output=/net/work/goeke/julia/log.%j.%a.out
 #SBATCH --time=120:00:00
