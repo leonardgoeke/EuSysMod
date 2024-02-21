@@ -3,7 +3,7 @@ using AnyMOD, Gurobi, CSV, Statistics
 b = ""
 
 if isempty(ARGS)
-    id_int = 2 # id of scenario in corresponding settings.csv
+    id_int = 1 # id of scenario in corresponding settings.csv
     t_int = 4 # number of threads
 else
     id_int = parse(Int,ARGS[1]) # id of scenario in corresponding settings.csv
@@ -25,7 +25,7 @@ desFac_dir = b * "desFac_" * obj_str # directory for design factors
 
 
 if isdir(temp_dir) rm(temp_dir, recursive = true) end
-mkdir(x)
+mkdir(temp_dir)
 
 inputDes_arr = [b * "_basis", b * "timeSeries/8760hours_2008", b * "nuCost/" * nuCost_str, b * "nuYear/" * nuY_str, map(x -> b * "nuExt/" * x, nuExt_arr)...]
 inputHeu_arr = [b * "_basis", b * "timeSeries/" * h_heu * "hours_2008",desFac_dir, b * "nuCost/" * nuCost_str, b * "nuYear/" * nuY_str, map(x -> b * "nuExt/" * x, nuExt_arr)...]
