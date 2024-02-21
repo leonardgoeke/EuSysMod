@@ -21,29 +21,16 @@ nuY_str = string(par_df[id_int,:nuYear]) # lifetime case
 
 obj_str = h * "_hours_" * h_heu * "_hoursHeu_" * nuCost_str * "_nuCost_" * join(nuExt_arr,"") * "_nuExt_"* nuY_str * "nuYear"
 temp_dir = b * "tempFix_" * obj_str # directory for temporary folder
-desFac_dir = b * "desFac_" * obj_str # directory for design factors
 
 
 if isdir(temp_dir) rm(temp_dir, recursive = true) end
 mkdir(temp_dir)
 
 inputDes_arr = [b * "_basis", b * "timeSeries/8760hours_2008", b * "nuCost/" * nuCost_str, b * "nuYear/" * nuY_str, map(x -> b * "nuExt/" * x, nuExt_arr)...]
-inputHeu_arr = [b * "_basis", b * "timeSeries/" * h_heu * "hours_2008",desFac_dir, b * "nuCost/" * nuCost_str, b * "nuYear/" * nuY_str, map(x -> b * "nuExt/" * x, nuExt_arr)...]
-inputMod_arr = [b * "_basis", b * "timeSeries/" * h * "hours_2008",desFac_dir,temp_dir, b * "nuCost/" * nuCost_str, b * "nuYear/" * nuY_str, map(x -> b * "nuExt/" * x, nuExt_arr)...]
+inputHeu_arr = [b * "_basis", b * "timeSeries/" * h_heu * "hours_2008", b * "nuCost/" * nuCost_str, b * "nuYear/" * nuY_str, map(x -> b * "nuExt/" * x, nuExt_arr)...]
+inputMod_arr = [b * "_basis", b * "timeSeries/" * h * "hours_2008",temp_dir, b * "nuCost/" * nuCost_str, b * "nuYear/" * nuY_str, map(x -> b * "nuExt/" * x, nuExt_arr)...]
 
 resultDir_str = b * "results"
-
-#region # * compute design factors heuristic solve
-
-if false
-
-anyM = anyModel(inputDes_arr,resultDir_str, objName = "designFactors_" * obj_str, supTsLvl = 2, shortExp = 5, redStep = 1.0, emissionLoss = false, holdFixed = true, onlyDesFac = true)
-createOptModel!(anyM);
-exportDesignFactors!(anyM,desFac_dir,false)
-
-end
-
-#endregion
 
 #region # * perform heuristic solve
 
@@ -58,13 +45,18 @@ heu_m, heuSca_obj = @suppress heuristicSolve(optMod_dic[:heuSca],1.0,t_int,Gurob
 ~, heuCom_obj = @suppress heuristicSolve(optMod_dic[:heuSca],8760/parse(Int,h_heu),t_int,Gurobi.Optimizer)
 # ! write fixes to files and limits to dictionary
 fix_dic, lim_dic, cntHeu_arr = evaluateHeu(heu_m,heuSca_obj,heuCom_obj,(thrsAbs = 0.001, thrsRel = 0.05),false) # get fixed and limited variables
-feasFix_tup = getFeasResult(optMod_dic[:top],fix_dic,lim_dic,t_int,0.001,Gurobi.Optimizer) # ensure feasiblity with fixed variables
+feasFix_tup = getFeasResult(optMod_dic[:top],fix_dic,lim_dic,t_int,0.001,Gurobi.Optimizer, roundDown = 4) # ensure feasiblity with fixed variables
 # ! write fixed variable values to files
 writeFixToFiles(fix_dic,feasFix_tup[1],temp_dir,heu_m; skipMustSt = true)
 
 heu_m = nothing
 
 #endregion
+
+
+modOpt_tup = optMod_dic[:top]
+zeroThrs_fl = 0.001
+opt_obj = Gurobi.Optimizer
 
 #region # * create and solve main model
 
@@ -83,6 +75,7 @@ optimize!(anyM.optModel)
 
 checkIIS(anyM)
 
+
 #endregion
 
 #region # * write results
@@ -94,9 +87,3 @@ reportResults(:cost,anyM, addObjName = true)
 reportTimeSeries(:electricity,anyM)
 
 #endregion
-
-
-
-
-
-
