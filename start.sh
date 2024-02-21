@@ -3,9 +3,9 @@
 #SBATCH --job-name=AnyMOD
 #SBATCH --output=/net/work/goeke/julia/log.%j.%a.out
 #SBATCH --time=120:00:00
-#SBATCH --mem-per-cpu=64G
+#SBATCH --mem-per-cpu=96G
 #SBATCH --partition=smp
-#SBATCH --cpus-per-task=6
+#SBATCH --cpus-per-task=5
 #SBATCH --mail-type=FAIL,TIME_LIMIT,END
 #SBATCH --mail-user=lgo@wip.tu-berlin.de
 

@@ -52,9 +52,6 @@ heu_m = nothing
 
 #endregion
 
-
-removeFixStorage(varSym,var_df,part)
-
 #region # * create and solve main model
 
 
