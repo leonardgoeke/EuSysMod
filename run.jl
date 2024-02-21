@@ -12,10 +12,10 @@ obj_str = h * "hours_" * h_heu * "hoursHeu" * grid * "_updated"
 temp_dir = "tempFix_" * obj_str # directory for temporary folder
 desFac_dir = "desFac_" * obj_str # directory for design factors
 
-for x in [desFac_dir,temp_dir]
-    if isdir(x) rm(x, recursive = true) end
-    mkdir(x)
-end
+
+if isdir(x) rm(temp_dir, recursive = true) end
+mkdir(temp_dir)
+
 
 inputDes_arr = ["_basis",grid,"timeSeries/8760hours_2008"]
 inputHeu_arr = ["_basis",grid,"timeSeries/" * h_heu * "hours_2008",desFac_dir]
@@ -25,9 +25,12 @@ resultDir_str = "results"
 
 #region # * compute design factors heuristic solve
 
-anyM = anyModel(inputDes_arr,resultDir_str, objName = "designFactors_" * obj_str, supTsLvl = 2, shortExp = 5, redStep = 1.0, emissionLoss = false, holdFixed = true, onlyDesFac = true)
-createOptModel!(anyM);
-exportDesignFactors!(anyM,desFac_dir,false)
+if !isdir(desFac_dir)
+    anyM = anyModel(inputDes_arr,resultDir_str, objName = "designFactors_" * obj_str, supTsLvl = 2, shortExp = 5, redStep = 1.0, emissionLoss = false, holdFixed = true, onlyDesFac = true)
+    createOptModel!(anyM);
+    exportDesignFactors!(anyM,desFac_dir,false)
+end
+    
 
 #endregion
 
