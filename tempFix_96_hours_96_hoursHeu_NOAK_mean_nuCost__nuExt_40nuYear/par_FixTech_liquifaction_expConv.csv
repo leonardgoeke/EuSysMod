@@ -1,0 +1,3 @@
+timestep_1,region_1,region_2,region_3,technology_1,technology_2,technology_3,parameter,value
+30th,EU,FR,fr,bioConversion,,liquifaction,expConvFix,14.799461983586
+30th,EU,SE,se_4,bioConversion,,liquifaction,expConvFix,1.92328927983

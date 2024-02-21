@@ -1,0 +1,7 @@
+timestep_1,timestep_2,region_1,region_2,region_3,region_4,technology_1,technology_2,technology_3,parameter,value
+30th,2040,EU,FR,fr,21FR,powerToX,electrolysis,alkElectrolysis,expConvFix,1.053111980273
+30th,2040,EU,IT,it_n,52IT,powerToX,electrolysis,alkElectrolysis,expConvFix,11.928993561877
+30th,2040,nonEU,AL,al,70AL,powerToX,electrolysis,alkElectrolysis,expConvFix,0.0
+30th,2040,nonEU,MK,mk,67MK,powerToX,electrolysis,alkElectrolysis,expConvFix,0.0
+30th,2040,nonEU,NO,no_n,84NO,powerToX,electrolysis,alkElectrolysis,expConvFix,0.162210190006
+30th,2040,nonEU,RS,rs,65RS,powerToX,electrolysis,alkElectrolysis,expConvFix,0.0

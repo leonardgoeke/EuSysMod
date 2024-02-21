@@ -1,0 +1,4 @@
+timestep_1,timestep_2,region_1,region_2,region_3,region_4,technology_1,technology_2,technology_3,parameter,value
+30th,2040,EU,FR,fr_co,99FR,networkHeat,,eBoilerDh,expConvFix,0.0
+30th,2040,nonEU,NO,no_m,83NO,networkHeat,,eBoilerDh,expConvFix,0.0
+30th,2040,nonEU,NO,no_n,85NO,networkHeat,,eBoilerDh,expConvFix,0.0
