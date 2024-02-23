@@ -13,7 +13,7 @@ temp_dir = "tempFix_" * obj_str # directory for temporary folder
 desFac_dir = "desFac_" * obj_str # directory for design factors
 
 
-if isdir(x) rm(temp_dir, recursive = true) end
+if isdir(temp_dir) rm(temp_dir, recursive = true) end
 mkdir(temp_dir)
 
 
@@ -47,7 +47,7 @@ heu_m, heuSca_obj = @suppress heuristicSolve(optMod_dic[:heuSca],1.0,t_int,Gurob
 ~, heuCom_obj = @suppress heuristicSolve(optMod_dic[:heuSca],8760/parse(Int,h_heu),t_int,Gurobi.Optimizer)
 # ! write fixes to files and limits to dictionary
 fix_dic, lim_dic, cntHeu_arr = evaluateHeu(heu_m,heuSca_obj,heuCom_obj,(thrsAbs = 0.001, thrsRel = 0.05),false) # get fixed and limited variables
-feasFix_tup = getFeasResult(optMod_dic[:top],fix_dic,lim_dic,t_int,0.001,Gurobi.Optimizer) # ensure feasiblity with fixed variables
+feasFix_tup = getFeasResult(optMod_dic[:top],fix_dic,lim_dic,t_int,0.001,Gurobi.Optimizer, roundDown = 5) # ensure feasiblity with fixed variables
 # ! write fixed variable values to files
 writeFixToFiles(fix_dic,feasFix_tup[1],temp_dir,heu_m; skipMustSt = true)
 
