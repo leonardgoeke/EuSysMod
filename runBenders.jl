@@ -1,435 +1,198 @@
-import Pkg; Pkg.activate(".")
-# Pkg.instantiate()
-#using AnyMOD, Gurobi, CSV, YAML, Base.Threads
+using AnyMOD, Gurobi, CSV, YAML
 
-b = "C:/Users/lgoeke/git/AnyMOD.jl/"
-#b = "C:/Felix Data/PhD/Benders Paper/2nd revision/git/AnyMOD.jl-1/"
+b = "C:/Users/pacop/Desktop/git/EuSysMod/"
 
-using Base.Threads, CSV, Dates, LinearAlgebra, Requires, YAML
-using MathOptInterface, Reexport, Statistics, SparseArrays, CategoricalArrays
-using DataFrames, JuMP, Suppressor
-using DelimitedFiles
+#region # * options for algorithm
 
-include(b* "src/objects.jl")
-include(b* "src/tools.jl")
-include(b* "src/modelCreation.jl")
-include(b* "src/decomposition.jl")
+# ! options for general algorithm
 
-include(b* "src/optModel/technology.jl")
-include(b* "src/optModel/exchange.jl")
-include(b* "src/optModel/system.jl")
-include(b* "src/optModel/cost.jl")
-include(b* "src/optModel/other.jl")
-include(b* "src/optModel/objective.jl")
+# target gap, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
+algSetup_obj = algSetup(0.01, 20, (bal = false, st = false), 10, 120.0, true, 4, Gurobi.Optimizer)
 
-include(b* "src/dataHandling/mapping.jl")
-include(b* "src/dataHandling/parameter.jl")
-include(b* "src/dataHandling/readIn.jl")
-include(b* "src/dataHandling/tree.jl")
-include(b* "src/dataHandling/util.jl")
+# ! options for stabilization
 
-include(b* "src/dataHandling/gurobiTools.jl")
-
-#region # * set and write algorithm options withVI_normalStab
-
-#using AnyMOD, Gurobi, CSV, YAML, Base.Threads
-suffix_str = "test"
-
-methKey_str = "prx1_18"
+methKey_str = "qtr_5"
 
 # write tuple for stabilization
-stabMap_dic = YAML.load_file("stabMap.yaml")
+stabMap_dic = YAML.load_file(b * "stabMap.yaml")
 if methKey_str in keys(stabMap_dic)
 	meth_tup = tuple(map(x -> Symbol(x[1]) => (; (Symbol(k) => v for (k, v) in x[2])...), collect(stabMap_dic[methKey_str]))...)
 else
 	meth_tup = tuple()
 end
 
-swt_ntup = (itr = 6, avgImp = 0.2, itrAvg = 4)
+iniStab_ntup = (setup = :none, det = true) # options to initialize stabilization, :none for first input will skip stabilization, other values control input folders, second input determines, if heuristic model is solved stochastically or not
 
-weight_ntup = (capa = 1.0, capaStSize = 1e-1, stLvl = 1e-2) # weight of variables in stabilization (-> small value for variables with large numbers to equalize)
-iniStab = 0 # initialize stabilization
-srsThr = 0.0 # threshold for serious step
-solOpt = (dbInf = true, numFoc = (stab = 3, noStab = 0), addVio = 1e6) # options for solving top problem
+stabSetup_obj = stabSetup(meth_tup, 0.0, iniStab_ntup)
+
+
+# ! options for near optimal
 
 # defines objectives for near-optimal (can only take top-problem variables, must specify a variable)
-nearOpt_ntup = tuple()
+nearOptOpj_tup = ("tradeOffWind_1" => (:min,((0.0,(variable = :capaConv, system = :onshore)),(1.0,(variable = :capaConv, system = :offshore)))),
+                	"tradeOffWind_2" => (:min,((0.25,(variable = :capaConv, system = :onshore)),(0.75,(variable = :capaConv, system = :offshore)))),
+						"tradeOffWind_3" => (:min,((0.5,(variable = :capaConv, system = :onshore)),(0.5,(variable = :capaConv, system = :offshore)))),
+							"tradeOffWind_4" => (:min,((0.75,(variable = :capaConv, system = :onshore)),(0.25,(variable = :capaConv, system = :offshore)))),
+								"tradeOffWind_5" => (:min,((1.0,(variable = :capaConv, system = :onshore)),(0.0,(variable = :capaConv, system = :offshore)))))
 
-gap = 0.001
-conSub = (rng = [1e-2,1e-8], int = :log, crs = false) # range and interpolation method for convergence criteria of subproblems
-useVI = (bal = false, st = true) # use vaild inequalities
-delCut = 20 # number of iterations since cut creation or last binding before cut is deleted
-
-reportFreq = 100 # number of iterations report files are written
-timeLim = 120 # set a time-limti in minuts for the algorithm
+nearOptSetup_obj = nearOptSetup(0.1, 0.05, 0.05, 0.0001, 20, nearOptOpj_tup) # cost threshold to keep solution, lls threshold to keep solution, epsilon for near-optimal, cut deletion
 
 #endregion
 
-#region # * set and write model options
+#region # * options for problem
 
-res = 96 # temporal resolution
-frs = 0 # level of foresight
-scr = 2 # number of scenarios
-t_int = 4
-dir_str = "C:/Users/lgoeke/git/EuSysMod/"
+# ! general problem settings
+name_str ="_test"
+# name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
+info_ntup = (name = name_str, frs = 0, supTsLvl = 1, shortExp = 10) 
 
-if !isempty(nearOpt_ntup) && any(getindex.(meth_tup,1) .!= :qtr) error("Near-optimal can only be paired with quadratic stabilization!") end
+# ! input folders
+dir_str = b
+scr_int = 2 # number of scenarios
+res_int = 96
 
-# ! intermediate definitions of parameters
+inDir_arr = [dir_str * "_basis",dir_str * "_full",dir_str * "timeSeries/" * string(res_int) * "hours_s" * string(scr_int)] # input directory
 
-#suffix_str = "_" * string(method) * "_" * string(res) * "_s" * string(scr) * "_rad" * string(rad) * "_shr" * string(shr) * "_with" * (useVI.bal ? "" : "outVI")* "VIBal_with" * (useVI.st ? "" : "out") * "VISt"
-inDir_arr = [dir_str * "_basis",dir_str * "_full",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"] # input directory
-
-if iniStab in (0,1)
+if stabSetup_obj.ini.setup in (:none,:full) 
 	heuInDir_arr = inDir_arr
-elseif iniStab == 2
-	heuInDir_arr =  [dir_str * "_basis",dir_str * "_heu",dir_str * "timeSeries/" * string(res) * "hours_det",dir_str * "timeSeries/" * string(res) * "hours_s" * string(scr) * "_stoch"]
+elseif stabSetup_obj.ini.setup == :reduced
+	heuInDir_arr =  [dir_str * "_basis",dir_str * "_heu",dir_str * "timeSeries/" * string(res_int) * "hours_s" * string(scr_int)]
 end 
 
-coefRngHeu_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
-coefRngTop_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
-coefRngSub_tup = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
+inputFolder_ntup = (in = inDir_arr, heu = heuInDir_arr, results = dir_str * "results")
 
-scaFacHeu_tup = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
-scaFacTop_tup = (capa = 1e2, capaStSize = 1e1, insCapa = 1e2, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
-scaFacSub_tup = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e1, dispSt = 1e3, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
+# ! scaling settings
 
-# ! general input parameters
+scale_dic = Dict{Symbol,NamedTuple}()
 
-opt_obj = Gurobi.Optimizer # solver option
-
-# options for different models
-optMod_dic = Dict{Symbol,NamedTuple}()
-
-# options for model generation 
-optMod_dic[:heu] =  (inputDir = heuInDir_arr, resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 1, shortExp = 10, coefRng = coefRngHeu_tup, scaFac = scaFacHeu_tup)
-optMod_dic[:top] =  (inputDir = inDir_arr, 	  resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 1, shortExp = 10, coefRng = coefRngTop_tup, scaFac = scaFacTop_tup)
-optMod_dic[:sub] =  (inputDir = inDir_arr, 	  resultDir = dir_str * "results", suffix = suffix_str, supTsLvl = 1, shortExp = 10, coefRng = coefRngSub_tup, scaFac = scaFacSub_tup)
+scale_dic[:rng] = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
+scale_dic[:facHeu] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
+scale_dic[:facTop] = (capa = 1e2, capaStSize = 1e1, insCapa = 1e2, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
+scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e1, dispSt = 1e3, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
 
 #endregion
 
-report_m = @suppress anyModel(String[],optMod_dic[:heu].resultDir, objName = "decomposition" * optMod_dic[:heu].suffix) # creates empty model just for reporting
+#region # * prepare iteration
 
-#region # * create top and sub-problems 
-
-# ! create top-problem
-
-modOpt_tup = optMod_dic[:top]
-
-top_m = @suppress anyModel(modOpt_tup.inputDir, modOpt_tup.resultDir, objName = "topModel" * modOpt_tup.suffix, lvlFrs = frs, supTsLvl = modOpt_tup.supTsLvl, shortExp = modOpt_tup.shortExp, coefRng = modOpt_tup.coefRng, scaFac = modOpt_tup.scaFac, reportLvl = 1, createVI = useVI)
-
-sub_tup = tuple([(x.Ts_dis,x.scr) for x in eachrow(top_m.parts.obj.par[:scrProb].data)]...) # get all time-step/scenario combinations
-
-top_m.subPro = tuple(0,0)
-@suppress prepareMod!(top_m,opt_obj,t_int)
-
-# ! create sub-problems
-
-modOptSub_tup = optMod_dic[:sub]
-
-sub_dic = Dict{Tuple{Int,Int},anyModel}()
-
-for (id,x) in enumerate(sub_tup)
-	# create sub-problem
-	s = @suppress anyModel(modOptSub_tup.inputDir, modOptSub_tup.resultDir, objName = "subModel_" * string(id) * modOptSub_tup.suffix, lvlFrs = frs, supTsLvl = modOptSub_tup.supTsLvl, shortExp = modOptSub_tup.shortExp, coefRng = modOptSub_tup.coefRng, scaFac = modOptSub_tup.scaFac, dbInf = solOpt.dbInf, reportLvl = 1)
-	s.subPro = x
-	@suppress prepareMod!(s,opt_obj,t_int)
-	set_optimizer_attribute(s.optModel, "Threads", t_int)
-	sub_dic[x] = s
-end
-
-# create separate variables for costs of subproblems and aggregate them (cannot be part of model creation, because requires information about subproblems) 
-top_m.parts.obj.var[:cut] = map(y -> map(x -> y == 1 ? sub_tup[x][1] : sub_tup[x][2], 1:length(sub_tup)),1:2) |> (z -> createVar(DataFrame(Ts_dis = z[1], scr = z[2]),"subCut",NaN,top_m.optModel,top_m.lock,top_m.sets, scaFac = 1e2))
-push!(top_m.parts.obj.cns[:objEqn], (name = :aggCut, cns = @constraint(top_m.optModel, sum(top_m.parts.obj.var[:cut][!,:var]) == filter(x -> x.name == :benders,top_m.parts.obj.var[:objVar])[1,:var])))
-
-produceMessage(report_m.options,report_m.report, 1," - Created top-problem and sub-problems", testErr = false, printErr = false)
-
-# initialize loop variables
-itrReport_df = DataFrame(i = Int[], lowCost = Float64[], bestObj = Float64[], gap = Float64[], curCost = Float64[], time_ges = Float64[], time_top = Float64[], time_sub = Float64[])
-
-#endregion
-
-#region # * add stabilization methods
-cutData_dic = Dict{Tuple{Int64,Int64},resData}()
-
-if !isempty(meth_tup)
-	
-	# ! get starting solution with heuristic solve or generic
-	if iniStab != 0
-		produceMessage(report_m.options,report_m.report, 1," - Started heuristic pre-solve for starting solution", testErr = false, printErr = false)
-		heu_m, startSol_obj =  @suppress heuristicSolve(optMod_dic[:heu],1.0,t_int,opt_obj,rtrnMod = true,solDet = true,fltSt = true);
-		lowBd_fl = iniStab == 2 ? 0.0 : value(heu_m.parts.obj.var[:objVar][1,:var])
-	else
-		@suppress optimize!(top_m.optModel)
-		startSol_obj = resData()
-		startSol_obj.objVal = value(top_m.parts.obj.var[:objVar][1,:var])
-		startSol_obj.capa, startSol_obj.stLvl = writeResult(top_m,[:capa,:exp,:mustCapa,:mustExp,:stLvl])
-		lowBd_fl = startSol_obj.objVal
+# initialize distributed computing
+if algSetup_obj.dist 
+	addprocs(scr_int*2) 
+	@suppress @everywhere begin 
+		using AnyMOD, Gurobi
+		runSubDist(w_int::Int64, resData_obj::resData, sol_sym::Symbol, optTol_fl::Float64=1e-8, crsOver_boo::Bool=false, wrtRes_boo::Bool=false) = Distributed.@spawnat w_int runSub(sub_m, resData_obj, sol_sym, optTol_fl, crsOver_boo, wrtRes_boo)
 	end
-	
-	# initialize iteration variables
-	push!(itrReport_df, (i = 0, lowCost = 0, bestObj = Inf, gap = 1.0, curCost = Inf, time_ges = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60, time_top = 0, time_sub = 0))
+	passobj(1, workers(), [:info_ntup, :inputFolder_ntup, :scale_dic, :algSetup_obj])
 
-	# solve sub-problems with capacity of heuristic solution to use for creation of cuts in first iteration and to compute corresponding objective value
-	startSub = now()
-	for x in collect(sub_tup)
-		dual_etr = @suppress runSub(sub_dic[x],copy(startSol_obj),:barrier)
-		cutData_dic[x] = dual_etr
-	end
-	startSol_obj.objVal = startSol_obj.objVal + sum(map(x -> x.objVal, values(cutData_dic)))
-	timeSub_fl = Dates.toms(now() - startSub) / Dates.toms(Second(1))/60
-
-	# write results for first iteration
-	push!(itrReport_df, (i = 1, lowCost = lowBd_fl, bestObj = startSol_obj.objVal, gap = 1 - lowBd_fl/startSol_obj.objVal, curCost = startSol_obj.objVal, time_ges = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60, time_top = 0, time_sub = timeSub_fl))
-	iIni_fl = 2
-	
-	# initialize stabilization
-	stab_obj, eleNum_int = stabObj(meth_tup,swt_ntup,weight_ntup,startSol_obj,lowBd_fl,top_m)
-	centerStab!(stab_obj.method[stab_obj.actMet],stab_obj,solOpt.addVio,top_m,report_m)
-	produceMessage(report_m.options,report_m.report, 1," - Initialized stabilization with $eleNum_int variables", testErr = false, printErr = false)
 else
-	stab_obj = nothing
-	push!(itrReport_df, (i = 0, lowCost = 0, bestObj = Inf, gap = 1.0, curCost = Inf, time_ges = Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60, time_top = 0, time_sub = 0))
-	iIni_fl = 0
+	runSubDist = x -> nothing
 end
+
+# create benders object
+benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, nearOptSetup_obj)
 
 #endregion
 
-#region # * benders iteration
+#region # * iteration algorithm
 
-nameStab_dic = Dict(:lvl1 => "level bundle",:lvl2 => "level bundle",:qtr => "quadratic trust-region", :prx => "proximal bundle", :box => "box-step method")
-
-# initialize reporting
-if top_m.options.lvlFrs != 0
-	stReport_df = DataFrame(i = Int[], timestep_superordinate_expansion = String[], timestep_superordinate_dispatch = String[], timestep_dispatch = String[], region_dispatch = String[], carrier = String[],
-			technology = String[], mode = String[], scenario = String[], id = String[], value = Float64[])
-end
-
-if !isempty(meth_tup)
-	itrReport_df[!,:actMethod] = fill(Symbol(),size(itrReport_df,1))
-	foreach(x -> itrReport_df[!,Symbol("dynPar_",x)] = Union{Float64,Vector{Float64}}[fill(Float64[],size(itrReport_df,1))...], stab_obj.method)
-end
-
-if !isempty(nearOpt_ntup)
-	nearOpt_df = DataFrame(i = Int[], timestep = String[], region = String[], system = String[], id = String[], capacity_variable = Symbol[], capacity_value = Float64[], cost = Float64[], lss = Float64[])
-	itrReport_df[!,:objective] = String[]
-	nOpt_int = 0
-end
-
-# initialize best solution
-best_obj = !isempty(meth_tup) ? startSol_obj : resData()
-
-# initialize loop variables
-i = iIni_fl
-gap_fl = 1.0
-minStep_fl = 0.0
-nOpt_int = 0
-costOpt_fl = Inf
-nearOptObj_fl = Inf
-cntNull_int = 0
-cntSrs_int = 0
-	
-# iteration algorithm
 while true
 
-	produceMessage(report_m.options,report_m.report, 1," - Started iteration $i", testErr = false, printErr = false)
+	produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Started iteration $(benders_obj.itr.cnt.i)", testErr = false, printErr = false)
 
-	#region # * solve top-problem 
+	#region # * solve top-problem and (start) sub-problems
 
-	startTop = now()
-	resData_obj, stabVar_obj, topCost_fl, estCost_fl, levelDual_fl = @suppress runTop(top_m,cutData_dic,stab_obj,solOpt.numFoc.stab,i); 
-	timeTop = now() - startTop
+	str_time = now()
+	resData_obj, stabVar_obj = @suppress runTop(benders_obj); 
+	elpTop_time = now() - str_time
 
-	# get objective value for near-optimal
-	if nOpt_int != 0 nearOptObj_fl = objective_value(top_m.optModel) end
+	# start solving sub-problems
+	cutData_dic = Dict{Tuple{Int64,Int64},resData}()
+	timeSub_dic = Dict{Tuple{Int64,Int64},Millisecond}()
+	lss_dic = Dict{Tuple{Int64,Int64},Float64}()
 
-	#endregion
-	
-	#region # * solve of sub-problems  
-	startSub = now()
-	prevCutData_dic = !isempty(meth_tup) && stab_obj.method[stab_obj.actMet] == :prx2 ? copy(cutData_dic) : nothing # save values of previous cut for proximal method variation 2
-	for x in collect(sub_tup)
-		dual_etr = runSub(sub_dic[x],copy(resData_obj),:barrier,nOpt_int == 0 ? getConvTol(gap_fl,gap,conSub) : conSub.rng[2],conSub.crs)
-		cutData_dic[x] = dual_etr
-	end
-	timeSub = now() - startSub
-
-	#endregion
-
-	#region # * check results
-
-	# ! updates current best
-	expStep_fl = nOpt_int == 0 ? (best_obj.objVal - estCost_fl) : 0.0 # expected step size
-	subCost_fl = sum(map(x -> x.objVal, values(cutData_dic))) # objective of sub-problems
-	currentCost = topCost_fl + subCost_fl
-
-	if (nOpt_int == 0 ? (topCost_fl + subCost_fl) : (subCost_fl - (estCost_fl - topCost_fl))) < best_obj.objVal
-		best_obj.objVal = nOpt_int == 0 ? (topCost_fl + subCost_fl) : (subCost_fl - (estCost_fl - topCost_fl)) # store current best value
-		best_obj.capa, best_obj.stLvl = writeResult(top_m,[:capa,:exp,:mustCapa,:stLvl]; rmvFix = true)		
-	end
-
-	# reporting on current results
-	if top_m.options.lvlFrs != 0 && i%reportFreq == 0 
-		stReport_df = writeStLvlRes(top_m,sub_dic,sub_tup,i,stReport_df) 
-	end
-	
-	if !isempty(nearOpt_ntup) nearOpt_df, lss_fl = writeCapaRes(top_m,sub_dic,sub_tup,nearOpt_df,i,nOpt_int,nearOpt_ntup,topCost_fl,subCost_fl,costOpt_fl,lssOpt_fl) end
-
-	#endregion
-
-	#region # * adjust refinements
-	
-	# ! delete cuts that not were binding for the defined number of iterations
-	deleteCuts!(top_m, nOpt_int == 0 ? delCut : nearOpt_ntup.cutDel,i)
-	
-	# ! adapt center and parameter for stabilization
-	if !isempty(meth_tup)
-		
-		# determine serious step 
-		adjCtr_boo = false
-		if best_obj.objVal < stab_obj.objVal - srsThr * expStep_fl
-			adjCtr_boo = true
-		end
-
-		# initialize counters
-		cntNull_int = adjCtr_boo ? 0 : cntNull_int + 1
-		cntSrs_int = adjCtr_boo ? cntSrs_int + 1 : 0
-
-		# solve problem without stabilization method
-		topCostNoStab_fl, estCostNoStab_fl = @suppress runTopWithoutStab(top_m,stab_obj,solOpt.numFoc.noStab)
-
-		#println(computePrx2Aux(cutData_dic,prevCutData_dic))
-		# adjust dynamic parameters of stabilization
-		prx2Aux_fl = stab_obj.method[stab_obj.actMet] == :prx2 ? computePrx2Aux(cutData_dic,prevCutData_dic) : nothing
-		foreach(i -> adjustDynPar!(stab_obj,top_m,i,adjCtr_boo,cntSrs_int,cntNull_int,levelDual_fl,prx2Aux_fl,estCostNoStab_fl,estCost_fl,best_obj.objVal,currentCost,nOpt_int != 0,report_m), 1:length(stab_obj.method))
-
-		# update center of stabilisation
-		if adjCtr_boo
-			stab_obj.var = filterStabVar(stabVar_obj.capa,stabVar_obj.stLvl,stab_obj.weight,top_m)
-			stab_obj.objVal = best_obj.objVal
-			produceMessage(report_m.options,report_m.report, 1," - Updated reference point for stabilization!", testErr = false, printErr = false)
-		end
-
-		estCost_fl = estCostNoStab_fl # set lower limit for convergence check to lower limit without trust region
-	end
-
-	#endregion
-
-	#region # * report on iteration
-
-	# computes optimality gap for cost minimization and feasibility gap for near-optimal
-	gap_fl = nOpt_int > 0 ? abs(best_obj.objVal / costOpt_fl) : (1 - estCost_fl/best_obj.objVal)
-
-	timeTop_fl = Dates.toms(timeTop) / Dates.toms(Second(1))
-	timeSub_fl = Dates.toms(timeSub) / Dates.toms(Second(1))
-	if nOpt_int == 0
-		produceMessage(report_m.options,report_m.report, 1," - Lower: $(round(estCost_fl, sigdigits = 8)), Upper: $(round(best_obj.objVal, sigdigits = 8)), Optimality gap: $(round(gap_fl, sigdigits = 4))", testErr = false, printErr = false)
-	else
-		produceMessage(report_m.options,report_m.report, 1," - Objective: $(nearOpt_ntup.obj[nOpt_int][1]), Objective value: $(round(nearOptObj_fl, sigdigits = 8)), Feasibility gap: $(round(gap_fl, sigdigits = 4))", testErr = false, printErr = false)
-	end
-	produceMessage(report_m.options,report_m.report, 1," - Time for top: $timeTop_fl Time for sub: $timeSub_fl", testErr = false, printErr = false)
-
-	# write to reporting files
-	etr_arr = Pair{Symbol,Any}[:i => i, :lowCost => estCost_fl, :bestObj => nOpt_int == 0 ? best_obj.objVal : nearOptObj_fl, :gap => gap_fl, :curCost => topCost_fl + subCost_fl,
-					:time_ges => Dates.value(floor(now() - report_m.options.startTime,Dates.Second(1)))/60, :time_top => timeTop_fl/60, :time_sub => timeSub_fl/60]
-	
-	if !isempty(meth_tup) # add info about stabilization
-		push!(etr_arr, :actMethod => stab_obj.method[stab_obj.actMet])	
-		append!(etr_arr, map(x -> Symbol("dynPar_",stab_obj.method[x]) => isa(stab_obj.dynPar[x],Dict) ? [round(stab_obj.dynPar[x][j], sigdigits = 2) for j in keys(stab_obj.dynPar[x])] : stab_obj.dynPar[x], 1:length(stab_obj.method)))
-	end
-
-	# add info about near-optimal
-	if !isempty(nearOpt_ntup)
-		push!(etr_arr,:objective => nOpt_int > 0 ? nearOpt_ntup.obj[nOpt_int][1] : "cost") 
-	end
-
-	push!(itrReport_df, (;zip(getindex.(etr_arr,1), getindex.(etr_arr,2))...))
-	if i%reportFreq == 0 
-		CSV.write(modOpt_tup.resultDir * "/iterationCuttingPlane_$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
-		if !isempty(nearOpt_ntup) CSV.write(modOpt_tup.resultDir * "/nearOptSol_$(replace(top_m.options.objName,"topModel" => "")).csv",  nearOpt_df) end
-	end
-	
-	#endregion
-	
-	#region # * check convergence and adapt stabilization	
-	
-	# check for termination
-	if gap_fl < gap
-		if !isempty(nearOpt_ntup) && nOpt_int < length(nearOpt_ntup.obj)
-			# switch from cost minimization to near-optimal
-			if nOpt_int == 0
-				# get characteristics of optimal solution
-				costOpt_fl = best_obj.objVal
-				lssOpt_fl = lss_fl
-				# filter near-optimal solution already obtained
-				nearOpt_df[!,:thrs] .= 1 .- best_obj.objVal ./ nearOpt_df[!,:cost]
-				filter!(x -> x.thrs <= nearOpt_ntup.cutThres && x.lss <= lssOpt_fl * (1 + nearOpt_ntup.lssThres), nearOpt_df)
-				# adjust gap
-				gap = nearOpt_ntup.feasGap
-			end
-			# reset iteration variables
-			gap_fl = gap 
-			nearOptObj_fl = Inf
-			best_obj.objVal = Inf
-			if !isempty(meth_tup) # reset current best tracking for stabilization
-				stab_obj.objVal = Inf
-				stab_obj.dynPar = writeStabOpt(meth_tup,estCost_fl,best_obj.objVal,top_m)[3]
-			end 
-			nOpt_int = nOpt_int + 1 # update near-opt counter
-			# adapt the objective and constraint to near-optimal
-			adaptNearOpt!(top_m,nearOpt_ntup,costOpt_fl,nOpt_int)
-			produceMessage(report_m.options,report_m.report, 1," - Switched to near-optimal for $(nearOpt_ntup.obj[nOpt_int][1])", testErr = false, printErr = false)
-		else
-			produceMessage(report_m.options,report_m.report, 1," - Finished iteration!", testErr = false, printErr = false)
-			break
+	if benders_obj.algOpt.dist futData_dic = Dict{Tuple{Int64,Int64},Future}() end
+	for (id,s) in enumerate(collect(keys(benders_obj.sub)))
+		if benders_obj.algOpt.dist # distributed case
+			futData_dic[s] = runSubDist(id + 1, copy(resData_obj), :barrier, 1e-8)
+		else # non-distributed case
+			cutData_dic[s], timeSub_dic[s], lss_dic[s] = runSub(benders_obj.sub[s], copy(resData_obj), :barrier, 1e-8)
 		end
 	end
 
-	# switch and update quadratic stabilization method
-	if !isempty(meth_tup)
-		# switch stabilization method
-		if !isempty(stab_obj.ruleSw) && i > stab_obj.ruleSw.itr && length(stab_obj.method) > 1
-			min_boo = itrReport_df[i - stab_obj.ruleSw.itr,:actMethod] == stab_obj.method[stab_obj.actMet] # check if method as been used for the minimum number of iterations 
-			pro_boo = itrReport_df[(i - min(i,stab_obj.ruleSw.itrAvg) + 1):end,:gap] |> (x -> (x[1]/x[end])^(1/(length(x) -1)) - 1 < stab_obj.ruleSw.avgImp) # check if progress in last iterations is below threshold
-			if min_boo && pro_boo
-				stab_obj.actMet = stab_obj.actMet + 1 |> (x -> length(stab_obj.method) < x ? 1 : x)
-				produceMessage(report_m.options,report_m.report, 1," - Switched stabilization to $(nameStab_dic[stab_obj.method[stab_obj.actMet]]) method!", testErr = false, printErr = false)
-			end
+	# top-problem without stabilization
+	if !isnothing(benders_obj.stab) && benders_obj.nearOpt.cnt == 0 @suppress runTopWithoutStab!(benders_obj) end
+
+	# get results of sub-problems
+	if benders_obj.algOpt.dist
+		wait.(collect(values(futData_dic)))
+		for s in collect(keys(benders_obj.sub))
+			cutData_dic[s], timeSub_dic[s], lss_dic[s] = fetch(futData_dic[s])
 		end
-
-		# update stabilization method
-		centerStab!(stab_obj.method[stab_obj.actMet],stab_obj,solOpt.addVio,top_m,report_m)
 	end
-
-	if Dates.value(floor(now() - report_m.options.startTime,Dates.Minute(1))) > timeLim
-		produceMessage(report_m.options,report_m.report, 1," - Aborted due to time-limit!", testErr = false, printErr = false)
-		break
-	end
-
+	
 	#endregion
 
-	i = i + 1
+	#region # * analyse results and update refinements
+
+	# update results and stabilization
+	updateIteration!(benders_obj, cutData_dic, stabVar_obj)
+
+	# report on iteration
+	reportBenders!(benders_obj, resData_obj, elpTop_time, timeSub_dic, lss_dic)
+
+	# check convergence and finish
+	rtn_boo = checkConvergence(benders_obj, lss_dic)
+	
+	#endregion
+
+	#if rtn_boo break end
+	benders_obj.itr.cnt.i = benders_obj.itr.cnt.i + 1
+
 end
 
 #endregion
 
 #region # * write results
 
-# write dataframe for reporting on iteration
-itrReport_df[!,:case] .= suffix_str
-CSV.write(modOpt_tup.resultDir * "/iterationCuttingPlane_$(replace(top_m.options.objName,"topModel" => "")).csv",  itrReport_df)
+function writeBendersResults!(benders_obj::bendersObj, runSubDist::Function)
 
-if !isempty(nearOpt_ntup)
-	CSV.write(modOpt_tup.resultDir * "/nearOptSol_$(replace(top_m.options.objName,"topModel" => "")).csv",  nearOpt_df)
-end
+	# reporting on iteration
+	benders_obj.report.itr[!,:case] .= benders_obj.info.name
+	CSV.write(benders_obj.report.mod.options.outDir * "/iterationCuttingPlane_$(benders_obj.info.name).csv", benders_obj.report.itr)
 
-# run top-problem with optimal values fixed
-@suppress computeFeas(top_m,best_obj.capa,1e-5,wrtRes = true)
+	# reporting on near-optimal
+	if !isnothing(benders_obj.nearOpt.setup)
+		CSV.write(benders_obj.report.mod.options.outDir * "/nearOptSol_$(benders_obj.info.name).csv", benders_obj.report.nearOpt)
+	end
 
-# run top-problem and sub-problems with optimal values fixed
-for x in collect(sub_tup)
-	runSub(sub_dic[x],copy(best_obj),:barrier,1e-8,false,true)
+	# run top-problem and sub-problems with optimal values fixed and write results
+	@suppress computeFeas(benders_obj.top, benders_obj.best.capa, 1e-5, wrtRes = true)
+
+	if benders_obj.algOpt.dist futData_dic = Dict{Tuple{Int64,Int64},Future}() end
+
+	for (id,s) in enumerate(collect(keys(benders_obj.sub)))
+		if benders_obj.algOpt.dist # distributed case
+			futData_dic[s] = runSubDist(id + 1, copy(startSol_obj), :barrier, 1e-8, false, true)
+		else # non-distributed case
+			runSub(benders_obj.sub[s], copy(startSol_obj), :barrier, 1e-8, false, true)
+		end
+	end
+
+	# TODO add writing of storage levels and time-series (but optional)
+	
 end
 
 #endregion
 
+
+# write storage levels
+for tSym in (:h2Cavern,:reservoir,:pumpedStorage,:redoxBattery,:lithiumBattery)
+	stLvl_df = DataFrame(Ts_dis = Int[], scr = Int[], lvl = Float64[])
+	for x in collect(sub_tup)
+		append!(stLvl_df,combine(x -> (lvl = sum(value.(x.var)),), groupby(sub_dic[x].parts.tech[tSym].var[:stLvl],[:Ts_dis,:scr])))
+	end
+	stLvl_df = unstack(sort(unique(stLvl_df),:Ts_dis),:scr,:lvl)
+	CSV.write(b * "results/stLvl_" * string(tSym) * "_" * suffix_str * ".csv",stLvl_df)
+end
+
+
+# !
