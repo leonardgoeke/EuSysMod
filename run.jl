@@ -2,11 +2,11 @@ using AnyMOD, Gurobi, CSV, Statistics
 
 # For example 2
 # ! string here define scenario, overwrite ARGS with respective values for hard-coding scenarios according to comments
-h =ARGS[1] # resolution of time-series for actual solve, can be 96, 1752, 4392, or 8760
-h_heu = ARGS[2] # resolution of time-series for pre-screening, can be 96, 1752, 4392, or 8760
-grid = ARGS[3] # scenario for grid expansion, can be "_gridExp" and "_noGridExp"
-bevScr = ARGS[4] # number of scenario for bev
-t_int =parse(Int, ARGS[5]) # number of threads
+h = "96" # resolution of time-series for actual solve, can be 96, 1752, 4392, or 8760
+h_heu = "96" # resolution of time-series for pre-screening, can be 96, 1752, 4392, or 8760
+grid = "_gridExp" # scenario for grid expansion, can be "_gridExp" and "_noGridExp"
+bevScr = "0" # number of scenario for bev
+t_int = 4 # number of threads
 #$$$
 
 
@@ -40,7 +40,7 @@ heu_m, heuSca_obj = @suppress heuristicSolve(optMod_dic[:heuSca], 1.0, t_int, Gu
 ~, heuCom_obj = @suppress heuristicSolve(optMod_dic[:heuSca], 8760 / parse(Int, h_heu), t_int, Gurobi.Optimizer)
 # ! write fixes to files and limits to dictionary
 fix_dic, lim_dic, cntHeu_arr = evaluateHeu(heu_m, heuSca_obj, heuCom_obj, (thrsAbs=0.001, thrsRel=0.05), true) # get fixed and limited variables
-feasFix_dic = getFeasResult(optMod_dic[:top], fix_dic, lim_dic, t_int, 0.001, Gurobi.Optimizer) # ensure feasiblity with fixed variables
+feasFix_dic, ~ = getFeasResult(optMod_dic[:top], fix_dic, lim_dic, t_int, 0.001, Gurobi.Optimizer) # ensure feasiblity with fixed variables
 # ! write fixed variable values to files
 writeFixToFiles(fix_dic, feasFix_dic, temp_dir, heu_m; skipMustSt=true)
 
