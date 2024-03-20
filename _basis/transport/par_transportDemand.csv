@@ -45,8 +45,8 @@ all,43PL,frtRoadLight,capaDem,0.40733
 all,44PL,frtRoadLight,capaDem,0.44182
 all,45PL,frtRoadLight,capaDem,0.26915
 all,46SK,frtRoadLight,capaDem,0.31156
-all,47CH,frtRoadLight,capaDem,0.06689
-all,48CH,frtRoadLight,capaDem,0.00692
+all,47CH,frtRoadLight,capaDem,0.125974432
+all,48CH,frtRoadLight,capaDem,0.013039773
 all,49AT,frtRoadLight,capaDem,0.04635
 all,50AT,frtRoadLight,capaDem,0.0563
 all,51AT,frtRoadLight,capaDem,0.07858
@@ -141,8 +141,8 @@ all,43PL,psngRoadPrvt,capaDem,10.64812
 all,44PL,psngRoadPrvt,capaDem,9.84663
 all,45PL,psngRoadPrvt,capaDem,7.63287
 all,46SK,psngRoadPrvt,capaDem,5.91786
-all,47CH,psngRoadPrvt,capaDem,14.82732
-all,48CH,psngRoadPrvt,capaDem,2.26895
+all,47CH,psngRoadPrvt,capaDem,21.2047101
+all,48CH,psngRoadPrvt,capaDem,3.244849037
 all,49AT,psngRoadPrvt,capaDem,3.90527
 all,50AT,psngRoadPrvt,capaDem,4.61785
 all,51AT,psngRoadPrvt,capaDem,9.25834
@@ -237,8 +237,8 @@ all,43PL,psngRoadPub,capaDem,1.69184
 all,44PL,psngRoadPub,capaDem,1.75054
 all,45PL,psngRoadPub,capaDem,1.18314
 all,46SK,psngRoadPub,capaDem,1.29728
-all,47CH,psngRoadPub,capaDem,1.19136
-all,48CH,psngRoadPub,capaDem,0.15713
+all,47CH,psngRoadPub,capaDem,0.806262647
+all,48CH,psngRoadPub,capaDem,0.106336471
 all,49AT,psngRoadPub,capaDem,0.56426
 all,50AT,psngRoadPub,capaDem,0.83237
 all,51AT,psngRoadPub,capaDem,0.93271
@@ -333,8 +333,8 @@ all,43PL,frtRail,capaDem,5.77905
 all,44PL,frtRail,capaDem,6.26844
 all,45PL,frtRail,capaDem,3.81864
 all,46SK,frtRail,capaDem,3.64649
-all,47CH,frtRail,capaDem,1.22281
-all,48CH,frtRail,capaDem,0.12664
+all,47CH,frtRail,capaDem,2.827052752
+all,48CH,frtRail,capaDem,0.292799725
 all,49AT,frtRail,capaDem,0.68203
 all,50AT,frtRail,capaDem,0.82833
 all,51AT,frtRail,capaDem,1.15613
@@ -429,8 +429,8 @@ all,43PL,frtRoadHeavy,capaDem,15.35567
 all,44PL,frtRoadHeavy,capaDem,16.65605
 all,45PL,frtRoadHeavy,capaDem,10.14662
 all,46SK,frtRoadHeavy,capaDem,6.89193
-all,47CH,frtRoadHeavy,capaDem,2.23072
-all,48CH,frtRoadHeavy,capaDem,0.23103
+all,47CH,frtRoadHeavy,capaDem,4.201159091
+all,48CH,frtRoadHeavy,capaDem,0.435106534
 all,49AT,frtRoadHeavy,capaDem,1.38916
 all,50AT,frtRoadHeavy,capaDem,1.68715
 all,51AT,frtRoadHeavy,capaDem,2.3548
@@ -525,8 +525,8 @@ all,43PL,psngRail,capaDem,1.07099
 all,44PL,psngRail,capaDem,1.00437
 all,45PL,psngRail,capaDem,0.76138
 all,46SK,psngRail,capaDem,0.79278
-all,47CH,psngRail,capaDem,3.93004
-all,48CH,psngRail,capaDem,0.48115
+all,47CH,psngRail,capaDem,5.691489389
+all,48CH,psngRail,capaDem,0.696795284
 all,49AT,psngRail,capaDem,0.71063
 all,50AT,psngRail,capaDem,0.9653
 all,51AT,psngRail,capaDem,1.29917
