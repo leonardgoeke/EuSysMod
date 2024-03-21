@@ -1,0 +1,5 @@
+region_3,region_3,exchange_1,exchange_2,parameter_1,value_1
+at,ch,powerGrid,hvac,expExcFix,0
+ch,de,powerGrid,hvac,expExcFix,0
+ch,fr,powerGrid,hvac,expExcFix,0
+ch,it_n,powerGrid,hvac,expExcFix,0

@@ -1,4 +1,8 @@
-h	h_heu	grid
-1752	96	_gridExp
-4392	1752	_gridExp
-4392	1752	_noGridExp
+h,h_heu,gridEU,gridCH,eeCH
+1752,1752,_gridExp,_exp,_ep2050
+1752,1752,_gridExp,_noExp30,_ep2050
+1752,1752,_gridExp,_noExpCur,_ep2050
+1752,1752,_gridExp,_exp,_crossHigh
+1752,1752,_gridExp,_noExp30,_crossHigh
+1752,1752,_gridExp,_noExpCur,_crossHigh
+96,96,_gridExp,_exp,_ep2050
