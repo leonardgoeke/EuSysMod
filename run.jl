@@ -1,12 +1,19 @@
 using AnyMOD, Gurobi, CSV, Statistics
 
 par_df = CSV.read("settings.csv",DataFrame)
-id_int = parse(Int,ARGS[1])
+
+if isempty(ARGS)
+    id_int = 1
+    t_int = 4
+else
+    id_int = parse(Int,ARGS[1])
+    t_int = parse(Int,ARGS[2]) # number of threads
+end
 
 h = string(par_df[id_int,:h]) # resolution of time-series for actual solve, can be 96, 1752, 4392, or 8760
 h_heu = string(par_df[id_int,:h_heu]) # resolution of time-series for pre-screening, can be 96, 1752, 4392, or 8760
 grid = string(par_df[id_int,:grid]) # scenario 
-t_int = parse(Int,ARGS[2]) # number of threads
+
 
 obj_str = h * "hours_" * h_heu * "hoursHeu" * grid * "_updated"
 temp_dir = "tempFix_" * obj_str # directory for temporary folder
