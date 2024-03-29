@@ -1,9 +1,11 @@
 using AnyMOD, Gurobi, CSV, Statistics
 
-par_df = CSV.read("settings.csv", DataFrame)
+b = ""
+
+par_df = CSV.read(b * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 7 # row in settings table
+    id_int = 1 # row in settings table
     t_int = 4 # number of threads
 else
     id_int = parse(Int, ARGS[1]) # row in settings table
@@ -21,19 +23,19 @@ obj_str = h * "hours_" * h_heu * "hoursHeu" * gridEU * gridCH * eeCH
 temp_dir = "tempFix_" * obj_str # directory for temporary folder
 desFac_dir = "designFactors" # directory for design factors
 
-if isdir(temp_dir) rm(temp_dir, recursive = true) end
-mkdir(temp_dir)
+if isdir(b * temp_dir) rm(b * temp_dir, recursive = true) end
+mkdir(b * temp_dir)
 
 
-inputDes_arr = ["basis", "gridEU/" * gridEU, "gridCH/" * gridCH, "eeCH/" * eeCH, "timeSeries/8760hours_2008"]
-inputHeu_arr = ["basis", "gridEU/" * gridEU, "gridCH/" * gridCH, "eeCH/" * eeCH, "timeSeries/" * h_heu * "hours_2008",  desFac_dir]
-inputMod_arr = ["basis", "gridEU/" * gridEU, "gridCH/" * gridCH, "eeCH/" * eeCH, "timeSeries/" * h * "hours_2008", desFac_dir, temp_dir]
+inputDes_arr = [b * "basis", b * "gridEU/" * gridEU, b * "gridCH/" * gridCH, b * "eeCH/" * eeCH, b * "timeSeries/8760hours_2008"]
+inputHeu_arr = [b * "basis", b * "gridEU/" * gridEU, b * "gridCH/" * gridCH, b * "eeCH/" * eeCH, b * "timeSeries/" * h_heu * "hours_2008", b * desFac_dir]
+inputMod_arr = [b * "basis", b * "gridEU/" * gridEU, b * "gridCH/" * gridCH, b * "eeCH/" * eeCH, b * "timeSeries/" * h * "hours_2008", b * desFac_dir, b * temp_dir]
 
-resultDir_str = "results"
+resultDir_str = b * "results"
 
 #region # * compute design factors heuristic solve
 
-if !isdir(desFac_dir)
+if !isdir(b * desFac_dir)
     anyM = anyModel(inputDes_arr, resultDir_str, objName = "designFactors", supTsLvl = 2, shortExp = 5, redStep = 1.0, emissionLoss = false, holdFixed = true, onlyDesFac = true)
     createOptModel!(anyM);
     exportDesignFactors!(anyM, desFac_dir, false)
@@ -94,3 +96,5 @@ reportResults(:cost, anyM, addObjName = true)
 reportTimeSeries(:electricity, anyM)
 
 #endregion
+
+printObject(anyM.parts.bal.cns[:capaBal], anyM)
