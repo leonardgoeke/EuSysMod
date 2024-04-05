@@ -104,8 +104,7 @@ stock,power,oilLiquidPlantStock,,refinedOil,electricity,,,stock,decomm,,,,
 stock,power,oilLiquidPlantStock_chp,,crudeOil,electricity; districtHeat,,,stock,decomm,,,,
 stock,power,oilPlantProLowStock,,refinedOil,electricity; processHeat_low,,,stock,none,,,,
 stock,power,oilPlantProMedStock,,refinedOil,electricity; processHeat_medium,,,stock,none,,,,
-stock,power,pumpedStorageOpen,,,,electricity,electricity,stock,none,,,,2
-stock,power,pumpedStorageClosed,,,,electricity,electricity,stock,none,,,,2
+stock,power,pumpedStorage,,,,electricity,electricity,stock,none,,,,2
 stock,power,reservoir,,,,,electricity,stock,none,,ineq,,2
 stock,power,runOfRiver,,,electricity,,,stock,none,,,,
 transport,bev,bevFrtRoadHeavy,,electricity,frtRoadHeavy,electricity,,emerging,none,,,,
