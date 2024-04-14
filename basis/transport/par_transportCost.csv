@@ -22,10 +22,10 @@ eFrtRail,2040,,,costExpConv,4808.565302
 ottoPsngRoadPrvt,,,,effConv,1.828
 cngPsngRoadPrvt,,,,effConv,1.747
 fcevPsngRoadPrvt,,,,effConv,3.013
-bevPsngRoadPrvt,,,,effConv,4.889
+bevPsngRoadPrvt,,,,effConv,6.11125
 dieselPsngRoadPub,,,,effConv,4.077
 fcPsngRoadPub,,,,effConv,4.295
-bevPsngRoadPub,,,,effConv,7.676
+bevPsngRoadPub,,,,effConv,9.595
 dieselFrtRoadLight,,,,effConv,0.23
 fcFrtRoadLight,,,,effConv,0.329
 dieselFrtRoadHeavy,,,,effConv,4.998
@@ -37,5 +37,5 @@ ePsngRail,,,,effConv,18.512
 fcFrtRail,,,,effConv,20.135
 dieselFrtRail,,,,effConv,19.114
 eFrtRail,,,,effConv,42.126
-bevFrtRoadLight,,2040,,effConv,0.793333
-bevFrtRoadHeavy,,2040,,effConv,13.87638
+bevFrtRoadLight,,2040,,effConv,0.99166625
+bevFrtRoadHeavy,,2040,,effConv,17.345475
