@@ -96,5 +96,3 @@ reportResults(:cost, anyM, addObjName = true)
 reportTimeSeries(:electricity, anyM)
 
 #endregion
-
-printObject(anyM.parts.bal.cns[:capaBal], anyM)
