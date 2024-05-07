@@ -1,0 +1,38 @@
+#!/bin/bash --login
+#$ -cwd
+#$ -N anyMOD
+#$ -o /net/work/goeke/julia/job_log.$JOB_ID.$TASK_ID.out
+#$ -j y
+#$ -l h_rt=345600
+#$ -l mem_free=4G
+#$ -pe mp 1
+#$ -m bae
+#$ -M lgo@wip.tu-berlin.de
+
+# limited foresight with benders, no near-optimal
+qsub -t 1 -v method='qtr_4' -v srs='0.0' -v ini='2' -v conv='4' -v vi='false' -v frs='3' -v no='false' -v time='540' -v scr='4' -v ram='16' startBendersOnly4_16.job
+qsub -t 2 -v method='qtr_5' -v srs='0.0' -v ini='2' -v conv='4' -v vi='false' -v frs='3' -v no='false' -v time='540' -v scr='4' -v ram='16' startBendersOnly4_16.job
+
+sleep 3600
+
+# perfect foresight with benders, no near-optimal
+qsub -t 3 -v method='qtr_4' -v srs='0.0' -v ini='2' -v conv='4' -v vi='false' -v frs='0' -v no='false' -v time='540' -v scr='4' -v ram='16' startBendersOnly4_16.job
+qsub -t 4 -v method='qtr_5' -v srs='0.0' -v ini='2' -v conv='4' -v vi='false' -v frs='0' -v no='false' -v time='540' -v scr='4' -v ram='16' startBendersOnly4_16.job
+
+sleep 3600
+
+# limited foresight with benders, near-optimal
+qsub -t 5 -v method='qtr_4' -v srs='0.0' -v ini='2' -v conv='4' -v vi='false' -v frs='3' -v no='true' -v time='540' -v scr='4' -v ram='16' startBendersOnly4_16.job
+qsub -t 6 -v method='qtr_5' -v srs='0.0' -v ini='2' -v conv='4' -v vi='false' -v frs='3' -v no='true' -v time='540' -v scr='4' -v ram='16' startBendersOnly4_16.job
+
+sleep 3600
+
+# split computation
+qsub -t 7 -v scr='4' -v scrSing='scr1983' startSingle4_16.job
+qsub -t 8 -v scr='4' -v scrSing='scr1996' startSingle4_16.job
+qsub -t 9 -v scr='4' -v scrSing='scr1998' startSingle4_16.job
+qsub -t 10 -v scr='4' -v scrSing='scr2003' startSingle4_16.job
+
+# limited and perfect foresight without benders
+qsub -t 11 -v scr='4' -v frs='0' startConv4_16.job
+qsub -t 12 -v scr='4' -v frs='3' startConv4_16.job

@@ -1,6 +1,4 @@
-technology_1,technology_2,technology_3,timestep_1,parameter_1,value_1,parameter_2,value_2
-wind,,offshore,2030,costExpConv,1660.612934,costOprConv,34.25014177
-wind,,offshore,2040,costExpConv,1577.582287,costOprConv,32.53763468
-wind,,onshore,2030,costExpConv,1035.56125,costOprConv,12.6
-wind,,onshore,2040,costExpConv,963.06625,costOprConv,11.34
-wind,,,,lifeConv,30,,
+technology_1,technology_3,parameter_1,value_1,parameter_2,value_2
+wind,offshore,costExpConv,1577.582287,costOprConv,32.53763468
+wind,onshore,costExpConv,963.06625,costOprConv,11.34
+wind,,lifeConv,30,,
