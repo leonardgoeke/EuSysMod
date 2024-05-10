@@ -77,7 +77,7 @@ function getAggRes(anyM::anyModel, nameCol_sym::Symbol)
 end
 
 # function for radar plot (from https://discourse.julialang.org/t/radar-plot-in-plots-jl-or-makie-jl/88576/7)
-function radarplot(ax::Axis, v; p_grid = maximum(v) * (1.0:5.0) / 5.0, title = "", labels = eachindex(v), labelsize = 1, points=true, col = (0.4,0.4,0.4),spokeswidth= 1.5, spokescolor=:salmon, fillalpha=0.2, linewidth=1.5)
+function radarplot(ax::Axis, v; p_grid = maximum(v) * (1.0:5.0) / 5.0, title = "", labels = eachindex(v), labelsize = 14, legendsize = 12, points=true, maxValStr = String[], col = (0.4,0.4,0.4),spokeswidth= 1.5, spokescolor=:salmon, fillalpha=0.2, linewidth=1.5)
     # horizintal and vertical text alignment:
     justifyme(θ) = (0≤θ<π/2 || 3π/2<θ≤2π) ? :left : (π/2<θ<3π/2) ? :right : :center
     justifymeV(θ) = π/4≤θ≤3π/4 ? :bottom : 5π/4<θ≤7π/4 ? :top : :center
@@ -116,7 +116,12 @@ function radarplot(ax::Axis, v; p_grid = maximum(v) * (1.0:5.0) / 5.0, title = "
         for i in p_grid
             poly!(ax, Circle(Point2f(0, 0), i), color = :transparent, strokewidth=1, strokecolor=ax.xgridcolor)
         end
-        #text!(ax, xc, yc, text=string.(p_grid), fontsize = 12, align = (:center, :baseline), color=ax.xlabelcolor)
+        if !isempty(maxValStr)
+            for i in eachindex(rad)
+                println((cos(rad[i]),sin(rad[i]),labels[i]))
+                text!(ax, cos(rad[i]), sin(rad[i]), text= maxValStr[i], fontsize = legendsize, align = (cos(rad[i]) > 0 ? :right : :left, :bottom), color=ax.xlabelcolor)
+            end
+        end
         arrows!(ax, zeros(l), zeros(l), xa, ya, color=ax.xgridcolor, linestyle=:solid, arrowhead=' ')
         if length(labels) == l
             for i in eachindex(rad)
