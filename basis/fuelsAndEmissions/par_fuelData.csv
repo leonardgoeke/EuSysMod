@@ -7,6 +7,5 @@ waste,,emissionFac,332,used old dynelmod input
 oil,,trdBuyPrc,53.19389723,"IEA (2017), World Energy Outlook 2017"
 hardcoal,,trdBuyPrc,8.203007305,
 gasFuel,naturalGas,trdBuyPrc,26.67689527,
-h2,,trdBuyPrc,164,"Fraunhofer ISE (2020), Wege zu einem klimaneutralen Energiesystem, Anhang"
 lignite,,trdBuyPrc,1.5,
 waste,,trdBuyPrc,14.07599999,

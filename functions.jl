@@ -55,22 +55,26 @@ end
 # write aggregated results for radar plot
 function getAggRes(anyM::anyModel, nameCol_sym::Symbol)
     conv_dic = Dict("wind" => 1.0,"solar" => 1.0,"ocgt" => 0.415)
+    st_arr = ("battery",)
     grid_arr = ("h2grid","powerGrid") 
 
     # filter conversion capacities
-    sum_df = reportResults(:summary, anyM, rtnOpt = (:csvDf,))
+    sum_df = reportResults(:summary, anyM, rtnOpt = (:csvDf,), rmvZero = false)
     sum_df[!,:technology] .= replace.(getindex.(split.(sum_df[!,:technology],"<"),1)," " => "")
 
     # aggergate and correct capacities
-    conv_df = combine(x -> (value = sum(x.value),),groupby(filter!(x -> x.variable == :capaConv && x.technology in collect(keys(conv_dic)), sum_df),[:technology]))
+    conv_df = combine(x -> (value = sum(x.value),),groupby(filter(x -> x.variable == :capaConv && x.technology in collect(keys(conv_dic)), sum_df),[:technology]))
     conv_df[!,:value] .= map(x -> conv_dic[x.technology] * x.value, eachrow(conv_df))
 
+    # filter and aggergate storage capacities
+    st_df = combine(x -> (value = sum(x.value),),groupby(filter(x -> x.variable == :capaStIn && x.technology in st_arr, sum_df),[:technology]))
+
     # filter grid capacities
-    exc_df = filter(x -> x.variable == :expExc, reportResults(:exchange, anyM, rtnOpt = (:csvDf,)))
+    exc_df = filter(x -> x.variable == :expExc, reportResults(:exchange, anyM, rtnOpt = (:csvDf,), rmvZero = false))
     exc_df[!,:exchange] .= replace.(getindex.(split.(exc_df[!,:exchange],"<"),1)," " => "")
     exc_df = combine(x -> (value = sum(x.value),),groupby(exc_df,[:exchange]))
 
-    allRes_df = vcat(rename(conv_df,:technology => :variable),rename(exc_df,:exchange => :variable))
+    allRes_df = vcat(rename(vcat(conv_df,st_df),:technology => :variable),rename(exc_df,:exchange => :variable))
     allRes_df[!,:case] .= nameCol_sym
 
     return allRes_df

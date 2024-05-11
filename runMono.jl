@@ -7,7 +7,7 @@ include(b * "functions.jl")
 par_df = CSV.read(b * "settings.csv",DataFrame)
 
 if isempty(ARGS)
-    id_int = 2 # currently 1 for future and 2 for historic
+    id_int = 1 # currently 1 for future and 2 for historic
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -25,7 +25,7 @@ resData_df = DataFrame(case = Symbol[], variable = String[], value = Float64[])
 # ! full stochastic model
 
 # create and solve model
-anyM = anyModel(input_arr, resultDir_str, objName = h * scr, supTsLvl = 1, reportLvl = 2);
+anyM = anyModel(input_arr, resultDir_str, objName = h * scr, supTsLvl = 1, reportLvl = 2, repTsLvl = 4);
 createOptModel!(anyM)
 setObjective!(:cost,anyM)
 
@@ -48,7 +48,7 @@ for specScr in allScr_arr
     println(specScr)
     
     @suppress begin
-        anyM = anyModel(input_arr, resultDir_str, objName = h * scr * string(specScr), supTsLvl = 1, reportLvl = 2, forceScr = specScr);
+        anyM = anyModel(input_arr, resultDir_str, objName = h * scr * string(specScr), supTsLvl = 1, reportLvl = 2, repTsLvl = 4, forceScr = specScr);
         createOptModel!(anyM)
         setObjective!(:cost,anyM)
         

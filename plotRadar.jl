@@ -1,11 +1,11 @@
 
 
-label_dic =Dict("h2Grid" => "H2 grid","powerGrid" => "power grid","ocgt" => "H2 turbine","solar" => "PV","wind" => "wind")
+label_dic =Dict("h2Grid" => "H2 grid","powerGrid" => "power grid","ocgt" => "H2 turbine","solar" => "PV","wind" => "wind","battery" => "battery")
 
 # ! get relevant data
 
-resDataFut_df = CSV.read(b * "results/169future_resData.csv",DataFrame)
-resDataHis_df = CSV.read(b * "results/169historic_resData.csv",DataFrame)
+resDataFut_df = CSV.read(b * "results/120future_resData.csv",DataFrame)
+resDataHis_df = CSV.read(b * "results/120historic_resData.csv",DataFrame)
 
 resDataFut_df[!,:data] .= "future"
 resDataHis_df[!,:data] .= "historic"
@@ -38,7 +38,6 @@ for z in [("future",(0.761,0.804,0.957),(0.404,0.510,0.894),0.25),("historic",(0
         radarplot(ax, val_arr; labels = "", p_grid = 0, spokeswidth = 0, points = false, col = z[2], fillalpha = z[4], linewidth=0.0)
     end
 
-    
     radarplot(ax, ref_arr; labels=labels_arr, maxValStr = maxValStr_arr, col = z[3], p_grid=0.2:0.2:1.0, spokeswidth = 0, labelsize=0.1,  title="", points = false, fillalpha = 0.0, linewidth=2.0)
     
     save(b * "results/radarplot_" * z[1] * ".png",fig)
