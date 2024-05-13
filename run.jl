@@ -33,7 +33,7 @@ resultDir_str = "results"
 #region # * compute design factors heuristic solve
 
 if !isdir(desFac_dir)
-    anyM = anyModel(inputDes_arr,resultDir_str, objName = "designFactors_" * obj_str, supTsLvl = 2, shortExp = 5, redStep = 1.0, emissionLoss = false, holdFixed = true, onlyDesFac = true)
+    anyM = anyModel(inputDes_arr,resultDir_str, objName = "designFactors_" * obj_str, supTsLvl = 2, repTsLvl = 3, shortExp = 5, redStep = 1.0, emissionLoss = false, holdFixed = true, onlyDesFac = true)
     createOptModel!(anyM);
     exportDesignFactors!(anyM,desFac_dir,false)
 end
@@ -47,11 +47,10 @@ coefRngHeuSca_tup = (mat = (1e-2,1e4), rhs = (1e0,1e5))
 scaFacHeuSca_tup = (capa = 1e0, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e3, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
 
 optMod_dic = Dict{Symbol,NamedTuple}()
-optMod_dic[:heuSca] =  (inputDir = inputHeu_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
-optMod_dic[:top] 	=  (inputDir = inputMod_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
+heuSetup_nTup =  (inputDir = inputHeu_arr, resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, repTsLvl = 3, shortExp = 5, coefRng = coefRngHeuSca_tup, scaFac = scaFacHeuSca_tup)
 
-heu_m, heuSca_obj = @suppress heuristicSolve(optMod_dic[:heuSca],1.0,t_int,Gurobi.Optimizer);
-~, heuCom_obj = @suppress heuristicSolve(optMod_dic[:heuSca],8760/parse(Int,h_heu),t_int,Gurobi.Optimizer)
+heu_m, heuSca_obj = @suppress heuristicSolve(optMod_dic[:heuSca],t_int,Gurobi.Optimizer);
+~, heuCom_obj = @suppress heuristicSolve(optMod_dic[:heuSca],t_int,Gurobi.Optimizer)
 # ! write fixes to files and limits to dictionary
 fix_dic, lim_dic, cntHeu_arr = evaluateHeu(heu_m,heuSca_obj,heuCom_obj,(thrsAbs = 0.001, thrsRel = 0.05),false) # get fixed and limited variables
 feasFix_tup = getFeasResult(optMod_dic[:top],fix_dic,lim_dic,t_int,0.001,Gurobi.Optimizer, roundDown = 5) # ensure feasiblity with fixed variables
@@ -65,7 +64,7 @@ heu_m = nothing
 #region # * create and solve main model
 
 
-anyM = anyModel(inputMod_arr,resultDir_str, objName = obj_str, supTsLvl = 2, shortExp = 5, redStep = 1.0, emissionLoss = false, holdFixed = true)
+anyM = anyModel(inputMod_arr,resultDir_str, objName = obj_str, supTsLvl = 2, repTsLvl = 3, shortExp = 5, redStep = 1.0, emissionLoss = false, holdFixed = true)
 
 createOptModel!(anyM)
 setObjective!(:cost,anyM)
