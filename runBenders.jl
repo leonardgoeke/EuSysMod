@@ -1,6 +1,6 @@
 using AnyMOD, Gurobi, CSV, YAML
 
-b = "C:/Users/lgoeke/OneDrive - ETH Zurich/Desktop/Git/EuSysMod/"
+b = "C:/Users/pacop/Desktop/git/EuSysMod/"
 
 #region # * options for algorithm
 
@@ -113,7 +113,7 @@ while true
 	end
 
 	# top-problem without stabilization
-	if !isnothing(benders_obj.stab) && benders_obj.nearOpt.cnt == 0 @suppress runTopWithoutStab!(benders_obj) end
+	if !isnothing(benders_obj.stab) @suppress runTopWithoutStab!(benders_obj, stabVar_obj) end
 
 	# get results of sub-problems
 	if benders_obj.algOpt.dist
@@ -128,7 +128,7 @@ while true
 	#region # * analyse results and update refinements
 
 	# update results and stabilization
-	updateIteration!(benders_obj, cutData_dic, stabVar_obj)
+	updateIteration!(benders_obj, cutData_dic, resData_obj, stabVar_obj)
 
 	# report on iteration
 	reportBenders!(benders_obj, resData_obj, elpTop_time, timeSub_dic, lss_dic)
