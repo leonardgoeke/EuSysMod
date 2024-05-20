@@ -1,0 +1,17 @@
+technology_3,region_1,parameter,value
+h2Cavern,,costExpStSize,1.5
+h2Cavern,,stOutToStInFix,1
+h2Cavern,,sizeToStOutFix,1000
+h2Cavern,DE,capaStSizeUp,11988141.42
+h2Cavern,FR,capaStSizeUp,274369.48
+h2Cavern,AT,capaStSizeFix,0
+h2Cavern,CH,capaStSizeFix,0
+h2Cavern,IT,capaStSizeFix,0
+h2Cavern,AT,capaStInFix,0
+h2Cavern,CH,capaStInFix,0
+h2Cavern,IT,capaStInFix,0
+h2Cavern,AT,capaStOutFix,0
+h2Cavern,CH,capaStOutFix,0
+h2Cavern,IT,capaStOutFix,0
+h2Cavern,,effStIn,0.98
+h2Cavern,,effStOut,0.98

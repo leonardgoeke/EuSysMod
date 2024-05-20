@@ -1,3 +1,4 @@
-h	scr
-120	future
-120	historic
+h,spatialScope,scr
+96,5Ctr,future
+96,allCtr,historic
+8760,allCtr,future

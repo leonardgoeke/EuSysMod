@@ -7,7 +7,7 @@ ocgt,,ocgtGas,,gasFuel,electricity,,,mature,none,
 ocgt,,ocgtH2,,h2,electricity,,,mature,none,
 powerToX,electrolysis,alkElectrolysis,,electricity,h2,,,mature,none,
 powerToX,electrolysis,pemElectrolysis,,electricity,h2,,,mature,none,
-powerToX,h2Storage,h2Cavern,,,,h2,h2,mature,none,2
+powerToX,h2Storage,h2Cavern,,,,h2,h2,emerging,none,4
 powerToX,synthFuel,methanePyrolysis,,gasFuel; electricity,h2,,,mature,none,
 solar,,openspace,,,electricity,,,mature,none,
 solar,,rooftopResi,,,electricity,,,mature,none,
@@ -16,8 +16,7 @@ stock,power,gasPlantStock_a,,gasFuel,electricity,,,stock,decomm,
 stock,power,gasPlantStock_b,,gasFuel,electricity,,,stock,decomm,
 stock,power,nuclearPlantStock,,,electricity,,,stock,decomm,
 stock,power,oilLiquidPlantStock,,oil,electricity,,,stock,decomm,
-stock,power,pumpedStorage,,,,electricity,electricity,stock,none,2
-stock,power,reservoir,,,,,electricity,stock,none,2
+stock,power,pumpedStorage,,,,electricity,electricity,stock,none,4
+stock,power,reservoir,,,,,electricity,stock,none,4
 stock,power,runOfRiver,,,electricity,,,stock,none,
-wind,,offshore,,,electricity,,,mature,none,
 wind,,onshore,,,electricity,,,mature,none,
