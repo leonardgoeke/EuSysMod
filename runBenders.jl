@@ -9,6 +9,9 @@ b = "C:/Users/pacop/Desktop/git/EuSysMod/"
 # target gap, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
 algSetup_obj = algSetup(0.01, 20, (bal = false, st = false), 10, 120.0, false, 4, Gurobi.Optimizer)
 
+# options for writing results
+res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
+
 # ! options for stabilization
 
 methKey_str = "qtr_5"
@@ -38,7 +41,7 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 # ! general problem settings
 name_str ="_test"
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
-info_ntup = (name = name_str, frs = 0, supTsLvl = 1, shortExp = 10) 
+info_ntup = (name = name_str, frsLvl = 0, supTsLvl = 2, repTsLvl = 2, shortExp = 10) 
 
 # ! input folders
 dir_str = b
@@ -144,3 +147,7 @@ while true
 end
 
 #endregion
+
+#region # * write results
+produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Write results", testErr = false, printErr = false)
+writeBendersResults!(benders_obj, runSubDist, res_ntup)
