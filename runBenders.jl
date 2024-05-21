@@ -1,4 +1,4 @@
-using Gurobi, AnyMOD, CSV, YAML
+using Gurobi, AnyMOD, CSV, YAML, SlurmClusterManager
 
 dir_str = ""
 
@@ -15,7 +15,6 @@ end
 h = string(par_df[id_int,:h])
 spa = string(par_df[id_int,:spatialScope])
 scr = string(par_df[id_int,:scr])
-scrCnt = par_df[id_int,:scrCnt]
 
 #region # * options for algorithm
 
@@ -53,7 +52,7 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 #region # * options for problem
 
 # ! general problem settings
-name_str = h * "_" * spa * "_" * scr
+name_str = "c2e_" * h * "_" * spa * "_" * scr
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
 info_ntup = (name = name_str, frsLvl = 0, supTsLvl = 2, repTsLvl = 4, shortExp = 10) 
 
@@ -83,7 +82,8 @@ scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e
 
 # initialize distributed computing
 if algSetup_obj.dist
-	addprocs(scrCnt) 
+	addprocs(SlurmManager()) # add all available tasks
+	rmprocs(1) # remove one node again for main process
 	@everywhere begin 
 		using Gurobi, AnyMOD 
 		runSubDist(w_int::Int64, resData_obj::resData, sol_sym::Symbol, optTol_fl::Float64=1e-8, crsOver_boo::Bool=false, resultOpt_tup::NamedTuple=NamedTuple()) = Distributed.@spawnat w_int runSub(sub_m, resData_obj, sol_sym, optTol_fl, crsOver_boo, resultOpt_tup)
