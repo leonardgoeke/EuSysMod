@@ -1,4 +1,5 @@
-h,spatialScope,scr
-96,5Ctr,future
-96,allCtr,historic
-8760,allCtr,future
+h,spatialScope,scr,workerCnt
+96,5Ctr,2scrFuture,2
+96,allCtr,historic,20
+8760,allCtr,future,20
+4368,allCtr,2scrFuture,2

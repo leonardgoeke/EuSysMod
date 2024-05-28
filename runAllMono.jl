@@ -1,7 +1,7 @@
 using AnyMOD, Gurobi, CSV
 using CairoMakie, Colors, Random
 
-b = ""
+b = "C:/Git/EuSysMod/" 
 
 include(b * "functions.jl")
 par_df = CSV.read(b * "settings.csv",DataFrame)
@@ -26,7 +26,7 @@ resData_df = DataFrame(case = Symbol[], variable = String[], value = Float64[])
 # ! full stochastic model
 
 # create and solve model
-anyM = anyModel(input_arr, resultDir_str, objName = "mono_" * h * "_" * spa * "_" * scr, supTsLvl = 2, shortExp = 10, reportLvl = 2, repTsLvl = 4);
+anyM = @profile anyModel(input_arr, resultDir_str, objName = "mono_" * h * "_" * spa * "_" * scr, supTsLvl = 2, shortExp = 10, reportLvl = 2, repTsLvl = 4);
 createOptModel!(anyM)
 setObjective!(:cost,anyM)
 

@@ -1,6 +1,6 @@
-using Gurobi, AnyMOD, CSV, YAML, SlurmClusterManager
+using Gurobi, AnyMOD, CSV, YAML, SlurmClusterManager, InteractiveUtils
 
-dir_str = ""
+dir_str = "" 
 
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
@@ -15,13 +15,14 @@ end
 h = string(par_df[id_int,:h])
 spa = string(par_df[id_int,:spatialScope])
 scr = string(par_df[id_int,:scr])
+wrkCnt = par_df[id_int,:workerCnt]
 
 #region # * options for algorithm
 
 # ! options for general algorithm
 
 # target gap, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
-algSetup_obj = algSetup(0.005, 20, (bal = false, st = false), 10, 1440.0, true, t_int, Gurobi.Optimizer)
+algSetup_obj = algSetup(0.005, 20, (bal = false, st = false), 10, 600.0, true, t_int, Gurobi.Optimizer)
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
@@ -37,7 +38,7 @@ else
 	meth_tup = tuple()
 end
 
-iniStab_ntup = (setup = :full, det = true) # options to initialize stabilization, :none for first input will skip stabilization, other values control input folders, second input determines, if heuristic model is solved stochastically or not
+iniStab_ntup = (setup = :reduced, det = false) # options to initialize stabilization, :none for first input will skip stabilization, other values control input folders, second input determines, if heuristic model is solved stochastically or not
 
 stabSetup_obj = stabSetup(meth_tup, 0.0, iniStab_ntup)
 
@@ -52,7 +53,7 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 #region # * options for problem
 
 # ! general problem settings
-name_str = "c2e_" * h * "_" * spa * "_" * scr
+name_str = "c2e_" * h * "_" * spa * "_" * scr * "_5"
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
 info_ntup = (name = name_str, frsLvl = 0, supTsLvl = 2, repTsLvl = 4, shortExp = 10) 
 
@@ -82,17 +83,16 @@ scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e
 
 # initialize distributed computing
 if algSetup_obj.dist
-	addprocs(SlurmManager()) # add all available tasks
-	rmprocs(1) # remove one node again for main process
-	@everywhere begin 
-		using Gurobi, AnyMOD 
-		runSubDist(w_int::Int64, resData_obj::resData, sol_sym::Symbol, optTol_fl::Float64=1e-8, crsOver_boo::Bool=false, resultOpt_tup::NamedTuple=NamedTuple()) = Distributed.@spawnat w_int runSub(sub_m, resData_obj, sol_sym, optTol_fl, crsOver_boo, resultOpt_tup)
+	addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=30G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=4, mem_per_cpu="8G", time=600) # add all available nodes
+	rmprocs(wrkCnt + 2) # remove one node again for main process
+	@everywhere begin
+		using Gurobi, AnyMOD
+		runSubDist(w_int::Int64, resData_obj::resData, sol_sym::Symbol, optTol_fl::Float64=1e-8, crsOver_boo::Bool=false, resultOpt_tup::NamedTuple=NamedTuple()) = Distributed.@spawnat w_int runSub(resData_obj, sol_sym, optTol_fl, crsOver_boo, resultOpt_tup)
 	end
 	passobj(1, workers(), [:info_ntup, :inputFolder_ntup, :scale_dic, :algSetup_obj])
 else
 	runSubDist = x -> nothing
 end
-
 # create benders object
 benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, nearOptSetup_obj)
 
