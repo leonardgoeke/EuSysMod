@@ -1,5 +1,10 @@
-h,spatialScope,scr,workerCnt
-96,5Ctr,2scrFuture,2
-96,allCtr,historic,20
-8760,allCtr,future,20
-4368,allCtr,2scrFuture,2
+h,spatialScope,scr,workerCnt,rngVio
+96,5Ctr,2scrFuture,2,1
+96,allCtr,historic,20,1
+8760,allCtr,future,20,1
+4368,allCtr,2scrFuture,2,0
+4368,allCtr,2scrFuture,2,1
+4368,allCtr,2scrFuture,2,2
+4368,allCtr,2scrFuture,2,3
+4368,allCtr,2scrFuture,2,4
+4368,allCtr,2scrFuture,2,5
