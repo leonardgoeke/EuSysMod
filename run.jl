@@ -12,11 +12,11 @@ else
     t_int = parse(Int, ARGS[2]) # number of threads
 end
 
-h = string(par_df[id_int,:h]) # resolution of time-series for actual solve, can be 96, 1752, 4392, or 8760
-grid = string(par_df[id_int,:grid]) # scenario 
+time = string(par_df[id_int,:time]) # resolution of time-series for actual solve, can be 96, 1752, 4392, or 8760
+space = string(par_df[id_int,:space]) # scenario 
 
-obj_str = h * "hours_" * "hoursHeu" * grid * "_updated"
-inputMod_arr = [b * "_basis", b * grid, b * "timeSeries/" * h * "hours_2008"]
+obj_str = time * "_" * space * "_testing"
+inputMod_arr = [b * "_basis", b * "timeSeries/" * time * "_" * space]
 resultDir_str = b * "results"
 
 
@@ -43,6 +43,7 @@ reportResults(:summary, anyM, addRep = (:capaConvOut,), addObjName = true)
 reportResults(:cost, anyM, addObjName = true)
 reportResults(:exchange, anyM, addObjName = true)
 
+plotSankeyDiagram(anyM, dropDown = (:timestep,), ymlFilter = b * "all.yml")
 reportTimeSeries(:electricity, anyM)
 
 #endregion

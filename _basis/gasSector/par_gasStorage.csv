@@ -55,3 +55,4 @@ region_4,technology_3,parameter_1,value_1,parameter_2,value_2,parameter_3,value_
 92UK,gasStorage,capaStSizeResi,25188.342,stOutToStInFix,0.978,sizeToStOutFix,31.043,
 93UK,gasStorage,capaStSizeResi,9037.646,stOutToStInFix,1.1,sizeToStOutFix,15.815,
 96IE,gasStorage,capaStSizeResi,4262.227,stOutToStInFix,0.85,sizeToStOutFix,32.52,
+,gasStorage,effStIn,0.99,,,,,
