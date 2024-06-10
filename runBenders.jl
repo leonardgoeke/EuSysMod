@@ -17,6 +17,7 @@ spa = string(par_df[id_int,:spatialScope])
 scr = string(par_df[id_int,:scr])
 wrkCnt = par_df[id_int,:workerCnt]
 rngVio = par_df[id_int,:rngVio]
+frsLvl = par_df[id_int,:foresight]
 
 #region # * options for algorithm
 
@@ -28,10 +29,16 @@ elseif rngVio in (2,3)
 	rngVio_ntup = (stab = 1e4, cut = 1e1, fix = 1e1)
 elseif rngVio in (4,5)
 	rngVio_ntup = (stab = 1e4, cut = 1e2, fix = 1e0)
+elseif rngVio == 6
+	rngVio_ntup = (stab = 1e4, cut = 1e2, fix = 1e1)
+elseif rngVio == 7
+	rngVio_ntup = (stab = 1e4, cut = 1e1, fix = 1e2)
+elseif rngVio == 8
+	rngVio_ntup = (stab = 1e4, cut = 1e0, fix = 1e2)
 end
 
 # target gap, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
-algSetup_obj = algSetup(0.005, 20, (bal = false, st = false), 10, 600.0, true, t_int, Gurobi.Optimizer, rngVio_ntup)
+algSetup_obj = algSetup(0.005, 20, (bal = false, st = false), 10, 1440.0, true, t_int, Gurobi.Optimizer, rngVio_ntup)
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
@@ -62,9 +69,9 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 #region # * options for problem
 
 # ! general problem settings
-name_str = "c2e_" * h * "_" * spa * "_" * scr * "_5_" * string(rngVio)
+name_str = "c2e_" * h * "_" * spa * "_" * scr * "_6_" * string(rngVio) * "_" * string(frsLvl) * "frs"
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
-info_ntup = (name = name_str, frsLvl = 0, supTsLvl = 2, repTsLvl = 4, shortExp = 10) 
+info_ntup = (name = name_str, frsLvl = frsLvl, supTsLvl = 2, repTsLvl = 4, shortExp = 10) 
 
 # ! input folders
 inDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spa, dir_str * "timeSeries/" * h * "hours_" * spa * "_" * scr]
@@ -81,8 +88,7 @@ inputFolder_ntup = (in = inDir_arr, heu = heuInDir_arr, results = dir_str * "res
 
 scale_dic = Dict{Symbol,NamedTuple}()
 
-#scale_dic[:rng] = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
-if rngVio in (0,2,4)
+if rngVio in (0,2,4,6,7,8)
 	scale_dic[:rng] = (mat = (1e-2,1e4), rhs = (1e-2,1e2))
 elseif rngVio in (1,3,5)
 	scale_dic[:rng] = (mat = (1e-2,1e4), rhs = (1e-2,1e4))
@@ -98,7 +104,7 @@ scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e
 
 # initialize distributed computing
 if algSetup_obj.dist
-	addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=30G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=4, mem_per_cpu="8G", time=600) # add all available nodes
+	addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=30G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=4, mem_per_cpu="8G", time=1440) # add all available nodes
 	rmprocs(wrkCnt + 2) # remove one node again for main process
 	@everywhere begin
 		using Gurobi, AnyMOD
