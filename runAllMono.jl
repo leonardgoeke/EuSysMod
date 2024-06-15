@@ -26,7 +26,7 @@ resData_df = DataFrame(case = Symbol[], variable = String[], value = Float64[])
 # ! full stochastic model
 
 # create and solve model
-anyM = @profile anyModel(input_arr, resultDir_str, objName = "mono_" * h * "_" * spa * "_" * scr, supTsLvl = 2, shortExp = 10, reportLvl = 2, repTsLvl = 4);
+anyM = anyModel(input_arr, resultDir_str, objName = "mono_" * h * "_" * spa * "_" * scr, supTsLvl = 2, shortExp = 10, reportLvl = 2, repTsLvl = 4);
 createOptModel!(anyM)
 setObjective!(:cost,anyM)
 
@@ -36,6 +36,10 @@ set_optimizer_attribute(anyM.optModel, "Crossover", 1);
 set_optimizer_attribute(anyM.optModel, "Threads",t_int);
 
 optimize!(anyM.optModel)
+
+
+reportTimeSeries(:electricity, anyM)
+
 objective_value(anyM.optModel)
 reportResults(:summary, anyM)
 reportResults(:cost, anyM)

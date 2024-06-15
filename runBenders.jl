@@ -18,33 +18,54 @@ scr = string(par_df[id_int,:scr])
 wrkCnt = par_df[id_int,:workerCnt]
 rngVio = par_df[id_int,:rngVio]
 frsLvl = par_df[id_int,:foresight]
+trust = par_df[id_int,:trust]
+accuracy = par_df[id_int,:accuracy]
 
 #region # * options for algorithm
 
 # ! options for general algorithm
 
-if rngVio in (0,1)
-	rngVio_ntup = (stab = 1e4, cut = 1e2, fix = 1e2)
-elseif rngVio in (2,3)
-	rngVio_ntup = (stab = 1e4, cut = 1e1, fix = 1e1)
-elseif rngVio in (4,5)
-	rngVio_ntup = (stab = 1e4, cut = 1e2, fix = 1e0)
-elseif rngVio == 6
-	rngVio_ntup = (stab = 1e4, cut = 1e2, fix = 1e1)
-elseif rngVio == 7
+if rngVio == 0
 	rngVio_ntup = (stab = 1e4, cut = 1e1, fix = 1e2)
-elseif rngVio == 8
-	rngVio_ntup = (stab = 1e4, cut = 1e0, fix = 1e2)
+elseif rngVio == 1
+	rngVio_ntup = (stab = 1e2, cut = 1e1, fix = 1e2)
+elseif rngVio == 2
+	rngVio_ntup = (stab = 1e4, cut = 1e1, fix = 1e3)
+elseif rngVio == 3
+	rngVio_ntup = (stab = 1e4, cut = 1e1, fix = 1e4)
+elseif rngVio == 4
+	rngVio_ntup = (stab = 1e4, cut = 1e2, fix = 1e2)
+elseif rngVio == 5
+	rngVio_ntup = (stab = 1e4, cut = 1e3, fix = 1e2)
 end
 
-# target gap, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
-algSetup_obj = algSetup(0.005, 20, (bal = false, st = false), 10, 1440.0, true, t_int, Gurobi.Optimizer, rngVio_ntup)
+if accuarcy == 0
+	inAcc_sym = :none
+elseif accuracy == 1
+	inAcc_sym = :lin
+elseif accuracy == 2
+	inAcc_sym = :exp
+elseif accuracy == 3
+	inAcc_sym = :log
+end
+
+
+# target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
+algSetup_obj = algSetup(0.005, 20, inAcc_sym, (bal = false, st = false), 10, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup)
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
 
-methKey_str = "qtr_5"
+if trust == 0
+	methKey_str = "qtr_4"
+elseif trust == 1
+	methKey_str = "qtr_5"
+elseif trust == 2
+	methKey_str = "qtr_8"
+elseif trust == 3
+	methKey_str = "box_3"
+end
 
 # write tuple for stabilization
 stabMap_dic = YAML.load_file(dir_str * "stabMap.yaml")
@@ -69,7 +90,7 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 #region # * options for problem
 
 # ! general problem settings
-name_str = "c2e_" * h * "_" * spa * "_" * scr * "_6_" * string(rngVio) * "_" * string(frsLvl) * "frs"
+name_str = "c2e_" * h * "_" * spa * "_" * scr * "_1_" * string(rngVio) * "_" * string(frsLvl) * "frs" * "_" * string(trust) * "trust" * "_" * string(accuracy) * "acc"
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
 info_ntup = (name = name_str, frsLvl = frsLvl, supTsLvl = 2, repTsLvl = 4, shortExp = 10) 
 
@@ -88,11 +109,8 @@ inputFolder_ntup = (in = inDir_arr, heu = heuInDir_arr, results = dir_str * "res
 
 scale_dic = Dict{Symbol,NamedTuple}()
 
-if rngVio in (0,2,4,6,7,8)
-	scale_dic[:rng] = (mat = (1e-2,1e4), rhs = (1e-2,1e2))
-elseif rngVio in (1,3,5)
-	scale_dic[:rng] = (mat = (1e-2,1e4), rhs = (1e-2,1e4))
-end
+
+scale_dic[:rng] = (mat = (1e-2,1e4), rhs = (1e-2,1e2))
 
 scale_dic[:facHeu] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
 scale_dic[:facTop] = (capa = 1e2, capaStSize = 1e1, insCapa = 1e2, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
@@ -104,8 +122,9 @@ scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e
 
 # initialize distributed computing
 if algSetup_obj.dist
-	addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=30G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=4, mem_per_cpu="8G", time=1440) # add all available nodes
-	rmprocs(wrkCnt + 2) # remove one node again for main process
+	#addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=30G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=4, mem_per_cpu="8G", time=4380) # add all available nodes
+	#rmprocs(wrkCnt + 2) # remove one node again for main process
+	addprocs(2)
 	@everywhere begin
 		using Gurobi, AnyMOD
 		runSubDist(w_int::Int64, resData_obj::resData, rngVio_fl::Float64, sol_sym::Symbol, optTol_fl::Float64=1e-8, crsOver_boo::Bool=false, resultOpt_tup::NamedTuple=NamedTuple()) = Distributed.@spawnat w_int runSub(resData_obj, rngVio_fl, sol_sym, optTol_fl, crsOver_boo, resultOpt_tup)
@@ -120,6 +139,8 @@ benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, s
 #endregion
 
 #region # * iteration algorithm
+
+
 
 while true
 
@@ -136,12 +157,14 @@ while true
 	timeSub_dic = Dict{Tuple{Int64,Int64},Millisecond}()
 	lss_dic = Dict{Tuple{Int64,Int64},Float64}()
 
+	acc_fl = benders_obj.algOpt.inAcc == :none ? 1e-8 : getConvTol(benders_obj.itr.gap, benders_obj.algOpt.gap, benders_obj.algOpt.inAcc)
+
 	if benders_obj.algOpt.dist futData_dic = Dict{Tuple{Int64,Int64},Future}() end
 	for (id,s) in enumerate(collect(keys(benders_obj.sub)))
 		if benders_obj.algOpt.dist # distributed case
-			futData_dic[s] = runSubDist(id + 1, copy(resData_obj), benders_obj.algOpt.rngVio.fix, :barrier, 1e-8)
+			futData_dic[s] = runSubDist(id + 1, copy(resData_obj), benders_obj.algOpt.rngVio.fix, :barrier, acc_fl)
 		else # non-distributed case
-			cutData_dic[s], timeSub_dic[s], lss_dic[s] = runSub(benders_obj.sub[s], copy(resData_obj), benders_obj.algOpt.rngVio.fix, :barrier, 1e-8)
+			cutData_dic[s], timeSub_dic[s], lss_dic[s] = runSub(benders_obj.sub[s], copy(resData_obj), benders_obj.algOpt.rngVio.fix, :barrier, acc_fl)
 		end
 	end
 

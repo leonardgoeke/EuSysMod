@@ -60,6 +60,12 @@ qtr_7:
     low: 1e-6 
     thr: 5e-4 
     fac: 2.0
+qtr_8:
+  qtr:
+    start: 1e-2
+    low: 1e-6 
+    thr: 5e-3 
+    fac: 2.0
 lvl1_1:
   lvl1:
     lam: 0.125
