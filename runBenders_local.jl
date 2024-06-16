@@ -1,4 +1,4 @@
-using Gurobi, AnyMOD, CSV, YAML, SlurmClusterManager, InteractiveUtils
+using Gurobi, AnyMOD, CSV, YAML
 
 dir_str = "" 
 
@@ -15,10 +15,9 @@ end
 h = string(par_df[id_int,:h])
 spa = string(par_df[id_int,:spatialScope])
 scr = string(par_df[id_int,:scr])
-frsLvl = par_df[id_int,:foresight]
-
 wrkCnt = par_df[id_int,:workerCnt]
 rngVio = par_df[id_int,:rngVio]
+frsLvl = par_df[id_int,:foresight]
 trust = par_df[id_int,:trust]
 accuracy = par_df[id_int,:accuracy]
 
@@ -51,7 +50,7 @@ elseif accuracy == 3
 end
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
-algSetup_obj = algSetup(0.005, 20, (bal = false, st = false), 10, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, conSub = (rng = [1e-2, 1e-8], int = inAcc_sym, crs = false))
+algSetup_obj = algSetup(0.005, 20, (bal = false, st = false), 10, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = inAcc_sym, crs = false))
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
@@ -121,8 +120,9 @@ scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e
 
 # initialize distributed computing
 if algSetup_obj.dist
-	addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=30G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=4, mem_per_cpu="8G", time=4380) # add all available nodes
-	rmprocs(wrkCnt + 2) # remove one node again for main process
+	#addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=30G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=4, mem_per_cpu="8G", time=4380) # add all available nodes
+	#rmprocs(wrkCnt + 2) # remove one node again for main process
+	addprocs(2)
 	@everywhere begin
 		using Gurobi, AnyMOD
 		runSubDist(w_int::Int64, resData_obj::resData, rngVio_fl::Float64, sol_sym::Symbol, optTol_fl::Float64=1e-8, crsOver_boo::Bool=false, resultOpt_tup::NamedTuple=NamedTuple()) = Distributed.@spawnat w_int runSub(resData_obj, rngVio_fl, sol_sym, optTol_fl, crsOver_boo, resultOpt_tup)
