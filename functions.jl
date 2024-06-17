@@ -148,20 +148,3 @@ function radarplot(ax::Axis, v; p_grid = maximum(v) * (1.0:5.0) / 5.0, title = "
     end
     ax
 end
-
-#=
-# get results
-reportResults(:summary, anyM, expVal = true)
-reportResults(:cost, anyM)
-reportResults(:exchange, anyM, expVal = true)
-plotSankeyDiagram(anyM, dropDown = (:timestep, :scenario))
-
-# return storage levels
-lvl_df = writeStLvl([:h2Cavern,:reservoir,:pumpedStorage,:redoxBattery,:lithiumBattery],anyM)
-printObject(lvl_df,anyM,fileName = "stLvl")
-
-# write duals
-relBal_ntup = (enBal = (:electricity,), stBal = (:h2Cavern,:reservoir), excRestr = (:hvac,:hvdc))
-dual_df = writeDuals(relBal_ntup,anyM)
-printObject(dual_df,anyM,fileName = "dual")
-=#
