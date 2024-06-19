@@ -22,6 +22,10 @@ rngVio = par_df[id_int,:rngVio]
 trust = par_df[id_int,:trust]
 accuracy = par_df[id_int,:accuracy]
 
+emFac = par_df[id_int,:emFac]
+rng = par_df[id_int,:range]
+
+
 #region # * options for algorithm
 
 # ! options for general algorithm
@@ -90,7 +94,7 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 #region # * options for problem
 
 # ! general problem settings
-name_str = "c2e_" * h * "_" * spa * "_" * scr * "_1_" * string(rngVio) * "_" * string(frsLvl) * "frs" * "_" * string(trust) * "trust" * "_" * string(accuracy) * "acc"
+name_str = "c2e_" * h * "_" * spa * "_" * scr * "_1_" * string(rngVio) * "_" * string(frsLvl) * "frs" * "_" * string(trust) * "trust_" * string(accuracy) * "acc_" * string(emFac) * "emFac_" * string(rng) * "rng"
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
 info_ntup = (name = name_str, frsLvl = frsLvl, supTsLvl = 2, repTsLvl = 4, shortExp = 10) 
 
@@ -107,13 +111,36 @@ inputFolder_ntup = (in = inDir_arr, heu = heuInDir_arr, results = dir_str * "res
 
 # ! scaling settings
 
+if emFac == 0
+	topFac = 1e3
+	subFac = 1e1
+elseif emFac == 1
+	topFac = 1e2
+	subFac = 1e0
+elseif emFac == 2
+	topFac = 1e4
+	subFac = 1e2
+elseif emFac == 3
+	topFac = 1e0
+	subFac = 1e0
+elseif emFac == 4
+	topFac = 1e0
+	subFac = 1e2
+end
+
 scale_dic = Dict{Symbol,NamedTuple}()
 
-scale_dic[:rng] = (mat = (1e-2,1e4), rhs = (1e-2,1e2))
+
+if rng == 0
+	scale_dic[:rng] = (mat = (1e-2,1e4), rhs = (1e-2,1e4))
+elseif rng == 1
+	scale_dic[:rng] = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
+end
 
 scale_dic[:facHeu] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
 scale_dic[:facTop] = (capa = 1e2, capaStSize = 1e1, insCapa = 1e2, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
 scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e1, dispSt = 1e3, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
+
 
 #endregion
 
