@@ -27,9 +27,9 @@ if isdir(b * temp_dir) rm(b * temp_dir, recursive = true) end
 mkdir(b * temp_dir)
 
 
-inputDes_arr = [b * "basis", b * "gridEU/" * gridEU, b * "gridCH/" * gridCH, b * "eeCH/" * eeCH, b * "timeSeries/8760hours_2008"]
-inputHeu_arr = [b * "basis", b * "gridEU/" * gridEU, b * "gridCH/" * gridCH, b * "eeCH/" * eeCH, b * "timeSeries/" * h_heu * "hours_2008", b * desFac_dir]
-inputMod_arr = [b * "basis", b * "gridEU/" * gridEU, b * "gridCH/" * gridCH, b * "eeCH/" * eeCH, b * "timeSeries/" * h * "hours_2008", b * desFac_dir, b * temp_dir]
+inputDes_arr = [b * "basis", b * "gridEU/" * gridEU, b * "gridCH/" * gridCH, b * "eeCH/" * eeCH, b * "timeSeries/8760hours_2008", b * "timeSeries/8760hours_2008" * eeCH]
+inputHeu_arr = [b * "basis", b * "gridEU/" * gridEU, b * "gridCH/" * gridCH, b * "eeCH/" * eeCH, b * "timeSeries/" * h_heu * "hours_2008", b * "timeSeries/8760hours_2008" * eeCH, b * desFac_dir]
+inputMod_arr = [b * "basis", b * "gridEU/" * gridEU, b * "gridCH/" * gridCH, b * "eeCH/" * eeCH, b * "timeSeries/" * h * "hours_2008", b * "timeSeries/8760hours_2008" * eeCH, b * desFac_dir, b * temp_dir]
 
 resultDir_str = b * "results"
 
