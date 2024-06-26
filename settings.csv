@@ -1,5 +1,5 @@
 h,spatialScope,scr,emission,foresight,workerCnt,rngVio,emFac,range,trust,accuracy
-96,5Ctr,2scrFuture,,0,2,0,0,0,0,0
+96,5Ctr,2scrFuture,det,0,2,0,0,0,0,0
 4368,allCtr,2scrFuture,det,0,2,0,0,0,0,0
 4368,allCtr,2scrFuture,det,3,8,0,0,0,0,0
 4368,allCtr,2scrFuture,stoch,3,8,0,0,0,0,0

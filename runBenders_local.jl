@@ -1,6 +1,6 @@
-using Gurobi, AnyMOD, CSV, YAML, SlurmClusterManager, InteractiveUtils
+using Gurobi, AnyMOD, CSV, YAML
 
-dir_str = "" 
+dir_str = "C:/Git/EuSysMod/" 
 
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
@@ -25,6 +25,8 @@ accuracy = par_df[id_int,:accuracy]
 
 emFac = par_df[id_int,:emFac]
 rng = par_df[id_int,:range]
+
+
 
 #region # * options for algorithm
 
@@ -55,7 +57,7 @@ elseif accuracy == 3
 end
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
-algSetup_obj = algSetup(0.005, 20, (bal = false, st = false), 10, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = inAcc_sym, crs = false))
+algSetup_obj = algSetup(0.005, 20, (bal = false, st = false), 10, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = inAcc_sym, crs = false))
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
@@ -94,7 +96,7 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 #region # * options for problem
 
 # ! general problem settings
-name_str = "c2e_" * h * "_" * spa * "_" * scr * "_1_" * string(rngVio) * "_" * string(frsLvl) * "frs" * "_" * string(trust) * "trust_" * string(accuracy) * "acc_" * string(emFac) * "emFac_" * string(rng) * "rng_" * emission
+name_str = "c2e_" * h * "_" * spa * "_" * scr * "_1_" * string(rngVio) * "_" * string(frsLvl) * "frs" * "_" * string(trust) * "trust_" * string(accuracy) * "acc_" * string(emFac) * "emFac_" * string(rng) * "rng"
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
 info_ntup = (name = name_str, frsLvl = frsLvl, supTsLvl = 2, repTsLvl = 4, shortExp = 10) 
 
@@ -148,7 +150,7 @@ scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = su
 
 # initialize distributed computing
 if algSetup_obj.dist
-	addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=30G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=4, mem_per_cpu="8G", time=4380) # add all available nodes
+	addprocs(wrkCnt) # add all available nodes
 	rmprocs(wrkCnt + 2) # remove one node again for main process
 	@everywhere begin
 		using Gurobi, AnyMOD
