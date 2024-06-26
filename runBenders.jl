@@ -15,6 +15,7 @@ end
 h = string(par_df[id_int,:h])
 spa = string(par_df[id_int,:spatialScope])
 scr = string(par_df[id_int,:scr])
+emission = string(par_df[id_int,:emission])
 frsLvl = par_df[id_int,:foresight]
 
 wrkCnt = par_df[id_int,:workerCnt]
@@ -24,6 +25,7 @@ accuracy = par_df[id_int,:accuracy]
 
 emFac = par_df[id_int,:emFac]
 rng = par_df[id_int,:range]
+
 
 
 #region # * options for algorithm
@@ -64,7 +66,7 @@ res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :
 if trust == 0
 	methKey_str = "qtr_4"
 elseif trust == 1
-	methKey_str = "qtr_5"
+methKey_str = "qtr_5"
 elseif trust == 2
 	methKey_str = "qtr_8"
 elseif trust == 3
@@ -99,12 +101,12 @@ name_str = "c2e_" * h * "_" * spa * "_" * scr * "_1_" * string(rngVio) * "_" * s
 info_ntup = (name = name_str, frsLvl = frsLvl, supTsLvl = 2, repTsLvl = 4, shortExp = 10) 
 
 # ! input folders
-inDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spa, dir_str * "timeSeries/" * h * "hours_" * spa * "_" * scr]
+inDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spa, dir_str * "emission/" * emission, dir_str * "timeSeries/" * h * "hours_" * spa * "_" * scr]
 
 if stabSetup_obj.ini.setup in (:none,:full) 
 	heuInDir_arr = inDir_arr
 elseif stabSetup_obj.ini.setup == :reduced
-	heuInDir_arr =  [dir_str * "basis", dir_str * "spatialScope/" * spa, dir_str * "timeSeries/96hours_" * spa * "_" * scr]
+	heuInDir_arr =  [dir_str * "basis", dir_str * "spatialScope/" * spa, dir_str * "emission/" * emission, dir_str * "timeSeries/96hours_" * spa * "_" * scr]
 end 
 
 inputFolder_ntup = (in = inDir_arr, heu = heuInDir_arr, results = dir_str * "results")
@@ -138,8 +140,8 @@ elseif rng == 1
 end
 
 scale_dic[:facHeu] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
-scale_dic[:facTop] = (capa = 1e2, capaStSize = 1e1, insCapa = 1e2, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
-scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e1, dispSt = 1e3, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
+scale_dic[:facTop] = (capa = 1e2, capaStSize = 1e1, insCapa = 1e2, dispConv = topFac, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
+scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = subFac, dispSt = 1e3, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
 
 
 #endregion
@@ -186,7 +188,7 @@ while true
 	acc_fl = getConvTol(benders_obj.itr.gap, benders_obj.algOpt.gap, benders_obj.algOpt.conSub)
 
 	if benders_obj.algOpt.dist futData_dic = Dict{Tuple{Int64,Int64},Future}() end
-	for (id,s) in enumerate(collect(keys(benders_obj.sub)))
+	for (id,s) in enumerate(sort(collect(keys(benders_obj.sub))))
 		if benders_obj.algOpt.dist # distributed case
 			futData_dic[s] = runSubDist(id + 1, copy(resData_obj), benders_obj.algOpt.rngVio.fix, :barrier, acc_fl)
 		else # non-distributed case
@@ -200,7 +202,7 @@ while true
 	# get results of sub-problems
 	if benders_obj.algOpt.dist
 		wait.(collect(values(futData_dic)))
-		for s in collect(keys(benders_obj.sub))
+		for s in sort(collect(keys(benders_obj.sub)))
 			cutData_dic[s], timeSub_dic[s], lss_dic[s], numFoc_dic[s] = fetch(futData_dic[s])
 		end
 	end
