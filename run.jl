@@ -19,7 +19,7 @@ gridCH = string(par_df[id_int, :gridCH]) # CH grid scenario
 eeCH = string(par_df[id_int, :eeCH]) # CH ee scenario
 alp = string(par_df[id_int, :alpinePV])
 
-obj_str = h * "hours_" * h_heu * "hoursHeu" * gridEU * gridCH * eeCH
+obj_str = h * "hours_" * h_heu * "hoursHeu" * gridEU * gridCH * eeCH * alp
 temp_dir = "tempFix_" * obj_str # directory for temporary folder
 desFac_dir = "designFactors" # directory for design factors
 
