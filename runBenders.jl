@@ -31,7 +31,7 @@ rng = par_df[id_int,:range]
 # ! options for general algorithm
 
 if rngVio == 0
-	rngVio_ntup = (stab = 1e4, cut = 1e1, fix = 1e2)
+	rngVio_ntup = (stab = 1e4, cut = 1e2, fix = 1e2)
 elseif rngVio == 1
 	rngVio_ntup = (stab = 1e2, cut = 1e1, fix = 1e2)
 elseif rngVio == 2
@@ -39,7 +39,7 @@ elseif rngVio == 2
 elseif rngVio == 3
 	rngVio_ntup = (stab = 1e4, cut = 1e1, fix = 1e4)
 elseif rngVio == 4
-	rngVio_ntup = (stab = 1e4, cut = 1e2, fix = 1e2)
+	rngVio_ntup = (stab = 1e4, cut = 1e1, fix = 1e2)
 elseif rngVio == 5
 	rngVio_ntup = (stab = 1e4, cut = 1e3, fix = 1e2)
 end
@@ -62,9 +62,9 @@ res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :
 # ! options for stabilization
 
 if trust == 0
-	methKey_str = "qtr_4"
+	methKey_str = "qtr_5"
 elseif trust == 1
-methKey_str = "qtr_5"
+	methKey_str = "qtr_4"
 elseif trust == 2
 	methKey_str = "qtr_8"
 elseif trust == 3
@@ -132,7 +132,7 @@ scale_dic = Dict{Symbol,NamedTuple}()
 
 
 if rng == 0
-	scale_dic[:rng] = (mat = (1e-2,1e4), rhs = (1e-2,1e4))
+	scale_dic[:rng] = (mat = (1e-2,1e4), rhs = (1e-2,1e2))
 elseif rng == 1
 	scale_dic[:rng] = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
 end
