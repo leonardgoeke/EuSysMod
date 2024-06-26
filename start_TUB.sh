@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --array=1,2,3,4,5,6,7,8,9,10,11,12
+#SBATCH --array=13,14,15,16,17,18,19,20,21,22,23,24
 #SBATCH --time=120:00:00
 #SBATCH --mem-per-cpu=64G
 #SBATCH --cpus-per-task=6

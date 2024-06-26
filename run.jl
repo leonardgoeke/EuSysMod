@@ -17,7 +17,7 @@ h_heu = string(par_df[id_int, :h_heu]) # resolution of time-series for pre-scree
 gridEU = string(par_df[id_int, :gridEU]) # EU grid scenario 
 gridCH = string(par_df[id_int, :gridCH]) # CH grid scenario 
 eeCH = string(par_df[id_int, :eeCH]) # CH ee scenario
-
+alp = string(par_df[id_int, :alpinePV])
 
 obj_str = h * "hours_" * h_heu * "hoursHeu" * gridEU * gridCH * eeCH
 temp_dir = "tempFix_" * obj_str # directory for temporary folder
@@ -27,9 +27,9 @@ if isdir(b * temp_dir) rm(b * temp_dir, recursive = true) end
 mkdir(b * temp_dir)
 
 
-inputDes_arr = [b * "basis", b * "gridEU/" * gridEU, b * "gridCH/" * gridCH, b * "eeCH/" * eeCH, b * "timeSeries/8760hours_2008", b * "timeSeries/8760hours_2008" * eeCH]
-inputHeu_arr = [b * "basis", b * "gridEU/" * gridEU, b * "gridCH/" * gridCH, b * "eeCH/" * eeCH, b * "timeSeries/" * h_heu * "hours_2008", b * "timeSeries/" * h_heu * "hours_2008" * eeCH, b * desFac_dir]
-inputMod_arr = [b * "basis", b * "gridEU/" * gridEU, b * "gridCH/" * gridCH, b * "eeCH/" * eeCH, b * "timeSeries/" * h * "hours_2008", b * "timeSeries/" * h * "hours_2008" * eeCH, b * desFac_dir, b * temp_dir]
+inputDes_arr = [b * "basis", b * "gridEU/" * gridEU, b * "gridCH/" * gridCH, b * "eeCH/" * eeCH * alp, b * "timeSeries/8760hours_2008", b * "timeSeries/8760hours_2008" * eeCH]
+inputHeu_arr = [b * "basis", b * "gridEU/" * gridEU, b * "gridCH/" * gridCH, b * "eeCH/" * eeCH * alp, b * "timeSeries/" * h_heu * "hours_2008", b * "timeSeries/" * h_heu * "hours_2008" * eeCH, b * desFac_dir]
+inputMod_arr = [b * "basis", b * "gridEU/" * gridEU, b * "gridCH/" * gridCH, b * "eeCH/" * eeCH * alp, b * "timeSeries/" * h * "hours_2008", b * "timeSeries/" * h * "hours_2008" * eeCH, b * desFac_dir, b * temp_dir]
 
 resultDir_str = b * "results"
 

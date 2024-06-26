@@ -134,3 +134,6 @@ wind,onshore,onshore_b,,,electricity,,,mature,none,4,,yes
 wind,onshore,onshore_c,,,electricity,,,mature,none,4,,yes
 powerToX,,gasStorage,,,,synthGas,synthGas,stock,decomm,,,
 powerToX,,avaAndNaviTech,,refinedOil,avaAndNavi,,,unrestricted,none,,,
+alpinePV,,alpinePV_BE,,,electricity,,,mature,none,,,
+alpinePV,,alpinePV_GR,,,electricity,,,mature,none,,,
+alpinePV,,alpinePV_VS,,,electricity,,,mature,none,,,
