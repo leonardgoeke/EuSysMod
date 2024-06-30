@@ -22,6 +22,7 @@ wrkCnt = par_df[id_int,:workerCnt]
 rngVio = par_df[id_int,:rngVio]
 trust = par_df[id_int,:trust]
 accuracy = par_df[id_int,:accuracy]
+dnsThrs = par_df[id_int,:dnsThrs]
 
 emFac = par_df[id_int,:emFac]
 rng = par_df[id_int,:range]
@@ -55,7 +56,7 @@ elseif accuracy == 3
 end
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
-algSetup_obj = algSetup(0.005, 20, (bal = false, st = false), 10, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = inAcc_sym, crs = false))
+algSetup_obj = algSetup(0.005, 20, (bal = false, st = false), 10, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = inAcc_sym, crs = false), (dbInf = true, numFoc = 3, dnsThrs = dnsThrs))
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 

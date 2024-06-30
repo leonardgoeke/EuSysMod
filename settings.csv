@@ -1,5 +1,8 @@
-h,spatialScope,scr,emission,foresight,workerCnt,rngVio,emFac,range,trust,accuracy
-96,5Ctr,2scrFuture,det,0,2,0,0,0,0,0
-4368,allCtr,2scrFuture,det,0,2,0,0,0,0,0
-4368,allCtr,2scrFuture,det,3,8,0,0,0,0,0
-4368,allCtr,2scrFuture,stoch,3,8,0,0,0,0,0
+h,spatialScope,scr,emission,foresight,workerCnt,rngVio,emFac,range,trust,accuracy,dnsThrs
+96,allCtr,2scrFuture,det,3,2,0,0,0,0,0,2000
+4368,allCtr,2scrFuture,det,0,2,0,0,0,0,0,200
+4368,allCtr,2scrFuture,det,3,8,0,0,0,0,0,200
+4368,allCtr,2scrFuture,stoch,3,8,0,0,0,0,0,200
+<,allCtr,2scrFuture,det,0,2,0,0,0,0,0,2000
+4368,allCtr,2scrFuture,det,3,8,0,0,0,0,0,2000
+4368,allCtr,2scrFuture,stoch,3,8,0,0,0,0,0,2000
