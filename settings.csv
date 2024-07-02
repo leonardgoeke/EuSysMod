@@ -3,6 +3,9 @@ h,spatialScope,scr,emission,foresight,workerCnt,rngVio,emFac,range,trust,accurac
 4368,allCtr,2scrFuture,det,0,2,0,0,0,0,0,200
 4368,allCtr,2scrFuture,det,3,8,0,0,0,0,0,200
 4368,allCtr,2scrFuture,stoch,3,8,0,0,0,0,0,200
-<,allCtr,2scrFuture,det,0,2,0,0,0,0,0,2000
+4368,allCtr,2scrFuture,det,0,2,0,0,0,0,0,2000
 4368,allCtr,2scrFuture,det,3,8,0,0,0,0,0,2000
 4368,allCtr,2scrFuture,stoch,3,8,0,0,0,0,0,2000
+4368,allCtr,2scrFuture,det,0,2,5,0,0,0,0,2000
+4368,allCtr,2scrFuture,det,3,8,5,0,0,0,0,2000
+4368,allCtr,2scrFuture,stoch,3,8,5,0,0,0,0,2000

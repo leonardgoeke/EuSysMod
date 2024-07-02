@@ -95,7 +95,7 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 #region # * options for problem
 
 # ! general problem settings
-name_str = "c2e_" * h * "_" * spa * "_" * scr * "_1_" * string(rngVio) * "_" * string(frsLvl) * "frs" * "_" * string(trust) * "trust_" * string(accuracy) * "acc_" * string(emFac) * "emFac_" * string(rng) * "rng_" * emission
+name_str = "c2e_" * h * "_" * spa * "_" * scr * "_1_" * string(rngVio) * "_" * string(frsLvl) * "frs" * "_" * string(trust) * "trust_" * string(accuracy) * "acc_" * string(emFac) * "emFac_" * string(dnsThrs) * "dnsThrs_" * string(rng) * "rng_" * emission
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
 info_ntup = (name = name_str, frsLvl = frsLvl, supTsLvl = 2, repTsLvl = 4, shortExp = 10) 
 
