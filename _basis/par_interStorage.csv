@@ -1,7 +1,5 @@
-technology_3,carrier_1,parameter,value
-,,repWorstCase,2
-h2StorageCavern_inter,,costStStartLvl,57.5
-gasStorage_inter,,costStStartLvl,103.9
-oilStorage_inter,,costStStartLvl,106.8
-pumpedStorageOpen,waterPhs,enCont,0
-reservoir,waterRes,enCont,0
+technology_3,parameter,value
+,repWorstCase,2
+h2StorageCavern_inter,costStStartLvl,57.5
+gasStorage_inter,costStStartLvl,103.9
+oilStorage_inter,costStStartLvl,106.8

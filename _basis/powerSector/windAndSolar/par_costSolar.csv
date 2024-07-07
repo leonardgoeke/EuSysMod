@@ -8,4 +8,3 @@ solar,openspace,pvOpenspace,2040,lifeConv,18,
 solar,rooftopResi,pvResi,2040,costExpConv,693.7872828,
 solar,rooftopResi,pvResi,2040,costOprConv,9.5,
 solar,rooftopResi,pvResi,2040,lifeConv,40,
-solar,openspace,cspOpenspace,,effConv,0.753,"based on NREL (2013), Land-Use Requirements for Solar Power Plants in the United States"
