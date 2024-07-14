@@ -23,3 +23,4 @@ processHeat_low,,costMissCapa,50000
 processHeat_medium,,costMissCapa,50000
 processHeat_high,,costMissCapa,50000
 ,,emissionInf,10000
+,,costStLvlLss,10000
