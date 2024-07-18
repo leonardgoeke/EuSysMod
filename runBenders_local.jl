@@ -1,6 +1,6 @@
 using Gurobi, AnyMOD, CSV, YAML
 
-dir_str = "C:/Users/pacop/Desktop/git/EuSysMOD/"
+dir_str = "C:/Git/EuSysMOD/"
 
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
@@ -30,7 +30,7 @@ rng = par_df[id_int,:range]
 # ! options for general algorithm
 
 if rngVio == 0
-	rngVio_ntup = (stab = 1e4, cut = 1e6, fix = 1e6)
+	rngVio_ntup = (stab = 1e4, cut = 1e2, fix = 1e2)
 elseif rngVio == 1
 	rngVio_ntup = (stab = 1e2, cut = 1e1, fix = 1e2)
 elseif rngVio == 2
@@ -192,6 +192,15 @@ while true
 		else # non-distributed case
 			cutData_dic[s], timeSub_dic[s], lss_dic[s], numFoc_dic[s] = runSub(benders_obj.sub[s], copy(resData_obj), benders_obj.algOpt.rngVio.fix, :barrier, acc_fl)
 		end
+
+		for y in (:oilStorage, :gasStorage)
+			if y in keys(cutData_dic[s].capa[:tech])
+				println(y)
+				println(keys(cutData_dic[s].capa[:tech][y]))
+			end
+		end
+		
+
 	end
 
 	# top-problem without stabilization
@@ -234,4 +243,31 @@ writeBendersResults!(benders_obj, runSubDist, res_ntup)
 
 #endregion
 
-benders_obj.sub[(3,2)].parts.tech[:gasStorage].cns
+
+# ! kein fix für storage level h2tank? -> ist korrekt im case mit perfect foresight
+benders_obj.top.parts.tech[:oilStorage].var
+benders_obj.top.parts.tech[:gasStorage].var
+
+
+benders_obj.top.parts.tech[:lithiumBattery].cns
+
+benders_obj.sub[(3,1)].parts.tech[:oilStorage].cns
+benders_obj.sub[(3,1)].parts.tech[:gasStorage].cns
+
+benders_obj.stab.var[:capa][:tech][:oilStorage]
+
+benders_obj.cuts[1][2].capa[:tech][:lithiumBattery]
+benders_obj.cuts[1][2].capa[:tech][:oilStorage]
+benders_obj.cuts[1][2].capa[:tech][:gasStorage]
+
+
+resData_obj.capa[:tech][:gasStorage]
+
+benders_obj.stab.var[:capa][:tech][:lithiumBattery]
+
+# expansion variable in cut ding????
+
+cutData_dic[(3,1)].capa[:tech][:oilStorage]
+
+# warum nicht mehr stuff in resData für gas storage (size ist ja free!)
+# (woher kommt exp in cut after initilizatin)
