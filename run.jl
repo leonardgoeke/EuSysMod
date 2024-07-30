@@ -1,6 +1,6 @@
 using AnyMOD, Gurobi, CSV, Statistics
 
-b = "C:/Git/EuSysMOD/"
+b = "C:/Users/pacop/Desktop/git/EuSysMOD/"
 
 par_df = CSV.read(b * "settings.csv", DataFrame)
 
@@ -47,3 +47,39 @@ reportResults(:exchange, anyM, addObjName = true)
 reportTimeSeries(:electricity, anyM)
 
 #endregion
+
+# ! write solution into benders object as best
+
+# get results and write to object
+resData_obj = resData()
+resData_obj.capa, resData_obj.stLvl, resData_obj.lim = writeResult(anyM, [:capa, :mustCapa, :stLvl, :lim]; rmvFix = true, fltSt = false)
+benders_obj.itr.best.capa, benders_obj.itr.best.stLvl, benders_obj.itr.best.lim = map(x -> getfield(resData_obj,x), [:capa, :stLvl, :lim])
+
+# manually compute emissions
+em_df = getAllVariables(:emission, anyM)
+em_df[!,:value] = value.(em_df[!,:var])
+em_df[!,:sub] .= map(x -> (getAncestors(x.Ts_dis, anyM.sets[:Ts], :int, 3)[end], x.scr), eachrow(em_df))
+em_df = combine(x -> (sub = x.sub[1],value = sum(x.value),), groupby(em_df, :sub))
+
+foreach(x -> em_df[!,x] .= 0, [:Ts_expSup, :Ts_dis, :R_dis, :C, :Te, :Exc, :M, :scr, :id ])
+benders_obj.itr.best.lim[:emissionBendersCom] = em_df
+
+# filter non-relevant storage
+for x in keys(benders_obj.itr.best.stLvl)
+    if anyM.parts.tech[x].stCyc > 2
+        delete!(benders_obj.itr.best.stLvl, x)
+    end
+end
+
+
+
+# ! test writing of heuristc solution
+
+heu_m = anyM
+
+# write results to benders object
+heuData_obj = resData()
+heuData_obj.objVal = sum(map(z -> sum(value.(heu_m.parts.cost.var[z][!, :var])), collect(filter(x -> any(occursin.(["costExp", "costOpr", "costMissCapa", "costRetro"], string(x))), keys(heu_m.parts.cost.var)))))
+heuData_obj.capa, ~ = writeResult(heu_m, [:capa, :exp, :mustCapa, :mustExp], fltSt = true)
+
+heuData_obj.capa[:tech][:onshore_a][:capaConv]

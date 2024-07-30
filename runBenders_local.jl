@@ -1,6 +1,6 @@
 using Gurobi, AnyMOD, CSV, YAML
 
-dir_str = "C:/Git/EuSysMOD/"
+dir_str = "C:/Users/pacop/Desktop/git/EuSysMOD/"
 
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
@@ -30,7 +30,7 @@ rng = par_df[id_int,:range]
 # ! options for general algorithm
 
 if rngVio == 0
-	rngVio_ntup = (stab = 1e4, cut = 1e2, fix = 1e2)
+	rngVio_ntup = (stab = 1e3, cut = 1e2, fix = 1e4)
 elseif rngVio == 1
 	rngVio_ntup = (stab = 1e2, cut = 1e1, fix = 1e2)
 elseif rngVio == 2
@@ -54,14 +54,14 @@ elseif accuracy == 3
 end
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
-algSetup_obj = algSetup(0.005, 20, (bal = false, st = false), 10, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = inAcc_sym, crs = false), (dbInf = true, numFoc = 3, dnsThrs = dnsThrs))
+algSetup_obj = algSetup(0.005, 20, (bal = false, st = true), 100, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = inAcc_sym, crs = false), (dbInf = true, numFoc = 3, dnsThrs = dnsThrs))
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
 
 if trust == 0
-	methKey_str = "qtr_5"
+	methKey_str = "qtr_1"
 elseif trust == 1
 	methKey_str = "qtr_4"
 elseif trust == 2
@@ -78,7 +78,7 @@ else
 	meth_tup = tuple()
 end
 
-iniStab_ntup = (setup = :none, det = false) # options to initialize stabilization, :none for first input will skip stabilization, other values control input folders, second input determines, if heuristic model is solved stochastically or not
+iniStab_ntup = (setup = :reduced, det = true) # options to initialize stabilization, :none for first input will skip stabilization, other values control input folders, second input determines, if heuristic model is solved stochastically or not
 
 stabSetup_obj = stabSetup(meth_tup, 0.0, iniStab_ntup)
 
@@ -110,26 +110,7 @@ end
 inputFolder_ntup = (in = inDir_arr, heu = heuInDir_arr, results = dir_str * "results")
 
 # ! scaling settings
-
-if emFac == 0
-	topFac = 1e3
-	subFac = 1e1
-elseif emFac == 1
-	topFac = 1e2
-	subFac = 1e0
-elseif emFac == 2
-	topFac = 1e4
-	subFac = 1e2
-elseif emFac == 3
-	topFac = 1e0
-	subFac = 1e0
-elseif emFac == 4
-	topFac = 1e0
-	subFac = 1e2
-end
-
 scale_dic = Dict{Symbol,NamedTuple}()
-
 
 if rng == 0
 	scale_dic[:rng] = (mat = (1e-2,1e6), rhs = (1e-2,1e2))
@@ -137,9 +118,9 @@ elseif rng == 1
 	scale_dic[:rng] = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
 end
 
-scale_dic[:facHeu] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e3, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
-scale_dic[:facTop] = (capa = 1e2, capaStSize = 1e1, insCapa = 1e2, dispConv = topFac, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
-scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = subFac, dispSt = 1e3, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
+scale_dic[:facHeu] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e2, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
+scale_dic[:facTop] = (capa = 1e2, capaStSize = 1e3, insCapa = 1e2, dispConv = 1e1, dispSt = 1e2, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
+scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e2, dispSt = 1e3, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
 
 
 #endregion
@@ -161,20 +142,18 @@ else
 	getComVarDist = x -> nothing
 end
 # create benders object
-benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, nearOptSetup_obj)
+benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, nearOptSetup_obj);
 
 #endregion
 
 #region # * iteration algorithm
-
 while true
 
 	produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Started iteration $(benders_obj.itr.cnt.i)", testErr = false, printErr = false)
 
 	#region # * solve top-problem and (start) sub-problems
-
 	str_time = now()
-	resData_obj, stabVar_obj = @suppress runTop(benders_obj); 
+	resData_obj, stabVar_obj =  @suppress runTop(benders_obj);   
 	elpTop_time = now() - str_time
 
 	# start solving sub-problems
@@ -192,15 +171,6 @@ while true
 		else # non-distributed case
 			cutData_dic[s], timeSub_dic[s], lss_dic[s], numFoc_dic[s] = runSub(benders_obj.sub[s], copy(resData_obj), benders_obj.algOpt.rngVio.fix, :barrier, acc_fl)
 		end
-
-		for y in (:oilStorage, :gasStorage)
-			if y in keys(cutData_dic[s].capa[:tech])
-				println(y)
-				println(keys(cutData_dic[s].capa[:tech][y]))
-			end
-		end
-		
-
 	end
 
 	# top-problem without stabilization
@@ -228,46 +198,13 @@ while true
 	rtn_boo = checkConvergence(benders_obj, lss_dic)
 	
 	#endregion
-
-	if rtn_boo break end
 	benders_obj.itr.cnt.i = benders_obj.itr.cnt.i + 1
-
+	if rtn_boo break end
+	
 end
-
-#endregion
-
 #region # * write results
 
 produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Write results", testErr = false, printErr = false)
 writeBendersResults!(benders_obj, runSubDist, res_ntup)
 
 #endregion
-
-
-# ! kein fix für storage level h2tank? -> ist korrekt im case mit perfect foresight
-benders_obj.top.parts.tech[:oilStorage].var
-benders_obj.top.parts.tech[:gasStorage].var
-
-
-benders_obj.top.parts.tech[:lithiumBattery].cns
-
-benders_obj.sub[(3,1)].parts.tech[:oilStorage].cns
-benders_obj.sub[(3,1)].parts.tech[:gasStorage].cns
-
-benders_obj.stab.var[:capa][:tech][:oilStorage]
-
-benders_obj.cuts[1][2].capa[:tech][:lithiumBattery]
-benders_obj.cuts[1][2].capa[:tech][:oilStorage]
-benders_obj.cuts[1][2].capa[:tech][:gasStorage]
-
-
-resData_obj.capa[:tech][:gasStorage]
-
-benders_obj.stab.var[:capa][:tech][:lithiumBattery]
-
-# expansion variable in cut ding????
-
-cutData_dic[(3,1)].capa[:tech][:oilStorage]
-
-# warum nicht mehr stuff in resData für gas storage (size ist ja free!)
-# (woher kommt exp in cut after initilizatin)

@@ -56,9 +56,9 @@ networkHeat,districtHeatSpace,districtHeatSpace_c,,districtHeat,spaceHeat,,,matu
 networkHeat,,eBoilerDh,,electricity,districtHeat,,,mature,none,,,,
 networkHeat,,gasBoilerDh,,naturalGas,districtHeat,,,mature,none,,,,
 networkHeat,,h2BoilerDh,,h2,districtHeat,,,mature,none,,,,
-networkHeat,,largeWaterTank,,,,districtHeat,districtHeat,mature,none,,,,2
+networkHeat,,largeWaterTank,,,,districtHeat,districtHeat,mature,none,,,,3
 networkHeat,,nonSolidBioBoilerDh,,nonSolidBiomass,districtHeat,,,mature,none,,,,
-networkHeat,,oilBoilerDh,,refinedOil,districtHeat,,,mature,none,,,,
+networkHeat,,oilBoilerDh,,refinedOil,districtHeat,,,stock,none,,,,
 networkHeat,,pitThermalStorage,,,,districtHeat,districtHeat,mature,none,,,,2
 networkHeat,,solidBioBoilerDh,,solidBiomass,districtHeat,,,mature,none,,,,
 ocgt,,ocgtGas,,naturalGas,electricity,,,mature,none,,,,
@@ -70,7 +70,7 @@ ocgt,,ocgtH2Chp,,h2,electricity; districtHeat,,,mature,none,,,,
 powerToX,electrolysis,alkElectrolysis,,electricity,h2; districtHeat,,,mature,none,,,,
 powerToX,electrolysis,pemElectrolysis,,electricity,h2; districtHeat,,,mature,none,,,,
 powerToX,electrolysis,soElectrolysis,,electricity; processHeat_high,h2,,,emerging,none,,,,
-powerToX,h2Storage,h2StorageCavern,,,,h2,h2,mature,none,,,,2
+powerToX,h2Storage,h2StorageCavern,,,,h2,h2,mature,none,,,,inter
 powerToX,h2Storage,h2StorageTank,,,,h2,h2,mature,none,,,,2
 powerToX,synthFuel,bioMethanation,,rawBiogas; h2,naturalGas,,,mature,none,,,,
 powerToX,synthFuel,methanePyrolysis,,naturalGas; electricity,h2; processHeat_high,,,mature,none,,,,
@@ -119,6 +119,6 @@ importFuel,,impGas,,,naturalGas,,,mature,none,,,,
 importFuel,,impOil,,,crudeOil,,,mature,none,,,,
 importFuel,,methaneToGas,base; flex,methane,naturalGas,,,unrestricted,none,,,,
 importFuel,,methanolToOil,base; flex,methanol,crudeOil,,,unrestricted,none,,,,
-stock,power,reservoir,,,,,electricity,stock,none,,ineq,,2
-powerToX,,gasStorage,,,,naturalGas,naturalGas,mature,none,,,,2
-powerToX,,oilStorage,,,,refinedOil,refinedOil,mature,none,,,,2
+stock,power,reservoir,,,,,electricity,stock,none,,ineq,,inter
+powerToX,,gasStorage,,,,naturalGas,naturalGas,mature,none,,,,inter
+powerToX,,oilStorage,,,,refinedOil,refinedOil,mature,none,,,,inter
