@@ -5,7 +5,7 @@ dir_str = "C:/Git/EuSysMOD/"
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 1 # currently 1 for future and 2 for historic
+    id_int = 2 # currently 1 for future and 2 for historic
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
