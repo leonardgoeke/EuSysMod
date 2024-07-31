@@ -22,7 +22,7 @@ qtr_1:
   qtr:
     start: 1e-0
     low: 1e-6 
-    thr: 5e-4 
+    thr: 5e-4
     fac: 2.0
 qtr_2:
   qtr:

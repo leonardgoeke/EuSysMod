@@ -56,9 +56,9 @@ networkHeat,districtHeatSpace,districtHeatSpace_c,,districtHeat,spaceHeat,,,matu
 networkHeat,,eBoilerDh,,electricity,districtHeat,,,mature,none,,,,
 networkHeat,,gasBoilerDh,,naturalGas,districtHeat,,,mature,none,,,,
 networkHeat,,h2BoilerDh,,h2,districtHeat,,,mature,none,,,,
-networkHeat,,largeWaterTank,,,,districtHeat,districtHeat,mature,none,,,,2
+networkHeat,,largeWaterTank,,,,districtHeat,districtHeat,mature,none,,,,3
 networkHeat,,nonSolidBioBoilerDh,,nonSolidBiomass,districtHeat,,,mature,none,,,,
-networkHeat,,oilBoilerDh,,refinedOil,districtHeat,,,mature,none,,,,
+networkHeat,,oilBoilerDh,,refinedOil,districtHeat,,,stock,none,,,,
 networkHeat,,pitThermalStorage,,,,districtHeat,districtHeat,mature,none,,,,2
 networkHeat,,solidBioBoilerDh,,solidBiomass,districtHeat,,,mature,none,,,,
 ocgt,,ocgtGas,,naturalGas,electricity,,,mature,none,,,,

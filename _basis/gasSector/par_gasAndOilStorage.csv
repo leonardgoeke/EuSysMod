@@ -7,3 +7,7 @@ gasStorage,costExpStSize,0.2
 gasStorage,costExpStIn,29
 gasStorage,stOutToStInCapaFix,3
 gasStorage,effStIn,0.99
+oilStorage,effStInterIn,0.99
+oilStorage,effStInterOut,0.99
+gasStorage,effStInterIn,0.99
+gasStorage,effStInterOut,0.99

@@ -66,19 +66,38 @@ reportTimeSeries(:electricity, anyM)
 
 #endregion
 
-#region # * write capacity as fixed parameters 
+# ! write solution into benders object as best
 
-res_dic, ~, ~ = writeResult(anyM, [:capa, :exp, :mustCapa, :mustExp], fltSt = false)
+# get results and write to object
+resData_obj = resData()
+resData_obj.capa, resData_obj.stLvl, resData_obj.lim = writeResult(anyM, [:capa, :mustCapa, :stLvl, :lim]; rmvFix = true, fltSt = false)
+benders_obj.itr.best.capa, benders_obj.itr.best.stLvl, benders_obj.itr.best.lim = map(x -> getfield(resData_obj,x), [:capa, :stLvl, :lim])
 
-coefRng_tup = (mat = (1e-2, 1e4), rhs = (1e0, 1e5))
-scaFac_tup = (capa = 1e0, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e3, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
-modOpt_tup = (inputDir = filter(x -> !occursin("timeSeries",x), inputMod_arr), resultDir = resultDir_str, suffix = obj_str, supTsLvl = 2, shortExp = 5, coefRng = coefRng_tup, scaFac = scaFac_tup)
+# manually compute emissions
+em_df = getAllVariables(:emission, anyM)
+em_df[!,:value] = value.(em_df[!,:var])
+em_df[!,:sub] .= map(x -> (getAncestors(x.Ts_dis, anyM.sets[:Ts], :int, 3)[end], x.scr), eachrow(em_df))
+em_df = combine(x -> (sub = x.sub[1],value = sum(x.value),), groupby(em_df, :sub))
 
-feasFix_dic = getFeasResult(modOpt_tup, res_dic, Dict{Symbol,Dict{Symbol,Dict{Symbol,DataFrame}}}() , t_int, 0.001, Gurobi.Optimizer, roundDown = 5)[1]
+foreach(x -> em_df[!,x] .= 0, [:Ts_expSup, :Ts_dis, :R_dis, :C, :Te, :Exc, :M, :scr, :id ])
+benders_obj.itr.best.lim[:emissionBendersCom] = em_df
+
+# filter non-relevant storage
+for x in keys(benders_obj.itr.best.stLvl)
+    if anyM.parts.tech[x].stCyc > 2
+        delete!(benders_obj.itr.best.stLvl, x)
+    end
+end
 
 
-writeFixToFiles(res_dic, feasFix_dic, resultDir_str * "/capacityFix_" * obj_str, anyM)
 
-#endregion
+# ! test writing of heuristc solution
 
-# TODO only write capa -> new script to run in monte carlo way
+heu_m = anyM
+
+# write results to benders object
+heuData_obj = resData()
+heuData_obj.objVal = sum(map(z -> sum(value.(heu_m.parts.cost.var[z][!, :var])), collect(filter(x -> any(occursin.(["costExp", "costOpr", "costMissCapa", "costRetro"], string(x))), keys(heu_m.parts.cost.var)))))
+heuData_obj.capa, ~ = writeResult(heu_m, [:capa, :exp, :mustCapa, :mustExp], fltSt = true)
+
+heuData_obj.capa[:tech][:onshore_a][:capaConv]
