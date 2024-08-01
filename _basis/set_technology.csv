@@ -1,6 +1,6 @@
 technology_1,technology_2,technology_3,mode,carrier_conversion_in,carrier_conversion_out,carrier_stored_in,carrier_stored_out,technology_type,technology_decomm,region_expansion,technology_stBalance,region_disaggregate,timestep_cyclic
 battery,,lithiumBattery,,,,electricity,electricity,mature,none,,,,3
-battery,,redoxBattery,,,,electricity,electricity,mature,none,,,,3
+battery,,redoxBattery,,,,electricity,electricity,stock,none,,,,3
 bioConversion,,biogasPlant,,nonSolidBiomass,rawBiogas,,,mature,none,,,,
 bioConversion,,biogasUpgrading,,rawBiogas,naturalGas,,,mature,none,,,,
 bioConversion,,gasification,,solidBiomass,naturalGas; districtHeat,,,mature,none,,,,
@@ -11,10 +11,8 @@ bioConversion,,nonSolidBioPlantProLow,onlyElec; onlyHeat,nonSolidBiomass,electri
 bioConversion,,solidBioPlantDh,onlyElec; onlyHeat,solidBiomass,electricity; districtHeat,,,mature,none,,,,
 bioConversion,,solidBioPlantProLow,onlyElec; onlyHeat,solidBiomass,electricity; processHeat_low,,,mature,none,,,,
 ccgt,ccgtGas,ccgtGasBackDh,,naturalGas,electricity; districtHeat,,,mature,none,,,,
-ccgt,ccgtGas,ccgtGasBackDhH2Rdy,,naturalGas,electricity; districtHeat,,,mature,none,,,,
 ccgt,ccgtGas,ccgtGasBackProLow,,naturalGas,electricity; processHeat_low,,,mature,none,,,,
 ccgt,ccgtGas,ccgtGasExtract,onlyElec; elecAndHeat ,naturalGas,electricity; districtHeat,,,mature,none,,,,
-ccgt,ccgtGas,ccgtGasExtractH2Rdy,onlyElec; elecAndHeat ,naturalGas,electricity; districtHeat,,,mature,none,,,,
 ccgt,ccgtH2,ccgtH2BackDh,,h2,electricity; districtHeat,,,mature,none,,,,
 ccgt,ccgtH2,ccgtH2BackProLow,,h2,electricity; processHeat_low,,,mature,none,,,,
 ccgt,ccgtH2,ccgtH2Extract,onlyElec; elecAndHeat ,h2,electricity; districtHeat,,,mature,none,,,,
@@ -58,13 +56,10 @@ networkHeat,,gasBoilerDh,,naturalGas,districtHeat,,,mature,none,,,,
 networkHeat,,h2BoilerDh,,h2,districtHeat,,,mature,none,,,,
 networkHeat,,largeWaterTank,,,,districtHeat,districtHeat,mature,none,,,,3
 networkHeat,,nonSolidBioBoilerDh,,nonSolidBiomass,districtHeat,,,mature,none,,,,
-networkHeat,,oilBoilerDh,,refinedOil,districtHeat,,,stock,none,,,,
 networkHeat,,pitThermalStorage,,,,districtHeat,districtHeat,mature,none,,,,2
 networkHeat,,solidBioBoilerDh,,solidBiomass,districtHeat,,,mature,none,,,,
 ocgt,,ocgtGas,,naturalGas,electricity,,,mature,none,,,,
 ocgt,,ocgtGasChp,,naturalGas,electricity; districtHeat,,,mature,none,,,,
-ocgt,,ocgtGasChpH2Rdy,,naturalGas,electricity; districtHeat,,,mature,none,,,,
-ocgt,,ocgtGasH2Rdy,,naturalGas,electricity,,,mature,none,,,,
 ocgt,,ocgtH2,,h2,electricity,,,mature,none,,,,
 ocgt,,ocgtH2Chp,,h2,electricity; districtHeat,,,mature,none,,,,
 powerToX,electrolysis,alkElectrolysis,,electricity,h2; districtHeat,,,mature,none,,,,
