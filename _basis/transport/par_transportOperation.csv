@@ -1,8 +1,10 @@
 technology_3,parameter,value
-bevPsngRoadPrvt,costExpConv,5270.466667
-bevPsngRoadPub,costExpConv,2200
-bevFrtRoadLight,costExpConv,3333.633333
-bevFrtRoadHeavy,costExpConv,1028.593333
+bevPsngRoadPrvt,desFac,3.659395134
+bevPsngRoadPub,desFac,4.783025634
+bevFrtRoadLight,desFac,0.228662732
+bevFrtRoadHeavy,desFac,5.682312647
+eFrtRail,effConv,42.126
+ePsngRail,effConv,18.512
 bevPsngRoadPrvt,effConv,9.5875
 bevPsngRoadPub,effConv,9.642666667
 bevFrtRoadLight,effConv,0.793333333
@@ -35,7 +37,3 @@ bevPsngRoadPrvt,useFix,0
 bevPsngRoadPub,useFix,0
 bevFrtRoadLight,useFix,0
 bevFrtRoadHeavy,useFix,0
-bevPsngRoadPrvt,desFac,3.659395134
-bevPsngRoadPub,desFac,4.783025634
-bevFrtRoadLight,desFac,0.228662732
-bevFrtRoadHeavy,desFac,5.682312647
