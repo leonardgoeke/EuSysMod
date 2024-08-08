@@ -20,7 +20,7 @@ box_4:
       minUp: 0.5
 qtr_1:
   qtr:
-    start: 1e-0
+    start: 0.5
     low: 1e-6 
     thr: 5e-4
     fac: 2.0

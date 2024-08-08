@@ -1,11 +1,11 @@
 using Gurobi, AnyMOD, CSV, YAML
 
-dir_str = "C:/Users/pacop/Desktop/git/EuSysMOD/"
+dir_str = "C:/Git/EuSysMod/"
 
-par_df = CSV.read(dir_str * "settings.csv", DataFrame)
+par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 2 # currently 1 for future and 2 for historic
+    id_int = 3
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -14,47 +14,42 @@ end
 
 space = string(par_df[id_int,:space]) # spatial resolution 
 time = string(par_df[id_int,:time]) # temporal resolution
+res = string(par_df[id_int,:resolution]) # resolution
 scenario = string(par_df[id_int,:scenario]) # scenario case
 
+# extract benders settings
+
 wrkCnt = par_df[id_int,:workerCnt]
-rngVio = par_df[id_int,:rngVio]
-trust = par_df[id_int,:trust]
 accuracy = par_df[id_int,:accuracy]
+trust = par_df[id_int,:trust]
 dnsThrs = par_df[id_int,:dnsThrs]
 
-emFac = par_df[id_int,:emFac]
-rng = par_df[id_int,:range]
+name_str = space * "_" * time * "_" * res * "_" * scenario * "_" * string(trust) * "trust_" * string(accuracy) * "acc_" * string(dnsThrs) * "dnsThrs_"
+
+# create scenario array and create temp folder with file
+if occursin("-", scenario)
+    scr_arr = split(scenario, "-") |> (x -> string.(parse.(Int, x[1]):parse(Int, x[2])))
+else
+    scr_arr = split(scenario, ",") |> x -> string.(x)
+end
+
+scrDir_str = dir_str * "temp/" * name_str
+if isdir(scrDir_str) rm(scrDir_str, recursive = true) end
+mkdir(scrDir_str)
+CSV.write(scrDir_str * "/set_scenario.csv", DataFrame(scenario = "scr" .* scr_arr))
+
 
 #region # * options for algorithm
 
 # ! options for general algorithm
 
-if rngVio == 0
-	rngVio_ntup = (stab = 1e3, cut = 1e2, fix = 1e4)
-elseif rngVio == 1
-	rngVio_ntup = (stab = 1e2, cut = 1e1, fix = 1e2)
-elseif rngVio == 2
-	rngVio_ntup = (stab = 1e4, cut = 1e1, fix = 1e3)
-elseif rngVio == 3
-	rngVio_ntup = (stab = 1e4, cut = 1e1, fix = 1e4)
-elseif rngVio == 4
-	rngVio_ntup = (stab = 1e4, cut = 1e1, fix = 1e2)
-elseif rngVio == 5
-	rngVio_ntup = (stab = 1e4, cut = 1e3, fix = 1e2)
-end
-
 if accuracy == 0
-	inAcc_sym = :none
-elseif accuracy == 1
-	inAcc_sym = :lin
-elseif accuracy == 2
-	inAcc_sym = :exp
-elseif accuracy == 3
-	inAcc_sym = :log
+	rngVio_ntup = (stab = 1e3, cut = 1e2, fix = 1e4)
+	rngTar_tup = (mat = (1e-2,1e6), rhs = (1e-2,1e2))
 end
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
-algSetup_obj = algSetup(0.005, 20, (bal = false, st = true), 100, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = inAcc_sym, crs = false), (dbInf = true, numFoc = 3, dnsThrs = dnsThrs))
+algSetup_obj = algSetup(0.005, 20, (bal = false, st = true), 100, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false), (dbInf = true, numFoc = 3, dnsThrs = dnsThrs))
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
@@ -62,12 +57,6 @@ res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :
 
 if trust == 0
 	methKey_str = "qtr_1"
-elseif trust == 1
-	methKey_str = "qtr_4"
-elseif trust == 2
-	methKey_str = "qtr_8"
-elseif trust == 3
-	methKey_str = "box_3"
 end
 
 # write tuple for stabilization
@@ -93,13 +82,14 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 #region # * options for problem
 
 # ! general problem settings
-name_str = space * "_" * time * "_" * scenario * "_testing" * "_" * string(trust) * "trust_" * string(accuracy) * "acc_" * string(emFac) * "emFac_" * string(dnsThrs) * "dnsThrs_" * string(rng) * "rng_"
+
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
 info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 3, shortExp = 5) 
 
 # ! input folders
-inDir_arr = [dir_str * "_basis", dir_str * "timeSeries/" * space * "_" * time * "_" * scenario]
-
+inDir_arr = [dir_str * "_basis", dir_str * "resolution/" * res * "_" * space, scrDir_str, dir_str * "timeSeries/" * space * "_" * time * "/general"]
+foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * space * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
+foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * space * "_" * time * "/scr" * x), scr_arr)
 
 if stabSetup_obj.ini.setup in (:none,:full) 
 	heuInDir_arr = inDir_arr
@@ -112,12 +102,8 @@ inputFolder_ntup = (in = inDir_arr, heu = heuInDir_arr, results = dir_str * "res
 # ! scaling settings
 scale_dic = Dict{Symbol,NamedTuple}()
 
-if rng == 0
-	scale_dic[:rng] = (mat = (1e-2,1e6), rhs = (1e-2,1e2))
-elseif rng == 1
-	scale_dic[:rng] = (mat = (1e-3,1e5), rhs = (1e-1,1e5))
-end
 
+scale_dic[:rng] = rngTar_tup
 scale_dic[:facHeu] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e2, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
 scale_dic[:facTop] = (capa = 1e2, capaStSize = 1e3, insCapa = 1e2, dispConv = 1e1, dispSt = 1e2, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
 scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e2, dispSt = 1e3, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
@@ -153,7 +139,7 @@ while true
 
 	#region # * solve top-problem and (start) sub-problems
 	str_time = now()
-	resData_obj, stabVar_obj =  @suppress runTop(benders_obj);   
+	resData_obj, stabVar_obj = @suppress runTop(benders_obj);
 	elpTop_time = now() - str_time
 
 	# start solving sub-problems
@@ -208,3 +194,4 @@ produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1,
 writeBendersResults!(benders_obj, runSubDist, res_ntup)
 
 #endregion
+
