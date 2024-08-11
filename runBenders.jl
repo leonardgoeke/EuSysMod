@@ -142,7 +142,7 @@ while true
 
 	#region # * solve top-problem and (start) sub-problems
 	str_time = now()
-	resData_obj, stabVar_obj =  @suppress runTop(benders_obj);   
+	resData_obj, stabVar_obj = runTop(benders_obj);   
 	elpTop_time = now() - str_time
 
 	# start solving sub-problems
