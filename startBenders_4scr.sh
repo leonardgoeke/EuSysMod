@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --array=2
+#SBATCH --array=4,6,8
 #SBATCH --time=120:00:00
 #SBATCH --job-name=benders_%j
 #SBATCH --output=results/benders_%j.out

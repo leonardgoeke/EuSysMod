@@ -49,7 +49,7 @@ if accuracy == 0
 end
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
-algSetup_obj = algSetup(0.005, 20, (bal = false, st = true), 10, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false), (dbInf = true, numFoc = 3, dnsThrs = dnsThrs))
+algSetup_obj = algSetup(0.005, 20, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false), (dbInf = true, numFoc = 3, dnsThrs = dnsThrs))
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
@@ -57,8 +57,11 @@ res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :
 
 if trust == 0
 	methKey_str = "qtr_1"
+elseif trust == 1
+	methKey_str = "lvl1_1"
+elseif trust == 2
+	methKey_str = "box_4"
 end
-
 # write tuple for stabilization
 stabMap_dic = YAML.load_file(dir_str * "stabMap.yaml")
 if methKey_str in keys(stabMap_dic)
@@ -89,7 +92,7 @@ info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 3, shortExp =
 # ! input folders
 inDir_arr = [dir_str * "_basis", dir_str * "resolution/" * res * "_" * space, scrDir_str, dir_str * "timeSeries/" * space * "_" * time * "/general"]
 foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * space * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
-foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * space * "_" * time * "/scr" * x), scr_arr)
+foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * space * "_" * time * "/scr" * x[1] * "/" * x[2]), Iterators.product(scr_arr,("ini1","ini2","ini3","ini4")))
 
 if stabSetup_obj.ini.setup in (:none,:full) 
 	heuInDir_arr = inDir_arr

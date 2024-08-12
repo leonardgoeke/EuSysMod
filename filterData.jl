@@ -30,7 +30,6 @@ for scr in scr_arr
 end
 
 # ! remove zeros in electricity demand
-
 for scr in scr_arr
 
     for frs in ("ini1","ini2","ini3","ini4")

@@ -1,11 +1,11 @@
 using Gurobi, AnyMOD, CSV, Statistics
 
-b = ""
+b = "C:/Git/EuSysMod/"
 
 par_df = CSV.read(b * "settings_benders.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 5
+    id_int = 1
     t_int = 4
 else
     id_int = parse(Int, ARGS[1])

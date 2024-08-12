@@ -1,6 +1,9 @@
 space,time,resolution,scenario,workerCnt,accuracy,trust,dnsThrs
-cluster,365d,daily,"1982,1983,1984,1985",16,0,0,2000
-cluster,96h,default,"1982,1983,1984,1985",16,0,0,2000
-cluster,365d,daily,"1982,1983",16,0,0,2000
-cluster,96h,default,"1982,1983",16,0,0,2000
-country,96h,default,"1982,1983",16,0,0,2000
+country,96h,default,"1982,1983",8,0,1,2000
+country,96h,default,"1982,1983,1984,1985",16,0,0,2000
+country,672h,default,"1982,1983",8,0,0,2000
+country,672h,default,"1982,1983,1984,1985",16,0,0,2000
+country,672h,default,"1982,1983",8,0,1,2000
+country,672h,default,"1982,1983,1984,1985",16,0,1,2000
+country,672h,default,"1982,1983",8,0,2,2000
+country,672h,default,"1982,1983,1984,1985",16,0,2,2000
