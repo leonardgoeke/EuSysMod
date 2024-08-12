@@ -1,7 +1,7 @@
 parameter,value
 rateDisc,0
-rateExpConv,0.05
-rateExpStIn,0.05
-rateExpStOut,0.05
-rateExpStSize,0.05
-rateExpExc,0.05
+rateExpConv,0.04
+rateExpStIn,0.04
+rateExpStOut,0.04
+rateExpStSize,0.04
+rateExpExc,0.04
