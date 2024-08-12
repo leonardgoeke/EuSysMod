@@ -77,7 +77,7 @@ powerToX,,sofc,,naturalGas,electricity; processHeat_high,,,mature,none,,,,
 solar,openspace,pvOpenspace,,,electricity,,,mature,none,4,,yes,
 solar,rooftopInd,pvInd,,,electricity,,,mature,none,4,,yes,
 solar,rooftopResi,pvResi,,,electricity,,,mature,none,4,,yes,
-solar,rooftopResi,solarThermalResi,,,spaceHeat,,,mature,none,4,,yes,
+solar,rooftopResi,solarThermalResi,,,spaceHeat,,,stock,none,4,,yes,
 stock,power,pumpedStorageClosed,,,,electricity,electricity,stock,none,,,,2
 stock,power,pumpedStorageOpen,,,,electricity,electricity,stock,none,,ineq,,2
 stock,power,runOfRiver,,,electricity,,,stock,none,,,,
