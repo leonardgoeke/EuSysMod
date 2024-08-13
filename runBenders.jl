@@ -45,7 +45,7 @@ CSV.write(scrDir_str * "/set_scenario.csv", DataFrame(scenario = "scr" .* scr_ar
 
 if accuracy == 0
 	rngVio_ntup = (stab = 1e3, cut = 1e2, fix = 1e4)
-	rngTar_tup = (mat = (1e-2,1e6), rhs = (1e-2,1e2))
+	rngTar_tup = (mat = (1e-2,1e5), rhs = (1e-2,1e2))
 end
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
@@ -90,7 +90,7 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 3, shortExp = 5) 
 
 # ! input folders
-inDir_arr = [dir_str * "_basis", dir_str * "resolution/" * res * "_" * space, scrDir_str, dir_str * "timeSeries/" * space * "_" * time * "/general"]
+inDir_arr = [dir_str * "_basis", dir_str * "/heatSector/fixed_" * space, dir_str * "resolution/" * res * "_" * space, scrDir_str, dir_str * "timeSeries/" * space * "_" * time * "/general"]
 foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * space * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
 foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * space * "_" * time * "/scr" * x[1] * "/" * x[2]), Iterators.product(scr_arr,("ini1","ini2","ini3","ini4")))
 
@@ -116,8 +116,6 @@ scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e
 
 
 #region # * prepare iteration
-
-CSV.write("test.csv", DataFrame(a = [1,2]))
 
 # initialize distributed computing
 if algSetup_obj.dist

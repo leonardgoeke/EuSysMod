@@ -1,6 +1,6 @@
 using Gurobi, AnyMOD, CSV, Statistics
 
-b = "C:/Git/EuSysMod/"
+b = "C:/Users/pacop/Desktop/git/EuSysMOD/"
 
 par_df = CSV.read(b * "settings_benders.csv", DataFrame)
 
@@ -34,20 +34,20 @@ CSV.write(scrDir_str * "/set_scenario.csv", DataFrame(scenario = "scr" .* scr_ar
 # define in- and output folders
 resultDir_str = b * "results"
 
-inputMod_arr = [b * "_basis", b * "resolution/" * res * "_" * space, scrDir_str, b * "timeSeries/" * space * "_" * time * "/general"]
+inputMod_arr = [b * "_basis", b * "/heatSector/fixed_" * space, b * "resolution/" * res * "_" * space, scrDir_str, b * "timeSeries/" * space * "_" * time * "/general"]
 foreach(x -> push!(inputMod_arr, b * "timeSeries/" * space * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
 foreach(x -> push!(inputMod_arr, b * "timeSeries/" * space * "_" * time * "/scr" * x), scr_arr)
 
 #region # * create and solve model
 
-anyM = anyModel(inputMod_arr, resultDir_str, objName = obj_str, supTsLvl = 2, repTsLvl = 3, frsLvl = 3, shortExp = 5, emissionLoss = false, holdFixed = true);
+anyM = anyModel(inputMod_arr, resultDir_str, objName = obj_str, supTsLvl = 2, repTsLvl = 3, frsLvl = 0, shortExp = 5, emissionLoss = false, holdFixed = true);
 
 createOptModel!(anyM)
 setObjective!(:cost, anyM)
 
 set_optimizer(anyM.optModel, Gurobi.Optimizer)
 set_optimizer_attribute(anyM.optModel, "Method", 2);
-set_optimizer_attribute(anyM.optModel, "NumericFocus", 2);
+set_optimizer_attribute(anyM.optModel, "NumericFocus", 0);
 set_optimizer_attribute(anyM.optModel, "Crossover", 0);
 set_optimizer_attribute(anyM.optModel, "Threads", t_int);
 set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
@@ -59,15 +59,13 @@ objective_value(anyM.optModel)
 
 #region # * write results
 
-reportResults(:summary, anyM, addRep = (:capaConvOut,), addObjName = true)
+reportResults(:summary, anyM, addObjName = true)
 reportResults(:cost, anyM, addObjName = true)
 reportResults(:exchange, anyM, addObjName = true)
 
 reportTimeSeries(:electricity, anyM)
 
 #endregion
-
-bla.var
 
 #=
 # ! write solution into benders object as best

@@ -20,9 +20,9 @@ box_4:
       minUp: 0.5
 qtr_1:
   qtr:
-    start: 0.5
-    low: 1e-6 
-    thr: 5e-4
+    start: 1.0
+    low: 1e-5 
+    thr: 5e-5
     fac: 2.0
 qtr_2:
   qtr:

@@ -1,6 +1,6 @@
 using Gurobi, AnyMOD, CSV, YAML
 
-dir_str = "C:/Git/EuSysMod/"
+dir_str = "C:/Users/pacop/Desktop/git/EuSysMOD/"
 
 par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
 
@@ -24,7 +24,7 @@ accuracy = par_df[id_int,:accuracy]
 trust = par_df[id_int,:trust]
 dnsThrs = par_df[id_int,:dnsThrs]
 
-name_str = space * "_" * time * "_" * res * "_" * scenario * "_" * string(trust) * "trust_" * string(accuracy) * "acc_" * string(dnsThrs) * "dnsThrs_"
+name_str = space * "_" * time * "_" * res * "_" * scenario * "_" * string(trust) * "trust_" * string(accuracy) * "acc_" * string(dnsThrs) * "dnsThrs_moreRAM_"
 
 # create scenario array and create temp folder with file
 if occursin("-", scenario)
@@ -44,12 +44,12 @@ CSV.write(scrDir_str * "/set_scenario.csv", DataFrame(scenario = "scr" .* scr_ar
 # ! options for general algorithm
 
 if accuracy == 0
-	rngVio_ntup = (stab = 1e3, cut = 1e2, fix = 1e4)
-	rngTar_tup = (mat = (1e-2,1e6), rhs = (1e-2,1e2))
+	rngVio_ntup = (stab = 1e2, cut = 1e2, fix = 1e4)
+	rngTar_tup = (mat = (1e-2,1e5), rhs = (1e-2,1e2))
 end
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
-algSetup_obj = algSetup(0.005, 20, (bal = false, st = true), 1, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false), (dbInf = true, numFoc = 3, dnsThrs = dnsThrs))
+algSetup_obj = algSetup(0.005, 20, (bal = false, st = true), 2, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false), (dbInf = true, numFoc = 3, dnsThrs = dnsThrs))
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
@@ -60,9 +60,10 @@ if trust == 0
 elseif trust == 1
 	methKey_str = "lvl1_1"
 elseif trust == 2
+	methKey_str = "box1_3"
+elseif trust == 2
 	methKey_str = "box_4"
 end
-
 # write tuple for stabilization
 stabMap_dic = YAML.load_file(dir_str * "stabMap.yaml")
 if methKey_str in keys(stabMap_dic)
@@ -91,7 +92,7 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 3, shortExp = 5) 
 
 # ! input folders
-inDir_arr = [dir_str * "_basis", dir_str * "resolution/" * res * "_" * space, scrDir_str, dir_str * "timeSeries/" * space * "_" * time * "/general"]
+inDir_arr = [dir_str * "_basis", dir_str * "/heatSector/fixed_" * space, dir_str * "resolution/" * res * "_" * space, scrDir_str, dir_str * "timeSeries/" * space * "_" * time * "/general"]
 foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * space * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
 foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * space * "_" * time * "/scr" * x[1] * "/" * x[2]), Iterators.product(scr_arr,("ini1","ini2","ini3","ini4")))
 
@@ -115,11 +116,12 @@ scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e
 
 #endregion
 
+
 #region # * prepare iteration
 
 # initialize distributed computing
 if algSetup_obj.dist
-	addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=30G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=4, mem_per_cpu="8G", time=4380) # add all available nodes
+	addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=60G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=8, mem_per_cpu="8G", time=4380) # add all available nodes
 	rmprocs(wrkCnt + 2) # remove one node again for main process
 	@everywhere begin
 		using Gurobi, AnyMOD
@@ -143,7 +145,7 @@ while true
 
 	#region # * solve top-problem and (start) sub-problems
 	str_time = now()
-	resData_obj, stabVar_obj = @suppress runTop(benders_obj);
+	resData_obj, stabVar_obj = runTop(benders_obj);   
 	elpTop_time = now() - str_time
 
 	# start solving sub-problems
@@ -198,4 +200,3 @@ produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1,
 writeBendersResults!(benders_obj, runSubDist, res_ntup)
 
 #endregion
-

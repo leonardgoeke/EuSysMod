@@ -4,9 +4,9 @@ naturalGas,,4,1,2,2,eq
 h2,,4,1,2,2,ineq
 districtHeat,,5,2,2,2,ineq
 spaceHeat,,5,2,2,2,none
-processHeat_low,,5,2,2,2,eq
+processHeat_low,,5,2,2,2,none
 processHeat_medium,,5,2,2,2,none
-processHeat_high,,5,2,2,2,eq
+processHeat_high,,5,2,2,2,none
 capturedCO2,,3,1,2,2,ineq
 psngRoadPrvt,,6,2,2,2,none
 psngRoadPub,,6,2,2,2,none

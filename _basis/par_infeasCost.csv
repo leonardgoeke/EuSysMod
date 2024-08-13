@@ -8,7 +8,7 @@ rawBiogas,,costLss,13000
 otherBiomass,nonSolidBiomass,costLss,13000
 otherBiomass,solidBiomass,costLss,13000
 districtHeat,,costLss,13000
-processHeat_low,,costLss,13000
+processHeat_medium,,costLss,13000
 processHeat_high,,costLss,13000
 capturedCO2,,costLss,13000
 h2,,costLss,50000

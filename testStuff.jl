@@ -1,50 +1,41 @@
-anyM = benders_obj.sub[(3,1)]
-# ! debug
 
-set_optimizer_attribute(anyM.optModel, "Method", 0)
-set_optimizer_attribute(anyM.optModel, "Crossover", 0)
-set_optimizer_attribute(anyM.optModel, "BarOrder", 0)
-set_optimizer_attribute(anyM.optModel, "NumericFocus", 0)
 
-optimize!(anyM.optModel)
 
-# computes iis
-compute_conflict!(anyM.optModel)
+#region # * checks and initialization
 
-if MOI.get(anyM.optModel, MOI.ConflictStatus()) != MOI.ConflictStatusCode(3) return end
-# loops over constraint tables to find constraints within iis
-allCns_pair = vcat(collect.(vcat(anyM.parts.obj.cns, anyM.parts.bal.cns, anyM.parts.cost.cns, anyM.parts.lim.cns, map(x -> x.cns, values(anyM.parts.exc))..., map(x -> x.cns, values(anyM.parts.tech))...))...)
+benders_obj = bendersObj()
+benders_obj.info = info_ntup
+benders_obj.algOpt = algSetup_obj
+benders_obj.nearOpt = nearOptObj(0, nearOptSetup_obj)
 
-for cns in allCns_pair
-	if cns[1] == :objEqn continue end
+#endregion
 
-	allConstr_arr = findall(map(x -> MOI.ConflictParticipationStatusCode(0) != MOI.get(anyM.optModel.moi_backend, MOI.ConstraintConflictStatus(), x.index), cns[2][!,:cns]))
-	# prints constraints within iis
-	if !isempty(allConstr_arr)
-		println("$(length(allConstr_arr)) of IIS in $(cns[1]) constraints.")
-		colSet_dic = Dict(x => Symbol(split(string(x), "_")[1]) for x in intCol(cns[2]))
-		for iisConstr in allConstr_arr
-			row = cns[2][iisConstr,:]
-			dimStr_arr = map(x -> row[x] == 0 ?  "" : x == :id ? string(row[x]) : string(x, ": ", join(getUniName(row[x], anyM.sets[colSet_dic[x]]), " < ")), collect(keys(colSet_dic)))
-			println("$(join(filter(x -> x != "", dimStr_arr), ", ")), constraint: $(row[:cns])")
-		end
-	end
+#region # * initialize reporting
+
+# dataframe for reporting during iteration
+itrReport_df = DataFrame(i = Int[], lowCost = Float64[], bestObj = Float64[], gap = Float64[], curCost = Float64[], time_ges = Float64[], time_top = Float64[], time_subTot = Float64[], time_sub = Array{Float64,1}[], numFoc = Array{Int,1}[], objName = String[])
+nearOpt_df = DataFrame(i = Int[], timestep = String[], region = String[], system = String[], id = String[], variable = Symbol[], value = Float64[], objName = String[])
+
+# empty model just for reporting
+report_m = @suppress anyModel(String[], inputFolder_ntup.results, objName = "decomposition" * info_ntup.name) 
+
+# add column for active stabilization method
+if !isempty(stabSetup_obj.method)
+	itrReport_df[!,:actMethod] = fill(Symbol(), size(itrReport_df, 1))
+	foreach(x -> itrReport_df[!,Symbol("dynPar_", x[1])] = Union{Float64,Vector{Float64}}[fill(Float64[], size(itrReport_df, 1))...], stabSetup_obj.method)
+	select!(itrReport_df, vcat(filter(x -> x != :objName, namesSym(itrReport_df)), [:objName]))
 end
 
-import AnyMOD.getUniName
+# extend reporting dataframe in case of near-optimal
+if !isnothing(nearOptSetup_obj) itrReport_df[!,:objective] = fill("", size(itrReport_df, 1)) end
+
+benders_obj.report = (itr = itrReport_df, nearOpt = nearOpt_df, mod = report_m)
+	
 
 
-benders_obj.top.parts.tech[:oilBoilerProHigh].cns[:mustCapaConvEq]
-benders_obj.top.parts.tech[:oilBoilerProHigh].cns[:capaConv]
-benders_obj.top.parts.tech[:oilBoilerProHigh].cns[:mustExpConv]
 
-resData_obj, stabVar_obj = runTop(benders_obj)
+top_m = anyModel(inputFolder_ntup.in, inputFolder_ntup.results, objName = "topModel_" * info_ntup.name, checkRng = (print = true, all = false), frsLvl = info_ntup.frsLvl, supTsLvl = info_ntup.supTsLvl, repTsLvl = info_ntup.repTsLvl, shortExp = info_ntup.shortExp, coefRng = scale_dic[:rng], scaFac = scale_dic[:facTop], reportLvl = 1, createVI = algSetup_obj.useVI)
+top_m.subPro = tuple(0, 0)
+@suppress prepareMod!(top_m, benders_obj.algOpt.opt, benders_obj.algOpt.threads)
 
-resData_obj.capa[:tech][:oilBoilerProHigh][:capaConv]
-resData_obj.capa[:tech][:oilBoilerProHigh][:mustCapaConv]
-
-stab_obj = benders_obj.stab
-delete(benders_obj.top.optModel, stab_obj.cns)
-# double radius of trust-region and enforce again
-stab_obj.dynPar[stab_obj.actMet] = max(stab_obj.methodOpt[stab_obj.actMet].low, stab_obj.dynPar[stab_obj.actMet] * stab_obj.methodOpt[stab_obj.actMet].fac)
-centerStab!(stab_obj.method[stab_obj.actMet], stab_obj, benders_obj.algOpt.rngVio.stab, benders_obj.top, benders_obj.report.mod)
+optimize!(top_m.optModel)
