@@ -5,7 +5,7 @@ dir_str = ""
 par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 2
+    id_int = 1
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -15,16 +15,17 @@ end
 space = string(par_df[id_int,:space]) # spatial resolution 
 time = string(par_df[id_int,:time]) # temporal resolution
 res = string(par_df[id_int,:resolution]) # resolution
+spaSco = string(par_df[id_int,:spatialScope]) # spatial scope
 scenario = string(par_df[id_int,:scenario]) # scenario case
 
 # extract benders settings
 
 wrkCnt = par_df[id_int,:workerCnt]
-accuracy = par_df[id_int,:accuracy]
+cutDel = par_df[id_int,:cutDel]
 trust = par_df[id_int,:trust]
 dnsThrs = par_df[id_int,:dnsThrs]
 
-name_str = space * "_" * time * "_" * res * "_" * scenario * "_" * string(trust) * "trust_" * string(accuracy) * "acc_" * string(dnsThrs) * "dnsThrs_moreRAM_"
+name_str = space * "_" * time * "_" * res * "_" * spaSco * "_" * scenario * "_" * string(trust) * "trust_" * string(cutDel) * "cutDel_" * string(dnsThrs) * "dnsThrs"
 
 # create scenario array and create temp folder with file
 if occursin("-", scenario)
@@ -43,24 +44,27 @@ CSV.write(scrDir_str * "/set_scenario.csv", DataFrame(scenario = "scr" .* scr_ar
 
 # ! options for general algorithm
 
-if accuracy == 0
-	rngVio_ntup = (stab = 1e3, cut = 1e2, fix = 1e4)
-	rngTar_tup = (mat = (1e-2,1e5), rhs = (1e-2,1e2))
-end
+rngVio_ntup = (stab = 1e2, cut = 1e2, fix = 1e4)
+rngTar_tup = (mat = (1e-2,1e5), rhs = (1e-2,1e2))
+
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
-algSetup_obj = algSetup(0.005, 1000, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false), (dbInf = true, numFoc = 3, dnsThrs = dnsThrs))
+algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false), (dbInf = true, numFoc = 3, dnsThrs = dnsThrs))
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
 
 if trust == 0
-	methKey_str = "lvl1_1"
+	methKey_str = "qtr_1"
 elseif trust == 1
 	methKey_str = "lvl1_4"
 elseif trust == 2
 	methKey_str = "lvl1_6"
+elseif trust == 3
+	methKey_str = "box_1"
+elseif trust == 4
+	methKey_str = "box_4"
 end
 
 # write tuple for stabilization
@@ -71,7 +75,7 @@ else
 	meth_tup = tuple()
 end
 
-iniStab_ntup = (setup = :none, det = true) # options to initialize stabilization, :none for first input will skip stabilization, other values control input folders, second input determines, if heuristic model is solved stochastically or not
+iniStab_ntup = (setup = :reduced, det = true) # options to initialize stabilization, :none for first input will skip stabilization, other values control input folders, second input determines, if heuristic model is solved stochastically or not
 
 stabSetup_obj = stabSetup(meth_tup, 0.0, iniStab_ntup)
 
@@ -91,17 +95,11 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 3, shortExp = 5) 
 
 # ! input folders
-inDir_arr = [dir_str * "_basis", dir_str * "heatSector/fixed_" * space, dir_str * "resolution/" * res * "_" * space, scrDir_str, dir_str * "timeSeries/" * space * "_" * time * "/general"]
+inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/"* spaSco, dir_str * "heatSector/fixed_" * space, dir_str * "resolution/" * res * "_" * space, scrDir_str, dir_str * "timeSeries/" * space * "_" * time * "/general"]
 foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * space * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
 foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * space * "_" * time * "/scr" * x[1] * "/" * x[2]), Iterators.product(scr_arr,("ini1","ini2","ini3","ini4")))
 
-if stabSetup_obj.ini.setup in (:none,:full) 
-	heuInDir_arr = inDir_arr
-elseif stabSetup_obj.ini.setup == :reduced
-	heuInDir_arr =  inDir_arr
-end 
-
-inputFolder_ntup = (in = inDir_arr, heu = heuInDir_arr, results = dir_str * "results")
+inputFolder_ntup = (in = inDir_arr, heu = inDir_arr, results = dir_str * "results")
 
 # ! scaling settings
 scale_dic = Dict{Symbol,NamedTuple}()
@@ -158,12 +156,12 @@ while true
 		if benders_obj.algOpt.dist # distributed case
 			futData_dic[s] = runSubDist(id + 1, copy(resData_obj), benders_obj.algOpt.rngVio.fix, :barrier, acc_fl)
 		else # non-distributed case
-			cutData_dic[s], timeSub_dic[s], lss_dic[s], numFoc_dic[s] = runSub(benders_obj.sub[s], copy(resData_obj), benders_obj.algOpt.rngVio.fix, :barrier, acc_fl)
+			cutData_dic[s], timeSub_dic[s], lss_dic[s], numFoc_dic[s] = @suppress runSub(benders_obj.sub[s], copy(resData_obj), benders_obj.algOpt.rngVio.fix, :barrier, acc_fl)
 		end
 	end
 
 	# top-problem without stabilization
-	if !isnothing(benders_obj.stab) @suppress runTopWithoutStab!(benders_obj, stabVar_obj) end
+	if !isnothing(benders_obj.stab) runTopWithoutStab!(benders_obj, stabVar_obj) end
 
 	# get results of sub-problems
 	if benders_obj.algOpt.dist
@@ -179,7 +177,6 @@ while true
 
 	# update results and stabilization
 	updateIteration!(benders_obj, cutData_dic, resData_obj, stabVar_obj)
-
 	# report on iteration
 	reportBenders!(benders_obj, resData_obj, elpTop_time, timeSub_dic, lss_dic, numFoc_dic)
 
