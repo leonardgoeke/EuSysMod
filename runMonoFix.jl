@@ -1,6 +1,6 @@
 using Gurobi, AnyMOD, CSV, Statistics
 
-b = "C:/Users/pacop/Desktop/git/EuSysMOD/"
+b = "C:/Git/EuSysMod/"
 
 par_df = CSV.read(b * "settings_benders.csv", DataFrame)
 
@@ -34,13 +34,13 @@ CSV.write(scrDir_str * "/set_scenario.csv", DataFrame(scenario = "scr" .* scr_ar
 # define in- and output folders
 resultDir_str = b * "results"
 
-inputMod_arr = [b * "_basis", b * "/heatSector/fixed_" * space, b * "resolution/" * res * "_" * space, scrDir_str, b * "timeSeries/" * space * "_" * time * "/general"]
+inputMod_arr = [b * "_basis", dir_str * "spatialScope/" * spaSco, b * "/heatSector/fixed_" * space, b * "resolution/" * res * "_" * space, scrDir_str, b * "timeSeries/" * space * "_" * time * "/general"]
 foreach(x -> push!(inputMod_arr, b * "timeSeries/" * space * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
 foreach(x -> push!(inputMod_arr, b * "timeSeries/" * space * "_" * time * "/scr" * x), scr_arr)
 
 #region # * create and solve model
 
-anyM = anyModel(inputMod_arr, resultDir_str, objName = obj_str, supTsLvl = 2, repTsLvl = 3, frsLvl = 0, shortExp = 5, emissionLoss = false, holdFixed = true);
+anyM = anyModel(inputMod_arr, resultDir_str, objName = obj_str, supTsLvl = 2, repTsLvl = 3, frsLvl = 3, shortExp = 5, emissionLoss = false, holdFixed = true);
 
 createOptModel!(anyM)
 setObjective!(:cost, anyM)

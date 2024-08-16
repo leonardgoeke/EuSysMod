@@ -55,22 +55,10 @@ res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :
 
 # ! options for stabilization
 
-if trust == 0
-	methKey_str = "qtr_1"
-elseif trust == 1
-	methKey_str = "lvl1_4"
-elseif trust == 2
-	methKey_str = "lvl1_6"
-elseif trust == 3
-	methKey_str = "box_1"
-elseif trust == 4
-	methKey_str = "box_4"
-end
-
 # write tuple for stabilization
 stabMap_dic = YAML.load_file(dir_str * "stabMap.yaml")
-if methKey_str in keys(stabMap_dic)
-	meth_tup = tuple(map(x -> Symbol(x[1]) => (; (Symbol(k) => v for (k, v) in x[2])...), collect(stabMap_dic[methKey_str]))...)
+if trust in keys(stabMap_dic)
+	meth_tup = tuple(map(x -> Symbol(x[1]) => (; (Symbol(k) => v for (k, v) in x[2])...), collect(stabMap_dic[trust]))...)
 else
 	meth_tup = tuple()
 end

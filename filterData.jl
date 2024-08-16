@@ -1,9 +1,9 @@
 using CSV, DataFrames
 
-dir_str = "C:/Git/EuSysMOD/timeSeries/"
+dir_str = "timeSeries/"
 
-inFolder_str = "greenfield_ESCU_country_96h"
-outFolder_str = "country_96h"
+inFolder_str = "greenfield_ESCU_country_8760h"
+outFolder_str = "country_8760h"
 
 scr_arr = string.(1982:2016)
 
@@ -29,6 +29,7 @@ for scr in scr_arr
  
 end
 
+#=
 # ! remove zeros in electricity demand
 for scr in scr_arr
 
@@ -42,3 +43,4 @@ for scr in scr_arr
     end
 
 end
+=#

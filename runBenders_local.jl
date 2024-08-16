@@ -1,6 +1,6 @@
 using Gurobi, AnyMOD, CSV, YAML
 
-dir_str = "C:/Users/pacop/Desktop/git/EuSysMod/"
+dir_str = "C:/Git/EuSysMod/"
 
 par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
 
@@ -44,33 +44,21 @@ CSV.write(scrDir_str * "/set_scenario.csv", DataFrame(scenario = "scr" .* scr_ar
 
 # ! options for general algorithm
 
-rngVio_ntup = (stab = 1e2, cut = 1e2, fix = 1e4)
+rngVio_ntup = (stab = 1e2, cut = 1e4, fix = 1e4)
 rngTar_tup = (mat = (1e-2,1e5), rhs = (1e-2,1e2))
 
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
-algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false), (dbInf = true, numFoc = 3, dnsThrs = dnsThrs))
+algSetup_obj = algSetup(0.001, cutDel, (bal = false, st = true), 2, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false), (dbInf = true, numFoc = 3, dnsThrs = dnsThrs))
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
 
-if trust == 0
-	methKey_str = "qtr_1"
-elseif trust == 1
-	methKey_str = "lvl1_4"
-elseif trust == 2
-	methKey_str = "lvl1_6"
-elseif trust == 3
-	methKey_str = "prx1_4"
-elseif trust == 4
-	methKey_str = "box_2"
-end
-
 # write tuple for stabilization
 stabMap_dic = YAML.load_file(dir_str * "stabMap.yaml")
-if methKey_str in keys(stabMap_dic)
-	meth_tup = tuple(map(x -> Symbol(x[1]) => (; (Symbol(k) => v for (k, v) in x[2])...), collect(stabMap_dic[methKey_str]))...)
+if trust in keys(stabMap_dic)
+	meth_tup = tuple(map(x -> Symbol(x[1]) => (; (Symbol(k) => v for (k, v) in x[2])...), collect(stabMap_dic[trust]))...)
 else
 	meth_tup = tuple()
 end
@@ -95,7 +83,7 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 3, shortExp = 5) 
 
 # ! input folders
-inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/"* spaSco, dir_str * "heatSector/fixed_" * space, dir_str * "resolution/" * res * "_" * space, scrDir_str, dir_str * "timeSeries/" * space * "_" * time * "/general"]
+inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "heatSector/fixed_" * space, dir_str * "resolution/" * res * "_" * space, scrDir_str, dir_str * "timeSeries/" * space * "_" * time * "/general"]
 foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * space * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
 foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * space * "_" * time * "/scr" * x[1] * "/" * x[2]), Iterators.product(scr_arr,("ini1","ini2","ini3","ini4")))
 
@@ -194,3 +182,4 @@ produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1,
 writeBendersResults!(benders_obj, runSubDist, res_ntup)
 
 #endregion
+

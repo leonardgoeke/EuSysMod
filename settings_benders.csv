@@ -1,7 +1,5 @@
 space,time,resolution,spatialScope,scenario,workerCnt,trust,cutDel,dnsThrs
-country,96h,default,core,"1982,1983",8,4,200,0
-country,672h,default,core,"1982,1983",8,0,200,2000
-country,672h,default,core,"1982,1983",8,1,200,2000
-country,672h,default,core,"1982,1983",8,2,200,2000
-country,672h,default,core,"1982,1983",8,3,200,2000
-country,672h,default,core,"1982,1983",8,4,200,2000
+country,96h,default,onlyCH,"1982,1983",8,qtr_1,200,0
+country,8760h,default,onlyCH,"1982,1983",8,qtr_1,200,0
+country,8760h,default,onlyCH,"1982,1983",8,lvl1_4,200,0
+country,8760h,default,onlyCH,"1982,1983",8,lvl1_6,200,0
