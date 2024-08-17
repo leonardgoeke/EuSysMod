@@ -1,6 +1,6 @@
 using Gurobi, AnyMOD, CSV, YAML
 
-dir_str = "C:/Git/EuSysMod/"
+dir_str = "C:/Users/pacop/Desktop/git/EuSysMOD/"
 
 par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
 
@@ -49,7 +49,7 @@ rngTar_tup = (mat = (1e-2,1e5), rhs = (1e-2,1e2))
 
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
-algSetup_obj = algSetup(0.001, cutDel, (bal = false, st = true), 2, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false), (dbInf = true, numFoc = 3, dnsThrs = dnsThrs))
+algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crsSub = true, crsTop = true), (dbInf = true, numFoc = 3, dnsThrs = dnsThrs))
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
@@ -117,7 +117,7 @@ else
 	getComVarDist = x -> nothing
 end
 # create benders object
-benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, nearOptSetup_obj);
+benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, res_ntup, nearOptSetup_obj);
 
 #endregion
 

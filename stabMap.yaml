@@ -2,22 +2,22 @@ box_1:
   box:
       low: 0.025
       up: 0.025
-      minUp: 0.5
+      minDelta: 0.5
 box_2:
   box:
       low: 0.05
       up: 0.05
-      minUp: 0.5
+      minDelta: 0.5
 box_3:
   box:
       low: 0.075
       up: 0.075
-      minUp: 0.5
+      minDelta: 0.5
 box_4:
   box:
       low: 0.1
       up: 0.1
-      minUp: 0.5
+      minDelta: 0.5
 qtr_1:
   qtr:
     start: 1.0
