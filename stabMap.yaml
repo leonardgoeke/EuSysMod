@@ -3,21 +3,37 @@ box_1:
       low: 0.025
       up: 0.025
       minDelta: 0.5
+      thr: 1e-5
+      fac: 2.0
+      scaLvl: 10.0
+      scaLim: 10.0
 box_2:
   box:
       low: 0.05
       up: 0.05
       minDelta: 0.5
+      thr: 1e-10
+      fac: 2.0
+      scaLvl: 10.0
+      scaLim: 10.0
 box_3:
   box:
       low: 0.075
       up: 0.075
       minDelta: 0.5
+      thr: 1e-10
+      fac: 2.0
+      scaLvl: 10.0
+      scaLim: 10.0
 box_4:
   box:
       low: 0.1
       up: 0.1
       minDelta: 0.5
+      thr: 1e-10
+      fac: 2.0
+      scaLvl: 10.0
+      scaLim: 10.0
 qtr_1:
   qtr:
     start: 1.0
