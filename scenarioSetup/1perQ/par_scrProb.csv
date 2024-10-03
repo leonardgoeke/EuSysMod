@@ -1,0 +1,17 @@
+scenario,timestep_3,parameter,value
+scr1983,ini1,scrProb,1
+scr1987,ini1,scrProb,0
+scr2005,ini1,scrProb,0
+scr2012,ini1,scrProb,0
+scr1983,ini2,scrProb,0
+scr1987,ini2,scrProb,0
+scr2005,ini2,scrProb,1
+scr2012,ini2,scrProb,0
+scr1983,ini3,scrProb,0
+scr1987,ini3,scrProb,0
+scr2005,ini3,scrProb,0
+scr2012,ini3,scrProb,1
+scr1983,ini4,scrProb,0
+scr1987,ini4,scrProb,1
+scr2005,ini4,scrProb,0
+scr2012,ini4,scrProb,0

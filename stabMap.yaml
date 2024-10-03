@@ -84,7 +84,7 @@ qtr_8:
     fac: 2.0
 lvl1_1:
   lvl1:
-    lam: 0.125
+    lam: 0.05
 lvl1_2:
   lvl1:
     lam: 0.25

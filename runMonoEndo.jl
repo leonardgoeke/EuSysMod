@@ -15,9 +15,10 @@ end
 space = string(par_df[id_int,:space]) # spatial resolution 
 time = string(par_df[id_int,:time]) # temporal resolution
 res = string(par_df[id_int,:resolution]) # resolution
+spaSco = string(par_df[id_int,:spatialScope]) # spatial scope
 scenario = string(par_df[id_int,:scenario]) # scenario case
 
-obj_str = space * "_" * time * "_" * res * "_" * scenario
+obj_str = space * "_" * time * "_" * res * "_" * spaSco * "_" * scenario
 
 # create scenario array and create temp folder with file
 if occursin("-", scenario)
@@ -34,9 +35,10 @@ CSV.write(scrDir_str * "/set_scenario.csv", DataFrame(scenario = "scr" .* scr_ar
 # define in- and output folders
 resultDir_str = b * "results"
 
-inputMod_arr = [b * "_basis", b * "/heatSector/endogenous", b * "resolution/" * res * "_" * space, scrDir_str, b * "timeSeries/" * space * "_" * time * "/general"]
-foreach(x -> push!(inputMod_arr, b * "timeSeries/" * space * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
-foreach(x -> push!(inputMod_arr, b * "timeSeries/" * space * "_" * time * "/scr" * x), scr_arr)
+inputMod_arr = [dir_str * "_basis", dir_str * "spatialScope/"* spaSco, dir_str * "heatSector/fixed_" * space, dir_str * "resolution/" * res * "_" * space, scrDir_str, dir_str * "timeSeries/" * space * "_" * time * "/general"]
+
+foreach(x -> push!(inputMod_arr, dir_str * "timeSeries/" * space * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
+foreach(x -> push!(inputMod_arr, dir_str * "timeSeries/" * space * "_" * time * "/scr" * x[1] * "/" * x[2]), Iterators.product(scr_arr,("ini1","ini2","ini3","ini4"))
 
 #region # * create and solve model
 

@@ -12,9 +12,7 @@ else
     t_int = parse(Int,ARGS[2]) # number of threads
 end
 
-space = string(par_df[id_int,:space]) # spatial resolution 
 time = string(par_df[id_int,:time]) # temporal resolution
-res = string(par_df[id_int,:resolution]) # resolution
 spaSco = string(par_df[id_int,:spatialScope]) # spatial scope
 scenario = string(par_df[id_int,:scenario]) # scenario case
 
@@ -24,32 +22,35 @@ wrkCnt = par_df[id_int,:workerCnt]
 cutDel = par_df[id_int,:cutDel]
 trust = par_df[id_int,:trust]
 dnsThrs = par_df[id_int,:dnsThrs]
+solve = par_df[id_int,:solve]
 
-name_str = space * "_" * time * "_" * res * "_" * spaSco * "_" * scenario * "_" * string(trust) * "trust_" * string(cutDel) * "cutDel_" * string(dnsThrs) * "dnsThrs"
+name_str = time * "_" * spaSco * "_" * scenario * "_" * string(trust) * "trust_" * string(cutDel) * "cutDel_" * string(dnsThrs) * "dnsThrs_" * solve
 
-# create scenario array and create temp folder with file
-if occursin("-", scenario)
-    scr_arr = split(scenario, "-") |> (x -> string.(parse.(Int, x[1]):parse(Int, x[2])))
-else
-    scr_arr = split(scenario, ",") |> x -> string.(x)
-end
-
-scrDir_str = dir_str * "temp/" * name_str
-if isdir(scrDir_str) rm(scrDir_str, recursive = true) end
-mkdir(scrDir_str)
-CSV.write(scrDir_str * "/set_scenario.csv", DataFrame(scenario = "scr" .* scr_arr))
-
+# create scenario and quarter array
+scrDir_str = dir_str * "scenarioSetup/" * scenario
+scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(dir_str * "scenarioSetup/" * scenario * "/par_scrProb.csv", DataFrame))))
 
 #region # * options for algorithm
 
 # ! options for general algorithm
 
-rngVio_ntup = (stab = 1e2, cut = 1e5, fix = 1e5)
+rngVio_ntup = (stab = 1e1, cut = 1e1, fix = 1e1)
 rngTar_tup = (mat = (1e-2,1e5), rhs = (1e-2,1e2))
 
-
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
-algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true), (dbInf = true, numFoc = 3, dnsThrs = dnsThrs, crs = true))
+if solve == "crsAllNoLim"
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 0.0, dbInf = true), (numFoc = 3, dnsThrs = dnsThrs, crs = true))
+elseif solve == "crsAll5Lim"
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 5.0, dbInf = true), (numFoc = 3, dnsThrs = dnsThrs, crs = true))
+elseif solve == "crsAll10Lim"
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 10.0, dbInf = true), (numFoc = 3, dnsThrs = dnsThrs, crs = true))
+elseif solve == "crsAll20Lim"
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 6000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = 3, dnsThrs = dnsThrs, crs = true))
+elseif solve == "crsTop5Lim"
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 5.0, dbInf = true), (numFoc = 3, dnsThrs = dnsThrs, crs = true))
+elseif solve == "crsTop0LimSimp"
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :simplex, timeLim = 0.0, dbInf = true), (numFoc = 3, dnsThrs = dnsThrs, crs = true))
+end
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
@@ -83,9 +84,9 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 3, shortExp = 5) 
 
 # ! input folders
-inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/"* spaSco, dir_str * "heatSector/fixed_" * space, dir_str * "resolution/" * res * "_" * space, scrDir_str, dir_str * "timeSeries/" * space * "_" * time * "/general"]
-foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * space * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
-foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * space * "_" * time * "/scr" * x[1] * "/" * x[2]), Iterators.product(scr_arr,("ini1","ini2","ini3","ini4")))
+inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "heatSector/fixed_country", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_" * time * "/general"]
+foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
+foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
 inputFolder_ntup = (in = inDir_arr, heu = inDir_arr, results = dir_str * "results")
 
@@ -99,12 +100,11 @@ scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e
 
 #endregion
 
-
 #region # * prepare iteration
 
 # initialize distributed computing
 if algSetup_obj.dist
-	addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=60G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=8, mem_per_cpu="8G", time=4380) # add all available nodes
+	addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=60G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=8, mem_per_cpu="8G", time=6000) # add all available nodes
 	rmprocs(wrkCnt + 2) # remove one node again for main process
 	@everywhere begin
 		using Gurobi, AnyMOD
@@ -137,14 +137,14 @@ while true
 	lss_dic = Dict{Tuple{Int64,Int64},Float64}()
 	numFoc_dic = Dict{Tuple{Int64,Int64},Int64}()
 
-	acc_fl = getConvTol(benders_obj.itr.gap, benders_obj.algOpt.gap, benders_obj.algOpt.conSub)
+	acc_fl = getConvTol(benders_obj.itr.gap, benders_obj.algOpt.gap, benders_obj.algOpt.sub)
 
 	if benders_obj.algOpt.dist futData_dic = Dict{Tuple{Int64,Int64},Future}() end
 	for (id,s) in enumerate(sort(collect(keys(benders_obj.sub))))
 		if benders_obj.algOpt.dist # distributed case
-			futData_dic[s] = runSubDist(id + 1, copy(resData_obj), benders_obj.algOpt.rngVio.fix, :barrier, acc_fl, benders_obj.algOpt.conSub.crs)
+			futData_dic[s] = runSubDist(id + 1, copy(resData_obj), benders_obj.algOpt.rngVio.fix, benders_obj.algOpt.sub.meth, acc_fl, benders_obj.algOpt.sub.crs)
 		else # non-distributed case
-			cutData_dic[s], timeSub_dic[s], lss_dic[s], numFoc_dic[s] = @suppress runSub(benders_obj.sub[s], copy(resData_obj), benders_obj.algOpt.rngVio.fix, :barrier, acc_fl, benders_obj.algOpt.conSub.crs)
+			cutData_dic[s], timeSub_dic[s], lss_dic[s], numFoc_dic[s] = @suppress runSub(benders_obj.sub[s], copy(resData_obj), benders_obj.algOpt.rngVio.fix, benders_obj.algOpt.sub.meth, acc_fl, benders_obj.algOpt.sub.crs)
 		end
 	end
 
