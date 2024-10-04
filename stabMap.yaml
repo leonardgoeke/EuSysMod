@@ -1,3 +1,27 @@
+qtrLvl_1:
+  qtrLvl:
+    startRad: 1.0
+    endRad: 0.01
+    inter: lin
+    lam: 0.125
+qtrLvl_2:
+  qtrLvl:
+    startRad: 1.0
+    endRad: 0.01
+    inter: lin
+    lam: 0.5
+qtrLvl_3:
+  qtrLvl:
+    startRad: 0.2
+    endRad: 0.01
+    inter: lin
+    lam: 0.125
+qtrLvl_4:
+  qtrLvl:
+    startRad: 0.2
+    endRad: 0.01
+    inter: lin
+    lam: 0.5
 box_1:
   box:
       low: 0.025
@@ -84,7 +108,7 @@ qtr_8:
     fac: 2.0
 lvl1_1:
   lvl1:
-    lam: 0.05
+    lam: 0.125
 lvl1_2:
   lvl1:
     lam: 0.25

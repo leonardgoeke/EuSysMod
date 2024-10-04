@@ -1,6 +1,6 @@
-using Gurobi, AnyMOD, CSV, YAML, SlurmClusterManager
+using Gurobi, AnyMOD, CSV, YAML
 
-dir_str = "C:/Git/EuSysMod/"
+dir_str = "C:/Users/pacop/Desktop/git/EuSysMOD/"
 
 par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
 
@@ -38,12 +38,19 @@ rngVio_ntup = (stab = 1e2, cut = 1e4, fix = 1e4)
 rngTar_tup = (mat = (1e-2,1e5), rhs = (1e-2,1e2))
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
+if occursin("lvl",trust)
+	numFoc_arr = [0,0]
+else
+	numFoc_arr = [0,3]
+end
+
+
 if solve == "crsAllNoLim"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 0.0, dbInf = true), (numFoc = 3, dnsThrs = dnsThrs, crs = true))
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 0.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
 elseif solve == "crsAll5Lim"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 0.01, dbInf = true), (numFoc = 3, dnsThrs = dnsThrs, crs = true))
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 0.01, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
 elseif solve == "crsTop5Lim"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 5.0, dbInf = true), (numFoc = 3, dnsThrs = dnsThrs, crs = true))
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 5.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
 end
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
@@ -132,7 +139,7 @@ while true
 	lss_dic = Dict{Tuple{Int64,Int64},Float64}()
 	numFoc_dic = Dict{Tuple{Int64,Int64},Int64}()
 
-	acc_fl = getConvTol(benders_obj.itr.gap, benders_obj.algOpt.gap, benders_obj.algOpt.sub)
+	acc_fl = getConvTol(benders_obj.itr.gap, benders_obj.algOpt.gap, benders_obj.algOpt.sub.rng, benders_obj.algOpt.sub.int)
 
 	if benders_obj.algOpt.dist futData_dic = Dict{Tuple{Int64,Int64},Future}() end
 	for (id,s) in enumerate(sort(collect(keys(benders_obj.sub))))
@@ -168,7 +175,7 @@ while true
 	
 	#endregion
 	benders_obj.itr.cnt.i = benders_obj.itr.cnt.i + 1
-	if rtn_boo break end
+	#if rtn_boo break end
 	
 end
 #region # * write results
@@ -177,3 +184,24 @@ produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1,
 writeBendersResults!(benders_obj, runSubDist, res_ntup)
 
 #endregion
+
+import AnyMOD.matchValWithVar
+
+stab_obj = benders_obj.stab
+top_m = benders_obj.top
+
+expExpr_dic = matchValWithVar(stab_obj.var, stab_obj.weight, top_m)
+
+allCapa_df = vcat(vcat(vcat(map(x -> expExpr_dic[:capa][x] |> (u -> map(y -> u[y] |> (w -> map(z -> w[z][!, [:var, :value, :scaFac]], collect(keys(w)))), collect(keys(u)))), [:tech, :exc])...)...)...)
+allStLvl_df = vcat(vcat(map(x -> expExpr_dic[:stLvl][x] |> (u -> map(y -> u[y], collect(keys(u)))), collect(keys(expExpr_dic[:stLvl])))...)...) |> (z -> isempty(z) ? empty_df : z)
+allLim_df = vcat(map(x -> expExpr_dic[:lim][x], collect(keys(expExpr_dic[:lim])))...) |> (z -> isempty(z) ? empty_df : select(z, [:var, :value, :scaFac]))
+
+allVar_df = vcat(allCapa_df, allStLvl_df, allLim_df)
+
+
+# set lower and upper bound
+allVar_df[!,:low] = map(x -> lower_bound(collect(keys(x.terms))[1]), allVar_df[!,:var])
+allVar_df[!,:up] = map(x -> upper_bound(collect(keys(x.terms))[1]), allVar_df[!,:var])
+
+
+CSV.write("allCapa_df.csv", allVar_df)

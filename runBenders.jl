@@ -38,18 +38,26 @@ rngVio_ntup = (stab = 1e1, cut = 1e1, fix = 1e1)
 rngTar_tup = (mat = (1e-2,1e5), rhs = (1e-2,1e2))
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
+if occursin("lvl", trust)
+	numFoc_arr = [0,0]
+else
+	numFoc_arr = [0,3]
+end
+
+
+# target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
 if solve == "crsAllNoLim"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 0.0, dbInf = true), (numFoc = 3, dnsThrs = dnsThrs, crs = true))
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 0.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
 elseif solve == "crsAll5Lim"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 5.0, dbInf = true), (numFoc = 3, dnsThrs = dnsThrs, crs = true))
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 5.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
 elseif solve == "crsAll10Lim"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 10.0, dbInf = true), (numFoc = 3, dnsThrs = dnsThrs, crs = true))
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 10.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
 elseif solve == "crsAll20Lim"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 6000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = 3, dnsThrs = dnsThrs, crs = true))
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 6000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
 elseif solve == "crsTop5Lim"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 5.0, dbInf = true), (numFoc = 3, dnsThrs = dnsThrs, crs = true))
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 5.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
 elseif solve == "crsTop0LimSimp"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :simplex, timeLim = 0.0, dbInf = true), (numFoc = 3, dnsThrs = dnsThrs, crs = true))
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :simplex, timeLim = 0.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
 end
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
