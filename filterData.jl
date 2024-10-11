@@ -2,8 +2,8 @@ using CSV, DataFrames
 
 dir_str = "timeSeries/"
 
-inFolder_str = "greenfield_ESCU_country_8760h"
-outFolder_str = "country_8760h"
+inFolder_str = "greenfield_ESCU_country_96h"
+outFolder_str = "country_96h"
 
 scr_arr = string.(1982:2016)
 
@@ -29,18 +29,21 @@ for scr in scr_arr
  
 end
 
-#=
-# ! remove zeros in electricity demand
+
+# ! correct column names
+relTech_arr = ["runOfRiver", "windOffshore", "windOnshore", "reservoirInflow", "openPumpedStorageInflow", "solarAva"]
+
+
 for scr in scr_arr
 
     for frs in ("ini1","ini2","ini3","ini4")
 
-        wrtDir_str = dir_str * outFolder_str * "/scr" * scr * "/" * frs
-        elecDem_df = CSV.read(wrtDir_str * "/par_elecDemand_scr" * scr * "_" * frs * ".csv", DataFrame)
-        
-        filter!(x -> string(x.region_3) != "0", elecDem_df)
-        CSV.write(wrtDir_str * "/par_elecDemand_scr" * scr * "_" * frs * ".csv", elecDem_df)
+        for x in relTech_arr
+            wrtDir_str = dir_str * outFolder_str * "/scr" * scr * "/" * frs
+            ts_df = CSV.read(wrtDir_str * "/par_" * x * "_scr" * scr * "_" * frs * ".csv", DataFrame)
+            
+            CSV.write(wrtDir_str * "/par_" * x * "_scr" * scr * "_" * frs * ".csv", rename(ts_df,:region_2 => :region_3))
+        end
     end
 
 end
-=#

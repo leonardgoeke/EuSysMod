@@ -145,7 +145,7 @@ while true
 	lss_dic = Dict{Tuple{Int64,Int64},Float64}()
 	numFoc_dic = Dict{Tuple{Int64,Int64},Int64}()
 
-	acc_fl = getConvTol(benders_obj.itr.gap, benders_obj.algOpt.gap, benders_obj.algOpt.sub)
+	acc_fl = getConvTol(benders_obj.itr.gap, benders_obj.algOpt.gap, benders_obj.algOpt.sub.rng, benders_obj.algOpt.sub.int)
 
 	if benders_obj.algOpt.dist futData_dic = Dict{Tuple{Int64,Int64},Future}() end
 	for (id,s) in enumerate(sort(collect(keys(benders_obj.sub))))
