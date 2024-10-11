@@ -1,6 +1,6 @@
 using Gurobi, AnyMOD, CSV, Statistics
 
-dir_str = ""
+dir_str = "C:/Users/pacop/Desktop/git/EuSysMOD/"
 
 par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
 
@@ -26,7 +26,7 @@ scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value !=
 resultDir_str = dir_str * "results"
 
 # input folders
-inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "heatSector/fixed_country", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_" * time * "/general"]
+inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "sectorCoupling/fixed_country", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_" * time * "/general"]
 foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
 foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
@@ -56,6 +56,8 @@ reportResults(:cost, anyM, addObjName = true)
 reportResults(:exchange, anyM, addObjName = true)
 
 reportTimeSeries(:electricity, anyM)
+
+plotSankeyDiagram(anyM, dropDown = tuple(:timestep,))
 
 #endregion
 
