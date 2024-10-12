@@ -9,8 +9,6 @@ scr_arr = string.(1982:2016)
 
 allFile_arr = readdir(dir_str * inFolder_str)
 
-
-
 # ! loop over years to create seperate folder
 
 for scr in scr_arr
@@ -30,7 +28,7 @@ for scr in scr_arr
 end
 
 
-# ! correct column names
+# ! correct column names and filter NaN for offshore
 relTech_arr = ["runOfRiver", "windOffshore", "windOnshore", "reservoirInflow", "openPumpedStorageInflow", "solarAva"]
 
 
@@ -38,10 +36,13 @@ for scr in scr_arr
 
     for frs in ("ini1","ini2","ini3","ini4")
 
-        for x in relTech_arr
-            wrtDir_str = dir_str * outFolder_str * "/scr" * scr * "/" * frs
+        wrtDir_str = dir_str * outFolder_str * "/scr" * scr * "/" * frs
+
+        for x in relTech_arr    
             ts_df = CSV.read(wrtDir_str * "/par_" * x * "_scr" * scr * "_" * frs * ".csv", DataFrame)
-            
+            if x == "windOffshore"
+                ts_df = filter(x -> !isnan(x.value), ts_df)
+            end
             CSV.write(wrtDir_str * "/par_" * x * "_scr" * scr * "_" * frs * ".csv", rename(ts_df,:region_2 => :region_3))
         end
     end
