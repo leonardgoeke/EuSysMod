@@ -19,7 +19,7 @@ qtrLvl_3:
 qtrLvl_4:
   qtrLvl:
     startRad: 0.2
-    endRad: 0.01
+    endRad: 0.005
     inter: lin
     lam: 0.5
 box_1:

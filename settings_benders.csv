@@ -1,5 +1,5 @@
 time,spatialScope,scenario,workerCnt,trust,cutDel,dnsThrs,solve
-96h,all,2perQ,8,qtrLvl_4,200,2000,crsTop5Lim
+96h,neighCH,2perQ,8,qtrLvl_4,200,2000,crsTop5Lim
 8760h,onlyCH,2perQ,8,qtrLvl_1,200,2000,crsTop5Lim
 8760h,onlyCH,2perQ,8,qtrLvl_2,200,2000,crsTop5Lim
 8760h,onlyCH,2perQ,8,qtrLvl_3,200,2000,crsTop5Lim

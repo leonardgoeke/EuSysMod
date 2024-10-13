@@ -72,11 +72,10 @@ powerToX,,directAirCapture,,electricity,capturedCO2,,,mature,none,,,,
 powerToX,,h2ToCrudeOil,,h2; capturedCO2,crudeOil; districtHeat,,,mature,none,,,,
 powerToX,,pefc,,h2,electricity; districtHeat,,,mature,none,,,,
 powerToX,,refinery,,crudeOil,refinedOil,,,stock,none,,,,
-powerToX,,sofc,,naturalGas,electricity; processHeat_high,,,stock,none,,,,
+powerToX,,sofc,,naturalGas,electricity; processHeat_high,,,mature,none,,,,
 solar,openspace,pvOpenspace,,,electricity,,,mature,none,,,yes,4
 solar,rooftopInd,pvInd,,,electricity,,,mature,none,,,yes,4
 solar,rooftopResi,pvResi,,,electricity,,,mature,none,,,yes,4
-solar,rooftopResi,solarThermalResi,,,spaceHeat,,,stock,none,,,yes,4
 stock,power,pumpedStorageClosed,,,,electricity,electricity,stock,none,,2,yes,4
 stock,power,pumpedStorageOpen,,,,electricity,electricity,stock,none,ineq,inter,yes,4
 stock,power,runOfRiver,,,electricity,,,stock,none,,,yes,4

@@ -29,6 +29,8 @@ impOil,,base,effConv,1
 impOil,,base,costVarGen,0
 impOil,,flex,effConv,1.05
 impOil,,flex,costVarGen,1.109906328
+methaneToGas,all,,capaConvResi,1
+methanolToOil,all,,capaConvResi,1
 impGas,01ES,,capaConvFix,0
 impGas,02ES,,capaConvFix,0
 impGas,03ES,,capaConvFix,0

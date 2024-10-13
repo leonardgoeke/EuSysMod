@@ -65,9 +65,7 @@ else
 	meth_tup = tuple()
 end
 
-iniStab_ntup = (setup = :reduced, det = true) # options to initialize stabilization, :none for first input will skip stabilization, other values control input folders, second input determines, if heuristic model is solved stochastically or not
-
-stabSetup_obj = stabSetup(meth_tup, 0.0, iniStab_ntup)
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced) # :none for last argument will skip initialization, other names just used for setting input folder below
 
 
 # ! options for near optimal
@@ -175,7 +173,7 @@ while true
 	
 	#endregion
 	benders_obj.itr.cnt.i = benders_obj.itr.cnt.i + 1
-	#if rtn_boo break end
+	if rtn_boo break end
 	
 end
 #region # * write results
@@ -185,23 +183,6 @@ writeBendersResults!(benders_obj, runSubDist, res_ntup)
 
 #endregion
 
-import AnyMOD.matchValWithVar
 
-stab_obj = benders_obj.stab
-top_m = benders_obj.top
-
-expExpr_dic = matchValWithVar(stab_obj.var, stab_obj.weight, top_m)
-
-allCapa_df = vcat(vcat(vcat(map(x -> expExpr_dic[:capa][x] |> (u -> map(y -> u[y] |> (w -> map(z -> w[z][!, [:var, :value, :scaFac]], collect(keys(w)))), collect(keys(u)))), [:tech, :exc])...)...)...)
-allStLvl_df = vcat(vcat(map(x -> expExpr_dic[:stLvl][x] |> (u -> map(y -> u[y], collect(keys(u)))), collect(keys(expExpr_dic[:stLvl])))...)...) |> (z -> isempty(z) ? empty_df : z)
-allLim_df = vcat(map(x -> expExpr_dic[:lim][x], collect(keys(expExpr_dic[:lim])))...) |> (z -> isempty(z) ? empty_df : select(z, [:var, :value, :scaFac]))
-
-allVar_df = vcat(allCapa_df, allStLvl_df, allLim_df)
-
-
-# set lower and upper bound
-allVar_df[!,:low] = map(x -> lower_bound(collect(keys(x.terms))[1]), allVar_df[!,:var])
-allVar_df[!,:up] = map(x -> upper_bound(collect(keys(x.terms))[1]), allVar_df[!,:var])
-
-
-CSV.write("allCapa_df.csv", allVar_df)
+# ! extract level and limit from heuristc solution
+# ? starting point: what am i looking for

@@ -20,5 +20,5 @@ otherBiomass,solidBiomass,3,1,2,2,ineq
 otherBiomass,nonSolidBiomass,3,1,2,2,ineq
 rawBiogas,,3,1,2,2,eq
 avaAndNavi,,3,1,2,2,eq
-methane,,4,1,2,2,none
-methanol,,3,1,2,2,none
+methane,,4,1,2,2,eq
+methanol,,3,1,2,2,eq

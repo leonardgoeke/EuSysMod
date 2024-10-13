@@ -66,8 +66,3 @@ for year in "scr" .* string.(collect(1982:2016))
     #endregion
 
 end
-
-printObject(anyM.parts.tech[:oilStorage].cns[:stBal], anyM)
-reportStorageLevel(anyM)
-
-anyM.parts.tech[:oilStorage].cns[:stBal]

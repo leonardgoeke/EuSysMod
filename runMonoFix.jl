@@ -32,6 +32,7 @@ foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "/" 
 
 #region # * create and solve model
 
+
 anyM = anyModel(inDir_arr, resultDir_str, objName = obj_str, supTsLvl = 2, repTsLvl = 3, frsLvl = 3, shortExp = 5, emissionLoss = false, holdFixed = true);
 
 createOptModel!(anyM)
@@ -57,7 +58,7 @@ reportResults(:exchange, anyM, addObjName = true)
 
 reportTimeSeries(:electricity, anyM)
 
-plotSankeyDiagram(anyM, dropDown = tuple(:timestep,))
+plotSankeyDiagram(anyM, dropDown = tuple(:timestep,), ymlFilter = dir_str * "sankeyYaml/electricity.yml")
 
 #endregion
 
@@ -109,7 +110,3 @@ for x in intersect(keys(anyM.parts.tech), (:h2StorageCavern, :pumpedStorageOpen,
         CSV.write(resultDir_str * "/rndLevel_" * string(x) * "_" * obj_str * ".csv", levelAgg_df)
     end
 end
-
-
-
-
