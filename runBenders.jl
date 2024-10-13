@@ -72,10 +72,7 @@ else
 	meth_tup = tuple()
 end
 
-iniStab_ntup = (setup = :reduced, det = true) # options to initialize stabilization, :none for first input will skip stabilization, other values control input folders, second input determines, if heuristic model is solved stochastically or not
-
-stabSetup_obj = stabSetup(meth_tup, 0.0, iniStab_ntup)
-
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced) # :none for last argument will skip initialization, other names just used for setting input folder below
 
 # ! options for near optimal
 
