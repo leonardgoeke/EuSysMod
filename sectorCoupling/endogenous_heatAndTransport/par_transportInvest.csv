@@ -11,7 +11,6 @@ fcFrtRoadLight,lifeConv,20
 bevFrtRoadLight,lifeConv,20
 dieselFrtRoadHeavy,lifeConv,20
 fcFrtRoadHeavy,lifeConv,20
-oberFrtRoadHeavy,lifeConv,20
 bevFrtRoadHeavy,lifeConv,20
 fcPsngRail,lifeConv,20
 dieselPsngRail,lifeConv,20
@@ -31,7 +30,6 @@ fcFrtRoadLight,costExpConv,19871.51798
 bevFrtRoadLight,costExpConv,4098.638601
 dieselFrtRoadHeavy,costExpConv,1926.308599
 fcFrtRoadHeavy,costExpConv,4503.142952
-oberFrtRoadHeavy,costExpConv,3318.230381
 bevFrtRoadHeavy,costExpConv,982.5043977
 fcPsngRail,costExpConv,2209.129607
 dieselPsngRail,costExpConv,1935.632617
