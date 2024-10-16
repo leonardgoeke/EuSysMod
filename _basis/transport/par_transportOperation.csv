@@ -34,7 +34,6 @@ dieselFrtRoadLight,effConv,0.23
 fcFrtRoadLight,effConv,0.329
 dieselFrtRoadHeavy,effConv,4.998
 fcFrtRoadHeavy,effConv,5.529
-oberFrtRoadHeavy,effConv,7.096
 fcPsngRail,effConv,7.246
 dieselPsngRail,effConv,6.878
 fcFrtRail,effConv,20.135
