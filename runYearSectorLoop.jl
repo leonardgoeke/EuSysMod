@@ -16,7 +16,6 @@ time = string(par_df[id_int,:time]) # temporal resolution
 spaSco = string(par_df[id_int,:spatialScope]) # spatial scope
 
 for year in "scr" .* string.(collect(1982:2016))
-
     println(year)
     obj_str = time * "_" * spaSco * "_" * year
 
@@ -51,7 +50,6 @@ for year in "scr" .* string.(collect(1982:2016))
     set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
 
     optimize!(anyM.optModel)
-    objective_value(anyM.optModel)
 
     #endregion
 
@@ -62,6 +60,7 @@ for year in "scr" .* string.(collect(1982:2016))
     reportResults(:exchange, anyM, addObjName = true)
 
     reportTimeSeries(:electricity, anyM)
+
 
     #endregion
 

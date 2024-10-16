@@ -2,7 +2,7 @@ using CSV, DataFrames
 
 dir_str = "timeSeries/"
 
-for t in ["8760","2856","672"]
+for t in ["8760","2856","672","96"]
     inFolder_str = "greenfield_ESCU_country_" * t  * "h"
     outFolder_str = "country_" * t  * "h"
 
@@ -44,7 +44,8 @@ for t in ["8760","2856","672"]
                 if x == "windOffshore"
                     ts_df = filter(x -> !isnan(x.value), ts_df)
                 end
-                CSV.write(wrtDir_str * "/par_" * x * "_scr" * scr * "_" * frs * ".csv", rename(ts_df,:region_2 => :region_3))
+                #CSV.write(wrtDir_str * "/par_" * x * "_scr" * scr * "_" * frs * ".csv", rename(ts_df,:region_2 => :region_3))
+                CSV.write(wrtDir_str * "/par_" * x * "_scr" * scr * "_" * frs * ".csv", ts_df)
             end
         end
 

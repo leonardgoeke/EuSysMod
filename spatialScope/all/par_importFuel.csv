@@ -573,3 +573,15 @@ impOil,95UK,,capaConvFix,0
 impOil,96IE,,capaConvFix,0
 impOil,98IT,,capaConvFix,0
 impOil,99FR,,capaConvFix,0
+methaneToGas,06ES,,capaConvResi,1
+methaneToGas,11ES,,capaConvResi,1
+methaneToGas,30NL,,capaConvResi,1
+methaneToGas,31DE,,capaConvResi,1
+methaneToGas,69GR,,capaConvResi,1
+methaneToGas,90UK,,capaConvResi,1
+methanolToOil,06ES,,capaConvResi,1
+methanolToOil,11ES,,capaConvResi,1
+methanolToOil,30NL,,capaConvResi,1
+methanolToOil,31DE,,capaConvResi,1
+methanolToOil,69GR,,capaConvResi,1
+methanolToOil,90UK,,capaConvResi,1
