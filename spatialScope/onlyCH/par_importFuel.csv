@@ -19,13 +19,13 @@ impMethanol,base,effConv,1
 impMethanol,base,costVarGen,0
 impMethanol,flex,effConv,1.05
 impMethanol,flex,costVarGen,5.594285714
-impGas,,costOprConv,135.0214687
+impGas,,costOprConv,230.4756
 impGas,base,effConv,1
 impGas,base,costVarGen,0
 impGas,flex,effConv,1.05
-impGas,flex,costVarGen,0.807369078
-impOil,,costOprConv,185.6166983
+impGas,flex,costVarGen,1.378142857
+impOil,,costOprConv,426.612
 impOil,base,effConv,1
 impOil,base,costVarGen,0
 impOil,flex,effConv,1.05
-impOil,flex,costVarGen,1.109906328
+impOil,flex,costVarGen,2.550952381
