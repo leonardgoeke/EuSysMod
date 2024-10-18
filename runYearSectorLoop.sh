@@ -1,5 +1,5 @@
 #!/bin/bash --login
-#SBATCH --array=3
+#SBATCH --array=2,3
 #SBATCH --time=120:00:00
 #SBATCH --job-name=ESCU_monoEndoLoop_%j
 #SBATCH --output=results/monoEndoLoop_%j.out

@@ -46,14 +46,8 @@ end
 
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
-if solve == "crsAllNoLim"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 0.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
-elseif solve == "crsAll5Lim"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 5.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
-elseif solve == "crsAll10Lim"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 10.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
-elseif solve == "crsAll20Lim"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 6000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
+if solve == "crsNone5Lim"
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 6000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 5.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = false))
 elseif solve == "crsTop5Lim"
 	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 5.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
 elseif solve == "crsTop0LimSimp"
@@ -89,11 +83,15 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 3, shortExp = 5) 
 
 # ! input folders
-inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "heatSector/fixed_country", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_" * time * "/general"]
+inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "sectorCoupling/endogenous_heat", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_" * time * "/general"]
 foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
 foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-inputFolder_ntup = (in = inDir_arr, heu = inDir_arr, results = dir_str * "results")
+heuDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "sectorCoupling/endogenous_heat", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_672h/general"]
+foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/country_672h/general_" * x), ("ini1","ini2","ini3","ini4"))
+foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/country_672h/" * x[1] * "/" * x[2]), scrQrt_arr)
+
+inputFolder_ntup = (in = inDir_arr, heu = heuDir_arr, results = dir_str * "results")
 
 # ! scaling settings
 scale_dic = Dict{Symbol,NamedTuple}()
