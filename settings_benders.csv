@@ -1,4 +1,8 @@
-time,spatialScope,scenario,workerCnt,trust,cutDel,dnsThrs,solve
-96h,all,2perQ,8,qtrLvl_4,200,2000,crsTop5Lim
-672h,all,2perQ,8,qtrLvl_4,200,2000,crsTop5Lim
-2856h,all,2perQ,8,qtrLvl_4,200,2000,crsNone5Lim
+time,spatialScope,scenario,trust,cutDel,dnsThrs,solve,workerCnt,threads,ram
+96h,all,2perQ,qtrLvl_4,200,2000,crsTop5Lim,8,4,8
+8760h,all,2perQ,qtrLvl_4,200,2000,crsNone20Lim,8,4,16
+8760h,all,4perQ,qtrLvl_4,200,2000,crsNone20Lim,16,4,16
+8760h,all,2perQ,qtrLvl_4,200,2000,crsSub20Lim,8,4,16
+8760h,all,2perQ,qtrLvl_4,200,2000,crsNone20LimAcc,8,4,16
+8760h,all,2perQ,qtrLvl_4,200,2000,crsNone20Lim,8,8,8
+8760h,all,2perQ,qtrLvl_4,200,2000,crsNone20Lim,8,8,16

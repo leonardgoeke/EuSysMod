@@ -9,4 +9,4 @@
 module add julia/1.10.3
 module add gurobi/10.0.3
 
-sbatch --nodes=9 --ntasks=8 --mem-per-cpu=8G --time=4380 --cpus-per-task=4 --ntasks-per-node=1 --wrap "julia --heap-size-hint=30G runBenders.jl $SLURM_ARRAY_TASK_ID $SLURM_CPUS_PER_TASK"
+sbatch --nodes=17 --ntasks=17 --mem-per-cpu=16G --time=4380 --cpus-per-task=4 --ntasks-per-node=1 --wrap "julia --heap-size-hint=62G runBenders.jl $SLURM_ARRAY_TASK_ID $SLURM_CPUS_PER_TASK"
