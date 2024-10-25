@@ -113,11 +113,13 @@ if algSetup_obj.dist
 		using Gurobi, AnyMOD
 		runSubDist(w_int::Int64, resData_obj::resData, rngVio_fl::Float64, sol_sym::Symbol, optTol_fl::Float64=1e-8, crsOver_boo::Bool=false, resultOpt_tup::NamedTuple=NamedTuple()) = Distributed.@spawnat w_int runSub(resData_obj, rngVio_fl, sol_sym, optTol_fl, crsOver_boo, resultOpt_tup)
 		getComVarDist(w_int::Int64) = Distributed.@spawnat w_int getComVar()
+		getSubStringDist(w_int::Int64, res_sym::Symbol) = Distributed.@spawnat w_int getSubString(res_sym)
 	end
 	passobj(1, workers(), [:info_ntup, :inputFolder_ntup, :scale_dic, :algSetup_obj])
 else
 	runSubDist = x -> nothing
 	getComVarDist = x -> nothing
+	getSubStringDist = x -> nothing
 end
 # create benders object
 benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, res_ntup, nearOptSetup_obj);
@@ -125,63 +127,14 @@ benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, s
 #endregion
 
 #region # * iteration algorithm
-while true
 
-	produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Started iteration $(benders_obj.itr.cnt.i)", testErr = false, printErr = false)
+runIteration!(benders_obj, runSubDist)
 
-	#region # * solve top-problem and (start) sub-problems
-	str_time = now()
-	resData_obj, stabVar_obj = runTop(benders_obj);   
-	elpTop_time = now() - str_time
+#endregion
 
-	# start solving sub-problems
-	cutData_dic = Dict{Tuple{Int64,Int64},resData}()
-	timeSub_dic = Dict{Tuple{Int64,Int64},Millisecond}()
-	lss_dic = Dict{Tuple{Int64,Int64},Float64}()
-	numFoc_dic = Dict{Tuple{Int64,Int64},Int64}()
-
-	acc_fl = getConvTol(benders_obj.itr.gap, benders_obj.algOpt.gap, benders_obj.algOpt.sub.rng, benders_obj.algOpt.sub.int)
-
-	if benders_obj.algOpt.dist futData_dic = Dict{Tuple{Int64,Int64},Future}() end
-	for (id,s) in enumerate(sort(collect(keys(benders_obj.sub))))
-		if benders_obj.algOpt.dist # distributed case
-			futData_dic[s] = @suppress runSubDist(id + 1, copy(resData_obj), benders_obj.algOpt.rngVio.fix, benders_obj.algOpt.sub.meth, acc_fl, benders_obj.algOpt.sub.crs)
-		else # non-distributed case
-			cutData_dic[s], timeSub_dic[s], lss_dic[s], numFoc_dic[s] = @suppress runSub(benders_obj.sub[s], copy(resData_obj), benders_obj.algOpt.rngVio.fix, benders_obj.algOpt.sub.meth, acc_fl, benders_obj.algOpt.sub.crs)
-		end
-	end
-
-	# top-problem without stabilization
-	if !isnothing(benders_obj.stab) runTopWithoutStab!(benders_obj, stabVar_obj) end
-
-	# get results of sub-problems
-	if benders_obj.algOpt.dist
-		wait.(collect(values(futData_dic)))
-		for s in sort(collect(keys(benders_obj.sub)))
-			cutData_dic[s], timeSub_dic[s], lss_dic[s], numFoc_dic[s] = fetch(futData_dic[s])
-		end
-	end
-	
-	#endregion
-
-	#region # * analyse results and update refinements
-
-	# update results and stabilization
-	updateIteration!(benders_obj, cutData_dic, resData_obj, stabVar_obj)
-	# report on iteration
-	reportBenders!(benders_obj, resData_obj, elpTop_time, timeSub_dic, lss_dic, numFoc_dic)
-
-	# check convergence and finish
-	rtn_boo = checkConvergence(benders_obj, lss_dic)
-	
-	#endregion
-	benders_obj.itr.cnt.i = benders_obj.itr.cnt.i + 1
-	if rtn_boo break end
-	
-end
 #region # * write results
 
 produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Write results", testErr = false, printErr = false)
-writeBendersResults!(benders_obj, runSubDist, res_ntup)
+writeBendersResults!(benders_obj, runSubDist, getSubStringDist, res_ntup)
 
 #endregion

@@ -9,13 +9,13 @@ if isempty(ARGS)
     t_int = 4
 else
     id_int = parse(Int, ARGS[1])
-    t_int = parse(Int, ARGS[2]) # number of threads
 end
 
 time = string(par_df[id_int,:time]) # temporal resolution
 spaSco = string(par_df[id_int,:spatialScope]) # spatial scope
 scenario = string(par_df[id_int,:scenario]) # scenario case
 foresight = string(par_df[id_int,:foresight]) # foresight
+t_int = par_df[id_int,:threads]
 
 obj_str = time * "_" * spaSco * "_" * scenario * "_" * foresight
 
