@@ -9,12 +9,13 @@ if isempty(ARGS)
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
-    t_int = parse(Int,ARGS[2]) # number of threads
 end
 
 time = string(par_df[id_int,:time]) # temporal resolution
 spaSco = string(par_df[id_int,:spatialScope]) # spatial scope
 scenario = string(par_df[id_int,:scenario]) # scenario case
+ram = par_df[id_int,:ram]
+t_int = par_df[id_int,:threads]
 
 # extract benders settings
 
@@ -24,7 +25,7 @@ trust = par_df[id_int,:trust]
 dnsThrs = par_df[id_int,:dnsThrs]
 solve = par_df[id_int,:solve]
 
-name_str = time * "_" * spaSco * "_" * scenario * "_" * string(trust) * "trust_" * string(cutDel) * "cutDel_" * string(dnsThrs) * "dnsThrs_" * solve
+name_str = time * "_" * spaSco * "_" * scenario * "_" * string(trust) * "trust_" * string(cutDel) * "cutDel_" * string(dnsThrs) * "dnsThrs_" * solve * "_threads" * string(t_int) * "_ram" * string(ram) 
 
 # create scenario and quarter array
 scrDir_str = dir_str * "scenarioSetup/" * scenario
@@ -44,14 +45,14 @@ else
 	numFoc_arr = [0,3]
 end
 
-
+println(solve)
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
-if solve == "crsNone5Lim"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 6000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 5.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = false))
-elseif solve == "crsTop5Lim"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 5.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
-elseif solve == "crsTop0LimSimp"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :simplex, timeLim = 0.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
+if solve == "crsNone20Lim"
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 6000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = false))
+elseif solve == "crsSub20Lim"
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 6000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = false))
+elseif solve == "crsNone20LimAcc"
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 6000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :lin, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = false))
 end
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
@@ -107,7 +108,7 @@ scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e
 
 # initialize distributed computing
 if algSetup_obj.dist
-	addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=60G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=8, mem_per_cpu="8G", time=6000) # add all available nodes
+	addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=" * string(floor(t_int * ram) - 2 ) * "G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=t_int, mem_per_cpu= string(ram) * "G", time=6000) # add all available nodes
 	rmprocs(wrkCnt + 2) # remove one node again for main process
 	@everywhere begin
 		using Gurobi, AnyMOD
