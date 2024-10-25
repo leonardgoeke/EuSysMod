@@ -1,6 +1,6 @@
 using Gurobi, AnyMOD, CSV, Statistics
 
-dir_str = "C:/Users/pacop/Desktop/git/EuSysMOD/"
+dir_str = ""
 
 par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
 
@@ -15,20 +15,22 @@ end
 time = string(par_df[id_int,:time]) # temporal resolution
 spaSco = string(par_df[id_int,:spatialScope]) # spatial scope
 scenario = string(par_df[id_int,:scenario]) # scenario case
+foresight = string(par_df[id_int,:foresight]) # foresight
 
-obj_str = time * "_" * spaSco * "_" * scenario
+obj_str = time * "_" * spaSco * "_" * scenario * "_" * foresight
 
 # create scenario and quarter array
-scrDir_str = dir_str * "scenarioSetup/" * scenario
-scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(dir_str * "scenarioSetup/" * scenario * "/par_scrProb.csv", DataFrame))))
+scrDir_str = dir_str * "scenarioSetup/" * scenario * "_" * foresight
+scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(scrDir_str * "/par_scrProb.csv", DataFrame))))
 
 # define in- and output folders
 resultDir_str = dir_str * "results"
 
 # input folders
-inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "sectorCoupling/fixed_country", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_" * time * "/general"]
-foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
-foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "/" * x[1] * "/" * x[2]), scrQrt_arr)
+unique(getindex.(scrQrt_arr,2))
+inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "sectorCoupling/endogenous_heat", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
+foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
+foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
 #region # * create and solve model
 
@@ -40,13 +42,12 @@ setObjective!(:cost, anyM)
 
 set_optimizer(anyM.optModel, Gurobi.Optimizer)
 set_optimizer_attribute(anyM.optModel, "Method", 2);
-set_optimizer_attribute(anyM.optModel, "NumericFocus", 0);
+set_optimizer_attribute(anyM.optModel, "NumericFocus", 2);
 set_optimizer_attribute(anyM.optModel, "Crossover", 0);
 set_optimizer_attribute(anyM.optModel, "Threads", t_int);
 set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
 
 optimize!(anyM.optModel)
-objective_value(anyM.optModel)
 
 #endregion
 

@@ -1,9 +1,6 @@
-time,spatialScope,scenario,trust,cutDel,dnsThrs,solve,workerCnt,threads,ram
-96h,all,2perQ,qtrLvl_4,200,2000,crsTop5Lim,8,4,8
-8760h,core,2perQ,qtrLvl_4,200,2000,crsNone20Lim,8,4,8
-8760h,core,2perQ,qtr_1,200,2000,crsTop5Lim,8,4,8
-8760h,core,2perQ,lvl1_4,200,2000,crsNone20Lim,8,4,8
-8760h,core,2perQ,qtrLvl_4,200,2000,crsSub20Lim,8,4,8
-8760h,core,2perQ,qtrLvl_4,200,2000,crsNone20LimAcc,8,4,8
-8760h,core,2perQ,qtr_2,200,2000,crsTop5Lim,8,4,8
-8760h,core,2perQ,lvl1_2,200,2000,crsNone20Lim,8,4,8
+time,spatialScope,scenario,foresight,trust,cutDel,dnsThrs,solve,workerCnt,threads,ram
+672h,onlyCH,2perQ,month,qtrLvl_4,200,2000,crsNone20LimAcc,8,4,8
+8760h,core,2perQ,month,qtrLvl_4,200,2000,crsNone20LimAcc,24,4,4
+8760h,core,2perQ,3month,qtrLvl_4,200,2000,crsNone20LimAcc,8,4,8
+8760h,core,2perQ,month,qtr_2,200,2000,crsNone20LimAcc,24,4,4
+8760h,core,2perQ,3month,qtr_2,200,2000,crsNone20LimAcc,8,4,8

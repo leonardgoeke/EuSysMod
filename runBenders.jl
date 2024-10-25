@@ -14,22 +14,22 @@ end
 time = string(par_df[id_int,:time]) # temporal resolution
 spaSco = string(par_df[id_int,:spatialScope]) # spatial scope
 scenario = string(par_df[id_int,:scenario]) # scenario case
-ram = par_df[id_int,:ram]
-t_int = par_df[id_int,:threads]
+foresight = string(par_df[id_int,:foresight]) # foresight
+solve = par_df[id_int,:solve]
 
 # extract benders settings
-
 wrkCnt = par_df[id_int,:workerCnt]
+t_int = par_df[id_int,:threads]
+ram = par_df[id_int,:ram]
 cutDel = par_df[id_int,:cutDel]
 trust = par_df[id_int,:trust]
 dnsThrs = par_df[id_int,:dnsThrs]
-solve = par_df[id_int,:solve]
 
-name_str = time * "_" * spaSco * "_" * scenario * "_" * string(trust) * "trust_" * string(cutDel) * "cutDel_" * string(dnsThrs) * "dnsThrs_" * solve * "_threads" * string(t_int) * "_ram" * string(ram) 
+name_str = time * "_" * spaSco * "_" * scenario * "_" * foresight * "_" * string(trust) * "trust_" * string(cutDel) * "cutDel_" * string(dnsThrs) * "dnsThrs_" * solve
 
 # create scenario and quarter array
-scrDir_str = dir_str * "scenarioSetup/" * scenario
-scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(dir_str * "scenarioSetup/" * scenario * "/par_scrProb.csv", DataFrame))))
+scrDir_str = dir_str * "scenarioSetup/" * scenario * "_" * foresight
+scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(scrDir_str * "/par_scrProb.csv", DataFrame))))
 
 #region # * options for algorithm
 
@@ -45,7 +45,6 @@ else
 	numFoc_arr = [0,3]
 end
 
-println(solve)
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
 if solve == "crsNone20Lim"
 	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 6000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = false))
@@ -84,13 +83,13 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 3, shortExp = 5) 
 
 # ! input folders
-inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "sectorCoupling/endogenous_heat", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_" * time * "/general"]
-foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
-foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "/" * x[1] * "/" * x[2]), scrQrt_arr)
+inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "sectorCoupling/endogenous_heat", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
+foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
+foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-heuDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "sectorCoupling/endogenous_heat", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_672h/general"]
-foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/country_672h/general_" * x), ("ini1","ini2","ini3","ini4"))
-foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/country_672h/" * x[1] * "/" * x[2]), scrQrt_arr)
+heuDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "sectorCoupling/endogenous_heat", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_672h_" * foresight * "/general"]
+foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/country_672h_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
+foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/country_672h_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
 inputFolder_ntup = (in = inDir_arr, heu = heuDir_arr, results = dir_str * "results")
 
@@ -146,7 +145,7 @@ while true
 	if benders_obj.algOpt.dist futData_dic = Dict{Tuple{Int64,Int64},Future}() end
 	for (id,s) in enumerate(sort(collect(keys(benders_obj.sub))))
 		if benders_obj.algOpt.dist # distributed case
-			futData_dic[s] = runSubDist(id + 1, copy(resData_obj), benders_obj.algOpt.rngVio.fix, benders_obj.algOpt.sub.meth, acc_fl, benders_obj.algOpt.sub.crs)
+			futData_dic[s] = @suppress runSubDist(id + 1, copy(resData_obj), benders_obj.algOpt.rngVio.fix, benders_obj.algOpt.sub.meth, acc_fl, benders_obj.algOpt.sub.crs)
 		else # non-distributed case
 			cutData_dic[s], timeSub_dic[s], lss_dic[s], numFoc_dic[s] = @suppress runSub(benders_obj.sub[s], copy(resData_obj), benders_obj.algOpt.rngVio.fix, benders_obj.algOpt.sub.meth, acc_fl, benders_obj.algOpt.sub.crs)
 		end

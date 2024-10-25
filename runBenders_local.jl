@@ -1,6 +1,6 @@
 using Gurobi, AnyMOD, CSV, YAML
 
-dir_str = "C:/Users/pacop/Desktop/git/EuSysMOD/"
+dir_str = ""
 
 par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
 
@@ -15,20 +15,20 @@ end
 time = string(par_df[id_int,:time]) # temporal resolution
 spaSco = string(par_df[id_int,:spatialScope]) # spatial scope
 scenario = string(par_df[id_int,:scenario]) # scenario case
+foresight = string(par_df[id_int,:foresight]) # foresight
 solve = par_df[id_int,:solve]
 
 # extract benders settings
-
 wrkCnt = par_df[id_int,:workerCnt]
 cutDel = par_df[id_int,:cutDel]
 trust = par_df[id_int,:trust]
 dnsThrs = par_df[id_int,:dnsThrs]
 
-name_str = time * "_" * spaSco * "_" * scenario * "_" * string(trust) * "trust_" * string(cutDel) * "cutDel_" * string(dnsThrs) * "dnsThrs_" * solve
+name_str = time * "_" * spaSco * "_" * scenario * "_" * foresight * "_" * string(trust) * "trust_" * string(cutDel) * "cutDel_" * string(dnsThrs) * "dnsThrs_" * solve
 
 # create scenario and quarter array
-scrDir_str = dir_str * "scenarioSetup/" * scenario
-scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(dir_str * "scenarioSetup/" * scenario * "/par_scrProb.csv", DataFrame))))
+scrDir_str = dir_str * "scenarioSetup/" * scenario * "_" * foresight
+scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(scrDir_str * "/par_scrProb.csv", DataFrame))))
 
 #region # * options for algorithm
 
@@ -44,13 +44,13 @@ else
 	numFoc_arr = [0,3]
 end
 
-
-if solve == "crsAllNoLim"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 0.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
-elseif solve == "crsAll5Lim"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 0.01, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
-elseif solve == "crsTop5Lim"
-	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 4320.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 5.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true))
+# target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
+if solve == "crsNone20Lim"
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 6000.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = false))
+elseif solve == "crsSub20Lim"
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 6000.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = true, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = false))
+elseif solve == "crsNone20LimAcc"
+	algSetup_obj = algSetup(0.005, cutDel, (bal = false, st = true), 2, 6000.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :lin, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = false))
 end
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
@@ -83,9 +83,15 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 3, shortExp = 5) 
 
 # ! input folders
-inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "sectorCoupling/fixed_country", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_" * time * "/general"]
-foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
-foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "/" * x[1] * "/" * x[2]), scrQrt_arr)
+if foresight == "month"
+	fore_tup = tuple(map(x -> "ini" * string(x), 1:12)...)
+elseif foresight == "3month"
+	fore_tup = tuple(map(x -> "ini" * string(x), 1:4)...)
+end
+
+inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "sectorCoupling/fixed_country", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
+foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/general_" * x), fore_tup)
+foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
 inputFolder_ntup = (in = inDir_arr, heu = inDir_arr, results = dir_str * "results")
 
