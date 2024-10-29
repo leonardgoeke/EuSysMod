@@ -20,7 +20,7 @@ for year in "scr" .* string.(collect(1982:2016))
     obj_str = time * "_" * spaSco * "_" * year
 
     # define in- and output folders
-    resultDir_str = dir_str * "results/sectorCoupling"
+    resultDir_str = dir_str * "results/technologySetup"
 
     # create scenario folder
     scrDir_str = "scenarioSetup/" * year
@@ -30,7 +30,7 @@ for year in "scr" .* string.(collect(1982:2016))
     end
 
     # input folders
-    inDir_arr = [dir_str * "_basis", dir_str * scrDir_str, dir_str * "spatialScope/" * spaSco, dir_str * "sectorCoupling/endogenous_heatAndTransport", dir_str * "resolution/default_country", dir_str * "timeSeries/country_" * time * "/general"]
+    inDir_arr = [dir_str * "_basis", dir_str * scrDir_str, dir_str * "spatialScope/" * spaSco, dir_str * "technologySetup/endogenous_heatAndTransport", dir_str * "resolution/default_country", dir_str * "timeSeries/country_" * time * "/general"]
 
     foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
     foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "/" * year * "/" * x), ("ini1","ini2","ini3","ini4"))

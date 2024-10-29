@@ -83,11 +83,11 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 3, shortExp = 5) 
 
 # ! input folders
-inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "sectorCoupling/endogenous_heat", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
+inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "technologySetup/endogenous_heat", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
 foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
 foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-heuDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "sectorCoupling/endogenous_heat", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_672h_" * foresight * "/general"]
+heuDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "technologySetup/endogenous_heat", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_672h_" * foresight * "/general"]
 foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/country_672h_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
 foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/country_672h_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
@@ -136,5 +136,16 @@ runIteration!(benders_obj, runSubDist)
 
 produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Write results", testErr = false, printErr = false)
 writeBendersResults!(benders_obj, runSubDist, getSubStringDist, res_ntup)
+
+#endregion
+
+#region # * compute dual variables for monte carlo analysis
+
+outDir_str = dir_str * "inputMonteCarlo/" * name_str * "/"
+
+writeVariableFix!(benders_obj, outDir_str)
+editTopForDuals!(benders_obj, inputFolder_ntup, info_ntup, stabSetup_obj, scale_dic, algSetup_obj, outDir_str, runSubDist)
+runIteration!(benders_obj, runSubDist)
+writeDualVariable!(benders_obj, outDir_str)
 
 #endregion
