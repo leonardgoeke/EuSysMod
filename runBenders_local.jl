@@ -1,6 +1,6 @@
 using Gurobi, AnyMOD, CSV, YAML
 
-dir_str = "C:/Git/EuSysMod/"
+dir_str = "C:/Users/pacop/Desktop/git/EuSysMOD/"
 
 par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
 
@@ -25,7 +25,7 @@ cutDel = par_df[id_int,:cutDel]
 trust = par_df[id_int,:trust]
 dnsThrs = par_df[id_int,:dnsThrs]
 
-name_str = time * "_" * spaSco * "_" * scenario * "_" * foresight * "_" * string(trust) * "trust_" * string(cutDel) * "cutDel_" * string(dnsThrs) * "dnsThrs_" * solve * "_delBoth"
+name_str = time * "_" * spaSco * "_" * scenario * "_" * foresight * "_" * string(trust) * "trust_" * string(cutDel) * "cutDel_" * string(dnsThrs) * "dnsThrs_" * solve
 
 # create scenario and quarter array
 scrDir_str = dir_str * "scenarioSetup/" * scenario * "_" * foresight
@@ -79,7 +79,8 @@ heuDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * 
 foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/country_672h_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
 foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/country_672h_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-inputFolder_ntup = (in = inDir_arr, heu = heuDir_arr, results = dir_str * "results")
+if !isdir(dir_str * "results/" * name_str) mkdir(dir_str * "results/" * name_str) end
+inputFolder_ntup = (in = inDir_arr, heu = heuDir_arr, results = dir_str * "results/" * name_str)
 
 # ! scaling settings
 scale_dic = Dict{Symbol,NamedTuple}()
@@ -110,7 +111,6 @@ else
 	getSubStringDist = x -> nothing
 	getComVarDist = x -> nothing
 end
-
 # create benders object
 benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, res_ntup, nearOptSetup_obj);
 
@@ -128,3 +128,17 @@ produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1,
 writeBendersResults!(benders_obj, runSubDist, getSubStringDist, res_ntup)
 
 #endregion
+
+#region # * compute dual variables for monte carlo analysis
+
+outDir_str = dir_str * "inputMonteCarlo/" * name_str * "/"
+
+writeVariableFix!(benders_obj, outDir_str)
+editTopForDuals!(benders_obj, inputFolder_ntup, info_ntup, stabSetup_obj, scale_dic, algSetup_obj, outDir_str, runSubDist)
+runIteration!(benders_obj, runSubDist)
+writeDualVariable!(benders_obj, outDir_str)
+
+#endregion
+
+
+

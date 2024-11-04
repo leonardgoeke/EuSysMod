@@ -92,7 +92,8 @@ heuDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * 
 foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/country_672h_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
 foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/country_672h_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-inputFolder_ntup = (in = inDir_arr, heu = heuDir_arr, results = dir_str * "results")
+if !isdir(dir_str * "results/" * name_str) mkdir(dir_str * "results/" * name_str) end
+inputFolder_ntup = (in = inDir_arr, heu = heuDir_arr, results = dir_str * "results/" * name_str)
 
 # ! scaling settings
 scale_dic = Dict{Symbol,NamedTuple}()
