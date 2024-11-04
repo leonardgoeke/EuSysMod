@@ -2,4 +2,4 @@ parameter,value
 repWorstCase,2
 effStInterIn,0.98
 effStInterOut,0.98
-expcStStartLvl,0.5
+expcStStartLvl,0.02

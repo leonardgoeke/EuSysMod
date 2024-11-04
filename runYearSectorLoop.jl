@@ -30,10 +30,9 @@ for year in "scr" .* string.(collect(1982:2016))
     end
 
     # input folders
-    inDir_arr = [dir_str * "_basis", dir_str * scrDir_str, dir_str * "spatialScope/" * spaSco, dir_str * "sectorCoupling/endogenous_heatAndTransport", dir_str * "resolution/default_country", dir_str * "timeSeries/country_" * time * "/general"]
-
-    foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "/general_" * x), ("ini1","ini2","ini3","ini4"))
-    foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "/" * year * "/" * x), ("ini1","ini2","ini3","ini4"))
+    inDir_arr = [dir_str * "_basis", dir_str * scrDir_str, dir_str * "spatialScope/" * spaSco, dir_str * "techSetup/endogenous_heatAndTransport", dir_str * "resolution/default_country", dir_str * "timeSeries/country_" * time * "_3month/general"]
+    foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "_3month/general_" * x), ("ini1","ini2","ini3","ini4"))
+    foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "_3month/" * year * "/" * x), ("ini1","ini2","ini3","ini4"))
 
     #region # * create and solve model
 
@@ -60,7 +59,6 @@ for year in "scr" .* string.(collect(1982:2016))
     reportResults(:exchange, anyM, addObjName = true)
 
     reportTimeSeries(:electricity, anyM)
-
 
     #endregion
 

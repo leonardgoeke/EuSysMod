@@ -94,7 +94,7 @@ all,UK,94UK,offshore_a,capaConvFix,0
 all,UK,95UK,offshore_a,capaConvUp,13.11511105
 all,IE,96IE,offshore_a,capaConvUp,19.31605421
 all,IT,98IT,offshore_a,capaConvUp,7.795862529
-all,FR,99FR,offshore_a,capaConvUp,3.686560432
+all,FR,99FR,offshore_a,capaConvUp,0
 all,ES,01ES,offshore_b,capaConvUp,5.859934947
 all,ES,02ES,offshore_b,capaConvUp,5.859934947
 all,ES,03ES,offshore_b,capaConvFix,0
@@ -190,7 +190,7 @@ all,UK,94UK,offshore_b,capaConvFix,0
 all,UK,95UK,offshore_b,capaConvUp,19.88488895
 all,IE,96IE,offshore_b,capaConvUp,32.88394579
 all,IT,98IT,offshore_b,capaConvUp,5.154137471
-all,FR,99FR,offshore_b,capaConvUp,2.126483047
+all,FR,99FR,offshore_b,capaConvUp,0
 all,ES,,offshore_a,capaConvUp,22.77035779
 all,PT,,offshore_a,capaConvUp,5.937491978
 all,FR,,offshore_a,capaConvUp,84.79088995
