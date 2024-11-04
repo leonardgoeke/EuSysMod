@@ -140,3 +140,14 @@ produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1,
 writeBendersResults!(benders_obj, runSubDist, getSubStringDist, res_ntup)
 
 #endregion
+
+#region # * compute dual variables for monte carlo analysis
+
+outDir_str = dir_str * "inputMonteCarlo/" * name_str * "/"
+
+writeVariableFix!(benders_obj, outDir_str)
+editTopForDuals!(benders_obj, inputFolder_ntup, info_ntup, stabSetup_obj, scale_dic, algSetup_obj, outDir_str, runSubDist)
+runIteration!(benders_obj, runSubDist)
+writeDualVariable!(benders_obj, outDir_str)
+
+#endregion

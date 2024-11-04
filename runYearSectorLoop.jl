@@ -20,7 +20,7 @@ for year in "scr" .* string.(collect(1982:2016))
     obj_str = time * "_" * spaSco * "_" * year
 
     # define in- and output folders
-    resultDir_str = dir_str * "results/sectorCoupling"
+    resultDir_str = dir_str * "results/technologySetup"
 
     # create scenario folder
     scrDir_str = "scenarioSetup/" * year
