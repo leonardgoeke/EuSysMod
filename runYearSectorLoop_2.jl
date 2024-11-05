@@ -6,21 +6,22 @@ par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
 
 if isempty(ARGS)
     id_int = 1
-    t_int = 4
 else
     id_int = parse(Int, ARGS[1])
-    t_int = parse(Int, ARGS[2]) # number of threads
 end
 
+t_int = 8
 time = string(par_df[id_int,:time]) # temporal resolution
 spaSco = string(par_df[id_int,:spatialScope]) # spatial scope
 
-for year in "scr" .* string.(collect(1982:2016))
+ini_arr = "ini" .* string.(1:12)
+
+for year in "scr" .* string.(collect(2000:2016))
     println(year)
     obj_str = time * "_" * spaSco * "_" * year
 
     # define in- and output folders
-    resultDir_str = dir_str * "results/technologySetup"
+    resultDir_str = dir_str * "results/deteministic"
 
     # create scenario folder
     scrDir_str = "scenarioSetup/" * year
@@ -30,9 +31,9 @@ for year in "scr" .* string.(collect(1982:2016))
     end
 
     # input folders
-    inDir_arr = [dir_str * "_basis", dir_str * scrDir_str, dir_str * "spatialScope/" * spaSco, dir_str * "techSetup/endogenous_heatAndTransport", dir_str * "resolution/default_country", dir_str * "timeSeries/country_" * time * "_3month/general"]
-    foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "_3month/general_" * x), ("ini1","ini2","ini3","ini4"))
-    foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "_3month/" * year * "/" * x), ("ini1","ini2","ini3","ini4"))
+    inDir_arr = [dir_str * "_basis", dir_str * scrDir_str, dir_str * "spatialScope/" * spaSco, dir_str * "techSetup/endogenous_heatAndTransport", dir_str * "resolution/default_country", dir_str * "timeSeries/country_" * time * "_month/general"]
+    foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "_month/general_" * x), ini_arr)
+    foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "_month/" * year * "/" * x), ini_arr)
 
     #region # * create and solve model
 
