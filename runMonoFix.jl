@@ -35,7 +35,7 @@ foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "_" 
 #region # * create and solve model
 
 
-anyM = anyModel(inDir_arr, resultDir_str, objName = obj_str, supTsLvl = 2, repTsLvl = 3, frsLvl = 3, shortExp = 5, emissionLoss = false, holdFixed = true);
+anyM = anyModel(inDir_arr, resultDir_str, objName = obj_str, supTsLvl = 2, repTsLvl = 4, frsLvl = 3, shortExp = 5, emissionLoss = false, holdFixed = true);
 
 createOptModel!(anyM)
 setObjective!(:cost, anyM)

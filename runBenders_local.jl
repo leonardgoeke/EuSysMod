@@ -68,7 +68,7 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 # ! general problem settings
 
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
-info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 3, shortExp = 5) 
+info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 4, shortExp = 5) 
 
 # ! input folders
 inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "techSetup/endogenous_heat", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
