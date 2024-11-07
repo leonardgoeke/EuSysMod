@@ -8,10 +8,10 @@ processHeat_low,,5,2,2,2,none
 processHeat_medium,,5,2,2,2,none
 processHeat_high,,5,2,2,2,none
 capturedCO2,,3,1,2,2,ineq
-psngRoadPrvt,,6,2,2,2,none
-psngRoadPub,,6,2,2,2,none
-frtRoadLight,,6,2,2,2,none
-frtRoadHeavy,,6,2,2,2,none
+psngRoadPrvt,,4,2,2,2,none
+psngRoadPub,,4,2,2,2,none
+frtRoadLight,,4,2,2,2,none
+frtRoadHeavy,,4,2,2,2,none
 psngRail,,6,2,2,2,none
 frtRail,,6,2,2,2,none
 crudeOil,,3,1,2,2,eq

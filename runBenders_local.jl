@@ -1,6 +1,8 @@
 using Gurobi, AnyMOD, CSV, YAML
 
 dir_str = "C:/Users/pacop/Desktop/git/EuSysMOD/"
+modDir_str = dir_str * "inputFiles/"
+setupDir_str = dir_str *  "modelSetup/"
 
 par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
 
@@ -28,7 +30,7 @@ dnsThrs = par_df[id_int,:dnsThrs]
 name_str = time * "_" * spaSco * "_" * scenario * "_" * foresight * "_" * string(trust) * "trust_" * string(cutDel) * "cutDel_" * string(dnsThrs) * "dnsThrs_" * solve
 
 # create scenario and quarter array
-scrDir_str = dir_str * "scenarioSetup/" * scenario * "_" * foresight
+scrDir_str = setupDir_str * "scenarioSetup/" * scenario * "_" * foresight
 scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(scrDir_str * "/par_scrProb.csv", DataFrame))))
 
 #region # * options for algorithm
@@ -68,10 +70,7 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 # ! general problem settings
 
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
-info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 3, shortExp = 5) 
-
-modDir_str = dir_str * "inputFiles/"
-setupDir_str = dir_str *  "modelSetup/"
+info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 4, shortExp = 5) 
 
 # ! input folders
 inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/endogenous_heat", setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
@@ -144,3 +143,4 @@ writeDualVariable!(benders_obj, outDir_str)
 
 #endregion
 
+printIIS(benders_obj.top)

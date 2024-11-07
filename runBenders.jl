@@ -3,6 +3,8 @@ using Gurobi, AnyMOD, CSV, YAML, SlurmClusterManager
 dir_str = ""
 
 par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
+modDir_str = dir_str * "inputFiles/"
+setupDir_str = dir_str *  "modelSetup/"
 
 if isempty(ARGS)
     id_int = 1
@@ -28,8 +30,9 @@ dnsThrs = par_df[id_int,:dnsThrs]
 name_str = time * "_" * spaSco * "_" * scenario * "_" * foresight * "_" * string(trust) * "trust_" * string(cutDel) * "cutDel_" * string(dnsThrs) * "dnsThrs_" * solve * "_newCutDel"
 
 # create scenario and quarter array
-scrDir_str = dir_str * "scenarioSetup/" * scenario * "_" * foresight
+scrDir_str = setupDir_str * "scenarioSetup/" * scenario * "_" * foresight
 scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(scrDir_str * "/par_scrProb.csv", DataFrame))))
+
 
 #region # * options for algorithm
 
