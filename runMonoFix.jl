@@ -19,8 +19,11 @@ t_int = par_df[id_int,:threads]
 
 obj_str = time * "_" * spaSco * "_" * scenario * "_" * foresight
 
+modDir_str = dir_str * "inputFiles/"
+setupDir_str = dir_str *  "modelSetup/"
+
 # create scenario and quarter array
-scrDir_str = dir_str * "scenarioSetup/" * scenario * "_" * foresight
+scrDir_str = setupDir_str * "scenarioSetup/" * scenario * "_" * foresight
 scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(scrDir_str * "/par_scrProb.csv", DataFrame))))
 
 # define in- and output folders
@@ -28,9 +31,10 @@ resultDir_str = dir_str * "results"
 
 # input folders
 unique(getindex.(scrQrt_arr,2))
-inDir_arr = [dir_str * "_basis", dir_str * "spatialScope/" * spaSco, dir_str * "techSetup/endogenous_heat", dir_str * "resolution/default_country", scrDir_str, dir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
-foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
-foreach(x -> push!(inDir_arr, dir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
+inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/endogenous_heat", setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
+foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
+foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
+
 
 #region # * create and solve model
 
@@ -50,6 +54,8 @@ set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
 optimize!(anyM.optModel)
 
 #endregion
+
+printIIS(anyM)
 
 #region # * write results
 
