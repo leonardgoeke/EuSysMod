@@ -1,0 +1,5 @@
+technology_1,technology_2,technology_3,timestep_2,parameter_1,value_1,parameter_2,value_2,source
+wind,offshore,offshore_a,2040,costExpConv,1577.582287,costOprConv,32.53763468,
+wind,offshore,offshore_b,2040,costExpConv,1777.267247,costOprConv,32.44750273,
+wind,onshore,,2040,costExpConv,963.06625,costOprConv,11.34,
+wind,,,,lifeConv,30,,,
