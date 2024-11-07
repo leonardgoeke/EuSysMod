@@ -21,10 +21,6 @@ bevPsngRoadPrvt,stDis,0.0001
 bevPsngRoadPub,stDis,0.0001
 bevFrtRoadLight,stDis,0.0001
 bevFrtRoadHeavy,stDis,0.0001
-bevPsngRoadPrvt,useFix,0
-bevPsngRoadPub,useFix,0
-bevFrtRoadLight,useFix,0
-bevFrtRoadHeavy,useFix,0
 ottoPsngRoadPrvt,effConv,1.828
 cngPsngRoadPrvt,effConv,1.747
 fcevPsngRoadPrvt,effConv,3.013
