@@ -39,7 +39,7 @@ monteDir_str = dir_str * "inputMonteCarlo/" * name_str
 
 # define input folder
 inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter/onlyMonteCarlo",
-                setupDir_str * "techSetup/endogenous_heat", setupDir_str * "resolution/default_country", setupDir_str * "spatialScope/" * spaSco,
+                setupDir_str * "techSetup/preselected", setupDir_str * "resolution/default_country", setupDir_str * "spatialScope/" * spaSco,
                     monteDir_str * "/storageFixes", monteDir_str * "/capacityFixes", monteDir_str * "/dualValues"]
 
 # add starting levels of storage
