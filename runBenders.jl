@@ -1,10 +1,10 @@
 using Gurobi, AnyMOD, CSV, YAML, SlurmClusterManager
 
 dir_str = ""
-
-par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
 modDir_str = dir_str * "inputFiles/"
 setupDir_str = dir_str *  "modelSetup/"
+
+par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
 
 if isempty(ARGS)
     id_int = 1
@@ -32,7 +32,6 @@ name_str = time * "_" * spaSco * "_" * scenario * "_" * foresight * "_" * string
 # create scenario and quarter array
 scrDir_str = setupDir_str * "scenarioSetup/" * scenario
 scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(scrDir_str * "/par_scrProb.csv", DataFrame))))
-
 
 #region # * options for algorithm
 
@@ -86,9 +85,6 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
 info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 4, shortExp = 5)
 
-modDir_str = dir_str * "inputFiles/"
-setupDir_str = dir_str *  "modelSetup/"
-
 # ! input folders
 inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/preselected", setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
@@ -98,7 +94,8 @@ heuDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str
 foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * "672h" * "_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
 foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * "672h" * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-if !isdir(dir_str * "results/" * name_str) mkdir(dir_str * "results/" * name_str) end
+restDir!(dir_str * "results/" * name_str)
+restDir!(dir_str * "results/" * name_str * "/sub")
 inputFolder_ntup = (in = inDir_arr, heu = heuDir_arr, results = dir_str * "results/" * name_str)
 inputFolderSub_ntup = (in = inDir_arr, heu = heuDir_arr, results = dir_str * "results/" * name_str * "/sub")
 
