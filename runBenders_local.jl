@@ -44,7 +44,7 @@ rngTar_tup = (mat = (1e-2,1e5), rhs = (1e-2,1e2))
 algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 6000.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
 upper_int = 1
 
-res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
+res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = tuple()) #duals = (:enBal, :excRestr, :stBal)
 
 # ! options for stabilization
 
@@ -81,8 +81,10 @@ heuDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str
 foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
 foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-if !isdir(dir_str * "results/" * name_str) mkdir(dir_str * "results/" * name_str) end
+restDir!(dir_str * "results/" * name_str)
+restDir!(dir_str * "results/" * name_str * "/sub")
 inputFolder_ntup = (in = inDir_arr, heu = heuDir_arr, results = dir_str * "results/" * name_str)
+inputFolderSub_ntup = (in = inDir_arr, heu = heuDir_arr, results = dir_str * "results/" * name_str * "/sub")
 
 # ! scaling settings
 scale_dic = Dict{Symbol,NamedTuple}()
@@ -107,7 +109,7 @@ if algSetup_obj.dist
 		getComVarDist(w_int::Int64) = Distributed.@spawnat w_int getComVar()
 		getSubStringDist(w_int::Int64, res_sym::Symbol) = Distributed.@spawnat w_int getSubString(res_sym)
 	end
-	passobj(1, workers(), [:info_ntup, :inputFolder_ntup, :scale_dic, :algSetup_obj])
+	passobj(1, workers(), [:info_ntup, :inputFolderSub_ntup, :scale_dic, :algSetup_obj])
 else
 	runSubDist = x -> nothing
 	getSubStringDist = x -> nothing
@@ -143,4 +145,5 @@ writeDualVariable!(benders_obj, outDir_str)
 
 #endregion
 
-printIIS(benders_obj.top)
+
+
