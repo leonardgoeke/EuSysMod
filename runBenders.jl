@@ -30,7 +30,7 @@ dnsThrs = par_df[id_int,:dnsThrs]
 name_str = time * "_" * spaSco * "_" * scenario * "_" * foresight * "_" * string(trust) * "trust_" * string(cutDel) * "cutDel_" * string(dnsThrs) * "dnsThrs_" * solve * "_newCutDel"
 
 # create scenario and quarter array
-scrDir_str = setupDir_str * "scenarioSetup/" * scenario * "_" * foresight
+scrDir_str = setupDir_str * "scenarioSetup/" * scenario
 scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(scrDir_str * "/par_scrProb.csv", DataFrame))))
 
 
@@ -70,7 +70,7 @@ else
 	meth_tup = tuple()
 end
 
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, (upper = 10, inter = :lin)) # :none for last argument will skip initialization, other names just used for setting input folder below
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, (upper = upper_int, inter = :lin)) # :none for last argument will skip initialization, other names just used for setting input folder below
 
 # ! options for near optimal
 
@@ -95,8 +95,8 @@ foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
 heuDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/preselected", setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
-foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
-foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
+foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * "672h" * "_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
+foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * "672h" * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
 if !isdir(dir_str * "results/" * name_str) mkdir(dir_str * "results/" * name_str) end
 inputFolder_ntup = (in = inDir_arr, heu = heuDir_arr, results = dir_str * "results/" * name_str)
