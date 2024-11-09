@@ -41,21 +41,21 @@ scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value !=
 rngVio_ntup = (stab = 1e1, cut = 1e1, fix = 1e1)
 rngTar_tup = (mat = (1e-2,1e5), rhs = (1e-2,1e2))
 
-# target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
+# target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit in minutes for algorithm, distributed computing?, number of threads, optimizer
 if solve == "20Upper"
-	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 6000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
+	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 2000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
 	upper_int = 20
 elseif solve == "10Upper"
-	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 6000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
+	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 2000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
 	upper_int = 10
 elseif solve == "5Upper"
-	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 6000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
+	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 2000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
 	upper_int = 5
 elseif solve == "1Upper"
-	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 6000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
+	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 2000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
 	upper_int = 1
 elseif solve == "1UpperLimAcc"
-	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 6000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :lin, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
+	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 2000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :lin, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
 end
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
@@ -84,17 +84,17 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 # ! general problem settings
 
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
-info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 3, shortExp = 5)
+info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 4, shortExp = 5)
 
 modDir_str = dir_str * "inputFiles/"
 setupDir_str = dir_str *  "modelSetup/"
 
 # ! input folders
-inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/endogenous_heat", setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
+inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/preselected", setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-heuDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/endogenous_heat", setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
+heuDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/preselected", setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
 foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
 foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
