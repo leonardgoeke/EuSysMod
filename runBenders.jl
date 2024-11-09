@@ -100,7 +100,7 @@ foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * "672h" * "_"
 
 if !isdir(dir_str * "results/" * name_str) mkdir(dir_str * "results/" * name_str) end
 inputFolder_ntup = (in = inDir_arr, heu = heuDir_arr, results = dir_str * "results/" * name_str)
-inputFolder_ntup = (in = inDir_arr, heu = heuDir_arr, results = dir_str * "results/" * name_str)
+inputFolderSub_ntup = (in = inDir_arr, heu = heuDir_arr, results = dir_str * "results/" * name_str * "/sub")
 
 # ! scaling settings
 scale_dic = Dict{Symbol,NamedTuple}()
@@ -124,7 +124,7 @@ if algSetup_obj.dist
 		getComVarDist(w_int::Int64) = Distributed.@spawnat w_int getComVar()
 		getSubStringDist(w_int::Int64, res_sym::Symbol) = Distributed.@spawnat w_int getSubString(res_sym)
 	end
-	passobj(1, workers(), [:info_ntup, :inputFolder_ntup, :scale_dic, :algSetup_obj])
+	passobj(1, workers(), [:info_ntup, :inputFolderSub_ntup, :scale_dic, :algSetup_obj])
 else
 	runSubDist = x -> nothing
 	getComVarDist = x -> nothing

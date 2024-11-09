@@ -1,7 +1,7 @@
-
 using Gurobi, AnyMOD, CSV
 
-dir_str = "C:/Users/pacop/Downloads/EuSysMOD/inputMonteCarlo/"
+dir_str = "C:/Users/pacop/Desktop/git/EuSysMOD/"
+rngYear_arr = collect(1982:2016)
 
 par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
 
@@ -27,6 +27,7 @@ t_int = 4
 #region # * setup input folders and data
 
 name_str = time * "_" * spaSco * "_" * scenario * "_" * foresight * "_" * string(trust) * "trust_" * string(cutDel) * "cutDel_" * string(dnsThrs) * "dnsThrs_" * solve
+frs_dic = Dict("month" => 12, "3month" => 4)
 
 # problem settings
 rngTar_tup = (mat = (1e-2,1e5), rhs = (1e-2,1e2))
@@ -36,6 +37,9 @@ info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 3, shortExp =
 modDir_str = dir_str * "inputFiles/"
 setupDir_str = dir_str *  "modelSetup/"
 monteDir_str = dir_str * "inputMonteCarlo/" * name_str
+resultDir_str = dir_str * "results/" * name_str * "/" * "monteCarlo"
+restDir!(resultDir_str) 
+
 
 # define input folder
 inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter/onlyMonteCarlo",
@@ -50,40 +54,55 @@ end
 
 #endregion
 
-#region # * loop over random time periods
+#region # * perform monte carlo analysis
 
-steps_int = 1
-ini_int = 1
-year_int = 1982
+allLvl_df = DataFrame(timestep_dispatch = String[], region_dispatch = String[], technology = String[], scenario = String[], value = Float64[], step = Int64[])
+allSum_df = DataFrame(region_dispatch = String[], technology = String[], carrier = String[], scenario = String[], timestep_foresight = String[], id = String[], variable = Symbol[], value = Float64[], step = Int64[])
+step_int = 1
 
-# create folder for scenario definition
-if !isdir(setupDir_str * "scenarioSetup/scr" * string(year_int)) 
-    mkdir(setupDir_str * "scenarioSetup/scr" * string(year_int))
+while step_int < 40
+    
+    ini_int = step_int % frs_dic[foresight] |> (x -> x == 0 ? frs_dic[foresight] : x)
+
+    # select random year/scenario
+    year_int = rand(rngYear_arr)
+    
+    println("Run step ", step_int, " with data for year ", year_int)
+
+    # create folder for scenario definition
+    restDir!(setupDir_str * "scenarioSetup/scr" * string(year_int))
     CSV.write(setupDir_str * "scenarioSetup/scr" * string(year_int) * "/set_scenario.csv", DataFrame(scenario = ["scr" * string(year_int)]))
+
+    # define input folders
+    tsFold_str = modDir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/"
+    tsDir_arr = [setupDir_str * "scenarioSetup/scr" * string(year_int),  tsFold_str * "general", tsFold_str * "general_ini" * (ini_int <= 9 ? "0" : "") * string(ini_int), tsFold_str * "scr" * string(year_int) * "/ini" * (ini_int <= 9 ? "0" : "") * string(ini_int)]
+
+    # run monte-carlo step
+    sub_m, startLvl_dic = @suppress runMonteCarloStep!(vcat(inDir_arr, tsDir_arr), startLvl_dic, step_int, ini_int, resultDir_str, t_int, info_ntup, rngTar_tup, scal_tup)
+
+    # write aggregated dispatch results
+    sum_df = select(filter(x -> x.scenario != "none", reportResults(:summary, sub_m, addObjName = false, rtnOpt = (:csvDf,))), Not([:timestep_superordinate_dispatch]))
+    sum_df[!,:step] .= step_int
+    append!(allSum_df, sum_df)
+
+    # write storage levels
+    lvl_df = select(reportStorageLevel(sub_m, false, (:df,)),Not([:timestep_superordinate_expansion,:timestep_superordinate_dispatch,:carrier,:mode,:id]))
+    lvl_df = filter(x -> occursin(sub_m.sets[:Ts].nodes[sub_m.subPro[1]].val, x.timestep_dispatch), lvl_df)
+    lvl_df[!,:step] .= step_int
+    append!(allLvl_df, lvl_df)
+
+    step_int = step_int + 1
 end
 
-tsFold_str = modDir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/"
-tsDir_arr = [setupDir_str * "scenarioSetup/scr" * string(year_int),  tsFold_str * "general", tsFold_str * "general_ini" * string(ini_int), tsFold_str * "scr" * string(year_int) * "/ini" * string(ini_int)]
+#endregion
 
-# create problem
-sub_m = anyModel(vcat(inDir_arr, tsDir_arr), dir_str * "results", objName = "subModel", frsLvl = info_ntup.frsLvl, repTsLvl = info_ntup.repTsLvl, supTsLvl = info_ntup.supTsLvl, shortExp = info_ntup.shortExp, coefRng = rngTar_tup, scaFac = scal_tup, holdFixed = true, monteCarlo = true);
-delete!(sub_m.parts.lim.par, :emissionUp)
+#region # * write results_
 
-# enforce sub-problem settings
-allFrs_arr = sort(getfield.(getNodesLvl(sub_m.sets[:Ts], info_ntup.frsLvl), :idx))
-sub_m.subPro = tuple(allFrs_arr[ini_int], 1)
+CSV.write(dir_str * "results/" * name_str * "/storageLvl_monteCarlo.csv", allLvl_df)
+CSV.write(dir_str * "results/" * name_str * "/summary_monteCarlo.csv", allSum_df)
 
-# create sup-problem including fix for starting levels
-prepareMod!(sub_m, Gurobi.Optimizer, t_int)
-startLvl_dic = fixStartingLevels!(sub_m, startLvl_dic, steps_int)
+#endregion
 
-# solve 
-optimize!(sub_m.optModel)
-
-# write results (emissions, costs, lss, storage level)
-reportResults(:summary, sub_m)
-reportResults(:cost, sub_m)
-
-sub_m.parts.tech[:oilStorage].cns[:stBal]
-sub_m.parts.tech[:gasStorage].var[:stLvl]
+# ! rumprobieren, wenn vernünftige ergebnisse clustering!
+# ! denke über erweiterung nach, mehrmals bei 0 starten? wofür wäre das gut?
 
