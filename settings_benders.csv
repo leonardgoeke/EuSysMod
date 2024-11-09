@@ -1,5 +1,5 @@
 time,spatialScope,scenario,foresight,trust,cutDel,dnsThrs,solve,workerCnt,threads,ram
-672h,onlyCH,total24_ext0,month,qtrLvl_1,200,2000,20Upper,8,4,8
+96h,onlyCH,total24_ext0,3month,qtrLvl_1,200,2000,20Upper,8,4,8
 672h,onlyCH,2perQ,month,qtrLvl_1,200,2000,20Upper,8,4,8
-672h,all,total36_ext4,month,qtrLvl_1,40,10000,1Upper,8,8,8
-8760h,all,total36_ext4,month,qtrLvl_2,40,10000,20Upper,8,8,8
+672h,all,total36_ext4,month,qtrLvl_1,40,10000,1Upper,36,8,8
+8760h,all,total36_ext4,month,qtrLvl_2,40,10000,20Upper,36,8,8
