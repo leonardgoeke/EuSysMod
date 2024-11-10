@@ -101,7 +101,7 @@ scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e
 
 # initialize distributed computing
 if algSetup_obj.dist
-	addprocs(24)
+	addprocs(8)
 	#addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=" * string(floor(t_int * ram) - 2 ) * "G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=t_int, mem_per_cpu= string(ram) * "G", time=6000) # add all available nodes
 	#rmprocs(wrkCnt + 2) # remove one node again for main process
 	@everywhere begin
