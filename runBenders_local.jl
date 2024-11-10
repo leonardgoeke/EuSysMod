@@ -1,6 +1,6 @@
 using Gurobi, AnyMOD, CSV, YAML
 
-dir_str = ""
+dir_str = "C:/Users/pacop/Desktop/git/EuSysMod/"
 modDir_str = dir_str * "inputFiles/"
 setupDir_str = dir_str *  "modelSetup/"
 
@@ -16,6 +16,7 @@ end
 time = string(par_df[id_int,:time]) # temporal resolution
 spaSco = string(par_df[id_int,:spatialScope]) # spatial scope
 scenario = string(par_df[id_int,:scenario]) # scenario case
+techs = string(par_df[id_int,:techs]) # available technologies
 foresight = string(par_df[id_int,:foresight]) # foresight
 solve = par_df[id_int,:solve]
 
@@ -27,10 +28,10 @@ cutDel = par_df[id_int,:cutDel]
 trust = par_df[id_int,:trust]
 dnsThrs = par_df[id_int,:dnsThrs]
 
-name_str = time * "_" * spaSco * "_" * scenario * "_" * foresight * "_" * string(trust) * "trust_" * string(cutDel) * "cutDel_" * string(dnsThrs) * "dnsThrs_" * solve
+name_str = convert(String,par_df[id_int,:name])
 
 # create scenario and quarter array
-scrDir_str = setupDir_str * "scenarioSetup/" * scenario
+scrDir_str = setupDir_str * "scenarioSetup/" * scenario * "_" * foresight
 scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(scrDir_str * "/par_scrProb.csv", DataFrame))))
 
 #region # * options for algorithm
@@ -41,7 +42,7 @@ rngVio_ntup = (stab = 1e1, cut = 1e2, fix = 1e3)
 rngTar_tup = (mat = (1e-2,1e5), rhs = (1e-2,1e2))
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
-algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 6000.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
+algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 6000.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
 upper_int = 1
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = tuple()) #duals = (:enBal, :excRestr, :stBal)
@@ -73,11 +74,11 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 4, shortExp = 5) 
 
 # ! input folders
-inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/preselected", setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
+inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/preselected_" * techs, setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-heuDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/preselected", setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
+heuDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/preselected_" * techs, setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
 foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
 foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
@@ -132,18 +133,7 @@ runIteration!(benders_obj, runSubDist)
 produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Write results", testErr = false, printErr = false)
 writeBendersResults!(benders_obj, runSubDist, getSubStringDist, res_ntup)
 
-#endregion
-
-#region # * compute dual variables for monte carlo analysis
-
 outDir_str = dir_str * "inputMonteCarlo/" * name_str * "/"
-
-writeVariableFix!(benders_obj, outDir_str)
-editTopForDuals!(benders_obj, inputFolder_ntup, info_ntup, stabSetup_obj, scale_dic, algSetup_obj, outDir_str, runSubDist)
-runIteration!(benders_obj, runSubDist)
-writeDualVariable!(benders_obj, outDir_str)
+writeMonteCarloInputs!(benders_obj, outDir_str, 0.05)
 
 #endregion
-
-
-

@@ -16,6 +16,7 @@ end
 time = string(par_df[id_int,:time]) # temporal resolution
 spaSco = string(par_df[id_int,:spatialScope]) # spatial scope
 scenario = string(par_df[id_int,:scenario]) # scenario case
+techs = string(par_df[id_int,:techs]) # available technologies
 foresight = string(par_df[id_int,:foresight]) # foresight
 solve = par_df[id_int,:solve]
 
@@ -27,7 +28,7 @@ cutDel = par_df[id_int,:cutDel]
 trust = par_df[id_int,:trust]
 dnsThrs = par_df[id_int,:dnsThrs]
 
-name_str = time * "_" * spaSco * "_" * scenario * "_" * foresight * "_" * string(trust) * "trust_" * string(cutDel) * "cutDel_" * string(dnsThrs) * "dnsThrs_" * solve * "_newCutDel"
+name_str = convert(String,par_df[id_int,:name])
 
 # create scenario and quarter array
 scrDir_str = setupDir_str * "scenarioSetup/" * scenario
@@ -86,11 +87,11 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 4, shortExp = 5)
 
 # ! input folders
-inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/preselected", setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
+inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/preselected_" * techs, setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-heuDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/preselected", setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
+heuDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/preselected_" * techs, setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
 foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * "672h" * "_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
 foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * "672h" * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 

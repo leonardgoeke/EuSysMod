@@ -1,5 +1,5 @@
 parameter,value
-repWorstCase,2
+repWorstCase,4
 effStInterIn,0.98
 effStInterOut,0.98
-expcStStartLvl,0.02
+expcStStartLvl,0.1
