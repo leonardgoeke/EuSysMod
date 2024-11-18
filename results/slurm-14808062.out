@@ -1,4 +1,0 @@
-Set parameter MIPGap to value 0.001
-Set parameter SolutionLimit to value 3600
-srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
-slurmstepd: error: *** JOB 14808062 ON eu-a2p-278 CANCELLED AT 2024-11-09T18:25:20 ***
