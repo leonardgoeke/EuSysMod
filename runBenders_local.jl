@@ -1,6 +1,6 @@
 using Gurobi, AnyMOD, CSV, YAML
 
-dir_str = "C:/Users/pacop/Desktop/git/EuSysMod/"
+dir_str = "C:/Git/EuSysMod/"
 modDir_str = dir_str * "inputFiles/"
 setupDir_str = dir_str *  "modelSetup/"
 

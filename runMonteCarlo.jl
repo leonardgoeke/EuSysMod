@@ -1,6 +1,6 @@
 using Gurobi, AnyMOD, CSV
 
-dir_str = "C:/Users/pacop/Desktop/git/EuSysMOD/"
+dir_str = "C:/Git/EuSysMod/"
 rngYear_arr = collect(1982:2016)
 
 par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
