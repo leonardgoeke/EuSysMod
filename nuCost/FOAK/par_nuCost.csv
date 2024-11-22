@@ -1,6 +1,6 @@
 technology_3,carrier_1,mode,parameter,value,comment
-nuclearPowerFlexChp_SFR,uranium,,costVarUse,7.182426151,uranium fuel cost (enrichment etc.)
-nuclearPowerFlexChp_SFR,,,costExpConv,4142.714962,"investitionskosten auf den uran input (bisher in AnyAtom bezogen auf den Stromoutput), spezifische_investitionskosten_strom_output * effizienzt = spezifische_kosten_uran_input"
+nuclearPowerFlexChp_SFR,uranium,,costVarUse,6.502972946,uranium fuel cost (enrichment etc.)
+nuclearPowerFlexChp_SFR,,,costExpConv,3750.816612,"investitionskosten auf den uran input (bisher in AnyAtom bezogen auf den Stromoutput), spezifische_investitionskosten_strom_output * effizienzt = spezifische_kosten_uran_input"
 nuclearPowerFlexChp_SFR,,,costOprConv,30.46227441,betriebskosten auf den uran input (bisher in AnyAtom bezogen auf den Stromoutput)
 nuclearPowerFlexChp_SFR,,moreHeat,avaConv,0.9,
 nuclearPowerFlexChp_SFR,,moreHeat,effConv,0.603428571,gesamt thermische effizienz: (output_strom + output_heat)/input_uran
@@ -8,27 +8,27 @@ nuclearPowerFlexChp_SFR,electricity,moreHeat,ratioConvOutFix,0.1,anteil des stro
 nuclearPowerFlexChp_SFR,,moreElec,avaConv,0.9,
 nuclearPowerFlexChp_SFR,,moreElec,effConv,0.402285714,
 nuclearPowerFlexChp_SFR,electricity,moreElec,ratioConvOutFix,0.9,
-nuclearPowerFlexChp_SMR,uranium,,costVarUse,5.985355126,uranium fuel cost (enrichment etc.)
-nuclearPowerFlexChp_SMR,,,costExpConv,3354.248396,
-nuclearPowerFlexChp_SMR,,,costOprConv,23.87999177,
+nuclearPowerFlexChp_SMR,uranium,,costVarUse,5.419144122,uranium fuel cost (enrichment etc.)
+nuclearPowerFlexChp_SMR,,,costExpConv,3036.93851,
+nuclearPowerFlexChp_SMR,,,costOprConv,25.38522867,
 nuclearPowerFlexChp_SMR,,moreHeat,avaConv,0.9,
 nuclearPowerFlexChp_SMR,,moreHeat,effConv,0.502857143,
 nuclearPowerFlexChp_SMR,electricity,moreHeat,ratioConvOutFix,0.1,
 nuclearPowerFlexChp_SMR,,moreElec,avaConv,0.9,
 nuclearPowerFlexChp_SMR,,moreElec,effConv,0.335238095,
 nuclearPowerFlexChp_SMR,electricity,moreElec,ratioConvOutFix,0.9,
-nuclearPowerFlexChp_HTR,uranium,,costVarUse,6.783402476,uranium fuel cost (enrichment etc.)
-nuclearPowerFlexChp_HTR,,,costExpConv,3768.364402,
-nuclearPowerFlexChp_HTR,,,costOprConv,25.80883602,
+nuclearPowerFlexChp_HTR,uranium,,costVarUse,6.141696671,uranium fuel cost (enrichment etc.)
+nuclearPowerFlexChp_HTR,,,costExpConv,3411.879391,
+nuclearPowerFlexChp_HTR,,,costOprConv,28.76992583,
 nuclearPowerFlexChp_HTR,,moreHeat,avaConv,0.9,
 nuclearPowerFlexChp_HTR,,moreHeat,effConv,0.569904762,
 nuclearPowerFlexChp_HTR,electricity,moreHeat,ratioConvOutFix,0.1,
 nuclearPowerFlexChp_HTR,,moreElec,avaConv,0.9,
 nuclearPowerFlexChp_HTR,,moreElec,effConv,0.368761905,
 nuclearPowerFlexChp_HTR,electricity,moreElec,ratioConvOutFix,0.9,
-nuclearPowerFlexChp_LWR,uranium,,costVarUse,5.985355126,uranium fuel cost (enrichment etc.)
-nuclearPowerFlexChp_LWR,,,costExpConv,2040.876272,
-nuclearPowerFlexChp_LWR,,,costOprConv,13.5940911,
+nuclearPowerFlexChp_LWR,uranium,,costVarUse,5.419144122,uranium fuel cost (enrichment etc.)
+nuclearPowerFlexChp_LWR,,,costExpConv,1847.810601,
+nuclearPowerFlexChp_LWR,,,costOprConv,25.38522867,
 nuclearPowerFlexChp_LWR,,moreHeat,avaConv,0.9,
 nuclearPowerFlexChp_LWR,,moreHeat,effConv,0.502857143,
 nuclearPowerFlexChp_LWR,electricity,moreHeat,ratioConvOutFix,0.1,
