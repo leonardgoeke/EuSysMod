@@ -38,8 +38,8 @@ scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value !=
 
 # ! options for general algorithm
 
-rngVio_ntup = (stab = 1e1, cut = 1e2, fix = 1e3)
-rngTar_tup = (mat = (1e-2,1e5), rhs = (1e-2,1e2))
+rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e3)
+rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
 algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 6000.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
@@ -57,7 +57,7 @@ else
 	meth_tup = tuple()
 end
 
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, (upper = upper_int, inter = :lin)) # :none for last argument will skip initialization, other names just used for setting input folder below
+stabSetup_obj = stabSetup(meth_tup, 0.0, :none, 0.01, (upper = upper_int, inter = :lin)) # :none for last argument will skip initialization, other names just used for setting input folder below
 
 # ! options for near optimal
 
@@ -92,7 +92,7 @@ scale_dic = Dict{Symbol,NamedTuple}()
 
 scale_dic[:rng] = rngTar_tup
 scale_dic[:facHeu] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e2, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
-scale_dic[:facTop] = (capa = 1e2, capaStSize = 1e3, insCapa = 1e2, dispConv = 1e1, dispSt = 1e2, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
+scale_dic[:facTop] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e2, dispConv = 1e2, dispSt = 1e4, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
 scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e2, dispSt = 1e3, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
 
 #endregion
@@ -133,7 +133,7 @@ runIteration!(benders_obj, runSubDist)
 produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Write results", testErr = false, printErr = false)
 writeBendersResults!(benders_obj, runSubDist, getSubStringDist, res_ntup)
 
-outDir_str = dir_str * "inputMonteCarlo/" * name_str * "/"
-writeMonteCarloInputs!(benders_obj, outDir_str, 0.05)
+outDir_str = dir_str * "inputOutOfSample/" * name_str * "/"
+writeResultsAsInputs!(benders_obj, outDir_str)
 
 #endregion

@@ -1,13 +1,13 @@
 qtrLvl_1:
   qtrLvl:
-    startRad: 0.2
-    endRad: 0.005
-    inter: lin
-    lam: 0.5
-qtrLvl_2:
-  qtrLvl:
     startRad: 0.1
-    endRad: 0.001
+    itrRad: 4
+    decStart: 5.0
+    decEnd: 0.5
+    incStart: 0.1
+    incEnd: 0.01
+    facStart: 2
+    facEnd: 1.2
     inter: lin
     lam: 0.5
 box_1:
