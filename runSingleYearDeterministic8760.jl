@@ -6,7 +6,7 @@ par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
 
 t_int = 8
 year = "scr" * string(parse(Int, ARGS[1]))
-time = "672h" # temporal resolution
+time = "8760h" # temporal resolution
 spaSco = "all" # spatial scope
 
 ini_arr = ["ini01", "ini02", "ini03", "ini04", "ini05", "ini06", "ini07", "ini08", "ini09", "ini10", "ini11", "ini12"]
@@ -25,7 +25,7 @@ if !isdir(scrDir_str)
 end
 
 # input folders
-inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", scrDir_str, setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/allEndogenous", setupDir_str * "resolution/default_country", modDir_str * "timeSeries/country_" * time * "_month/general"]
+inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", scrDir_str, setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/preselected_all", setupDir_str * "resolution/default_country", modDir_str * "timeSeries/country_" * time * "_month/general"]
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_month/general_" * x), ini_arr)
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_month/" * year * "/" * x), ini_arr)
 
@@ -55,4 +55,33 @@ reportResults(:exchange, anyM, addObjName = true)
 
 reportTimeSeries(:electricity, anyM)
 
+reportStorageLevel(anyM)
+
+
+# create directory
+outDir_str = dir_str * "inputOutOfSample/" * obj_str * "/"
+restDir!(outDir_str)
+
+parDef_dic = defineParameter(anyM.options, anyM.report)
+
+# write capacity values
+for sys in (:tech, :exc)
+    part_dic = getfield(anyM.parts, sys)
+    for sSym in keys(part_dic)
+        for capaSym in filter(x -> any(occursin.(["capa","exp"], string(x))), keys(part_dic[sSym].var))
+            # get value capacity variable
+            var_df = copy(part_dic[sSym].var[capaSym])
+            var_df[!,:value] = value.(var_df[!,:var])
+            select!(var_df, Not([:var]))
+            # write parameter fle
+            par_sym = Symbol(capaSym,"Fix")
+            writeParameterFile!(anyM, var_df, par_sym, parDef_dic[par_sym], outDir_str * "par_" * string(sSym,"_",capaSym))
+        end
+    end
+end
+
+
 #endregion
+
+
+
