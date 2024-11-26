@@ -18,7 +18,9 @@ modDir_str = dir_str * "inputFiles/"
 setupDir_str = dir_str *  "modelSetup/"
 
 # create scenario folder
-scrDir_str = setupDir_str * "scenarioSetup/" * year
+scrFolDir_str = setupDir_str * "scenarioSetup/"  * spaSco
+scrDir_str = scrFolDir_str * "/" * scenario * "_" * foresight
+if !isdir(scrFolDir_str) mkdir(scrFolDir_str) end
 if !isdir(scrDir_str)
     mkdir(scrDir_str)
     CSV.write(scrDir_str * "/set_scenario.csv", DataFrame(scenario = [year]))

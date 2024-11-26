@@ -23,7 +23,7 @@ modDir_str = dir_str * "inputFiles/"
 setupDir_str = dir_str *  "modelSetup/"
 
 # create scenario and quarter array
-scrDir_str = setupDir_str * "scenarioSetup/" * scenario * "_" * foresight
+scrDir_str = setupDir_str * "scenarioSetup/"  * spaSco * "/" * scenario * "_" * foresight
 scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(scrDir_str * "/par_scrProb.csv", DataFrame))))
 
 # define in- and output folders

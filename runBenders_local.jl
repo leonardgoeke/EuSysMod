@@ -31,7 +31,7 @@ dnsThrs = par_df[id_int,:dnsThrs]
 name_str = convert(String,par_df[id_int,:name])
 
 # create scenario and quarter array
-scrDir_str = setupDir_str * "scenarioSetup/" * scenario * "_" * foresight
+scrDir_str = setupDir_str * "scenarioSetup/"  * spaSco * "/" * scenario * "_" * foresight
 scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(scrDir_str * "/par_scrProb.csv", DataFrame))))
 
 #region # * options for algorithm
