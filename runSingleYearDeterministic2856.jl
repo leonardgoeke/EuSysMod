@@ -5,8 +5,8 @@ dir_str = ""
 par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
 
 t_int = 8
-year = "scr" * string(parse(Int, ARGS[1]))
-time = "2856h" # temporal resolution
+year = "scr1982" # * string(parse(Int, ARGS[1]))
+time = "672h" # temporal resolution
 spaSco = "all" # spatial scope
 
 ini_arr = ["ini01", "ini02", "ini03", "ini04", "ini05", "ini06", "ini07", "ini08", "ini09", "ini10", "ini11", "ini12"]
@@ -19,7 +19,7 @@ setupDir_str = dir_str *  "modelSetup/"
 
 # create scenario folder
 scrFolDir_str = setupDir_str * "scenarioSetup/"  * spaSco
-scrDir_str = scrFolDir_str * "/" * scenario * "_" * foresight
+scrDir_str = scrFolDir_str * "/" * year
 if !isdir(scrFolDir_str) mkdir(scrFolDir_str) end
 if !isdir(scrDir_str)
     mkdir(scrDir_str)
@@ -27,7 +27,7 @@ if !isdir(scrDir_str)
 end
 
 # input folders
-inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", scrDir_str, setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/allEndogenous", setupDir_str * "resolution/default_country", modDir_str * "timeSeries/country_" * time * "_month/general"]
+inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", scrDir_str, setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/preselected_all", setupDir_str * "resolution/default_country", modDir_str * "timeSeries/country_" * time * "_month/general"]
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_month/general_" * x), ini_arr)
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_month/" * year * "/" * x), ini_arr)
 
@@ -56,5 +56,6 @@ reportResults(:cost, anyM, addObjName = true)
 reportResults(:exchange, anyM, addObjName = true)
 
 reportTimeSeries(:electricity, anyM)
+reportStorageLevel(anyM)
 
 #endregion

@@ -62,7 +62,7 @@ else
 	meth_tup = tuple()
 end
 
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, (upper = upper_int, inter = :lin)) # :none for last argument will skip initialization, other names just used for setting input folder below
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, (upper = solTop_int, inter = :lin)) # :none for last argument will skip initialization, other names just used for setting input folder below
 
 # ! options for near optimal
 

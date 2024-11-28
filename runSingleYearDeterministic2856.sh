@@ -2,7 +2,7 @@
 
 #SBATCH --array=1982-2016
 #SBATCH --time=120:00:00
-#SBATCH --job-name=ESCU_SingleDeter_%j
+#SBATCH --job-name=results/ESCU_SingleDeter_%j
 #SBATCH --output=results/SingleDeter_%j.out
 #SBATCH --error=results/SingleDeter_%j.err
 
