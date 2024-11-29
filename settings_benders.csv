@@ -1,4 +1,0 @@
-name,time,spatialScope,scenario,techs,foresight,trust,cutDel,dnsThrs,solve,workerCnt,threads,ram
-all_24Test,8760h,all,total24_ext0,all,month,qtrLvl_1,50,10000,top20,24,8,8
-bla1,672h,all,total36_ext4,all,month,qtrLvl_1,40,10000,1Upper,8,8,8
-bla2,8760h,all,total36_ext4,all,month,qtrLvl_2,40,10000,20Upper,8,8,8

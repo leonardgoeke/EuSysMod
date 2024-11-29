@@ -1,13 +1,13 @@
 using Gurobi, AnyMOD, CSV, YAML
 
-dir_str = "C:/Git/EuSysMod/"
+dir_str = ""
 modDir_str = dir_str * "inputFiles/"
 setupDir_str = dir_str *  "modelSetup/"
 
-par_df = CSV.read(dir_str * "settings_benders.csv", DataFrame)
+par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 1
+    id_int = 2
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -17,10 +17,11 @@ time = string(par_df[id_int,:time]) # temporal resolution
 spaSco = string(par_df[id_int,:spatialScope]) # spatial scope
 scenario = string(par_df[id_int,:scenario]) # scenario case
 techs = string(par_df[id_int,:techs]) # available technologies
-foresight = string(par_df[id_int,:foresight]) # foresight
-solve = par_df[id_int,:solve]
+security = string(par_df[id_int,:security]) # security settings
+inOos = string(par_df[id_int,:inputOutOfSample]) # capacity folder for out-of-sample testing
 
 # extract benders settings
+solve = par_df[id_int,:solve]
 wrkCnt = par_df[id_int,:workerCnt]
 t_int = par_df[id_int,:threads]
 ram = par_df[id_int,:ram]
@@ -30,9 +31,23 @@ dnsThrs = par_df[id_int,:dnsThrs]
 
 name_str = convert(String,par_df[id_int,:name])
 
+checkDet_boo = scenario in "scr" .* string.(1982:2016)
+
 # create scenario and quarter array
-scrDir_str = setupDir_str * "scenarioSetup/"  * spaSco * "/" * scenario * "_" * foresight
-scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(scrDir_str * "/par_scrProb.csv", DataFrame))))
+if checkDet_boo # case of single year
+	scrQrt_arr = map(x -> (scenario, "ini" * (x < 10 ? "0" : "") * string(x)), 1:12)
+	# create scenario folder
+	scrFolDir_str = setupDir_str * "scenarioSetup/"  * spaSco
+	scrDir_str = scrFolDir_str * "/" * scenario
+	if !isdir(scrFolDir_str) mkdir(scrFolDir_str) end
+	if !isdir(scrDir_str)
+		mkdir(scrDir_str)
+		CSV.write(scrDir_str * "/set_scenario.csv", DataFrame(scenario = [scenario]))
+	end	
+else
+	scrDir_str = setupDir_str * "scenarioSetup/"  * spaSco * "/" * scenario * "_" * "month"
+	scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(scrDir_str * "/par_scrProb.csv", DataFrame))))
+end
 
 #region # * options for algorithm
 
@@ -41,9 +56,16 @@ scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value !=
 rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e3)
 rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 
-# target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer
-algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 6000.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
-upper_int = 1
+# target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
+if solve == "20checkConv_noIni"
+	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 2000.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
+	solTop_int = 20
+	iniStab_sym = :none
+elseif solve == "20checkConv_ini"
+	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 2000.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :lin, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
+	solTop_int = 20
+	iniStab_sym = :reduced
+end
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = tuple()) #duals = (:enBal, :excRestr, :stBal)
 
@@ -57,7 +79,7 @@ else
 	meth_tup = tuple()
 end
 
-stabSetup_obj = stabSetup(meth_tup, 0.0, :none, 0.01, (upper = upper_int, inter = :lin)) # :none for last argument will skip initialization, other names just used for setting input folder below
+stabSetup_obj = stabSetup(meth_tup, 0.0, iniStab_sym, 0.01, (upper = solTop_int, inter = :lin), true) # :none for last argument will skip initialization, other names just used for setting input folder below
 
 # ! options for near optimal
 
@@ -71,16 +93,21 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 # ! general problem settings
 
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
-info_ntup = (name = name_str, frsLvl = 3, supTsLvl = 2, repTsLvl = 4, shortExp = 5) 
+info_ntup = (name = name_str, frsLvl = checkDet_boo ? 0 : 3, supTsLvl = 2, repTsLvl = 4, shortExp = 5) 
 
 # ! input folders
-inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/preselected_" * techs, setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
-foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
-foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
+inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "securitySetup/" * security, setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/" * techs, setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_month/general"]
+foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_month/general_" * x), unique(getindex.(scrQrt_arr,2)))
+foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * "month/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-heuDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/preselected_" * techs, setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general"]
-foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
-foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * time * "_" * foresight * "/" * x[1] * "/" * x[2]), scrQrt_arr)
+heuDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "securitySetup/" * security, setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/" * techs, setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_month/general"]
+foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * "672h" * "_month/general_" * x), unique(getindex.(scrQrt_arr,2)))
+foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * "672h" * "_month/" * x[1] * "/" * x[2]), scrQrt_arr)
+
+if inOos != "missing"
+	push!(inDir_arr, dir_str * "inputOutOfSample/" * inOos)
+	push!(heuDir_arr, dir_str * "inputOutOfSample/" * inOos)
+end
 
 restDir!(dir_str * "results/" * name_str)
 restDir!(dir_str * "results/" * name_str * "/sub")
@@ -133,7 +160,9 @@ runIteration!(benders_obj, runSubDist)
 produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Write results", testErr = false, printErr = false)
 writeBendersResults!(benders_obj, runSubDist, getSubStringDist, res_ntup)
 
-outDir_str = dir_str * "inputOutOfSample/" * name_str * "/"
-writeResultsAsInputs!(benders_obj, outDir_str)
+if inOos == "missing"
+	outDir_str = dir_str * "inputOutOfSample/" * name_str * "/"
+	writeResultsAsInputs!(benders_obj, outDir_str)
+end
 
 #endregion
