@@ -1,21 +1,22 @@
 using Gurobi, AnyMOD, CSV, YAML
+include("functions.jl")
 
-dir_str = ""
+dir_str = "C:/Git/EuSysMod/"
 modDir_str = dir_str * "inputFiles/"
 setupDir_str = dir_str *  "modelSetup/"
 
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 2
+    id_int = 1
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
 end
 
 time = string(par_df[id_int,:time]) # temporal resolution
-spaSco = string(par_df[id_int,:spatialScope]) # spatial scope
-scenario = string(par_df[id_int,:scenario]) # scenario case
+spaSco = convert(String,par_df[id_int,:spatialScope]) # spatial scope
+scenario = convert(String,par_df[id_int,:scenario]) # scenario case
 techs = string(par_df[id_int,:techs]) # available technologies
 security = string(par_df[id_int,:security]) # security settings
 inOos = string(par_df[id_int,:inputOutOfSample]) # capacity folder for out-of-sample testing
@@ -33,21 +34,11 @@ name_str = convert(String,par_df[id_int,:name])
 
 checkDet_boo = scenario in "scr" .* string.(1982:2016)
 
-# create scenario and quarter array
-if checkDet_boo # case of single year
-	scrQrt_arr = map(x -> (scenario, "ini" * (x < 10 ? "0" : "") * string(x)), 1:12)
-	# create scenario folder
-	scrFolDir_str = setupDir_str * "scenarioSetup/"  * spaSco
-	scrDir_str = scrFolDir_str * "/" * scenario
-	if !isdir(scrFolDir_str) mkdir(scrFolDir_str) end
-	if !isdir(scrDir_str)
-		mkdir(scrDir_str)
-		CSV.write(scrDir_str * "/set_scenario.csv", DataFrame(scenario = [scenario]))
-	end	
-else
-	scrDir_str = setupDir_str * "scenarioSetup/"  * spaSco * "/" * scenario * "_" * "month"
-	scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(scrDir_str * "/par_scrProb.csv", DataFrame))))
-end
+
+# create files determining scenario setup
+
+scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scenario, setupDir_str, spaSco)
+scrQrtHeu_arr, scrDirHeu_str = generateScrInfo(false, "total12_ext0", setupDir_str, spaSco)
 
 #region # * options for algorithm
 
@@ -57,13 +48,13 @@ rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e3)
 rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-if solve == "20checkConv_noIni"
-	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 2000.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
-	solTop_int = 20
+if solve == "5checkConv_noIni"
+	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 600.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
+	solTop_int = 5
 	iniStab_sym = :none
-elseif solve == "20checkConv_ini"
-	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 2000.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :lin, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
-	solTop_int = 20
+elseif solve == "5checkConv_ini"
+	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 600.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :lin, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
+	solTop_int = 5
 	iniStab_sym = :reduced
 end
 
@@ -100,9 +91,9 @@ inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str 
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_month/general_" * x), unique(getindex.(scrQrt_arr,2)))
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * "month/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-heuDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "securitySetup/" * security, setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/" * techs, setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_month/general"]
-foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * "672h" * "_month/general_" * x), unique(getindex.(scrQrt_arr,2)))
-foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * "672h" * "_month/" * x[1] * "/" * x[2]), scrQrt_arr)
+heuDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "securitySetup/" * security, setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/" * techs, setupDir_str * "resolution/default_country", scrDirHeu_str, modDir_str * "timeSeries/country_" * time * "_month/general"]
+foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * "672h" * "_month/general_" * x), unique(getindex.(scrQrtHeu_arr,2)))
+foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * "672h" * "_month/" * x[1] * "/" * x[2]), scrQrtHeu_arr)
 
 if inOos != "missing"
 	push!(inDir_arr, dir_str * "inputOutOfSample/" * inOos)

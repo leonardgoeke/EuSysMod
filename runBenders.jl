@@ -1,4 +1,5 @@
 using Gurobi, AnyMOD, CSV, YAML, SlurmClusterManager
+include("functions.jl")
 
 dir_str = ""
 modDir_str = dir_str * "inputFiles/"
@@ -32,21 +33,9 @@ dnsThrs = par_df[id_int,:dnsThrs]
 name_str = convert(String,par_df[id_int,:name])
 checkDet_boo = scenario in "scr" .* string.(1982:2016)
 
-# create scenario and quarter array
-if checkDet_boo # case of single year
-	scrQrt_arr = map(x -> (scenario, "ini" * (x < 10 ? "0" : "") * string(x)), 1:12)
-	# create scenario folder
-	scrFolDir_str = setupDir_str * "scenarioSetup/"  * spaSco
-	scrDir_str = scrFolDir_str * "/" * scenario
-	if !isdir(scrFolDir_str) mkdir(scrFolDir_str) end
-	if !isdir(scrDir_str)
-		mkdir(scrDir_str)
-		CSV.write(scrDir_str * "/set_scenario.csv", DataFrame(scenario = [scenario]))
-	end	
-else
-	scrDir_str = setupDir_str * "scenarioSetup/"  * spaSco * "/" * scenario * "_" * "month"
-	scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(scrDir_str * "/par_scrProb.csv", DataFrame))))
-end
+# create files determining scenario setup
+scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scenario, setupDir_str, spaSco)
+scrQrtHeu_arr, scrDirHeu_str = generateScrInfo(false, "total12_ext0", setupDir_str, spaSco)
 
 #region # * options for algorithm
 
@@ -56,13 +45,13 @@ rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e3)
 rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-if solve == "20checkConv_noIni"
-	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 2000.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
-	solTop_int = 20
+if solve == "5checkConv_noIni"
+	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 600.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
+	solTop_int = 5
 	iniStab_sym = :none
-elseif solve == "20checkConv_ini"
-	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 2000.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :lin, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
-	solTop_int = 20
+elseif solve == "5checkConv_ini"
+	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 600.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :lin, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
+	solTop_int = 5
 	iniStab_sym = :reduced
 end
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
@@ -98,9 +87,9 @@ inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str 
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_month/general_" * x), unique(getindex.(scrQrt_arr,2)))
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * "month/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-heuDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "securitySetup/" * security, setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/" * techs, setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_month/general"]
-foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * "672h" * "_month/general_" * x), unique(getindex.(scrQrt_arr,2)))
-foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * "672h" * "_month/" * x[1] * "/" * x[2]), scrQrt_arr)
+heuDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "securitySetup/" * security, setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/" * techs, setupDir_str * "resolution/default_country", scrDirHeu_str, modDir_str * "timeSeries/country_" * time * "_month/general"]
+foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * "672h" * "_month/general_" * x), unique(getindex.(scrQrtHeu_arr,2)))
+foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_" * "672h" * "_month/" * x[1] * "/" * x[2]), scrQrtHeu_arr)
 
 if inOos != "missing"
 	push!(inDir_arr, dir_str * "inputOutOfSample/" * inOos)
@@ -117,7 +106,7 @@ scale_dic = Dict{Symbol,NamedTuple}()
 
 scale_dic[:rng] = rngTar_tup
 scale_dic[:facHeu] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e2, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
-scale_dic[:facTop] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e2, dispConv = 1e2, dispSt = 1e4, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
+scale_dic[:facTop] = (capa = 1e4, capaStSize = 1e4, insCapa = 1e4, dispConv = 1e2, dispSt = 1e4, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
 scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e2, dispSt = 1e3, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
 
 #endregion

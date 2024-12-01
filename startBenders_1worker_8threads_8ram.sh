@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#SBATCH --array=3-8
+#SBATCH --array=21-26
 #SBATCH --time=120:00:00
-#SBATCH --job-name=results/benders_%j
+#SBATCH --job-name=benders_%j
 #SBATCH --output=results/benders_%j.out
 #SBATCH --error=results/benders_%j.err
 

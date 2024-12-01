@@ -1,38 +1,56 @@
 qtrLvl_1:
   qtrLvl:
     startRad: 0.1
-    itrRad: 4
-    decStart: 5.0
-    decEnd: 0.5
-    incStart: 0.15
-    incEnd: 0.03
-    facStart: 2.0
-    facEnd: 2.0
+    endRad: 0.01
     inter: lin
     lam: 0.5
 qtrLvl_2:
   qtrLvl:
     startRad: 0.1
-    itrRad: 4
-    decStart: 5.0
-    decEnd: 0.5
-    incStart: 0.15
-    incEnd: 0.03
-    facStart: 2.0
-    facEnd: 1.5
-    inter: lin
+    endRad: 0.01
+    inter: log
     lam: 0.5
 qtrLvl_3:
   qtrLvl:
-    startRad: 1.0
-    itrRad: 4
-    decStart: 5.0
-    decEnd: 0.5
-    incStart: 0.15
-    incEnd: 0.03
-    facStart: 2.0
-    facEnd: 1.5
+    startRad: 0.1
+    endRad: 0.01
+    inter: exp
+    lam: 0.5
+qtrLvl_4:
+  qtrLvl:
+    startRad: 0.1
+    endRad: 0.005
     inter: lin
+    lam: 0.5
+qtrLvl_5:
+  qtrLvl:
+    startRad: 0.1
+    endRad: 0.005
+    inter: log
+    lam: 0.5
+qtrLvl_6:
+  qtrLvl:
+    startRad: 0.1
+    endRad: 0.005
+    inter: exp
+    lam: 0.5
+qtrLvl_7:
+  qtrLvl:
+    startRad: 0.1
+    endRad: 0.001
+    inter: lin
+    lam: 0.5
+qtrLvl_8:
+  qtrLvl:
+    startRad: 0.1
+    endRad: 0.001
+    inter: log
+    lam: 0.5
+qtrLvl_9:
+  qtrLvl:
+    startRad: 0.1
+    endRad: 0.001
+    inter: exp
     lam: 0.5
 box_1:
   box:
