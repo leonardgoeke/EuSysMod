@@ -97,10 +97,18 @@ if inOos != "missing"
 	push!(heuDir_arr, dir_str * "inputOutOfSample/" * inOos)
 end
 
-restDir!(dir_str * "results/" * name_str)
-restDir!(dir_str * "results/" * name_str * "/sub")
-inputFolder_ntup = (in = inDir_arr, heu = heuDir_arr, results = dir_str * "results/" * name_str)
-inputFolderSub_ntup = (in = inDir_arr, heu = heuDir_arr, results = dir_str * "results/" * name_str * "/sub")
+# ! result folders
+resultDir_str = dir_str * "results/" * (checkDet_boo ? "deterministic" : name_str)
+
+if !checkDet_boo 
+	restDir!(resultDir_str) 
+	restDir!(resultDir_str * "/sub")
+end
+
+# ! final folder setting
+inputFolder_ntup = (in = inDir_arr, heu = heuDir_arr, results = resultDir_str)
+inputFolderSub_ntup = (in = inDir_arr, heu = heuDir_arr, results = resultDir_str * (!checkDet_boo ? "/sub" : ""))
+
 
 # ! scaling settings
 scale_dic = Dict{Symbol,NamedTuple}()
