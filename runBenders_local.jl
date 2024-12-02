@@ -1,7 +1,7 @@
 using Gurobi, AnyMOD, CSV, YAML
 include("functions.jl")
 
-dir_str = "C:/Git/EuSysMod/"
+dir_str = "C:/Users/pacop/Desktop/git/EuSysMod/"
 modDir_str = dir_str * "inputFiles/"
 setupDir_str = dir_str *  "modelSetup/"
 
@@ -67,7 +67,7 @@ else
 	meth_tup = tuple()
 end
 
-stabSetup_obj = stabSetup(meth_tup, 0.0, iniStab_sym, 0.01, (upper = solTop_int, inter = :lin), true) # :none for last argument will skip initialization, other names just used for setting input folder below
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, (upper = solTop_int, inter = :lin), true) # :none for last argument will skip initialization, other names just used for setting input folder below
 
 # ! options for near optimal
 
@@ -100,14 +100,12 @@ end
 # ! result folders
 resultDir_str = dir_str * "results/" * (checkDet_boo ? "deterministic" : name_str)
 
-if !checkDet_boo 
-	restDir!(resultDir_str) 
-	restDir!(resultDir_str * "/sub")
-end
+restDir!(resultDir_str) 
+restDir!(resultDir_str * "/sub")
 
 # ! final folder setting
 inputFolder_ntup = (in = inDir_arr, heu = heuDir_arr, results = resultDir_str)
-inputFolderSub_ntup = (in = inDir_arr, heu = heuDir_arr, results = resultDir_str * (!checkDet_boo ? "/sub" : ""))
+inputFolderSub_ntup = (in = inDir_arr, heu = heuDir_arr, results = resultDir_str * "/sub")
 
 
 # ! scaling settings

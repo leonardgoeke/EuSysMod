@@ -97,14 +97,12 @@ end
 # ! result folders
 resultDir_str = dir_str * "results/" * (checkDet_boo ? "deterministic" : name_str)
 
-if !checkDet_boo 
-	restDir!(resultDir_str) 
-	restDir!(resultDir_str * "/sub")
-end
+restDir!(resultDir_str) 
+restDir!(resultDir_str * "/sub")
 
 # ! final folder setting
 inputFolder_ntup = (in = inDir_arr, heu = heuDir_arr, results = resultDir_str)
-inputFolderSub_ntup = (in = inDir_arr, heu = heuDir_arr, results = resultDir_str * (!checkDet_boo ? "/sub" : ""))
+inputFolderSub_ntup = (in = inDir_arr, heu = heuDir_arr, results = resultDir_str * "/sub")
 
 # ! scaling settings
 scale_dic = Dict{Symbol,NamedTuple}()
