@@ -4,7 +4,9 @@ testStabNext2,672h,all,scr1982,preselected_all,10expc20sec4rep,qtrLvl_2,,50,1000
 testStabNext3,672h,all,scr1982,preselected_all,10expc20sec4rep,qtrLvl_3,,50,10000,5checkConv,1,8,8
 testStabNext4,672h,all,scr1982,preselected_all,10expc20sec4rep,qtrLvl_4,,50,10000,5checkConv,1,8,8
 testStabNext5,672h,all,scr1982,preselected_all,10expc20sec4rep,qtrLvl_5,,50,10000,5checkConv,1,8,8
-testBig,8760h,all,total24_ext0_month,preselected_all,10expc20sec4rep,qtrLvl_1,,50,10000,20checkConv,24,8,8
+testStabNext6,672h,all,scr1982,preselected_all,10expc20sec4rep,qtrLvl_6,,50,10000,5checkConv,1,8,8
+testStabNext7,672h,all,scr1982,preselected_all,10expc20sec4rep,qtrLvl_7,,50,10000,5checkConv,1,8,8
+testBig,8760h,all,total24_ext0,preselected_all,10expc20sec4rep,qtrLvl_1,,50,10000,20checkConv,24,8,8
 
 
 
