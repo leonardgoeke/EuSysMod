@@ -15,8 +15,8 @@ else
 end
 
 time = string(par_df[id_int,:time]) # temporal resolution
-spaSco = string(par_df[id_int,:spatialScope]) # spatial scope
-scenario = string(par_df[id_int,:scenario]) # scenario case
+spaSco = convert(String,par_df[id_int,:spatialScope]) # spatial scope
+scenario = convert(String,par_df[id_int,:scenario]) # scenario case
 techs = string(par_df[id_int,:techs]) # available technologies
 security = string(par_df[id_int,:security]) # security settings
 inOos = string(par_df[id_int,:inputOutOfSample]) # capacity folder for out-of-sample testing
@@ -45,14 +45,12 @@ rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e3)
 rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-if solve == "5checkConv_noIni"
-	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 600.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
+if solve == "20checkConv"
+	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
+	solTop_int = 20
+elseif solve == "5checkConv"
+	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :lin, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
 	solTop_int = 5
-	iniStab_sym = :none
-elseif solve == "5checkConv_ini"
-	algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 600.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :lin, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
-	solTop_int = 5
-	iniStab_sym = :reduced
 end
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
@@ -66,7 +64,7 @@ else
 	meth_tup = tuple()
 end
 
-stabSetup_obj = stabSetup(meth_tup, 0.0, iniStab_sym, 0.01, (upper = solTop_int, inter = :lin), true) # :none for last argument will skip initialization, other names just used for setting input folder below
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, (upper = solTop_int, inter = :lin), true) # :none for last argument will skip initialization, other names just used for setting input folder below
 
 # ! options for near optimal
 
