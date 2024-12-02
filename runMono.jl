@@ -13,7 +13,7 @@ if isempty(ARGS)
     id_int = 9
     t_int = 4
 else
-    id_int = parse(Int,ARGS[1])
+    id_int = 8
 end
 
 time = string(par_df[id_int,:time]) # temporal resolution
