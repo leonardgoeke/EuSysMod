@@ -13,6 +13,7 @@ if isempty(ARGS)
     id_int = 9
     t_int = 4
 else
+    t_int = 8
     id_int = 8
 end
 
