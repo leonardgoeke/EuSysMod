@@ -1,7 +1,7 @@
 technology_3,region_1,parameter,value
 h2Cavern,,costExpStSize,1.5
-h2Cavern,,stOutToStInFix,1
-h2Cavern,,sizeToStOutFix,1000
+h2Cavern,,stOutToStInCapaFix,1
+h2Cavern,,sizeToStOutCapaFix,1000
 h2Cavern,,effStIn,0.98
 h2Cavern,,effStOut,0.98
 h2Cavern,AL,capaStSizeUp,14079.53819
