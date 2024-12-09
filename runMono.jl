@@ -13,8 +13,7 @@ if isempty(ARGS)
     id_int = 9
     t_int = 4
 else
-    t_int = 8
-    id_int = 8
+    id_int = parse(Int,ARGS[1])
 end
 
 time = string(par_df[id_int,:time]) # temporal resolution
@@ -23,6 +22,8 @@ scenario = convert(String,par_df[id_int,:scenario]) # scenario case
 techs = string(par_df[id_int,:techs]) # available technologies
 security = string(par_df[id_int,:security]) # security settings
 inOos = string(par_df[id_int,:inputOutOfSample]) # capacity folder for out-of-sample testing
+
+t_int = par_df[id_int,:threads]
 
 name_str = convert(String,par_df[id_int,:name])
 checkDet_boo = scenario in "scr" .* string.(1982:2016)

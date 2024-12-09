@@ -1,7 +1,7 @@
-using Gurobi, AnyMOD, CSV, YAML
+using Gurobi, AnyMOD, CSV, YAML, SlurmClusterManager
 include("functions.jl")
 
-dir_str = "C:/Users/pacop/Desktop/git/EuSysMod/"
+dir_str = "C:/Git/EuSysMod/"
 modDir_str = dir_str * "inputFiles/"
 setupDir_str = dir_str *  "modelSetup/"
 
@@ -33,9 +33,7 @@ dnsThrs = par_df[id_int,:dnsThrs]
 name_str = convert(String,par_df[id_int,:name])
 checkDet_boo = scenario in "scr" .* string.(1982:2016)
 
-
 # create files determining scenario setup
-
 scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scenario, setupDir_str, spaSco)
 scrQrtHeu_arr, scrDirHeu_str = generateScrInfo(false, "total12_ext0", setupDir_str, spaSco)
 
@@ -45,13 +43,10 @@ scrQrtHeu_arr, scrDirHeu_str = generateScrInfo(false, "total12_ext0", setupDir_s
 rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-if solve == "scaleA"
-	rngVio_ntup = (stab = 2e2, cut = 1e2, fix = 1e2)
-elseif solve == "scaleB"
-	rngVio_ntup = (stab = 2e2, cut = 1e4, fix = 1e5)
-end
+rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e2)
 
-algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
+
+algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
@@ -64,8 +59,7 @@ else
 	meth_tup = tuple()
 end
 
-solTop_int = 30
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, (upper = solTop_int, inter = :lin), true) # :none for last argument will skip initialization, other names just used for setting input folder below
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, (upper = 13, inter = :lin, sub = 10.0), true) # :none for last argument will skip initialization, other names just used for setting input folder below
 
 # ! options for near optimal
 
@@ -98,21 +92,29 @@ end
 # ! result folders
 resultDir_str = dir_str * "results/" * (checkDet_boo ? "deterministic" : name_str)
 
-restDir!(resultDir_str) 
-restDir!(resultDir_str * "/sub")
+if !checkDet_boo
+	restDir!(resultDir_str) 
+	restDir!(resultDir_str * "/sub")
+end
 
 # ! final folder setting
 inputFolder_ntup = (in = inDir_arr, heu = heuDir_arr, results = resultDir_str)
 inputFolderSub_ntup = (in = inDir_arr, heu = heuDir_arr, results = resultDir_str * "/sub")
-
 
 # ! scaling settings
 scale_dic = Dict{Symbol,NamedTuple}()
 
 scale_dic[:rng] = rngTar_tup
 scale_dic[:facHeu] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e2, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
-scale_dic[:facTop] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e2, dispConv = 1e2, dispSt = 1e2, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
-scale_dic[:facSub] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e2, dispSt = 1e2, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
+scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e2, dispSt = 1e2, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
+
+if solve == "scaleA"
+	scale_dic[:facTop] = (capa = 1e4, capaStSize = 1e4, insCapa = 1e4, dispConv = 1e3, dispSt = 1e4, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)	
+elseif solve == "scaleB"
+	scale_dic[:facTop] = (capa = 1e5, capaStSize = 1e5, insCapa = 1e5, dispConv = 1e4, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
+elseif solve == "scaleC"
+	scale_dic[:facTop] = (capa = 1e6, capaStSize = 1e6, insCapa = 1e6, dispConv = 1e45, dispSt = 1e6, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
+end
 
 #endregion
 
@@ -120,9 +122,8 @@ scale_dic[:facSub] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e
 
 # initialize distributed computing
 if algSetup_obj.dist
-	addprocs(8)
-	#addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=" * string(floor(t_int * ram) - 2 ) * "G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=t_int, mem_per_cpu= string(ram) * "G", time=6000) # add all available nodes
-	#rmprocs(wrkCnt + 2) # remove one node again for main process
+	addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=" * string(floor(t_int * ram) - 2 ) * "G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=t_int, mem_per_cpu= string(ram) * "G", time=6000) # add all available nodes
+	rmprocs(wrkCnt + 2) # remove one node again for main process
 	@everywhere begin
 		using Gurobi, AnyMOD
 		runSubDist(w_int::Int64, resData_obj::resData, rngVio_fl::Float64, sol_sym::Symbol, optTol_fl::Float64=1e-8, crsOver_boo::Bool=false, resultOpt_tup::NamedTuple=NamedTuple()) = Distributed.@spawnat w_int runSub(resData_obj, rngVio_fl, sol_sym, optTol_fl, crsOver_boo, resultOpt_tup)
@@ -132,8 +133,8 @@ if algSetup_obj.dist
 	passobj(1, workers(), [:info_ntup, :inputFolderSub_ntup, :scale_dic, :algSetup_obj])
 else
 	runSubDist = x -> nothing
-	getSubStringDist = x -> nothing
 	getComVarDist = x -> nothing
+	getSubStringDist = x -> nothing
 end
 
 # create benders object
