@@ -1,11 +1,11 @@
 technology_3,parameter,value
-bevPsngRoadPrvt,desFac,3.659395134
+bevPsngRoadPrvt,desFac,1.559027969
 bevPsngRoadPub,desFac,4.783025634
 bevFrtRoadLight,desFac,0.228662732
 bevFrtRoadHeavy,desFac,5.682312647
 eFrtRail,effConv,42.126
 ePsngRail,effConv,18.512
-bevPsngRoadPrvt,effConv,9.5875
+bevPsngRoadPrvt,effConv,5.77
 bevPsngRoadPub,effConv,9.642666667
 bevFrtRoadLight,effConv,0.793333333
 bevFrtRoadHeavy,effConv,13.87637976
