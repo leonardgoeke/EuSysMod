@@ -1,5 +1,5 @@
 using AnyMOD, Gurobi, CSV
-using CairoMakie, Colors, Random
+
 include("functions.jl")
 
 dir_str = "C:/Git/EuSysMod/" 

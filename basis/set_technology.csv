@@ -1,18 +1,18 @@
-technology_1,technology_2,technology_3,mode,carrier_conversion_in,carrier_conversion_out,carrier_stored_in,carrier_stored_out,technology_type,technology_decomm,timestep_cyclic
-battery,,lithiumBattery,,,,electricity,electricity,emerging,none,4
-battery,,redoxBattery,,,,electricity,electricity,emerging,none,4
-engine,enginePeak,dieselEngine,,oil,electricity,,,mature,none,
-engine,enginePeak,gasEngine,,gasFuel,electricity,,,mature,none,
-ocgt,,ocgtGas,,gasFuel,electricity,,,mature,none,
-ocgt,,ocgtH2,,h2,electricity,,,mature,none,
-powerToX,electrolysis,alkElectrolysis,,electricity,h2,,,mature,none,
-powerToX,electrolysis,pemElectrolysis,,electricity,h2,,,mature,none,
-powerToX,h2Storage,h2Cavern,,,,h2,h2,emerging,none,inter
-powerToX,synthFuel,methanePyrolysis,,gasFuel; electricity,h2,,,mature,none,
-solar,,openspace,,,electricity,,,mature,none,
-solar,,rooftopResi,,,electricity,,,mature,none,
-solar,,rooftopInd,,,electricity,,,mature,none,
-stock,power,pumpedStorage,,,,electricity,electricity,stock,none,inter
-stock,power,reservoir,,,,,electricity,stock,none,2
-stock,power,runOfRiver,,,electricity,,,stock,none,
-wind,,onshore,,,electricity,,,mature,none,
+technology_1,technology_2,technology_3,mode,carrier_conversion_in,carrier_conversion_out,carrier_stored_in,carrier_stored_out,technology_type,technology_decomm,timestep_cyclic,technology_stBalance
+battery,,lithiumBattery,,,,electricity,electricity,emerging,none,4,
+battery,,redoxBattery,,,,electricity,electricity,emerging,none,4,
+engine,enginePeak,dieselEngine,,oil,electricity,,,mature,none,,
+engine,enginePeak,gasEngine,,gasFuel,electricity,,,mature,none,,
+ocgt,,ocgtGas,,gasFuel,electricity,,,mature,none,,
+ocgt,,ocgtH2,,h2,electricity,,,mature,none,,
+powerToX,electrolysis,alkElectrolysis,,electricity,h2,,,mature,none,,
+powerToX,electrolysis,pemElectrolysis,,electricity,h2,,,mature,none,,
+powerToX,h2Storage,h2Cavern,,,,h2,h2,emerging,none,inter,
+powerToX,synthFuel,methanePyrolysis,,gasFuel; electricity,h2,,,mature,none,,
+solar,,openspace,,,electricity,,,mature,none,,
+solar,,rooftopResi,,,electricity,,,mature,none,,
+solar,,rooftopInd,,,electricity,,,mature,none,,
+stock,power,pumpedStorage,,,,electricity,electricity,stock,none,inter,
+stock,power,reservoir,,,,,electricity,stock,none,2,ineq
+stock,power,runOfRiver,,,electricity,,,stock,none,,
+wind,,onshore,,,electricity,,,mature,none,,
