@@ -65,10 +65,13 @@ set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
 
 optimize!(anyM.optModel)
 
+
+
 #endregion
 
 #region # * write results
 
+reportTimeSeries(:electricity, anyM)
 reportResults(:summary, anyM, addObjName = true)
 reportResults(:cost, anyM, addObjName = true)
 reportResults(:exchange, anyM, addObjName = true)
