@@ -1,2 +1,3 @@
-h,spatialScope,scope,scr,foresight
-672,5ctr,fut,only2,3
+name,time,case,spatialScope,scenario,foresight,trust,cutDel,dnsThrs,solve,workerCnt,threads,ram
+future_all_all,8760,fut,allCtr,all,0,qtrLvl_1,300,10000,scaleA,20,8,8
+historic_all_all,8760,his,allCtr,all,0,qtrLvl_1,300,10000,scaleA,20,8,8

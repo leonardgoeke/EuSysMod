@@ -16,30 +16,30 @@ else
     t_int = parse(Int,ARGS[2]) # number of threads
 end
 
-h = string(par_df[id_int,:h])
-spa = convert(String, par_df[id_int,:spatialScope])
-sco = convert(String, par_df[id_int,:scope])
-scr = convert(String, par_df[id_int,:scr])
-frs = par_df[id_int,:foresight]
+time = string(par_df[id_int,:time]) # temporal resolution
+spaSco = convert(String,par_df[id_int,:spatialScope]) # spatial scope
+case = convert(String,par_df[id_int,:case]) # future or historic data
+scr = convert(String,par_df[id_int,:scenario]) # scenario case
+foresight = par_df[id_int,:foresight] # scenario case
 
 # determine scenario inputs
-checkDet_boo = scr in "scr" .* string.(sco == "fut" ? (2080:2099) : (1995:2014))  
-scr_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, sco)
+checkDet_boo = scr in "scr" .* string.(case == "fut" ? (2080:2099) : (1995:2014))  
+scr_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, case)
 
 # define input and output folder
-input_arr = [dir_str * "basis", dir_str * "spatialScope/" * spa, scrDir_str, dir_str * "timeSeries/" * sco * "_" * h * "h/general"]
-foreach(x -> push!(input_arr,dir_str * "timeSeries/" * sco * "_" * h * "h/" * x), scr_arr)
+input_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/" * case * "_" * time * "h/general"]
+foreach(x -> push!(input_arr,dir_str * "timeSeries/" * case * "_" * time * "h/" * x), scr_arr)
 resultDir_str = dir_str * "results"
 
 resData_df = DataFrame(case = Symbol[], variable = String[], value = Float64[])
-name_str = "mono_" * h * "_" * spa * "_" * sco * "_" * scr * "_" * string(frs)
+name_str = "mono_" * time * "_" * spaSco * "_" * case * "_" * scr * "_" * string(foresight)
 
 #endregion
 
 #region # solve model
 
 # create and solve model
-anyM = anyModel(input_arr, resultDir_str, objName = name_str, frsLvl = frs, supTsLvl = 2, shortExp = 10, reportLvl = 2, repTsLvl = 4);
+anyM = anyModel(input_arr, resultDir_str, objName = name_str, frsLvl = foresight, supTsLvl = 2, shortExp = 10, reportLvl = 2, repTsLvl = 4);
 createOptModel!(anyM)
 setObjective!(:cost,anyM)
 
@@ -55,10 +55,4 @@ reportTimeSeries(:h2, anyM)
 reportResults(:summary, anyM)
 reportResults(:cost, anyM)
 
-anyM.graInfo.colors["h2"] = anyM.graInfo.colors["hydrogen"]
-plotSankeyDiagram(anyM, dropDown = (:timestep, :scenario), fontSize = 16, digVal = 0)
-
 #endregion
-
-
-write_to_file(anyM.optModel, "simpleButLargeModel.mps")
