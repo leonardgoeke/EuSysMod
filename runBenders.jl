@@ -36,13 +36,13 @@ scr_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, case)
 #region # * options for algorithm
 
 # ! options for general algorithm
-rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
+rngTar_tup = (mat = (1e-2, 1e4), rhs = (1e-2, 1e2))
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e2)
+rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e1)
 
 
-algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
+algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 40.0, dbInf = true, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
@@ -95,7 +95,7 @@ scale_dic = Dict{Symbol,NamedTuple}()
 
 scale_dic[:rng] = rngTar_tup
 scale_dic[:facHeu] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e2, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
-scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e2, dispSt = 1e2, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
+scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e1, dispSt = 1e3, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
 
 if solve == "scaleA"
 	scale_dic[:facTop] = (capa = 1e4, capaStSize = 1e4, insCapa = 1e4, dispConv = 1e3, dispSt = 1e4, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)	
@@ -115,7 +115,7 @@ if algSetup_obj.dist
 	rmprocs(wrkCnt + 2) # remove one node again for main process
 	@everywhere begin
 		using Gurobi, AnyMOD
-		runSubDist(w_int::Int64, resData_obj::resData, rngVio_fl::Float64, sol_sym::Symbol, optTol_fl::Float64=1e-8, crsOver_boo::Bool=false, resultOpt_tup::NamedTuple=NamedTuple()) = Distributed.@spawnat w_int runSub(resData_obj, rngVio_fl, sol_sym, optTol_fl, crsOver_boo, resultOpt_tup)
+		runSubDist(w_int::Int64, resData_obj::resData, rngVio_fl::Float64, sol_sym::Symbol, optTol_fl::Float64=1e-8, crsOver_boo::Bool=false, check_boo::Bool=false, resultOpt_tup::NamedTuple=NamedTuple()) = Distributed.@spawnat w_int runSub(resData_obj, rngVio_fl, sol_sym, optTol_fl, crsOver_boo, check_boo, resultOpt_tup)
 		getComVarDist(w_int::Int64) = Distributed.@spawnat w_int getComVar()
 		getSubStringDist(w_int::Int64, res_sym::Symbol) = Distributed.@spawnat w_int getSubString(res_sym)
 	end

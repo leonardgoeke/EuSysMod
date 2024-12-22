@@ -2,7 +2,7 @@ using AnyMOD, Gurobi, CSV
 
 include("functions.jl")
 
-dir_str = "C:/Git/EuSysMod/" 
+dir_str = "" 
 par_df = CSV.read(dir_str * "settings.csv",DataFrame)
 
 if isempty(ARGS)
