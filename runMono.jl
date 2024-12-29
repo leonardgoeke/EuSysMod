@@ -65,8 +65,6 @@ set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
 
 optimize!(anyM.optModel)
 
-
-
 #endregion
 
 #region # * write results
