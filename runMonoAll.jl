@@ -27,15 +27,16 @@ foresight = par_df[id_int,:foresight] # scenario case
 
 # determine scenario inputs
 checkDet_boo = scr in "scr" .* string.(case == "fut" ? (2080:2099) : (1995:2014))  
-scr_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, case)
+scr_arr, ~ = generateScrInfo(checkDet_boo, scr, dir_str, case)
 
 for s in scr_arr
 
     #region # define inputs
+    ~, scrDir_str = generateScrInfo(true, convert(String,s), dir_str, case)
 
     # define input and output folder
     input_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/" * case * "_" * time * "h/general"]
-    foreach(x -> push!(input_arr,dir_str * "timeSeries/" * case * "_" * time * "h/" * x), [s])
+    foreach(x -> push!(input_arr, dir_str * "timeSeries/" * case * "_" * time * "h/" * x), [s])
     resultDir_str = dir_str * "results"
 
     name_str = "mono_" * time * "_" * spaSco * "_" * case * "_" * s * "_" * string(foresight)
