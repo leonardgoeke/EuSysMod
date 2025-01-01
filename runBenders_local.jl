@@ -1,4 +1,4 @@
-using Gurobi, AnyMOD, CSV, YAML, SlurmClusterManager
+using Gurobi, AnyMOD, CSV, YAML
 include("functions.jl")
 
 dir_str = "C:/Git/EuSysMod/"

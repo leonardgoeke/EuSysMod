@@ -1,2 +1,6 @@
 name,time,spatialScope,scenario,techs,security,trust,inputOutOfSample,cutDel,dnsThrs,solve,workerCnt,threads,ram
 all_t16e2_5exp0sec1rep,8760h,allNoSE,total16_ext2,preselected_all,5expc0sec1rep,qtrLvl_1,,300,10000,scaleA,1,8,8
+all_t16e2_5exp0sec1rep_test,672h,onlyCH,total16_ext2,preselected_all,5expc0sec1rep,qtrLvl_1,,300,10000,scaleA,1,8,8
+t16e2_672h,672h,allNoSE,total16_ext2,preselected_all,5expc0sec1rep,qtrLvl_1,,300,10000,scaleA,1,8,8
+t24e2_672h,672h,allNoSE,total24_ext2,preselected_all,5expc0sec1rep,qtrLvl_1,,300,10000,scaleA,1,8,8
+t36e2_672h,672h,allNoSE,total36_ext2,preselected_all,5expc0sec1rep,qtrLvl_1,,300,10000,scaleA,1,8,8
