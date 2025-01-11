@@ -40,26 +40,41 @@ scrQrtHeu_arr, scrDirHeu_str = generateScrInfo(false, "total12_ext0", setupDir_s
 #region # * options for algorithm
 
 # ! options for general algorithm
-rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
+rngTar_tup = (mat = (1e-2, 1e4), rhs = (1e-2, 1e2))
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e2)
-
-if solve in ("scaleA_Tol1",)
-	up_fl = 1e-2
-	inter_sym = :log
-elseif solve in ("scaleA_Tol2",)
-	up_fl = 1e-2
-	inter_sym = :lin
-elseif solve in ("scaleA_Tol3",)
-	up_fl = 1e-4
-	inter_sym = :log
-else
-	up_fl = 1e-6
-	inter_sym = :log
+if solve in ("const_smallViolation", "dyn_smallViolation", "dynLess_smallViolation")
+	rngVio_ntup = (stab = 2e1, cut = 1e0, fix = 1e2)
+elseif solve in ("const_midViolation", "dyn_midViolation", "dynLess_midViolation")
+	rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e2)
+elseif solve in ("const_midViolation", "dyn_midViolation", "dynLess_midViolation")
+	rngVio_ntup = (stab = 2e1, cut = 1e4, fix = 1e2)
 end
 
-algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, wrkCnt != 0, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = (inter_sym, [up_fl, 1e-6]), feasTol =  (inter_sym, [up_fl, 1e-6]), check = true))
+if solve in ("const_smallViolation", "const_midViolation", "const_largeViolation")
+	# tolerance stabalized problem
+	tolStab_arr = [1e-6, 1e-6]
+	interStab_sym = :none
+	# tolerance without stabilization
+	tolNoStab_arr = [1e-6, 1e-6]
+	interNoStab_sym = :none
+elseif solve in ("dyn_smallViolation", "dyn_midViolation", "dyn_largeViolation")
+	# tolerance stabalized problem
+	tolStab_arr = [1e-2, 1e-6]
+	interStab_sym = :lin
+	# tolerance without stabilization
+	tolNoStab_arr = [1e-2, 1e-6]
+	interNoStab_sym = :lin
+elseif solve in ("dynLess_smallViolation", "dynLess_midViolation", "dynLess_largeViolation")
+	# tolerance stabalized problem
+	tolStab_arr = [1e-2, 1e-4]
+	interStab_sym = :log
+	# tolerance without stabilization
+	tolNoStab_arr = [1e-2, 1e-4]
+	interNoStab_sym = :log
+end
+
+algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), check = true))
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
@@ -121,14 +136,7 @@ scale_dic = Dict{Symbol,NamedTuple}()
 scale_dic[:rng] = rngTar_tup
 scale_dic[:facHeu] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e2, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
 scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e2, dispSt = 1e2, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
-
-if solve in ("scaleA", "scaleA_Tol1", "scaleA_Tol2", "scaleA_Tol3")
-	scale_dic[:facTop] = (capa = 1e4, capaStSize = 1e4, insCapa = 1e4, dispConv = 1e3, dispSt = 1e4, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)	
-elseif solve == "scaleB"
-	scale_dic[:facTop] = (capa = 1e5, capaStSize = 1e5, insCapa = 1e5, dispConv = 1e4, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
-elseif solve == "scaleC"
-	scale_dic[:facTop] = (capa = 1e6, capaStSize = 1e6, insCapa = 1e6, dispConv = 1e45, dispSt = 1e6, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
-end
+scale_dic[:facTop] = (capa = 1e4, capaStSize = 1e4, insCapa = 1e4, dispConv = 1e3, dispSt = 1e4, dispExc = 1e3, dispTrd = 1e2, costDisp = 1e1, costCapa = 1e1, obj = 1e3)	
 
 #endregion
 
