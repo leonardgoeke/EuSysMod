@@ -47,7 +47,7 @@ if solve in ("const_smallViolation", "dyn_smallViolation", "dynLess_smallViolati
 	rngVio_ntup = (stab = 2e1, cut = 1e0, fix = 1e2)
 elseif solve in ("const_midViolation", "dyn_midViolation", "dynLess_midViolation")
 	rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e2)
-elseif solve in ("const_midViolation", "dyn_midViolation", "dynLess_midViolation")
+elseif solve in ("const_largeViolation", "dyn_largeViolation", "dynLess_largeViolation")
 	rngVio_ntup = (stab = 2e1, cut = 1e4, fix = 1e2)
 end
 
