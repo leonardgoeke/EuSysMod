@@ -8,3 +8,9 @@ t24e2_672h_5exp0sec1rep_dyn_largeViolation,672h,allNoSE,total24_ext2,preselected
 t24e2_672h_5exp0sec1rep_dynLess_smallViolation,672h,allNoSE,total24_ext2,preselected_all,5expc0sec1rep,qtrLvl_1,,300,10000,dynLess_smallViolation,0,8,8
 t24e2_672h_5exp0sec1rep_dynLess_midViolation,672h,allNoSE,total24_ext2,preselected_all,5expc0sec1rep,qtrLvl_1,,300,10000,dynLess_midViolation,0,8,8
 t24e2_672h_5exp0sec1rep_dynLess_largeViolation,672h,allNoSE,total24_ext2,preselected_all,5expc0sec1rep,qtrLvl_1,,300,10000,dynLess_largeViolation,0,8,8
+t24e2_672h_5exp0sec1rep_const_midViolation_concBoth,672h,allNoSE,total24_ext2,preselected_all,5expc0sec1rep,qtrLvl_1,,300,10000,const_midViolation,0,8,8
+t24e2_672h_5exp0sec1rep_dyn_midViolation_concBoth,672h,allNoSE,total24_ext2,preselected_all,5expc0sec1rep,qtrLvl_1,,300,10000,dyn_midViolation,0,8,8
+t24e2_672h_5exp0sec1rep_dynLess_midViolation_concBoth,672h,allNoSE,total24_ext2,preselected_all,5expc0sec1rep,qtrLvl_1,,300,10000,dynLess_midViolation,0,8,8
+t24e2_672h_5exp0sec1rep_const_midViolation_concBoth_lesDes,672h,allNoSE,total24_ext2,preselected_all,5expc0sec1rep,qtrLvl_1,,300,200,const_midViolation,0,8,8
+t24e2_672h_5exp0sec1rep_dyn_midViolation_concBoth_lesDes,672h,allNoSE,total24_ext2,preselected_all,5expc0sec1rep,qtrLvl_1,,300,200,dyn_midViolation,0,8,8
+t24e2_672h_5exp0sec1rep_dynLess_midViolation_concBoth_lesDes,672h,allNoSE,total24_ext2,preselected_all,5expc0sec1rep,qtrLvl_1,,300,200,dynLess_midViolation,0,8,8
