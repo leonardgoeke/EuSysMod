@@ -43,11 +43,11 @@ scrQrtHeu_arr, scrDirHeu_str = generateScrInfo(false, "total12_ext0", setupDir_s
 rngTar_tup = (mat = (1e-2, 1e4), rhs = (1e-2, 1e2))
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-if solve in ("const_smallViolation", "dyn_smallViolation", "dynLess_smallViolation")
+if solve in ("const_smallViolation", "dynStab1_smallViolation", "dynStab2_smallViolation", "dynBoth1_smallViolation", "dynBoth2_smallViolation")
 	rngVio_ntup = (stab = 2e1, cut = 1e0, fix = 1e2)
-elseif solve in ("const_midViolation", "dyn_midViolation", "dynLess_midViolation")
+elseif solve in ("const_midViolation", "dynStab1_midViolation", "dynStab2_midViolation", "dynBoth1_midViolation", "dynBoth2_midViolation")
 	rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e2)
-elseif solve in ("const_largeViolation", "dyn_largeViolation", "dynLess_largeViolation")
+elseif solve in ("const_largeViolation", "dynStab1_largeViolation", "dynStab2_largeViolation", "dynBoth1_largeViolation", "dynBoth2_largeViolation")
 	rngVio_ntup = (stab = 2e1, cut = 1e4, fix = 1e2)
 end
 
@@ -58,14 +58,28 @@ if solve in ("const_smallViolation", "const_midViolation", "const_largeViolation
 	# tolerance without stabilization
 	tolNoStab_arr = [1e-6, 1e-6]
 	interNoStab_sym = :none
-elseif solve in ("dyn_smallViolation", "dyn_midViolation", "dyn_largeViolation")
+elseif solve in ("dynStab1_smallViolation", "dynStab1_midViolation", "dynStab1_largeViolation")
 	# tolerance stabalized problem
 	tolStab_arr = [1e-2, 1e-6]
-	interStab_sym = :lin
+	interStab_sym = :log
+	# tolerance without stabilization
+	tolNoStab_arr = [1e-6, 1e-6]
+	interNoStab_sym = :none
+elseif solve in ("dynStab2_smallViolation", "dynStab2_midViolation", "dynStab2_largeViolation")
+	# tolerance stabalized problem
+	tolStab_arr = [1e-2, 1e-4]
+	interStab_sym = :log
+	# tolerance without stabilization
+	tolNoStab_arr = [1e-6, 1e-6]
+	interNoStab_sym = :none
+elseif solve in ("dynBoth1_smallViolation", "dynBoth1_midViolation", "dynBoth1_largeViolation")
+	# tolerance stabalized problem
+	tolStab_arr = [1e-2, 1e-6]
+	interStab_sym = :log
 	# tolerance without stabilization
 	tolNoStab_arr = [1e-2, 1e-6]
-	interNoStab_sym = :lin
-elseif solve in ("dynLess_smallViolation", "dynLess_midViolation", "dynLess_largeViolation")
+	interNoStab_sym = :log
+elseif solve in ("dynBoth2_smallViolation", "dynBoth2_midViolation", "dynBoth2_largeViolation")
 	# tolerance stabalized problem
 	tolStab_arr = [1e-2, 1e-4]
 	interStab_sym = :log
@@ -74,7 +88,7 @@ elseif solve in ("dynLess_smallViolation", "dynLess_midViolation", "dynLess_larg
 	interNoStab_sym = :log
 end
 
-algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = -1, noStabMeth = -1, check = true))
+algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, check = true))
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
