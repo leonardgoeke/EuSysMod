@@ -40,25 +40,8 @@ scrQrtHeu_arr, scrDirHeu_str = generateScrInfo(false, "total12_ext0", setupDir_s
 #region # * options for algorithm
 
 # ! options for general algorithm
-if solve in ("smaleRange_smaleVio","smaleRange_midVio","smaleRange_bigVio")
-	rngTar_tup = (mat = (1e-2, 1e3), rhs = (1e-2, 1e2))
-elseif solve in ("bigRang_smaleVio","bigRang_midVio","bigRang_bigVio")
-	rngTar_tup = (mat = (1e-2, 1e4), rhs = (1e-2, 1e2))
-else
-	rngTar_tup = (mat = (1e-2, 1e4), rhs = (1e-2, 1e2))
-end
-
-# target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-if solve in ("smaleRange_smaleVio", "bigRang_smaleVio")
-	rngVio_ntup = (stab = 2e0, cut = 1e0, fix = 1e2)
-elseif solve in ("smaleRange_midVio", "bigRang_midVio")
-	rngVio_ntup = (stab = 2e1, cut = 1e0, fix = 1e2)
-elseif solve in ("smaleRange_bigVio", "bigRang_bigVio")
-	rngVio_ntup = (stab = 2e2, cut = 1e0, fix = 1e2)
-else
-	rngVio_ntup = (stab = 2e1, cut = 1e0, fix = 1e2)
-end
-
+rngTar_tup = (mat = (1e-2, 1e4), rhs = (1e-2, 1e2))
+rngVio_ntup = (stab = 2e1, cut = 1e0, fix = 1e2)
 
 # tolerance stabalized problem
 tolStab_arr = [1e-2, 1e-6]
@@ -67,8 +50,8 @@ interStab_sym = :log
 tolNoStab_arr = [1e-6, 1e-6]
 interNoStab_sym = :none
 
-
-algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, check = true))
+# target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
+algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, wrkCnt != 0, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, check = true))
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 

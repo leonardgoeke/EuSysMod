@@ -1,14 +1,14 @@
 using Gurobi, AnyMOD, CSV, YAML
 include("functions.jl")
 
-dir_str = "C:/Users/pacop/Desktop/git/EuSysMod/"
+dir_str = "C:/Git/EuSysMod/"
 modDir_str = dir_str * "inputFiles/"
 setupDir_str = dir_str *  "modelSetup/"
 
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 1
+    id_int = 2
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -41,42 +41,18 @@ scrQrtHeu_arr, scrDirHeu_str = generateScrInfo(false, "total12_ext0", setupDir_s
 
 # ! options for general algorithm
 rngTar_tup = (mat = (1e-2, 1e4), rhs = (1e-2, 1e2))
+rngVio_ntup = (stab = 2e1, cut = 1e0, fix = 1e2)
+
+# tolerance stabalized problem
+tolStab_arr = [1e-2, 1e-6]
+interStab_sym = :log
+# tolerance without stabilization
+tolNoStab_arr = [1e-6, 1e-6]
+interNoStab_sym = :none
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
+algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, wrkCnt != 0, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, check = true))
 
-if solve in ("const_smallViolation", "dyn_smallViolation", "dynLess_smallViolation")
-	rngVio_ntup = (stab = 2e1, cut = 1e0, fix = 1e2)
-elseif solve in ("const_midViolation", "dyn_midViolation", "dynLess_midViolation")
-	rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e2)
-elseif solve in ("const_midViolation", "dyn_midViolation", "dynLess_midViolation")
-	rngVio_ntup = (stab = 2e1, cut = 1e4, fix = 1e2)
-end
-
-
-if solve in ("const_smallViolation", "const_midViolation", "const_largeViolation")
-	# tolerance stabalized problem
-	tolStab_arr = [1e-6, 1e-6]
-	interStab_sym = :none
-	# tolerance without stabilization
-	tolNoStab_arr = [1e-6, 1e-6]
-	interNoStab_sym = :none
-elseif solve in ("dyn_smallViolation", "dyn_midViolation", "dyn_largeViolation")
-	# tolerance stabalized problem
-	tolStab_arr = [1e-2, 1e-6]
-	interStab_sym = :lin
-	# tolerance without stabilization
-	tolNoStab_arr = [1e-2, 1e-6]
-	interNoStab_sym = :lin
-elseif solve in ("dynLess_smallViolation", "dynLess_midViolation", "dynLess_largeViolation")
-	# tolerance stabalized problem
-	tolStab_arr = [1e-2, 1e-4]
-	interStab_sym = :log
-	# tolerance without stabilization
-	tolNoStab_arr = [1e-2, 1e-4]
-	interNoStab_sym = :log
-end
-
-algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, false, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = -1, noStabMeth = -1, check = false))
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
@@ -89,7 +65,7 @@ else
 	meth_tup = tuple()
 end
 
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, (upper = 1, inter = :lin, sub = 1.0), true) # :none for last argument will skip initialization, other names just used for setting input folder below
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, (upper = 70, inter = :log, sub = 10.0), true) # :none for last argument will skip initialization, other names just used for setting input folder below
 
 # ! options for near optimal
 
@@ -181,3 +157,12 @@ if inOos == "missing"
 end
 
 #endregion
+
+top_m = benders_obj.top
+stab_obj = benders_obj.stab
+
+import AnyMOD.matchValWithVar
+expExpr_dic = matchValWithVar(deepcopy(stab_obj.var), stab_obj.weight, top_m)
+allCapa_df = vcat(vcat(vcat(map(x -> expExpr_dic[:capa][x] |> (u -> map(y -> u[y] |> (w -> map(z -> w[z][!,[:var, :value, :scaFac]], collect(keys(w)))), collect(keys(u)))), [:tech, :exc])...)...)...)
+allStLvl_df = vcat(vcat(map(x -> expExpr_dic[:stLvl][x] |> (u -> map(y -> u[y], collect(keys(u)))), collect(keys(expExpr_dic[:stLvl])))...)...) |> (z -> isempty(z) ? DataFrame(var = AffExpr[], value = Float64[], scaFac = Float64[] ) : z)
+allLim_df = vcat(map(x -> select(expExpr_dic[:lim][x], [:var, :value, :scaFac]), collect(keys(expExpr_dic[:lim])))...) |> (z -> isempty(z) ? DataFrame(var = AffExpr[], value = Float64[], scaFac = Float64[] ) : z)
