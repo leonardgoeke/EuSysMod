@@ -10,8 +10,8 @@ setupDir_str = dir_str *  "modelSetup/"
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 1
-    t_int = 4
+    id_int = 5
+    t_int = 1
 else
     id_int = parse(Int,ARGS[1])
 end
@@ -20,6 +20,7 @@ time = string(par_df[id_int,:time]) # temporal resolution
 spaSco = convert(String,par_df[id_int,:spatialScope]) # spatial scope
 scenario = convert(String,par_df[id_int,:scenario]) # scenario case
 techs = string(par_df[id_int,:techs]) # available technologies
+reso = string(par_df[id_int,:resolution]) # spatial resolution
 security = string(par_df[id_int,:security]) # security settings
 inOos = string(par_df[id_int,:inputOutOfSample]) # capacity folder for out-of-sample testing
 
@@ -36,7 +37,7 @@ resultDir_str = dir_str * "results"
 
 # input folders
 # ! input folders
-inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "securitySetup/" * security, setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/" * spaSco * "/" * techs, setupDir_str * "resolution/default_country", scrDir_str, modDir_str * "timeSeries/country_" * time * "_month/general"]
+inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "securitySetup/" * security, setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/" * spaSco * "/" * techs, setupDir_str * "resolution/" * reso, scrDir_str, modDir_str * "timeSeries/country_" * time * "_month/general"]
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_month/general_" * x), unique(getindex.(scrQrt_arr,2)))
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * "month/" * x[1] * "/" * x[2]), scrQrt_arr)
 

@@ -1,8 +1,8 @@
-carrier_1,region_4,timestep_2,technology_3,parameter,value,source
-crudeOil,,,refinery,emissionFac,13.14368023,
-refinedOil,,,,emissionFac,262.8736046,
-naturalGas,,,,emissionFac,201.296363,
-,,,refinery,effConv,0.95,
-methane,,,methaneToGas,emissionFac,-262.8736046,
-methanol,,,methanolToOil,emissionFac,-201.296363,
-,,,,emissionUp,0,
+carrier_1,technology_3,parameter,value,source
+crudeOil,refinery,emissionFac,13.14368023,
+refinedOil,,emissionFac,262.8736046,
+naturalGas,,emissionFac,201.296363,
+,refinery,effConv,0.95,
+methane,methaneToGas,emissionFac,-262.8736046,
+methanol,methanolToOil,emissionFac,-201.296363,
+,,emissionUp,0,

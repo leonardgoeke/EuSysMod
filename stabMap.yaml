@@ -16,6 +16,12 @@ qtrLvl_3:
     endRad: 0.005
     inter: exp
     lam: 0.7
+qtrLvl_4:
+  qtrLvl:
+    startRad: 1.0
+    endRad: 0.005
+    inter: exp
+    lam: 0.6
 box_1:
   box:
       low: 0.025
