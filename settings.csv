@@ -1,6 +1,4 @@
 name,time,spatialScope,scenario,resolution,techs,security,trust,inputOutOfSample,cutDel,dnsThrs,solve,workerCnt,threads,ram
-t24e2_8760h_qtr1_final,8760h,all,total24_ext2,fuelMacro,preselected_all,5expc0sec1rep,qtrLvl_1,,200,10000,bigRang,0,10,32
-t24e2_8760h_NoSe_final,8760h,allNoSE,total24_ext2,fuelMacro,preselected_all,5expc0sec1rep,qtrLvl_1,,200,10000,bigRang,0,10,32
-t24e2_8760h_qtr2_final,8760h,allNoSE,total24_ext2,fuelMacro,preselected_all,5expc0sec1rep,qtrLvl_2,,200,10000,bigRang,0,10,32
-t24e2_8760h_qtr3_final,8760h,allNoSE,total24_ext2,fuelMacro,preselected_all,5expc0sec1rep,qtrLvl_3,,200,10000,bigRang,0,10,32
-t24e2_8760h_qtr4_final,8760h,allNoSE,total24_ext2,fuelMacro,preselected_all,5expc0sec1rep,qtrLvl_4,,200,10000,bigRang,0,10,32
+t24e2_8760h_qtr1_noGasGrid,8760h,all,total24_ext2,fuelMacro,preselected_all,5expc0sec1rep,qtrLvl_1,,200,10000,bigRang,0,10,32
+t24e2_8760h_qtr2_noGasGrid,8760h,all,total24_ext2,fuelMacro,preselected_all,5expc0sec1rep,qtrLvl_2,,200,10000,bigRang,0,10,32
+t24e2_8760h_qtr2_noGasGrid,8760h,all,total24_ext2,fuelMacro,preselected_all,5expc0sec1rep,qtrLvl_3,,200,10000,bigRang,0,10,32
