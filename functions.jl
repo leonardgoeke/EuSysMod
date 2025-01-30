@@ -1,5 +1,7 @@
 function generateScrInfo(checkDet_boo::Bool, scenario::String, setupDir_str::String, scope::String)
 
+    frs_arr = ["ini01", "ini02", "ini03", "ini04", "ini05", "ini06", "ini07", "ini08", "ini09", "ini10", "ini11", "ini12"]
+
     # create scenario and quarter array
     if checkDet_boo # case of single year
         scrQrt_arr = [scenario]
@@ -13,8 +15,14 @@ function generateScrInfo(checkDet_boo::Bool, scenario::String, setupDir_str::Str
         end	
     else
         scrDir_str = setupDir_str * "scenarios/"  * scope * "/" * scenario
-        scrQrt_arr = CSV.read(scrDir_str * "/set_scenario.csv", DataFrame)[!,:scenario]
+        if isfile(scrDir_str * "/par_scrProb.csv")
+            scrQrt_arr = map(x -> (x.scenario, x.timestep_3), eachrow(filter(x -> x.value != 0.0, CSV.read(scrDir_str * "/par_scrProb.csv", DataFrame))))
+        else
+            scr_arr = CSV.read(scrDir_str * "/set_scenario.csv", DataFrame)[!,:scenario]
+            scrQrt_arr = vcat(map(x -> map(y -> (x,y), frs_arr), scr_arr)...)
+        end 
     end
 
     return scrQrt_arr, scrDir_str
 end
+

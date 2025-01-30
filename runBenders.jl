@@ -31,7 +31,7 @@ name_str = convert(String,par_df[id_int,:name])
 
 # create files determining scenario setup
 checkDet_boo = scr in "scr" .* string.(case == "fut" ? (2080:2099) : (1995:2014))  
-scr_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, case)
+scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, string(split(case,"_")[1]))
 
 #region # * options for algorithm
 
@@ -41,8 +41,14 @@ rngTar_tup = (mat = (1e-2, 1e4), rhs = (1e-2, 1e2))
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
 rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e1)
 
+# tolerance stabalized problem
+tolStab_arr = [1e-2, 1e-6]
+interStab_sym = :log
+# tolerance without stabilization
+tolNoStab_arr = [1e-6, 1e-6]
+interNoStab_sym = :log
 
-algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, true, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 40.0, dbInf = true, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, qtrTol = 1e-6, feasTol = 1e-6))
+algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, wrkCnt != 0, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, check = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, check = true))
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
@@ -73,10 +79,10 @@ info_ntup = (name = name_str, frsLvl = foresight, supTsLvl = 2, repTsLvl = 4, sh
 
 # ! input folders
 inDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/" * case * "_" * time * "h/general"]
-foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * case * "_" * time * "h/" * x), scr_arr)
+foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * case * "_" * time * "h/" * x[1] * "/" * x[2]), scrQrt_arr)
 
 heuDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/" * case * "_" * "672h/general"]
-foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/" * case * "_" * "672h/" * x), scr_arr)
+foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/" * case * "_" * "672h/"  * x[1] * "/" * x[2]), scrQrt_arr)
 
 # ! result folders
 resultDir_str = dir_str * "results/" * name_str
