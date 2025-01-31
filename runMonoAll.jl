@@ -27,9 +27,9 @@ foresight = par_df[id_int,:foresight] # scenario case
 
 # determine scenario inputs
 checkDet_boo = scr in "scr" .* string.(case == "fut" ? (2080:2099) : (1995:2014))  
-scr_arr, ~ = generateScrInfo(checkDet_boo, scr, dir_str, case)
+scr_arr, ~ = generateScrInfo(checkDet_boo, scr, dir_str, string(split(case,"_")[1]))
 
-for s in scr_arr
+for s in unique(getindex.(scr_arr, 1))
 
     #region # define inputs
     ~, scrDir_str = generateScrInfo(true, convert(String,s), dir_str, case)
