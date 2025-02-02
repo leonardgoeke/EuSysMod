@@ -3,5 +3,3 @@ powerGrid,hvac,electricity,mature,none,undirected
 powerGrid,hvdc,electricity,mature,none,undirected
 h2Grid,,h2,mature,none,directed
 biomassExc,,solidBiomass,unrestricted,none,undirected
-liquidExc,,crudeOil; refinedOil,unrestricted,none,undirected
-gasGrid,dir,naturalGas,stock,decomm,directed
