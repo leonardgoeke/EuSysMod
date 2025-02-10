@@ -48,7 +48,7 @@ interStab_sym = :log
 tolNoStab_arr = [1e-6, 1e-6]
 interNoStab_sym = :log
 
-algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, wrkCnt != 0, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, check = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, check = true))
+algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, wrkCnt != 0, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, check = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), noStabTol = (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, check = true))
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
