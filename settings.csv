@@ -1,4 +1,2 @@
 name,time,spatialScope,scenario,resolution,techs,security,trust,inputOutOfSample,cutDel,dnsThrs,solve,workerCnt,threads,ram
-t24e2_8760h_qtr1_gridCorrect,8760h,all,total24_ext2,fuelMacro,preselected_all,5expc0sec1rep,qtrLvl_1,,200,10000,bigRang,24,10,32
-t24e2_8760h_qtr1_gridCorrect,8760h,all,total24_ext2,fuelMacro,preselected_all,5expc0sec1rep,qtrLvl_2,,200,10000,bigRang,24,10,32
-t24e2_8760h_qtr1_gridCorrect,8760h,all,total24_ext2,fuelMacro,preselected_all,5expc0sec1rep,qtrLvl_3,,200,10000,bigRang,24,10,32
+t24e2_672h_qtr1_gridCorrect,672h,all,total24_ext2,fuelMacro,preselected_all,5expc0sec1rep,qtrLvl_1,,200,10000,bigRang,24,10,32
