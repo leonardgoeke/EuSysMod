@@ -27,7 +27,7 @@ solve = par_df[id_int,:solve]
 wrkCnt = par_df[id_int,:workerCnt]
 t_int = par_df[id_int,:threads]
 ram = par_df[id_int,:ram]
-cutDel = par_df[id_int,:cutDel]
+cutDel = string(par_df[id_int,:cutDel])
 trust = par_df[id_int,:trust]
 dnsThrs = par_df[id_int,:dnsThrs]
 
@@ -48,39 +48,74 @@ rngVio_ntup = (stab = 2e1, cut = 1e0, fix = 1e2)
 tolStab_arr = [1e-2, 1e-6]
 interStab_sym = :log
 
-# tolerance stabilized problem, quadratic convergence
-if solve in ("4to6Log_fullT", "4to6Log_singleT")
-	tolStabQ_arr = [1e-4, 1e-6]
-	interStabQ_sym = :log
-elseif solve in ("3to6Lin_fullT", "3to6Lin_singleT")
-	tolStabQ_arr = [1e-3, 1e-6]
-	interStabQ_sym = :lin
-elseif solve in ("3to3Lin_fullT", "3to3Lin_singleT")
-	tolStabQ_arr = [1e-3, 1e-3]
-	interStabQ_sym = :lin
-elseif solve in ("4to4Lin_fullT", "4to4Lin_singleT")
-	tolStabQ_arr = [1e-4, 1e-4]
-	interStabQ_sym = :lin
-elseif solve in ("5to5Lin_fullT", "5to5Lin_singleT")
-	tolStabQ_arr = [1e-5, 1e-5]
-	interStabQ_sym = :lin
-elseif solve in ("6to6Lin_fullT", "6to6Lin_singleT")
-	tolStabQ_arr = [1e-6, 1e-6]
-	interStabQ_sym = :lin
+if cutDel == "50cnt_0.1thres_noStab1"
+	del_int = 50
+	del_fl = 0.1
+	noStab_tup = (upper = 70, inter = :log, sub = 10.0)
+elseif cutDel == "50cnt_0.5thres_noStab1"
+	del_int = 50
+	del_fl = 0.5
+	noStab_tup = (upper = 70, inter = :log, sub = 10.0)
+elseif cutDel == "50cnt_1thres_noStab1"
+	del_int = 50
+	del_fl = 0.5
+	noStab_tup = (upper = 70, inter = :log, sub = 10.0)
+elseif cutDel == "30cnt_0.1thres_noStab1"
+	del_int = 30
+	del_fl = 0.1
+	noStab_tup = (upper = 70, inter = :log, sub = 10.0)
+elseif cutDel == "30cnt_0.5thres_noStab1"
+	del_int = 30
+	del_fl = 0.5
+	noStab_tup = (upper = 70, inter = :log, sub = 10.0)
+elseif cutDel == "30cnt_1thres_noStab1"
+	del_int = 30
+	del_fl = 0.5
+	noStab_tup = (upper = 70, inter = :log, sub = 10.0)
+elseif cutDel == "50cnt_0.1thres_noStab2"
+	del_int = 50
+	del_fl = 0.1
+	noStab_tup = (upper = 1, inter = :log, sub = 1.0)
+elseif cutDel == "50cnt_0.5thres_noStab2"
+	del_int = 50
+	del_fl = 0.5
+	noStab_tup = (upper = 1, inter = :log, sub = 1.0)
+elseif cutDel == "50cnt_1thres_noStab2"
+	del_int = 50
+	del_fl = 0.5
+	noStab_tup = (upper = 1, inter = :log, sub = 1.0)
+elseif cutDel == "30cnt_0.1thres_noStab2"
+	del_int = 30
+	del_fl = 0.1
+	noStab_tup = (upper = 1, inter = :log, sub = 1.0)
+elseif cutDel == "30cnt_0.5thres_noStab2"
+	del_int = 30
+	del_fl = 0.5
+	noStab_tup = (upper = 1, inter = :log, sub = 1.0)
+elseif cutDel == "30cnt_1thres_noStab2"
+	del_int = 30
+	del_fl = 0.5
+	noStab_tup = (upper = 1, inter = :log, sub = 1.0)
 end
 
-if solve in ("4to6Log_fullT","3to6Lin_fullT","3to3Lin_fullT","4to4Lin_fullT","5to5Lin_fullT","6to6Lin_fullT")
-	tTop_int = t_int
-else
-	tTop_int = 1
-end
+# ! options for general algorithm
+rngTar_tup = (mat = (1e-2, 1e4), rhs = (1e-2, 1e2))
+rngVio_ntup = (stab = 2e1, cut = 1e0, fix = 1e2)
+
+# tolerance stabilized problem, feasibility
+tolStab_arr = [1e-6, 1e-6]
+interStab_sym = :lin
+
+# tolerance stabilized problem, quadratic convergence
+tolStabQ_arr = [1e-6, 1e-6]
+interStabQ_sym = :lin
 
 # tolerance without stabilization
 tolNoStab_arr = [1e-6, 1e-6]
 interNoStab_sym = :none
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, false, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, threads = t_int, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = tTop_int, check = false))
+algSetup_obj = algSetup(0.01, (cnt = del_int, thres = del_fl), (bal = false, st = true), 2, 7200.0, false, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, threads = t_int, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = true, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false))
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
@@ -94,7 +129,7 @@ else
 	meth_tup = tuple()
 end
 
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, (upper = 70, inter = :log, sub = 10.0), true) # :none for last argument will skip initialization, other names just used for setting input folder below
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, noStab_tup, true) # :none for last argument will skip initialization, other names just used for setting input folder below
 
 # ! options for near optimal
 
