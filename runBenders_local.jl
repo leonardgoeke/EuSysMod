@@ -40,56 +40,9 @@ scrQrtHeu_arr, scrDirHeu_str = generateScrInfo(false, "total12_ext0", setupDir_s
 
 #region # * options for algorithm
 
-if cutDel == "50cnt_0.1thres_noStab1"
-	del_int = 50
-	del_fl = 0.1
-	noStab_tup = (upper = 70, inter = :log, sub = 10.0)
-elseif cutDel == "50cnt_0.5thres_noStab1"
-	del_int = 50
-	del_fl = 0.5
-	noStab_tup = (upper = 70, inter = :log, sub = 10.0)
-elseif cutDel == "50cnt_1thres_noStab1"
-	del_int = 50
-	del_fl = 0.5
-	noStab_tup = (upper = 70, inter = :log, sub = 10.0)
-elseif cutDel == "30cnt_0.1thres_noStab1"
-	del_int = 30
-	del_fl = 0.1
-	noStab_tup = (upper = 70, inter = :log, sub = 10.0)
-elseif cutDel == "30cnt_0.5thres_noStab1"
-	del_int = 30
-	del_fl = 0.5
-	noStab_tup = (upper = 70, inter = :log, sub = 10.0)
-elseif cutDel == "30cnt_1thres_noStab1"
-	del_int = 30
-	del_fl = 0.5
-	noStab_tup = (upper = 70, inter = :log, sub = 10.0)
-elseif cutDel == "50cnt_0.1thres_noStab2"
-	del_int = 50
-	del_fl = 0.1
-	noStab_tup = (upper = 1, inter = :log, sub = 1.0)
-elseif cutDel == "50cnt_0.5thres_noStab2"
-	del_int = 50
-	del_fl = 0.5
-	noStab_tup = (upper = 1, inter = :log, sub = 1.0)
-elseif cutDel == "50cnt_1thres_noStab2"
-	del_int = 50
-	del_fl = 0.5
-	noStab_tup = (upper = 1, inter = :log, sub = 1.0)
-elseif cutDel == "30cnt_0.1thres_noStab2"
-	del_int = 30
-	del_fl = 0.1
-	noStab_tup = (upper = 1, inter = :log, sub = 1.0)
-elseif cutDel == "30cnt_0.5thres_noStab2"
-	del_int = 30
-	del_fl = 0.5
-	noStab_tup = (upper = 1, inter = :log, sub = 1.0)
-elseif cutDel == "30cnt_1thres_noStab2"
-	del_int = 30
-	del_fl = 0.5
-	noStab_tup = (upper = 1, inter = :log, sub = 1.0)
-end
-
+del_int = 15
+del_fl = 0.5
+noStab_tup = (upper = 1, inter = :log, sub = 1.0)
 
 # ! options for general algorithm
 rngTar_tup = (mat = (1e-2, 1e4), rhs = (1e-2, 1e2))
@@ -122,7 +75,7 @@ else
 	meth_tup = tuple()
 end
 
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, noStab_tup, true) # :none for last argument will skip initialization, other names just used for setting input folder below
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, noStab_tup, true) # :none for third argument will skip initialization, other names just used for setting input folder below
 
 # ! options for near optimal
 
@@ -214,114 +167,3 @@ if inOos == "missing"
 end
 
 #endregion
-
-
-printObject(benders_obj.top.parts.obj.cns[:bendersCuts], benders_obj.top)
-
-benders_obj.cuts.slack
-
-# ! run iteration
-import AnyMOD.deleteCuts!, AnyMOD.interItrPar, AnyMOD.removeStab!
-
-
-produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Started iteration $(benders_obj.itr.cnt.i)", testErr = false, printErr = false)
-
-#region # * solve top-problem and (start) sub-problems
-str_time = now()
-resData_obj, stabVar_obj, stLvl_dic = runTop(benders_obj);
-elpTop_time = now() - str_time
-println("cuts before removal: ", size(benders_obj.top.parts.obj.cns[:bendersCuts],1))
-
-# start solving sub-problems
-cutData_dic = Dict{Tuple{Int64,Int64},resData}()
-timeSub_dic = Dict{Tuple{Int64,Int64},Millisecond}()
-lss_dic = Dict{Tuple{Int64,Int64},Float64}()
-numFoc_dic = Dict{Tuple{Int64,Int64},Int64}()
-
-acc_fl = interItrPar(benders_obj.itr.gap, benders_obj.algOpt.gap, benders_obj.algOpt.sub.rng, benders_obj.algOpt.sub.int)
-
-if benders_obj.algOpt.dist futData_dic = Dict{Tuple{Int64,Int64},Future}() end
-for (id,s) in enumerate(sort(collect(keys(benders_obj.sub))))
-	if benders_obj.algOpt.dist # distributed case
-		futData_dic[s] = runSubDist(id + 1, copy(resData_obj), benders_obj.algOpt.rngVio.fix, benders_obj.algOpt.sub.meth, acc_fl, benders_obj.algOpt.sub.crs, benders_obj.algOpt.sub.check)
-	else # non-distributed case
-		cutData_dic[s], timeSub_dic[s], lss_dic[s], numFoc_dic[s] = runSub(benders_obj.sub[s], copy(resData_obj), benders_obj.algOpt.rngVio.fix, benders_obj.algOpt.sub.meth, acc_fl, benders_obj.algOpt.sub.crs, benders_obj.algOpt.sub.check)
-	end
-end
-
-# save current results
-curRes_dic = Dict(x => reportResults(x, benders_obj.top, rtnOpt = (:csvDf,), rmvZero = false) for x in benders_obj.report.res.general)
-
-# top-problem without stabilization
-strNoStab_time = now()
-if !isnothing(benders_obj.stab) 
-	# check if top problem without stabilization should be solved again 
-	if benders_obj.itr.cnt.i >= benders_obj.itr.cnt.nextNoStab || benders_obj.stab.crossNoStab
-		runTopWithoutStab!(benders_obj)
-		# compute next iteration to solve top problem
-		par_ntup = benders_obj.stab.solveNoStab
-		gap_fl = 1 - benders_obj.itr.res[:lowLimCost] / benders_obj.itr.res[:curBest]
-		waitTopNoStab_int = max(1, Int(floor(interItrPar(gap_fl, benders_obj.algOpt.gap, [par_ntup.upper,1], par_ntup.inter, par_ntup.sub))))
-		benders_obj.itr.cnt.nextNoStab = benders_obj.itr.cnt.i + waitTopNoStab_int
-		# only report, if problem without stabilization is not solved again in the next iteration
-		if waitTopNoStab_int != 1
-			produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Solved top problem without stabilization. Next solve in iteration $(benders_obj.itr.cnt.nextNoStab)", testErr = false, printErr = false)
-		end
-	else
-		# use results of last correct solve as lower bound
-		benders_obj.itr.res[:lowLimCost] = benders_obj.itr.res[:estTotCostNoStab]
-		# remove stabilization
-		removeStab!(benders_obj)
-	end
-end
-elpNoStab_time = now() - strNoStab_time
-
-# get results of sub-problems
-if benders_obj.algOpt.dist
-	wait.(collect(values(futData_dic)))
-	for s in sort(collect(keys(benders_obj.sub)))
-		cutData_dic[s], timeSub_dic[s], lss_dic[s], numFoc_dic[s] = fetch(futData_dic[s])
-	end
-end
-
-#endregion
-
-#region # * analyse results and update refinements
-
-# update results and stabilization
-updateIteration!(benders_obj, cutData_dic, resData_obj, curRes_dic, stabVar_obj, stLvl_dic)
-# report on iteration
-reportBenders!(benders_obj, resData_obj, elpTop_time, elpNoStab_time, timeSub_dic, lss_dic, numFoc_dic)
-
-# check convergence and finish
-rtn_boo = checkConvergence(benders_obj, lss_dic)
-
-# delete cuts that not were binding for the defined number of iterations
-deleteCuts!(benders_obj)
-
-#endregion
-
-benders_obj.itr.cnt.i = benders_obj.itr.cnt.i + 1
-
-benders_obj.cuts.all
-benders_obj.cuts.active
-
-benders_obj.top.parts.obj.cns[:bendersCuts]
-
-
-
-allAct_arr = map(x -> (x.i, x.Ts_dis, x.scr), eachrow(benders_obj.top.parts.obj.cns[:bendersCuts]))
-addCuts_arr = filter(x -> !(benders_obj.cuts.all[x][1] in allAct_arr), benders_obj.cuts.active)
-
-# ! bla
-
-stab_obj = benders_obj.stab
-allAct_arr = map(x -> (x.i, x.Ts_dis, x.scr), eachrow(benders_obj.top.parts.obj.cns[:bendersCuts]))
-addCuts_arr = filter(x -> !(benders_obj.cuts.all[x][1] in allAct_arr), benders_obj.cuts.active)
-
-if !isempty(addCuts_arr) 
-	# save values of previous cut for proximal method variation 2
-	benders_obj.cuts.prev = !isnothing(stab_obj) && stab_obj.method[stab_obj.actMet] == :prx2 ? copy(addCuts_arr) : Int[]
-	# add cuts and reset collecting array
-	addCuts!(benders_obj.top, benders_obj.algOpt.rngVio.cut, benders_obj.cuts.all[addCuts_arr], benders_obj.itr.cnt.i) 
-end
