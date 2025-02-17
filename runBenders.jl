@@ -45,8 +45,8 @@ rngTar_tup = (mat = (1e-2, 1e4), rhs = (1e-2, 1e2))
 rngVio_ntup = (stab = 2e1, cut = 1e0, fix = 1e2)
 
 
-if cutDel == "15cnt_1thres"
-	del_int = 15
+if cutDel == "10cnt_1thres"
+	del_int = 10
 	del_fl = 1.0
 elseif cutDel == "25cnt_1thres"
 	del_int = 25
@@ -84,7 +84,7 @@ tolNoStab_arr = [1e-6, 1e-6]
 interNoStab_sym = :none
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-algSetup_obj = algSetup(0.01, (cnt = del_int, thres = del_fl), (bal = false, st = true), 2, 7200.0, wrkCnt != 0, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, threads = t_int, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false))
+algSetup_obj = algSetup(0.01, (cnt = del_int, thres = del_fl), (bal = false, st = true), 2, 7200.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, threads = t_int, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false))
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
