@@ -1,7 +1,7 @@
 parameter,value
 effStInterIn,0.98
 effStInterOut,0.98
-expcStStartLvl,0
+expcStStartLvl,0.02
 secFacWorstCase,0
-repWorstCase,1
-repBestCase,1
+repWorstCase,4
+repBestCase,4
