@@ -1,14 +1,14 @@
 using Gurobi, AnyMOD, CSV, YAML
 include("functions.jl")
 
-dir_str = "C:/Users/pacop/Desktop/git/EuSysMod/"
+dir_str = "C:/Git/EuSysMod/"
 modDir_str = dir_str * "inputFiles/"
 setupDir_str = dir_str *  "modelSetup/"
 
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 1
+    id_int = 2
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -55,7 +55,7 @@ elseif cutDel == "200cnt_05thres"
 	del_fl = 0.5
 end
 
-noStab_tup = (upper = 70, inter = :log, sub = 4.0)
+noStab_tup = (upper = 70, inter = :log, sub = 2.0)
 
 rngTar_tup = (mat = (1e-2, 1e4), rhs = (1e-2, 1e2))
 rngVio_ntup = (stab = 2e1, cut = 1e0, fix = 1e2)
@@ -82,6 +82,10 @@ elseif solve == "highPres"
 	tolStab_arr = [1e-6, 1e-6]
 	interStab_sym = :log
 end
+
+# tolerance without stabilization
+tolNoStab_arr = [1e-2, 1e-6]
+interNoStab_sym = :lin
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
 algSetup_obj = algSetup(0.01, (cnt = del_int, thres = del_fl), (bal = false, st = true), 2, 7200.0, false, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, threads = t_int, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = true, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false))
@@ -190,3 +194,6 @@ if inOos == "missing"
 end
 
 #endregion
+var_df = anyM.parts.tech[:directAirCapture].var[:capaConv]
+var_df[!,:var] .= map(x -> sum(map(y -> y * x.terms[y], collect(keys(x.terms)))), var_df[!,:var])
+

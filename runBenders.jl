@@ -55,7 +55,7 @@ elseif cutDel == "200cnt_05thres"
 	del_fl = 0.5
 end
 
-noStab_tup = (upper = 70, inter = :log, sub = 4.0)
+noStab_tup = (upper = 70, inter = :log, sub = 2.0)
 
 rngTar_tup = (mat = (1e-2, 1e4), rhs = (1e-2, 1e2))
 rngVio_ntup = (stab = 2e1, cut = 1e0, fix = 1e2)
