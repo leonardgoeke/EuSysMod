@@ -9,7 +9,7 @@ dir_str = "C:/Git/EuSysMod/"
 par_df = CSV.read(dir_str * "settings.csv",DataFrame)
 
 if isempty(ARGS)
-    id_int = 1 # currently 1 for future and 2 for historic
+    id_int = 7 # currently 1 for future and 2 for historic
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -28,7 +28,8 @@ scr_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, case)
 
 # define input and output folder
 input_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/" * case * "_" * time * "h/general"]
-foreach(x -> push!(input_arr,dir_str * "timeSeries/" * case * "_" * time * "h/" * x), scr_arr)
+foreach(x -> push!(input_arr, dir_str * "timeSeries/" * case * "_" * time * "h/" * x[1] * "/" * x[2]), scr_arr)
+
 resultDir_str = dir_str * "results"
 
 resData_df = DataFrame(case = Symbol[], variable = String[], value = Float64[])

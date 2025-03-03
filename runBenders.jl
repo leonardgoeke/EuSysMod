@@ -6,8 +6,7 @@ dir_str = ""
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 1
-    t_int = 4
+	id_int = 5
 else
     id_int = parse(Int,ARGS[1])
 end
@@ -36,19 +35,22 @@ scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, string(spli
 #region # * options for algorithm
 
 # ! options for general algorithm
-rngTar_tup = (mat = (1e-2, 1e4), rhs = (1e-2, 1e2))
+rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e1)
+rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e2)
 
-# tolerance stabalized problem
+# tolerance stabilized problem, quadratic convergence
+tolStabQ_arr = [1e-2, 1e-6]
+interStabQ_sym = :log
+# tolerance stabilized problem, feasibility
 tolStab_arr = [1e-2, 1e-6]
 interStab_sym = :log
 # tolerance without stabilization
-tolNoStab_arr = [1e-6, 1e-6]
-interNoStab_sym = :log
+tolNoStab_arr = [1e-2, 1e-6]
+interNoStab_sym = :lin
 
-algSetup_obj = algSetup(0.01, cutDel, (bal = false, st = true), 2, 7200.0, wrkCnt != 0, t_int, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, check = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, check = true))
+algSetup_obj = algSetup(0.01, (cnt = 200, thres = 0.5), (bal = false, st = true), 2, 7200.0, wrkCnt != 0, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, threads = t_int, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = true, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false))
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
@@ -146,6 +148,6 @@ runIteration!(benders_obj, runSubDist)
 #region # * write results
 
 produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Write results", testErr = false, printErr = false)
-writeBendersResults!(benders_obj, runSubDist, getSubStringDist, res_ntup)
+writeBendersResults!(benders_obj, runSubDist, getSubStringDist)
 
 #endregion
