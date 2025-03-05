@@ -30,7 +30,7 @@ name_str = convert(String,par_df[id_int,:name])
 
 # create files determining scenario setup
 checkDet_boo = scr in "scr" .* string.(case == "fut" ? (2080:2099) : (1995:2014))  
-scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, string(split(case,"_")[1]))
+scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, case)
 
 #region # * options for algorithm
 

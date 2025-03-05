@@ -6,7 +6,7 @@ dir_str = "C:/Git/EuSysMod/"
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 5
+    id_int = 7
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -31,7 +31,7 @@ name_str = convert(String,par_df[id_int,:name])
 
 # create files determining scenario setup
 checkDet_boo = scr in "scr" .* string.(case == "fut" ? (2080:2099) : (1995:2014))  
-scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, string(split(case,"_")[1]))
+scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, string(case))
 
 #region # * options for algorithm
 
