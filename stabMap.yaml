@@ -3,7 +3,7 @@ qtrLvl_1:
     startRad: 0.1
     endRad: 0.005
     inter: exp
-    lam: 0.7
+    lam: 0.5
 qtrLvl_2:
   qtrLvl:
     startRad: 0.1

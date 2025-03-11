@@ -38,7 +38,7 @@ scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, case)
 rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e2)
+rngVio_ntup = (stab = 2e1, cut = 1e3, fix = 1e3)
 
 # tolerance stabilized problem, quadratic convergence
 tolStabQ_arr = [1e-2, 1e-6]
@@ -50,7 +50,7 @@ interStab_sym = :log
 tolNoStab_arr = [1e-2, 1e-6]
 interNoStab_sym = :lin
 
-algSetup_obj = algSetup(0.01, (cnt = 200, thres = 0.5), (bal = false, st = true), 2, 7200.0, wrkCnt != 0, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, threads = t_int, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = true, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false))
+algSetup_obj = algSetup(0.01, (cnt = 2000, thres = 0.5), (bal = false, st = true), 2, 7200.0, wrkCnt != 0, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = true, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false))
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
@@ -103,15 +103,8 @@ scale_dic = Dict{Symbol,NamedTuple}()
 
 scale_dic[:rng] = rngTar_tup
 scale_dic[:facHeu] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e2, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
-scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e1, dispSt = 1e3, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
-
-if solve == "scaleA"
-	scale_dic[:facTop] = (capa = 1e4, capaStSize = 1e4, insCapa = 1e4, dispConv = 1e3, dispSt = 1e4, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)	
-elseif solve == "scaleB"
-	scale_dic[:facTop] = (capa = 1e5, capaStSize = 1e5, insCapa = 1e5, dispConv = 1e4, dispSt = 1e5, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
-elseif solve == "scaleC"
-	scale_dic[:facTop] = (capa = 1e6, capaStSize = 1e6, insCapa = 1e6, dispConv = 1e45, dispSt = 1e6, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)
-end
+scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e2, dispSt = 1e2, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
+scale_dic[:facTop] = (capa = 1e4, capaStSize = 1e4, insCapa = 1e4, dispConv = 1e3, dispSt = 1e4, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)	
 
 #endregion
 
