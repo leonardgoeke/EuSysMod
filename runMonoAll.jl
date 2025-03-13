@@ -6,7 +6,7 @@ dir_str = ""
 par_df = CSV.read(dir_str * "settings.csv",DataFrame)
 
 if isempty(ARGS)
-    id_int = 1 # currently 1 for future and 2 for historic
+    id_int = 7 # currently 1 for future and 2 for historic
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -27,7 +27,7 @@ foresight = par_df[id_int,:foresight] # scenario case
 
 # determine scenario inputs
 checkDet_boo = scr in "scr" .* string.(case == "fut" ? (2080:2099) : (1995:2014))  
-scr_arr, ~ = generateScrInfo(checkDet_boo, scr, dir_str, string(split(case,"_")[1]))
+scr_arr, ~ = generateScrInfo(checkDet_boo, scr, dir_str, case)
 
 for s in unique(getindex.(scr_arr, 1))
 
