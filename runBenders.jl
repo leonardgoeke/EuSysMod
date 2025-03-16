@@ -38,7 +38,7 @@ scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, case)
 rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-rngVio_ntup = (stab = 2e1, cut = 1e3, fix = 1e3)
+rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e2)
 
 # tolerance stabilized problem, quadratic convergence
 tolStabQ_arr = [1e-2, 1e-6]
@@ -50,7 +50,7 @@ interStab_sym = :log
 tolNoStab_arr = [1e-2, 1e-6]
 interNoStab_sym = :lin
 
-algSetup_obj = algSetup(0.01, (cnt = 2000, thres = 0.5), (bal = false, st = true), 2, 7200.0, wrkCnt != 0, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = false), (numFoc = [2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = true))
+algSetup_obj = algSetup(0.01, (cnt = 2000, thres = 0.5), (bal = false, st = true), 2, 7200.0, wrkCnt != 0, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = true, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = true))
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
