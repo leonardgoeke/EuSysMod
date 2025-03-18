@@ -8,7 +8,7 @@ impH2Pipe,,,costOprConv,715.11384
 impH2Pipe,,base,effConv,1
 impH2Pipe,,base,costVarGen,0
 impH2Pipe,,flex,effConv,1.111111111
-impH2Pipe,,flex,costVarGen,-12.3706
+impH2Pipe,,flex,costVarGen,9.8294
 impMethane,,,costOprConv,891.96072
 impMethane,,base,effConv,1
 impMethane,,base,costVarGen,0
