@@ -1,10 +1,2 @@
 name,time,case,spatialScope,scenario,foresight,trust,cutDel,dnsThrs,solve,workerCnt,threads,ram
-his_aa_all_all_,8760,his_aa,allCtr,all,0,qtrLvl_1,600,10000,scaleA,20,8,8
-fut_aa_all_all_new,8760,fut_aa,allCtr,all,0,qtrLvl_1,600,10000,scaleA,20,8,8
-his_bb_all_all_new,8760,his_bb,allCtr,all,0,qtrLvl_1,600,10000,scaleA,20,8,8
-fut_bb_all_all_new,8760,fut_bb,allCtr,all,0,qtrLvl_1,600,10000,scaleA,20,8,8
-his_cc_all_all_new,8760,his_cc,allCtr,all,0,qtrLvl_1,600,10000,scaleA,20,8,8
-fut_cc_all_all_new,8760,fut_cc,allCtr,all,0,qtrLvl_1,600,10000,scaleA,20,8,8
-fut_bb_test672_qtrLvl1_upd,672,fut_bb,allCtr,all,0,qtrLvl_1,600,10000,scaleA,20,4,4
-fut_bb_test672_qtrLvl2_upd,672,fut_bb,allCtr,all,0,qtrLvl_2,600,10000,scaleA,20,4,4
-fut_bb_test672_qtrLvl3_upd,672,fut_bb,allCtr,all,0,qtrLvl_3,600,10000,scaleA,20,4,4
+his_aa_all_all_frs,8760,his_aa,allCtr,all,3,qtrLvl_1,600,10000,scaleA,20,8,8
