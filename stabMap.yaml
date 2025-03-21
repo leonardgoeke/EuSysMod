@@ -3,30 +3,6 @@ qtrLvl_1:
     startRad: 0.1
     endRad: 0.005
     inter: exp
-    lam: 0.6
-qtrLvl_2:
-  qtrLvl:
-    startRad: 0.1
-    endRad: 0.001
-    inter: exp
-    lam: 0.6
-qtrLvl_3:
-  qtrLvl:
-    startRad: 0.1
-    endRad: 0.005
-    inter: exp
-    lam: 0.7
-qtrLvl_4:
-  qtrLvl:
-    startRad: 0.1
-    endRad: 0.0005
-    inter: exp
-    lam: 0.6
-qtrLvl_5:
-  qtrLvl:
-    startRad: 0.1
-    endRad: 0.001
-    inter: exp
     lam: 0.7
 box_1:
   box:

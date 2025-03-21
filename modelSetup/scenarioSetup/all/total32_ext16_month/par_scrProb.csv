@@ -24,14 +24,14 @@ scr2016,ini01,scrProb,0.0,none
 scr2006,ini02,scrProb,0.02857142857142857,extreme
 scr1991,ini02,scrProb,0.02857142857142857,extreme
 scr1992,ini02,scrProb,0.02857142857142857,extreme
-scr1983,ini02,scrProb,0.6571428571428571,clustering
-scr1995,ini02,scrProb,0.2571428571428571,clustering
+scr1983,ini02,scrProb,0.6285714285714286,clustering
+scr1988,ini02,scrProb,0.2857142857142857,clustering
 scr1985,ini02,scrProb,0.0,none
 scr1986,ini02,scrProb,0.0,none
-scr1988,ini02,scrProb,0.0,none
 scr1989,ini02,scrProb,0.0,none
 scr1990,ini02,scrProb,0.0,none
 scr1994,ini02,scrProb,0.0,none
+scr1995,ini02,scrProb,0.0,none
 scr1996,ini02,scrProb,0.0,none
 scr1998,ini02,scrProb,0.0,none
 scr1999,ini02,scrProb,0.0,none
@@ -131,8 +131,8 @@ scr2008,ini06,scrProb,0.0,none
 scr2009,ini06,scrProb,0.0,none
 scr2011,ini06,scrProb,0.0,none
 scr2016,ini06,scrProb,0.0,none
-scr1988,ini07,scrProb,0.02857142857142857,extreme
 scr2009,ini07,scrProb,0.02857142857142857,extreme
+scr1988,ini07,scrProb,0.02857142857142857,extreme
 scr1999,ini07,scrProb,0.9428571428571428,clustering
 scr1983,ini07,scrProb,0.0,none
 scr1985,ini07,scrProb,0.0,none

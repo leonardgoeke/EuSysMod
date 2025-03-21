@@ -42,8 +42,8 @@ scrQrtHeu_arr, scrDirHeu_str = generateScrInfo(false, "total12_ext0", setupDir_s
 #region # * options for algorithm
 
 # ! options for general algorithm
-rngTar_tup = (mat = (1e-2, 1e4), rhs = (1e-2, 1e2))
-rngVio_ntup = (stab = 2e1, cut = 1e0, fix = 1e2)
+rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
+rngVio_ntup = (stab = 2e1, cut = 1e1, fix = 1e1)
 
 if cutDel == "25cnt_1thres"
 	del_int = 25
@@ -56,37 +56,21 @@ elseif cutDel == "200cnt_05thres"
 	del_fl = 0.5
 end
 
-noStab_tup = (upper = 70, inter = :log, sub = 2.0)
-
-rngTar_tup = (mat = (1e-2, 1e4), rhs = (1e-2, 1e2))
-rngVio_ntup = (stab = 2e1, cut = 1e0, fix = 1e2)
-
-if solve == "lowPres"
-	# tolerance stabilized problem, quadratic convergence
-	tolStabQ_arr = [1e-2, 1e-6]
-	interStabQ_sym = :log
-	# tolerance stabilized problem, feasibility
-	tolStab_arr = [1e-2, 1e-6]
-	interStab_sym = :log
-elseif solve == "midPres"
-	# tolerance stabilized problem, quadratic convergence
-	tolStabQ_arr = [1e-4, 1e-6]
-	interStabQ_sym = :lin
-	# tolerance stabilized problem, feasibility
-	tolStab_arr = [1e-4, 1e-6]
-	interStab_sym = :lin
-elseif solve == "highPres"
-	# tolerance stabilized problem, quadratic convergence
-	tolStabQ_arr = [1e-6, 1e-6]
-	interStabQ_sym = :log
-	# tolerance stabilized problem, feasibility
-	tolStab_arr = [1e-6, 1e-6]
-	interStab_sym = :log
-end
+# range violations
+rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
+rngVio_ntup = (stab = 2e1, cut = 1e1, fix = 1e1)
 
 # tolerance without stabilization
 tolNoStab_arr = [1e-2, 1e-6]
 interNoStab_sym = :lin
+
+# tolerance stabilized problem, quadratic convergence
+tolStabQ_arr = [1e-2, 1e-6]
+interStabQ_sym = :log
+
+# tolerance stabilized problem, feasibility
+tolStab_arr = [1e-2, 1e-6]
+interStab_sym = :log
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
 algSetup_obj = algSetup(0.01, (cnt = del_int, thres = del_fl), (bal = false, st = true), 2, 7200.0, false, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, threads = t_int, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = true, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false))
@@ -103,7 +87,17 @@ else
 	meth_tup = tuple()
 end
 
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, noStab_tup, true) # :none for third argument will skip initialization, other names just used for setting input folder below
+# solve frequency of top problem without stabilization for lower bound
+noStab_tup = (upper = 70, inter = :log, sub = 2.0)
+
+if solve == "0Lvl"
+	w_tup = (capa = 1e0, capaStSize = 1e-3, stLvl = 0.0, lim = 1e0)
+elseif solve == "lowLvl"
+	w_tup = (capa = 1e0, capaStSize = 1e-3, stLvl = 1e-3, lim = 1e0)
+end
+
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, noStab_tup, repVio = true, weight = w_tup) # :none for last argument will skip initialization, other names just used for setting input folder below
+
 
 # ! options for near optimal
 

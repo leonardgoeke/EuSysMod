@@ -1,0 +1,48 @@
+errStatus,section,location,message
+green,carrier mapping,,carrier 'otherBiomass' inherited resolution from children
+green,timestep mapping,,superordinate dispatch level provided via options was used
+green,timestep mapping,,time-steps on level 6 set to correspond to 1.0 hours
+green,technology mapping,storage cycling,"storage cycling for technology 'lithiumBattery' is less detailed than representative level, storage operates as long-term storage"
+green,technology mapping,storage cycling,"storage cycling for technology 'redoxBattery' is less detailed than representative level, storage operates as long-term storage"
+green,technology mapping,storage cycling,"storage cycling for technology 'largeWaterTank' is less detailed than representative level, storage operates as long-term storage"
+green,technology mapping,storage cycling,"storage cycling for technology 'pitThermalStorage' is less detailed than representative level, storage operates as long-term storage"
+green,technology mapping,storage cycling,"detected keyword 'inter' for storage cycling of technology 'h2StorageCavern', storage operates as a stochastic inter-annual storage"
+green,technology mapping,storage cycling,"storage cycling for technology 'h2StorageTank' is less detailed than representative level, storage operates as long-term storage"
+green,technology mapping,expansion level,specific spatial expansion level provided for technology 'pvOpenspace_a' was used instead of a carrier based value
+green,technology mapping,expansion level,specific spatial expansion level provided for technology 'pvOpenspace_b' was used instead of a carrier based value
+green,technology mapping,expansion level,specific spatial expansion level provided for technology 'pvInd_a' was used instead of a carrier based value
+green,technology mapping,expansion level,specific spatial expansion level provided for technology 'pvInd_b' was used instead of a carrier based value
+green,technology mapping,expansion level,specific spatial expansion level provided for technology 'pvResi' was used instead of a carrier based value
+green,technology mapping,expansion level,specific spatial expansion level provided for technology 'solarThermalResi' was used instead of a carrier based value
+green,technology mapping,storage cycling,"storage cycling for technology 'pumpedStorageClosed' is less detailed than representative level, storage operates as long-term storage"
+green,technology mapping,expansion level,specific spatial expansion level provided for technology 'pumpedStorageOpen' was used instead of a carrier based value
+green,technology mapping,storage cycling,"detected keyword 'inter' for storage cycling of technology 'pumpedStorageOpen', storage operates as a stochastic inter-annual storage"
+green,technology mapping,expansion level,specific spatial expansion level provided for technology 'runOfRiver' was used instead of a carrier based value
+green,technology mapping,expansion level,specific spatial expansion level provided for technology 'offshore_a' was used instead of a carrier based value
+green,technology mapping,expansion level,specific spatial expansion level provided for technology 'offshore_b' was used instead of a carrier based value
+green,technology mapping,expansion level,specific spatial expansion level provided for technology 'onshore_a' was used instead of a carrier based value
+green,technology mapping,expansion level,specific spatial expansion level provided for technology 'onshore_b' was used instead of a carrier based value
+yellow,technology mapping,carrier,some carrier of technology 'reservoir'  can be discharged but not charged
+green,technology mapping,expansion level,specific spatial expansion level provided for technology 'reservoir' was used instead of a carrier based value
+green,technology mapping,storage cycling,"detected keyword 'inter' for storage cycling of technology 'reservoir', storage operates as a stochastic inter-annual storage"
+green,technology mapping,storage cycling,"detected keyword 'inter' for storage cycling of technology 'gasStorage', storage operates as a stochastic inter-annual storage"
+green,technology mapping,storage cycling,"detected keyword 'inter' for storage cycling of technology 'oilStorage', storage operates as a stochastic inter-annual storage"
+yellow,must output,,"technology 'miscProHeat < h2BoilerPro < h2BoilerProMed' has must-run, but no pre-defined design factor, also the model has reduced foresight and is created distributed, as a result, design factors only reflect operation within the foresight period"
+yellow,must output,,"technology 'miscProHeat < gasBoilerPro < gasBoilerProMed' has must-run, but no pre-defined design factor, also the model has reduced foresight and is created distributed, as a result, design factors only reflect operation within the foresight period"
+yellow,must output,,"technology 'bioConversion < nonSolidBioPlantProLow' has must-run, but no pre-defined design factor, also the model has reduced foresight and is created distributed, as a result, design factors only reflect operation within the foresight period"
+yellow,must output,,"technology 'heatpump < heatpumpPro' has must-run, but no pre-defined design factor, also the model has reduced foresight and is created distributed, as a result, design factors only reflect operation within the foresight period"
+yellow,must output,,"technology 'networkHeat < districtHeatSpace < districtHeatSpace_b' has must-run, but no pre-defined design factor, also the model has reduced foresight and is created distributed, as a result, design factors only reflect operation within the foresight period"
+yellow,must output,,"technology 'miscSpaceHeat < bioBoilerSpace' has must-run, but no pre-defined design factor, also the model has reduced foresight and is created distributed, as a result, design factors only reflect operation within the foresight period"
+yellow,must output,,"technology 'miscProHeat < oilBoilerPro < oilBoilerProMed' has must-run, but no pre-defined design factor, also the model has reduced foresight and is created distributed, as a result, design factors only reflect operation within the foresight period"
+yellow,must output,,"technology 'transport < eFrtRail' has must-run, but no pre-defined design factor, also the model has reduced foresight and is created distributed, as a result, design factors only reflect operation within the foresight period"
+yellow,must output,,"technology 'miscProHeat < bioBoilerPro < bioBoilerProLow' has must-run, but no pre-defined design factor, also the model has reduced foresight and is created distributed, as a result, design factors only reflect operation within the foresight period"
+yellow,must output,,"technology 'miscProHeat < electricHeatPro < eBoilerProHigh' has must-run, but no pre-defined design factor, also the model has reduced foresight and is created distributed, as a result, design factors only reflect operation within the foresight period"
+yellow,must output,,"technology 'miscProHeat < h2BoilerPro < h2BoilerProHigh' has must-run, but no pre-defined design factor, also the model has reduced foresight and is created distributed, as a result, design factors only reflect operation within the foresight period"
+yellow,must output,,"technology 'networkHeat < districtHeatSpace < districtHeatSpace_a' has must-run, but no pre-defined design factor, also the model has reduced foresight and is created distributed, as a result, design factors only reflect operation within the foresight period"
+yellow,must output,,"technology 'miscProHeat < electricHeatPro < eBoilerProMed' has must-run, but no pre-defined design factor, also the model has reduced foresight and is created distributed, as a result, design factors only reflect operation within the foresight period"
+yellow,must output,,"technology 'miscProHeat < oilBoilerPro < oilBoilerProHigh' has must-run, but no pre-defined design factor, also the model has reduced foresight and is created distributed, as a result, design factors only reflect operation within the foresight period"
+yellow,must output,,"technology 'transport < ePsngRail' has must-run, but no pre-defined design factor, also the model has reduced foresight and is created distributed, as a result, design factors only reflect operation within the foresight period"
+yellow,must output,,"technology 'miscProHeat < gasBoilerPro < gasBoilerProHigh' has must-run, but no pre-defined design factor, also the model has reduced foresight and is created distributed, as a result, design factors only reflect operation within the foresight period"
+yellow,must output,,"technology 'networkHeat < heatGrid < districtHeatPro' has must-run, but no pre-defined design factor, also the model has reduced foresight and is created distributed, as a result, design factors only reflect operation within the foresight period"
+yellow,must output,,"technology 'networkHeat < districtHeatSpace < districtHeatSpace_c' has must-run, but no pre-defined design factor, also the model has reduced foresight and is created distributed, as a result, design factors only reflect operation within the foresight period"
+yellow,limit,emission,"limits were provided for 'none' without specificing the superordinate dispatch timestep, this means the sum over all superordinate timesteps was limited (see https://leonardgoeke.github.io/AnyMOD.jl/stable/parameter_list/#Limits-on-quantities-dispatched)"
