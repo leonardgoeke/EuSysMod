@@ -9,7 +9,7 @@ dir_str = "C:/Git/EuSysMod/"
 par_df = CSV.read(dir_str * "settings.csv",DataFrame)
 
 if isempty(ARGS)
-    id_int = 7 # currently 1 for future and 2 for historic
+    id_int = 13 # currently 1 for future and 2 for historic
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -40,13 +40,13 @@ name_str = "mono_" * time * "_" * spaSco * "_" * case * "_" * scr * "_" * string
 #region # solve model
 
 # create and solve model
-anyM = anyModel(input_arr, resultDir_str, objName = name_str, frsLvl = foresight, supTsLvl = 2, shortExp = 10, reportLvl = 2, repTsLvl = 4);
+anyM = anyModel(input_arr, resultDir_str, objName = name_str, frsLvl = foresight, supTsLvl = 2, shortExp = 5, reportLvl = 2, repTsLvl = 4);
 createOptModel!(anyM)
 setObjective!(:cost,anyM)
 
 set_optimizer(anyM.optModel, Gurobi.Optimizer)
 set_optimizer_attribute(anyM.optModel, "Method", 2);
-set_optimizer_attribute(anyM.optModel, "Crossover", 0);
+set_optimizer_attribute(anyM.optModel, "Crossover", 1);
 set_optimizer_attribute(anyM.optModel, "Threads",t_int);
 
 optimize!(anyM.optModel)
@@ -57,3 +57,5 @@ reportResults(:summary, anyM)
 reportResults(:cost, anyM)
 
 #endregion
+
+objective_value(anyM.optModel)

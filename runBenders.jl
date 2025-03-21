@@ -38,7 +38,7 @@ scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, case)
 rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e2)
+rngVio_ntup = (stab = 2e1, cut = 1e1, fix = 1e1)
 
 # tolerance stabilized problem, quadratic convergence
 tolStabQ_arr = [1e-2, 1e-6]
@@ -69,7 +69,7 @@ else
 	meth_tup = tuple()
 end
 
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, (upper = 1, inter = :lin, sub = 0.0), true) # :none for last argument will skip initialization, other names just used for setting input folder below
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, (upper = 1, inter = :lin, sub = 0.0), repVio = true, weight = (capa = 1e0, capaStSize = 1e-2, stLvl = 1e-2, lim = 1e0)) # :none for last argument will skip initialization, other names just used for setting input folder below
 
 # ! options for near optimal
 

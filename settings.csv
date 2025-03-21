@@ -11,3 +11,4 @@ fut_bb_test672_qtrLvl3_0Foc,672,fut_bb,allCtr,all,0,qtrLvl_3,600,10000,0to2to3,2
 fut_bb_test672_qtrLvl1_13Foc,672,fut_bb,allCtr,all,0,qtrLvl_1,600,10000,1to3,20,4,4
 fut_bb_test672_qtrLvl2_13Foc,672,fut_bb,allCtr,all,0,qtrLvl_2,600,10000,1to3,20,4,4
 fut_bb_test672_qtrLvl3_13Foc,672,fut_bb,allCtr,all,0,qtrLvl_3,600,10000,1to3,20,4,4
+base_testMonthBoost,8760,fut_aa,5Ctr,only2,3,qtrLvl_1,600,10000,1to3,20,4,4
