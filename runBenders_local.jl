@@ -6,7 +6,7 @@ dir_str = "C:/Git/EuSysMod/"
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 8
+    id_int = 13
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -39,7 +39,7 @@ scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, string(case
 rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-rngVio_ntup = (stab = 2e1, cut = 1e2, fix = 1e2)
+rngVio_ntup = (stab = 2e1, cut = 1e1, fix = 1e1)
 
 # tolerance stabilized problem, quadratic convergence
 tolStabQ_arr = [1e-2, 1e-6]
@@ -51,7 +51,13 @@ interStab_sym = :log
 tolNoStab_arr = [1e-2, 1e-6]
 interNoStab_sym = :lin
 
-algSetup_obj = algSetup(0.01, (cnt = 2000, thres = 0.5), (bal = false, st = true), 2, 7200.0, false, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = true, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false))
+if solve == "0to2to3"
+	numFoc_arr = [0,2,3]
+else
+	numFoc_arr = [1,2,3]
+end
+
+algSetup_obj = algSetup(0.01, (cnt = 2000, thres = 0.5), (bal = false, st = true), 2, 7200.0, false, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = false), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false))
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
@@ -64,7 +70,7 @@ else
 	meth_tup = tuple()
 end
 
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, (upper = 13, inter = :log, sub = 10.0), true) # :none for last argument will skip initialization, other names just used for setting input folder below
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = (capa = 1e0, capaStSize = 1e-3, stLvl = 0.0, lim = 1e0)) # :none for last argument will skip initialization, other names just used for setting input folder below
 
 # ! options for near optimal
 
@@ -146,4 +152,3 @@ produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1,
 writeBendersResults!(benders_obj, runSubDist, getSubStringDist)
 
 #endregion
-
