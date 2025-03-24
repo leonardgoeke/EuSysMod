@@ -1,5 +1,5 @@
 name,time,spatialScope,scenario,resolution,techCase,importCase,security,trust,inputOutOfSample,cutDel,dnsThrs,solve,workerCnt,threads,ram
-t24e2_2expc4rep_base,8760h,all,total24_ext2,fuelMacro,preselected_all,10Flex20Price,2expc0sec4rep,qtrLvl_1,,50cnt_05thres,10000,0Lvl,24,8,8
+t24e2_2expc4rep_base,8760h,all,total24_ext2,fuelMacro,preselected_all,10Flex20Price,2expc0sec4rep,qtrLvl_1,,50cnt_05thres,10000,lowLvl,24,8,8
 t24e2_2expc4rep_base,672h,all,total24_ext2,fuelMacro,preselected_all,10Flex20Price,2expc0sec4rep,qtrLvl_1,,50cnt_05thres,10000,0Lvl,1,8,8
 test_det,672h,all,total12_ext0,fuelMacro,preselected_all,10Flex20Price,2expc0sec4rep,qtrLvl_1,,50cnt_05thres,10000,0Lvl,1,8,8
 
