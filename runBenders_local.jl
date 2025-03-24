@@ -189,6 +189,3 @@ if inOos == "missing"
 end
 
 #endregion
-var_df = anyM.parts.tech[:directAirCapture].var[:capaConv]
-var_df[!,:var] .= map(x -> sum(map(y -> y * x.terms[y], collect(keys(x.terms)))), var_df[!,:var])
-
