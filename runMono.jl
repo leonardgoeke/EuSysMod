@@ -59,8 +59,8 @@ createOptModel!(anyM)
 setObjective!(:cost, anyM)
 
 set_optimizer(anyM.optModel, Gurobi.Optimizer)
-set_optimizer_attribute(anyM.optModel, "Method", 0);
-set_optimizer_attribute(anyM.optModel, "NumericFocus", 0);
+set_optimizer_attribute(anyM.optModel, "Method", 2);
+set_optimizer_attribute(anyM.optModel, "NumericFocus", 2);
 set_optimizer_attribute(anyM.optModel, "Crossover", 0);
 set_optimizer_attribute(anyM.optModel, "Threads", t_int);
 set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
