@@ -60,7 +60,7 @@ setObjective!(:cost, anyM)
 
 set_optimizer(anyM.optModel, Gurobi.Optimizer)
 set_optimizer_attribute(anyM.optModel, "Method", 2);
-set_optimizer_attribute(anyM.optModel, "NumericFocus", 2);
+set_optimizer_attribute(anyM.optModel, "NumericFocus", 0);
 set_optimizer_attribute(anyM.optModel, "Crossover", 0);
 set_optimizer_attribute(anyM.optModel, "Threads", t_int);
 set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
@@ -91,7 +91,7 @@ if inOos == "missing"
     for sys in (:tech, :exc)
         part_dic = getfield(anyM.parts, sys)
         for sSym in keys(part_dic)
-            for capaSym in filter(x -> any(occursin.(["capa","exp"], string(x))), keys(part_dic[sSym].var))
+            for capaSym in filter(x -> any(occursin.(["capa","exp"], string(x))) && !any(occursin.(["Inter","Season"], string(x))), keys(part_dic[sSym].var))
                 # get value capacity variable
                 var_df = copy(part_dic[sSym].var[capaSym])
                 var_df[!,:value] = value.(var_df[!,:var])
