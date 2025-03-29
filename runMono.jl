@@ -10,7 +10,7 @@ setupDir_str = dir_str *  "modelSetup/"
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 3
+    id_int = 9
     t_int = 8
 else
     id_int = parse(Int,ARGS[1])
@@ -60,7 +60,7 @@ setObjective!(:cost, anyM)
 
 set_optimizer(anyM.optModel, Gurobi.Optimizer)
 set_optimizer_attribute(anyM.optModel, "Method", 2);
-set_optimizer_attribute(anyM.optModel, "NumericFocus", 0);
+set_optimizer_attribute(anyM.optModel, "NumericFocus", 2);
 set_optimizer_attribute(anyM.optModel, "Crossover", 0);
 set_optimizer_attribute(anyM.optModel, "Threads", t_int);
 set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
@@ -68,6 +68,8 @@ set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
 optimize!(anyM.optModel)
 
 #endregion
+
+printIIS(anyM)
 
 #region # * write results
 
@@ -94,10 +96,18 @@ if inOos == "missing"
             for capaSym in filter(x -> any(occursin.(["capa","exp"], string(x))) && !any(occursin.(["Inter","Season"], string(x))), keys(part_dic[sSym].var))
                 # get value capacity variable
                 var_df = copy(part_dic[sSym].var[capaSym])
-                var_df[!,:value] = value.(var_df[!,:var])
+                var_df[!,:value] = map(x -> x < 1e-5 ? 0.0 : x, value.(var_df[!,:var]))
                 select!(var_df, Not([:var]))
-                # write parameter fle
-                par_sym = Symbol(capaSym,"Fix")
+                # add potentially missing dir column
+                if sys == :exc
+                    if capaSym == :expExc
+                        continue
+                    elseif part_dic[sSym].dir && !(:dir in AnyMOD.namesSym(var_df))
+                        var_df[!, :dir] .= true
+                    end
+                end
+                # write parameter file
+                par_sym = Symbol(capaSym, "Fix")
                 writeParameterFile!(anyM, var_df, par_sym, parDef_dic[par_sym], outDir_str * "par_" * string(sSym,"_",capaSym))
             end
         end
