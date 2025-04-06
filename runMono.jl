@@ -10,7 +10,7 @@ setupDir_str = dir_str *  "modelSetup/"
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 9
+    id_int = 8
     t_int = 8
 else
     id_int = parse(Int,ARGS[1])
@@ -100,9 +100,7 @@ if inOos == "missing"
                 select!(var_df, Not([:var]))
                 # add potentially missing dir column
                 if sys == :exc
-                    if capaSym == :expExc
-                        continue
-                    elseif part_dic[sSym].dir && !(:dir in AnyMOD.namesSym(var_df))
+                    if part_dic[sSym].dir && !(:dir in AnyMOD.namesSym(var_df))
                         var_df[!, :dir] .= true
                     end
                 end

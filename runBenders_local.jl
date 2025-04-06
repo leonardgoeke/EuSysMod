@@ -8,7 +8,7 @@ setupDir_str = dir_str *  "modelSetup/"
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 6
+    id_int = 8
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -61,15 +61,15 @@ rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 rngVio_ntup = (stab = 2e1, cut = 1e1, fix = 1e1)
 
 # tolerance without stabilization
-tolNoStab_arr = [1e-2, 1e-6]
+tolNoStab_arr = [1e-6, 1e-6]
 interNoStab_sym = :lin
 
 # tolerance stabilized problem, quadratic convergence
-tolStabQ_arr = [1e-2, 1e-6]
+tolStabQ_arr = [1e-6, 1e-6]
 interStabQ_sym = :log
 
 # tolerance stabilized problem, feasibility
-tolStab_arr = [1e-2, 1e-6]
+tolStab_arr = [1e-6, 1e-6]
 interStab_sym = :log
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
@@ -88,12 +88,20 @@ else
 end
 
 # solve frequency of top problem without stabilization for lower bound
-noStab_tup = (upper = 70, inter = :log, sub = 2.0)
+noStab_tup = (upper = 1, inter = :log, sub = 2.0)
 
-if solve == "0Lvl"
+if solve in ("0Lvl_none", "0Lvl_reduced")
 	w_tup = (capa = 1e0, capaStSize = 1e-3, stLvl = 0.0, lim = 1e0)
-elseif solve == "lowLvl"
+elseif solve in ("lowLvl_none", "lowLvl_reduced")
 	w_tup = (capa = 1e0, capaStSize = 1e-3, stLvl = 1e-3, lim = 1e0)
+end
+
+w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 1e1, lim = 1e1)
+
+if solve in ("0Lvl_none", "lowLvl_none")
+	ini_sym = :none
+elseif solve in ("0Lvl_reduced", "lowLvl_reduced")
+	ini_sym = :reduced
 end
 
 stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, noStab_tup, repVio = true, weight = w_tup) # :none for last argument will skip initialization, other names just used for setting input folder below
@@ -189,3 +197,8 @@ if inOos == "missing"
 end
 
 #endregion
+
+
+# TODO issues 
+# 2) benders test: schreiben von werten für exchange unvollständig
+
