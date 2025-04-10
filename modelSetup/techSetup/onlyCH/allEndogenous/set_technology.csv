@@ -92,7 +92,7 @@ wind,offshore,offshore_a,,,electricity,,,mature,none,,,yes,3
 wind,offshore,offshore_b,,,electricity,,,mature,none,,,yes,3
 wind,onshore,onshore_a,,,electricity,,,mature,none,,,yes,3
 wind,onshore,onshore_b,,,electricity,,,mature,none,,,yes,3
-powerToX,,avaAndNaviTech,,refinedOil,avaAndNavi,,,unrestricted,none,,,,
+powerToX,,liquidFuelExtTech,,refinedOil,avaAndNavi,,,unrestricted,none,,,,
 importFuel,,impH2Ship,base; flex,,h2,,,mature,none,,,,
 importFuel,,impH2Pipe,base; flex,,h2,,,mature,none,,,,
 importFuel,,impMethane,base; flex,,methane,,,mature,none,,,,
