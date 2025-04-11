@@ -92,13 +92,13 @@ wind,offshore,offshore_a,,,electricity,,,mature,none,,,yes,3
 wind,offshore,offshore_b,,,electricity,,,mature,none,,,yes,3
 wind,onshore,onshore_a,,,electricity,,,mature,none,,,yes,3
 wind,onshore,onshore_b,,,electricity,,,mature,none,,,yes,3
-powerToX,,liquidFuelExtTech,,refinedOil,avaAndNavi,,,unrestricted,none,,,,
+powerToX,,liquidFuelExtTech,,refinedOil,liquidFuelExt,,,unrestricted,none,,,,
 importFuel,,impH2Ship,base; flex,,h2,,,mature,none,,,,
 importFuel,,impH2Pipe,base; flex,,h2,,,mature,none,,,,
 importFuel,,impMethane,base; flex,,methane,,,mature,none,,,,
 importFuel,,impMethanol,base; flex,,methanol,,,mature,none,,,,
-importFuel,,impGas,base; flex,,naturalGas,,,stock,none,,,,
-importFuel,,impOil,base; flex,,crudeOil,,,stock,none,,,,
+importFuel,,impGas,base; flex,,naturalGas,,,mature,none,,,,
+importFuel,,impOil,base; flex,,crudeOil,,,mature,none,,,,
 importFuel,,methaneToGas,,methane,naturalGas,,,unrestricted,none,,,,
 importFuel,,methanolToOil,,methanol,crudeOil,,,unrestricted,none,,,,
 stock,power,reservoir,,,,,electricity,stock,none,ineq,inter,yes,3

@@ -58,60 +58,8 @@ anyM = anyModel(inDir_arr, resultDir_str, objName = name_str, supTsLvl = 2, repT
 createOptModel!(anyM)
 setObjective!(:cost, anyM)
 
-set_optimizer(anyM.optModel, Gurobi.Optimizer)
-set_optimizer_attribute(anyM.optModel, "Method", 2);
-set_optimizer_attribute(anyM.optModel, "NumericFocus", 2);
-set_optimizer_attribute(anyM.optModel, "Crossover", 0);
-set_optimizer_attribute(anyM.optModel, "Threads", t_int);
-set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
+write_to_file(anyM.optModel, name_str * ".mps")
 
-optimize!(anyM.optModel)
 
 #endregion
 
-printIIS(anyM)
-
-#region # * write results
-
-reportTimeSeries(:electricity, anyM)
-reportResults(:summary, anyM, addObjName = true)
-reportResults(:cost, anyM, addObjName = true)
-reportResults(:exchange, anyM, addObjName = true)
-
-#endregion
-
-#region # * write input for out-of-sample testing
-
-if inOos == "missing"
-    # create directory
-    outDir_str = dir_str * "inputOutOfSample/" * name_str * "/"
-    restDir!(outDir_str)
-
-    parDef_dic = defineParameter(anyM.options, anyM.report)
-
-    # write capacity values
-    for sys in (:tech, :exc)
-        part_dic = getfield(anyM.parts, sys)
-        for sSym in keys(part_dic)
-            for capaSym in filter(x -> any(occursin.(["capa","exp"], string(x))) && !any(occursin.(["Inter","Season"], string(x))), keys(part_dic[sSym].var))
-                # get value capacity variable
-                var_df = copy(part_dic[sSym].var[capaSym])
-                var_df[!,:value] = map(x -> x < 1e-5 ? 0.0 : x, value.(var_df[!,:var]))
-                select!(var_df, Not([:var]))
-                # add potentially missing dir column
-                if sys == :exc
-                    if part_dic[sSym].dir && !(:dir in AnyMOD.namesSym(var_df))
-                        var_df[!, :dir] .= true
-                    end
-                end
-                # write parameter file
-                par_sym = Symbol(capaSym, "Fix")
-                writeParameterFile!(anyM, var_df, par_sym, parDef_dic[par_sym], outDir_str * "par_" * string(sSym,"_",capaSym))
-            end
-        end
-    end
-end
-
-#endregion
-
-anyM.parts.tech[:pumpedStorageOpen].cns[:underStLvlSeas]

@@ -64,7 +64,7 @@ ocgt,,ocgtH2,,h2,electricity,,,mature,none,,,,
 ocgt,,ocgtH2Chp,,h2,electricity; districtHeat,,,stock,none,,,,
 powerToX,electrolysis,alkElectrolysis,,electricity,h2; districtHeat,,,mature,none,,,,
 powerToX,electrolysis,pemElectrolysis,,electricity,h2; districtHeat,,,stock,none,,,,
-powerToX,h2Storage,h2StorageCavern,,,,h2,h2,mature,none,,3,,
+powerToX,h2Storage,h2StorageCavern,,,,h2,h2,mature,none,,2,,
 powerToX,h2Storage,h2StorageTank,,,,h2,h2,mature,none,,2,,
 powerToX,synthFuel,bioMethanation,,rawBiogas; h2,naturalGas,,,stock,none,,,,
 powerToX,synthFuel,methanePyrolysis,,naturalGas; electricity,h2; processHeat_high,,,stock,none,,,,
@@ -80,7 +80,7 @@ solar,rooftopInd,pvInd_b,,,electricity,,,mature,none,,,yes,3
 solar,rooftopResi,pvResi,,,electricity,,,stock,none,,,yes,3
 solar,rooftopResi,solarThermalResi,,,spaceHeat,,,stock,none,,,yes,3
 stock,power,pumpedStorageClosed,,,,electricity,electricity,stock,none,,2,,
-stock,power,pumpedStorageOpen,,,,electricity,electricity,stock,none,ineq,3,yes,3
+stock,power,pumpedStorageOpen,,,,electricity,electricity,stock,none,ineq,2,yes,3
 stock,power,runOfRiver,,,electricity,,,stock,none,,,yes,3
 transport,bev,bevFrtRoadHeavy,,electricity,frtRoadHeavy,,,stock,none,,3,,
 transport,bev,bevFrtRoadLight,,electricity,frtRoadLight,,,stock,none,,3,,
@@ -92,18 +92,18 @@ wind,offshore,offshore_a,,,electricity,,,mature,none,,,yes,3
 wind,offshore,offshore_b,,,electricity,,,mature,none,,,yes,3
 wind,onshore,onshore_a,,,electricity,,,mature,none,,,yes,3
 wind,onshore,onshore_b,,,electricity,,,mature,none,,,yes,3
-powerToX,,liquidFuelExtTech,,refinedOil,avaAndNavi,,,unrestricted,none,,,,
-importFuel,,impH2Ship,base; flex,,h2,,,mature,none,,,,
-importFuel,,impH2Pipe,base; flex,,h2,,,mature,none,,,,
-importFuel,,impMethane,base; flex,,methane,,,mature,none,,,,
-importFuel,,impMethanol,base; flex,,methanol,,,mature,none,,,,
+powerToX,,liquidFuelExtTech,,refinedOil,liquidFuelExt,,,unrestricted,none,,,,
+importFuel,,impH2Ship,base; flex,,h2,,,stock,none,,,,
+importFuel,,impH2Pipe,base; flex,,h2,,,stock,none,,,,
+importFuel,,impMethane,base; flex,,methane,,,stock,none,,,,
+importFuel,,impMethanol,base; flex,,methanol,,,stock,none,,,,
 importFuel,,impGas,base; flex,,naturalGas,,,stock,none,,,,
 importFuel,,impOil,base; flex,,crudeOil,,,stock,none,,,,
 importFuel,,methaneToGas,,methane,naturalGas,,,unrestricted,none,,,,
 importFuel,,methanolToOil,,methanol,crudeOil,,,unrestricted,none,,,,
-stock,power,reservoir,,,,,electricity,stock,none,ineq,3,yes,3
-powerToX,,gasStorage,,,,naturalGas,naturalGas,mature,none,,3,,
-powerToX,,oilStorage,,,,refinedOil,refinedOil,mature,none,,3,,
+stock,power,reservoir,,,,,electricity,stock,none,ineq,2,yes,3
+powerToX,,gasStorage,,,,naturalGas,naturalGas,mature,none,,2,,
+powerToX,,oilStorage,,,,refinedOil,refinedOil,mature,none,,2,,
 transport,,cngPsngRoadPrvt,,naturalGas,psngRoadPrvt,,,stock,none,,,,
 transport,,dieselFrtRail,,refinedOil,frtRail,,,stock,none,,,,
 transport,,dieselFrtRoadHeavy,,refinedOil,frtRoadHeavy,,,stock,none,,,,
