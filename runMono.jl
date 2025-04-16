@@ -69,8 +69,6 @@ optimize!(anyM.optModel)
 
 #endregion
 
-printIIS(anyM)
-
 #region # * write results
 
 reportTimeSeries(:electricity, anyM)
@@ -113,5 +111,3 @@ if inOos == "missing"
 end
 
 #endregion
-
-anyM.parts.tech[:pumpedStorageOpen].cns[:underStLvlSeas]

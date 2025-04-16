@@ -5,7 +5,7 @@ crudeOil,,costLss,20000
 h2,,costLss,20000
 districtHeat,,costLss,20000
 refinedOil,,costLss,13000
-avaAndNavi,,costLss,13000
+liquidFuelExt,,costLss,13000
 rawBiogas,,costLss,13000
 otherBiomass,solidBiomass,costLss,13000
 otherBiomass,nonSolidBiomass,costLss,13000
