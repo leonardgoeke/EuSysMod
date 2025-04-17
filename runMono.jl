@@ -10,7 +10,7 @@ setupDir_str = dir_str *  "modelSetup/"
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 7
+    id_int = 1
     t_int = 8
 else
     id_int = parse(Int,ARGS[1])
