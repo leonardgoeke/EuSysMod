@@ -198,7 +198,7 @@ end
 
 #endregion
 
-# TODO 
-# 1) make option to write complicating variables into df
-# 2) return df at end of iteration
-# 3) externally write analyses (matrix etc.)
+
+# TODO issues 
+# 2) benders test: schreiben von werten für exchange unvollständig
+
