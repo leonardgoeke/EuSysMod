@@ -37,7 +37,7 @@ checkDet_boo = scenario in "scr" .* string.(1982:2016)
 
 # create files determining scenario setup
 scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scenario, setupDir_str, spaSco)
-scrQrtHeu_arr, scrDirHeu_str = generateScrInfo(false, "total12_ext0", setupDir_str, spaSco)
+scrQrtHeu_arr, scrDirHeu_str = generateScrInfo(false, "total12_ext0_all", setupDir_str, spaSco)
 
 #region # * options for algorithm
 
@@ -176,7 +176,7 @@ else
 end
 
 # create benders object
-benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, res_ntup, nearOptSetup_obj);
+benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, res_ntup);
 
 #endregion
 
@@ -197,8 +197,3 @@ if inOos == "missing"
 end
 
 #endregion
-
-
-# TODO issues 
-# 2) benders test: schreiben von werten für exchange unvollständig
-

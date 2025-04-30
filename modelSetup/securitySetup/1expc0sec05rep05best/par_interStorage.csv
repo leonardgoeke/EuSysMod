@@ -3,5 +3,5 @@ effStInterIn,0.995
 effStInterOut,1
 expcStStartLvl,0.01
 secFacWorstCase,0
-repWorstCase,1
-repBestCase,1
+repWorstCase,0.5
+repBestCase,0.5

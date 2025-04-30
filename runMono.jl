@@ -3,7 +3,7 @@ include("functions.jl")
 
 #region # * define inputs
 
-dir_str = ""
+dir_str = "C:/Git/EuSysMod/"
 modDir_str = dir_str * "inputFiles/"
 setupDir_str = dir_str *  "modelSetup/"
 
@@ -111,3 +111,40 @@ if inOos == "missing"
 end
 
 #endregion
+
+import AnyMOD.getUpBound, AnyMOD.createVar
+
+part = anyM.parts.tech[:oilStorage]
+
+	# ! create variable for worst- and best-case storage level
+	scaFac_fl = anyM.options.scaFac.dispSt
+	var_df = unique(select(part.var[:stLvlInter], Not([:scr,:var])))
+	upBound_arr = getUpBound(var_df, anyM.options.bound.disp / scaFac_fl, anyM.supTs, anyM.sets[:Ts])
+
+	# create variables itself
+	part.var[:worstCaseStDelta] = createVar(var_df, "worstCaseStDelta", fill(0.0,length(upBound_arr)), anyM.optModel, anyM.lock, anyM.sets, scaFac = scaFac_fl, lowBd = -1 * maximum(upBound_arr))
+	part.var[:bestCaseStDelta] = createVar(var_df, "bestCaseStDelta", upBound_arr, anyM.optModel, anyM.lock, anyM.sets, scaFac = scaFac_fl, lowBd = 0.0)
+
+	# create expression for sum of worst- and best-case
+	conLvl_dic = Dict{Symbol,DataFrame}()
+	for c in (:worst, :best)
+		conLvl_df = combine(x -> (delta = sum(x.var),), groupby(part.var[Symbol(c,:CaseStDelta)], filter(x -> x != :Ts_dis, intCol(part.var[Symbol(c,:CaseStDelta)]))))
+		conLvl_dic[c] = matchSetParameter(conLvl_df, part.par[Symbol(:rep, makeUp(c),:Case)], anyM.sets, newCol = Symbol(:rep,makeUp(c)))
+	end
+
+	# create variable for start storage level and overshoot
+	part.var[:startStLvl_seas] = createVar(orderDf(select(conLvl_dic[:worst], Not([:repWorst, :delta]))), "startStLvl_seas", anyM.options.bound.capa, anyM.optModel, anyM.lock, anyM.sets, scaFac = anyM.options.scaFac.capaStSize)
+	part.var[:startStLvl_res] = createVar(orderDf(select(conLvl_dic[:worst], Not([:repWorst, :delta]))), "startStLvl_res", anyM.options.bound.capa, anyM.optModel, anyM.lock, anyM.sets, scaFac = anyM.options.scaFac.capaStSize)
+	part.var[:startStLvl] = createVar(orderDf(select(conLvl_dic[:worst], Not([:repWorst, :delta]))), "startStLvl", anyM.options.bound.capa, anyM.optModel, anyM.lock, anyM.sets, scaFac = anyM.options.scaFac.capaStSize)
+
+	part.var[:leewayStLvl] = createVar(orderDf(select(conLvl_dic[:best], Not([:repBest, :delta]))), "leewayStLvl", anyM.options.bound.capa, anyM.optModel, anyM.lock, anyM.sets, scaFac = anyM.options.scaFac.capaStSize)
+
+	# ! enforce constraints
+
+	# create constraints to enforce worst-and best-case
+	for c in (:worst, :best)
+		enExt_df = innerjoin(rename(part.var[:stLvlInter], :var => :delta), rename(part.var[Symbol(c,:CaseStDelta)], :var => c), on = intCol(part.var[Symbol(c,:CaseStDelta)]))
+		enExt_df = matchSetParameter(enExt_df, part.par[Symbol(:secFac,makeUp(c),:Case)], anyM.sets, newCol = :secFac)
+		enExt_df[!,:cnsExpr] = map(x -> (1 + x.secFac) * x.delta - getindex(x,c), eachrow(enExt_df))
+		cns_dic[Symbol(c,:CaseStDelta)] = cnsCont(select(enExt_df, Not([:delta,c])), c == :worst ? :greater : :smaller)
+	end
