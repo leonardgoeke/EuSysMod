@@ -35,9 +35,10 @@ dnsThrs = par_df[id_int,:dnsThrs]
 name_str = convert(String,par_df[id_int,:name])
 checkDet_boo = scenario in "scr" .* string.(1982:2016)
 
+
 # create files determining scenario setup
 scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scenario, setupDir_str, spaSco)
-scrQrtHeu_arr, scrDirHeu_str = generateScrInfo(false, "total12_ext0", setupDir_str, spaSco)
+scrQrtHeu_arr, scrDirHeu_str = generateScrInfo(false, "total12_ext0_" * split(scenario,"_")[end], setupDir_str, spaSco)
 
 #region # * options for algorithm
 
