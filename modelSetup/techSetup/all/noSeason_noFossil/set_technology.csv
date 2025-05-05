@@ -1,6 +1,6 @@
 technology_1,technology_2,technology_3,mode,carrier_conversion_in,carrier_conversion_out,carrier_stored_in,carrier_stored_out,technology_type,technology_decomm,technology_stBalance,timestep_cyclic,region_disaggregate,region_expansion
-battery,,lithiumBattery,,,,electricity,electricity,mature,none,,2,,
-battery,,redoxBattery,,,,electricity,electricity,stock,none,,2,,
+battery,,lithiumBattery,,,,electricity,electricity,mature,none,,3,,
+battery,,redoxBattery,,,,electricity,electricity,stock,none,,3,,
 bioConversion,,biogasPlant,,nonSolidBiomass,rawBiogas,,,stock,none,,,,
 bioConversion,,biogasUpgrading,,rawBiogas,naturalGas,,,stock,none,,,,
 bioConversion,,gasification,,solidBiomass,naturalGas; districtHeat,,,mature,none,,,,
@@ -54,9 +54,9 @@ networkHeat,districtHeatSpace,districtHeatSpace_c,,districtHeat,spaceHeat,,,matu
 networkHeat,,eBoilerDh,,electricity,districtHeat,,,mature,none,,,,
 networkHeat,,gasBoilerDh,,naturalGas,districtHeat,,,mature,none,,,,
 networkHeat,,h2BoilerDh,,h2,districtHeat,,,mature,none,,,,
-networkHeat,,largeWaterTank,,,,districtHeat,districtHeat,mature,none,,2,,
+networkHeat,,largeWaterTank,,,,districtHeat,districtHeat,mature,none,,3,,
 networkHeat,,nonSolidBioBoilerDh,,nonSolidBiomass,districtHeat,,,stock,none,,,,
-networkHeat,,pitThermalStorage,,,,districtHeat,districtHeat,mature,none,,2,,
+networkHeat,,pitThermalStorage,,,,districtHeat,districtHeat,mature,none,,3,,
 networkHeat,,solidBioBoilerDh,,solidBiomass,districtHeat,,,stock,none,,,,
 ocgt,,ocgtGas,,naturalGas,electricity,,,mature,none,,,,
 ocgt,,ocgtGasChp,,naturalGas,electricity; districtHeat,,,stock,none,,,,
@@ -64,8 +64,8 @@ ocgt,,ocgtH2,,h2,electricity,,,mature,none,,,,
 ocgt,,ocgtH2Chp,,h2,electricity; districtHeat,,,stock,none,,,,
 powerToX,electrolysis,alkElectrolysis,,electricity,h2; districtHeat,,,mature,none,,,,
 powerToX,electrolysis,pemElectrolysis,,electricity,h2; districtHeat,,,stock,none,,,,
-powerToX,h2Storage,h2StorageCavern,,,,h2,h2,mature,none,,2,,
-powerToX,h2Storage,h2StorageTank,,,,h2,h2,stock,none,,2,,
+powerToX,h2Storage,h2StorageCavern,,,,h2,h2,mature,none,,3,,
+powerToX,h2Storage,h2StorageTank,,,,h2,h2,stock,none,,3,,
 powerToX,synthFuel,bioMethanation,,rawBiogas; h2,naturalGas,,,mature,none,,,,
 powerToX,synthFuel,methanePyrolysis,,naturalGas; electricity,h2; processHeat_high,,,stock,none,,,,
 powerToX,,directAirCapture,,electricity;processHeat_medium,capturedCO2,,,mature,none,,,,
@@ -79,13 +79,13 @@ solar,rooftopInd,pvInd_a,,,electricity,,,mature,none,,,yes,3
 solar,rooftopInd,pvInd_b,,,electricity,,,mature,none,,,yes,3
 solar,rooftopResi,pvResi,,,electricity,,,stock,none,,,yes,3
 solar,rooftopResi,solarThermalResi,,,spaceHeat,,,stock,none,,,yes,3
-stock,power,pumpedStorageClosed,,,,electricity,electricity,stock,none,,2,,
-stock,power,pumpedStorageOpen,,,,electricity,electricity,stock,none,ineq,2,yes,3
+stock,power,pumpedStorageClosed,,,,electricity,electricity,stock,none,,3,,
+stock,power,pumpedStorageOpen,,,,electricity,electricity,stock,none,ineq,3,yes,3
 stock,power,runOfRiver,,,electricity,,,stock,none,,,yes,3
-transport,bev,bevFrtRoadHeavy,,electricity,frtRoadHeavy,,,stock,none,,2,,
-transport,bev,bevFrtRoadLight,,electricity,frtRoadLight,,,stock,none,,2,,
-transport,bev,bevPsngRoadPrvt,,electricity,psngRoadPrvt,,,stock,none,,2,,
-transport,bev,bevPsngRoadPub,,electricity,psngRoadPub,,,stock,none,,2,,
+transport,bev,bevFrtRoadHeavy,,electricity,frtRoadHeavy,,,stock,none,,3,,
+transport,bev,bevFrtRoadLight,,electricity,frtRoadLight,,,stock,none,,3,,
+transport,bev,bevPsngRoadPrvt,,electricity,psngRoadPrvt,,,stock,none,,3,,
+transport,bev,bevPsngRoadPub,,electricity,psngRoadPub,,,stock,none,,3,,
 transport,,eFrtRail,,electricity,frtRail,,,stock,none,,,,
 transport,,ePsngRail,,electricity,psngRail,,,stock,none,,,,
 wind,offshore,offshore_a,,,electricity,,,mature,none,,,yes,3
@@ -93,17 +93,17 @@ wind,offshore,offshore_b,,,electricity,,,mature,none,,,yes,3
 wind,onshore,onshore_a,,,electricity,,,mature,none,,,yes,3
 wind,onshore,onshore_b,,,electricity,,,mature,none,,,yes,3
 powerToX,,liquidFuelExtTech,,refinedOil,liquidFuelExt,,,unrestricted,none,,,,
-importFuel,,impH2Ship,base; flex,,h2,,,stock,none,,,,
-importFuel,,impH2Pipe,base; flex,,h2,,,stock,none,,,,
-importFuel,,impMethane,base; flex,,methane,,,stock,none,,,,
-importFuel,,impMethanol,base; flex,,methanol,,,stock,none,,,,
+importFuel,,impH2Ship,base; flex,,h2,,,mature,none,,,,
+importFuel,,impH2Pipe,base; flex,,h2,,,mature,none,,,,
+importFuel,,impMethane,base; flex,,methane,,,mature,none,,,,
+importFuel,,impMethanol,base; flex,,methanol,,,mature,none,,,,
 importFuel,,impGas,base; flex,,naturalGas,,,stock,none,,,,
 importFuel,,impOil,base; flex,,crudeOil,,,stock,none,,,,
 importFuel,,methaneToGas,,methane,naturalGas,,,unrestricted,none,,,,
 importFuel,,methanolToOil,,methanol,crudeOil,,,unrestricted,none,,,,
-stock,power,reservoir,,,,,electricity,stock,none,ineq,2,yes,3
-powerToX,,gasStorage,,,,naturalGas,naturalGas,mature,none,,2,,
-powerToX,,oilStorage,,,,refinedOil,refinedOil,mature,none,,2,,
+stock,power,reservoir,,,,,electricity,stock,none,ineq,3,yes,3
+powerToX,,gasStorage,,,,naturalGas,naturalGas,mature,none,,3,,
+powerToX,,oilStorage,,,,refinedOil,refinedOil,mature,none,,3,,
 transport,,cngPsngRoadPrvt,,naturalGas,psngRoadPrvt,,,stock,none,,,,
 transport,,dieselFrtRail,,refinedOil,frtRail,,,stock,none,,,,
 transport,,dieselFrtRoadHeavy,,refinedOil,frtRoadHeavy,,,stock,none,,,,
