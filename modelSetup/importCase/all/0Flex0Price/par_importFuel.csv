@@ -23,7 +23,7 @@ impGas,,,costOprConv,309.228
 impGas,,base,effConv,1
 impGas,,base,costVarGen,0
 impGas,,flex,effConv,1
-impGas,,flex,costVarGen,-6.48897E-15
+impGas,,flex,costVarGen,0
 impOil,,,costOprConv,535.236
 impOil,,base,effConv,1
 impOil,,base,costVarGen,0
