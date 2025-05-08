@@ -3,7 +3,7 @@ include("functions.jl")
 
 #region # * define inputs
 
-dir_str = "C:/Git/EuSysMod/"
+dir_str = ""
 modDir_str = dir_str * "inputFiles/"
 setupDir_str = dir_str *  "modelSetup/"
 

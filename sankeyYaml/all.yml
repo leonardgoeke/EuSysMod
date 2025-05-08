@@ -939,7 +939,7 @@ vertices:
       - 0.1647083189169205
     type: "technology"
   - label: "PV"
-    name: "pvOpenspace"
+    name: "pvOpenspace_a"
     color:
       - 0.85
       - 0.85
@@ -949,7 +949,9 @@ vertices:
       - 0.6628659194003773
     type: "technology"
     aggregating:
-      - "pvInd"
+      - "pvOpenspace_b"
+      - "pvInd_a"
+      - "pvInd_b"
       - "pvResi"
   - label: "alkali electrolysis"
     name: "alkElectrolysis"
@@ -1231,8 +1233,8 @@ vertices:
       - 0.6734114157402631
       - 0.3835467025055289
     type: "carrier"
-  - label: "aviation and navigation"
-    name: "avaAndNaviTech"
+  - label: "feedstock and transport"
+    name: "liquidFuelExtTech"
     color:
       - 0.235
       - 0.506
@@ -1366,7 +1368,8 @@ edges:
   - hydropyrolysis: "refinedOil"
   - naturalGas: "gasBoilerProLow"
   - gasBoilerProLow: "processHeat_low"
-  - pvInd: "electricity"
+  - pvInd_a: "electricity"
+  - pvInd_b: "electricity"
   - h2: "h2BoilerProLow"
   - h2BoilerProLow: "processHeat_low"
   - electricity: "heatpumpAirDh"
@@ -1474,7 +1477,8 @@ edges:
   - ottoPsngRoadPrvt: "psngRoadPrvt"
   - electricity: "bevPsngRoadPub"
   - bevPsngRoadPub: "psngRoadPub"
-  - pvOpenspace: "electricity"
+  - pvOpenspace_a: "electricity"
+  - pvOpenspace_b: "electricity"
   - electricity: "alkElectrolysis"
   - alkElectrolysis: "h2"
   - alkElectrolysis: "districtHeat"

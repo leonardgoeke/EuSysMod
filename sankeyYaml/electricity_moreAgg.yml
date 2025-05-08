@@ -12,16 +12,6 @@ vertices:
     aggregating:
       - "heatpumpAirSpace"
       - "resistiveHeatSpace"
-  - label: "gasBoilerProHigh"
-    name: "gasBoilerProHigh"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.20288091905003602
-      - 0.46200912449738263
-    type: "technology"
   - label: "solidBioPlantProLow"
     name: "solidBioPlantProLow"
     color:
@@ -42,16 +32,6 @@ vertices:
       - 0.45861258537206434
       - 0.547491983037598
     type: "technology"
-  - label: "pit thermal storage"
-    name: "pitThermalStorage"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.3595901959917576
-      - 0.8062060767250575
-    type: "technology"
   - label: "lithium battery"
     name: "lithiumBattery"
     color:
@@ -62,7 +42,7 @@ vertices:
       - 0.0022898780648664685
       - 0.5355620101560069
     type: "technology"
-  - label: "engine"
+  - label: "gas engine"
     name: "gasEngine"
     color:
       - 0.85
@@ -72,8 +52,16 @@ vertices:
       - 0.17143913591400672
       - 0.6539468892645565
     type: "technology"
-    aggregating:
-      - "dieselEngine"
+  - label: "methanol engine"
+    name: "dieselEngine"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.17143913591400672
+      - 0.6539468892645565
+    type: "technology"
   - label: "low temp. engine, gas"
     name: "gasEngineProLow"
     color:
@@ -83,36 +71,6 @@ vertices:
     position:
       - 0.37405768883788276
       - 0.5378408332383078
-    type: "technology"
-  - label: "water tank"
-    name: "largeWaterTank"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.3094782920344916
-      - 0.8026985116051522
-    type: "technology"
-  - label: "fcFrtRail"
-    name: "fcFrtRail"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.3793044059271791
-      - 0.016676442702065475
-    type: "technology"
-  - label: "biogas methanation"
-    name: "bioMethanation"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.4408190704689211
-      - 0.46051873966481344
     type: "technology"
   - label: "pumped storage"
     name: "pumpedStorageOpen"
@@ -136,16 +94,6 @@ vertices:
       - 0.4361141253936182
       - 0.6298485885170159
     type: "technology"
-  - label: "h2BoilerDh"
-    name: "h2BoilerDh"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.3495519723561432
-      - 0.36307404981974545
-    type: "technology"
   - label: "low temp. CCGT back, H2"
     name: "ccgtH2BackProLow"
     color:
@@ -155,26 +103,6 @@ vertices:
     position:
       - 0.39329018914533187
       - 0.3674761743539582
-    type: "technology"
-  - label: "fcFrtRoadHeavy"
-    name: "fcFrtRoadHeavy"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.2126485172746847
-      - 0.06593722362767468
-    type: "technology"
-  - label: "DH gas boiler"
-    name: "gasBoilerDh"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.3046218536939893
-      - 0.7509770192746548
     type: "technology"
   - label: "offshore_b"
     name: "offshore_b"
@@ -196,16 +124,6 @@ vertices:
       - 0.41730350685190104
       - 0.4025725554988331
     type: "technology"
-  - label: "biomass boiler"
-    name: "bioBoilerSpace"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.66360393832928
-      - 0.844064341570323
-    type: "technology"
   - label: "wind, onshore"
     name: "onshore_a"
     color:
@@ -218,7 +136,7 @@ vertices:
     type: "technology"
     aggregating:
       - "onshore_b"
-  - label: "DH plant"
+  - label: "biomass CHP"
     name: "nonSolidBioPlantDh"
     color:
       - 0.85
@@ -240,7 +158,7 @@ vertices:
       - 0.29930297970197994
       - 0.38031752944972913
     type: "technology"
-  - label: "BEVs"
+  - label: "transport"
     name: "bevPsngRoadPrvt"
     color:
       - 0.85
@@ -254,6 +172,8 @@ vertices:
       - "bevFrtRoadLight"
       - "bevFrtRoadHeavy"
       - "bevPsngRoadPub"
+      - "ePsngRail"
+      - "eFrtRail"
   - label: "medium temp. engine, biogas"
     name: "bioGasEngineProMed"
     color:
@@ -263,26 +183,6 @@ vertices:
     position:
       - 0.4814543966669732
       - 0.510252846071034
-    type: "technology"
-  - label: "fcFrtRoadLight"
-    name: "fcFrtRoadLight"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.31250951079352934
-      - 0.041749753873330964
-    type: "technology"
-  - label: "solidBioBoilerDh"
-    name: "solidBioBoilerDh"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.5552111661751207
-      - 0.7135684767122172
     type: "technology"
   - label: "CCGT back, gas"
     name: "ccgtGasBackDh"
@@ -294,118 +194,6 @@ vertices:
       - 0.2717115780190738
       - 0.6685797333900267
     type: "technology"
-  - label: "cngPsngRoadPrvt"
-    name: "cngPsngRoadPrvt"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.5639855052415776
-      - 0.4556489375746421
-    type: "technology"
-  - label: "dieselFrtRoadLight"
-    name: "dieselFrtRoadLight"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.56255759033486
-      - 0.05641835824732028
-    type: "technology"
-  - label: "oilBoilerProLow"
-    name: "oilBoilerProLow"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.7004947705441176
-      - 0.3494106854349507
-    type: "technology"
-  - label: "gasBoilerProMed"
-    name: "gasBoilerProMed"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.5427771456672658
-      - 0.5586603520394174
-    type: "technology"
-  - label: "bioBoilerProLow"
-    name: "bioBoilerProLow"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.7155503106717812
-      - 0.5866219141005153
-    type: "technology"
-  - label: "dieselFrtRoadHeavy"
-    name: "dieselFrtRoadHeavy"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.43719244512341976
-      - 0.10158686816707457
-    type: "technology"
-  - label: "bioBoilerProMed"
-    name: "bioBoilerProMed"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.7000258364007611
-      - 0.513789306355989
-    type: "technology"
-  - label: "gas storage"
-    name: "gasStorage"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.2557480629255831
-      - 0.843311877699566
-    type: "technology"
-  - label: "oil storage"
-    name: "oilStorage"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.2557480629255831
-      - 0.843311877699566
-    type: "technology"
-  - label: "fcevPsngRoadPrvt"
-    name: "fcevPsngRoadPrvt"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.5311958941577777
-      - 0.14655380960340603
-    type: "technology"
-  - label: "H2 boiler"
-    name: "h2BoilerProHigh"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.1976373810921141
-      - 0.15161312175763642
-    type: "technology"
-    aggregating:
-      - "h2BoilerProMed"
   - label: "OCGT CHP, gas"
     name: "ocgtGasChp"
     color:
@@ -446,47 +234,7 @@ vertices:
       - 0.4961167131441063
       - 0.4101294569981924
     type: "technology"
-  - label: "gas boiler"
-    name: "gasBoilerSpace"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.4345746562443936
-      - 0.840161003388685
-    type: "technology"
-  - label: "hydropyrolysis"
-    name: "hydropyrolysis"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.7185258263764436
-      - 0.45089200472599417
-    type: "technology"
-  - label: "gasBoilerProLow"
-    name: "gasBoilerProLow"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.5336451626758533
-      - 0.6451449813285939
-    type: "technology"
-  - label: "h2BoilerProLow"
-    name: "h2BoilerProLow"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.5213244087869148
-      - 0.2842077086246404
-    type: "technology"
-  - label: "DH air HP"
+  - label: "electric district heating"
     name: "heatpumpAirDh"
     color:
       - 0.85
@@ -496,6 +244,8 @@ vertices:
       - 0.19901191009698482
       - 0.5836084611570597
     type: "technology"
+    aggregating:
+      - "eBoilerDh"
   - label: "low temp. CCGT back, gas"
     name: "ccgtGasBackProLow"
     color:
@@ -526,16 +276,6 @@ vertices:
       - 0.29135933998787966
       - 0.4103220866351951
     type: "technology"
-  - label: ""
-    name: "districtHeatPro"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.5861546085110078
-      - 0.5854679479852637
-    type: "technology"
   - label: "solid oxide FC"
     name: "sofc"
     color:
@@ -555,26 +295,6 @@ vertices:
     position:
       - 0.2575178492406828
       - 0.40827631479947246
-    type: "technology"
-  - label: "dieselPsngRoadPub"
-    name: "dieselPsngRoadPub"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.6722131115831688
-      - 0.07560503585389394
-    type: "technology"
-  - label: "gasification"
-    name: "gasification"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.4819456226674553
-      - 0.7043050372364996
     type: "technology"
   - label: "pem electrolysis"
     name: "pemElectrolysis"
@@ -596,16 +316,6 @@ vertices:
       - 0.20955908149349867
       - 0.31403483725488984
     type: "technology"
-  - label: "H2 storage tank"
-    name: "h2StorageTank"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.2718712534451921
-      - 0.024948186749053136
-    type: "technology"
   - label: "medium temp. CCGT back, gas"
     name: "ccgtGasBackProMed"
     color:
@@ -615,26 +325,6 @@ vertices:
     position:
       - 0.41804611361472327
       - 0.5116070451337931
-    type: "technology"
-  - label: "DH boiler, electric"
-    name: "eBoilerDh"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.20655717822801062
-      - 0.5510592155066486
-    type: "technology"
-  - label: "fcPsngRoadPub"
-    name: "fcPsngRoadPub"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.42941409404903946
-      - 0.0490299571492645
     type: "technology"
   - label: "medium temp. CCGT back, H2"
     name: "ccgtH2BackProMed"
@@ -691,38 +381,6 @@ vertices:
       - 0.08781945191315821
       - 0.6203456078760616
     type: "technology"
-  - label: "other transport"
-    name: "eFrtRail"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.35188848888717045
-      - 0.20608721592441553
-    type: "technology"
-    aggregating:
-      - "ePsngRail"
-  - label: "oil boiler"
-    name: "oilBoilerProHigh"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.43084508368460467
-      - 0.1765833320448097
-    type: "technology"
-  - label: "oilBoilerProMed"
-    name: "oilBoilerProMed"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.7081532325485537
-      - 0.28365679307266717
-    type: "technology"
   - label: "eBoilerProHigh"
     name: "eBoilerProHigh"
     color:
@@ -743,16 +401,6 @@ vertices:
       - 0.2382495674892962
       - 0.6192271119778234
     type: "technology"
-  - label: "H2 to crude oil"
-    name: "h2ToCrudeOil"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.5212232134381508
-      - 0.3653535108796221
-    type: "technology"
   - label: "ccgtH2Extract"
     name: "ccgtH2Extract"
     color:
@@ -763,29 +411,6 @@ vertices:
       - 0.27486512122495466
       - 0.3868432898738896
     type: "technology"
-  - label: ""
-    name: "districtHeatSpace_a"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.45435457224514186
-      - 0.7910929001238545
-    type: "technology"
-    aggregating:
-      - "districtHeatSpace_b"
-      - "districtHeatSpace_c"
-  - label: "H2 storage cavern"
-    name: "h2StorageCavern"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.23967909502634493
-      - 0.039326577524175066
-    type: "technology"
   - label: "low temp. plant, solid BM"
     name: "nonSolidBioPlantProLow"
     color:
@@ -795,16 +420,6 @@ vertices:
     position:
       - 0.4974892091897521
       - 0.597483635666809
-    type: "technology"
-  - label: "biogas plant"
-    name: "biogasPlant"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.7270212342765793
-      - 0.7353006848560015
     type: "technology"
   - label: "wind, offshore"
     name: "offshore_a"
@@ -818,16 +433,6 @@ vertices:
     type: "technology"
     aggregating:
       - "offshore_b"
-  - label: "dieselFrtRail"
-    name: "dieselFrtRail"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.6341302831994281
-      - 0.047772330551681896
-    type: "technology"
   - label: "eBoilerProLow"
     name: "eBoilerProLow"
     color:
@@ -837,16 +442,6 @@ vertices:
     position:
       - 0.38717657837068387
       - 0.46870335685018955
-    type: "technology"
-  - label: "refinery"
-    name: "refinery"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.8209107559394783
-      - 0.2403258982222614
     type: "technology"
   - label: "liquifaction"
     name: "liquifaction"
@@ -858,16 +453,6 @@ vertices:
       - 0.572155203115425
       - 0.5183892260646853
     type: "technology"
-  - label: "biogas upgrading"
-    name: "biogasUpgrading"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.49715971423535854
-      - 0.7496119897129098
-    type: "technology"
   - label: "gasEngineProMed"
     name: "gasEngineProMed"
     color:
@@ -878,28 +463,8 @@ vertices:
       - 0.39221932680209404
       - 0.5014099188671804
     type: "technology"
-  - label: "nonSolidBioBoilerDh"
-    name: "nonSolidBioBoilerDh"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.5386143715100621
-      - 0.7487126901996914
-    type: "technology"
-  - label: "ottoPsngRoadPrvt"
-    name: "ottoPsngRoadPrvt"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.7419929674217908
-      - 0.1647083189169205
-    type: "technology"
   - label: "PV"
-    name: "pvOpenspace"
+    name: "pvOpenspace_a"
     color:
       - 0.85
       - 0.85
@@ -909,7 +474,9 @@ vertices:
       - 0.6628659194003773
     type: "technology"
     aggregating:
-      - "pvInd"
+      - "pvOpenspace_b"
+      - "pvInd_a"
+      - "pvInd_b"
       - "pvResi"
   - label: "alkali electrolysis"
     name: "alkElectrolysis"
@@ -921,96 +488,6 @@ vertices:
       - 0.3221125878323824
       - 0.39008157432425256
     type: "technology"
-  - label: "H2 import, ship"
-    name: "impH2Ship"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.3221125878323824
-      - 0.39008157432425256
-    type: "technology"
-  - label: "H2 import, pipeline"
-    name: "impH2Pipe"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.3221125878323824
-      - 0.39008157432425256
-    type: "technology"
-  - label: "fossil gas import"
-    name: "impGas"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.3221125878323824
-      - 0.39008157432425256
-    type: "technology"
-  - label: "fossil oil import"
-    name: "impOil"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.3221125878323824
-      - 0.39008157432425256
-    type: "technology"
-  - label: "green gas import"
-    name: "methaneToGas"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.3221125878323824
-      - 0.39008157432425256
-    type: "technology"
-  - label: "green oil import"
-    name: "methanolToOil"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.3221125878323824
-      - 0.39008157432425256
-    type: "technology"
-  - label: "non-solid biomass"
-    name: "nonSolidBiomass"
-    color:
-      - 0.682
-      - 0.898
-      - 0.443
-    position:
-      - 0.6212637206488161
-      - 0.7178453515491483
-    type: "carrier"
-  - label: "other biomass"
-    name: "otherBiomass"
-    color:
-      - 0.682
-      - 0.898
-      - 0.443
-    position:
-      - 0.7157073593437235
-      - 0.6566738200522261
-    type: "carrier"
-  - label: "solid biomass"
-    name: "solidBiomass"
-    color:
-      - 0.682
-      - 0.898
-      - 0.443
-    position:
-      - 0.6150243685691631
-      - 0.6646712846760506
-    type: "carrier"
   - label: "electricity"
     name: "electricity"
     color:
@@ -1021,126 +498,6 @@ vertices:
       - 0.2629863545613276
       - 0.4897050098802379
     type: "carrier"
-  - label: "space heat"
-    name: "spaceHeat"
-    color:
-      - 1.0
-      - 0.4549019607843137
-      - 0.5215686274509804
-    position:
-      - 0.5282621151525395
-      - 0.8064369897790468
-    type: "carrier"
-  - label: "gas"
-    name: "naturalGas"
-    color:
-      - 0.235
-      - 0.506
-      - 0.325
-    position:
-      - 0.3433526419430335
-      - 0.6259373921685883
-    type: "carrier"
-  - label: "process heat - high"
-    name: "processHeat_high"
-    color:
-      - 0.6823529411764706
-      - 0.07058823529411765
-      - 0.22745098039215686
-    position:
-      - 0.2423388844702108
-      - 0.29255501573936016
-    type: "carrier"
-  - label: "refined oil"
-    name: "refinedOil"
-    color:
-      - 0.33725490196078434
-      - 0.3411764705882353
-      - 0.3254901960784314
-    position:
-      - 0.6020714096119408
-      - 0.2454949838032215
-    type: "carrier"
-  - label: "process heat - low"
-    name: "processHeat_low"
-    color:
-      - 0.6823529411764706
-      - 0.07058823529411765
-      - 0.22745098039215686
-    position:
-      - 0.528118634129406
-      - 0.48049979293706
-    type: "carrier"
-  - label: "raw biogas"
-    name: "rawBiogas"
-    color:
-      - 0.682
-      - 0.898
-      - 0.443
-    position:
-      - 0.5632510318852452
-      - 0.6142217228746434
-    type: "carrier"
-  - label: "H2"
-    name: "h2"
-    color:
-      - 0.329
-      - 0.447
-      - 0.827
-    position:
-      - 0.3436483471948764
-      - 0.23356255804039183
-    type: "carrier"
-  - label: "district heat"
-    name: "districtHeat"
-    color:
-      - 0.6
-      - 0.0
-      - 0.169
-    position:
-      - 0.37499315320650206
-      - 0.5761540636436088
-    type: "carrier"
-  - label: "process heat - medium"
-    name: "processHeat_medium"
-    color:
-      - 0.6823529411764706
-      - 0.07058823529411765
-      - 0.22745098039215686
-    position:
-      - 0.540193573981075
-      - 0.40528051097910744
-    type: "carrier"
-  - label: "carbon"
-    name: "capturedCO2"
-    color:
-      - 0.0
-      - 0.0
-      - 0.0
-    position:
-      - 0.646161297235269
-      - 0.3279683067929288
-    type: "carrier"
-  - label: "crude oil"
-    name: "crudeOil"
-    color:
-      - 0.33725490196078434
-      - 0.3411764705882353
-      - 0.3254901960784314
-    position:
-      - 0.6734114157402631
-      - 0.3835467025055289
-    type: "carrier"
-  - label: "aviation and navigation"
-    name: "avaAndNaviTech"
-    color:
-      - 0.235
-      - 0.506
-      - 0.325
-    position:
-      - 1.0
-      - 0.16615683057109587
-    type: "technology"
 edges:
   - nonSolidBiomass: "otherBiomass"
   - solidBiomass: "otherBiomass"
@@ -1252,7 +609,8 @@ edges:
   - hydropyrolysis: "refinedOil"
   - naturalGas: "gasBoilerProLow"
   - gasBoilerProLow: "processHeat_low"
-  - pvInd: "electricity"
+  - pvInd_a: "electricity"
+  - pvInd_b: "electricity"
   - h2: "h2BoilerProLow"
   - h2BoilerProLow: "processHeat_low"
   - electricity: "heatpumpAirDh"
@@ -1336,9 +694,6 @@ edges:
   - electricity: "eBoilerProLow"
   - eBoilerProLow: "processHeat_low"
   - onshore_b: "electricity"
-  - crudeOil: "refinery"
-  - refinery: "refinedOil"
-  - refinery: "jetFuel"
   - otherBiomass: "liquifaction"
   - electricity: "liquifaction"
   - liquifaction: "crudeOil"
@@ -1352,7 +707,8 @@ edges:
   - nonSolidBioBoilerDh: "districtHeat"
   - refinedOil: "ottoPsngRoadPrvt"
   - electricity: "bevPsngRoadPub"
-  - pvOpenspace: "electricity"
+  - pvOpenspace_a: "electricity"
+  - pvOpenspace_b: "electricity"
   - electricity: "alkElectrolysis"
   - alkElectrolysis: "h2"
   - alkElectrolysis: "districtHeat"
@@ -1362,13 +718,12 @@ edges:
   - impOil: "crudeOil"
 
 removeSankey:
-  - trade buy: "solid biomass"
-  - trade buy: "non-solid biomass"
-  - final demand: "process heat - low"
-  - final demand: "process heat - medium"
-  - final demand: "process heat - high"
+  - trade buy: "biomass"
+  - final demand: "process heat"
   - final demand: "jet fuel"
   - exchange losses: "jet fuel"
   - exchange losses: "electricity"
   - exchange losses: "H2"
-  - exchange losses: "crude oil"
+  - exchange losses: "methanol"
+  - exchange losses: "biomass"
+  - net import: "biomass"

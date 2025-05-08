@@ -71,3 +71,5 @@ test_barrier_4th8ram,8760h,all,total14_ext2_all,fuelMacro,inter_all,0Flex0Price,
 test_phdg4cross_4th8ram,8760h,all,total14_ext2_all,fuelMacro,inter_all,0Flex0Price,1expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,phdg_4_cross,15,4,8
 test_phdg6cross_4th8ram,8760h,all,total14_ext2_all,fuelMacro,inter_all,0Flex0Price,1expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,phdg_6_cross,15,4,8
 test_phdg4noCross_4th8ram,8760h,all,total14_ext2_all,fuelMacro,inter_all,0Flex0Price,1expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,phdg_4_noCross,15,4,8
+test,8760h,all,total14_ext2_all,fuelMacro,inter_all,0Flex0Price,1expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,phdg_4_cross,15,8,4
+noInter_all_2856h_total36_ext2_all_30Flex5Price_1ex1r1b,2856h,all,total36_ext2_all,fuelMacro,noInter_all,30Flex5Price,1expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,barrier,1,12,16

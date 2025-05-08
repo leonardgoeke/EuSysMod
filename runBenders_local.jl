@@ -8,7 +8,7 @@ setupDir_str = dir_str *  "modelSetup/"
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 8
+    id_int = 73
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -72,8 +72,27 @@ interStabQ_sym = :log
 tolStab_arr = [1e-6, 1e-6]
 interStab_sym = :log
 
+# options to solve sub-problems
+if solve == "barrier"
+	meth_sym = :barrier
+	crs_sym = false
+	rng_arr = [1e-2, 1e-8]
+elseif solve == "phdg_4_cross"
+	meth_sym = :pdhg
+	crs_sym = true
+	rng_arr = [1e-4, 1e-4]
+elseif solve == "phdg_6_cross"
+	meth_sym = :pdhg
+	crs_sym = true
+	rng_arr = [1e-6, 1e-6]
+elseif solve == "phdg_4_noCross"
+	meth_sym = :pdhg
+	crs_sym = false
+	rng_arr = [1e-4, 1e-4]
+end
+
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-algSetup_obj = algSetup(0.01, (cnt = del_int, thres = del_fl), (bal = false, st = true), 2, 7200.0, false, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 20.0, dbInf = true, threads = t_int, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = true, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false))
+algSetup_obj = algSetup(0.01, (cnt = del_int, thres = del_fl), (bal = false, st = true), 2, 7200.0, false, Gurobi.Optimizer, rngVio_ntup, (rng = rng_arr, int = :none, crs = crs_sym, meth = meth_sym, timeLim = 20.0, dbInf = true, threads = t_int, check = false), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = true, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false))
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
@@ -90,19 +109,9 @@ end
 # solve frequency of top problem without stabilization for lower bound
 noStab_tup = (upper = 1, inter = :log, sub = 2.0)
 
-if solve in ("0Lvl_none", "0Lvl_reduced")
-	w_tup = (capa = 1e0, capaStSize = 1e-3, stLvl = 0.0, lim = 1e0)
-elseif solve in ("lowLvl_none", "lowLvl_reduced")
-	w_tup = (capa = 1e0, capaStSize = 1e-3, stLvl = 1e-3, lim = 1e0)
-end
-
-w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 1e1, lim = 1e1)
-
-if solve in ("0Lvl_none", "lowLvl_none")
-	ini_sym = :none
-elseif solve in ("0Lvl_reduced", "lowLvl_reduced")
-	ini_sym = :reduced
-end
+# solve frequency of top problem without stabilization for lower bound
+noStab_tup = (upper = 70, inter = :log, sub = 2.0)
+w_tup = (capa = 1e0, capaStSize = 1e-3, stLvl = 0.0, lim = 1e0)
 
 stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, noStab_tup, repVio = true, weight = w_tup) # :none for last argument will skip initialization, other names just used for setting input folder below
 
