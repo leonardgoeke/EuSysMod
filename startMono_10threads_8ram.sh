@@ -1,5 +1,5 @@
 #!/bin/bash --login
-#SBATCH --array=35-40
+#SBATCH --array=1-70
 #SBATCH --time=120:00:00
 #SBATCH --job-name=results/ESCU_mono_%j
 #SBATCH --output=results/mono_%j.out
@@ -13,6 +13,7 @@ sbatch --nodes=1 --ntasks=1 --mem-per-cpu=8G --time=7200 --cpus-per-task=10 --nt
 
 
 
+sbatch "julia aggInflows.jl "
 
 
 
