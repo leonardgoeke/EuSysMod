@@ -20,12 +20,14 @@ scenario = convert(String,par_df[id_int,:scenario]) # scenario case
 reso = string(par_df[id_int,:resolution]) # spatial resolution
 techs = string(par_df[id_int,:techCase]) # available technologies
 imp = string(par_df[id_int,:importCase]) # fuel import setup 
+
 security = string(par_df[id_int,:security]) # security settings
 inOos = string(par_df[id_int,:inputOutOfSample]) # capacity folder for out-of-sample testing
 
 # extract benders settings
 solve = par_df[id_int,:solve]
 wrkCnt = par_df[id_int,:workerCnt]
+cores_int = par_df[id_int,:cores]
 t_int = par_df[id_int,:threads]
 ram = par_df[id_int,:ram]
 cutDel = string(par_df[id_int,:cutDel])
