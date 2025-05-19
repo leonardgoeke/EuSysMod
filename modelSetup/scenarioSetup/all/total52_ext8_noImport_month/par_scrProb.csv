@@ -1,10 +1,10 @@
 scenario,timestep_3,parameter,value,comment
-scr1990,ini01,scrProb,0.028571428571428574,extreme
-scr2009,ini01,scrProb,0.2285714285714286,clustering
-scr2007,ini01,scrProb,0.20000000000000004,clustering
-scr2011,ini01,scrProb,0.14285714285714288,clustering
-scr2015,ini01,scrProb,0.17142857142857146,clustering
-scr2012,ini01,scrProb,0.2285714285714286,clustering
+scr1990,ini01,scrProb,0.02857142857142857,extreme
+scr2009,ini01,scrProb,0.22857142857142856,clustering
+scr2007,ini01,scrProb,0.2,clustering
+scr2011,ini01,scrProb,0.14285714285714285,clustering
+scr2015,ini01,scrProb,0.14285714285714285,clustering
+scr2012,ini01,scrProb,0.2571428571428571,clustering
 scr1982,ini01,scrProb,0.0,none
 scr1983,ini01,scrProb,0.0,none
 scr1984,ini01,scrProb,0.0,none
@@ -25,6 +25,7 @@ scr2002,ini01,scrProb,0.0,none
 scr2004,ini01,scrProb,0.0,none
 scr2005,ini01,scrProb,0.0,none
 scr2006,ini01,scrProb,0.0,none
+scr2008,ini01,scrProb,0.0,none
 scr2010,ini01,scrProb,0.0,none
 scr2014,ini01,scrProb,0.0,none
 scr2016,ini01,scrProb,0.0,none
@@ -50,6 +51,7 @@ scr2001,ini02,scrProb,0.0,none
 scr2002,ini02,scrProb,0.0,none
 scr2004,ini02,scrProb,0.0,none
 scr2007,ini02,scrProb,0.0,none
+scr2008,ini02,scrProb,0.0,none
 scr2009,ini02,scrProb,0.0,none
 scr2010,ini02,scrProb,0.0,none
 scr2011,ini02,scrProb,0.0,none
@@ -80,6 +82,7 @@ scr2001,ini03,scrProb,0.0,none
 scr2002,ini03,scrProb,0.0,none
 scr2006,ini03,scrProb,0.0,none
 scr2007,ini03,scrProb,0.0,none
+scr2008,ini03,scrProb,0.0,none
 scr2010,ini03,scrProb,0.0,none
 scr2011,ini03,scrProb,0.0,none
 scr2012,ini03,scrProb,0.0,none
@@ -110,19 +113,19 @@ scr2004,ini04,scrProb,0.0,none
 scr2005,ini04,scrProb,0.0,none
 scr2006,ini04,scrProb,0.0,none
 scr2007,ini04,scrProb,0.0,none
+scr2008,ini04,scrProb,0.0,none
 scr2009,ini04,scrProb,0.0,none
 scr2011,ini04,scrProb,0.0,none
 scr2012,ini04,scrProb,0.0,none
 scr2014,ini04,scrProb,0.0,none
 scr2015,ini04,scrProb,0.0,none
-scr2001,ini05,scrProb,0.4,clustering
-scr2016,ini05,scrProb,0.3142857142857143,clustering
-scr2006,ini05,scrProb,0.2857142857142857,clustering
+scr2004,ini05,scrProb,0.4857142857142857,clustering
+scr1987,ini05,scrProb,0.42857142857142855,clustering
+scr2008,ini05,scrProb,0.08571428571428572,clustering
 scr1982,ini05,scrProb,0.0,none
 scr1983,ini05,scrProb,0.0,none
 scr1984,ini05,scrProb,0.0,none
 scr1985,ini05,scrProb,0.0,none
-scr1987,ini05,scrProb,0.0,none
 scr1988,ini05,scrProb,0.0,none
 scr1989,ini05,scrProb,0.0,none
 scr1990,ini05,scrProb,0.0,none
@@ -134,9 +137,10 @@ scr1997,ini05,scrProb,0.0,none
 scr1998,ini05,scrProb,0.0,none
 scr1999,ini05,scrProb,0.0,none
 scr2000,ini05,scrProb,0.0,none
+scr2001,ini05,scrProb,0.0,none
 scr2002,ini05,scrProb,0.0,none
-scr2004,ini05,scrProb,0.0,none
 scr2005,ini05,scrProb,0.0,none
+scr2006,ini05,scrProb,0.0,none
 scr2007,ini05,scrProb,0.0,none
 scr2009,ini05,scrProb,0.0,none
 scr2010,ini05,scrProb,0.0,none
@@ -144,6 +148,7 @@ scr2011,ini05,scrProb,0.0,none
 scr2012,ini05,scrProb,0.0,none
 scr2014,ini05,scrProb,0.0,none
 scr2015,ini05,scrProb,0.0,none
+scr2016,ini05,scrProb,0.0,none
 scr2007,ini06,scrProb,0.2571428571428572,clustering
 scr1998,ini06,scrProb,0.5142857142857143,clustering
 scr2014,ini06,scrProb,0.2285714285714286,clustering
@@ -167,6 +172,7 @@ scr2002,ini06,scrProb,0.0,none
 scr2004,ini06,scrProb,0.0,none
 scr2005,ini06,scrProb,0.0,none
 scr2006,ini06,scrProb,0.0,none
+scr2008,ini06,scrProb,0.0,none
 scr2009,ini06,scrProb,0.0,none
 scr2010,ini06,scrProb,0.0,none
 scr2011,ini06,scrProb,0.0,none
@@ -195,6 +201,7 @@ scr2004,ini07,scrProb,0.0,none
 scr2005,ini07,scrProb,0.0,none
 scr2006,ini07,scrProb,0.0,none
 scr2007,ini07,scrProb,0.0,none
+scr2008,ini07,scrProb,0.0,none
 scr2009,ini07,scrProb,0.0,none
 scr2010,ini07,scrProb,0.0,none
 scr2011,ini07,scrProb,0.0,none
@@ -224,6 +231,7 @@ scr2001,ini08,scrProb,0.0,none
 scr2002,ini08,scrProb,0.0,none
 scr2006,ini08,scrProb,0.0,none
 scr2007,ini08,scrProb,0.0,none
+scr2008,ini08,scrProb,0.0,none
 scr2009,ini08,scrProb,0.0,none
 scr2010,ini08,scrProb,0.0,none
 scr2011,ini08,scrProb,0.0,none
@@ -253,6 +261,7 @@ scr2004,ini09,scrProb,0.0,none
 scr2005,ini09,scrProb,0.0,none
 scr2006,ini09,scrProb,0.0,none
 scr2007,ini09,scrProb,0.0,none
+scr2008,ini09,scrProb,0.0,none
 scr2009,ini09,scrProb,0.0,none
 scr2010,ini09,scrProb,0.0,none
 scr2011,ini09,scrProb,0.0,none
@@ -283,6 +292,7 @@ scr2004,ini10,scrProb,0.0,none
 scr2005,ini10,scrProb,0.0,none
 scr2006,ini10,scrProb,0.0,none
 scr2007,ini10,scrProb,0.0,none
+scr2008,ini10,scrProb,0.0,none
 scr2009,ini10,scrProb,0.0,none
 scr2010,ini10,scrProb,0.0,none
 scr2011,ini10,scrProb,0.0,none
@@ -312,6 +322,7 @@ scr2004,ini11,scrProb,0.0,none
 scr2005,ini11,scrProb,0.0,none
 scr2006,ini11,scrProb,0.0,none
 scr2007,ini11,scrProb,0.0,none
+scr2008,ini11,scrProb,0.0,none
 scr2009,ini11,scrProb,0.0,none
 scr2010,ini11,scrProb,0.0,none
 scr2011,ini11,scrProb,0.0,none
@@ -340,6 +351,7 @@ scr2002,ini12,scrProb,0.0,none
 scr2005,ini12,scrProb,0.0,none
 scr2006,ini12,scrProb,0.0,none
 scr2007,ini12,scrProb,0.0,none
+scr2008,ini12,scrProb,0.0,none
 scr2009,ini12,scrProb,0.0,none
 scr2010,ini12,scrProb,0.0,none
 scr2011,ini12,scrProb,0.0,none

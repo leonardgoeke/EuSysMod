@@ -1,9 +1,9 @@
 scenario,timestep_3,parameter,value,comment
 scr1990,ini01,scrProb,0.02857142857142857,extreme
-scr2008,ini01,scrProb,0.02857142857142857,extreme
-scr2009,ini01,scrProb,0.6,clustering
-scr1986,ini01,scrProb,0.34285714285714286,clustering
+scr2009,ini01,scrProb,0.4857142857142857,clustering
+scr2008,ini01,scrProb,0.4857142857142857,clustering
 scr1985,ini01,scrProb,0.0,none
+scr1986,ini01,scrProb,0.0,none
 scr1988,ini01,scrProb,0.0,none
 scr1989,ini01,scrProb,0.0,none
 scr1991,ini01,scrProb,0.0,none
@@ -114,10 +114,10 @@ scr2009,ini06,scrProb,0.0,none
 scr2011,ini06,scrProb,0.0,none
 scr2016,ini06,scrProb,0.0,none
 scr2009,ini07,scrProb,0.02857142857142857,extreme
-scr1999,ini07,scrProb,0.9714285714285714,clustering
+scr1988,ini07,scrProb,0.02857142857142857,extreme
+scr1999,ini07,scrProb,0.9428571428571428,clustering
 scr1985,ini07,scrProb,0.0,none
 scr1986,ini07,scrProb,0.0,none
-scr1988,ini07,scrProb,0.0,none
 scr1989,ini07,scrProb,0.0,none
 scr1990,ini07,scrProb,0.0,none
 scr1991,ini07,scrProb,0.0,none
