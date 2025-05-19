@@ -79,7 +79,7 @@ solar,rooftopInd,pvInd_a,,,electricity,,,mature,none,,,yes,3
 solar,rooftopInd,pvInd_b,,,electricity,,,mature,none,,,yes,3
 solar,rooftopResi,pvResi,,,electricity,,,stock,none,,,yes,3
 solar,rooftopResi,solarThermalResi,,,spaceHeat,,,stock,none,,,yes,3
-stock,power,pumpedStorageClosed,,,,electricity,electricity,stock,none,,2,,
+stock,power,pumpedStorageClosed,,,,electricity,electricity,stock,none,,inter,,
 stock,power,pumpedStorageOpen,,,,electricity,electricity,stock,none,ineq,inter,yes,3
 stock,power,runOfRiver,,,electricity,,,stock,none,,,yes,3
 transport,bev,bevFrtRoadHeavy,,electricity,frtRoadHeavy,,,stock,none,,3,,
