@@ -76,26 +76,12 @@ tolStab_arr = [1e-2, 1e-6]
 interStab_sym = :log
 
 # options to solve sub-problems
-if solve == "barrier"
-	meth_sym = :barrier
-	crs_sym = false
-	rng_arr = [1e-2, 1e-8]
-elseif solve == "phdg_4_cross"
-	meth_sym = :pdhg
-	crs_sym = true
-	rng_arr = [1e-4, 1e-4]
-elseif solve == "phdg_6_cross"
-	meth_sym = :pdhg
-	crs_sym = true
-	rng_arr = [1e-6, 1e-6]
-elseif solve == "phdg_4_noCross"
-	meth_sym = :pdhg
-	crs_sym = false
-	rng_arr = [1e-4, 1e-4]
-end
+meth_sym = :barrier
+crs_sym = false
+rng_arr = [1e-2, 1e-8]
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-algSetup_obj = algSetup(0.01, (cnt = del_int, thres = del_fl), (bal = false, st = true), 2, 720.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, (rng = rng_arr, int = :none, crs = crs_sym, meth = meth_sym, timeLim = 20.0, dbInf = true, threads = t_int, check = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false))
+algSetup_obj = algSetup(0.01, (cnt = del_int, thres = del_fl), (bal = false, st = true), 2, 7200.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, (rng = rng_arr, int = :none, crs = crs_sym, meth = meth_sym, timeLim = 20.0, dbInf = true, threads = t_int, check = true), (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false))
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
@@ -170,7 +156,7 @@ scale_dic[:facTop] = (capa = 1e4, capaStSize = 1e4, insCapa = 1e4, dispConv = 1e
 
 # initialize distributed computing
 if algSetup_obj.dist
-	addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=" * string(floor(t_int * ram) - 2 ) * "G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=t_int, mem_per_cpu= string(ram) * "G", time=6000) # add all available nodes
+	addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=" * string(floor(t_int * ram) - 2 ) * "G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=t_int, mem_per_cpu= string(ram) * "G", time=7200) # add all available nodes
 	rmprocs(wrkCnt + 2) # remove one node again for main process
 	@everywhere begin
 		using Gurobi, AnyMOD
