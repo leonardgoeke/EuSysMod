@@ -78,10 +78,11 @@ optimize!(anyM.optModel)
 
 #region # * write results
 
-reportTimeSeries(:electricity, anyM)
+
 reportResults(:summary, anyM, addObjName = true)
 reportResults(:cost, anyM, addObjName = true)
 reportResults(:exchange, anyM, addObjName = true)
+reportTimeSeries(:electricity, anyM)
 
 #endregion
 
