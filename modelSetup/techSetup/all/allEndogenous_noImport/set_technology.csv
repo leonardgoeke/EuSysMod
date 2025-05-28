@@ -90,8 +90,7 @@ transport,,eFrtRail,,electricity,frtRail,,,mature,none,,,,
 transport,,ePsngRail,,electricity,psngRail,,,mature,none,,,,
 wind,offshore,offshore_a,,,electricity,,,mature,none,,,yes,3
 wind,offshore,offshore_b,,,electricity,,,mature,none,,,yes,3
-wind,onshore,onshore_a,,,electricity,,,mature,none,,,yes,3
-wind,onshore,onshore_b,,,electricity,,,mature,none,,,yes,3
+wind,,onshore,,,electricity,,,mature,none,,,yes,4
 powerToX,,liquidFuelExtTech,,refinedOil,liquidFuelExt,,,unrestricted,none,,,,
 importFuel,,impH2Ship,base; flex,,h2,,,stock,none,,,,
 importFuel,,impH2Pipe,base; flex,,h2,,,stock,none,,,,

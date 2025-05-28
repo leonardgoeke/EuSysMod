@@ -1,8 +1,8 @@
 name,time,spatialScope,scenario,resolution,techCase,importCase,security,trust,inputOutOfSample,cutDel,dnsThrs,solve,workerCnt,threads,ram,cores
-det_all_8760h_scr1982,8760h,all,scr1982,fuelMacro,inter_all,0Flex0Price,2expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,non,1,10,8,10
-det_all_8760h_scr1983,8760h,all,scr1983,fuelMacro,inter_all,0Flex0Price,2expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,non,1,10,8,10
-det_all_8760h_scr1984,8760h,all,scr1984,fuelMacro,inter_all,0Flex0Price,2expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,non,1,10,8,10
-det_all_8760h_scr1985,8760h,all,scr1985,fuelMacro,inter_all,0Flex0Price,2expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,non,1,10,8,10
+det_all_8760h_scr1982,8760h,all,scr1982,fuelMacro,inter_all,0Flex0Price,2expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,barrier,1,10,8,10
+det_all_8760h_scr1983,8760h,all,scr1983,fuelMacro,inter_all,0Flex0Price,2expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,barrier,1,10,8,10
+det_all_8760h_scr1984,8760h,all,scr1984,fuelMacro,inter_all,0Flex0Price,2expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,pdhg,1,10,8,10
+det_all_8760h_scr1985,8760h,all,scr1985,fuelMacro,inter_all,0Flex0Price,2expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,pdhg,1,10,8,10
 det_all_8760h_scr1986,8760h,all,scr1986,fuelMacro,inter_all,0Flex0Price,2expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,non,1,10,8,10
 det_all_8760h_scr1987,8760h,all,scr1987,fuelMacro,inter_all,0Flex0Price,2expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,non,1,10,8,10
 det_all_8760h_scr1988,8760h,all,scr1988,fuelMacro,inter_all,0Flex0Price,2expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,non,1,10,8,10
@@ -34,7 +34,7 @@ det_all_8760h_scr2013,8760h,all,scr2013,fuelMacro,inter_all,0Flex0Price,2expc0se
 det_all_8760h_scr2014,8760h,all,scr2014,fuelMacro,inter_all,0Flex0Price,2expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,non,1,10,8,10
 det_all_8760h_scr2015,8760h,all,scr2015,fuelMacro,inter_all,0Flex0Price,2expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,non,1,10,8,10
 det_all_8760h_scr2016,8760h,all,scr2016,fuelMacro,inter_all,0Flex0Price,2expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,non,1,10,8,10
-inter_all_2856h_total36_ext2_all_0Flex0Price_1ex1r1b,2856h,all,total36_ext2_all,fuelMacro,inter_all,0Flex0Price,1expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,non,1,14,8,10
-noInter_all_2856h_total36_ext2_all_0Flex0Price_1ex1r1b,2856h,all,total36_ext2_all,fuelMacro,noInter_all,0Flex0Price,1expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,non,1,14,8,10
+inter_all_2856h_total36_ext2_all_0Flex0Price_1ex1r1b_fix,2856h,all,total36_ext2_all,fuelMacro,inter_all,0Flex0Price,1expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,barrier,1,14,8,10
+noInter_all_2856h_total36_ext2_all_0Flex0Price_1ex1r1b_fix,2856h,all,total36_ext2_all,fuelMacro,noInter_all,0Flex0Price,1expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,barrier,1,14,8,10
 inter_all_8760h_total36_ext2_all_0Flex0Price_1ex1r1b,8760h,all,total36_ext2_all,fuelMacro,inter_all,0Flex0Price,1expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,non,37,14,2,14
 noInter_all_8760h_total36_ext2_all_0Flex0Price_1ex1r1b,8760h,all,total36_ext2_all,fuelMacro,noInter_all,0Flex0Price,1expc0sec1rep1best,qtrLvl_1,,50cnt_05thres,10000,non,37,14,2,14
