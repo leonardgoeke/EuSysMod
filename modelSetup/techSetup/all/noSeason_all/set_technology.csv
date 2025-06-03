@@ -101,7 +101,7 @@ importFuel,,impOil,base; flex,,crudeOil,,,mature,none,,,,
 importFuel,,methaneToGas,,methane,naturalGas,,,unrestricted,none,,,,
 importFuel,,methanolToOil,,methanol,crudeOil,,,unrestricted,none,,,,
 stock,power,reservoir,,,,,electricity,stock,none,ineq,3,yes,3
-powerToX,,gasStorage,,,,naturalGas,naturalGas,stock,decomm,,3,,
+powerToX,,gasStorage,,,,naturalGas,naturalGas,mature,none,,3,,
 powerToX,,oilStorage,,,,refinedOil,refinedOil,mature,none,,3,,
 transport,,cngPsngRoadPrvt,,naturalGas,psngRoadPrvt,,,stock,none,,,,
 transport,,dieselFrtRail,,refinedOil,frtRail,,,stock,none,,,,

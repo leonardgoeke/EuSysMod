@@ -66,7 +66,7 @@ set_optimizer_attribute(anyM.optModel, "Threads", t_int);
 if solve == "barrier"
     set_optimizer_attribute(anyM.optModel, "Method", 2);
     set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
-    set_optimizer_attribute(anyM.optModel, "NumericFocus", 1);
+    set_optimizer_attribute(anyM.optModel, "NumericFocus", 2);
 else
     set_optimizer_attribute(anyM.optModel, "Method", 6);
     set_optimizer_attribute(anyM.optModel, "GURO_PAR_PDHGRELTOL", 1e-4);
@@ -78,7 +78,7 @@ optimize!(anyM.optModel)
 
 #region # * write results
 
-
+reportStorageLevel(anyM)
 reportResults(:summary, anyM, addObjName = true)
 reportResults(:cost, anyM, addObjName = true)
 reportResults(:exchange, anyM, addObjName = true)
@@ -119,13 +119,3 @@ if inOos == "missing"
 end
 
 #endregion
-
-
-
-anyM.parts.exc[:hvdc].cns[:capaExc]
-
-upper_bound(collect(keys(anyM.parts.exc[:hvdc].var[:expExc][1,:var].terms))[1])
-
-printObject(anyM.parts.lim.cns[:expExcUp], anyM)
-
-printObject(anyM.parts.exc[:hvdc].var[:expExc], anyM)
