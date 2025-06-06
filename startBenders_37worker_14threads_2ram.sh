@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --array=38-39
-#SBATCH --time=120:00:00
+#SBATCH --array=141-144
+#SBATCH --time=121:00:00
 #SBATCH --job-name=benders_%j
 #SBATCH --output=results/benders_%j.out
 #SBATCH --error=results/benders_%j.err

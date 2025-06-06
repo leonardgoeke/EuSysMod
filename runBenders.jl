@@ -97,7 +97,11 @@ end
 
 # solve frequency of top problem without stabilization for lower bound
 noStab_tup = (upper = 70, inter = :log, sub = 2.0)
-w_tup = (capa = 1e0, capaStSize = 1e-3, stLvl = 0.0, lim = 1e0)
+if solve == "0LvlLim"
+	w_tup = (capa = 1e0, capaStSize = 1e-3, stLvl = 0.0, lim = 1e0)
+elseif solve == "3LvlLim"
+	w_tup = (capa = 1e0, capaStSize = 1e-3, stLvl = 1e-3, lim = 1e-3)
+end
 
 stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, noStab_tup, repVio = true, weight = w_tup) # :none for last argument will skip initialization, other names just used for setting input folder below
 
