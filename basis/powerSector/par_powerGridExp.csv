@@ -274,7 +274,6 @@ RO,RS,powerGrid,hvac,2,expExcUp,2,costExpExc,139
 RO,RS,powerGrid,hvac,3,expExcUp,1.5,costExpExc,138.67
 RO,RS,powerGrid,hvac,4,expExcUp,0.5,costExpExc,114
 RO,RS,powerGrid,hvac,5,expExcUp,0.622,costExpExc,64.31
+DE,LU,powerGrid,hvac,,expExcFix,0,,
+BE,LU,powerGrid,hvac,,expExcFix,0,,
 FR,LU,powerGrid,hvac,,expExcFix,0,,
-FR,IT,powerGrid,hvac,,expExcFix,0,,
-DK,SE,powerGrid,hvdc,,expExcFix,0,,
-FR,IT,powerGrid,hvdc,,expExcFix,0,,

@@ -6,7 +6,7 @@ dir_str = ""
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-	id_int = 5
+	id_int = 13
 else
     id_int = parse(Int,ARGS[1])
 end
@@ -22,7 +22,6 @@ solve = par_df[id_int,:solve]
 wrkCnt = par_df[id_int,:workerCnt]
 t_int = par_df[id_int,:threads]
 ram = par_df[id_int,:ram]
-cutDel = par_df[id_int,:cutDel]
 trust = par_df[id_int,:trust]
 dnsThrs = par_df[id_int,:dnsThrs]
 
@@ -50,14 +49,36 @@ interStab_sym = :log
 tolNoStab_arr = [1e-2, 1e-6]
 interNoStab_sym = :lin
 
-if solve == "0to2to3"
-	numFoc_arr = [0,2,3]
-else
-	numFoc_arr = [1,2,3]
+numFoc_arr = [0,2,3]
+
+# solver options for sub and top problem
+subOpt_tup = (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = false)
+topOpt_tup = (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false)
+
+if solve == "1to01Log"
+	cutMgm_tup = (meth = :redundant, opt = (startFac = 1.0, endFac = 0.1, inter = :log), freq = 5, report = true)
+elseif solve == "1to01Lin"
+	cutMgm_tup = (meth = :redundant, opt = (startFac = 1.0, endFac = 0.1, inter = :lin), freq = 5, report = true)
+elseif solve == "1to01Exp"
+cutMgm_tup = (meth = :redundant, opt = (startFac = 1.0, endFac = 0.1, inter = :exp), freq = 5, report = true)
+elseif solve == "1to05Log"
+	cutMgm_tup = (meth = :redundant, opt = (startFac = 1.0, endFac = 0.5, inter = :log), freq = 5, report = true)
+elseif solve == "1to05Lin"
+	cutMgm_tup = (meth = :redundant, opt = (startFac = 1.0, endFac = 0.5, inter = :log), freq = 5, report = true)
+elseif solve == "10cnt05thres"
+	cutMgm_tup = (meth = :redundant, opt = (cnt = 10, thres = 0.5), freq = 5, report = true)
+elseif solve == "10cnt1thres"
+	cutMgm_tup = (meth = :redundant, opt = (cnt = 10, thres = 1.0), freq = 5, report = true)
+elseif solve == "50cnt05thres"
+	cutMgm_tup = (meth = :redundant, opt = (cnt = 50, thres = 0.5), freq = 5, report = true)
+elseif solve == "50cnt1thres"
+	cutMgm_tup = (meth = :redundant, opt = (cnt = 50, thres = 1.0), freq = 5, report = true)
 end
 
-algSetup_obj = algSetup(0.01, (cnt = 2000, thres = 0.5), (bal = false, st = true), 2, 7200.0, wrkCnt != 0, Gurobi.Optimizer, rngVio_ntup, (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = false), (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false))
+# optimimality gap, cut management, valid inequalities, reporting frequency, time limit, distributed computing, optimizer
+algSetup_obj = algSetup(0.01, cutMgm_tup, (bal = false, st = true), 2, 7200.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
+
 
 # ! options for stabilization
 
@@ -69,7 +90,8 @@ else
 	meth_tup = tuple()
 end
 
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, (upper = 1, inter = :lin, sub = 0.0), repVio = true, weight = (capa = 1e0, capaStSize = 1e-2, stLvl = 1e-2, lim = 1e0)) # :none for last argument will skip initialization, other names just used for setting input folder below
+# method, threshold serious step, initialization, minimum value, solve frequency without stabilization, weights in stabilization (in additon to scaling of base problem)
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.1, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = (capa = 1e0, capaStSize = 1e0, stLvl = 0.0, lim = 1e0))
 
 # ! options for near optimal
 
@@ -134,7 +156,7 @@ else
 end
 
 # create benders object
-benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, res_ntup, nearOptSetup_obj);
+benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, res_ntup);
 
 #endregion
 

@@ -1,3 +1,17 @@
+qtrLvlBox_1:
+  qtrLvlBox:
+    startRad: 0.1
+    endRad: 0.005
+    interRad: exp
+    lam: 0.75
+    startBoxRel: 0.05
+    endBoxRel: 0.005
+    interBoxRel: exp
+    startBoxAbs: 10.0
+    endBoxAbs: 0.5
+    interBoxAbs: exp
+    scaLvl: 10.0
+    scaLim: 10.0
 qtrLvl_1:
   qtrLvl:
     startRad: 0.1
