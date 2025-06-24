@@ -9,16 +9,6 @@ impH2Pipe,,base,effConv,1
 impH2Pipe,,base,costVarGen,0
 impH2Pipe,,flex,effConv,1.428571429
 impH2Pipe,,flex,costVarGen,25.86465
-impMethane,,,costOprConv,896.51154
-impMethane,,base,effConv,1
-impMethane,,base,costVarGen,0
-impMethane,,flex,effConv,1.428571429
-impMethane,,flex,costVarGen,32.26095
-impMethanol,,,costOprConv,921.53448
-impMethanol,,base,effConv,1
-impMethanol,,base,costVarGen,0
-impMethanol,,flex,effConv,1.428571429
-impMethanol,,flex,costVarGen,33.1614
 impGas,,,costOprConv,304.58958
 impGas,,base,effConv,1
 impGas,,base,costVarGen,0
@@ -213,5 +203,3 @@ impH2Ship,95UK,,capaConvFix,0
 impH2Ship,96IE,,capaConvFix,0
 impH2Ship,98IT,,capaConvFix,0
 impH2Ship,99FR,,capaConvFix,0
-methaneToGas,all,,capaConvResi,1
-methanolToOil,all,,capaConvResi,1

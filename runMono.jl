@@ -11,7 +11,7 @@ par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
     id_int = 1
-    t_int = 8
+    t_int = 14
 else
     id_int = parse(Int,ARGS[1])
 end
@@ -65,7 +65,7 @@ set_optimizer_attribute(anyM.optModel, "Threads", t_int);
 
 if solve == "barrier"
     set_optimizer_attribute(anyM.optModel, "Method", 2);
-    set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
+    set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-4);
     set_optimizer_attribute(anyM.optModel, "NumericFocus", 2);
 else
     set_optimizer_attribute(anyM.optModel, "Method", 6);
@@ -78,10 +78,11 @@ optimize!(anyM.optModel)
 
 #region # * write results
 
-reportStorageLevel(anyM)
+
 reportResults(:summary, anyM, addObjName = true)
 reportResults(:cost, anyM, addObjName = true)
 reportResults(:exchange, anyM, addObjName = true)
+reportStorageLevel(anyM)
 reportTimeSeries(:electricity, anyM)
 
 #endregion
@@ -119,3 +120,5 @@ if inOos == "missing"
 end
 
 #endregion
+
+anyM.parts.tech[:dummyOilDemand]
