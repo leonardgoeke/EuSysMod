@@ -61,22 +61,16 @@ setObjective!(:cost, anyM)
 set_optimizer(anyM.optModel, Gurobi.Optimizer)
 set_optimizer_attribute(anyM.optModel, "Crossover", 0);
 set_optimizer_attribute(anyM.optModel, "Threads", t_int);
+set_optimizer_attribute(anyM.optModel, "Method", 2);
+set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
+set_optimizer_attribute(anyM.optModel, "NumericFocus", 2);
 
-if solve == "barrier"
-    set_optimizer_attribute(anyM.optModel, "Method", 2);
-    set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
-    set_optimizer_attribute(anyM.optModel, "NumericFocus", 2);
-else
-    set_optimizer_attribute(anyM.optModel, "Method", 6);
-    set_optimizer_attribute(anyM.optModel, "GURO_PAR_PDHGRELTOL", 1e-4);
-end
 
 optimize!(anyM.optModel)
 
 #endregion
 
 #region # * write results
-
 
 reportResults(:summary, anyM, addObjName = true)
 reportResults(:cost, anyM, addObjName = true)
