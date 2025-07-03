@@ -17,7 +17,6 @@ else
 end
 
 time = string(par_df[id_int,:time]) # temporal resolution
-spaSco = convert(String,par_df[id_int,:spatialScope]) # spatial scope
 scenario = convert(String,par_df[id_int,:scenario]) # scenario case
 techs = string(par_df[id_int,:techCase]) # available technologies
 imp = string(par_df[id_int,:importCase]) # fuel import setup 
@@ -32,14 +31,14 @@ name_str = convert(String,par_df[id_int,:name])
 checkDet_boo = scenario in "scr" .* string.(1982:2016)
 
 # create scenario and quarter array
-scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scenario, setupDir_str, spaSco)
+scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scenario, setupDir_str)
 
 # define in- and output folders
 resultDir_str = dir_str * "results"
 
 # input folders
 # ! input folders
-inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "securitySetup/" * security, setupDir_str * "spatialScope/" * spaSco, setupDir_str * "techSetup/" * spaSco * "/" * techs, setupDir_str * "importCase/" * spaSco * "/" * imp, setupDir_str * "resolution/" * reso, scrDir_str, modDir_str * "timeSeries/country_" * time * "_month/general"]
+inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "securitySetup/" * security, setupDir_str * "techSetup/" * techs, setupDir_str * "importCase/" * imp, setupDir_str * "resolution/" * reso, scrDir_str, modDir_str * "timeSeries/country_" * time * "_month/general"]
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_month/general_" * x), unique(getindex.(scrQrt_arr,2)))
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * "month/" * x[1] * "/" * x[2]), scrQrt_arr)
 
