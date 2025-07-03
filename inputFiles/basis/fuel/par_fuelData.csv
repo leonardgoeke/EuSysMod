@@ -1,7 +1,7 @@
 carrier_1,technology_3,parameter,value,source
-rawOil,refinery,emissionFac,13.14368023,
+rawOil,refinery,emissionFac,18.4,
 refinedOil,,emissionFac,262.8736046,
 naturalGas,,emissionFac,201.296363,
 methanol,,emissionFac,248.4896193,
-,refinery,effConv,0.95,
+,refinery,effConv,0.93,
 ,,emissionUp,0,

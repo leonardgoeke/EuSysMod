@@ -65,7 +65,7 @@ set_optimizer_attribute(anyM.optModel, "Threads", t_int);
 
 if solve == "barrier"
     set_optimizer_attribute(anyM.optModel, "Method", 2);
-    set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-4);
+    set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
     set_optimizer_attribute(anyM.optModel, "NumericFocus", 2);
 else
     set_optimizer_attribute(anyM.optModel, "Method", 6);
@@ -120,5 +120,3 @@ if inOos == "missing"
 end
 
 #endregion
-
-anyM.parts.tech[:dummyOilDemand]

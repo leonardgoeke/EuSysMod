@@ -62,7 +62,7 @@ vertices:
       - 0.0022898780648664685
       - 0.5355620101560069
     type: "technology"
-  - label: "engine"
+  - label: "engines"
     name: "gasEngine"
     color:
       - 0.85
@@ -74,6 +74,7 @@ vertices:
     type: "technology"
     aggregating:
       - "dieselEngine"
+      - "gasEngineProMed"
   - label: "low temp. engine, gas"
     name: "gasEngineProLow"
     color:
@@ -197,7 +198,7 @@ vertices:
       - 0.844064341570323
     type: "technology"
   - label: "wind, onshore"
-    name: "onshore_a"
+    name: "onshore"
     color:
       - 0.85
       - 0.85
@@ -206,8 +207,6 @@ vertices:
       - 0.04570214146337637
       - 0.397397502500471
     type: "technology"
-    aggregating:
-      - "onshore_b"
   - label: "biomass CHP"
     name: "nonSolidBioPlantDh"
     color:
@@ -316,7 +315,7 @@ vertices:
       - 0.7004947705441176
       - 0.3494106854349507
     type: "technology"
-  - label: "gasBoilerProMed"
+  - label: "gas boiler"
     name: "gasBoilerProMed"
     color:
       - 0.85
@@ -716,8 +715,68 @@ vertices:
       - 0.2382495674892962
       - 0.6192271119778234
     type: "technology"
+  - label: "Fischer-Tropsch"
+    name: "fischerTropsch"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.5212232134381508
+      - 0.3653535108796221
+    type: "technology"
+  - label: "oil to HVC"
+    name: "rawOilToHvc"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.5212232134381508
+      - 0.3653535108796221
+    type: "technology"
+  - label: "methanol to HVC"
+    name: "methanolToHvc"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.5212232134381508
+      - 0.3653535108796221
+    type: "technology"
   - label: "H2 to methanol"
-    name: "h2ToCrudeOil"
+    name: "h2ToMethanol"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.5212232134381508
+      - 0.3653535108796221
+    type: "technology"
+  - label: "H2 + biogas to methanol"
+    name: "h2BiogasToMethanol"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.5212232134381508
+      - 0.3653535108796221
+    type: "technology"
+  - label: "biomass to methanol"
+    name: "biomassToMethanol"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.5212232134381508
+      - 0.3653535108796221
+    type: "technology"
+  - label: "methanol to oil"
+    name: "methanolToRawOil"
     color:
       - 0.85
       - 0.85
@@ -810,16 +869,6 @@ vertices:
     position:
       - 0.38717657837068387
       - 0.46870335685018955
-    type: "technology"
-  - label: "liquifaction"
-    name: "liquifaction"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.572155203115425
-      - 0.5183892260646853
     type: "technology"
   - label: "biogas upgrading"
     name: "biogasUpgrading"
@@ -926,26 +975,6 @@ vertices:
       - 0.3221125878323824
       - 0.39008157432425256
     type: "technology"
-  - label: "green gas import"
-    name: "methaneToGas"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.3221125878323824
-      - 0.39008157432425256
-    type: "technology"
-  - label: "green oil import"
-    name: "methanolToOil"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.3221125878323824
-      - 0.39008157432425256
-    type: "technology"
   - label: "biomass"
     name: "otherBiomass"
     color:
@@ -979,7 +1008,7 @@ vertices:
       - 0.5282621151525395
       - 0.8064369897790468
     type: "carrier"
-  - label: "methane"
+  - label: "gas"
     name: "naturalGas"
     color:
       - 0.576470588
@@ -1042,20 +1071,50 @@ vertices:
       - 0.646161297235269
       - 0.3279683067929288
     type: "carrier"
-  - label: "methanol"
-    name: "crudeOil"
+  - label: "oil"
+    name: "rawOil"
     color:
-      - 0.141176471
-      - 0.411764706
-      - 0.24705882
+      - 0.733333333
+      - 0.533333333
+      - 0.454901961
     position:
       - 0.6734114157402631
       - 0.3835467025055289
     type: "carrier"
     aggregating:
       - "refinedOil"
-  - label: "feedstock and transport"
-    name: "liquidFuelExtTech"
+  - label: "high-value chemicals"
+    name: "hvc"
+    color:
+      - 0.835294118
+      - 0.4
+      - 0.964705882
+    position:
+      - 0.6734114157402631
+      - 0.3835467025055289
+    type: "carrier"
+  - label: "methanol"
+    name: "methanol"
+    color:
+      - 0.862745098
+      - 0.905882353
+      - 0.458823529
+    position:
+      - 0.6734114157402631
+      - 0.3835467025055289
+    type: "carrier"
+  - label: "industry and aviation"
+    name: "dummyOilDemand"
+    color:
+      - 0.235
+      - 0.506
+      - 0.325
+    position:
+      - 1.0
+      - 0.16615683057109587
+    type: "technology"
+  - label: "navigation"
+    name: "dummyMethanolDem"
     color:
       - 0.235
       - 0.506
@@ -1118,7 +1177,7 @@ edges:
   - eBoilerProMed: "processHeat_medium"
   - solidBiomass: "bioBoilerSpace"
   - bioBoilerSpace: "spaceHeat"
-  - onshore_a: "electricity"
+  - onshore: "electricity"
   - nonSolidBiomass: "nonSolidBioPlantDh"
   - nonSolidBioPlantDh: "electricity"
   - nonSolidBioPlantDh: "districtHeat"
@@ -1151,8 +1210,6 @@ edges:
   - gasStorage: "naturalGas"
   - refinedOil: "oilStorage"
   - oilStorage: "refinedOil"
-  - methaneToGas: "naturalGas"
-  - methanolToOil: "crudeOil"
   - h2: "fcevPsngRoadPrvt"
   - h2: "h2BoilerProHigh"
   - h2BoilerProHigh: "processHeat_high"
@@ -1167,12 +1224,14 @@ edges:
   - ccgtH2BackDh: "electricity"
   - ccgtH2BackDh: "districtHeat"
   - electricity: "directAirCapture"
-  - processHeat_low: "directAirCapture"
+  - processHeat_medium: "directAirCapture"
   - directAirCapture: "capturedCO2"
   - naturalGas: "gasBoilerSpace"
   - gasBoilerSpace: "spaceHeat"
+  - h2: "fcPsngRail"
+  - fcPsngRail: "psngRail"
   - solidBiomass: "hydropyrolysis"
-  - hydropyrolysis: "refinedOil"
+  - hydropyrolysis: "rawOil"
   - naturalGas: "gasBoilerProLow"
   - gasBoilerProLow: "processHeat_low"
   - pvInd_a: "electricity"
@@ -1239,10 +1298,10 @@ edges:
   - naturalGas: "ccgtGasExtract"
   - ccgtGasExtract: "electricity"
   - ccgtGasExtract: "districtHeat"
-  - h2: "h2ToCrudeOil"
-  - capturedCO2: "h2ToCrudeOil"
-  - h2ToCrudeOil: "crudeOil"
-  - h2ToCrudeOil: "districtHeat"
+  - h2: "fischerTropsch"
+  - capturedCO2: "fischerTropsch"
+  - fischerTropsch: "rawOil"
+  - fischerTropsch: "districtHeat"
   - h2: "ccgtH2Extract"
   - ccgtH2Extract: "electricity"
   - ccgtH2Extract: "districtHeat"
@@ -1259,10 +1318,6 @@ edges:
   - refinedOil: "dieselFrtRail"
   - electricity: "eBoilerProLow"
   - eBoilerProLow: "processHeat_low"
-  - onshore_b: "electricity"
-  - otherBiomass: "liquifaction"
-  - electricity: "liquifaction"
-  - liquifaction: "crudeOil"
   - pvResi: "electricity"
   - rawBiogas: "biogasUpgrading"
   - biogasUpgrading: "naturalGas"
@@ -1281,15 +1336,39 @@ edges:
   - impH2Ship: "h2"
   - impH2Pipe: "h2"
   - impGas: "naturalGas"
-  - impOil: "crudeOil"
+  - impOil: "rawOil"
+  - refinedOil: "fischerTropsch"
+  - capturedCO2: "fischerTropsch"
+  - fischerTropsch: "rawOil"
+  - fischerTropsch: "districtHeat"
+  - rawOil: "rawOilToHvc"
+  - rawOilToHvc: "hvc"
+  - methanol: "methanolToHvc"
+  - methanolToHvc: "hvc"
+  - h2: "h2ToMethanol"
+  - processHeat_medium: "h2ToMethanol"
+  - capturedCO2: "h2ToMethanol"
+  - electricity: "h2ToMethanol"
+  - h2ToMethanol: "methanol"
+  - h2ToMethanol: "districtHeat"
+  - h2: "h2BiogasToMethanol"
+  - processHeat_medium: "h2BiogasToMethanol"
+  - rawBiogas: "h2BiogasToMethanol"
+  - electricity: "h2BiogasToMethanol"
+  - h2BiogasToMethanol: "methanol"
+  - otherBiomass: "h2BiogasToMethanol"
+  - biomassToMethanol: "methanol"
+  - biomassToMethanol: "districtHeat"
+  - h2: "methanolToRawOil"
+  - methanol: "methanolToRawOil"
+  - methanolToRawOil: "rawOil"
 
 removeSankey:
   - trade buy: "biomass"
-  - final demand: "process heat"
-  - final demand: "jet fuel"
-  - exchange losses: "jet fuel"
+  - final demand: "process heat - low"
+  - final demand: "process heat - medium"
+  - final demand: "process heat - high"
+  - final demand: "high-value chemicals"
   - exchange losses: "electricity"
   - exchange losses: "H2"
-  - exchange losses: "methanol"
-  - exchange losses: "biomass"
-  - net import: "biomass"
+  - exchange losses: "raw oil"

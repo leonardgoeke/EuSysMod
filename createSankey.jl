@@ -55,12 +55,10 @@ anyM = anyModel(inDir_arr, resultDir_str, objName = name_str, supTsLvl = 2, repT
 
 
 # create sankey diagram
-file_str = resultDir_str * "/results_summary_inter_all_2856h_total36_ext2_all_10Flex20Price_1ex1r1b_202504271805.csv"
+file_str = resultDir_str * "/results_summary_det_all_2856h_scr1982_202507010951.csv"
 
 scrCases = ["worstCase" => ("scr1985", "scr2006", "scr2005", "scr1984","scr2004", "scr2007", "scr1995", "scr1995", "scr2000", "scr2012", "scr1985", "scr2004"),
 				"bestCase" => ("scr1984","scr1995","scr2006","scr2001","scr1987","scr1998","scr1999","scr2005","scr2012","scr1990","scr1991","scr1999")]
 
 plotSankeyDiagram(anyM, name = "all", dropDown = (:scenario,), dataIn = file_str, scrCases = scrCases, ymlFilter = dir_str * "sankeyYaml/all_moreAgg.yml")
 plotSankeyDiagram(anyM, name = "electricity", dropDown = (:scenario,), dataIn = file_str, scrCases = scrCases, ymlFilter = dir_str * "sankeyYaml/electricity_moreAgg.yml")
-
-

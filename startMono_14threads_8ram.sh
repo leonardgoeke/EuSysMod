@@ -1,5 +1,5 @@
 #!/bin/bash --login
-#SBATCH --array=1,36,71
+#SBATCH --array=58,61
 #SBATCH --time=120:00:00
 #SBATCH --job-name=results/ESCU_mono_%j
 #SBATCH --output=results/mono_%j.out

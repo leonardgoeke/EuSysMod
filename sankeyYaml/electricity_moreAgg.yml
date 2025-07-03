@@ -125,7 +125,7 @@ vertices:
       - 0.4025725554988331
     type: "technology"
   - label: "wind, onshore"
-    name: "onshore_a"
+    name: "onshore"
     color:
       - 0.85
       - 0.85
@@ -134,8 +134,6 @@ vertices:
       - 0.04570214146337637
       - 0.397397502500471
     type: "technology"
-    aggregating:
-      - "onshore_b"
   - label: "biomass CHP"
     name: "nonSolidBioPlantDh"
     color:
@@ -443,16 +441,6 @@ vertices:
       - 0.38717657837068387
       - 0.46870335685018955
     type: "technology"
-  - label: "liquifaction"
-    name: "liquifaction"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.572155203115425
-      - 0.5183892260646853
-    type: "technology"
   - label: "gasEngineProMed"
     name: "gasEngineProMed"
     color:
@@ -552,7 +540,7 @@ edges:
   - eBoilerProMed: "processHeat_medium"
   - solidBiomass: "bioBoilerSpace"
   - bioBoilerSpace: "spaceHeat"
-  - onshore_a: "electricity"
+  - onshore: "electricity"
   - nonSolidBiomass: "nonSolidBioPlantDh"
   - nonSolidBioPlantDh: "electricity"
   - nonSolidBioPlantDh: "districtHeat"
@@ -585,8 +573,6 @@ edges:
   - gasStorage: "naturalGas"
   - refinedOil: "oilStorage"
   - oilStorage: "refinedOil"
-  - methaneToGas: "naturalGas"
-  - methanolToOil: "crudeOil"
   - h2: "fcevPsngRoadPrvt"
   - h2: "h2BoilerProHigh"
   - h2BoilerProHigh: "processHeat_high"
@@ -600,13 +586,14 @@ edges:
   - h2: "ccgtH2BackDh"
   - ccgtH2BackDh: "electricity"
   - ccgtH2BackDh: "districtHeat"
-  - electricity: "directAirCapture"
-  - processHeat_low: "directAirCapture"
+  - processHeat_medium: "directAirCapture"
   - directAirCapture: "capturedCO2"
   - naturalGas: "gasBoilerSpace"
   - gasBoilerSpace: "spaceHeat"
+  - h2: "fcPsngRail"
+  - fcPsngRail: "psngRail"
   - solidBiomass: "hydropyrolysis"
-  - hydropyrolysis: "refinedOil"
+  - hydropyrolysis: "rawOil"
   - naturalGas: "gasBoilerProLow"
   - gasBoilerProLow: "processHeat_low"
   - pvInd_a: "electricity"
@@ -693,10 +680,6 @@ edges:
   - refinedOil: "dieselFrtRail"
   - electricity: "eBoilerProLow"
   - eBoilerProLow: "processHeat_low"
-  - onshore_b: "electricity"
-  - otherBiomass: "liquifaction"
-  - electricity: "liquifaction"
-  - liquifaction: "crudeOil"
   - pvResi: "electricity"
   - rawBiogas: "biogasUpgrading"
   - biogasUpgrading: "naturalGas"
@@ -715,15 +698,40 @@ edges:
   - impH2Ship: "h2"
   - impH2Pipe: "h2"
   - impGas: "naturalGas"
-  - impOil: "crudeOil"
+  - impOil: "rawOil"
+  - refinedOil: "fischerTropsch"
+  - capturedCO2: "fischerTropsch"
+  - fischerTropsch: "rawOil"
+  - fischerTropsch: "districtHeat"
+  - refinedOil: "rawOilToHvc"
+  - rawOilToHvc: "hvc"
+  - methanol: "methanolToHvc"
+  - methanolToHvc: "hvc"
+  - h2: "h2ToMethanol"
+  - processHeat_medium: "h2ToMethanol"
+  - capturedCO2: "h2ToMethanol"
+  - electricity: "h2ToMethanol"
+  - h2ToMethanol: "methanol"
+  - h2ToMethanol: "districtHeat"
+  - h2: "h2BiogasToMethanol"
+  - processHeat_medium: "h2BiogasToMethanol"
+  - rawBiogas: "h2BiogasToMethanol"
+  - electricity: "h2BiogasToMethanol"
+  - h2BiogasToMethanol: "methanol"
+  - otherBiomass: "h2BiogasToMethanol"
+  - biomassToMethanol: "methanol"
+  - biomassToMethanol: "districtHeat"
+  - h2: "methanolToRawOil"
+  - methanol: "methanolToRawOil"
+  - methanolToRawOil: "rawOil"
 
 removeSankey:
-  - trade buy: "biomass"
-  - final demand: "process heat"
-  - final demand: "jet fuel"
-  - exchange losses: "jet fuel"
+  - trade buy: "solid biomass"
+  - trade buy: "non-solid biomass"
+  - final demand: "process heat - low"
+  - final demand: "process heat - medium"
+  - final demand: "process heat - high"
+  - final demand: "high-value chemicals"
   - exchange losses: "electricity"
   - exchange losses: "H2"
-  - exchange losses: "methanol"
-  - exchange losses: "biomass"
-  - net import: "biomass"
+  - exchange losses: "raw oil"

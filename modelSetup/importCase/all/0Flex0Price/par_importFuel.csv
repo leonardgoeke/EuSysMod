@@ -9,12 +9,12 @@ impH2Pipe,,base,effConv,1
 impH2Pipe,,base,costVarGen,0
 impH2Pipe,,flex,effConv,1
 impH2Pipe,,flex,costVarGen,0
-impGas,,,costOprConv,309.228
+impGas,,,costOprConv,232.64808
 impGas,,base,effConv,1
 impGas,,base,costVarGen,0
 impGas,,flex,effConv,1
 impGas,,flex,costVarGen,0
-impOil,,,costOprConv,535.236
+impOil,,,costOprConv,455.85288
 impOil,,base,effConv,1
 impOil,,base,costVarGen,0
 impOil,,flex,effConv,1
