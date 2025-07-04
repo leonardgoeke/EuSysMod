@@ -21,6 +21,7 @@ IT_,gasStorage,capaStInUp,6247.7,stOutToStInCapaFix,1.2,sizeToStOutCapaFix,40.1
 Scan,gasStorage,capaStInUp,317.1,stOutToStInCapaFix,0.7,sizeToStOutCapaFix,33.4
 SouthEast,gasStorage,capaStInUp,966.9,stOutToStInCapaFix,1.1,sizeToStOutCapaFix,54.2
 UkPlus,gasStorage,capaStInUp,1667.8,stOutToStInCapaFix,1,sizeToStOutCapaFix,26.8
+CH_,gasStorage,capaStInUp,0,stOutToStInCapaFix,1,sizeToStOutCapaFix,1
 Balt,gasStorage,costExpStSize,0.41,,,,
 Benelux,gasStorage,costExpStSize,0.47,,,,
 DE_,gasStorage,costExpStSize,0.72,,,,
