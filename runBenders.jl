@@ -19,6 +19,7 @@ foresight = par_df[id_int,:foresight] # scenario case
 
 # extract benders settings
 solve = par_df[id_int,:solve]
+cutDel = string(par_df[id_int,:cutDel])
 wrkCnt = par_df[id_int,:workerCnt]
 t_int = par_df[id_int,:threads]
 ram = par_df[id_int,:ram]
@@ -34,51 +35,87 @@ scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, case)
 #region # * options for algorithm
 
 # ! options for general algorithm
+
+# range violations
 rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
+rngVio_ntup = (stab = 2e2, cut = 1e2, fix = 1e1)
 
-# target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-rngVio_ntup = (stab = 2e1, cut = 1e1, fix = 1e1)
+# method for cut management
+if cutDel in ("10cnt_1thres", "20cnt_05thres", "100cnt_05thres")
+	if cutDel == "10cnt_1thres"
+		del_int = 25
+		del_fl = 1.0
+	elseif cutDel == "20cnt_05thres"
+		del_int = 50
+		del_fl = 0.5
+	elseif cutDel == "100cnt_05thres"
+		del_int = 200
+		del_fl = 0.5
+	end
+	cutMgm_tup = (meth = :slack, opt = (cnt = del_int, thres = del_fl), freq = 1, report = true)
+end
 
-# tolerance stabilized problem, quadratic convergence
-tolStabQ_arr = [1e-2, 1e-6]
-interStabQ_sym = :log
+if cutDel in ("red1","red05")
+	if cutDel == "red1"
+		cutMgm_tup = (meth = :redundant, opt = (startFac = 1.0, endFac = 1.0, inter = :lin), freq = 1, report = true)
+	elseif cutDel == "red05"
+		cutMgm_tup = (meth = :redundant, opt = (startFac = 0.5, endFac = 0.5, inter = :lin), freq = 1, report = true)
+	end
+end
+
+if solve == 1e-6
+	# tolerance stabilized problem, convergence
+	tolStab_arr = [1e-6, 1e-6]
+	interStab_sym = :log
+	# tolerance stabilized problem, quadratic convergence
+	tolStabQ_arr = [1e-6, 1e-6]
+	interStabQ_sym = :log
+elseif solve == 1e-3
+	# tolerance stabilized problem, convergence
+	tolStab_arr = [1e-3, 1e-3]
+	interStab_sym = :log
+	# tolerance stabilized problem, quadratic convergence
+	tolStabQ_arr = [1e-3, 1e-3]
+	interStabQ_sym = :log
+elseif solve == 5e-1
+	# tolerance stabilized problem, convergence
+	tolStab_arr = [5e-1, 5e-1]
+	interStab_sym = :log
+	# tolerance stabilized problem, quadratic convergence
+	tolStabQ_arr = [5e-1, 5e-1]
+	interStabQ_sym = :log
+elseif solve == 1e-1
+	# tolerance stabilized problem, convergence
+	tolStab_arr = [1e-1, 1e-1]
+	interStab_sym = :log
+	# tolerance stabilized problem, quadratic convergence
+	tolStabQ_arr = [1e-1, 1e-1]
+	interStabQ_sym = :log
+elseif solve == 0
+	# tolerance stabilized problem, convergence
+	tolStab_arr = [0.0, 0.0]
+	interStab_sym = :log
+	# tolerance stabilized problem, quadratic convergence
+	tolStabQ_arr = [0.0, 0.0]
+	interStabQ_sym = :log
+end
+
 # tolerance stabilized problem, feasibility
-tolStab_arr = [1e-2, 1e-6]
-interStab_sym = :log
+tolStabFeas_arr = [1e-6, 1e-6]
+interStabFeas_sym = :log
 # tolerance without stabilization
-tolNoStab_arr = [1e-2, 1e-6]
+tolNoStab_arr = [1e-6, 1e-6]
 interNoStab_sym = :lin
-
-numFoc_arr = [0,2,3]
 
 # solver options for sub and top problem
 subOpt_tup = (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = false)
-topOpt_tup = (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false)
+topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = true)
 
-if solve == "1to01Log"
-	cutMgm_tup = (meth = :redundant, opt = (startFac = 1.0, endFac = 0.1, inter = :log), freq = 5, report = true)
-elseif solve == "1to01Lin"
-	cutMgm_tup = (meth = :redundant, opt = (startFac = 1.0, endFac = 0.1, inter = :lin), freq = 5, report = true)
-elseif solve == "1to01Exp"
-cutMgm_tup = (meth = :redundant, opt = (startFac = 1.0, endFac = 0.1, inter = :exp), freq = 5, report = true)
-elseif solve == "1to05Log"
-	cutMgm_tup = (meth = :redundant, opt = (startFac = 1.0, endFac = 0.5, inter = :log), freq = 5, report = true)
-elseif solve == "1to05Lin"
-	cutMgm_tup = (meth = :redundant, opt = (startFac = 1.0, endFac = 0.5, inter = :log), freq = 5, report = true)
-elseif solve == "10cnt05thres"
-	cutMgm_tup = (meth = :redundant, opt = (cnt = 10, thres = 0.5), freq = 5, report = true)
-elseif solve == "10cnt1thres"
-	cutMgm_tup = (meth = :redundant, opt = (cnt = 10, thres = 1.0), freq = 5, report = true)
-elseif solve == "50cnt05thres"
-	cutMgm_tup = (meth = :redundant, opt = (cnt = 50, thres = 0.5), freq = 5, report = true)
-elseif solve == "50cnt1thres"
-	cutMgm_tup = (meth = :redundant, opt = (cnt = 50, thres = 1.0), freq = 5, report = true)
-end
+cutMgm_tup = (meth = :slack, opt = (cnt = 50, thres = 0.5), freq = 10, report = false) 
 
 # optimimality gap, cut management, valid inequalities, reporting frequency, time limit, distributed computing, optimizer
 algSetup_obj = algSetup(0.01, cutMgm_tup, (bal = false, st = true), 2, 7200.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
-
 
 # ! options for stabilization
 

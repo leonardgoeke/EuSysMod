@@ -20,10 +20,10 @@ foresight = par_df[id_int,:foresight] # scenario case
 
 # extract benders settings
 solve = par_df[id_int,:solve]
+cutDel = string(par_df[id_int,:cutDel])
 wrkCnt = par_df[id_int,:workerCnt]
 t_int = par_df[id_int,:threads]
 ram = par_df[id_int,:ram]
-cutDel = par_df[id_int,:cutDel]
 trust = par_df[id_int,:trust]
 dnsThrs = par_df[id_int,:dnsThrs]
 
@@ -31,33 +31,89 @@ name_str = convert(String,par_df[id_int,:name])
 
 # create files determining scenario setup
 checkDet_boo = scr in "scr" .* string.(case == "fut" ? (2080:2099) : (1995:2014))  
-scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, string(case))
+scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, case)
 
 #region # * options for algorithm
 
 # ! options for general algorithm
-rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 
-# target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
+# range violations
+rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 rngVio_ntup = (stab = 2e2, cut = 1e2, fix = 1e1)
 
-# tolerance stabilized problem, quadratic convergence
-tolStabQ_arr = [1e-6, 1e-6]
-interStabQ_sym = :log
+# method for cut management
+if cutDel in ("10cnt_1thres", "20cnt_05thres", "100cnt_05thres")
+	if cutDel == "10cnt_1thres"
+		del_int = 25
+		del_fl = 1.0
+	elseif cutDel == "20cnt_05thres"
+		del_int = 50
+		del_fl = 0.5
+	elseif cutDel == "100cnt_05thres"
+		del_int = 200
+		del_fl = 0.5
+	end
+	cutMgm_tup = (meth = :slack, opt = (cnt = del_int, thres = del_fl), freq = 1, report = true)
+end
+
+if cutDel in ("red1","red05")
+	if cutDel == "red1"
+		cutMgm_tup = (meth = :redundant, opt = (startFac = 1.0, endFac = 1.0, inter = :lin), freq = 1, report = true)
+	elseif cutDel == "red05"
+		cutMgm_tup = (meth = :redundant, opt = (startFac = 0.5, endFac = 0.5, inter = :lin), freq = 1, report = true)
+	end
+end
+
+if solve == 1e-6
+	# tolerance stabilized problem, convergence
+	tolStab_arr = [1e-6, 1e-6]
+	interStab_sym = :log
+	# tolerance stabilized problem, quadratic convergence
+	tolStabQ_arr = [1e-6, 1e-6]
+	interStabQ_sym = :log
+elseif solve == 1e-3
+	# tolerance stabilized problem, convergence
+	tolStab_arr = [1e-3, 1e-3]
+	interStab_sym = :log
+	# tolerance stabilized problem, quadratic convergence
+	tolStabQ_arr = [1e-3, 1e-3]
+	interStabQ_sym = :log
+elseif solve == 5e-1
+	# tolerance stabilized problem, convergence
+	tolStab_arr = [5e-1, 5e-1]
+	interStab_sym = :log
+	# tolerance stabilized problem, quadratic convergence
+	tolStabQ_arr = [5e-1, 5e-1]
+	interStabQ_sym = :log
+elseif solve == 1e-1
+	# tolerance stabilized problem, convergence
+	tolStab_arr = [1e-1, 1e-1]
+	interStab_sym = :log
+	# tolerance stabilized problem, quadratic convergence
+	tolStabQ_arr = [1e-1, 1e-1]
+	interStabQ_sym = :log
+elseif solve == 0
+	# tolerance stabilized problem, convergence
+	tolStab_arr = [0.0, 0.0]
+	interStab_sym = :log
+	# tolerance stabilized problem, quadratic convergence
+	tolStabQ_arr = [0.0, 0.0]
+	interStabQ_sym = :log
+end
+
 # tolerance stabilized problem, feasibility
-tolStab_arr = [1e-6, 1e-6]
-interStab_sym = :log
+tolStabFeas_arr = [1e-6, 1e-6]
+interStabFeas_sym = :log
 # tolerance without stabilization
 tolNoStab_arr = [1e-6, 1e-6]
 interNoStab_sym = :lin
 
-numFoc_arr = [0,2,3]
-
 # solver options for sub and top problem
 subOpt_tup = (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = false)
-topOpt_tup = (numFoc = numFoc_arr, dnsThrs = dnsThrs, crs = true, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false)
-cutMgm_tup = (meth = :redundant, opt = (startFac = 1.0, endFac = 0.1, inter = :log), freq = 10, report = true) #  (cnt = 15, thres = 0.5) # e.g. deleted, if relative slack always below 0.5 in last 15 iterations 
-cutMgm_tup = (meth = :slack, opt = (cnt = 15, thres = 0.5) , freq = 10, report = true) 
+topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = true)
+
+#cutMgm_tup = (meth = :slack, opt = (cnt = 50, thres = 0.5), freq = 10, report = false) 
+cutMgm_tup = (meth = :redundant, opt = (startFac = 1.0, endFac = 1.0, inter = :lin), freq = 10, report = true)
 
 # optimimality gap, cut management, valid inequalities, reporting frequency, time limit, distributed computing, optimizer
 algSetup_obj = algSetup(0.01, cutMgm_tup, (bal = false, st = true), 2, 7200.0, false, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
@@ -160,163 +216,6 @@ writeResultsAsInputs!(benders_obj, dir_str * "inputCapa/")
 
 
 
+# TODO implement first order methods: 1) get dual within top-problem
 
-# TODO 1) test on all countries and scenarios on server
-# TODO 2) add cut creation as well
-# TODO 3) more efficient code implementation (parallel, what metric are computed under which options?), does nothing work?
-# ! findings: works better with more subproblems :), smaller lss: faster convergence, no clear impact on performance
-# afte
-
-import AnyMOD.interItrPar, AnyMOD.removeStab!, AnyMOD.trackCuts!
-
-allRes_df = DataFrame(i = Int[], Ts_expSup = Int[], Ts_disSup = Int[], Ts_dis = Int[], R_dis = Int[], R_exp = Int[], R_from = Int[], R_to = Int[], C = Int[], Te = Int[], Exc = Int[], M = Int[], scr = Int[], id = Int[], sub = Tuple[], variable = Symbol[], value = Float64[])
-
-while true
-
-	produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Started iteration $(benders_obj.itr.cnt.i)", testErr = false, printErr = false)
-
-	#region # * solve top-problem and (start) sub-problems
-	str_time = now()
-	resData_obj, bestData_obj, stabVar_obj, stLvl_dic = runTop(benders_obj);
-	elpTop_time = now() - str_time
-
-
-
-	# start solving sub-problems
-	cutData_dic = Dict{Tuple{Int64,Int64},resData}()
-	timeSub_dic = Dict{Tuple{Int64,Int64},Millisecond}()
-	lss_dic = Dict{Tuple{Int64,Int64},Float64}()
-	numFoc_dic = Dict{Tuple{Int64,Int64},Int64}()
-
-	acc_fl = interItrPar(benders_obj.itr.gap, benders_obj.algOpt.gap, benders_obj.algOpt.sub.rng, benders_obj.algOpt.sub.int)
-
-	if benders_obj.algOpt.dist futData_dic = Dict{Tuple{Int64,Int64},Future}() end
-	for (id,s) in enumerate(sort(collect(keys(benders_obj.sub))))
-		if benders_obj.algOpt.dist # distributed case
-			futData_dic[s] = runSubDist(id + 1, copy(resData_obj), benders_obj.algOpt.rngVio.fix, benders_obj.algOpt.sub.meth, acc_fl, benders_obj.algOpt.sub.crs, benders_obj.algOpt.sub.check)
-		else # non-distributed case
-			cutData_dic[s], timeSub_dic[s], lss_dic[s], numFoc_dic[s] = runSub(benders_obj.sub[s], copy(resData_obj), benders_obj.algOpt.rngVio.fix, benders_obj.algOpt.sub.meth, acc_fl, benders_obj.algOpt.sub.crs, benders_obj.algOpt.sub.check)
-		end
-	end
-
-	# save current results
-	curRes_dic = Dict(x => reportResults(x, benders_obj.top, rtnOpt = (:csvDf,), rmvZero = false) for x in benders_obj.report.res.general)
-
-	# top-problem without stabilization
-	strNoStab_time = now()
-	if !isnothing(benders_obj.stab) 
-		# remove stabilization from top problem (to be added again at the end of iteration)
-		removeStab!(benders_obj)
-		# check if top problem without stabilization should be solved again 
-		if benders_obj.itr.cnt.i >= benders_obj.itr.cnt.nextNoStab || benders_obj.stab.crossNoStab
-			runTopWithoutStab!(benders_obj)
-			# compute next iteration to solve top problem
-			par_ntup = benders_obj.stab.solveNoStab
-			gap_fl = 1 - benders_obj.itr.res[:lowLimCost] / benders_obj.itr.res[:curBest]
-			waitTopNoStab_int = max(1, Int(floor(interItrPar(gap_fl, benders_obj.algOpt.gap, [par_ntup.upper,1], par_ntup.inter, par_ntup.sub))))
-			benders_obj.itr.cnt.nextNoStab = benders_obj.itr.cnt.i + waitTopNoStab_int
-			# only report, if problem without stabilization is not solved again in the next iteration
-			if waitTopNoStab_int != 1
-				produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Solved top problem without stabilization. Next solve in iteration $(benders_obj.itr.cnt.nextNoStab)", testErr = false, printErr = false)
-			end
-		else
-			# use results of last correct solve as lower bound
-			benders_obj.itr.res[:lowLimCost] = benders_obj.itr.res[:estTotCostNoStab]
-		end
-
-	end
-	elpNoStab_time = now() - strNoStab_time
-
-	# get results of sub-problems
-	if benders_obj.algOpt.dist
-		wait.(collect(values(futData_dic)))
-		for s in sort(collect(keys(benders_obj.sub)))
-			cutData_dic[s], timeSub_dic[s], lss_dic[s], numFoc_dic[s] = fetch(futData_dic[s])
-		end
-	end
-	
-	#endregion
-
-	#region # * analyse results and update refinements
-
-	# update results and stabilization
-	srsStep_boo = updateIteration!(benders_obj, cutData_dic, bestData_obj, curRes_dic, stabVar_obj, stLvl_dic)
-	# report on iteration
-	reportBenders!(benders_obj, resData_obj, elpTop_time, elpNoStab_time, timeSub_dic, lss_dic, numFoc_dic)
-
-	# check convergence and finish
-	rtn_boo = checkConvergence(benders_obj, lss_dic)
-
-	
-	# track capacity over iterations if activated
-	if benders_obj.trackCapa reportComplVar!(allRes_df, resData_obj, benders_obj.itr.cnt.i) end
-
-	#endregion
-
-	benders_obj.itr.cnt.i = benders_obj.itr.cnt.i + 1
-	if rtn_boo break end
-	
-end
-
-
-
-
-trackSlack_arr = Pair[]
-for s in keys(benders_obj.sub)
-
-	# get all cuts and variables
-	allCuts_arr = filter(x -> x[1][2] == s[1] && x[1][3] == s[2], benders_obj.cuts.all)
-	if isempty(allCuts_arr) continue end # skip if no cuts for this subproblem
-	for i in eachindex(allCuts_arr)
-		# compute slack
-		push!(trackSlack_arr, allCuts_arr[i][1] => allCuts_arr[i][2][1] |> (y -> - value(y)))
-	end
-end
-
-minimum(getindex.(trackSlack_arr, 2)) # get minimum slack of all cuts
-
-maximum(getindex.(trackSlack_arr, 2))
-
-benders_obj.top.parts.obj.cns[:bendersCuts]
-
-benders_obj.top.parts.obj.cns[:bendersCuts][!,:slack] .= map(x -> value(x) + x.constant, benders_obj.top.parts.obj.cns[:bendersCuts][!,:cns])
-
-
-inOpt = filter(x -> x.i == 1 && x.Ts_dis == 2 && x.scr == 11, benders_obj.top.parts.obj.cns[:bendersCuts])
-
-normalized_rhs(inOpt[1,:cns]) + value(inOpt[1,:cns])
-
-inData = benders_obj.cuts.all[2]
-
-value(inData[2][1]) 
-
-# ! investigate slack
-
-model = Model(Gurobi.Optimizer)
-
-x = @variable(model, x >= 0)
-
-
-y = @variable(model, 0 <= y <= 3)
-
-
-@objective(model, Min, 12x + 20y)
-
-
-@constraint(model, c1, 6x + 8y >= 100)
-
-cns_expr = 7x + 12y - 120
-cns = @constraint(model, c2, - cns_expr <= 0)
-cns2 = @constraint(model, c3, - cns_expr +1 <= 0)
-optimize!(model)
-
-value(x)
-
-value(cns_expr)
-value(cns) - normalized_rhs(cns)
-
-value(cns2) - normalized_rhs(cns2)
-
-push!(trackSlack_arr, allCuts_arr[i][1] => - value(allCuts_arr[i][2][1]))
-
-
+benders_obj.top.parts.obj.cns
