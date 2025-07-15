@@ -1,4 +1,4 @@
-using Gurobi, AnyMOD, CSV, YAML, SlurmClusterManager
+using Gurobi, AnyMOD, CSV, YAML
 include("functions.jl")
 
 dir_str = ""
@@ -6,7 +6,8 @@ dir_str = ""
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-	id_int = 13
+    id_int = 14 # or 16
+    t_int = 4
 else
     id_int = parse(Int,ARGS[1])
 end
@@ -18,8 +19,9 @@ scr = convert(String,par_df[id_int,:scenario]) # scenario case
 foresight = par_df[id_int,:foresight] # scenario case
 
 # extract benders settings
-solve = par_df[id_int,:solve]
+optTolStab = par_df[id_int,:optTolStab]
 cutDel = string(par_df[id_int,:cutDel])
+infeasTop = par_df[id_int,:infeasTop]
 wrkCnt = par_df[id_int,:workerCnt]
 t_int = par_df[id_int,:threads]
 ram = par_df[id_int,:ram]
@@ -41,64 +43,34 @@ rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 rngVio_ntup = (stab = 2e2, cut = 1e2, fix = 1e1)
 
 # method for cut management
-if cutDel in ("10cnt_1thres", "20cnt_05thres", "100cnt_05thres")
+if cutDel in ("10cnt_1thres", "50cnt_05thres", "100cnt_05thres")
 	if cutDel == "10cnt_1thres"
 		del_int = 25
 		del_fl = 1.0
-	elseif cutDel == "20cnt_05thres"
+	elseif cutDel == "50cnt_05thres"
 		del_int = 50
 		del_fl = 0.5
 	elseif cutDel == "100cnt_05thres"
 		del_int = 200
 		del_fl = 0.5
 	end
-	cutMgm_tup = (meth = :slack, opt = (cnt = del_int, thres = del_fl), freq = 1, report = true)
+	cutMgm_tup = (meth = :slack, opt = (cnt = del_int, thres = del_fl), freq = 1, report = false)
 end
 
 if cutDel in ("red1","red05")
 	if cutDel == "red1"
-		cutMgm_tup = (meth = :redundant, opt = (startFac = 1.0, endFac = 1.0, inter = :lin), freq = 1, report = true)
+		cutMgm_tup = (meth = :redundant, opt = (startFac = 1.0, endFac = 1.0, inter = :lin), freq = 1, report = false)
 	elseif cutDel == "red05"
-		cutMgm_tup = (meth = :redundant, opt = (startFac = 0.5, endFac = 0.5, inter = :lin), freq = 1, report = true)
+		cutMgm_tup = (meth = :redundant, opt = (startFac = 0.5, endFac = 0.5, inter = :lin), freq = 1, report = false)
 	end
 end
 
-if solve == 1e-6
-	# tolerance stabilized problem, convergence
-	tolStab_arr = [1e-6, 1e-6]
-	interStab_sym = :log
-	# tolerance stabilized problem, quadratic convergence
-	tolStabQ_arr = [1e-6, 1e-6]
-	interStabQ_sym = :log
-elseif solve == 1e-3
-	# tolerance stabilized problem, convergence
-	tolStab_arr = [1e-3, 1e-3]
-	interStab_sym = :log
-	# tolerance stabilized problem, quadratic convergence
-	tolStabQ_arr = [1e-3, 1e-3]
-	interStabQ_sym = :log
-elseif solve == 5e-1
-	# tolerance stabilized problem, convergence
-	tolStab_arr = [5e-1, 5e-1]
-	interStab_sym = :log
-	# tolerance stabilized problem, quadratic convergence
-	tolStabQ_arr = [5e-1, 5e-1]
-	interStabQ_sym = :log
-elseif solve == 1e-1
-	# tolerance stabilized problem, convergence
-	tolStab_arr = [1e-1, 1e-1]
-	interStab_sym = :log
-	# tolerance stabilized problem, quadratic convergence
-	tolStabQ_arr = [1e-1, 1e-1]
-	interStabQ_sym = :log
-elseif solve == 0
-	# tolerance stabilized problem, convergence
-	tolStab_arr = [0.0, 0.0]
-	interStab_sym = :log
-	# tolerance stabilized problem, quadratic convergence
-	tolStabQ_arr = [0.0, 0.0]
-	interStabQ_sym = :log
-end
+# tolerance stabilized problem, convergence
+tolStab_arr = [optTolStab, optTolStab]
+interStab_sym = :log
+# tolerance stabilized problem, quadratic convergence
+tolStabQ_arr = [optTolStab, optTolStab]
+interStabQ_sym = :log
 
 # tolerance stabilized problem, feasibility
 tolStabFeas_arr = [1e-6, 1e-6]
@@ -109,12 +81,10 @@ interNoStab_sym = :lin
 
 # solver options for sub and top problem
 subOpt_tup = (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = false)
-topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = true)
-
-cutMgm_tup = (meth = :slack, opt = (cnt = 50, thres = 0.5), freq = 10, report = false) 
+topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false)
 
 # optimimality gap, cut management, valid inequalities, reporting frequency, time limit, distributed computing, optimizer
-algSetup_obj = algSetup(0.01, cutMgm_tup, (bal = false, st = true), 2, 7200.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
+algSetup_obj = algSetup(0.01, cutMgm_tup, (bal = false, st = true), 2, 7200.0, false, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
@@ -128,7 +98,7 @@ else
 end
 
 # method, threshold serious step, initialization, minimum value, solve frequency without stabilization, weights in stabilization (in additon to scaling of base problem)
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.1, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = (capa = 1e0, capaStSize = 1e0, stLvl = 0.0, lim = 1e0))
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.1, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = (capa = 1e0, capaStSize = 1e0, stLvl = 1e0, lim = 1e0))
 
 # ! options for near optimal
 
@@ -142,13 +112,13 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 # ! general problem settings
 
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
-info_ntup = (name = name_str, frsLvl = foresight, supTsLvl = 2, repTsLvl = 4, shortExp = 5) 
+info_ntup = (name = name_str, frsLvl = foresight, supTsLvl = 2, repTsLvl = 4, shortExp = 5, infeasTop = infeasTop != "none") 
 
 # ! input folders
-inDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/" * case * "_" * time * "h/general"]
+inDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, setupDir_str * "infeasTop/" * infeasTop, scrDir_str, dir_str * "timeSeries/" * case * "_" * time * "h/general"]
 foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * case * "_" * time * "h/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-heuDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/" * case * "_" * "672h/general"]
+heuDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, setupDir_str * "infeasTop/" * infeasTop, scrDir_str, dir_str * "timeSeries/" * case * "_" * "672h/general"]
 foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/" * case * "_" * "672h/"  * x[1] * "/" * x[2]), scrQrt_arr)
 
 # ! result folders
@@ -199,7 +169,7 @@ benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, s
 
 #region # * iteration algorithm
 
-runIteration!(benders_obj, runSubDist)
+allRes_df = runIteration!(benders_obj, runSubDist)
 
 #endregion
 
@@ -209,3 +179,5 @@ produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1,
 writeBendersResults!(benders_obj, runSubDist, getSubStringDist)
 
 #endregion
+
+
