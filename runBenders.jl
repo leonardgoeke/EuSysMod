@@ -47,17 +47,35 @@ scrQrtHeu_arr, scrDirHeu_str = generateScrInfo(false, "total12_ext0_" * split(sc
 rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 rngVio_ntup = (stab = 2e2, cut = 1e1, fix = 1e1)
 
-if cutDel == "25cnt_1thres"
-	del_int = 25
+# method for cut management
+if cutDel == "10cnt_1thres"
+	del_int = 10
+	del_fl = 1.0
+elseif cutDel == "10cnt_05thres"
+	del_int = 10
+	del_fl = 0.5
+elseif cutDel == "10cnt_025thres"
+	del_int = 10
+	del_fl = 0.25
+elseif cutDel == "50cnt_1thres"
+	del_int = 50
 	del_fl = 1.0
 elseif cutDel == "50cnt_05thres"
 	del_int = 50
 	del_fl = 0.5
-elseif cutDel == "200cnt_05thres"
-	del_int = 200
+elseif cutDel == "50cnt_025thres"
+	del_int = 50
+	del_fl = 0.25
+elseif cutDel == "100cnt_1thres"
+	del_int = 100
+	del_fl = 1.0
+elseif cutDel == "100cnt_05thres"
+	del_int = 100
 	del_fl = 0.5
+elseif cutDel == "100cnt_025thres"
+	del_int = 100
+	del_fl = 0.25
 end
-
 cutMgm_tup = (meth = :slack, opt = (cnt = del_int, thres = del_fl), freq = 1, report = false) 
 
 # range violations

@@ -119,19 +119,19 @@ lvl1_6:
   lvl1:
     lam: 0.875
 lvl3_1:
-  lvl1:
+  lvl3:
     lam: 0.125
 lvl3_2:
-  lvl1:
+  lvl3:
     lam: 0.25
 lvl3_3:
-  lvl1:
+  lvl3:
     lam: 0.375
 lvl3_4:
-  lvl1:
+  lvl3:
     lam: 0.5
 lvl3_5:
-  lvl1:
+  lvl3:
     lam: 0.75
 lvl2_1:
   lvl2:

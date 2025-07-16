@@ -23,7 +23,6 @@ imp = string(par_df[id_int,:importCase]) # fuel import setup
 reso = string(par_df[id_int,:resolution]) # spatial resolution
 security = string(par_df[id_int,:security]) # security settings
 inOos = string(par_df[id_int,:inputOutOfSample]) # capacity folder for out-of-sample testing
-solve = par_df[id_int,:solve]
 
 t_int = par_df[id_int,:threads]
 
