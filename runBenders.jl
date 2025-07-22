@@ -51,7 +51,7 @@ scrQrtHeu_arr, scrDirHeu_str = generateScrInfo(false, "total12_ext0_" * split(sc
 
 # range violations
 rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
-rngVio_ntup = (stab = 2e2, cut = 1e2, fix = 1e1)
+rngVio_ntup = (stab = 2e2, cut = 1e3, fix = 1e2)
 
 # method for cut management
 if cutDel == "10cnt_1thres"
@@ -94,11 +94,11 @@ tolStabQ_arr = [optTolStab, optTolStab]
 interStabQ_sym = :log
 
 # tolerance without stabilization, convergence
-tolNoStab_arr = [1e-2, 1e-6]
+tolNoStab_arr = [1e-4, 1e-6]
 interNoStab_sym = :lin
 
 # tolerance for feasibility
-tolStabFeas_arr = [1e-4, 1e-6]
+tolStabFeas_arr = [1e-6, 1e-6]
 interStabFeas_sym = :lin
 
 # solver options for sub and top problem

@@ -10,7 +10,7 @@ setupDir_str = dir_str *  "modelSetup/"
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 1
+    id_int = 28
     t_int = 14
 else
     id_int = parse(Int,ARGS[1])
@@ -23,6 +23,7 @@ imp = string(par_df[id_int,:importCase]) # fuel import setup
 reso = string(par_df[id_int,:resolution]) # spatial resolution
 security = string(par_df[id_int,:security]) # security settings
 inOos = string(par_df[id_int,:inputOutOfSample]) # capacity folder for out-of-sample testing
+infeasTop = par_df[id_int,:infeasTop] 
 
 t_int = par_df[id_int,:threads]
 
@@ -37,7 +38,7 @@ resultDir_str = dir_str * "results"
 
 # input folders
 # ! input folders
-inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "securitySetup/" * security, setupDir_str * "techSetup/" * techs, setupDir_str * "importCase/" * imp, setupDir_str * "resolution/" * reso, scrDir_str, modDir_str * "timeSeries/country_" * time * "_month/general"]
+inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "infeasTop/" * infeasTop, setupDir_str * "securitySetup/" * security, setupDir_str * "techSetup/" * techs, setupDir_str * "importCase/" * imp, setupDir_str * "resolution/" * reso, scrDir_str, modDir_str * "timeSeries/country_" * time * "_month/general"]
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_month/general_" * x), unique(getindex.(scrQrt_arr,2)))
 foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * "month/" * x[1] * "/" * x[2]), scrQrt_arr)
 
@@ -63,7 +64,6 @@ set_optimizer_attribute(anyM.optModel, "Threads", t_int);
 set_optimizer_attribute(anyM.optModel, "Method", 2);
 set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
 set_optimizer_attribute(anyM.optModel, "NumericFocus", 2);
-
 
 optimize!(anyM.optModel)
 
