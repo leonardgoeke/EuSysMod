@@ -10,7 +10,7 @@ setupDir_str = dir_str *  "modelSetup/"
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 28
+    id_int = 18 # next 16,18
     t_int = 14
 else
     id_int = parse(Int,ARGS[1])
@@ -61,7 +61,7 @@ setObjective!(:cost, anyM)
 set_optimizer(anyM.optModel, Gurobi.Optimizer)
 set_optimizer_attribute(anyM.optModel, "Crossover", 0);
 set_optimizer_attribute(anyM.optModel, "Threads", t_int);
-set_optimizer_attribute(anyM.optModel, "Method", 2);
+set_optimizer_attribute(anyM.optModel, "Method", 3);
 set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
 set_optimizer_attribute(anyM.optModel, "NumericFocus", 2);
 
