@@ -42,5 +42,4 @@ bdSm_lvl3_4_0.000001_noCutDel_0.01_noStLvl_TRUE,672,fut_aa,allCtr,all,0,lvl3_4,1
 bdSm_lvl1_3_0.1_noCutDel_0.01_noStLvl_TRUE,672,fut_aa,allCtr,all,0,lvl1_3,1.00E-01,noCutDel,0.01,noStLvl,TRUE,none,1,14,4,0
 bdSm_lvl1_4_0.1_noCutDel_0.01_noStLvl_TRUE,672,fut_aa,allCtr,all,0,lvl1_4,1.00E-01,noCutDel,0.01,noStLvl,TRUE,none,1,14,4,0
 mwSm_lvl1_3_0.1_noCutDel_Inf_noStLvl_FALSE,672,fut_aa,allCtr,all,0,lvl1_3,0.1,noCutDel,Inf,noStLvl,FALSE,none,1,14,4,0
-mwSm_lvl1_4_0.1_noCutDel_Inf_noStLvl_FALSE,672,fut_aa,allCtr,all,0,lvl1_4,0.1,noCutDel,Inf,noStLvl,FALSE,none,1,14,4,0
 test,672,fut_aa,2Ctr,only2,0,lvl1_3,1.00E-01,noCutDel,Inf,noStLvl,FALSE,none,1,14,4,0

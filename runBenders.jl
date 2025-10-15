@@ -6,7 +6,7 @@ dir_str = ""
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 45 # or 16
+    id_int = 44 # or 16
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -89,7 +89,7 @@ interNoStab_sym = :lin
 
 # solver options for sub and top problem
 subOpt_tup = (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = false)
-topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = true)
+topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false)
 
 # optimimality gap, cut management, valid inequalities, reporting frequency, time limit, distributed computing, optimizer
 algSetup_obj = algSetup(0.001, cutMgm_tup, (bal = false, st = true), 2, 7200.0, false, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
@@ -113,7 +113,7 @@ elseif weigthStab == "withStLvl"
 end
 
 # method, threshold serious step, initialization, minimum value, solve frequency without stabilization, weights in stabilization (in additon to scaling of base problem)
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, - lowLimStab, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = weigthStab)
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, - lowLimStab, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = w_tup)
 
 # ! options for near optimal
 

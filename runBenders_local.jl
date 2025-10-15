@@ -113,7 +113,7 @@ elseif weigthStab == "withStLvl"
 end
 
 # method, threshold serious step, initialization, minimum value, solve frequency without stabilization, weights in stabilization (in additon to scaling of base problem)
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, - lowLimStab, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = weigthStab)
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, - lowLimStab, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = w_tup)
 
 # ! options for near optimal
 
