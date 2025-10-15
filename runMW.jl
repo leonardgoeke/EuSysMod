@@ -6,7 +6,7 @@ include(dir_str * "functions.jl")
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 31 # or 16
+    id_int = 45 # or 16
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -21,7 +21,12 @@ foresight = par_df[id_int,:foresight] # scenario case
 # extract benders settings
 optTolStab = par_df[id_int,:optTolStab]
 cutDel = string(par_df[id_int,:cutDel])
+
+lowLimStab = string(par_df[id_int,:lowLimStab]) |> (x -> x == "Inf" ? Inf : parse(Float64,x))
+weigthStab = string(par_df[id_int,:weigthStab]) 
+viStorage = par_df[id_int,:viStorage] == "TRUE"
 infeasTop = par_df[id_int,:infeasTop]
+
 wrkCnt = par_df[id_int,:workerCnt]
 t_int = par_df[id_int,:threads]
 ram = par_df[id_int,:ram]
@@ -100,8 +105,15 @@ else
 	meth_tup = tuple()
 end
 
+# weight of variables in stabilization
+if weigthStab == "noStLvl"
+	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 0.0, lim = 1e0)
+elseif weigthStab == "withStLvl"
+	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 1e0, lim = 1e0)
+end
+
 # method, threshold serious step, initialization, minimum value, solve frequency without stabilization, weights in stabilization (in additon to scaling of base problem)
-stabSetup_obj = stabSetup(meth_tup, 0.0, :none, 0.1, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = (capa = 1e0, capaStSize = 1e0, stLvl = 1e0, lim = 1e0))
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, - lowLimStab, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = weigthStab)
 
 # ! options for near optimal
 

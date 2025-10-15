@@ -9,9 +9,3 @@ pemElectrolysis,,effConv,0.85038736
 pemElectrolysis,,costExpConv,525
 pemElectrolysis,,costOprConv,21
 pemElectrolysis,,avaConv,0.761303188
-methanePyrolysis,,lifeConv,22.5
-methanePyrolysis,,effConv,0.421428571
-methanePyrolysis,,costExpConv,309.225
-methanePyrolysis,,costOprConv,6.1845
-methanePyrolysis,,avaConv,0.675549451
-methanePyrolysis,electricity,ratioConvInFix,0.205714286
