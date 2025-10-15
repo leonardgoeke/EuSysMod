@@ -1,12 +1,12 @@
 using Gurobi, AnyMOD, CSV, YAML
-include("functions.jl")
 
-dir_str = ""
+dir_str = "C:/Git/climate2energy/"
+include(dir_str * "functions.jl")
 
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 2 # or 16
+    id_int = 31 # or 16
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -40,7 +40,7 @@ scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, case)
 
 # range violations
 rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
-rngVio_ntup = (stab = 2e2, cut = 1e2, fix = 1e1)
+rngVio_ntup = (stab = 1e2, cut = 1e2, fix = 1e2)
 
 # method for cut management
 if cutDel in ("10cnt_1thres", "50cnt_05thres", "100cnt_05thres","noCutDel")
@@ -84,10 +84,10 @@ interNoStab_sym = :lin
 
 # solver options for sub and top problem
 subOpt_tup = (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = false)
-topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = true)
+topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false)
 
 # optimimality gap, cut management, valid inequalities, reporting frequency, time limit, distributed computing, optimizer
-algSetup_obj = algSetup(0.001, cutMgm_tup, (bal = false, st = true), 2, 7200.0, false, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
+algSetup_obj = algSetup(0.2, cutMgm_tup, (bal = false, st = true), 2, 7200.0, false, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
@@ -101,7 +101,7 @@ else
 end
 
 # method, threshold serious step, initialization, minimum value, solve frequency without stabilization, weights in stabilization (in additon to scaling of base problem)
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = (capa = 1e0, capaStSize = 1e0, stLvl = 1e0, lim = 1e0))
+stabSetup_obj = stabSetup(meth_tup, 0.0, :none, 1e-20, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = (capa = 1e0, capaStSize = 1e0, stLvl = 1e0, lim = 1e0))
 
 # ! options for near optimal
 
@@ -140,9 +140,9 @@ inputFolderSub_ntup = (in = inDir_arr, heu = heuDir_arr, results = resultDir_str
 scale_dic = Dict{Symbol,NamedTuple}()
 
 scale_dic[:rng] = rngTar_tup
-scale_dic[:facHeu] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e2, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
-scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e2, dispSt = 1e2, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
-scale_dic[:facTop] = (capa = 1e4, capaStSize = 1e4, insCapa = 1e4, dispConv = 1e3, dispSt = 1e4, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e3)	
+scale_dic[:facHeu] = (capa = 1e0, capaStSize = 1e0, insCapa = 1e0, dispConv = 1e1, dispSt = 1e2, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
+scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e0, insCapa = 1e0, dispConv = 1e2, dispSt = 1e2, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e0)
+scale_dic[:facTop] = (capa = 1e0, capaStSize = 1e0, insCapa = 1e0, dispConv = 1e3, dispSt = 1e4, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e0, obj = 1e0)	
 
 #endregion
 
@@ -150,7 +150,7 @@ scale_dic[:facTop] = (capa = 1e4, capaStSize = 1e4, insCapa = 1e4, dispConv = 1e
 
 # initialize distributed computing
 if algSetup_obj.dist
-	addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=" * string(floor(t_int * ram) - 2 ) * "G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=t_int, mem_per_cpu= string(ram) * "G", time=6000) # add all available nodes
+	addprocs(wrkCnt) # add all available nodes
 	rmprocs(wrkCnt + 2) # remove one node again for main process
 	@everywhere begin
 		using Gurobi, AnyMOD
@@ -165,22 +165,30 @@ else
 	getSubStringDist = x -> nothing
 end
 
+
 # create benders object
 benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, res_ntup);
+
+# extract gradient of top-problem
+dualData_obj = computeTopGradient(benders_obj);
 
 #endregion
 
 #region # * iteration algorithm
 
+# first benders
 allRes_df = runIteration!(benders_obj, runSubDist)
 
-#endregion
+#writeBendersResults!(benders_obj, runSubDist, getSubStringDist)
 
-#region # * write results
-
-produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Write results", testErr = false, printErr = false)
-writeBendersResults!(benders_obj, runSubDist, getSubStringDist)
+runGradientMethod!(benders_obj, dualData_obj)
 
 #endregion
 
+
+
+# target: 28740
+
+
+# ! iteration gradient
 
