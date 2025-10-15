@@ -8,7 +8,7 @@ setupDir_str = dir_str *  "modelSetup/"
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 18
+    id_int = 31
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -34,7 +34,7 @@ trust = par_df[id_int,:trust]
 
 weigthStab = par_df[id_int,:weigthStab]	
 optTolStab = par_df[id_int,:optTolStab]
-viStorage = par_df[id_int,:viStorage] == "TRUE"
+viStorage = par_df[id_int,:viStorage]
 infeasTop = par_df[id_int,:infeasTop]
 dnsThrs = par_df[id_int,:dnsThrs]
 
@@ -54,15 +54,57 @@ rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 rngVio_ntup = (stab = 2e2, cut = 1e2, fix = 1e1)
 
 # method for cut management
-if cutDel == "25cnt_1thres"
-	del_int = 25
+if cutDel == "10cnt_1thres"
+	del_int = 10
+	del_fl = 1.0
+elseif cutDel == "10cnt_05thres"
+	del_int = 10
+	del_fl = 0.5
+elseif cutDel == "10cnt_025thres"
+	del_int = 10
+	del_fl = 0.25
+elseif cutDel == "50cnt_1thres"
+	del_int = 50
 	del_fl = 1.0
 elseif cutDel == "50cnt_05thres"
 	del_int = 50
 	del_fl = 0.5
-elseif cutDel == "200cnt_05thres"
-	del_int = 200
+elseif cutDel == "50cnt_025thres"
+	del_int = 50
+	del_fl = 0.25
+elseif cutDel == "100cnt_1thres"
+	del_int = 100
+	del_fl = 1.0
+elseif cutDel == "100cnt_05thres"
+	del_int = 100
 	del_fl = 0.5
+elseif cutDel == "100cnt_025thres"
+	del_int = 100
+	del_fl = 0.25
+elseif cutDel == "100cnt_15thres"
+	del_int = 100
+	del_fl = 1.5
+elseif cutDel == "150cnt_1thres"
+	del_int = 150
+	del_fl = 1.0
+elseif cutDel == "150cnt_15thres"
+	del_int = 150
+	del_fl = 1.5
+elseif cutDel == "200cnt_1thres"
+	del_int = 200
+	del_fl = 1.0
+elseif cutDel == "200cnt_15thres"
+	del_int = 200
+	del_fl = 1.5
+elseif cutDel == "250cnt_1thres"
+	del_int = 250
+	del_fl = 1.0
+elseif cutDel == "250cnt_15thres"
+	del_int = 250
+	del_fl = 1.5
+elseif cutDel == "300cnt_1thres"
+	del_int = 300
+	del_fl = 1.0
 end
 
 cutMgm_tup = (meth = :slack, opt = (cnt = del_int, thres = del_fl), freq = 1, report = false)
@@ -88,7 +130,7 @@ subOpt_tup = (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, tim
 topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStab_sym, tolStab_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = true)
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-algSetup_obj = algSetup(0.9997, cutMgm_tup, (bal = false, st = viStorage), 2, 7200.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
+algSetup_obj = algSetup(0.001, cutMgm_tup, (bal = false, st = viStorage), 2, 7200.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 

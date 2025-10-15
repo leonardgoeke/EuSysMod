@@ -1,9 +1,23 @@
+qtrLvlBox_1:
+  qtrLvlBox:
+    startRad: 0.1
+    endRad: 0.005
+    interRad: exp
+    lam: 0.75
+    startBoxRel: 0.05
+    endBoxRel: 0.005
+    interBoxRel: exp
+    startBoxAbs: 10.0
+    endBoxAbs: 0.5
+    interBoxAbs: exp
+    scaLvl: 10.0
+    scaLim: 10.0
 qtrLvl_1:
   qtrLvl:
     startRad: 0.1
     endRad: 0.005
-    inter: log
-    lam: 0.7
+    inter: exp
+    lam: 0.75
 qtrLvl_2:
   qtrLvl:
     startRad: 0.1
@@ -114,25 +128,13 @@ lvl1_4:
     lam: 0.5
 lvl1_5:
   lvl1:
-    lam: 0.75
+    lam: 0.625
 lvl1_6:
   lvl1:
-    lam: 0.875
-lvl3_1:
-  lvl3:
-    lam: 0.125
-lvl3_2:
-  lvl3:
-    lam: 0.25
-lvl3_3:
-  lvl3:
-    lam: 0.375
-lvl3_4:
-  lvl3:
-    lam: 0.5
-lvl3_5:
-  lvl3:
     lam: 0.75
+lvl1_7:
+  lvl1:
+    lam: 0.875
 lvl2_1:
   lvl2:
     lam: 0.2
@@ -193,6 +195,27 @@ lvl2_15:
   lvl2:
     lam: 0.7
     myMax: 100.0
+lvl3_1:
+  lvl1:
+    lam: 0.125
+lvl3_2:
+  lvl1:
+    lam: 0.25
+lvl3_3:
+  lvl1:
+    lam: 0.375
+lvl3_4:
+  lvl1:
+    lam: 0.5
+lvl3_5:
+  lvl1:
+    lam: 0.625
+lvl3_6:
+  lvl1:
+    lam: 0.75
+lvl3_7:
+  lvl1:
+    lam: 0.875
 prx1_1:
   prx1:
     start: 1.0

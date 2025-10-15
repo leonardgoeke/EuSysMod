@@ -1,39 +1,4 @@
 vertices:
-  - label: "electric space heating"
-    name: "heatpumpGroundSpace"
-    color:
-      - 1.0
-      - 0.4549019607843137
-      - 0.5215686274509804
-    position:
-      - 0.3974124909716237
-      - 0.705469483138422
-    type: "technology"
-    aggregating:
-      - "heatpumpAirSpace"
-      - "resistiveHeatSpace"
-  - label: "electric district heating"
-    name: "heatpumpAirDh"
-    color:
-      - 0.6
-      - 0.0
-      - 0.169
-    position:
-      - 0.19901191009698482
-      - 0.5836084611570597
-    type: "technology"
-    aggregating:
-      - "eBoilerDh"
-  - label: "gasBoilerProHigh"
-    name: "gasBoilerProHigh"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.20288091905003602
-      - 0.46200912449738263
-    type: "technology"
   - label: "solidBioPlantProLow"
     name: "solidBioPlantProLow"
     color:
@@ -44,58 +9,15 @@ vertices:
       - 0.49176101495310187
       - 0.5662018670599795
     type: "technology"
-  - label: "low temp. engine, biogas"
-    name: "bioGasEngineProLow"
+  - label: "water tank"
+    name: "largeWaterTank"
     color:
       - 0.85
       - 0.85
       - 0.85
     position:
-      - 0.45861258537206434
-      - 0.547491983037598
-    type: "technology"
-  - label: "pit thermal storage"
-    name: "pitThermalStorage"
-    color:
-      - 0.6
-      - 0.0
-      - 0.169
-    position:
-      - 0.3595901959917576
-      - 0.8062060767250575
-    type: "technology"
-  - label: "lithium battery"
-    name: "lithiumBattery"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.0022898780648664685
-      - 0.5355620101560069
-    type: "technology"
-  - label: "engines"
-    name: "gasEngine"
-    color:
-      - 1.0
-      - 0.9215
-      - 0.2313
-    position:
-      - 0.17143913591400672
-      - 0.6539468892645565
-    type: "technology"
-    aggregating:
-      - "dieselEngine"
-      - "gasEngineProMed"
-  - label: "low temp. engine, gas"
-    name: "gasEngineProLow"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.37405768883788276
-      - 0.5378408332383078
+      - 0.3094782920344916
+      - 0.8026985116051522
     type: "technology"
   - label: "fcFrtRail"
     name: "fcFrtRail"
@@ -117,18 +39,6 @@ vertices:
       - 0.4408190704689211
       - 0.46051873966481344
     type: "technology"
-  - label: "pumped storage"
-    name: "pumpedStorageOpen"
-    color:
-      - 0.180392
-      - 0.337255
-      - 0.705882
-    position:
-      - 0.037945684180904604
-      - 0.47675949086138497
-    type: "technology"
-    aggregating:
-      - "pumpedStorageClosed"
   - label: "DH plant, solid BM"
     name: "solidBioPlantDh"
     color:
@@ -159,36 +69,6 @@ vertices:
       - 0.2126485172746847
       - 0.06593722362767468
     type: "technology"
-  - label: "DH gas boiler"
-    name: "gasBoilerDh"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.3046218536939893
-      - 0.7509770192746548
-    type: "technology"
-  - label: "offshore_b"
-    name: "offshore_b"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.08056137712670947
-      - 0.3463960884480573
-    type: "technology"
-  - label: "eBoilerProMed"
-    name: "eBoilerProMed"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.41730350685190104
-      - 0.4025725554988331
-    type: "technology"
   - label: "biomass boiler"
     name: "bioBoilerSpace"
     color:
@@ -199,44 +79,12 @@ vertices:
       - 0.66360393832928
       - 0.844064341570323
     type: "technology"
-  - label: "wind, onshore"
-    name: "onshore"
-    color:
-      - 0.317647
-      - 0.525490
-      - 0.588235
-    position:
-      - 0.04570214146337637
-      - 0.397397502500471
-    type: "technology"
-  - label: "biomass CHP"
-    name: "nonSolidBioPlantDh"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.4348349298614053
-      - 0.6610854763575162
-    type: "technology"
-    aggregating:
-      - "gasEngineDh"
-  - label: "OCGT CHP, H2"
-    name: "ocgtH2Chp"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.29930297970197994
-      - 0.38031752944972913
-    type: "technology"
-  - label: "transport"
+  - label: "other demand"
     name: "bevPsngRoadPrvt"
     color:
-      - 0.435294
-      - 0.784314
-      - 0.713725
+      - 1.0
+      - 0.9215
+      - 0.2313
     position:
       - 0.4656876906705614
       - 0.3178586573998341
@@ -247,16 +95,6 @@ vertices:
       - "bevPsngRoadPub"
       - "ePsngRail"
       - "eFrtRail"
-  - label: "medium temp. engine, biogas"
-    name: "bioGasEngineProMed"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.4814543966669732
-      - 0.510252846071034
-    type: "technology"
   - label: "fcFrtRoadLight"
     name: "fcFrtRoadLight"
     color:
@@ -317,16 +155,6 @@ vertices:
       - 0.7004947705441176
       - 0.3494106854349507
     type: "technology"
-  - label: "gas boiler"
-    name: "gasBoilerProMed"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.5427771456672658
-      - 0.5586603520394174
-    type: "technology"
   - label: "bioBoilerProLow"
     name: "bioBoilerProLow"
     color:
@@ -357,26 +185,6 @@ vertices:
       - 0.7000258364007611
       - 0.513789306355989
     type: "technology"
-  - label: "gas storage"
-    name: "gasStorage"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.2557480629255831
-      - 0.843311877699566
-    type: "technology"
-  - label: "oil storage"
-    name: "oilStorage"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.2557480629255831
-      - 0.843311877699566
-    type: "technology"
   - label: "fcevPsngRoadPrvt"
     name: "fcevPsngRoadPrvt"
     color:
@@ -386,39 +194,6 @@ vertices:
     position:
       - 0.5311958941577777
       - 0.14655380960340603
-    type: "technology"
-  - label: "H2 boiler"
-    name: "h2BoilerProHigh"
-    color:
-      - 0.6823529411764706
-      - 0.07058823529411765
-      - 0.22745098039215686
-    position:
-      - 0.1976373810921141
-      - 0.15161312175763642
-    type: "technology"
-    aggregating:
-      - "h2BoilerProMed"
-      - "h2BoilerDh"
-  - label: "OCGT CHP, gas"
-    name: "ocgtGasChp"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.29622762499903726
-      - 0.5955744238741636
-    type: "technology"
-  - label: "DH engine, biogas"
-    name: "bioGasEngineDh"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.40432827870372134
-      - 0.6132412054849791
     type: "technology"
   - label: "CCGT back, H2"
     name: "ccgtH2BackDh"
@@ -430,26 +205,6 @@ vertices:
       - 0.3171719414052985
       - 0.41713000075072165
     type: "technology"
-  - label: "direct air capture"
-    name: "directAirCapture"
-    color:
-      - 0.0
-      - 0.0
-      - 0.0
-    position:
-      - 0.4961167131441063
-      - 0.4101294569981924
-    type: "technology"
-  - label: "gas boiler"
-    name: "gasBoilerSpace"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.4345746562443936
-      - 0.840161003388685
-    type: "technology"
   - label: "hydropyrolysis"
     name: "hydropyrolysis"
     color:
@@ -459,16 +214,6 @@ vertices:
     position:
       - 0.7185258263764436
       - 0.45089200472599417
-    type: "technology"
-  - label: "gasBoilerProLow"
-    name: "gasBoilerProLow"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.5336451626758533
-      - 0.6451449813285939
     type: "technology"
   - label: "h2BoilerProLow"
     name: "h2BoilerProLow"
@@ -490,7 +235,7 @@ vertices:
       - 0.4024719544311717
       - 0.554268130759174
     type: "technology"
-  - label: "reservoir"
+  - label: "hydro"
     name: "reservoir"
     color:
       - 0.180392
@@ -500,6 +245,8 @@ vertices:
       - 0.05716719973255796
       - 0.6391728921891986
     type: "technology"
+    aggregating:
+      - "runOfRiver"
   - label: "pem FC"
     name: "pefc"
     color:
@@ -509,26 +256,6 @@ vertices:
     position:
       - 0.29135933998787966
       - 0.4103220866351951
-    type: "technology"
-  - label: "water tank"
-    name: "largeWaterTank"
-    color:
-      - 0.6
-      - 0.0
-      - 0.169
-    position:
-      - 0.3094782920344916
-      - 0.8026985116051522
-    type: "technology"
-  - label: "district process heating"
-    name: "districtHeatPro"
-    color:
-      - 0.6823529411764706
-      - 0.07058823529411765
-      - 0.22745098039215686
-    position:
-      - 0.5861546085110078
-      - 0.5854679479852637
     type: "technology"
   - label: "solid oxide FC"
     name: "sofc"
@@ -580,26 +307,6 @@ vertices:
       - 0.34380228785610223
       - 0.4058482890557758
     type: "technology"
-  - label: "OCGT, H2"
-    name: "ocgtH2"
-    color:
-      - 1.0
-      - 0.9215
-      - 0.2313
-    position:
-      - 0.20955908149349867
-      - 0.31403483725488984
-    type: "technology"
-  - label: "H2 storage tank"
-    name: "h2StorageTank"
-    color:
-      - 0.329
-      - 0.447
-      - 0.827
-    position:
-      - 0.2718712534451921
-      - 0.024948186749053136
-    type: "technology"
   - label: "medium temp. CCGT back, gas"
     name: "ccgtGasBackProMed"
     color:
@@ -640,7 +347,7 @@ vertices:
       - 0.04058788399547142
       - 0.553858992948227
     type: "technology"
-  - label: "electric process heating"
+  - label: "space and process heating"
     name: "heatpumpPro"
     color:
       - 0.6823529411764706
@@ -651,30 +358,19 @@ vertices:
       - 0.4451894446739018
     type: "technology"
     aggregating:
-      - "nonSolidBioPlantProLow"
       - "eBoilerProLow"
       - "eBoilerProMed"
       - "eBoilerProHigh"
-  - label: "OCGT, gas"
-    name: "ocgtGas"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.19019750855513035
-      - 0.6853843660857377
-    type: "technology"
-  - label: "run-of-river"
-    name: "runOfRiver"
-    color:
-      - 0.180392
-      - 0.337255
-      - 0.705882
-    position:
-      - 0.08781945191315821
-      - 0.6203456078760616
-    type: "technology"
+      - "heatpumpAirDh"
+      - "eBoilerDh"
+      - "heatpumpGroundSpace"
+      - "heatpumpAirSpace"
+      - "resistiveHeatSpace"
+      - "gasBoilerProMed"
+      - "h2BoilerProHigh"
+      - "h2BoilerProMed"
+      - "gasBoilerDh"
+      - "h2BoilerDh"
   - label: "oil boiler"
     name: "oilBoilerProHigh"
     color:
@@ -695,16 +391,6 @@ vertices:
       - 0.7081532325485537
       - 0.28365679307266717
     type: "technology"
-  - label: "eBoilerProHigh"
-    name: "eBoilerProHigh"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.1411385523954598
-      - 0.3374784937491812
-    type: "technology"
   - label: "CCGT extract, gas"
     name: "ccgtGasExtract"
     color:
@@ -718,9 +404,9 @@ vertices:
   - label: "Fischer-Tropsch"
     name: "fischerTropsch"
     color:
-      - 0.733333333
-      - 0.533333333
-      - 0.454901961
+      - 0.85
+      - 0.85
+      - 0.85
     position:
       - 0.5212232134381508
       - 0.3653535108796221
@@ -795,39 +481,6 @@ vertices:
       - 0.27486512122495466
       - 0.3868432898738896
     type: "technology"
-  - label: "district space heating"
-    name: "districtHeatSpace_a"
-    color:
-      - 1.0
-      - 0.4549019607843137
-      - 0.5215686274509804
-    position:
-      - 0.45435457224514186
-      - 0.7910929001238545
-    type: "technology"
-    aggregating:
-      - "districtHeatSpace_b"
-      - "districtHeatSpace_c"
-  - label: "H2 storage cavern"
-    name: "h2StorageCavern"
-    color:
-      - 0.329
-      - 0.447
-      - 0.827
-    position:
-      - 0.23967909502634493
-      - 0.039326577524175066
-    type: "technology"
-  - label: "low temp. plant, solid BM"
-    name: "nonSolidBioPlantProLow"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.4974892091897521
-      - 0.597483635666809
-    type: "technology"
   - label: "biogas plant"
     name: "biogasPlant"
     color:
@@ -838,18 +491,19 @@ vertices:
       - 0.7270212342765793
       - 0.7353006848560015
     type: "technology"
-  - label: "wind, offshore"
+  - label: "wind"
     name: "offshore_a"
     color:
-      - 0.129412
-      - 0.349020
-      - 0.407843
+      - 0.317647
+      - 0.525490 
+      - 0.588235
     position:
       - 0.0937337387036215
       - 0.38201237299000024
     type: "technology"
     aggregating:
       - "offshore_b"
+      - "onshore"
   - label: "dieselFrtRail"
     name: "dieselFrtRail"
     color:
@@ -860,16 +514,6 @@ vertices:
       - 0.6341302831994281
       - 0.047772330551681896
     type: "technology"
-  - label: "eBoilerProLow"
-    name: "eBoilerProLow"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.38717657837068387
-      - 0.46870335685018955
-    type: "technology"
   - label: "biogas upgrading"
     name: "biogasUpgrading"
     color:
@@ -879,16 +523,6 @@ vertices:
     position:
       - 0.49715971423535854
       - 0.7496119897129098
-    type: "technology"
-  - label: "gasEngineProMed"
-    name: "gasEngineProMed"
-    color:
-      - 0.85
-      - 0.85
-      - 0.85
-    position:
-      - 0.39221932680209404
-      - 0.5014099188671804
     type: "technology"
   - label: "nonSolidBioBoilerDh"
     name: "nonSolidBioBoilerDh"
@@ -955,16 +589,6 @@ vertices:
       - 0.3221125878323824
       - 0.39008157432425256
     type: "technology"
-  - label: "fossil gas import"
-    name: "impGas"
-    color:
-      - 0.235
-      - 0.506
-      - 0.325
-    position:
-      - 0.3221125878323824
-      - 0.39008157432425256
-    type: "technology"
   - label: "fossil oil import"
     name: "impOil"
     color:
@@ -998,16 +622,6 @@ vertices:
       - 0.2629863545613276
       - 0.4897050098802379
     type: "carrier"
-  - label: "space heat"
-    name: "spaceHeat"
-    color:
-      - 1.0
-      - 0.4549019607843137
-      - 0.5215686274509804
-    position:
-      - 0.5282621151525395
-      - 0.8064369897790468
-    type: "carrier"
   - label: "gas"
     name: "naturalGas"
     color:
@@ -1018,19 +632,6 @@ vertices:
       - 0.3433526419430335
       - 0.6259373921685883
     type: "carrier"
-  - label: "process heat"
-    name: "processHeat_high"
-    color:
-      - 0.6823529411764706
-      - 0.07058823529411765
-      - 0.22745098039215686
-    position:
-      - 0.2423388844702108
-      - 0.29255501573936016
-    type: "carrier"
-    aggregating:
-      - "processHeat_medium"
-      - "processHeat_low"
   - label: "raw biogas"
     name: "rawBiogas"
     color:
@@ -1051,26 +652,19 @@ vertices:
       - 0.3436483471948764
       - 0.23356255804039183
     type: "carrier"
-  - label: "district heat"
-    name: "districtHeat"
+  - label: "process heat"
+    name: "processHeat_high"
     color:
-      - 0.6
-      - 0.0
-      - 0.169
+      - 0.6823529411764706
+      - 0.07058823529411765
+      - 0.22745098039215686
     position:
-      - 0.37499315320650206
-      - 0.5761540636436088
+      - 0.2423388844702108
+      - 0.29255501573936016
     type: "carrier"
-  - label: "carbon"
-    name: "capturedCO2"
-    color:
-      - 0.0
-      - 0.0
-      - 0.0
-    position:
-      - 0.646161297235269
-      - 0.3279683067929288
-    type: "carrier"
+    aggregating:
+      - "processHeat_medium"
+      - "processHeat_low"
   - label: "oil"
     name: "rawOil"
     color:
@@ -1123,230 +717,144 @@ vertices:
       - 1.0
       - 0.16615683057109587
     type: "technology"
+  - label: "thermal backup"
+    name: "gasEngine"
+    color:
+      - 0.85
+      - 0.85
+      - 0.85
+    position:
+      - 0.17143913591400672
+      - 0.6539468892645565
+    type: "technology"
+    aggregating:
+      - "dieselEngine"
+      - "ocgtH2"
+      - "ocgtH2Chp"
+      - "nonSolidBioPlantDh"
 edges:
+  - h2: "h2BoilerDh"
+  - h2BoilerDh: "districtHeat"
+  - h2: "ocgtH2"
+  - ocgtH2: "electricity"
+  - h2: "h2BoilerProHigh"
+  - h2BoilerProHigh: "processHeat_high"
+  - naturalGas: "gasBoilerDh"
+  - gasBoilerDh: "districtHeat"
+  - h2: "h2BoilerProMed"
+  - h2BoilerProMed: "processHeat_medium"
+  - h2: "ocgtH2Chp"
+  - ocgtH2Chp: "electricity"
+  - ocgtH2Chp: "districtHeat"
   - nonSolidBiomass: "otherBiomass"
   - solidBiomass: "otherBiomass"
   - electricity: "heatpumpGroundSpace"
-  - heatpumpGroundSpace: "spaceHeat"
-  - naturalGas: "gasBoilerProHigh"
-  - gasBoilerProHigh: "processHeat_high"
-  - refinedOil: "dieselEngine"
-  - dieselEngine: "electricity"
   - solidBiomass: "solidBioPlantProLow"
   - solidBioPlantProLow: "electricity"
-  - solidBioPlantProLow: "processHeat_low"
-  - rawBiogas: "bioGasEngineProLow"
-  - bioGasEngineProLow: "electricity"
-  - bioGasEngineProLow: "processHeat_low"
+  - naturalGas: "gasBoilerProMed"
+  - gasBoilerProMed: "processHeat_medium"
   - electricity: "resistiveHeatSpace"
-  - resistiveHeatSpace: "spaceHeat"
-  - districtHeat: "pitThermalStorage"
-  - pitThermalStorage: "districtHeat"
   - electricity: "heatpumpAirSpace"
-  - heatpumpAirSpace: "spaceHeat"
-  - electricity: "lithiumBattery"
-  - lithiumBattery: "electricity"
-  - naturalGas: "gasEngine"
-  - gasEngine: "electricity"
-  - naturalGas: "gasEngineProLow"
-  - gasEngineProLow: "electricity"
-  - gasEngineProLow: "processHeat_low"
-  - districtHeat: "largeWaterTank"
-  - largeWaterTank: "districtHeat"
   - h2: "fcFrtRail"
   - rawBiogas: "bioMethanation"
   - h2: "bioMethanation"
   - bioMethanation: "naturalGas"
-  - electricity: "pumpedStorageOpen"
-  - pumpedStorageOpen: "electricity"
-  - electricity: "pumpedStorageClosed"
-  - pumpedStorageClosed: "electricity"
   - solidBiomass: "solidBioPlantDh"
   - solidBioPlantDh: "electricity"
-  - solidBioPlantDh: "districtHeat"
-  - h2: "h2BoilerDh"
-  - h2BoilerDh: "districtHeat"
   - h2: "ccgtH2BackProLow"
   - ccgtH2BackProLow: "electricity"
-  - ccgtH2BackProLow: "processHeat_low"
   - h2: "fcFrtRoadHeavy"
-  - naturalGas: "gasBoilerDh"
-  - gasBoilerDh: "districtHeat"
   - offshore_b: "electricity"
   - electricity: "eBoilerProMed"
-  - eBoilerProMed: "processHeat_medium"
   - solidBiomass: "bioBoilerSpace"
-  - bioBoilerSpace: "spaceHeat"
   - onshore: "electricity"
   - nonSolidBiomass: "nonSolidBioPlantDh"
   - nonSolidBioPlantDh: "electricity"
-  - nonSolidBioPlantDh: "districtHeat"
-  - h2: "ocgtH2Chp"
-  - ocgtH2Chp: "electricity"
-  - ocgtH2Chp: "districtHeat"
   - electricity: "bevPsngRoadPrvt"
-  - rawBiogas: "bioGasEngineProMed"
-  - bioGasEngineProMed: "electricity"
-  - bioGasEngineProMed: "processHeat_medium"
   - h2: "fcFrtRoadLight"
   - electricity: "bevFrtRoadHeavy"
   - solidBiomass: "solidBioBoilerDh"
-  - solidBioBoilerDh: "districtHeat"
   - naturalGas: "ccgtGasBackDh"
   - ccgtGasBackDh: "electricity"
-  - ccgtGasBackDh: "districtHeat"
   - naturalGas: "cngPsngRoadPrvt"
   - refinedOil: "dieselFrtRoadLight"
-  - refinedOil: "oilBoilerProLow"
-  - oilBoilerProLow: "processHeat_low"
-  - naturalGas: "gasBoilerProMed"
-  - gasBoilerProMed: "processHeat_medium"
   - solidBiomass: "bioBoilerProLow"
-  - bioBoilerProLow: "processHeat_low"
   - refinedOil: "dieselFrtRoadHeavy"
   - rawBiogas: "bioBoilerProMed"
-  - bioBoilerProMed: "processHeat_medium"
-  - naturalGas: "gasStorage"
-  - gasStorage: "naturalGas"
-  - refinedOil: "oilStorage"
-  - oilStorage: "refinedOil"
   - h2: "fcevPsngRoadPrvt"
-  - h2: "h2BoilerProHigh"
-  - h2BoilerProHigh: "processHeat_high"
   - electricity: "bevFrtRoadLight"
-  - naturalGas: "ocgtGasChp"
-  - ocgtGasChp: "electricity"
-  - ocgtGasChp: "districtHeat"
-  - rawBiogas: "bioGasEngineDh"
-  - bioGasEngineDh: "electricity"
-  - bioGasEngineDh: "districtHeat"
   - h2: "ccgtH2BackDh"
   - ccgtH2BackDh: "electricity"
-  - ccgtH2BackDh: "districtHeat"
-  - electricity: "directAirCapture"
-  - processHeat_medium: "directAirCapture"
-  - directAirCapture: "capturedCO2"
-  - naturalGas: "gasBoilerSpace"
-  - gasBoilerSpace: "spaceHeat"
   - h2: "fcPsngRail"
   - fcPsngRail: "psngRail"
   - solidBiomass: "hydropyrolysis"
   - hydropyrolysis: "rawOil"
-  - naturalGas: "gasBoilerProLow"
-  - gasBoilerProLow: "processHeat_low"
   - pvInd_a: "electricity"
   - pvInd_b: "electricity"
   - h2: "h2BoilerProLow"
-  - h2BoilerProLow: "processHeat_low"
   - electricity: "heatpumpAirDh"
-  - heatpumpAirDh: "districtHeat"
   - naturalGas: "ccgtGasBackProLow"
   - ccgtGasBackProLow: "electricity"
-  - ccgtGasBackProLow: "processHeat_low"
   - reservoir: "electricity"
   - h2: "pefc"
   - pefc: "electricity"
-  - pefc: "districtHeat"
-  - districtHeat: "districtHeatPro"
-  - districtHeatPro: "processHeat_low"
   - naturalGas: "sofc"
   - sofc: "electricity"
-  - sofc: "processHeat_high"
   - naturalGas: "methanePyrolysis"
   - electricity: "methanePyrolysis"
   - methanePyrolysis: "h2"
-  - methanePyrolysis: "processHeat_high"
   - refinedOil: "dieselPsngRoadPub"
   - solidBiomass: "gasification"
   - gasification: "naturalGas"
-  - gasification: "districtHeat"
   - electricity: "pemElectrolysis"
   - pemElectrolysis: "h2"
-  - pemElectrolysis: "districtHeat"
-  - h2: "ocgtH2"
-  - ocgtH2: "electricity"
-  - h2: "h2StorageTank"
-  - h2StorageTank: "h2"
   - naturalGas: "ccgtGasBackProMed"
   - ccgtGasBackProMed: "electricity"
-  - ccgtGasBackProMed: "processHeat_medium"
-  - naturalGas: "gasEngineDh"
-  - gasEngineDh: "electricity"
-  - gasEngineDh: "districtHeat"
   - electricity: "eBoilerDh"
-  - eBoilerDh: "districtHeat"
   - h2: "fcPsngRoadPub"
   - h2: "ccgtH2BackProMed"
   - ccgtH2BackProMed: "electricity"
-  - ccgtH2BackProMed: "processHeat_medium"
   - electricity: "redoxBattery"
   - redoxBattery: "electricity"
   - electricity: "heatpumpPro"
-  - heatpumpPro: "processHeat_low"
-  - h2: "h2BoilerProMed"
-  - h2BoilerProMed: "processHeat_medium"
-  - naturalGas: "ocgtGas"
-  - ocgtGas: "electricity"
-  - runOfRiver: "electricity"
   - electricity: "eFrtRail"
   - refinedOil: "oilBoilerProHigh"
-  - oilBoilerProHigh: "processHeat_high"
   - refinedOil: "oilBoilerProMed"
-  - oilBoilerProMed: "processHeat_medium"
   - electricity: "eBoilerProHigh"
-  - eBoilerProHigh: "processHeat_high"
   - naturalGas: "ccgtGasExtract"
   - ccgtGasExtract: "electricity"
-  - ccgtGasExtract: "districtHeat"
   - h2: "fischerTropsch"
-  - capturedCO2: "fischerTropsch"
   - fischerTropsch: "rawOil"
-  - fischerTropsch: "districtHeat"
   - h2: "ccgtH2Extract"
   - ccgtH2Extract: "electricity"
-  - ccgtH2Extract: "districtHeat"
-  - districtHeat: "districtHeatSpace"
-  - districtHeatSpace: "spaceHeat"
-  - h2: "h2StorageCavern"
-  - h2StorageCavern: "h2"
-  - nonSolidBiomass: "nonSolidBioPlantProLow"
-  - nonSolidBioPlantProLow: "electricity"
-  - nonSolidBioPlantProLow: "processHeat_low"
   - nonSolidBiomass: "biogasPlant"
   - biogasPlant: "rawBiogas"
   - offshore_a: "electricity"
   - refinedOil: "dieselFrtRail"
   - electricity: "eBoilerProLow"
-  - eBoilerProLow: "processHeat_low"
   - pvResi: "electricity"
   - rawBiogas: "biogasUpgrading"
   - biogasUpgrading: "naturalGas"
-  - naturalGas: "gasEngineProMed"
-  - gasEngineProMed: "electricity"
-  - gasEngineProMed: "processHeat_medium"
   - nonSolidBiomass: "nonSolidBioBoilerDh"
-  - nonSolidBioBoilerDh: "districtHeat"
   - refinedOil: "ottoPsngRoadPrvt"
   - electricity: "bevPsngRoadPub"
   - pvOpenspace_a: "electricity"
   - pvOpenspace_b: "electricity"
   - electricity: "alkElectrolysis"
   - alkElectrolysis: "h2"
-  - alkElectrolysis: "districtHeat"
   - impH2Ship: "h2"
   - impH2Pipe: "h2"
-  - impGas: "naturalGas"
   - impOil: "rawOil"
+  - refinedOil: "fischerTropsch"
+  - fischerTropsch: "rawOil"
   - rawOil: "rawOilToHvc"
   - rawOilToHvc: "hvc"
   - methanol: "methanolToHvc"
   - methanolToHvc: "hvc"
   - h2: "h2ToMethanol"
   - processHeat_medium: "h2ToMethanol"
-  - capturedCO2: "h2ToMethanol"
   - electricity: "h2ToMethanol"
   - h2ToMethanol: "methanol"
-  - h2ToMethanol: "districtHeat"
   - h2: "h2BiogasToMethanol"
   - processHeat_medium: "h2BiogasToMethanol"
   - rawBiogas: "h2BiogasToMethanol"
@@ -1354,17 +862,20 @@ edges:
   - h2BiogasToMethanol: "methanol"
   - otherBiomass: "h2BiogasToMethanol"
   - biomassToMethanol: "methanol"
-  - biomassToMethanol: "districtHeat"
   - h2: "methanolToRawOil"
   - methanol: "methanolToRawOil"
   - methanolToRawOil: "rawOil"
-
+  - refinedOil: "dieselEngine"
+  - dieselEngine: "electricity"
+  - naturalGas: "gasEngine"
+  - gasEngine: "electricity"
+  - naturalGas: "gasEngineProMed"
+  - gasEngineProMed: "electricity"
 removeSankey:
   - trade buy: "biomass"
-  - final demand: "process heat - low"
-  - final demand: "process heat - medium"
-  - final demand: "process heat - high"
+  - final demand: "process heat"
   - final demand: "high-value chemicals"
   - exchange losses: "electricity"
   - exchange losses: "H2"
   - exchange losses: "raw oil"
+  - space and process heating: "process heat"

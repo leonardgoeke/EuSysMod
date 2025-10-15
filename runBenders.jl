@@ -20,6 +20,7 @@ reso = string(par_df[id_int,:resolution]) # spatial resolution
 techs = string(par_df[id_int,:techCase]) # available technologies
 imp = string(par_df[id_int,:importCase]) # fuel import setup 
 
+foresight = par_df[id_int,:foresight] # scenario case
 security = string(par_df[id_int,:security]) # security settings
 inOos = string(par_df[id_int,:inputOutOfSample]) # capacity folder for out-of-sample testing
 
@@ -34,6 +35,7 @@ trust = par_df[id_int,:trust]
 
 weigthStab = par_df[id_int,:weigthStab]	
 optTolStab = par_df[id_int,:optTolStab]
+lowLimStab = string(par_df[id_int,:lowLimStab]) |> (x -> x == "Inf" ? Inf : parse(Float64,x))
 viStorage = par_df[id_int,:viStorage] == "TRUE"
 infeasTop = par_df[id_int,:infeasTop]
 dnsThrs = par_df[id_int,:dnsThrs]
@@ -51,7 +53,7 @@ scrQrtHeu_arr, scrDirHeu_str = generateScrInfo(false, "total12_ext0_" * split(sc
 
 # range violations
 rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
-rngVio_ntup = (stab = 2e2, cut = 1e3, fix = 1e2)
+rngVio_ntup = (stab = 2e2, cut = 1e3, fix = 1e3)
 
 # method for cut management
 if cutDel == "10cnt_1thres"
@@ -81,7 +83,35 @@ elseif cutDel == "100cnt_05thres"
 elseif cutDel == "100cnt_025thres"
 	del_int = 100
 	del_fl = 0.25
+elseif cutDel == "100cnt_15thres"
+	del_int = 100
+	del_fl = 1.5
+elseif cutDel == "150cnt_1thres"
+	del_int = 150
+	del_fl = 1.0
+elseif cutDel == "150cnt_15thres"
+	del_int = 150
+	del_fl = 1.5
+elseif cutDel == "200cnt_1thres"
+	del_int = 200
+	del_fl = 1.0
+elseif cutDel == "200cnt_15thres"
+	del_int = 200
+	del_fl = 1.5
+elseif cutDel == "250cnt_1thres"
+	del_int = 250
+	del_fl = 1.0
+elseif cutDel == "250cnt_15thres"
+	del_int = 250
+	del_fl = 1.5
+elseif cutDel == "300cnt_1thres"
+	del_int = 300
+	del_fl = 1.0
+elseif cutDel == "noCutDel"
+	del_int = 10000
+	del_fl = 0.5
 end
+
 
 cutMgm_tup = (meth = :slack, opt = (cnt = del_int, thres = del_fl), freq = 1, report = false)
 
@@ -106,7 +136,7 @@ subOpt_tup = (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, tim
 topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStab_sym, tolStab_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false)
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-algSetup_obj = algSetup(0.001, cutMgm_tup, (bal = false, st = viStorage), 2, 5760.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
+algSetup_obj = algSetup(0.001, cutMgm_tup, (bal = false, st = viStorage), 2, 7200.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
@@ -130,7 +160,7 @@ elseif weigthStab == "withStLvl"
 	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 1e0, lim = 1e0)
 end
 
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, noStab_tup, repVio = true, weight = w_tup) # :none for last argument will skip initialization, other names just used for setting input folder below
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, lowLimStab, noStab_tup, repVio = true, weight = w_tup) # :none for last argument will skip initialization, other names just used for setting input folder below
 
 # ! options for near optimal
 
@@ -144,7 +174,7 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 # ! general problem settings
 
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
-info_ntup = (name = name_str, frsLvl = checkDet_boo ? 0 : 3, supTsLvl = 2, repTsLvl = 4, shortExp = 5, infeasTop = infeasTop != "none") 
+info_ntup = (name = name_str, frsLvl = foresight, supTsLvl = 2, repTsLvl = 4, shortExp = 5, infeasTop = !(infeasTop in ("none", "none_half1", "none_half2")))
 
 # ! input folders
 inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "securitySetup/" * security, setupDir_str * "infeasTop/" * infeasTop, setupDir_str * "techSetup/" * techs, setupDir_str * "importCase/" * imp, setupDir_str * "resolution/" * reso, scrDir_str, modDir_str * "timeSeries/country_" * time * "_month/general"]
