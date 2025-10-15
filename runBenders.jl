@@ -22,7 +22,7 @@ foresight = par_df[id_int,:foresight] # scenario case
 optTolStab = par_df[id_int,:optTolStab]
 cutDel = string(par_df[id_int,:cutDel])
 
-lowLimStab = string(par_df[id_int,:lowLimStab]) |> (x -> x == "Inf" ? Inf : parse(Float64,x))
+lowLimStab = string(par_df[id_int,:lowLimStab]) |> (x -> x == "Inf" ? - Inf : parse(Float64,x))
 weigthStab = string(par_df[id_int,:weigthStab]) 
 viStorage = par_df[id_int,:viStorage] == "TRUE"
 infeasTop = par_df[id_int,:infeasTop]
@@ -113,7 +113,7 @@ elseif weigthStab == "withStLvl"
 end
 
 # method, threshold serious step, initialization, minimum value, solve frequency without stabilization, weights in stabilization (in additon to scaling of base problem)
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, - lowLimStab, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = w_tup)
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, lowLimStab, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = w_tup)
 
 # ! options for near optimal
 
