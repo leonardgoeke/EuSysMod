@@ -196,25 +196,25 @@ lvl2_15:
     lam: 0.7
     myMax: 100.0
 lvl3_1:
-  lvl1:
+  lvl3:
     lam: 0.125
 lvl3_2:
-  lvl1:
+  lvl3:
     lam: 0.25
 lvl3_3:
-  lvl1:
+  lvl3:
     lam: 0.375
 lvl3_4:
-  lvl1:
+  lvl3:
     lam: 0.5
 lvl3_5:
-  lvl1:
+  lvl3:
     lam: 0.625
 lvl3_6:
-  lvl1:
+  lvl3:
     lam: 0.75
 lvl3_7:
-  lvl1:
+  lvl3:
     lam: 0.875
 prx1_1:
   prx1:
