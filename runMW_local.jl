@@ -6,7 +6,7 @@ include(dir_str * "functions.jl")
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 45 # or 16
+    id_int = 44 # or 16
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -116,7 +116,7 @@ elseif weigthStab == "withStLvl"
 end
 
 # method, threshold serious step, initialization, minimum value, solve frequency without stabilization, weights in stabilization (in additon to scaling of base problem)
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, lowLimStab, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = w_tup)
+stabSetup_obj = stabSetup(meth_tup, 0.0, :none, lowLimStab, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = w_tup)
 
 #endregion
 
@@ -187,6 +187,8 @@ allRes_df = runIterationMW!(benders_obj, runSubDist)
 
 #endregion
 
+CSV.write("C:/Git/climate2energy/results/$(benders_obj.info.name)_timeMW.csv", benders_obj.report.mwTime)
+
 #region # * write results
 
 produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Write results", testErr = false, printErr = false)
@@ -196,9 +198,10 @@ writeBendersResults!(benders_obj, runSubDist, getSubStringDist)
 
 
 
+allCns_arr = filter(x -> typeof(x) != VariableRef, collect(values(benders_obj.sub[(2,1)].dual.mod.obj_dict)))
 
 
 
 
 
-
+normalized_rhs.(allCns_arr)

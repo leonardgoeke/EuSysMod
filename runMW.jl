@@ -88,7 +88,7 @@ tolNoStab_arr = [1e-6, 1e-6]
 interNoStab_sym = :lin
 
 # solver options for sub and top problem
-subOpt_tup = (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = false)
+subOpt_tup = (rng = [1e-2, 1e-6], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = false)
 topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false)
 
 # optimimality gap, cut management, valid inequalities, reporting frequency, time limit, distributed computing, optimizer

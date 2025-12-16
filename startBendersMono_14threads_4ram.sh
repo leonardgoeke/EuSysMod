@@ -1,5 +1,5 @@
 #!/bin/bash --login
-#SBATCH --array=13,14,15,16,17,18,27,28,33,34,39,40
+#SBATCH --array=1-57
 #SBATCH --time=120:00:00
 #SBATCH --job-name=results/mono_%j
 #SBATCH --output=results/mono_%j.out

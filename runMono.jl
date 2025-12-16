@@ -3,13 +3,12 @@ using AnyMOD, Gurobi, CSV
 dir_str = "C:/Git/climate2energy/"
 include(dir_str * "functions.jl")
 
-
 #region # define inputs
 
 par_df = CSV.read(dir_str * "settings.csv",DataFrame)
 
 if isempty(ARGS)
-    id_int = 31 # currently 1 for future and 2 for historic
+    id_int = 44 # currently 1 for future and 2 for historic
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])

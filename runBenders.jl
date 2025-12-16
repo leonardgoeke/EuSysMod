@@ -1,4 +1,4 @@
-using Gurobi, AnyMOD, CSV, YAML
+using Gurobi, AnyMOD, CSV, YAML, SlurmClusterManager
 include("functions.jl")
 
 dir_str = ""
@@ -92,7 +92,7 @@ subOpt_tup = (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, tim
 topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false)
 
 # optimimality gap, cut management, valid inequalities, reporting frequency, time limit, distributed computing, optimizer
-algSetup_obj = algSetup(0.001, cutMgm_tup, (bal = false, st = true), 2, 7200.0, false, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
+algSetup_obj = algSetup(0.001, cutMgm_tup, (bal = false, st = true), 2, 7200.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
@@ -108,6 +108,8 @@ end
 # weight of variables in stabilization
 if weigthStab == "noStLvl"
 	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 0.0, lim = 1e0)
+elseif weigthStab == "lowStLvl"
+	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 1e-2, lim = 1e0)
 elseif weigthStab == "withStLvl"
 	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 1e0, lim = 1e0)
 end
@@ -166,7 +168,7 @@ if algSetup_obj.dist
 	rmprocs(wrkCnt + 2) # remove one node again for main process
 	@everywhere begin
 		using Gurobi, AnyMOD
-		runSubDist(w_int::Int64, resData_obj::resData, rngVio_fl::Float64, sol_sym::Symbol, optTol_fl::Float64=1e-8, crsOver_boo::Bool=false, check_boo::Bool=false, resultOpt_tup::NamedTuple=NamedTuple()) = Distributed.@spawnat w_int runSub(resData_obj, rngVio_fl, sol_sym, optTol_fl, crsOver_boo, check_boo, resultOpt_tup)
+		runSubDist(w_int::Int64, resData_obj::resData, rngVio_fl::Float64, sol_sym::Symbol, timeLim_fl::Float64, optTol_fl::Float64=1e-8, crsOver_boo::Bool=false, check_boo::Bool=false, resultOpt_tup::NamedTuple=NamedTuple()) = Distributed.@spawnat w_int runSub(resData_obj, rngVio_fl, sol_sym, timeLim_fl, optTol_fl, crsOver_boo, check_boo, resultOpt_tup)
 		getComVarDist(w_int::Int64) = Distributed.@spawnat w_int getComVar()
 		getSubStringDist(w_int::Int64, res_sym::Symbol) = Distributed.@spawnat w_int getSubString(res_sym)
 	end
