@@ -1,3 +1,9 @@
+using Pkg
+Pkg.activate(".")
+
+using Infiltrator
+Infiltrator.toggle_async_check(false)
+
 using Gurobi, AnyMOD, CSV, YAML
 include("functions.jl")
 
@@ -6,7 +12,7 @@ dir_str = "C:/Git/climate2energy/"
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 59 # or 16
+    id_int = 17 # or 16
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -22,10 +28,10 @@ foresight = par_df[id_int,:foresight] # scenario case
 optTolStab = par_df[id_int,:optTolStab]
 cutDel = string(par_df[id_int,:cutDel])
 
-lowLimStab = string(par_df[id_int,:lowLimStab]) |> (x -> x == "Inf" ? Inf : parse(Float64,x))
+lowLimStab = string(par_df[id_int,:lowLimStab]) |> (x -> x == "Inf" ? - Inf : parse(Float64,x))
 weigthStab = string(par_df[id_int,:weigthStab]) 
-viStorage = par_df[id_int,:viStorage] == "TRUE"
-infeasTop = par_df[id_int,:infeasTop]
+decomp = par_df[id_int,:decomp]
+check_boo = par_df[id_int,:check] == "TRUE"
 
 wrkCnt = par_df[id_int,:workerCnt]
 t_int = par_df[id_int,:threads]
@@ -48,7 +54,7 @@ rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 rngVio_ntup = (stab = 2e2, cut = 1e2, fix = 1e1)
 
 # method for cut management
-if cutDel in ("10cnt_1thres", "50cnt_05thres", "noCutDel")
+if cutDel in ("10cnt_1thres", "50cnt_05thres", "100cnt_05thres","noCutDel")
 	if cutDel == "10cnt_1thres"
 		del_int = 25
 		del_fl = 1.0
@@ -87,12 +93,15 @@ interStabFeas_sym = :log
 tolNoStab_arr = [1e-6, 1e-6]
 interNoStab_sym = :lin
 
+# determine presolve option
+pre_int = -1
+
 # solver options for sub and top problem
-subOpt_tup = (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = false)
-topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false)
+subOpt_tup = (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = check_boo)
+topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), presolve = pre_int, stabMeth = 2, noStabMeth = 2, threads = t_int, check = check_boo)
 
 # optimimality gap, cut management, valid inequalities, reporting frequency, time limit, distributed computing, optimizer
-algSetup_obj = algSetup(0.001, cutMgm_tup, (bal = false, st = true), 2, 7200.0, false, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
+algSetup_obj = algSetup(0.001, cutMgm_tup, (bal = false, st = true), 2, 8640.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
@@ -108,12 +117,14 @@ end
 # weight of variables in stabilization
 if weigthStab == "noStLvl"
 	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 0.0, lim = 1e0)
+elseif weigthStab == "lowStLvl"
+	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 1e-2, lim = 1e0)
 elseif weigthStab == "withStLvl"
 	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 1e0, lim = 1e0)
 end
 
 # method, threshold serious step, initialization, minimum value, solve frequency without stabilization, weights in stabilization (in additon to scaling of base problem)
-stabSetup_obj = stabSetup(meth_tup, 0.0, :none, lowLimStab, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = w_tup)
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, lowLimStab, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = w_tup)
 
 # ! options for near optimal
 
@@ -127,13 +138,13 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 # ! general problem settings
 
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
-info_ntup = (name = name_str, frsLvl = foresight, supTsLvl = 2, repTsLvl = 4, shortExp = 5, infeasTop = infeasTop != "none") 
+info_ntup = (name = name_str, frsLvl = foresight, supTsLvl = 2, repTsLvl = 4, shortExp = 5, infeasTop = false) 
 
 # ! input folders
-inDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco,  dir_str * "infeasTop/" * infeasTop, scrDir_str, dir_str * "timeSeries/" * case * "_" * time * "h/general"]
+inDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/" * case * "_" * time * "h/general"]
 foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * case * "_" * time * "h/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-heuDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, dir_str * "infeasTop/" * infeasTop, scrDir_str, dir_str * "timeSeries/" * case * "_" * "672h/general"]
+heuDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/" * case * "_" * "672h/general"]
 foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/" * case * "_" * "672h/"  * x[1] * "/" * x[2]), scrQrt_arr)
 
 # ! result folders
@@ -162,11 +173,11 @@ scale_dic[:facTop] = (capa = 1e4, capaStSize = 1e4, insCapa = 1e4, dispConv = 1e
 
 # initialize distributed computing
 if algSetup_obj.dist
-	addprocs(wrkCnt) # add all available nodes
+	addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=" * string(floor(t_int * ram) - 2 ) * "G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=t_int, mem_per_cpu= string(ram) * "G", time=6000) # add all available nodes
 	rmprocs(wrkCnt + 2) # remove one node again for main process
 	@everywhere begin
 		using Gurobi, AnyMOD
-		runSubDist(w_int::Int64, resData_obj::resData, rngVio_fl::Float64, sol_sym::Symbol, optTol_fl::Float64=1e-8, crsOver_boo::Bool=false, check_boo::Bool=false, resultOpt_tup::NamedTuple=NamedTuple()) = Distributed.@spawnat w_int runSub(resData_obj, rngVio_fl, sol_sym, optTol_fl, crsOver_boo, check_boo, resultOpt_tup)
+		runSubDist(w_int::Int64, resData_obj::resData, rngVio_fl::Float64, sol_sym::Symbol, timeLim_fl::Float64, optTol_fl::Float64=1e-8, crsOver_boo::Bool=false, check_boo::Bool=false, resultOpt_tup::NamedTuple=NamedTuple()) = Distributed.@spawnat w_int runSub(resData_obj, rngVio_fl, sol_sym, timeLim_fl, optTol_fl, crsOver_boo, check_boo, resultOpt_tup)
 		getComVarDist(w_int::Int64) = Distributed.@spawnat w_int getComVar()
 		getSubStringDist(w_int::Int64, res_sym::Symbol) = Distributed.@spawnat w_int getSubString(res_sym)
 	end
@@ -190,7 +201,10 @@ allRes_df = runIteration!(benders_obj, runSubDist)
 
 #region # * write results
 
-#produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Write results", testErr = false, printErr = false)
-#writeBendersResults!(benders_obj, runSubDist, getSubStringDist)
+produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Write results", testErr = false, printErr = false)
+writeBendersResults!(benders_obj, runSubDist, getSubStringDist)
 
 #endregion
+
+
+# ! debug stuff

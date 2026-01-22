@@ -1,6 +1,6 @@
 using AnyMOD, Gurobi, CSV
 
-dir_str = "C:/Git/climate2energy/"
+dir_str = ""
 include(dir_str * "functions.jl")
 
 #region # define inputs
@@ -42,6 +42,8 @@ name_str = "mono_" * time * "_" * spaSco * "_" * case * "_" * scr * "_" * string
 anyM = anyModel(input_arr, resultDir_str, objName = name_str, frsLvl = foresight, holdFixed = true, supTsLvl = 2, shortExp = 5, reportLvl = 2, repTsLvl = 4);
 createOptModel!(anyM)
 setObjective!(:cost,anyM)
+
+write_to_file(anyM.optModel, resultDir_str  *"/" * name_str * ".mps")
 
 set_optimizer(anyM.optModel, Gurobi.Optimizer)
 set_optimizer_attribute(anyM.optModel, "Method", 2);

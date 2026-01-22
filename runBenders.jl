@@ -6,7 +6,7 @@ dir_str = ""
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 44 # or 16
+    id_int = 17 # or 16
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -24,8 +24,8 @@ cutDel = string(par_df[id_int,:cutDel])
 
 lowLimStab = string(par_df[id_int,:lowLimStab]) |> (x -> x == "Inf" ? - Inf : parse(Float64,x))
 weigthStab = string(par_df[id_int,:weigthStab]) 
-viStorage = par_df[id_int,:viStorage] == "TRUE"
-infeasTop = par_df[id_int,:infeasTop]
+decomp = par_df[id_int,:decomp]
+check_boo = par_df[id_int,:check] == "TRUE"
 
 wrkCnt = par_df[id_int,:workerCnt]
 t_int = par_df[id_int,:threads]
@@ -87,12 +87,15 @@ interStabFeas_sym = :log
 tolNoStab_arr = [1e-6, 1e-6]
 interNoStab_sym = :lin
 
+# determine presolve option
+pre_int = -1
+
 # solver options for sub and top problem
-subOpt_tup = (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = false)
-topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = false)
+subOpt_tup = (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = check_boo)
+topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), presolve = pre_int, stabMeth = 2, noStabMeth = 2, threads = t_int, check = check_boo)
 
 # optimimality gap, cut management, valid inequalities, reporting frequency, time limit, distributed computing, optimizer
-algSetup_obj = algSetup(0.001, cutMgm_tup, (bal = false, st = true), 2, 7200.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
+algSetup_obj = algSetup(0.001, cutMgm_tup, (bal = false, st = true), 2, 8640.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
@@ -129,13 +132,13 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 # ! general problem settings
 
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
-info_ntup = (name = name_str, frsLvl = foresight, supTsLvl = 2, repTsLvl = 4, shortExp = 5, infeasTop = infeasTop != "none") 
+info_ntup = (name = name_str, frsLvl = foresight, supTsLvl = 2, repTsLvl = 4, shortExp = 5, infeasTop = false) 
 
 # ! input folders
-inDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, dir_str * "infeasTop/" * infeasTop, scrDir_str, dir_str * "timeSeries/" * case * "_" * time * "h/general"]
+inDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/" * case * "_" * time * "h/general"]
 foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * case * "_" * time * "h/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-heuDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, dir_str * "infeasTop/" * infeasTop, scrDir_str, dir_str * "timeSeries/" * case * "_" * "672h/general"]
+heuDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/" * case * "_" * "672h/general"]
 foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/" * case * "_" * "672h/"  * x[1] * "/" * x[2]), scrQrt_arr)
 
 # ! result folders
@@ -197,4 +200,11 @@ writeBendersResults!(benders_obj, runSubDist, getSubStringDist)
 
 #endregion
 
+keys(benders_obj.sub)
 
+benders_obj.top.parts.obj.par[:scrProb].data
+
+anyM = benders_obj.top
+anyM.parts.tech[:h2Cavern].var[:stLvl]
+
+filter(x -> x.R_dis == 3, anyM.parts.tech[:h2Cavern].var[:stLvl])
