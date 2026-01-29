@@ -8,7 +8,7 @@ setupDir_str = dir_str *  "modelSetup/"
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 31
+    id_int = 13
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -20,6 +20,7 @@ reso = string(par_df[id_int,:resolution]) # spatial resolution
 techs = string(par_df[id_int,:techCase]) # available technologies
 imp = string(par_df[id_int,:importCase]) # fuel import setup 
 
+foresight = par_df[id_int,:foresight] # scenario case
 security = string(par_df[id_int,:security]) # security settings
 inOos = string(par_df[id_int,:inputOutOfSample]) # capacity folder for out-of-sample testing
 
@@ -34,6 +35,7 @@ trust = par_df[id_int,:trust]
 
 weigthStab = par_df[id_int,:weigthStab]	
 optTolStab = par_df[id_int,:optTolStab]
+lowLimStab = string(par_df[id_int,:lowLimStab]) |> (x -> x == "Inf" ? - Inf : parse(Float64,x))
 viStorage = par_df[id_int,:viStorage]
 infeasTop = par_df[id_int,:infeasTop]
 dnsThrs = par_df[id_int,:dnsThrs]
@@ -105,6 +107,9 @@ elseif cutDel == "250cnt_15thres"
 elseif cutDel == "300cnt_1thres"
 	del_int = 300
 	del_fl = 1.0
+elseif cutDel == "noCutDel"
+	del_int = 10000
+	del_fl = 0.5
 end
 
 cutMgm_tup = (meth = :slack, opt = (cnt = del_int, thres = del_fl), freq = 1, report = false)
@@ -127,7 +132,7 @@ interStabFeas_sym = :lin
 
 # solver options for sub and top problem
 subOpt_tup = (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = false)
-topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStab_sym, tolStab_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), stabMeth = 2, noStabMeth = 2, threads = t_int, check = true)
+topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStab_sym, tolStab_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), presolve = -1, stabMeth = 2, noStabMeth = 2, threads = t_int, check = false)
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
 algSetup_obj = algSetup(0.001, cutMgm_tup, (bal = false, st = viStorage), 2, 7200.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
@@ -145,16 +150,18 @@ else
 end
 
 # solve frequency of top problem without stabilization for lower bound
-noStab_tup = (upper = 70, inter = :log, sub = 2.0)
+noStab_tup = (upper = 5, inter = :log, sub = 2.0)
 
 # weight of variables in stabilization
 if weigthStab == "noStLvl"
 	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 0.0, lim = 1e0)
+elseif weigthStab == "lowStLvl"
+	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 1e-2, lim = 1e0)
 elseif weigthStab == "withStLvl"
 	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 1e0, lim = 1e0)
 end
 
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, 0.01, noStab_tup, repVio = true, weight = w_tup) # :none for last argument will skip initialization, other names just used for setting input folder below
+stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, lowLimStab, noStab_tup, repVio = true, weight = w_tup) # :none for last argument will skip initialization, other names just used for setting input folder below
 
 # ! options for near optimal
 
@@ -168,7 +175,7 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 # ! general problem settings
 
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
-info_ntup = (name = name_str, frsLvl = checkDet_boo ? 0 : 3, supTsLvl = 2, repTsLvl = 4, shortExp = 5, infeasTop = infeasTop != "none") 
+info_ntup = (name = name_str, frsLvl = checkDet_boo ? 0 : foresight, decompLvl = 0, supTsLvl = 2, repTsLvl = 4, shortExp = 5, infeasTop = infeasTop != "none") 
 
 # ! input folders
 inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "securitySetup/" * security, setupDir_str * "infeasTop/" * infeasTop, setupDir_str * "techSetup/" * techs, setupDir_str * "importCase/" * imp, setupDir_str * "resolution/" * reso, scrDir_str, modDir_str * "timeSeries/country_" * time * "_month/general"]
@@ -203,7 +210,7 @@ scale_dic = Dict{Symbol,NamedTuple}()
 scale_dic[:rng] = rngTar_tup
 scale_dic[:facHeu] = (capa = 1e2, capaStSize = 1e2, insCapa = 1e1, dispConv = 1e1, dispSt = 1e2, dispExc = 1e3, dispTrd = 1e3, costDisp = 1e1, costCapa = 1e2, obj = 1e0)
 scale_dic[:facSub] = (capa = 1e0, capaStSize = 1e2, insCapa = 1e0, dispConv = 1e2, dispSt = 1e2, dispExc = 1e1, dispTrd = 1e1, costDisp = 1e0, costCapa = 1e2, obj = 1e1)
-scale_dic[:facTop] = (capa = 1e4, capaStSize = 1e4, insCapa = 1e4, dispConv = 1e3, dispSt = 1e4, dispExc = 1e3, dispTrd = 1e2, costDisp = 1e1, costCapa = 1e1, obj = 1e3)	
+scale_dic[:facTop] = (capa = 1e1, capaStSize = 1e4, insCapa = 1e2, dispConv = 1e3, dispSt = 1e4, dispExc = 1e3, dispTrd = 1e2, costDisp = 1e1, costCapa = 1e1, obj = 1e3)	
 
 #endregion
 
@@ -226,13 +233,15 @@ else
 end
 
 # create benders object
-benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, res_ntup);
+benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, res_ntup, trackCapa = true);
 
 #endregion
 
 #region # * iteration algorithm
 
-runIteration!(benders_obj, runSubDist)
+allRes_df = runIteration!(benders_obj, runSubDist)
+
+printObject(allRes_df, benders_obj.top)
 
 #endregion
 
@@ -247,3 +256,29 @@ if inOos == "missing"
 end
 
 #endregion
+
+benders_obj.top.parts.tech[:reservoir].var[:stLvl]
+benders_obj.top.parts.tech[:reservoir].cns[:stSizeSeasonRestr]
+
+
+benders_obj.sub[(3,1)].parts.tech[:reservoir].cns[:stLvlBendersFix][!,:cns]
+benders_obj.sub[(4,3)].parts.tech[:reservoir].cns[:stLvlBendersFix][!,:cns]
+882
+
+resData_obj.stLvl[:reservoir][:stLvl]
+
+resData_obj.stLvl[:oilStorage][:stLvl]
+
+cutData_dic[(3,1)].stLvl[:reservoir][:stLvl]
+
+cutData_dic[(3,1)].stLvl[:oilStorage][:stLvl]
+
+
+resData_obj.capa[:reservoir][:stLvl]
+
+benders_obj.top.parts.obj.cns
+
+
+benders_obj.sub[(3,1)].parts.tech[:reservoir].cns[:stBal][2,:cns]
+
+printObject(benders_obj.sub[(3,1)].parts.tech[:reservoir].cns[:stBal], benders_obj.sub[(3,1)])
