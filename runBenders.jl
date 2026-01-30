@@ -6,7 +6,7 @@ dir_str = ""
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 17 # or 16
+    id_int = 2 # or 16
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -20,7 +20,6 @@ foresight = par_df[id_int,:foresight] # scenario case
 
 # extract benders settings
 optTolStab = par_df[id_int,:optTolStab]
-cutDel = string(par_df[id_int,:cutDel])
 
 lowLimStab = string(par_df[id_int,:lowLimStab]) |> (x -> x == "Inf" ? - Inf : parse(Float64,x))
 weigthStab = string(par_df[id_int,:weigthStab]) 
@@ -48,30 +47,7 @@ rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 rngVio_ntup = (stab = 2e2, cut = 1e2, fix = 1e1)
 
 # method for cut management
-if cutDel in ("10cnt_1thres", "50cnt_05thres", "100cnt_05thres","noCutDel")
-	if cutDel == "10cnt_1thres"
-		del_int = 25
-		del_fl = 1.0
-	elseif cutDel == "50cnt_05thres"
-		del_int = 50
-		del_fl = 0.5
-	elseif cutDel == "100cnt_05thres"
-		del_int = 200
-		del_fl = 0.5
-	elseif cutDel == "noCutDel"
-		del_int = 10000
-		del_fl = 0.5
-	end
-	cutMgm_tup = (meth = :slack, opt = (cnt = del_int, thres = del_fl), freq = 1, report = false)
-end
-
-if cutDel in ("red1","red05")
-	if cutDel == "red1"
-		cutMgm_tup = (meth = :redundant, opt = (startFac = 1.0, endFac = 1.0, inter = :lin), freq = 1, report = false)
-	elseif cutDel == "red05"
-		cutMgm_tup = (meth = :redundant, opt = (startFac = 0.5, endFac = 0.5, inter = :lin), freq = 1, report = false)
-	end
-end
+cutMgm_tup = (meth = :slack, opt = (cnt = 10000, thres = 0.5), freq = 1, report = false)
 
 # tolerance stabilized problem, convergence
 tolStab_arr = [optTolStab, optTolStab]
@@ -95,7 +71,7 @@ subOpt_tup = (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, tim
 topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), presolve = pre_int, stabMeth = 2, noStabMeth = 2, threads = t_int, check = check_boo)
 
 # optimimality gap, cut management, valid inequalities, reporting frequency, time limit, distributed computing, optimizer
-algSetup_obj = algSetup(0.001, cutMgm_tup, (bal = false, st = true), 2, 8640.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
+algSetup_obj = algSetup(0.001, cutMgm_tup, (bal = false, st = true), 2, 16000.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
@@ -132,14 +108,14 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 # ! general problem settings
 
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
-info_ntup = (name = name_str, frsLvl = foresight, supTsLvl = 2, repTsLvl = 4, shortExp = 5, infeasTop = false) 
+info_ntup = (name = name_str, frsLvl = foresight, decompLvl = (foresight != 0 || decomp == "year" ? 0 : 3), supTsLvl = 2, repTsLvl = 4, shortExp = 5, infeasTop = false) 
 
 # ! input folders
-inDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/" * case * "_" * time * "h/general"]
-foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * case * "_" * time * "h/" * x[1] * "/" * x[2]), scrQrt_arr)
+inDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/setup/" * time * "h_" * (decomp == "year" ? "month" : decomp)]
+foreach(x -> push!(inDir_arr, dir_str * "timeSeries/data/" * case * "_" * time * "h/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-heuDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/" * case * "_" * "672h/general"]
-foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/" * case * "_" * "672h/"  * x[1] * "/" * x[2]), scrQrt_arr)
+heuDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/setup/672h_" * (decomp == "year" ? "month" : decomp)]
+foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/data/" * case * "_" * "672h/"  * x[1] * "/" * x[2]), scrQrt_arr)
 
 # ! result folders
 resultDir_str = dir_str * "results/" * name_str
@@ -167,7 +143,7 @@ scale_dic[:facTop] = (capa = 1e4, capaStSize = 1e4, insCapa = 1e4, dispConv = 1e
 
 # initialize distributed computing
 if algSetup_obj.dist
-	addprocs(SlurmManager(; launch_timeout = 300), exeflags="--heap-size-hint=" * string(floor(t_int * ram) - 2 ) * "G", nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=t_int, mem_per_cpu= string(ram) * "G", time=6000) # add all available nodes
+	addprocs(SlurmManager(; launch_timeout = 300), nodes=1, ntasks=1, ntasks_per_node=1, cpus_per_task=t_int, mem_per_cp = isinteger(ram) ? (string(ram) * "G") : (string(ram*1024) * "M"), time=6000) # add all available nodes
 	rmprocs(wrkCnt + 2) # remove one node again for main process
 	@everywhere begin
 		using Gurobi, AnyMOD
@@ -199,12 +175,3 @@ produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1,
 writeBendersResults!(benders_obj, runSubDist, getSubStringDist)
 
 #endregion
-
-keys(benders_obj.sub)
-
-benders_obj.top.parts.obj.par[:scrProb].data
-
-anyM = benders_obj.top
-anyM.parts.tech[:h2Cavern].var[:stLvl]
-
-filter(x -> x.R_dis == 3, anyM.parts.tech[:h2Cavern].var[:stLvl])

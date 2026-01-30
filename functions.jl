@@ -1,6 +1,6 @@
 function generateScrInfo(checkDet_boo::Bool, scenario::String, setupDir_str::String, scope::String)
 
-    frs_arr = ["ini01", "ini02", "ini03", "ini04", "ini05", "ini06", "ini07", "ini08", "ini09", "ini10", "ini11", "ini12"]
+    frs_arr = ["m01", "m02", "m03", "m04", "m05", "m06", "m07", "m08", "m09", "m10", "m11", "m12"]
 
     # create scenario and quarter array
     if checkDet_boo # case of single year
