@@ -1,3 +1,6 @@
+using Pkg
+Pkg.activate(".")
+
 using Gurobi, AnyMOD, CSV, YAML
 include("functions.jl")
 
@@ -8,7 +11,7 @@ setupDir_str = dir_str *  "modelSetup/"
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 13
+    id_int = 52
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -19,10 +22,14 @@ scenario = convert(String,par_df[id_int,:scenario]) # scenario case
 reso = string(par_df[id_int,:resolution]) # spatial resolution
 techs = string(par_df[id_int,:techCase]) # available technologies
 imp = string(par_df[id_int,:importCase]) # fuel import setup 
+spLength = string(par_df[id_int,:spLength]) # length of steps on third level
+regionalScope = "5Ctr" #string(par_df[id_int,:regionalScope]) # regional scope of model
 
 foresight = par_df[id_int,:foresight] # scenario case
-security = string(par_df[id_int,:security]) # security settings
-inOos = string(par_df[id_int,:inputOutOfSample]) # capacity folder for out-of-sample testing
+interpolate = par_df[id_int,:interpolate] # frequency solve top without stabilization
+decomp = par_df[id_int,:decomp] # decomposition under perfect foresight
+security = "1ex0se1re1be" # security settings
+inOos = "" # string(par_df[id_int,:inputOutOfSample]) # capacity folder for out-of-sample testing
 
 # extract benders settings
 
@@ -37,15 +44,15 @@ weigthStab = par_df[id_int,:weigthStab]
 optTolStab = par_df[id_int,:optTolStab]
 lowLimStab = string(par_df[id_int,:lowLimStab]) |> (x -> x == "Inf" ? - Inf : parse(Float64,x))
 viStorage = par_df[id_int,:viStorage]
-infeasTop = par_df[id_int,:infeasTop]
+infeasTop = "none"
 dnsThrs = par_df[id_int,:dnsThrs]
 
 name_str = convert(String,par_df[id_int,:name])
 checkDet_boo = scenario in "scr" .* string.(1982:2016)
 
 # create files determining scenario setup
-scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scenario, setupDir_str)
-scrQrtHeu_arr, scrDirHeu_str = generateScrInfo(false, "total12_ext0_" * split(scenario,"_")[end], setupDir_str)
+scrQrt_arr, scrDir_str, mapFolders = generateScrInfo(checkDet_boo, scenario, setupDir_str, spLength)
+scrQrtHeu_arr, scrDirHeu_str,  = generateScrInfo(false, "total12_ext0_" * split(scenario,"_")[end], setupDir_str, "month")
 
 #region # * options for algorithm
 
@@ -59,51 +66,6 @@ rngVio_ntup = (stab = 2e2, cut = 1e2, fix = 1e1)
 if cutDel == "10cnt_1thres"
 	del_int = 10
 	del_fl = 1.0
-elseif cutDel == "10cnt_05thres"
-	del_int = 10
-	del_fl = 0.5
-elseif cutDel == "10cnt_025thres"
-	del_int = 10
-	del_fl = 0.25
-elseif cutDel == "50cnt_1thres"
-	del_int = 50
-	del_fl = 1.0
-elseif cutDel == "50cnt_05thres"
-	del_int = 50
-	del_fl = 0.5
-elseif cutDel == "50cnt_025thres"
-	del_int = 50
-	del_fl = 0.25
-elseif cutDel == "100cnt_1thres"
-	del_int = 100
-	del_fl = 1.0
-elseif cutDel == "100cnt_05thres"
-	del_int = 100
-	del_fl = 0.5
-elseif cutDel == "100cnt_025thres"
-	del_int = 100
-	del_fl = 0.25
-elseif cutDel == "100cnt_15thres"
-	del_int = 100
-	del_fl = 1.5
-elseif cutDel == "150cnt_1thres"
-	del_int = 150
-	del_fl = 1.0
-elseif cutDel == "150cnt_15thres"
-	del_int = 150
-	del_fl = 1.5
-elseif cutDel == "200cnt_1thres"
-	del_int = 200
-	del_fl = 1.0
-elseif cutDel == "200cnt_15thres"
-	del_int = 200
-	del_fl = 1.5
-elseif cutDel == "250cnt_1thres"
-	del_int = 250
-	del_fl = 1.0
-elseif cutDel == "250cnt_15thres"
-	del_int = 250
-	del_fl = 1.5
 elseif cutDel == "300cnt_1thres"
 	del_int = 300
 	del_fl = 1.0
@@ -135,7 +97,7 @@ subOpt_tup = (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, tim
 topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStab_sym, tolStab_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), presolve = -1, stabMeth = 2, noStabMeth = 2, threads = t_int, check = false)
 
 # target gap, inaccurate cuts options, number of iteration after unused cut is deleted, valid inequalities, number of iterations report is written, time-limit for algorithm, distributed computing?, number of threads, optimizer, solver settings sub and top
-algSetup_obj = algSetup(0.001, cutMgm_tup, (bal = false, st = viStorage), 2, 7200.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
+algSetup_obj = algSetup(0.05, cutMgm_tup, (bal = false, st = viStorage), 2, 7200.0, false, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
 
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
@@ -150,7 +112,12 @@ else
 end
 
 # solve frequency of top problem without stabilization for lower bound
-noStab_tup = (upper = 5, inter = :log, sub = 2.0)
+if interpolate
+	noStab_tup = (upper = 70, inter = :log, sub = 2.0)
+else
+	noStab_tup = (upper = 1, inter = :log, sub = 2.0)
+end
+
 
 # weight of variables in stabilization
 if weigthStab == "noStLvl"
@@ -175,16 +142,16 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 # ! general problem settings
 
 # name, temporal resolution, level of foresight, superordinate dispatch level, length of steps between investment years
-info_ntup = (name = name_str, frsLvl = checkDet_boo ? 0 : foresight, decompLvl = 0, supTsLvl = 2, repTsLvl = 4, shortExp = 5, infeasTop = infeasTop != "none") 
+info_ntup = (name = name_str, frsLvl = checkDet_boo ? 0 : foresight, decompLvl = decomp, supTsLvl = 2, repTsLvl = 4, shortExp = 5, infeasTop = infeasTop != "none") 
 
 # ! input folders
-inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "securitySetup/" * security, setupDir_str * "infeasTop/" * infeasTop, setupDir_str * "techSetup/" * techs, setupDir_str * "importCase/" * imp, setupDir_str * "resolution/" * reso, scrDir_str, modDir_str * "timeSeries/country_" * time * "_month/general"]
-foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_month/general_" * x), unique(getindex.(scrQrt_arr,2)))
-foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * "month/" * x[1] * "/" * x[2]), scrQrt_arr)
+inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "regionSetup/" * regionalScope, setupDir_str * "securitySetup/" * security, setupDir_str * "infeasTop/" * infeasTop, setupDir_str * "techSetup/" * techs, setupDir_str * "timeSetup/" * time * "/" * spLength, setupDir_str * "importCase/" * imp, setupDir_str * "resolution/" * reso, scrDir_str, modDir_str * "timeSeries/country_" * time * "/general"]
+foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
+foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-heuDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "securitySetup/" * security, setupDir_str * "infeasTop/" * infeasTop, setupDir_str * "techSetup/" * techs, setupDir_str * "importCase/" * imp, setupDir_str * "resolution/" * reso, scrDirHeu_str, modDir_str * "timeSeries/country_672h_month/general"]
-foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_672h_month/general_" * x), unique(getindex.(scrQrtHeu_arr,2)))
-foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_672h_month/" * x[1] * "/" * x[2]), scrQrtHeu_arr)
+heuDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "regionSetup/" * regionalScope, setupDir_str * "securitySetup/" * security, setupDir_str * "infeasTop/" * infeasTop, setupDir_str * "techSetup/" * techs, setupDir_str * "timeSetup/" * time * "/" * "month", setupDir_str * "importCase/" * imp, setupDir_str * "resolution/" * reso, scrDirHeu_str, modDir_str * "timeSeries/country_672h/general"]
+foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_672h/general_" * x), unique(getindex.(scrQrtHeu_arr,2)))
+foreach(x -> push!(heuDir_arr, modDir_str * "timeSeries/country_672h/" * x[1] * "/" * x[2]), scrQrtHeu_arr)
 
 
 if inOos != "missing"
@@ -225,7 +192,7 @@ if algSetup_obj.dist
 		getComVarDist(w_int::Int64) = Distributed.@spawnat w_int getComVar()
 		getSubStringDist(w_int::Int64, res_sym::Symbol) = Distributed.@spawnat w_int getSubString(res_sym)
 	end
-	passobj(1, workers(), [:info_ntup, :inputFolderSub_ntup, :scale_dic, :algSetup_obj])
+	passobj(1, workers(), [:info_ntup, :inputFolderSub_ntup, :scale_dic, :algSetup_obj, :mapFolders])
 else
 	runSubDist = x -> nothing
 	getComVarDist = x -> nothing
@@ -233,7 +200,7 @@ else
 end
 
 # create benders object
-benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, res_ntup, trackCapa = true);
+benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, res_ntup, trackCapa = true, mapFolders = mapFolders);
 
 #endregion
 
@@ -257,28 +224,12 @@ end
 
 #endregion
 
-benders_obj.top.parts.tech[:reservoir].var[:stLvl]
-benders_obj.top.parts.tech[:reservoir].cns[:stSizeSeasonRestr]
+benders_obj.sub[(3,1)].parts.lim.cns
 
+benders_obj.sub[(3,1)].parts.lim.cns[:emissionBendersCom]
 
-benders_obj.sub[(3,1)].parts.tech[:reservoir].cns[:stLvlBendersFix][!,:cns]
-benders_obj.sub[(4,3)].parts.tech[:reservoir].cns[:stLvlBendersFix][!,:cns]
-882
+optimize!(benders_obj.top.optModel)
+resData_obj = resData(benders_obj.top)
+bla = filterResData(resData_obj, benders_obj.top, [:capa, :mustCapa, :stLvl, :lim]; rmvFix = true, fltSt = false)
 
-resData_obj.stLvl[:reservoir][:stLvl]
-
-resData_obj.stLvl[:oilStorage][:stLvl]
-
-cutData_dic[(3,1)].stLvl[:reservoir][:stLvl]
-
-cutData_dic[(3,1)].stLvl[:oilStorage][:stLvl]
-
-
-resData_obj.capa[:reservoir][:stLvl]
-
-benders_obj.top.parts.obj.cns
-
-
-benders_obj.sub[(3,1)].parts.tech[:reservoir].cns[:stBal][2,:cns]
-
-printObject(benders_obj.sub[(3,1)].parts.tech[:reservoir].cns[:stBal], benders_obj.sub[(3,1)])
+bla = filterResData(resData_obj, benders_obj.top, [:capa, :mustCapa, :stLvl, :emissionBendersCom]; rmvFix = true, fltSt = false)

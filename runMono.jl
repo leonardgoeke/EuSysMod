@@ -1,3 +1,4 @@
+
 using Gurobi, AnyMOD, CSV, Statistics
 include("functions.jl")
 
@@ -10,7 +11,7 @@ setupDir_str = dir_str *  "modelSetup/"
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 13 # next 16,18
+    id_int = 19
     t_int = 14
 else
     id_int = parse(Int,ARGS[1])
@@ -21,9 +22,12 @@ scenario = convert(String,par_df[id_int,:scenario]) # scenario case
 techs = string(par_df[id_int,:techCase]) # available technologies
 imp = string(par_df[id_int,:importCase]) # fuel import setup 
 reso = string(par_df[id_int,:resolution]) # spatial resolution
-security = string(par_df[id_int,:security]) # security settings
-inOos = string(par_df[id_int,:inputOutOfSample]) # capacity folder for out-of-sample testing
-infeasTop = par_df[id_int,:infeasTop] 
+security = "1ex0se1re1be" # security settings
+spLength = string(par_df[id_int,:spLength]) # length of steps on third level
+regionalScope = string(par_df[id_int,:regionalScope]) # regional scope of model
+
+inOos = "missing"
+infeasTop = "none"
 
 t_int = par_df[id_int,:threads]
 
@@ -31,16 +35,16 @@ name_str = convert(String,par_df[id_int,:name])
 checkDet_boo = scenario in "scr" .* string.(1982:2016)
 
 # create scenario and quarter array
-scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scenario, setupDir_str)
+scrQrt_arr, scrDir_str, = generateScrInfo(checkDet_boo, scenario, setupDir_str, spLength)
 
 # define in- and output folders
 resultDir_str = dir_str * "results"
 
 # input folders
 # ! input folders
-inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "infeasTop/" * infeasTop, setupDir_str * "securitySetup/" * security, setupDir_str * "techSetup/" * techs, setupDir_str * "importCase/" * imp, setupDir_str * "resolution/" * reso, scrDir_str, modDir_str * "timeSeries/country_" * time * "_month/general"]
-foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_month/general_" * x), unique(getindex.(scrQrt_arr,2)))
-foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "_" * "month/" * x[1] * "/" * x[2]), scrQrt_arr)
+inDir_arr = [modDir_str * "basis", modDir_str * "infeasParameter", setupDir_str * "infeasTop/" * infeasTop, setupDir_str * "regionSetup/" * regionalScope, setupDir_str * "securitySetup/" * security, setupDir_str * "techSetup/" * techs, setupDir_str * "timeSetup/" * time * "/" * spLength, setupDir_str * "importCase/" * imp, setupDir_str * "resolution/" * reso, scrDir_str, modDir_str * "timeSeries/country_" * time * "/general"]
+foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "/general_" * x), unique(getindex.(scrQrt_arr,2)))
+foreach(x -> push!(inDir_arr, modDir_str * "timeSeries/country" * "_" * time * "/" * x[1] * "/" * x[2]), scrQrt_arr)
 
 if inOos != "missing"
 	push!(inDir_arr, dir_str * "inputOutOfSample/" * inOos)
@@ -60,10 +64,11 @@ setObjective!(:cost, anyM)
 
 set_optimizer(anyM.optModel, Gurobi.Optimizer)
 set_optimizer_attribute(anyM.optModel, "Crossover", 0);
-set_optimizer_attribute(anyM.optModel, "Threads", t_int);
 set_optimizer_attribute(anyM.optModel, "Method", 2);
-set_optimizer_attribute(anyM.optModel, "BarConvTol", 1e-5);
-set_optimizer_attribute(anyM.optModel, "NumericFocus", 3);
+set_optimizer_attribute(anyM.optModel, "BarConvTol", 5e-4);
+set_optimizer_attribute(anyM.optModel, "Threads", t_int);
+set_optimizer_attribute(anyM.optModel, "BarOrder", 1);
+set_optimizer_attribute(anyM.optModel, "NumericFocus", 0);
 
 optimize!(anyM.optModel)
 
@@ -75,12 +80,12 @@ reportResults(:summary, anyM, addObjName = true)
 reportResults(:cost, anyM, addObjName = true)
 reportResults(:exchange, anyM, addObjName = true)
 reportStorageLevel(anyM)
-reportTimeSeries(:electricity, anyM)
 
 #endregion
 
 #region # * write input for out-of-sample testing
 
+#=
 if inOos == "missing"
     # create directory
     outDir_str = dir_str * "inputOutOfSample/" * name_str * "/"
@@ -110,5 +115,6 @@ if inOos == "missing"
         end
     end
 end
+=#
 
 #endregion

@@ -64,7 +64,7 @@ powerToX,electrolysis,alkElectrolysis,,electricity,h2; districtHeat,,,mature,non
 powerToX,electrolysis,pemElectrolysis,,electricity,h2; districtHeat,,,stock,none,,,,
 powerToX,h2Storage,h2StorageCavern,,,,h2,h2,mature,none,,inter,,
 powerToX,h2Storage,h2StorageTank,,,,h2,h2,mature,none,,2,,
-powerToX,synthFuel,bioMethanation,,rawBiogas; h2,naturalGas,,,mature,none,,,,
+powerToX,synthFuel,bioMethanation,,rawBiogas; h2,naturalGas; districtHeat,,,mature,none,,,,
 powerToX,synthFuel,methanePyrolysis,,naturalGas; electricity,h2; processHeat_high,,,stock,none,,,,
 powerToX,,pefc,,h2,electricity; districtHeat,,,stock,none,,,,
 powerToX,,sofc,,naturalGas,electricity; processHeat_high,,,stock,none,,,,
