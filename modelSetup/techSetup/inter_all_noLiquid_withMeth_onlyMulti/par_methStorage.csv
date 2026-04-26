@@ -1,0 +1,7 @@
+technology_3,parameter_1,value_1
+methanolStorage,costExpStSize,0.1092
+methanolStorage,costExpStIn,15.834
+methanolStorage,effStIn,0.98
+methanolStorage,stOutToStInCapaFix,1
+methanolStorage,effStInterIn,0.98
+methanolStorage,effStInterOut,0.98

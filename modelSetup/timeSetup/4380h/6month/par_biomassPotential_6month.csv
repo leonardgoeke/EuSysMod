@@ -1,0 +1,5 @@
+scenario,timestep_3,carrier_1,carrier_2,parameter,value
+all,all,otherBiomass,nonSolidBiomass,trdBuyUp,175188.36
+all,all,otherBiomass,solidBiomass,trdBuyUp,652195.32
+,,otherBiomass,solidBiomass,trdBuyPrc,0
+,,otherBiomass,nonSolidBiomass,trdBuyPrc,0
