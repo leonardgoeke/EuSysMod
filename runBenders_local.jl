@@ -9,7 +9,7 @@ dir_str = "C:/Git/climate2energy/"
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 17 # or 16
+    id_int = 44 # or 16
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -19,7 +19,9 @@ time = string(par_df[id_int,:time]) # temporal resolution
 case = convert(String,par_df[id_int,:case]) # future or historic data
 spaSco = convert(String,par_df[id_int,:spatialScope]) # spatial scope
 scr = convert(String,par_df[id_int,:scenario]) # scenario case
-foresight = par_df[id_int,:foresight] # scenario case
+foresight = par_df[id_int,:foresight] # foresight
+heuPre = par_df[id_int,:heuPre] # heuristic presolve
+valid = false # use of valid inequalities
 
 # extract benders settings
 optTolStab = par_df[id_int,:optTolStab]
@@ -39,7 +41,7 @@ name_str = convert(String,par_df[id_int,:name])
 
 # create files determining scenario setup
 checkDet_boo = scr in "scr" .* string.(case == "fut" ? (2080:2099) : (1995:2014))  
-scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, case)
+scrQrt_arr, scrDir_str, mapFolders = generateScrInfo(checkDet_boo, scr, dir_str, case)
 
 #region # * options for algorithm
 
@@ -50,6 +52,8 @@ rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
 rngVio_ntup = (stab = 2e2, cut = 1e2, fix = 1e1)
 
 # method for cut management
+del_int = 10000
+del_fl = 0.5
 cutMgm_tup = (meth = :slack, opt = (cnt = del_int, thres = del_fl), freq = 1, report = false)
 
 
@@ -98,7 +102,7 @@ elseif weigthStab == "withStLvl"
 end
 
 # method, threshold serious step, initialization, minimum value, solve frequency without stabilization, weights in stabilization (in additon to scaling of base problem)
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, lowLimStab, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = w_tup)
+stabSetup_obj = stabSetup(meth_tup, 0.0, heuPre ? :reduced : :none, lowLimStab, (upper = 1, inter = :lin, sub = 1.0), repVio = true, weight = w_tup)
 
 # ! options for near optimal
 
@@ -115,11 +119,11 @@ nearOptSetup_obj = nothing # cost threshold to keep solution, lls threshold to k
 info_ntup = (name = name_str, frsLvl = foresight, decompLvl = (foresight != 0 && decomp != "year" ? 3 : 0), supTsLvl = 2, repTsLvl = 4, shortExp = 5, infeasTop = false) 
 
 # ! input folders
-inDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/" * case * "_" * time * "h/general"]
-foreach(x -> push!(inDir_arr, dir_str * "timeSeries/" * case * "_" * time * "h/" * x[1] * "/" * x[2]), scrQrt_arr)
+inDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/setup/" * time * "h_" * (decomp == "year" ? "month" : decomp)]
+foreach(x -> push!(inDir_arr, dir_str * "timeSeries/data/" * case * "_" * time * "h/" * x[1] * "/" * x[2]), scrQrt_arr)
 
-heuDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/" * case * "_" * "672h/general"]
-foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/" * case * "_" * "672h/"  * x[1] * "/" * x[2]), scrQrt_arr)
+heuDir_arr = [dir_str * "basis", dir_str * "spatialScope/" * spaSco, scrDir_str, dir_str * "timeSeries/setup/672h_" * (decomp == "year" ? "month" : decomp)]
+foreach(x -> push!(heuDir_arr, dir_str * "timeSeries/data/" * case * "_" * "672h/"  * x[1] * "/" * x[2]), scrQrt_arr)
 
 # ! result folders
 resultDir_str = dir_str * "results/" * name_str
@@ -155,7 +159,7 @@ if algSetup_obj.dist
 		getComVarDist(w_int::Int64) = Distributed.@spawnat w_int getComVar()
 		getSubStringDist(w_int::Int64, res_sym::Symbol) = Distributed.@spawnat w_int getSubString(res_sym)
 	end
-	passobj(1, workers(), [:info_ntup, :inputFolderSub_ntup, :scale_dic, :algSetup_obj])
+	passobj(1, workers(), [:info_ntup, :inputFolderSub_ntup, :scale_dic, :algSetup_obj, :mapFolders])
 else
 	runSubDist = x -> nothing
 	getComVarDist = x -> nothing
@@ -163,7 +167,7 @@ else
 end
 
 # create benders object
-benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, res_ntup, trackCapa = true);
+benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, res_ntup, trackCapa = true, mapFolders = mapFolders);
 
 #endregion
 

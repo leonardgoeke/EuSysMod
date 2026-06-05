@@ -6,7 +6,7 @@ dir_str = ""
 par_df = CSV.read(dir_str * "settings.csv", DataFrame)
 
 if isempty(ARGS)
-    id_int = 2 # or 16
+    id_int = 44 # or 16
     t_int = 4
 else
     id_int = parse(Int,ARGS[1])
@@ -16,15 +16,18 @@ time = string(par_df[id_int,:time]) # temporal resolution
 case = convert(String,par_df[id_int,:case]) # future or historic data
 spaSco = convert(String,par_df[id_int,:spatialScope]) # spatial scope
 scr = convert(String,par_df[id_int,:scenario]) # scenario case
-foresight = par_df[id_int,:foresight] # scenario case
+foresight = par_df[id_int,:foresight] # foresight
+heuPre = par_df[id_int,:heuPre] # heuristic presolve
+valid = false # use of valid inequalities
 
 # extract benders settings
 optTolStab = par_df[id_int,:optTolStab]
 
 lowLimStab = string(par_df[id_int,:lowLimStab]) |> (x -> x == "Inf" ? - Inf : parse(Float64,x))
 weigthStab = string(par_df[id_int,:weigthStab]) 
+acc = string(par_df[id_int,:accuracy]) 
 decomp = par_df[id_int,:decomp]
-check_boo = par_df[id_int,:check] == "TRUE"
+check_boo = par_df[id_int,:check]
 
 wrkCnt = par_df[id_int,:workerCnt]
 t_int = par_df[id_int,:threads]
@@ -36,7 +39,7 @@ name_str = convert(String,par_df[id_int,:name])
 
 # create files determining scenario setup
 checkDet_boo = scr in "scr" .* string.(case == "fut" ? (2080:2099) : (1995:2014))  
-scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, case)
+scrQrt_arr, scrDir_str, mapFolders = generateScrInfo(checkDet_boo, scr, dir_str, case) # TODO pre-filtering of input folders for SP not enabled, because of folders are violating naming conventions
 
 #region # * options for algorithm
 
@@ -44,7 +47,11 @@ scrQrt_arr, scrDir_str = generateScrInfo(checkDet_boo, scr, dir_str, case)
 
 # range violations
 rngTar_tup = (mat = (1e-2, 1e5), rhs = (1e-2, 1e2))
-rngVio_ntup = (stab = 2e2, cut = 1e2, fix = 1e1)
+if acc == "ref"
+	rngVio_ntup = (stab = 2e2, cut = 1e2, fix = 1e1)
+elseif acc == "high"
+	rngVio_ntup = (stab = 2e2, cut = 1e3, fix = 1e2)
+end
 
 # method for cut management
 cutMgm_tup = (meth = :slack, opt = (cnt = 10000, thres = 0.5), freq = 1, report = false)
@@ -68,10 +75,10 @@ pre_int = -1
 
 # solver options for sub and top problem
 subOpt_tup = (rng = [1e-2, 1e-8], int = :none, crs = false, meth = :barrier, timeLim = 30.0, dbInf = true, threads = t_int, check = check_boo)
-topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol =  (interNoStab_sym, tolNoStab_arr), presolve = pre_int, stabMeth = 2, noStabMeth = 2, threads = t_int, check = check_boo)
+topOpt_tup = (numFoc = [0,2,3], dnsThrs = dnsThrs, crs = false, stabTol = (interStab_sym, tolStab_arr), stabTolQ = (interStabQ_sym, tolStabQ_arr), stabTolFeas = (interStabFeas_sym, tolStabFeas_arr), noStabTol = (interNoStab_sym, tolNoStab_arr), presolve = pre_int, stabMeth = 2, noStabMeth = 2, threads = t_int, check = check_boo)
 
 # optimimality gap, cut management, valid inequalities, reporting frequency, time limit, distributed computing, optimizer
-algSetup_obj = algSetup(0.001, cutMgm_tup, (bal = false, st = true), 2, 16000.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
+algSetup_obj = algSetup(0.001, cutMgm_tup, (bal = false, st = valid), 2, 16000.0, wrkCnt != 1, Gurobi.Optimizer, rngVio_ntup, subOpt_tup, topOpt_tup)
 res_ntup = (general = (:summary, :exchange, :cost), carrierTs = (:electricity, :h2), storage = (write = true, agg = true), duals = (:enBal, :excRestr, :stBal))
 
 # ! options for stabilization
@@ -87,14 +94,24 @@ end
 # weight of variables in stabilization
 if weigthStab == "noStLvl"
 	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 0.0, lim = 1e0)
-elseif weigthStab == "lowStLvl"
+elseif weigthStab == "lowStLvl1"
+	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 1e-1, lim = 1e0)
+elseif weigthStab == "lowStLvl2"
 	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 1e-2, lim = 1e0)
 elseif weigthStab == "withStLvl"
 	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 1e0, lim = 1e0)
+elseif weigthStab == "highStLvl"
+	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 1e1, lim = 1e0)
+elseif weigthStab == "lowStLvl3"
+	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 1e-3, lim = 1e0)
+elseif weigthStab == "lowStLvl4"
+	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 1e-4, lim = 1e0)
+elseif weigthStab == "lowStLvl5"
+	w_tup = (capa = 1e0, capaStSize = 1e0, stLvl = 1e-5, lim = 1e0)
 end
 
 # method, threshold serious step, initialization, minimum value, solve frequency without stabilization, weights in stabilization (in additon to scaling of base problem)
-stabSetup_obj = stabSetup(meth_tup, 0.0, :reduced, lowLimStab, (upper = 13, inter = :log, sub = 10.0), repVio = true, weight = w_tup)
+stabSetup_obj = stabSetup(meth_tup, 0.0, heuPre ? :reduced : :none, lowLimStab, (upper = 1, inter = :lin, sub = 1.0), repVio = true, weight = w_tup)
 
 # ! options for near optimal
 
@@ -151,7 +168,7 @@ if algSetup_obj.dist
 		getComVarDist(w_int::Int64) = Distributed.@spawnat w_int getComVar()
 		getSubStringDist(w_int::Int64, res_sym::Symbol) = Distributed.@spawnat w_int getSubString(res_sym)
 	end
-	passobj(1, workers(), [:info_ntup, :inputFolderSub_ntup, :scale_dic, :algSetup_obj])
+	passobj(1, workers(), [:info_ntup, :inputFolderSub_ntup, :scale_dic, :algSetup_obj, :mapFolders])
 else
 	runSubDist = x -> nothing
 	getComVarDist = x -> nothing
@@ -159,7 +176,7 @@ else
 end
 
 # create benders object
-benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, res_ntup);
+benders_obj = bendersObj(info_ntup, inputFolder_ntup, scale_dic, algSetup_obj, stabSetup_obj, runSubDist, getComVarDist, res_ntup, mapFolders = mapFolders);
 
 #endregion
 
@@ -171,7 +188,7 @@ allRes_df = runIteration!(benders_obj, runSubDist)
 
 #region # * write results
 
-produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Write results", testErr = false, printErr = false)
-writeBendersResults!(benders_obj, runSubDist, getSubStringDist)
+#produceMessage(benders_obj.report.mod.options, benders_obj.report.mod.report, 1, " - Write results", testErr = false, printErr = false)
+#writeBendersResults!(benders_obj, runSubDist, getSubStringDist)
 
 #endregion

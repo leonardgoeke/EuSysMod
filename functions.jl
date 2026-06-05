@@ -23,6 +23,5 @@ function generateScrInfo(checkDet_boo::Bool, scenario::String, setupDir_str::Str
         end 
     end
 
-    return scrQrt_arr, scrDir_str
+    return scrQrt_arr, scrDir_str, (ts = Dict(x => [x] for x in unique(getindex.(scrQrt_arr,2))), scr = Dict(x => [x] for x in unique(getindex.(scrQrt_arr,1))))
 end
-
