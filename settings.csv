@@ -14,4 +14,6 @@ inter_all_total32_ext8_noLiquid_withMeth_onlyMulti,8760h,total32_ext8_all,fuelMa
 sensiMethods_baseline,2856h,total24_ext8_all,fuelMacro,inter_all,3,0,10Flex20Price,month,allCtr,lvl1_3,0.5,300cnt_1thres,noStLvl,0.01,TRUE,TRUE,10000,total12_ext0,1,32,32,32,13,
 sensiMethods_noFuelMacro,2856h,total24_ext8_all,noFuelMacro,inter_all,3,0,10Flex20Price,month,allCtr,lvl1_3,0.5,300cnt_1thres,noStLvl,0.01,TRUE,TRUE,10000,total12_ext0,1,32,32,32,14,
 sensiMethods_allTechs,2856h,total24_ext8_all,fuelMacro,inter_all_allEndo,3,0,10Flex20Price,month,allCtr,lvl1_3,0.5,300cnt_1thres,noStLvl,0.01,TRUE,TRUE,10000,total12_ext0,1,32,32,32,15,
-test,672h,total32_ext8_all,fuelMacro,inter_all,3,0,10Flex20Price,month,allCtr,lvl1_3,0.5,300cnt_1thres,noStLvl,0.01,TRUE,TRUE,10000,total12_ext0,1,32,32,32,15,I
+sensiMethods_allTechs_inclFirm,2856h,total24_ext8_all,fuelMacro,inter_all_allEndo_inclFirm,3,0,10Flex20Price,month,allCtr,lvl1_3,0.5,300cnt_1thres,noStLvl,0.01,TRUE,TRUE,10000,total12_ext0,1,14,32,32,16,
+inter_all_total24_ext8_2856h_firmCapa1,2856h,total24_ext8_all,fuelMacro,inter_all_firmCapa1,3,0,10Flex20Price,month,allCtr,lvl1_3,0.5,300cnt_1thres,noStLvl,0.01,TRUE,TRUE,10000,total12_ext0,1,14,32,32,17,
+noInter_all_total24_ext8_2856h_firmCapa1,2856h,total24_ext8_all,fuelMacro,noInter_all_firmCapa1,3,0,10Flex20Price,month,allCtr,lvl1_3,0.5,300cnt_1thres,noStLvl,0.01,TRUE,TRUE,10000,total12_ext0,1,14,32,32,18,

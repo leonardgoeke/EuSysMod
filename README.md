@@ -51,3 +51,32 @@ julia --project=. runMono.jl
 - A new `results/test/` folder containing CSV result files (e.g. summary, cost, exchange, and storage-level results) written by the model's built-in reporting functions.
 
 **Expected run time:** approximately 15 minutes on a normal desktop computer.
+
+## 4. Instructions for use
+
+The input files follow the format of [AnyMOD.jl](https://github.com/leonardgoeke/AnyMOD.jl); sets (`set_*.csv`), parameters (`par_*.csv`) and results are explained in the [AnyMOD.jl documentation](https://leonardgoeke.github.io/AnyMOD.jl/stable/).
+
+Each row of [`settings.csv`](settings.csv) defines a model case by selecting one sub-folder per `modelSetup/` category; the scripts combine these with the shared data in `inputFiles/`. Run a case by passing its row number, e.g. `julia --project=. runMono.jl 3`. To use your own data, edit the CSV files or add a new sub-folder and a matching row in `settings.csv`.
+
+### `inputFiles/` – data shared by all cases
+
+| Folder | Content |
+|---|---|
+| `basis/power/` | Thermal plants, storage, grid (`grid/`), hydro (`hydro/`), wind and solar costs and potentials (`windAndSolar/`) |
+| `basis/fuel/` | Fuels, power-to-X, refineries, hydrogen grid and storage, gas and oil storage, biomass and oil trade |
+| `basis/heat/`, `basis/transport/` | Space and process heat, district heating, heat storage; transport operation |
+| `infeasParameter/` | Penalty costs for unmet demand |
+| `timeSeries/country_<res>/` | Time series per weather year (`scrYYYY/`) and month (`iniXX/`), e.g. demand, renewable capacity factors, hydro inflows; plus year-independent series (`general*/`) |
+
+### `modelSetup/` – options that differ between cases
+
+| Folder | Content |
+|---|---|
+| `timeSetup/` | Temporal resolution and step length (`set_timestep.csv`), biomass potentials |
+| `scenarioSetup/` | Weather years and their probabilities |
+| `techSetup/` | Technology portfolio and case-specific parameters |
+| `importCase/` | Costs and efficiencies of fuel and hydrogen imports |
+| `resolution/` | Carriers and their temporal/spatial resolution (`set_carrier.csv`) |
+| `regionSetup/` | Countries in scope (`set_region.csv`) |
+| `securitySetup/` | Parameters for storage between steps |
+| `infeasTop/` | Penalty costs for the Benders top problem (Benders scripts only) |

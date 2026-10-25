@@ -1,0 +1,8 @@
+technology_3,carrier_1,carrier_2,parameter,value,source
+directAirCaptureSensi,electricity,,emissionFac,-441.0084243,
+directAirCaptureSensi,,,avaConv,0.85,
+directAirCaptureSensi,electricity,,ratioConvInFix,0.655065861,
+directAirCaptureSensi,,,costExpConv,3197.835349,
+directAirCaptureSensi,,,costOprConv,172.8302093,
+directAirCaptureSensi,,,effConv,0.288889563,
+directAirCaptureSensi,,,lifeConv,30,
